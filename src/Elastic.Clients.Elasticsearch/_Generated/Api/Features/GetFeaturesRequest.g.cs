@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Features;
 
 public sealed partial class GetFeaturesRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -59,6 +65,14 @@ public sealed partial class GetFeaturesRequest : PlainRequest<GetFeaturesRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "features.get_features";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -92,6 +106,8 @@ public sealed partial class GetFeaturesRequestDescriptor : RequestDescriptor<Get
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "features.get_features";
+
+	public GetFeaturesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

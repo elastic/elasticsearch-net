@@ -59,13 +59,6 @@ public sealed partial class GetMappingRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-	/// <summary>
-	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -127,14 +120,6 @@ public sealed partial class GetMappingRequest : PlainRequest<GetMappingRequestPa
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request retrieves information from the local node only.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
-
-	/// <summary>
-	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -172,7 +157,6 @@ public sealed partial class GetMappingRequestDescriptor<TDocument> : RequestDesc
 	public GetMappingRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetMappingRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetMappingRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetMappingRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
 	public GetMappingRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetMappingRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -215,7 +199,6 @@ public sealed partial class GetMappingRequestDescriptor : RequestDescriptor<GetM
 	public GetMappingRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public GetMappingRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public GetMappingRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetMappingRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public GetMappingRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetMappingRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)

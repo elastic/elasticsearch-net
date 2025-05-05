@@ -38,11 +38,27 @@ public sealed partial class PostRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Update the license.
+/// </para>
+/// <para>
 /// You can update your license at runtime without shutting down your nodes.
 /// License updates take effect immediately.
 /// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
@@ -70,6 +86,22 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 	/// </summary>
 	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonInclude, JsonPropertyName("license")]
 	public Elastic.Clients.Elasticsearch.LicenseManagement.License? License { get; set; }
 
@@ -85,6 +117,8 @@ public sealed partial class PostRequest : PlainRequest<PostRequestParameters>
 /// <summary>
 /// <para>
 /// Update the license.
+/// </para>
+/// <para>
 /// You can update your license at runtime without shutting down your nodes.
 /// License updates take effect immediately.
 /// If the license you are installing does not support all of the features that were available with your previous license, however, you are notified in the response.
@@ -112,6 +146,8 @@ public sealed partial class PostRequestDescriptor : RequestDescriptor<PostReques
 	internal override string OperationName => "license.post";
 
 	public PostRequestDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
+	public PostRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+	public PostRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	private Elastic.Clients.Elasticsearch.LicenseManagement.License? LicenseValue { get; set; }
 	private Elastic.Clients.Elasticsearch.LicenseManagement.LicenseDescriptor LicenseDescriptor { get; set; }

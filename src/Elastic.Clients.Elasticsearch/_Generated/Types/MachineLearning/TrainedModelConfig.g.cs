@@ -141,6 +141,8 @@ public sealed partial class TrainedModelConfig
 	/// </summary>
 	[JsonInclude, JsonPropertyName("model_type")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelType? ModelType { get; init; }
+	[JsonInclude, JsonPropertyName("platform_architecture")]
+	public string? PlatformArchitecture { get; init; }
 	[JsonInclude, JsonPropertyName("prefix_strings")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelPrefixStrings? PrefixStrings { get; init; }
 

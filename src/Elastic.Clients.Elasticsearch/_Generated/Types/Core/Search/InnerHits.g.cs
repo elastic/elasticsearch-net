@@ -36,7 +36,7 @@ public sealed partial class InnerHits
 	[JsonInclude, JsonPropertyName("explain")]
 	public bool? Explain { get; set; }
 	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
+	[JsonConverter(typeof(FieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>

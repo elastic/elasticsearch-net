@@ -43,12 +43,12 @@ public sealed partial class ScheduleNowTransformRequestParameters : RequestParam
 /// <summary>
 /// <para>
 /// Schedule a transform to start now.
-/// Instantly runs a transform to process data.
 /// </para>
 /// <para>
-/// If you _schedule_now a transform, it will process the new data instantly,
-/// without waiting for the configured frequency interval. After _schedule_now API is called,
-/// the transform will be processed again at now + frequency unless _schedule_now API
+/// Instantly run a transform to process data.
+/// If you run this API, the transform will process the new data instantly,
+/// without waiting for the configured frequency interval. After the API is called,
+/// the transform will be processed again at <c>now + frequency</c> unless the API
 /// is called again in the meantime.
 /// </para>
 /// </summary>
@@ -78,12 +78,12 @@ public sealed partial class ScheduleNowTransformRequest : PlainRequest<ScheduleN
 /// <summary>
 /// <para>
 /// Schedule a transform to start now.
-/// Instantly runs a transform to process data.
 /// </para>
 /// <para>
-/// If you _schedule_now a transform, it will process the new data instantly,
-/// without waiting for the configured frequency interval. After _schedule_now API is called,
-/// the transform will be processed again at now + frequency unless _schedule_now API
+/// Instantly run a transform to process data.
+/// If you run this API, the transform will process the new data instantly,
+/// without waiting for the configured frequency interval. After the API is called,
+/// the transform will be processed again at <c>now + frequency</c> unless the API
 /// is called again in the meantime.
 /// </para>
 /// </summary>

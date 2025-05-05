@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public sealed partial class EnrichStatsRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -49,6 +55,14 @@ public sealed partial class EnrichStatsRequest : PlainRequest<EnrichStatsRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.stats";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -72,6 +86,8 @@ public sealed partial class EnrichStatsRequestDescriptor : RequestDescriptor<Enr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.stats";
+
+	public EnrichStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

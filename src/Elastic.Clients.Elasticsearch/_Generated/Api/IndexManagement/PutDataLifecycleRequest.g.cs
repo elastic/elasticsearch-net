@@ -120,12 +120,20 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 
 	/// <summary>
 	/// <para>
-	/// If defined, every backing index will execute the configured downsampling configuration after the backing
-	/// index is not the data stream write index anymore.
+	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("downsampling")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("enabled")]
+	public bool? Enabled { get; set; }
 }
 
 /// <summary>
@@ -164,6 +172,7 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
+	private bool? EnabledValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -180,8 +189,7 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 
 	/// <summary>
 	/// <para>
-	/// If defined, every backing index will execute the configured downsampling configuration after the backing
-	/// index is not the data stream write index anymore.
+	/// The downsampling configuration to execute for the managed backing index after rollover.
 	/// </para>
 	/// </summary>
 	public PutDataLifecycleRequestDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? downsampling)
@@ -208,6 +216,18 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public PutDataLifecycleRequestDescriptor Enabled(bool? enabled = true)
+	{
+		EnabledValue = enabled;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -231,6 +251,12 @@ public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescripto
 		{
 			writer.WritePropertyName("downsampling");
 			JsonSerializer.Serialize(writer, DownsamplingValue, options);
+		}
+
+		if (EnabledValue.HasValue)
+		{
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue.Value);
 		}
 
 		writer.WriteEndObject();

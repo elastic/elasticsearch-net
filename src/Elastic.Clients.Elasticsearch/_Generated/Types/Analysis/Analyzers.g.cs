@@ -153,9 +153,6 @@ public sealed partial class AnalyzersDescriptor : IsADictionaryDescriptor<Analyz
 	public AnalyzersDescriptor Kuromoji(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, null);
 	public AnalyzersDescriptor Kuromoji(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzerDescriptor, KuromojiAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Kuromoji(string analyzerName, KuromojiAnalyzer kuromojiAnalyzer) => AssignVariant(analyzerName, kuromojiAnalyzer);
-	public AnalyzersDescriptor Language(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, null);
-	public AnalyzersDescriptor Language(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzerDescriptor, LanguageAnalyzer>(analyzerName, configure);
-	public AnalyzersDescriptor Language(string analyzerName, LanguageAnalyzer languageAnalyzer) => AssignVariant(analyzerName, languageAnalyzer);
 	public AnalyzersDescriptor Latvian(string analyzerName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor, LatvianAnalyzer>(analyzerName, null);
 	public AnalyzersDescriptor Latvian(string analyzerName, Action<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzerDescriptor, LatvianAnalyzer>(analyzerName, configure);
 	public AnalyzersDescriptor Latvian(string analyzerName, LatvianAnalyzer latvianAnalyzer) => AssignVariant(analyzerName, latvianAnalyzer);
@@ -290,8 +287,6 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordAnalyzer>(ref reader, options);
 			case "kuromoji":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer>(ref reader, options);
-			case "language":
-				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer>(ref reader, options);
 			case "latvian":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer>(ref reader, options);
 			case "lithuanian":
@@ -433,9 +428,6 @@ internal sealed partial class AnalyzerInterfaceConverter : JsonConverter<IAnalyz
 				return;
 			case "kuromoji":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiAnalyzer), options);
-				return;
-			case "language":
-				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LanguageAnalyzer), options);
 				return;
 			case "latvian":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LatvianAnalyzer), options);

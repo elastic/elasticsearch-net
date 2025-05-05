@@ -32,17 +32,28 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class UnfollowRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Unfollow an index.
+/// </para>
+/// <para>
 /// Convert a cross-cluster replication follower index to a regular index.
 /// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
 /// The follower index must be paused and closed before you call the unfollow API.
 /// </para>
 /// <para>
-/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+/// info
+/// Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
 /// </para>
 /// </summary>
 public sealed partial class UnfollowRequest : PlainRequest<UnfollowRequestParameters>
@@ -58,17 +69,30 @@ public sealed partial class UnfollowRequest : PlainRequest<UnfollowRequestParame
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.unfollow";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Unfollow an index.
+/// </para>
+/// <para>
 /// Convert a cross-cluster replication follower index to a regular index.
 /// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
 /// The follower index must be paused and closed before you call the unfollow API.
 /// </para>
 /// <para>
-/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+/// info
+/// Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
 /// </para>
 /// </summary>
 public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescriptor<UnfollowRequestDescriptor<TDocument>, UnfollowRequestParameters>
@@ -91,6 +115,8 @@ public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescri
 
 	internal override string OperationName => "ccr.unfollow";
 
+	public UnfollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public UnfollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		RouteValues.Required("index", index);
@@ -105,12 +131,15 @@ public sealed partial class UnfollowRequestDescriptor<TDocument> : RequestDescri
 /// <summary>
 /// <para>
 /// Unfollow an index.
+/// </para>
+/// <para>
 /// Convert a cross-cluster replication follower index to a regular index.
 /// The API stops the following task associated with a follower index and removes index metadata and settings associated with cross-cluster replication.
 /// The follower index must be paused and closed before you call the unfollow API.
 /// </para>
 /// <para>
-/// NOTE: Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
+/// info
+/// Currently cross-cluster replication does not support converting an existing regular index to a follower index. Converting a follower index to a regular index is an irreversible operation.
 /// </para>
 /// </summary>
 public sealed partial class UnfollowRequestDescriptor : RequestDescriptor<UnfollowRequestDescriptor, UnfollowRequestParameters>
@@ -128,6 +157,8 @@ public sealed partial class UnfollowRequestDescriptor : RequestDescriptor<Unfoll
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.unfollow";
+
+	public UnfollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public UnfollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{

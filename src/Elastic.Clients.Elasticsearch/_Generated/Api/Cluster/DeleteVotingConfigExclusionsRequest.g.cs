@@ -34,6 +34,13 @@ public sealed partial class DeleteVotingConfigExclusionsRequestParameters : Requ
 {
 	/// <summary>
 	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies whether to wait for all excluded nodes to be removed from the
 	/// cluster before clearing the voting configuration exclusions list.
 	/// Defaults to true, meaning that all excluded nodes must be removed from
@@ -60,6 +67,14 @@ public sealed partial class DeleteVotingConfigExclusionsRequest : PlainRequest<D
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.delete_voting_config_exclusions";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
@@ -97,6 +112,7 @@ public sealed partial class DeleteVotingConfigExclusionsRequestDescriptor : Requ
 
 	internal override string OperationName => "cluster.delete_voting_config_exclusions";
 
+	public DeleteVotingConfigExclusionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public DeleteVotingConfigExclusionsRequestDescriptor WaitForRemoval(bool? waitForRemoval = true) => Qs("wait_for_removal", waitForRemoval);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

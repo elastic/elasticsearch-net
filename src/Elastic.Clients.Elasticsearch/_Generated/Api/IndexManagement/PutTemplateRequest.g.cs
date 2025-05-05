@@ -32,6 +32,11 @@ namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public sealed partial class PutTemplateRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
+	/// </summary>
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
@@ -95,6 +100,11 @@ public sealed partial class PutTemplateRequest : PlainRequest<PutTemplateRequest
 
 	internal override string OperationName => "indices.put_template";
 
+	/// <summary>
+	/// <para>
+	/// User defined reason for creating/updating the index template
+	/// </para>
+	/// </summary>
 	[JsonIgnore]
 	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 

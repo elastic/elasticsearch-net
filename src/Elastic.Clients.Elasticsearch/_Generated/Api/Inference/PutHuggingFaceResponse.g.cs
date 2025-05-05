@@ -19,45 +19,60 @@
 
 using Elastic.Clients.Elasticsearch.Fluent;
 using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Products.Elasticsearch;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Elastic.Clients.Elasticsearch.SearchApplication;
+namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class SearchApplicationListItem
+public sealed partial class PutHuggingFaceResponse : ElasticsearchResponse
 {
 	/// <summary>
 	/// <para>
-	/// Analytics collection associated to the Search Application
+	/// Chunking configuration object
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analytics_collection_name")]
-	public string? AnalyticsCollectionName { get; init; }
+	[JsonInclude, JsonPropertyName("chunking_settings")]
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; init; }
 
 	/// <summary>
 	/// <para>
-	/// Indices that are part of the Search Application
+	/// The inference Id
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	public IReadOnlyCollection<string> Indices { get; init; }
+	[JsonInclude, JsonPropertyName("inference_id")]
+	public string InferenceId { get; init; }
 
 	/// <summary>
 	/// <para>
-	/// Search Application name
+	/// The service type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
-	public string Name { get; init; }
+	[JsonInclude, JsonPropertyName("service")]
+	public string Service { get; init; }
 
 	/// <summary>
 	/// <para>
-	/// Last time the Search Application was updated
+	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("updated_at_millis")]
-	public long UpdatedAtMillis { get; init; }
+	[JsonInclude, JsonPropertyName("service_settings")]
+	public object ServiceSettings { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Task settings specific to the service and task type
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("task_settings")]
+	public object? TaskSettings { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The task type
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("task_type")]
+	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }
 }

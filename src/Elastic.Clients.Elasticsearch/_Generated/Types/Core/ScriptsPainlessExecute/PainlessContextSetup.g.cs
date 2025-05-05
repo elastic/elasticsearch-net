@@ -31,7 +31,7 @@ public sealed partial class PainlessContextSetup
 {
 	/// <summary>
 	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("document")]
@@ -39,8 +39,14 @@ public sealed partial class PainlessContextSetup
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
+	/// Index containing a mapping that's compatible with the indexed document.
 	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
@@ -71,7 +77,7 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 
 	/// <summary>
 	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor<TDocument> Document(object document)
@@ -82,8 +88,14 @@ public sealed partial class PainlessContextSetupDescriptor<TDocument> : Serializ
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
+	/// Index containing a mapping that's compatible with the indexed document.
 	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
@@ -164,7 +176,7 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 
 	/// <summary>
 	/// <para>
-	/// Document that’s temporarily indexed in-memory and accessible from the script.
+	/// Document that's temporarily indexed in-memory and accessible from the script.
 	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor Document(object document)
@@ -175,8 +187,14 @@ public sealed partial class PainlessContextSetupDescriptor : SerializableDescrip
 
 	/// <summary>
 	/// <para>
-	/// Index containing a mapping that’s compatible with the indexed document.
+	/// Index containing a mapping that's compatible with the indexed document.
 	/// You may specify a remote index by prefixing the index with the remote cluster alias.
+	/// For example, <c>remote1:my_index</c> indicates that you want to run the painless script against the "my_index" index on the "remote1" cluster.
+	/// This request will be forwarded to the "remote1" cluster if you have configured a connection to that remote cluster.
+	/// </para>
+	/// <para>
+	/// NOTE: Wildcards are not accepted in the index expression for this endpoint.
+	/// The expression <c>*:myindex</c> will return the error "No such remote cluster" and the expression <c>logs*</c> or <c>remote1:logs*</c> will return the error "index not found".
 	/// </para>
 	/// </summary>
 	public PainlessContextSetupDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)

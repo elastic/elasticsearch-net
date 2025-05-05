@@ -51,7 +51,6 @@ public sealed partial class IndicesPrivileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("names")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.IndexName))]
 	public ICollection<Elastic.Clients.Elasticsearch.IndexName> Names { get; set; }
 
 	/// <summary>
@@ -186,7 +185,7 @@ public sealed partial class IndicesPrivilegesDescriptor<TDocument> : Serializabl
 		}
 
 		writer.WritePropertyName("names");
-		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
+		JsonSerializer.Serialize(writer, NamesValue, options);
 		writer.WritePropertyName("privileges");
 		JsonSerializer.Serialize(writer, PrivilegesValue, options);
 		if (QueryValue is not null)
@@ -314,7 +313,7 @@ public sealed partial class IndicesPrivilegesDescriptor : SerializableDescriptor
 		}
 
 		writer.WritePropertyName("names");
-		SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.IndexName>(NamesValue, writer, options);
+		JsonSerializer.Serialize(writer, NamesValue, options);
 		writer.WritePropertyName("privileges");
 		JsonSerializer.Serialize(writer, PrivilegesValue, options);
 		if (QueryValue is not null)

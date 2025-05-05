@@ -63,7 +63,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest(IngestRequest request)
@@ -96,7 +96,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(IngestRequest request, CancellationToken cancellationToken = default)
 	{
@@ -128,7 +128,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest<TDocument>(IngestRequestDescriptor<TDocument> descriptor)
@@ -161,7 +161,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -195,7 +195,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor<TDocument>> configureRequest)
@@ -230,7 +230,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest<TDocument>()
@@ -264,7 +264,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest<TDocument>(Action<IngestRequestDescriptor<TDocument>> configureRequest)
@@ -299,7 +299,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest(IngestRequestDescriptor descriptor)
@@ -332,7 +332,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -366,7 +366,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor> configureRequest)
@@ -401,7 +401,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest()
@@ -435,7 +435,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IngestResponse Ingest(Action<IngestRequestDescriptor> configureRequest)
@@ -470,7 +470,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync<TDocument>(IngestRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -502,7 +502,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -535,7 +535,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -569,7 +569,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -602,7 +602,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync<TDocument>(Action<IngestRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -636,7 +636,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(IngestRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -668,7 +668,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -701,7 +701,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<IngestRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -735,7 +735,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(CancellationToken cancellationToken = default)
 	{
@@ -768,7 +768,7 @@ public partial class SimulateNamespacedClient : NamespacedClientProxy
 	/// However, you can supply substitute pipeline definitions in the body of the request.
 	/// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-ingest-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IngestResponse> IngestAsync(Action<IngestRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

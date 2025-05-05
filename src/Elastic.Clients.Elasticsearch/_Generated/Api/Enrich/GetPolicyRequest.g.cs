@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public sealed partial class GetPolicyRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -57,6 +63,14 @@ public sealed partial class GetPolicyRequest : PlainRequest<GetPolicyRequestPara
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.get_policy";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -84,6 +98,8 @@ public sealed partial class GetPolicyRequestDescriptor : RequestDescriptor<GetPo
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.get_policy";
+
+	public GetPolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
 	{

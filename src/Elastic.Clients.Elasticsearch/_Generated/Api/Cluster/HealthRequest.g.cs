@@ -86,7 +86,7 @@ public sealed partial class HealthRequestParameters : RequestParameters
 	/// The request waits until the specified number N of nodes is available. It also accepts >=N, &lt;=N, >N and &lt;N. Alternatively, it is possible to use ge(N), le(N), gt(N) and lt(N) notation.
 	/// </para>
 	/// </summary>
-	public object? WaitForNodes { get => Q<object?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
+	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -206,7 +206,7 @@ public sealed partial class HealthRequest : PlainRequest<HealthRequestParameters
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public object? WaitForNodes { get => Q<object?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
+	public Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? WaitForNodes { get => Q<Elastic.Clients.Elasticsearch.Cluster.WaitForNodes?>("wait_for_nodes"); set => Q("wait_for_nodes", value); }
 
 	/// <summary>
 	/// <para>
@@ -276,7 +276,7 @@ public sealed partial class HealthRequestDescriptor<TDocument> : RequestDescript
 	public HealthRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public HealthRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public HealthRequestDescriptor<TDocument> WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
-	public HealthRequestDescriptor<TDocument> WaitForNodes(object? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
+	public HealthRequestDescriptor<TDocument> WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor<TDocument> WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 	public HealthRequestDescriptor<TDocument> WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 	public HealthRequestDescriptor<TDocument> WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);
@@ -335,7 +335,7 @@ public sealed partial class HealthRequestDescriptor : RequestDescriptor<HealthRe
 	public HealthRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public HealthRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 	public HealthRequestDescriptor WaitForEvents(Elastic.Clients.Elasticsearch.WaitForEvents? waitForEvents) => Qs("wait_for_events", waitForEvents);
-	public HealthRequestDescriptor WaitForNodes(object? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
+	public HealthRequestDescriptor WaitForNodes(Elastic.Clients.Elasticsearch.Cluster.WaitForNodes? waitForNodes) => Qs("wait_for_nodes", waitForNodes);
 	public HealthRequestDescriptor WaitForNoInitializingShards(bool? waitForNoInitializingShards = true) => Qs("wait_for_no_initializing_shards", waitForNoInitializingShards);
 	public HealthRequestDescriptor WaitForNoRelocatingShards(bool? waitForNoRelocatingShards = true) => Qs("wait_for_no_relocating_shards", waitForNoRelocatingShards);
 	public HealthRequestDescriptor WaitForStatus(Elastic.Clients.Elasticsearch.HealthStatus? waitForStatus) => Qs("wait_for_status", waitForStatus);

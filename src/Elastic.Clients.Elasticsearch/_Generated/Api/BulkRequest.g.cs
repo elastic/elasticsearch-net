@@ -34,6 +34,13 @@ public sealed partial class BulkRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, the response will include the ingest pipelines that were run for each index or create.
 	/// </para>
 	/// </summary>
@@ -331,6 +338,14 @@ public sealed partial class BulkRequest : PlainRequest<BulkRequestParameters>
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "bulk";
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
 	/// <summary>
 	/// <para>
@@ -645,6 +660,7 @@ public sealed partial class BulkRequestDescriptor<TDocument> : RequestDescriptor
 
 	internal override string OperationName => "bulk";
 
+	public BulkRequestDescriptor<TDocument> IncludeSourceOnError(bool? includeSourceOnError = true) => Qs("include_source_on_error", includeSourceOnError);
 	public BulkRequestDescriptor<TDocument> ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
 	public BulkRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public BulkRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
@@ -880,6 +896,7 @@ public sealed partial class BulkRequestDescriptor : RequestDescriptor<BulkReques
 
 	internal override string OperationName => "bulk";
 
+	public BulkRequestDescriptor IncludeSourceOnError(bool? includeSourceOnError = true) => Qs("include_source_on_error", includeSourceOnError);
 	public BulkRequestDescriptor ListExecutedPipelines(bool? listExecutedPipelines = true) => Qs("list_executed_pipelines", listExecutedPipelines);
 	public BulkRequestDescriptor Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public BulkRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);

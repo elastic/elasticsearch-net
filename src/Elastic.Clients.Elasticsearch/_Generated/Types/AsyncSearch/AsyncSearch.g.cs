@@ -31,7 +31,7 @@ public sealed partial class AsyncSearch<TDocument>
 {
 	/// <summary>
 	/// <para>
-	/// Partial aggregations results, coming from the shards that have already completed the execution of the query.
+	/// Partial aggregations results, coming from the shards that have already completed running the query.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("aggregations")]

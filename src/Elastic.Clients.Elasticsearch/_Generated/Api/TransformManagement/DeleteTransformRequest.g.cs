@@ -59,7 +59,6 @@ public sealed partial class DeleteTransformRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete a transform.
-/// Deletes a transform.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTransformRequest : PlainRequest<DeleteTransformRequestParameters>
@@ -106,7 +105,6 @@ public sealed partial class DeleteTransformRequest : PlainRequest<DeleteTransfor
 /// <summary>
 /// <para>
 /// Delete a transform.
-/// Deletes a transform.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTransformRequestDescriptor : RequestDescriptor<DeleteTransformRequestDescriptor, DeleteTransformRequestParameters>

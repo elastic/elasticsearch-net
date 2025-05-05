@@ -43,6 +43,8 @@ public sealed partial class SimulateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Simulate a pipeline.
+/// </para>
+/// <para>
 /// Run an ingest pipeline against a set of provided documents.
 /// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
@@ -83,8 +85,8 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
@@ -95,6 +97,8 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 /// <summary>
 /// <para>
 /// Simulate a pipeline.
+/// </para>
+/// <para>
 /// Run an ingest pipeline against a set of provided documents.
 /// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
@@ -178,8 +182,8 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
@@ -264,6 +268,8 @@ public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescri
 /// <summary>
 /// <para>
 /// Simulate a pipeline.
+/// </para>
+/// <para>
 /// Run an ingest pipeline against a set of provided documents.
 /// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
@@ -347,8 +353,8 @@ public sealed partial class SimulateRequestDescriptor : RequestDescriptor<Simula
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>

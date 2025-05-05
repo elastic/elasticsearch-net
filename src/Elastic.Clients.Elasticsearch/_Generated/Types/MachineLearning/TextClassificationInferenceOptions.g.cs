@@ -65,6 +65,8 @@ public sealed partial class TextClassificationInferenceOptions
 	/// </summary>
 	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+	[JsonInclude, JsonPropertyName("vocabulary")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? Vocabulary { get; set; }
 
 	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(TextClassificationInferenceOptions textClassificationInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.TextClassification(textClassificationInferenceOptions);
 }
@@ -88,6 +90,9 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? VocabularyValue { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor VocabularyDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> VocabularyDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -151,6 +156,30 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		return Self;
 	}
 
+	public TextClassificationInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary? vocabulary)
+	{
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = null;
+		VocabularyValue = vocabulary;
+		return Self;
+	}
+
+	public TextClassificationInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor descriptor)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptorAction = null;
+		VocabularyDescriptor = descriptor;
+		return Self;
+	}
+
+	public TextClassificationInferenceOptionsDescriptor Vocabulary(Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> configure)
+	{
+		VocabularyValue = null;
+		VocabularyDescriptor = null;
+		VocabularyDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -186,6 +215,22 @@ public sealed partial class TextClassificationInferenceOptionsDescriptor : Seria
 		{
 			writer.WritePropertyName("tokenization");
 			JsonSerializer.Serialize(writer, TokenizationValue, options);
+		}
+
+		if (VocabularyDescriptor is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyDescriptor, options);
+		}
+		else if (VocabularyDescriptorAction is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor(VocabularyDescriptorAction), options);
+		}
+		else if (VocabularyValue is not null)
+		{
+			writer.WritePropertyName("vocabulary");
+			JsonSerializer.Serialize(writer, VocabularyValue, options);
 		}
 
 		writer.WriteEndObject();

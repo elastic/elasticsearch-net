@@ -31,4 +31,6 @@ public sealed partial class ExecuteEnrichPolicyStatus
 {
 	[JsonInclude, JsonPropertyName("phase")]
 	public Elastic.Clients.Elasticsearch.Enrich.EnrichPolicyPhase Phase { get; init; }
+	[JsonInclude, JsonPropertyName("step")]
+	public string? Step { get; init; }
 }

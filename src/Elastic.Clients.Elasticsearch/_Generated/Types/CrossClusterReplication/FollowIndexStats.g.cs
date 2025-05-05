@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowIndexStats
 {
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
 	public string Index { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// An array of shard-level following task statistics.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("shards")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ShardStats> Shards { get; init; }
 }

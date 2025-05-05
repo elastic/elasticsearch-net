@@ -34,59 +34,6 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The document count (how many documents contain this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// </summary>
-	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term offsets.
-	/// </para>
-	/// </summary>
-	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term payloads.
-	/// </para>
-	/// </summary>
-	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes term positions.
-	/// </para>
-	/// </summary>
-	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-
-	/// <summary>
-	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// It is random by default.
 	/// </para>
@@ -99,49 +46,6 @@ public sealed partial class TermVectorsRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
-
-	/// <summary>
-	/// <para>
-	/// A custom value that is used to route operations to a specific shard.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the response includes:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// The total term frequency (how often a term occurs in all documents).
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// The document frequency (the number of documents containing the current term).
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// By default these values are not returned since term statistics can have a serious performance impact.
-	/// </para>
-	/// </summary>
-	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, returns the document version as part of a hit.
-	/// </para>
-	/// </summary>
-	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
-
-	/// <summary>
-	/// <para>
-	/// The version type.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
 }
 
 /// <summary>
@@ -235,12 +139,39 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list or wildcard expressions of fields to include in the statistics.
-	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// The node or shard the operation should be performed on.
+	/// It is random by default.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Fields? Fields { get => Q<Elastic.Clients.Elasticsearch.Fields?>("fields"); set => Q("fields", value); }
+	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, the request is real-time as opposed to near-real-time.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+
+	/// <summary>
+	/// <para>
+	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("doc")]
+	[SourceConverter]
+	public TDocument? Doc { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("fields")]
+	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
+	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -264,57 +195,60 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 	/// </item>
 	/// </list>
 	/// </summary>
-	[JsonIgnore]
-	public bool? FieldStatistics { get => Q<bool?>("field_statistics"); set => Q("field_statistics", value); }
+	[JsonInclude, JsonPropertyName("field_statistics")]
+	public bool? FieldStatistics { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Filter terms based on their tf-idf scores.
+	/// This could be useful in order find out a good characteristic vector of a document.
+	/// This feature works in a similar manner to the second phase of the More Like This Query.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("filter")]
+	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes term offsets.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public bool? Offsets { get => Q<bool?>("offsets"); set => Q("offsets", value); }
+	[JsonInclude, JsonPropertyName("offsets")]
+	public bool? Offsets { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes term payloads.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public bool? Payloads { get => Q<bool?>("payloads"); set => Q("payloads", value); }
+	[JsonInclude, JsonPropertyName("payloads")]
+	public bool? Payloads { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Override the default per-field analyzer.
+	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
+	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("per_field_analyzer")]
+	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the response includes term positions.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public bool? Positions { get => Q<bool?>("positions"); set => Q("positions", value); }
-
-	/// <summary>
-	/// <para>
-	/// The node or shard the operation should be performed on.
-	/// It is random by default.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public string? Preference { get => Q<string?>("preference"); set => Q("preference", value); }
-
-	/// <summary>
-	/// <para>
-	/// If true, the request is real-time as opposed to near-real-time.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public bool? Realtime { get => Q<bool?>("realtime"); set => Q("realtime", value); }
+	[JsonInclude, JsonPropertyName("positions")]
+	public bool? Positions { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A custom value that is used to route operations to a specific shard.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Routing? Routing { get => Q<Elastic.Clients.Elasticsearch.Routing?>("routing"); set => Q("routing", value); }
+	[JsonInclude, JsonPropertyName("routing")]
+	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -336,53 +270,24 @@ public sealed partial class TermVectorsRequest<TDocument> : PlainRequest<TermVec
 	/// By default these values are not returned since term statistics can have a serious performance impact.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public bool? TermStatistics { get => Q<bool?>("term_statistics"); set => Q("term_statistics", value); }
+	[JsonInclude, JsonPropertyName("term_statistics")]
+	public bool? TermStatistics { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns the document version as part of a hit.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public long? Version { get => Q<long?>("version"); set => Q("version", value); }
+	[JsonInclude, JsonPropertyName("version")]
+	public long? Version { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The version type.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get => Q<Elastic.Clients.Elasticsearch.VersionType?>("version_type"); set => Q("version_type", value); }
-
-	/// <summary>
-	/// <para>
-	/// An artificial document (a document not present in the index) for which you want to retrieve term vectors.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("doc")]
-	[SourceConverter]
-	public TDocument? Doc { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Filter terms based on their tf-idf scores.
-	/// This could be useful in order find out a good characteristic vector of a document.
-	/// This feature works in a similar manner to the second phase of the More Like This Query.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	public Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? Filter { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Override the default per-field analyzer.
-	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
-	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("per_field_analyzer")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzer { get; set; }
+	[JsonInclude, JsonPropertyName("version_type")]
+	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
 /// <summary>
@@ -492,17 +397,8 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 
 	internal override string OperationName => "termvectors";
 
-	public TermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
-	public TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true) => Qs("field_statistics", fieldStatistics);
-	public TermVectorsRequestDescriptor<TDocument> Offsets(bool? offsets = true) => Qs("offsets", offsets);
-	public TermVectorsRequestDescriptor<TDocument> Payloads(bool? payloads = true) => Qs("payloads", payloads);
-	public TermVectorsRequestDescriptor<TDocument> Positions(bool? positions = true) => Qs("positions", positions);
 	public TermVectorsRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public TermVectorsRequestDescriptor<TDocument> Realtime(bool? realtime = true) => Qs("realtime", realtime);
-	public TermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
-	public TermVectorsRequestDescriptor<TDocument> TermStatistics(bool? termStatistics = true) => Qs("term_statistics", termStatistics);
-	public TermVectorsRequestDescriptor<TDocument> Version(long? version) => Qs("version", version);
-	public TermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType) => Qs("version_type", versionType);
 
 	public TermVectorsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
 	{
@@ -517,10 +413,19 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 	}
 
 	private TDocument? DocValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
+	private bool? FieldStatisticsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.Filter? FilterValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor FilterDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.TermVectors.FilterDescriptor> FilterDescriptorAction { get; set; }
+	private bool? OffsetsValue { get; set; }
+	private bool? PayloadsValue { get; set; }
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, string>? PerFieldAnalyzerValue { get; set; }
+	private bool? PositionsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
+	private bool? TermStatisticsValue { get; set; }
+	private long? VersionValue { get; set; }
+	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -530,6 +435,46 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 	public TermVectorsRequestDescriptor<TDocument> Doc(TDocument? doc)
 	{
 		DocValue = doc;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of fields to include in the statistics.
+	/// It is used as the default list unless a specific field list is provided in the <c>completion_fields</c> or <c>fielddata_fields</c> parameters.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	{
+		FieldsValue = fields;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The document count (how many documents contain this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of document frequencies (the sum of document frequencies for all terms in this field).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The sum of total term frequencies (the sum of total term frequencies of each term in this field).
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> FieldStatistics(bool? fieldStatistics = true)
+	{
+		FieldStatisticsValue = fieldStatistics;
 		return Self;
 	}
 
@@ -566,6 +511,28 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, the response includes term offsets.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Offsets(bool? offsets = true)
+	{
+		OffsetsValue = offsets;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term payloads.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Payloads(bool? payloads = true)
+	{
+		PayloadsValue = payloads;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Override the default per-field analyzer.
 	/// This is useful in order to generate term vectors in any fashion, especially when using artificial documents.
 	/// When providing an analyzer for a field that already stores term vectors, the term vectors will be regenerated.
@@ -577,6 +544,76 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes term positions.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Positions(bool? positions = true)
+	{
+		PositionsValue = positions;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A custom value that is used to route operations to a specific shard.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	{
+		RoutingValue = routing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// The total term frequency (how often a term occurs in all documents).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The document frequency (the number of documents containing the current term).
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// By default these values are not returned since term statistics can have a serious performance impact.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> TermStatistics(bool? termStatistics = true)
+	{
+		TermStatisticsValue = termStatistics;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns the document version as part of a hit.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> Version(long? version)
+	{
+		VersionValue = version;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The version type.
+	/// </para>
+	/// </summary>
+	public TermVectorsRequestDescriptor<TDocument> VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	{
+		VersionTypeValue = versionType;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -584,6 +621,18 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 		{
 			writer.WritePropertyName("doc");
 			settings.SourceSerializer.Serialize(DocValue, writer);
+		}
+
+		if (FieldsValue is not null)
+		{
+			writer.WritePropertyName("fields");
+			JsonSerializer.Serialize(writer, FieldsValue, options);
+		}
+
+		if (FieldStatisticsValue.HasValue)
+		{
+			writer.WritePropertyName("field_statistics");
+			writer.WriteBooleanValue(FieldStatisticsValue.Value);
 		}
 
 		if (FilterDescriptor is not null)
@@ -602,10 +651,52 @@ public sealed partial class TermVectorsRequestDescriptor<TDocument> : RequestDes
 			JsonSerializer.Serialize(writer, FilterValue, options);
 		}
 
+		if (OffsetsValue.HasValue)
+		{
+			writer.WritePropertyName("offsets");
+			writer.WriteBooleanValue(OffsetsValue.Value);
+		}
+
+		if (PayloadsValue.HasValue)
+		{
+			writer.WritePropertyName("payloads");
+			writer.WriteBooleanValue(PayloadsValue.Value);
+		}
+
 		if (PerFieldAnalyzerValue is not null)
 		{
 			writer.WritePropertyName("per_field_analyzer");
 			JsonSerializer.Serialize(writer, PerFieldAnalyzerValue, options);
+		}
+
+		if (PositionsValue.HasValue)
+		{
+			writer.WritePropertyName("positions");
+			writer.WriteBooleanValue(PositionsValue.Value);
+		}
+
+		if (RoutingValue is not null)
+		{
+			writer.WritePropertyName("routing");
+			JsonSerializer.Serialize(writer, RoutingValue, options);
+		}
+
+		if (TermStatisticsValue.HasValue)
+		{
+			writer.WritePropertyName("term_statistics");
+			writer.WriteBooleanValue(TermStatisticsValue.Value);
+		}
+
+		if (VersionValue.HasValue)
+		{
+			writer.WritePropertyName("version");
+			writer.WriteNumberValue(VersionValue.Value);
+		}
+
+		if (VersionTypeValue is not null)
+		{
+			writer.WritePropertyName("version_type");
+			JsonSerializer.Serialize(writer, VersionTypeValue, options);
 		}
 
 		writer.WriteEndObject();

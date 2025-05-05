@@ -34,5 +34,5 @@ public sealed partial class SimulateDocumentResult
 	[JsonInclude, JsonPropertyName("error")]
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
 	[JsonInclude, JsonPropertyName("processor_results")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? ProcessorResults { get; init; }
 }

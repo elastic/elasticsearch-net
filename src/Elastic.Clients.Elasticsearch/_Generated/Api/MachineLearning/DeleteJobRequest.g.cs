@@ -61,6 +61,8 @@ public sealed partial class DeleteJobRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete an anomaly detection job.
+/// </para>
+/// <para>
 /// All job configuration, model state and results are deleted.
 /// It is not currently possible to delete multiple jobs using wildcards or a
 /// comma separated list. If you delete a job that has a datafeed, the request
@@ -115,6 +117,8 @@ public sealed partial class DeleteJobRequest : PlainRequest<DeleteJobRequestPara
 /// <summary>
 /// <para>
 /// Delete an anomaly detection job.
+/// </para>
+/// <para>
 /// All job configuration, model state and results are deleted.
 /// It is not currently possible to delete multiple jobs using wildcards or a
 /// comma separated list. If you delete a job that has a datafeed, the request

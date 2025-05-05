@@ -37,6 +37,8 @@ public sealed partial class DeleteSearchApplicationRequestParameters : RequestPa
 /// <summary>
 /// <para>
 /// Delete a search application.
+/// </para>
+/// <para>
 /// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 /// </para>
 /// </summary>
@@ -58,6 +60,8 @@ public sealed partial class DeleteSearchApplicationRequest : PlainRequest<Delete
 /// <summary>
 /// <para>
 /// Delete a search application.
+/// </para>
+/// <para>
 /// Remove a search application and its associated alias. Indices attached to the search application are not removed.
 /// </para>
 /// </summary>

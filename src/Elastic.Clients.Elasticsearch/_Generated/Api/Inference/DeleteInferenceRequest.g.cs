@@ -34,14 +34,14 @@ public sealed partial class DeleteInferenceRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
 	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
@@ -72,7 +72,7 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 
 	/// <summary>
 	/// <para>
-	/// When true, the endpoint is not deleted, and a list of ingest processors which reference this endpoint is returned
+	/// When true, the endpoint is not deleted and a list of ingest processors which reference this endpoint is returned.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -80,7 +80,7 @@ public sealed partial class DeleteInferenceRequest : PlainRequest<DeleteInferenc
 
 	/// <summary>
 	/// <para>
-	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields
+	/// When true, the inference endpoint is forcefully deleted even if it is still being used by ingest processors or semantic text fields.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

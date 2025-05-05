@@ -31,7 +31,7 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// <summary>
 	/// <para>
 	/// Metadata about clusters involved in the cross-cluster search.
-	/// Not shown for local-only searches.
+	/// It is not shown for local-only searches.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_clusters")]
@@ -40,8 +40,8 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// <summary>
 	/// <para>
 	/// If the async search completed, this field shows the status code of the search.
-	/// For example, 200 indicates that the async search was successfully completed.
-	/// 503 indicates that the async search was completed with an error.
+	/// For example, <c>200</c> indicates that the async search was successfully completed.
+	/// <c>503</c> indicates that the async search was completed with an error.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_status")]
@@ -49,8 +49,8 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Indicates when the async search completed. Only present
-	/// when the search has completed.
+	/// Indicates when the async search completed.
+	/// It is present only when the search has completed.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_time")]
@@ -82,7 +82,10 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 	/// <summary>
 	/// <para>
 	/// Indicates whether the search is still running or has completed.
-	/// NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
+	/// </para>
+	/// <para>
+	/// info
+	/// If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]
@@ -90,7 +93,7 @@ public sealed partial class AsyncSearchStatusResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
-	/// Indicates how many shards have run the query so far.
+	/// The number of shards that have run the query so far.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("_shards")]

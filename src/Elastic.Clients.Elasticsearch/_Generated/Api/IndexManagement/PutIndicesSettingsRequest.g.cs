@@ -85,6 +85,15 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 
 	/// <summary>
 	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a response. If no response is received before the
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
@@ -191,6 +200,16 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 
 	/// <summary>
 	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a response. If no response is received before the
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
@@ -248,6 +267,7 @@ public sealed partial class PutIndicesSettingsRequestDescriptor<TDocument> : Req
 	public PutIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public PutIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutIndicesSettingsRequestDescriptor<TDocument> PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
+	public PutIndicesSettingsRequestDescriptor<TDocument> Reopen(bool? reopen = true) => Qs("reopen", reopen);
 	public PutIndicesSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public PutIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -332,6 +352,7 @@ public sealed partial class PutIndicesSettingsRequestDescriptor : RequestDescrip
 	public PutIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public PutIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PutIndicesSettingsRequestDescriptor PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
+	public PutIndicesSettingsRequestDescriptor Reopen(bool? reopen = true) => Qs("reopen", reopen);
 	public PutIndicesSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public PutIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)

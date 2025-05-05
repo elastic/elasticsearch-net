@@ -96,6 +96,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> ConstantKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, ConstantKeywordProperty constantKeywordProperty) => AssignVariant(propertyName, constantKeywordProperty);
 	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> ConstantKeyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordPropertyDescriptor<TDocument>, ConstantKeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>, CountedKeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>, CountedKeywordProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> CountedKeyword(Elastic.Clients.Elasticsearch.PropertyName propertyName, CountedKeywordProperty countedKeywordProperty) => AssignVariant(propertyName, countedKeywordProperty);
+	public PropertiesDescriptor<TDocument> CountedKeyword(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>, CountedKeywordProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> CountedKeyword(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordPropertyDescriptor<TDocument>, CountedKeywordProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.DateNanosPropertyDescriptor<TDocument>, DateNanosProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> DateNanos(Elastic.Clients.Elasticsearch.PropertyName propertyName, DateNanosProperty dateNanosProperty) => AssignVariant(propertyName, dateNanosProperty);
@@ -236,6 +241,11 @@ public sealed partial class PropertiesDescriptor<TDocument> : IsADictionaryDescr
 	public PropertiesDescriptor<TDocument> Object(Elastic.Clients.Elasticsearch.PropertyName propertyName, ObjectProperty objectProperty) => AssignVariant(propertyName, objectProperty);
 	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Object(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.ObjectPropertyDescriptor<TDocument>, ObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, configure);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Elastic.Clients.Elasticsearch.PropertyName propertyName, PassthroughObjectProperty passthroughObjectProperty) => AssignVariant(propertyName, passthroughObjectProperty);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Expression<Func<TDocument, object>> propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, null);
+	public PropertiesDescriptor<TDocument> PassthroughObject(Expression<Func<TDocument, object>> propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectPropertyDescriptor<TDocument>, PassthroughObjectProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, null);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, Action<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Mapping.PercolatorPropertyDescriptor<TDocument>, PercolatorProperty>(propertyName, configure);
 	public PropertiesDescriptor<TDocument> Percolator(Elastic.Clients.Elasticsearch.PropertyName propertyName, PercolatorProperty percolatorProperty) => AssignVariant(propertyName, percolatorProperty);
@@ -339,6 +349,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.CompletionProperty>(ref reader, options);
 			case "constant_keyword":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty>(ref reader, options);
+			case "counted_keyword":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty>(ref reader, options);
 			case "date_nanos":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty>(ref reader, options);
 			case "date":
@@ -395,6 +407,8 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.NestedProperty>(ref reader, options);
 			case "object":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.ObjectProperty>(ref reader, options);
+			case "passthrough":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty>(ref reader, options);
 			case "percolator":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty>(ref reader, options);
 			case "point":
@@ -457,6 +471,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "constant_keyword":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ConstantKeywordProperty), options);
+				return;
+			case "counted_keyword":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.CountedKeywordProperty), options);
 				return;
 			case "date_nanos":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.DateNanosProperty), options);
@@ -541,6 +558,9 @@ internal sealed partial class PropertyInterfaceConverter : JsonConverter<IProper
 				return;
 			case "object":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.ObjectProperty), options);
+				return;
+			case "passthrough":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PassthroughObjectProperty), options);
 				return;
 			case "percolator":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Mapping.PercolatorProperty), options);

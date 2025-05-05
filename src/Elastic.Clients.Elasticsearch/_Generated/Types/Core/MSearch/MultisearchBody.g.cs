@@ -89,7 +89,7 @@ internal sealed partial class MultisearchBodyConverter : JsonConverter<Multisear
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
@@ -475,7 +475,7 @@ public sealed partial class MultisearchBody
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -641,7 +641,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> KnnDescriptorAction { get; set; }
@@ -860,7 +860,7 @@ public sealed partial class MultisearchBodyDescriptor<TDocument> : SerializableD
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor<TDocument> IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -1657,7 +1657,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> KnnDescriptorAction { get; set; }
@@ -1876,7 +1876,7 @@ public sealed partial class MultisearchBodyDescriptor : SerializableDescriptor<M
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public MultisearchBodyDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public MultisearchBodyDescriptor IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;

@@ -29,10 +29,27 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class ReadException
 {
+	/// <summary>
+	/// <para>
+	/// The exception that caused the read to fail.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("exception")]
 	public Elastic.Clients.Elasticsearch.ErrorCause Exception { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The starting sequence number of the batch requested from the leader.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("from_seq_no")]
 	public long FromSeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of times the batch has been retried.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("retries")]
 	public int Retries { get; init; }
 }

@@ -37,6 +37,8 @@ public sealed partial class DeleteFilterRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete a filter.
+/// </para>
+/// <para>
 /// If an anomaly detection job references the filter, you cannot delete the
 /// filter. You must update or delete the job before you can delete the filter.
 /// </para>
@@ -59,6 +61,8 @@ public sealed partial class DeleteFilterRequest : PlainRequest<DeleteFilterReque
 /// <summary>
 /// <para>
 /// Delete a filter.
+/// </para>
+/// <para>
 /// If an anomaly detection job references the filter, you cannot delete the
 /// filter. You must update or delete the job before you can delete the filter.
 /// </para>

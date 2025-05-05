@@ -29,6 +29,13 @@ namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
 public sealed partial class TransformStatsHealth
 {
+	/// <summary>
+	/// <para>
+	/// If a non-healthy status is returned, contains a list of issues of the transform.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("issues")]
+	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.TransformManagement.TransformHealthIssue>? Issues { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
 }

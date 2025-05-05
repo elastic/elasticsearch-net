@@ -37,6 +37,8 @@ public sealed partial class OpenJobRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Open anomaly detection jobs.
+/// </para>
+/// <para>
 /// An anomaly detection job must be opened to be ready to receive and analyze
 /// data. It can be opened and closed multiple times throughout its lifecycle.
 /// When you open a new job, it starts with an empty model.
@@ -71,6 +73,8 @@ public sealed partial class OpenJobRequest : PlainRequest<OpenJobRequestParamete
 /// <summary>
 /// <para>
 /// Open anomaly detection jobs.
+/// </para>
+/// <para>
 /// An anomaly detection job must be opened to be ready to receive and analyze
 /// data. It can be opened and closed multiple times throughout its lifecycle.
 /// When you open a new job, it starts with an empty model.

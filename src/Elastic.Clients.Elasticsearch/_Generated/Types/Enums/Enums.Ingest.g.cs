@@ -318,6 +318,69 @@ internal sealed class JsonProcessorConflictStrategyConverter : JsonConverter<Jso
 	}
 }
 
+[JsonConverter(typeof(PipelineSimulationStatusOptionsConverter))]
+public enum PipelineSimulationStatusOptions
+{
+	[EnumMember(Value = "success")]
+	Success,
+	[EnumMember(Value = "skipped")]
+	Skipped,
+	[EnumMember(Value = "error_ignored")]
+	ErrorIgnored,
+	[EnumMember(Value = "error")]
+	Error,
+	[EnumMember(Value = "dropped")]
+	Dropped
+}
+
+internal sealed class PipelineSimulationStatusOptionsConverter : JsonConverter<PipelineSimulationStatusOptions>
+{
+	public override PipelineSimulationStatusOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "success":
+				return PipelineSimulationStatusOptions.Success;
+			case "skipped":
+				return PipelineSimulationStatusOptions.Skipped;
+			case "error_ignored":
+				return PipelineSimulationStatusOptions.ErrorIgnored;
+			case "error":
+				return PipelineSimulationStatusOptions.Error;
+			case "dropped":
+				return PipelineSimulationStatusOptions.Dropped;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, PipelineSimulationStatusOptions value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case PipelineSimulationStatusOptions.Success:
+				writer.WriteStringValue("success");
+				return;
+			case PipelineSimulationStatusOptions.Skipped:
+				writer.WriteStringValue("skipped");
+				return;
+			case PipelineSimulationStatusOptions.ErrorIgnored:
+				writer.WriteStringValue("error_ignored");
+				return;
+			case PipelineSimulationStatusOptions.Error:
+				writer.WriteStringValue("error");
+				return;
+			case PipelineSimulationStatusOptions.Dropped:
+				writer.WriteStringValue("dropped");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(ShapeTypeConverter))]
 public enum ShapeType
 {

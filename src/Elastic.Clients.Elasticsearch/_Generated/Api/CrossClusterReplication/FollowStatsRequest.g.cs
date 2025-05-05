@@ -32,11 +32,20 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowStatsRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get follower stats.
+/// </para>
+/// <para>
 /// Get cross-cluster replication follower stats.
 /// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
@@ -54,11 +63,22 @@ public sealed partial class FollowStatsRequest : PlainRequest<FollowStatsRequest
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.follow_stats";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get follower stats.
+/// </para>
+/// <para>
 /// Get cross-cluster replication follower stats.
 /// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
@@ -83,6 +103,8 @@ public sealed partial class FollowStatsRequestDescriptor<TDocument> : RequestDes
 
 	internal override string OperationName => "ccr.follow_stats";
 
+	public FollowStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
+
 	public FollowStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -97,6 +119,8 @@ public sealed partial class FollowStatsRequestDescriptor<TDocument> : RequestDes
 /// <summary>
 /// <para>
 /// Get follower stats.
+/// </para>
+/// <para>
 /// Get cross-cluster replication follower stats.
 /// The API returns shard-level stats about the "following tasks" associated with each shard for the specified indices.
 /// </para>
@@ -116,6 +140,8 @@ public sealed partial class FollowStatsRequestDescriptor : RequestDescriptor<Fol
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.follow_stats";
+
+	public FollowStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public FollowStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{

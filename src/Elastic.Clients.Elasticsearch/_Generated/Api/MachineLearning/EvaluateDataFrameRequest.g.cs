@@ -37,6 +37,8 @@ public sealed partial class EvaluateDataFrameRequestParameters : RequestParamete
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
@@ -81,6 +83,8 @@ public sealed partial class EvaluateDataFrameRequest : PlainRequest<EvaluateData
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
@@ -224,6 +228,8 @@ public sealed partial class EvaluateDataFrameRequestDescriptor<TDocument> : Requ
 /// <summary>
 /// <para>
 /// Evaluate data frame analytics.
+/// </para>
+/// <para>
 /// The API packages together commonly used evaluation metrics for various types
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth

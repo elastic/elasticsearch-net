@@ -83,13 +83,6 @@ public sealed partial class NodesStatsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -202,14 +195,6 @@ public sealed partial class NodesStatsRequest : PlainRequest<NodesStatsRequestPa
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -259,7 +244,6 @@ public sealed partial class NodesStatsRequestDescriptor<TDocument> : RequestDesc
 	public NodesStatsRequestDescriptor<TDocument> IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public NodesStatsRequestDescriptor<TDocument> IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public NodesStatsRequestDescriptor<TDocument> Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-	public NodesStatsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public NodesStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public NodesStatsRequestDescriptor<TDocument> Types(ICollection<string>? types) => Qs("types", types);
 
@@ -320,7 +304,6 @@ public sealed partial class NodesStatsRequestDescriptor : RequestDescriptor<Node
 	public NodesStatsRequestDescriptor IncludeSegmentFileSizes(bool? includeSegmentFileSizes = true) => Qs("include_segment_file_sizes", includeSegmentFileSizes);
 	public NodesStatsRequestDescriptor IncludeUnloadedSegments(bool? includeUnloadedSegments = true) => Qs("include_unloaded_segments", includeUnloadedSegments);
 	public NodesStatsRequestDescriptor Level(Elastic.Clients.Elasticsearch.Level? level) => Qs("level", level);
-	public NodesStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public NodesStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public NodesStatsRequestDescriptor Types(ICollection<string>? types) => Qs("types", types);
 

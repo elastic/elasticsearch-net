@@ -29,70 +29,240 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class ShardStats
 {
+	/// <summary>
+	/// <para>
+	/// The total of transferred bytes read from the leader.
+	/// This is only an estimate and does not account for compression if enabled.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("bytes_read")]
 	public long BytesRead { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of failed reads.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("failed_read_requests")]
 	public long FailedReadRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of failed bulk write requests on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("failed_write_requests")]
 	public long FailedWriteRequests { get; init; }
 	[JsonInclude, JsonPropertyName("fatal_exception")]
 	public Elastic.Clients.Elasticsearch.ErrorCause? FatalException { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The index aliases version the follower is synced up to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_aliases_version")]
 	public long FollowerAliasesVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The current global checkpoint on the follower.
+	/// The difference between the <c>leader_global_checkpoint</c> and the <c>follower_global_checkpoint</c> is an indication of how much the follower is lagging the leader.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_global_checkpoint")]
 	public long FollowerGlobalCheckpoint { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_index")]
 	public string FollowerIndex { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The mapping version the follower is synced up to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_mapping_version")]
 	public long FollowerMappingVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The current maximum sequence number on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_max_seq_no")]
 	public long FollowerMaxSeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The index settings version the follower is synced up to.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_settings_version")]
 	public long FollowerSettingsVersion { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The starting sequence number of the last batch of operations requested from the leader.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("last_requested_seq_no")]
 	public long LastRequestedSeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The current global checkpoint on the leader known to the follower task.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_global_checkpoint")]
 	public long LeaderGlobalCheckpoint { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster being followed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index")]
 	public string LeaderIndex { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The current maximum sequence number on the leader known to the follower task.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_max_seq_no")]
 	public long LeaderMaxSeqNo { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of operations read from the leader.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("operations_read")]
 	public long OperationsRead { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of operations written on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("operations_written")]
 	public long OperationsWritten { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of active read requests from the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("outstanding_read_requests")]
 	public int OutstandingReadRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of active bulk write requests on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("outstanding_write_requests")]
 	public int OutstandingWriteRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// An array of objects representing failed reads.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("read_exceptions")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.ReadException> ReadExceptions { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The remote cluster containing the leader index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_cluster")]
 	public string RemoteCluster { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The numerical shard ID, with values from 0 to one less than the number of replicas.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("shard_id")]
 	public int ShardId { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of successful fetches.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("successful_read_requests")]
 	public long SuccessfulReadRequests { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of bulk write requests run on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("successful_write_requests")]
 	public long SuccessfulWriteRequests { get; init; }
 	[JsonInclude, JsonPropertyName("time_since_last_read")]
 	public Elastic.Clients.Elasticsearch.Duration? TimeSinceLastRead { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of milliseconds since a read request was sent to the leader.
+	/// When the follower is caught up to the leader, this number will increase up to the configured <c>read_poll_timeout</c> at which point another read request will be sent to the leader.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("time_since_last_read_millis")]
 	public long TimeSinceLastReadMillis { get; init; }
 	[JsonInclude, JsonPropertyName("total_read_remote_exec_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadRemoteExecTime { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The total time reads spent running on the remote cluster.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total_read_remote_exec_time_millis")]
 	public long TotalReadRemoteExecTimeMillis { get; init; }
 	[JsonInclude, JsonPropertyName("total_read_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalReadTime { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The total time reads were outstanding, measured from the time a read was sent to the leader to the time a reply was returned to the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total_read_time_millis")]
 	public long TotalReadTimeMillis { get; init; }
 	[JsonInclude, JsonPropertyName("total_write_time")]
 	public Elastic.Clients.Elasticsearch.Duration? TotalWriteTime { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The total time spent writing on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("total_write_time_millis")]
 	public long TotalWriteTimeMillis { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The number of write operations queued on the follower.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("write_buffer_operation_count")]
 	public long WriteBufferOperationCount { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The total number of bytes of operations currently queued for writing.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("write_buffer_size_in_bytes")]
 	public Elastic.Clients.Elasticsearch.ByteSize WriteBufferSizeInBytes { get; init; }
 }

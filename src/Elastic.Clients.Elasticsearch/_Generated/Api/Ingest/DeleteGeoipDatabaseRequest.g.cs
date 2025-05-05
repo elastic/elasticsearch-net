@@ -34,7 +34,7 @@ public sealed partial class DeleteGeoipDatabaseRequestParameters : RequestParame
 {
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
+	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -42,7 +42,7 @@ public sealed partial class DeleteGeoipDatabaseRequestParameters : RequestParame
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -51,6 +51,8 @@ public sealed partial class DeleteGeoipDatabaseRequestParameters : RequestParame
 /// <summary>
 /// <para>
 /// Delete GeoIP database configurations.
+/// </para>
+/// <para>
 /// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
@@ -70,7 +72,7 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
+	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -79,7 +81,7 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// The period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -89,6 +91,8 @@ public sealed partial class DeleteGeoipDatabaseRequest : PlainRequest<DeleteGeoi
 /// <summary>
 /// <para>
 /// Delete GeoIP database configurations.
+/// </para>
+/// <para>
 /// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>
@@ -125,6 +129,8 @@ public sealed partial class DeleteGeoipDatabaseRequestDescriptor<TDocument> : Re
 /// <summary>
 /// <para>
 /// Delete GeoIP database configurations.
+/// </para>
+/// <para>
 /// Delete one or more IP geolocation database configurations.
 /// </para>
 /// </summary>

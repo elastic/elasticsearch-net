@@ -66,6 +66,13 @@ public sealed partial class OpenPointInTimeRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// By default, it is random.
 	/// </para>
@@ -184,6 +191,14 @@ public sealed partial class OpenPointInTimeRequest : PlainRequest<OpenPointInTim
 
 	/// <summary>
 	/// <para>
+	/// Maximum number of concurrent shard requests that each sub-search request executes per node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
 	/// The node or shard the operation should be performed on.
 	/// By default, it is random.
 	/// </para>
@@ -284,6 +299,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor<TDocument> : Reques
 	public OpenPointInTimeRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
+	public OpenPointInTimeRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 	public OpenPointInTimeRequestDescriptor<TDocument> Preference(string? preference) => Qs("preference", preference);
 	public OpenPointInTimeRequestDescriptor<TDocument> Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 
@@ -421,6 +437,7 @@ public sealed partial class OpenPointInTimeRequestDescriptor : RequestDescriptor
 	public OpenPointInTimeRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public OpenPointInTimeRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
 	public OpenPointInTimeRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration keepAlive) => Qs("keep_alive", keepAlive);
+	public OpenPointInTimeRequestDescriptor MaxConcurrentShardRequests(int? maxConcurrentShardRequests) => Qs("max_concurrent_shard_requests", maxConcurrentShardRequests);
 	public OpenPointInTimeRequestDescriptor Preference(string? preference) => Qs("preference", preference);
 	public OpenPointInTimeRequestDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing) => Qs("routing", routing);
 

@@ -38,7 +38,9 @@ public enum EnrichPolicyPhase
 	[EnumMember(Value = "FAILED")]
 	Failed,
 	[EnumMember(Value = "COMPLETE")]
-	Complete
+	Complete,
+	[EnumMember(Value = "CANCELLED")]
+	Cancelled
 }
 
 internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPhase>
@@ -56,6 +58,8 @@ internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPha
 				return EnrichPolicyPhase.Failed;
 			case "COMPLETE":
 				return EnrichPolicyPhase.Complete;
+			case "CANCELLED":
+				return EnrichPolicyPhase.Cancelled;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -77,6 +81,9 @@ internal sealed class EnrichPolicyPhaseConverter : JsonConverter<EnrichPolicyPha
 				return;
 			case EnrichPolicyPhase.Complete:
 				writer.WriteStringValue("COMPLETE");
+				return;
+			case EnrichPolicyPhase.Cancelled:
+				writer.WriteStringValue("CANCELLED");
 				return;
 		}
 

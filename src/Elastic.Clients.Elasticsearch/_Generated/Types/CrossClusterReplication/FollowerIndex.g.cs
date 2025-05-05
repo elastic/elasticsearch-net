@@ -29,14 +29,43 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowerIndex
 {
+	/// <summary>
+	/// <para>
+	/// The name of the follower index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follower_index")]
 	public string FollowerIndexValue { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The name of the index in the leader cluster that is followed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("leader_index")]
 	public string LeaderIndex { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// An object that encapsulates cross-cluster replication parameters. If the follower index's status is paused, this object is omitted.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("parameters")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters? Parameters { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The remote cluster that contains the leader index.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("remote_cluster")]
 	public string RemoteCluster { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// The status of the index following: <c>active</c> or <c>paused</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexStatus Status { get; init; }
 }

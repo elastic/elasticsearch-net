@@ -55,6 +55,8 @@ public sealed partial class DeleteForecastRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete forecasts from a job.
+/// </para>
+/// <para>
 /// By default, forecasts are retained for 14 days. You can specify a
 /// different retention period with the <c>expires_in</c> parameter in the forecast
 /// jobs API. The delete forecast API enables you to delete one or more
@@ -104,6 +106,8 @@ public sealed partial class DeleteForecastRequest : PlainRequest<DeleteForecastR
 /// <summary>
 /// <para>
 /// Delete forecasts from a job.
+/// </para>
+/// <para>
 /// By default, forecasts are retained for 14 days. You can specify a
 /// different retention period with the <c>expires_in</c> parameter in the forecast
 /// jobs API. The delete forecast API enables you to delete one or more

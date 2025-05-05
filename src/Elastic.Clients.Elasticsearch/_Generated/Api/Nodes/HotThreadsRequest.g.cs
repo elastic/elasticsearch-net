@@ -49,15 +49,6 @@ public sealed partial class HotThreadsRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response
-	/// is received before the timeout expires, the request fails and
-	/// returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// Number of samples of thread stacktrace.
 	/// </para>
 	/// </summary>
@@ -137,16 +128,6 @@ public sealed partial class HotThreadsRequest : PlainRequest<HotThreadsRequestPa
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node. If no response
-	/// is received before the timeout expires, the request fails and
-	/// returns an error.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// Number of samples of thread stacktrace.
 	/// </para>
 	/// </summary>
@@ -216,7 +197,6 @@ public sealed partial class HotThreadsRequestDescriptor : RequestDescriptor<HotT
 
 	public HotThreadsRequestDescriptor IgnoreIdleThreads(bool? ignoreIdleThreads = true) => Qs("ignore_idle_threads", ignoreIdleThreads);
 	public HotThreadsRequestDescriptor Interval(Elastic.Clients.Elasticsearch.Duration? interval) => Qs("interval", interval);
-	public HotThreadsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public HotThreadsRequestDescriptor Snapshots(long? snapshots) => Qs("snapshots", snapshots);
 	public HotThreadsRequestDescriptor Sort(Elastic.Clients.Elasticsearch.ThreadType? sort) => Qs("sort", sort);
 	public HotThreadsRequestDescriptor Threads(long? threads) => Qs("threads", threads);

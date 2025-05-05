@@ -55,12 +55,23 @@ public sealed partial class UpdateTrainedModelDeploymentRequest : PlainRequest<U
 
 	/// <summary>
 	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("adaptive_allocations")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The number of model allocations on each node where the model is deployed.
 	/// All allocations on a node share the same copy of the model in memory but use
 	/// a separate set of threads to evaluate the model.
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("number_of_allocations")]
@@ -94,7 +105,41 @@ public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : Requ
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocationsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor AdaptiveAllocationsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> AdaptiveAllocationsDescriptorAction { get; set; }
 	private int? NumberOfAllocationsValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	public UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? adaptiveAllocations)
+	{
+		AdaptiveAllocationsDescriptor = null;
+		AdaptiveAllocationsDescriptorAction = null;
+		AdaptiveAllocationsValue = adaptiveAllocations;
+		return Self;
+	}
+
+	public UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor descriptor)
+	{
+		AdaptiveAllocationsValue = null;
+		AdaptiveAllocationsDescriptorAction = null;
+		AdaptiveAllocationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public UpdateTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> configure)
+	{
+		AdaptiveAllocationsValue = null;
+		AdaptiveAllocationsDescriptor = null;
+		AdaptiveAllocationsDescriptorAction = configure;
+		return Self;
+	}
 
 	/// <summary>
 	/// <para>
@@ -104,6 +149,7 @@ public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : Requ
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
 	public UpdateTrainedModelDeploymentRequestDescriptor NumberOfAllocations(int? numberOfAllocations)
@@ -115,6 +161,22 @@ public sealed partial class UpdateTrainedModelDeploymentRequestDescriptor : Requ
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
+		if (AdaptiveAllocationsDescriptor is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, AdaptiveAllocationsDescriptor, options);
+		}
+		else if (AdaptiveAllocationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor(AdaptiveAllocationsDescriptorAction), options);
+		}
+		else if (AdaptiveAllocationsValue is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, AdaptiveAllocationsValue, options);
+		}
+
 		if (NumberOfAllocationsValue.HasValue)
 		{
 			writer.WritePropertyName("number_of_allocations");

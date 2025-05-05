@@ -50,7 +50,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequest request)
@@ -70,7 +70,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -89,7 +89,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(ListDanglingIndicesRequestDescriptor descriptor)
@@ -109,7 +109,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices()
@@ -130,7 +130,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ListDanglingIndicesResponse ListDanglingIndices(Action<ListDanglingIndicesRequestDescriptor> configureRequest)
@@ -152,7 +152,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(ListDanglingIndicesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -171,7 +171,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(CancellationToken cancellationToken = default)
 	{
@@ -191,7 +191,7 @@ public partial class DanglingIndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Use this API to list dangling indices, which you can then import or delete.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/dangling-indices-list.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ListDanglingIndicesResponse> ListDanglingIndicesAsync(Action<ListDanglingIndicesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

@@ -93,6 +93,14 @@ public sealed partial class KnnQuery
 
 	/// <summary>
 	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("rescore_vector")]
+	public Elastic.Clients.Elasticsearch.RescoreVector? RescoreVector { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The minimum similarity for a vector to be considered a match
 	/// </para>
 	/// </summary>
@@ -123,6 +131,9 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.RescoreVector? RescoreVectorValue { get; set; }
+	private Elastic.Clients.Elasticsearch.RescoreVectorDescriptor RescoreVectorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> RescoreVectorDescriptorAction { get; set; }
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
@@ -283,6 +294,35 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 
 	/// <summary>
 	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public KnnQueryDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? rescoreVector)
+	{
+		RescoreVectorDescriptor = null;
+		RescoreVectorDescriptorAction = null;
+		RescoreVectorValue = rescoreVector;
+		return Self;
+	}
+
+	public KnnQueryDescriptor<TDocument> RescoreVector(Elastic.Clients.Elasticsearch.RescoreVectorDescriptor descriptor)
+	{
+		RescoreVectorValue = null;
+		RescoreVectorDescriptorAction = null;
+		RescoreVectorDescriptor = descriptor;
+		return Self;
+	}
+
+	public KnnQueryDescriptor<TDocument> RescoreVector(Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> configure)
+	{
+		RescoreVectorValue = null;
+		RescoreVectorDescriptor = null;
+		RescoreVectorDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The minimum similarity for a vector to be considered a match
 	/// </para>
 	/// </summary>
@@ -372,6 +412,22 @@ public sealed partial class KnnQueryDescriptor<TDocument> : SerializableDescript
 			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
 		}
 
+		if (RescoreVectorDescriptor is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, RescoreVectorDescriptor, options);
+		}
+		else if (RescoreVectorDescriptorAction is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RescoreVectorDescriptor(RescoreVectorDescriptorAction), options);
+		}
+		else if (RescoreVectorValue is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, RescoreVectorValue, options);
+		}
+
 		if (SimilarityValue.HasValue)
 		{
 			writer.WritePropertyName("similarity");
@@ -403,6 +459,9 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilder? QueryVectorBuilderValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor QueryVectorBuilderDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.QueryVectorBuilderDescriptor> QueryVectorBuilderDescriptorAction { get; set; }
+	private Elastic.Clients.Elasticsearch.RescoreVector? RescoreVectorValue { get; set; }
+	private Elastic.Clients.Elasticsearch.RescoreVectorDescriptor RescoreVectorDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> RescoreVectorDescriptorAction { get; set; }
 	private float? SimilarityValue { get; set; }
 
 	/// <summary>
@@ -563,6 +622,35 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 
 	/// <summary>
 	/// <para>
+	/// Apply oversampling and rescoring to quantized vectors *
+	/// </para>
+	/// </summary>
+	public KnnQueryDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVector? rescoreVector)
+	{
+		RescoreVectorDescriptor = null;
+		RescoreVectorDescriptorAction = null;
+		RescoreVectorValue = rescoreVector;
+		return Self;
+	}
+
+	public KnnQueryDescriptor RescoreVector(Elastic.Clients.Elasticsearch.RescoreVectorDescriptor descriptor)
+	{
+		RescoreVectorValue = null;
+		RescoreVectorDescriptorAction = null;
+		RescoreVectorDescriptor = descriptor;
+		return Self;
+	}
+
+	public KnnQueryDescriptor RescoreVector(Action<Elastic.Clients.Elasticsearch.RescoreVectorDescriptor> configure)
+	{
+		RescoreVectorValue = null;
+		RescoreVectorDescriptor = null;
+		RescoreVectorDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// The minimum similarity for a vector to be considered a match
 	/// </para>
 	/// </summary>
@@ -650,6 +738,22 @@ public sealed partial class KnnQueryDescriptor : SerializableDescriptor<KnnQuery
 		{
 			writer.WritePropertyName("query_vector_builder");
 			JsonSerializer.Serialize(writer, QueryVectorBuilderValue, options);
+		}
+
+		if (RescoreVectorDescriptor is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, RescoreVectorDescriptor, options);
+		}
+		else if (RescoreVectorDescriptorAction is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.RescoreVectorDescriptor(RescoreVectorDescriptorAction), options);
+		}
+		else if (RescoreVectorValue is not null)
+		{
+			writer.WritePropertyName("rescore_vector");
+			JsonSerializer.Serialize(writer, RescoreVectorValue, options);
 		}
 
 		if (SimilarityValue.HasValue)

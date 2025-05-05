@@ -34,6 +34,13 @@ public sealed partial class ExecutePolicyRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, the request blocks other enrich policy execution requests until complete.
 	/// </para>
 	/// </summary>
@@ -59,6 +66,14 @@ public sealed partial class ExecutePolicyRequest : PlainRequest<ExecutePolicyReq
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.execute_policy";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
@@ -91,6 +106,7 @@ public sealed partial class ExecutePolicyRequestDescriptor : RequestDescriptor<E
 
 	internal override string OperationName => "enrich.execute_policy";
 
+	public ExecutePolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public ExecutePolicyRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
 
 	public ExecutePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)

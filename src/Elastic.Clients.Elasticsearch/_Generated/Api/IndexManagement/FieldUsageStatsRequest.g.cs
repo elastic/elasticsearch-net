@@ -63,30 +63,6 @@ public sealed partial class FieldUsageStatsRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
@@ -150,33 +126,6 @@ public sealed partial class FieldUsageStatsRequest : PlainRequest<FieldUsageStat
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-
-	/// <summary>
-	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// Period to wait for a response.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to all or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
 /// <summary>
@@ -215,9 +164,6 @@ public sealed partial class FieldUsageStatsRequestDescriptor<TDocument> : Reques
 	public FieldUsageStatsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldUsageStatsRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public FieldUsageStatsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public FieldUsageStatsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public FieldUsageStatsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public FieldUsageStatsRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 
 	public FieldUsageStatsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -262,9 +208,6 @@ public sealed partial class FieldUsageStatsRequestDescriptor : RequestDescriptor
 	public FieldUsageStatsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public FieldUsageStatsRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields) => Qs("fields", fields);
 	public FieldUsageStatsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public FieldUsageStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public FieldUsageStatsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public FieldUsageStatsRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
 
 	public FieldUsageStatsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{

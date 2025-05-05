@@ -122,7 +122,7 @@ internal sealed partial class NormalizerInterfaceConverter : JsonConverter<INorm
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/analysis-normalizers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/analysis-normalizers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [JsonConverter(typeof(NormalizerInterfaceConverter))]
 public partial interface INormalizer

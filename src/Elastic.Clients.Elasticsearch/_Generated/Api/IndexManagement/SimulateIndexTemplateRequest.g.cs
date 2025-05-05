@@ -34,6 +34,20 @@ public sealed partial class SimulateIndexTemplateRequestParameters : RequestPara
 {
 	/// <summary>
 	/// <para>
+	/// User defined reason for dry-run creating the new template for simulation purposes
+	/// </para>
+	/// </summary>
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+	/// </para>
+	/// </summary>
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, returns all relevant default configurations for the index template.
 	/// </para>
 	/// </summary>
@@ -66,6 +80,22 @@ public sealed partial class SimulateIndexTemplateRequest : PlainRequest<Simulate
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.simulate_index_template";
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for dry-run creating the new template for simulation purposes
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether the index template we optionally defined in the body should only be dry-run added if new or can also replace an existing one
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Create { get => Q<bool?>("create"); set => Q("create", value); }
 
 	/// <summary>
 	/// <para>
@@ -106,6 +136,8 @@ public sealed partial class SimulateIndexTemplateRequestDescriptor : RequestDesc
 
 	internal override string OperationName => "indices.simulate_index_template";
 
+	public SimulateIndexTemplateRequestDescriptor Cause(string? cause) => Qs("cause", cause);
+	public SimulateIndexTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateIndexTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 

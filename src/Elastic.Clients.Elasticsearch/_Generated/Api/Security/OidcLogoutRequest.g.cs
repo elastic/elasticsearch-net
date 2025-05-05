@@ -61,19 +61,19 @@ public sealed partial class OidcLogoutRequest : PlainRequest<OidcLogoutRequestPa
 
 	/// <summary>
 	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("access_token")]
-	public string AccessToken { get; set; }
-
-	/// <summary>
-	/// <para>
 	/// The refresh token to be invalidated.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The access token to be invalidated.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("token")]
+	public string Token { get; set; }
 }
 
 /// <summary>
@@ -107,19 +107,8 @@ public sealed partial class OidcLogoutRequestDescriptor : RequestDescriptor<Oidc
 
 	internal override string OperationName => "security.oidc_logout";
 
-	private string AccessTokenValue { get; set; }
 	private string? RefreshTokenValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The access token to be invalidated.
-	/// </para>
-	/// </summary>
-	public OidcLogoutRequestDescriptor AccessToken(string accessToken)
-	{
-		AccessTokenValue = accessToken;
-		return Self;
-	}
+	private string TokenValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -132,17 +121,28 @@ public sealed partial class OidcLogoutRequestDescriptor : RequestDescriptor<Oidc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The access token to be invalidated.
+	/// </para>
+	/// </summary>
+	public OidcLogoutRequestDescriptor Token(string token)
+	{
+		TokenValue = token;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("access_token");
-		writer.WriteStringValue(AccessTokenValue);
 		if (!string.IsNullOrEmpty(RefreshTokenValue))
 		{
 			writer.WritePropertyName("refresh_token");
 			writer.WriteStringValue(RefreshTokenValue);
 		}
 
+		writer.WritePropertyName("token");
+		writer.WriteStringValue(TokenValue);
 		writer.WriteEndObject();
 	}
 }

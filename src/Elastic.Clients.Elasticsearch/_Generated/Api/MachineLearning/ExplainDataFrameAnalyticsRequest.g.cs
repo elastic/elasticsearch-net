@@ -37,6 +37,8 @@ public sealed partial class ExplainDataFrameAnalyticsRequestParameters : Request
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:
@@ -157,6 +159,8 @@ public sealed partial class ExplainDataFrameAnalyticsRequest : PlainRequest<Expl
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:
@@ -492,6 +496,8 @@ public sealed partial class ExplainDataFrameAnalyticsRequestDescriptor<TDocument
 /// <summary>
 /// <para>
 /// Explain data frame analytics config.
+/// </para>
+/// <para>
 /// This API provides explanations for a data frame analytics config that either
 /// exists already or one that has not been created yet. The following
 /// explanations are provided:

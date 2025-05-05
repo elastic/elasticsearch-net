@@ -41,6 +41,14 @@ public sealed partial class RolloverRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
@@ -143,6 +151,15 @@ public sealed partial class RolloverRequest : PlainRequest<RolloverRequestParame
 	/// </summary>
 	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+	/// <summary>
+	/// <para>
+	/// If set to true, the rollover action will only mark a data stream to signal that it needs to be rolled over at the next write.
+	/// Only allowed on data streams.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Lazy { get => Q<bool?>("lazy"); set => Q("lazy", value); }
 
 	/// <summary>
 	/// <para>
@@ -286,6 +303,7 @@ public sealed partial class RolloverRequestDescriptor<TDocument> : RequestDescri
 	internal override string OperationName => "indices.rollover";
 
 	public RolloverRequestDescriptor<TDocument> DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
+	public RolloverRequestDescriptor<TDocument> Lazy(bool? lazy = true) => Qs("lazy", lazy);
 	public RolloverRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public RolloverRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public RolloverRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
@@ -524,6 +542,7 @@ public sealed partial class RolloverRequestDescriptor : RequestDescriptor<Rollov
 	internal override string OperationName => "indices.rollover";
 
 	public RolloverRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
+	public RolloverRequestDescriptor Lazy(bool? lazy = true) => Qs("lazy", lazy);
 	public RolloverRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public RolloverRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 	public RolloverRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);

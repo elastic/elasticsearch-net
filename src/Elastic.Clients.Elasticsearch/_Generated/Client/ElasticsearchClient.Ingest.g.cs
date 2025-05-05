@@ -42,9 +42,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequest request)
@@ -56,9 +58,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -69,9 +73,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor)
@@ -83,9 +89,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id)
@@ -98,9 +106,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -114,9 +124,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequestDescriptor descriptor)
@@ -128,9 +140,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id)
@@ -143,9 +157,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest)
@@ -159,9 +175,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -172,9 +190,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -186,9 +206,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -201,9 +223,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -214,9 +238,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -228,9 +254,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Delete one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-delete-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -244,7 +272,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(DeleteIpLocationDatabaseRequest request)
@@ -257,7 +285,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(DeleteIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -269,7 +297,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase<TDocument>(DeleteIpLocationDatabaseRequestDescriptor<TDocument> descriptor)
@@ -282,7 +310,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id)
@@ -296,7 +324,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -311,7 +339,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(DeleteIpLocationDatabaseRequestDescriptor descriptor)
@@ -324,7 +352,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id)
@@ -338,7 +366,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteIpLocationDatabaseRequestDescriptor> configureRequest)
@@ -353,7 +381,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync<TDocument>(DeleteIpLocationDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -365,7 +393,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -378,7 +406,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -392,7 +420,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(DeleteIpLocationDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -404,7 +432,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
 	{
@@ -417,7 +445,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteIpLocationDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -432,7 +460,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequest request)
@@ -446,7 +474,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequest request, CancellationToken cancellationToken = default)
 	{
@@ -459,7 +487,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor)
@@ -473,7 +501,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -488,7 +516,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest)
@@ -504,7 +532,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequestDescriptor descriptor)
@@ -518,7 +546,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
@@ -533,7 +561,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest)
@@ -549,7 +577,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -562,7 +590,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -576,7 +604,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -591,7 +619,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -604,7 +632,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -618,7 +646,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Delete pipelines.
 	/// Delete one or more ingest pipelines.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -633,7 +661,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequest request)
@@ -647,7 +675,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -660,7 +688,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
@@ -674,7 +702,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GeoIpStatsResponse GeoIpStats()
@@ -689,7 +717,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GeoIpStatsResponse GeoIpStats(Action<GeoIpStatsRequestDescriptor> configureRequest)
@@ -705,7 +733,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -718,7 +746,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -732,7 +760,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Get GeoIP statistics.
 	/// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(Action<GeoIpStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -745,9 +773,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(GetGeoipDatabaseRequest request)
@@ -759,9 +789,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -772,9 +804,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(GetGeoipDatabaseRequestDescriptor<TDocument> descriptor)
@@ -786,9 +820,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id)
@@ -801,9 +837,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -817,9 +855,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>()
@@ -832,9 +872,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -848,9 +890,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(GetGeoipDatabaseRequestDescriptor descriptor)
@@ -862,9 +906,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id)
@@ -877,9 +923,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor> configureRequest)
@@ -893,9 +941,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase()
@@ -908,9 +958,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Action<GetGeoipDatabaseRequestDescriptor> configureRequest)
@@ -924,9 +976,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(GetGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -937,9 +991,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -951,9 +1007,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -966,9 +1024,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -980,9 +1040,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -995,9 +1057,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1008,9 +1072,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -1022,9 +1088,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1037,9 +1105,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(CancellationToken cancellationToken = default)
 	{
@@ -1051,9 +1121,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get GeoIP database configurations.
+	/// </para>
+	/// <para>
 	/// Get information about one or more IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-get-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1067,7 +1139,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(GetIpLocationDatabaseRequest request)
@@ -1080,7 +1152,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(GetIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1092,7 +1164,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase<TDocument>(GetIpLocationDatabaseRequestDescriptor<TDocument> descriptor)
@@ -1105,7 +1177,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id)
@@ -1119,7 +1191,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -1134,7 +1206,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase<TDocument>()
@@ -1148,7 +1220,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase<TDocument>(Action<GetIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -1163,7 +1235,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(GetIpLocationDatabaseRequestDescriptor descriptor)
@@ -1176,7 +1248,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id)
@@ -1190,7 +1262,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id, Action<GetIpLocationDatabaseRequestDescriptor> configureRequest)
@@ -1205,7 +1277,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase()
@@ -1219,7 +1291,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIpLocationDatabaseResponse GetIpLocationDatabase(Action<GetIpLocationDatabaseRequestDescriptor> configureRequest)
@@ -1234,7 +1306,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync<TDocument>(GetIpLocationDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1246,7 +1318,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -1259,7 +1331,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1273,7 +1345,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1286,7 +1358,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync<TDocument>(Action<GetIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1300,7 +1372,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(GetIpLocationDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1312,7 +1384,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
 	{
@@ -1325,7 +1397,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, Action<GetIpLocationDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1339,7 +1411,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(CancellationToken cancellationToken = default)
 	{
@@ -1352,7 +1424,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get IP geolocation database configurations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Action<GetIpLocationDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1365,10 +1437,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(GetPipelineRequest request)
@@ -1380,10 +1454,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1394,10 +1470,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor)
@@ -1409,10 +1487,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -1425,10 +1505,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor<TDocument>> configureRequest)
@@ -1442,10 +1524,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline<TDocument>()
@@ -1458,10 +1542,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest)
@@ -1475,10 +1561,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(GetPipelineRequestDescriptor descriptor)
@@ -1490,10 +1578,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id)
@@ -1506,10 +1596,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest)
@@ -1523,10 +1615,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline()
@@ -1539,10 +1633,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPipelineResponse GetPipeline(Action<GetPipelineRequestDescriptor> configureRequest)
@@ -1556,10 +1652,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1570,10 +1668,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -1585,10 +1685,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1601,10 +1703,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1616,10 +1720,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1632,10 +1738,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1646,10 +1754,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -1661,10 +1771,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1677,10 +1789,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
 	{
@@ -1692,10 +1806,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get pipelines.
+	/// </para>
+	/// <para>
 	/// Get information about one or more ingest pipelines.
 	/// This API returns a local reference of the pipeline.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPipelineResponse> GetPipelineAsync(Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1712,7 +1828,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequest request)
@@ -1728,7 +1844,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1743,7 +1859,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
@@ -1759,7 +1875,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ProcessorGrokResponse ProcessorGrok()
@@ -1776,7 +1892,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ProcessorGrokResponse ProcessorGrok(Action<ProcessorGrokRequestDescriptor> configureRequest)
@@ -1794,7 +1910,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1809,7 +1925,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
 	{
@@ -1825,7 +1941,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(Action<ProcessorGrokRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1838,9 +1954,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequest request)
@@ -1852,9 +1970,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1865,9 +1985,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor)
@@ -1879,9 +2001,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -1894,9 +2018,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -1910,9 +2036,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequestDescriptor descriptor)
@@ -1924,9 +2052,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id)
@@ -1939,9 +2069,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest)
@@ -1955,9 +2087,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1968,9 +2102,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1982,9 +2118,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1997,9 +2135,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2010,9 +2150,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2024,9 +2166,11 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create or update a GeoIP database configuration.
+	/// </para>
+	/// <para>
 	/// Refer to the create or update IP geolocation database configuration API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-ingest-put-geoip-database">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2040,7 +2184,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(PutIpLocationDatabaseRequest request)
@@ -2053,7 +2197,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(PutIpLocationDatabaseRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2065,7 +2209,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase<TDocument>(PutIpLocationDatabaseRequestDescriptor<TDocument> descriptor)
@@ -2078,7 +2222,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id)
@@ -2092,7 +2236,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, Action<PutIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest)
@@ -2107,7 +2251,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(PutIpLocationDatabaseRequestDescriptor descriptor)
@@ -2120,7 +2264,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id)
@@ -2134,7 +2278,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIpLocationDatabaseResponse PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, Action<PutIpLocationDatabaseRequestDescriptor> configureRequest)
@@ -2149,7 +2293,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync<TDocument>(PutIpLocationDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2161,7 +2305,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2174,7 +2318,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, Action<PutIpLocationDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2188,7 +2332,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(PutIpLocationDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2200,7 +2344,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2213,7 +2357,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create or update an IP geolocation database configuration.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-ip-location-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DatabaseConfiguration configuration, Elastic.Clients.Elasticsearch.Id id, Action<PutIpLocationDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2228,7 +2372,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequest request)
@@ -2242,7 +2386,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2255,7 +2399,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor)
@@ -2269,7 +2413,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -2284,7 +2428,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest)
@@ -2300,7 +2444,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
@@ -2314,7 +2458,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
@@ -2329,7 +2473,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
@@ -2345,7 +2489,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2358,7 +2502,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2372,7 +2516,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2387,7 +2531,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2400,7 +2544,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2414,7 +2558,7 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// Create or update a pipeline.
 	/// Changes made using this API take effect immediately.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2427,10 +2571,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(SimulateRequest request)
@@ -2442,10 +2588,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2456,10 +2604,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>(SimulateRequestDescriptor<TDocument> descriptor)
@@ -2471,10 +2621,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -2487,10 +2639,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest)
@@ -2504,10 +2658,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>()
@@ -2520,10 +2676,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest)
@@ -2537,10 +2695,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
@@ -2552,10 +2712,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id)
@@ -2568,10 +2730,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest)
@@ -2585,10 +2749,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate()
@@ -2601,10 +2767,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
@@ -2618,10 +2786,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(SimulateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2632,10 +2802,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -2647,10 +2819,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2663,10 +2837,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -2678,10 +2854,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2694,10 +2872,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2708,10 +2888,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -2723,10 +2905,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2739,10 +2923,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
 	{
@@ -2754,10 +2940,12 @@ public partial class IngestNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Simulate a pipeline.
+	/// </para>
+	/// <para>
 	/// Run an ingest pipeline against a set of provided documents.
 	/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateResponse> SimulateAsync(Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

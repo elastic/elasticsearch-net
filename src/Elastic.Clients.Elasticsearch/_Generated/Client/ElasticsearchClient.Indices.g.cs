@@ -50,7 +50,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(AnalyzeIndexRequest request)
@@ -70,7 +70,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(AnalyzeIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -89,7 +89,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze<TDocument>(AnalyzeIndexRequestDescriptor<TDocument> descriptor)
@@ -109,7 +109,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -130,7 +130,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest)
@@ -152,7 +152,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze<TDocument>()
@@ -173,7 +173,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze<TDocument>(Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest)
@@ -195,7 +195,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(AnalyzeIndexRequestDescriptor descriptor)
@@ -215,7 +215,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -236,7 +236,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(Elastic.Clients.Elasticsearch.IndexName? index, Action<AnalyzeIndexRequestDescriptor> configureRequest)
@@ -258,7 +258,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze()
@@ -279,7 +279,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AnalyzeIndexResponse Analyze(Action<AnalyzeIndexRequestDescriptor> configureRequest)
@@ -301,7 +301,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(AnalyzeIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -320,7 +320,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -340,7 +340,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -361,7 +361,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -381,7 +381,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync<TDocument>(Action<AnalyzeIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -402,7 +402,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(AnalyzeIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -421,7 +421,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -441,7 +441,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<AnalyzeIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -462,7 +462,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(CancellationToken cancellationToken = default)
 	{
@@ -482,7 +482,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If more than this limit of tokens gets generated, an error occurs.
 	/// The <c>_analyze</c> endpoint without a specified index will always use <c>10000</c> as its limit.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-analyze.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AnalyzeIndexResponse> AnalyzeAsync(Action<AnalyzeIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -490,6 +490,303 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<AnalyzeIndexRequestDescriptor, AnalyzeIndexResponse, AnalyzeIndexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex(CancelMigrateReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequest, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync(CancelMigrateReindexRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequest, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(CancelMigrateReindexRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CancelMigrateReindexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex<TDocument>()
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex<TDocument>(Action<CancelMigrateReindexRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex(CancelMigrateReindexRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CancelMigrateReindexResponse CancelMigrateReindex(Elastic.Clients.Elasticsearch.Indices indices, Action<CancelMigrateReindexRequestDescriptor> configureRequest)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(CancelMigrateReindexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CancelMigrateReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync<TDocument>(Action<CancelMigrateReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor<TDocument>, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync(CancelMigrateReindexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cancel a migration reindex operation.
+	/// </para>
+	/// <para>
+	/// Cancel a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CancelMigrateReindexResponse> CancelMigrateReindexAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CancelMigrateReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CancelMigrateReindexRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CancelMigrateReindexRequestDescriptor, CancelMigrateReindexResponse, CancelMigrateReindexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -503,7 +800,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequest request)
@@ -523,7 +820,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(ClearCacheRequest request, CancellationToken cancellationToken = default)
 	{
@@ -542,7 +839,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor)
@@ -562,7 +859,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -583,7 +880,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
@@ -605,7 +902,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>()
@@ -626,7 +923,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest)
@@ -648,7 +945,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(ClearCacheRequestDescriptor descriptor)
@@ -668,7 +965,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -689,7 +986,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest)
@@ -711,7 +1008,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache()
@@ -732,7 +1029,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCacheResponse ClearCache(Action<ClearCacheRequestDescriptor> configureRequest)
@@ -754,7 +1051,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(ClearCacheRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -773,7 +1070,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -793,7 +1090,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -814,7 +1111,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -834,7 +1131,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync<TDocument>(Action<ClearCacheRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -855,7 +1152,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(ClearCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -874,7 +1171,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -894,7 +1191,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -915,7 +1212,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(CancellationToken cancellationToken = default)
 	{
@@ -935,7 +1232,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To clear only specific caches, use the <c>fielddata</c>, <c>query</c>, or <c>request</c> parameters.
 	/// To clear the cache only of specific fields, use the <c>fields</c> parameter.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clearcache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCacheResponse> ClearCacheAsync(Action<ClearCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1035,7 +1332,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(CloneIndexRequest request)
@@ -1134,7 +1431,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync(CloneIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1232,7 +1529,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone<TDocument>(CloneIndexRequestDescriptor<TDocument> descriptor)
@@ -1331,7 +1628,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target)
@@ -1431,7 +1728,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest)
@@ -1532,7 +1829,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target)
@@ -1632,7 +1929,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest)
@@ -1733,7 +2030,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(CloneIndexRequestDescriptor descriptor)
@@ -1832,7 +2129,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target)
@@ -1932,7 +2229,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloneIndexResponse Clone(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor> configureRequest)
@@ -2033,7 +2330,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(CloneIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2131,7 +2428,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
 	{
@@ -2230,7 +2527,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2330,7 +2627,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
 	{
@@ -2429,7 +2726,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync<TDocument>(Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2529,7 +2826,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync(CloneIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2627,7 +2924,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, CancellationToken cancellationToken = default)
 	{
@@ -2726,7 +3023,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-clone-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloneIndexResponse> CloneAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Name target, Action<CloneIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2761,7 +3058,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close(CloseIndexRequest request)
@@ -2795,7 +3092,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(CloseIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2828,7 +3125,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>(CloseIndexRequestDescriptor<TDocument> descriptor)
@@ -2862,7 +3159,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -2897,7 +3194,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor<TDocument>> configureRequest)
@@ -2933,7 +3230,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>()
@@ -2968,7 +3265,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close<TDocument>(Action<CloseIndexRequestDescriptor<TDocument>> configureRequest)
@@ -3004,7 +3301,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close(CloseIndexRequestDescriptor descriptor)
@@ -3038,7 +3335,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close(Elastic.Clients.Elasticsearch.Indices indices)
@@ -3073,7 +3370,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CloseIndexResponse Close(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor> configureRequest)
@@ -3109,7 +3406,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CloseIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3142,7 +3439,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -3176,7 +3473,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3211,7 +3508,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -3245,7 +3542,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync<TDocument>(Action<CloseIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3280,7 +3577,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(CloseIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3313,7 +3610,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -3347,7 +3644,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 	/// Closing indices can be turned off with the cluster settings API by setting <c>cluster.indices.close.enable</c> to <c>false</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CloseIndexResponse> CloseAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<CloseIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3396,7 +3693,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(CreateIndexRequest request)
@@ -3444,7 +3741,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(CreateIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3491,7 +3788,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create<TDocument>(CreateIndexRequestDescriptor<TDocument> descriptor)
@@ -3539,7 +3836,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -3588,7 +3885,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor<TDocument>> configureRequest)
@@ -3638,7 +3935,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create<TDocument>()
@@ -3687,7 +3984,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create<TDocument>(Action<CreateIndexRequestDescriptor<TDocument>> configureRequest)
@@ -3737,7 +4034,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(CreateIndexRequestDescriptor descriptor)
@@ -3785,7 +4082,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(Elastic.Clients.Elasticsearch.IndexName index)
@@ -3834,7 +4131,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateIndexResponse Create(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest)
@@ -3884,7 +4181,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(CreateIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3931,7 +4228,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -3979,7 +4276,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4028,7 +4325,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -4076,7 +4373,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync<TDocument>(Action<CreateIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4125,7 +4422,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(CreateIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4172,7 +4469,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -4220,7 +4517,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
 	/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateIndexResponse> CreateAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<CreateIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4233,10 +4530,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateDataStreamResponse CreateDataStream(CreateDataStreamRequest request)
@@ -4248,10 +4546,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateDataStreamResponse> CreateDataStreamAsync(CreateDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4262,10 +4561,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateDataStreamResponse CreateDataStream(CreateDataStreamRequestDescriptor descriptor)
@@ -4277,10 +4577,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name)
@@ -4293,10 +4594,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateDataStreamResponse CreateDataStream(Elastic.Clients.Elasticsearch.DataStreamName name, Action<CreateDataStreamRequestDescriptor> configureRequest)
@@ -4310,10 +4612,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateDataStreamResponse> CreateDataStreamAsync(CreateDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4324,10 +4627,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, CancellationToken cancellationToken = default)
 	{
@@ -4339,10 +4643,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create a data stream.
-	/// Creates a data stream.
+	/// </para>
+	/// <para>
 	/// You must have a matching index template with data stream enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-create-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateDataStreamResponse> CreateDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamName name, Action<CreateDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4354,10 +4659,241 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
+	/// Create an index from a source index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom(CreateFromRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<CreateFromRequest, CreateFromResponse, CreateFromRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync(CreateFromRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<CreateFromRequest, CreateFromResponse, CreateFromRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom<TDocument>(CreateFromRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest)
+	{
+		var descriptor = new CreateFromRequestDescriptor<TDocument>(createFrom, source, dest);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, Action<CreateFromRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new CreateFromRequestDescriptor<TDocument>(createFrom, source, dest);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom(CreateFromRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest)
+	{
+		var descriptor = new CreateFromRequestDescriptor(createFrom, source, dest);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CreateFromResponse CreateFrom(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, Action<CreateFromRequestDescriptor> configureRequest)
+	{
+		var descriptor = new CreateFromRequestDescriptor(createFrom, source, dest);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync<TDocument>(CreateFromRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateFromRequestDescriptor<TDocument>(createFrom, source, dest);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, Action<CreateFromRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateFromRequestDescriptor<TDocument>(createFrom, source, dest);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor<TDocument>, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync(CreateFromRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateFromRequestDescriptor(createFrom, source, dest);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an index from a source index.
+	/// </para>
+	/// <para>
+	/// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CreateFromResponse> CreateFromAsync(Elastic.Clients.Elasticsearch.IndexManagement.CreateFrom createFrom, Elastic.Clients.Elasticsearch.IndexName source, Elastic.Clients.Elasticsearch.IndexName dest, Action<CreateFromRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CreateFromRequestDescriptor(createFrom, source, dest);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CreateFromRequestDescriptor, CreateFromResponse, CreateFromRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get data stream stats.
+	/// </para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(DataStreamsStatsRequest request)
@@ -4369,9 +4905,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(DataStreamsStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4382,9 +4920,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(DataStreamsStatsRequestDescriptor descriptor)
@@ -4396,9 +4936,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(Elastic.Clients.Elasticsearch.IndexName? name)
@@ -4411,9 +4953,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(Elastic.Clients.Elasticsearch.IndexName? name, Action<DataStreamsStatsRequestDescriptor> configureRequest)
@@ -4427,9 +4971,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats()
@@ -4442,9 +4988,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DataStreamsStatsResponse DataStreamsStats(Action<DataStreamsStatsRequestDescriptor> configureRequest)
@@ -4458,9 +5006,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(DataStreamsStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4471,9 +5021,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(Elastic.Clients.Elasticsearch.IndexName? name, CancellationToken cancellationToken = default)
 	{
@@ -4485,9 +5037,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(Elastic.Clients.Elasticsearch.IndexName? name, Action<DataStreamsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4500,9 +5054,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -4514,9 +5070,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream stats.
-	/// Retrieves statistics for one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get statistics for one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-stream-stats-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DataStreamsStatsResponse> DataStreamsStatsAsync(Action<DataStreamsStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4537,7 +5095,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete(DeleteIndexRequest request)
@@ -4557,7 +5115,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync(DeleteIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4576,7 +5134,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>(DeleteIndexRequestDescriptor<TDocument> descriptor)
@@ -4596,7 +5154,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -4617,7 +5175,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest)
@@ -4639,7 +5197,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>()
@@ -4660,7 +5218,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete<TDocument>(Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest)
@@ -4682,7 +5240,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete(DeleteIndexRequestDescriptor descriptor)
@@ -4702,7 +5260,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete(Elastic.Clients.Elasticsearch.Indices indices)
@@ -4723,7 +5281,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexResponse Delete(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest)
@@ -4745,7 +5303,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(DeleteIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4764,7 +5322,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -4784,7 +5342,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4805,7 +5363,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -4825,7 +5383,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync<TDocument>(Action<DeleteIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4846,7 +5404,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync(DeleteIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4865,7 +5423,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -4885,7 +5443,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// To delete the index, you must roll over the data stream so a new write index is created.
 	/// You can then use the delete index API to delete the previous write index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4900,7 +5458,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias(DeleteAliasRequest request)
@@ -4914,7 +5472,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync(DeleteAliasRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4927,7 +5485,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(DeleteAliasRequestDescriptor<TDocument> descriptor)
@@ -4941,7 +5499,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
@@ -4956,7 +5514,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest)
@@ -4972,7 +5530,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name)
@@ -4987,7 +5545,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest)
@@ -5003,7 +5561,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias(DeleteAliasRequestDescriptor descriptor)
@@ -5017,7 +5575,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name)
@@ -5032,7 +5590,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAliasResponse DeleteAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest)
@@ -5048,7 +5606,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(DeleteAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5061,7 +5619,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -5075,7 +5633,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5090,7 +5648,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -5104,7 +5662,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5119,7 +5677,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync(DeleteAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5132,7 +5690,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -5146,7 +5704,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete an alias.
 	/// Removes a data stream or index from an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAliasResponse> DeleteAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Names name, Action<DeleteAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5161,7 +5719,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(DeleteDataLifecycleRequest request)
@@ -5175,7 +5733,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(DeleteDataLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5188,7 +5746,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(DeleteDataLifecycleRequestDescriptor descriptor)
@@ -5202,7 +5760,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
@@ -5217,7 +5775,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataLifecycleResponse DeleteDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataLifecycleRequestDescriptor> configureRequest)
@@ -5233,7 +5791,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(DeleteDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5246,7 +5804,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
 	{
@@ -5260,7 +5818,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data stream lifecycles.
 	/// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataLifecycleResponse> DeleteDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5275,7 +5833,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataStreamResponse DeleteDataStream(DeleteDataStreamRequest request)
@@ -5289,7 +5847,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataStreamResponse> DeleteDataStreamAsync(DeleteDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5302,7 +5860,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataStreamResponse DeleteDataStream(DeleteDataStreamRequestDescriptor descriptor)
@@ -5316,7 +5874,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name)
@@ -5331,7 +5889,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteDataStreamResponse DeleteDataStream(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataStreamRequestDescriptor> configureRequest)
@@ -5347,7 +5905,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataStreamResponse> DeleteDataStreamAsync(DeleteDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5360,7 +5918,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
 	{
@@ -5374,7 +5932,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Delete data streams.
 	/// Deletes one or more data streams and their backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteDataStreamResponse> DeleteDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<DeleteDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5391,7 +5949,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexTemplateResponse DeleteIndexTemplate(DeleteIndexTemplateRequest request)
@@ -5407,7 +5965,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5422,7 +5980,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexTemplateResponse DeleteIndexTemplate(DeleteIndexTemplateRequestDescriptor descriptor)
@@ -5438,7 +5996,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name)
@@ -5455,7 +6013,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteIndexTemplateResponse DeleteIndexTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest)
@@ -5473,7 +6031,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(DeleteIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5488,7 +6046,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -5504,7 +6062,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// names are specified then there is no wildcard support and the provided names should match completely with
 	/// existing templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteIndexTemplateResponse> DeleteIndexTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5518,7 +6076,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTemplateResponse DeleteTemplate(DeleteTemplateRequest request)
@@ -5531,7 +6089,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTemplateResponse> DeleteTemplateAsync(DeleteTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5543,7 +6101,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTemplateResponse DeleteTemplate(DeleteTemplateRequestDescriptor descriptor)
@@ -5556,7 +6114,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -5570,7 +6128,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name, Action<DeleteTemplateRequestDescriptor> configureRequest)
@@ -5585,7 +6143,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTemplateResponse> DeleteTemplateAsync(DeleteTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5597,7 +6155,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -5610,7 +6168,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete a legacy index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5632,7 +6190,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage(DiskUsageRequest request)
@@ -5653,7 +6211,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync(DiskUsageRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5673,7 +6231,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>(DiskUsageRequestDescriptor<TDocument> descriptor)
@@ -5694,7 +6252,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -5716,7 +6274,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor<TDocument>> configureRequest)
@@ -5739,7 +6297,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>()
@@ -5761,7 +6319,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage<TDocument>(Action<DiskUsageRequestDescriptor<TDocument>> configureRequest)
@@ -5784,7 +6342,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage(DiskUsageRequestDescriptor descriptor)
@@ -5805,7 +6363,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.Indices indices)
@@ -5827,7 +6385,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DiskUsageResponse DiskUsage(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor> configureRequest)
@@ -5850,7 +6408,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(DiskUsageRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5870,7 +6428,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -5891,7 +6449,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5913,7 +6471,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -5934,7 +6492,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync<TDocument>(Action<DiskUsageRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5956,7 +6514,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync(DiskUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5976,7 +6534,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -5997,7 +6555,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Since stored fields are stored together in a compressed format, the sizes of stored fields are also estimates and can be inaccurate.
 	/// The stored size of the <c>_id</c> field is likely underestimated while the <c>_source</c> field is overestimated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-disk-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DiskUsageResponse> DiskUsageAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DiskUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6019,7 +6577,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample(DownsampleRequest request)
@@ -6040,7 +6598,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync(DownsampleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6060,7 +6618,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample<TDocument>(DownsampleRequestDescriptor<TDocument> descriptor)
@@ -6081,7 +6639,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
@@ -6103,7 +6661,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor<TDocument>> configureRequest)
@@ -6126,7 +6684,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample(DownsampleRequestDescriptor descriptor)
@@ -6147,7 +6705,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
@@ -6169,7 +6727,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DownsampleResponse Downsample(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor> configureRequest)
@@ -6192,7 +6750,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(DownsampleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6212,7 +6770,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, CancellationToken cancellationToken = default)
 	{
@@ -6233,7 +6791,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6255,7 +6813,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync(DownsampleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6275,7 +6833,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, CancellationToken cancellationToken = default)
 	{
@@ -6296,7 +6854,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Neither field nor document level security can be defined on the source index.
 	/// The source index must be read only (<c>index.blocks.write: true</c>).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-downsample-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DownsampleResponse> DownsampleAsync(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Action<DownsampleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6311,7 +6869,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequest request)
@@ -6325,7 +6883,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6338,7 +6896,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(ExistsRequestDescriptor<TDocument> descriptor)
@@ -6352,7 +6910,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6367,7 +6925,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -6383,7 +6941,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>()
@@ -6398,7 +6956,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -6414,7 +6972,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequestDescriptor descriptor)
@@ -6428,7 +6986,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices)
@@ -6443,7 +7001,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest)
@@ -6459,7 +7017,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6472,7 +7030,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6486,7 +7044,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6501,7 +7059,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -6515,7 +7073,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6530,7 +7088,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6543,7 +7101,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -6557,7 +7115,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Check indices.
 	/// Check if one or more indices, index aliases, or data streams exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-exists.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6570,9 +7128,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(ExistsAliasRequest request)
@@ -6584,9 +7144,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(ExistsAliasRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6597,9 +7159,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(ExistsAliasRequestDescriptor<TDocument> descriptor)
@@ -6611,9 +7175,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
@@ -6626,9 +7192,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest)
@@ -6642,9 +7210,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name)
@@ -6657,9 +7227,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest)
@@ -6673,9 +7245,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(ExistsAliasRequestDescriptor descriptor)
@@ -6687,9 +7261,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name)
@@ -6702,9 +7278,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest)
@@ -6718,9 +7296,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name)
@@ -6733,9 +7313,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsAliasResponse ExistsAlias(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest)
@@ -6749,9 +7331,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(ExistsAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6762,9 +7346,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -6776,9 +7362,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6791,9 +7379,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -6805,9 +7395,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6820,9 +7412,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(ExistsAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6833,9 +7427,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -6847,9 +7443,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6862,9 +7460,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -6876,9 +7476,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check aliases.
-	/// Checks if one or more data stream or index aliases exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Check if one or more data stream or index aliases exist.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsAliasResponse> ExistsAliasAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6891,9 +7493,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsIndexTemplateResponse ExistsIndexTemplate(ExistsIndexTemplateRequest request)
@@ -6905,9 +7509,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(ExistsIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6918,9 +7524,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsIndexTemplateResponse ExistsIndexTemplate(ExistsIndexTemplateRequestDescriptor descriptor)
@@ -6932,9 +7540,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -6947,9 +7557,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsIndexTemplateResponse ExistsIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest)
@@ -6963,9 +7575,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(ExistsIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6976,9 +7590,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -6990,9 +7606,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Check index templates.
+	/// </para>
+	/// <para>
 	/// Check whether index templates exist.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/index-templates.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-exists-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsIndexTemplateResponse> ExistsIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<ExistsIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7011,7 +7629,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsTemplateResponse ExistsTemplate(ExistsTemplateRequest request)
@@ -7029,7 +7647,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsTemplateResponse> ExistsTemplateAsync(ExistsTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7046,7 +7664,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsTemplateResponse ExistsTemplate(ExistsTemplateRequestDescriptor descriptor)
@@ -7064,7 +7682,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name)
@@ -7083,7 +7701,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsTemplateResponse ExistsTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ExistsTemplateRequestDescriptor> configureRequest)
@@ -7103,7 +7721,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsTemplateResponse> ExistsTemplateAsync(ExistsTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7120,7 +7738,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -7138,7 +7756,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-template-exists-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsTemplateResponse> ExistsTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7153,7 +7771,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(ExplainDataLifecycleRequest request)
@@ -7167,7 +7785,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(ExplainDataLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7180,7 +7798,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor)
@@ -7194,7 +7812,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -7209,7 +7827,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest)
@@ -7225,7 +7843,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>()
@@ -7240,7 +7858,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle<TDocument>(Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest)
@@ -7256,7 +7874,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(ExplainDataLifecycleRequestDescriptor descriptor)
@@ -7270,7 +7888,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices)
@@ -7285,7 +7903,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainDataLifecycleResponse ExplainDataLifecycle(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest)
@@ -7301,7 +7919,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(ExplainDataLifecycleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7314,7 +7932,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -7328,7 +7946,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7343,7 +7961,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -7357,7 +7975,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync<TDocument>(Action<ExplainDataLifecycleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7372,7 +7990,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(ExplainDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7385,7 +8003,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -7399,7 +8017,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get the status for a data stream lifecycle.
 	/// Get information about an index or data stream's current data stream lifecycle status, such as time since index creation, time since rollover, the lifecycle configuration managing the index, or any errors encountered during lifecycle execution.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-explain-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainDataLifecycleResponse> ExplainDataLifecycleAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ExplainDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7420,7 +8038,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(FieldUsageStatsRequest request)
@@ -7440,7 +8058,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync(FieldUsageStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7459,7 +8077,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>(FieldUsageStatsRequestDescriptor<TDocument> descriptor)
@@ -7479,7 +8097,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -7500,7 +8118,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest)
@@ -7522,7 +8140,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>()
@@ -7543,7 +8161,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats<TDocument>(Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest)
@@ -7565,7 +8183,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(FieldUsageStatsRequestDescriptor descriptor)
@@ -7585,7 +8203,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.Indices indices)
@@ -7606,7 +8224,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldUsageStatsResponse FieldUsageStats(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor> configureRequest)
@@ -7628,7 +8246,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(FieldUsageStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7647,7 +8265,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -7667,7 +8285,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7688,7 +8306,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -7708,7 +8326,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync<TDocument>(Action<FieldUsageStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7729,7 +8347,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync(FieldUsageStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7748,7 +8366,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -7768,7 +8386,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 	/// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/field-usage-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldUsageStatsResponse> FieldUsageStatsAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<FieldUsageStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7794,7 +8412,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(FlushRequest request)
@@ -7819,7 +8437,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(FlushRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7843,7 +8461,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>(FlushRequestDescriptor<TDocument> descriptor)
@@ -7868,7 +8486,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -7894,7 +8512,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor<TDocument>> configureRequest)
@@ -7921,7 +8539,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>()
@@ -7947,7 +8565,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest)
@@ -7974,7 +8592,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(FlushRequestDescriptor descriptor)
@@ -7999,7 +8617,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -8025,7 +8643,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor> configureRequest)
@@ -8052,7 +8670,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush()
@@ -8078,7 +8696,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FlushResponse Flush(Action<FlushRequestDescriptor> configureRequest)
@@ -8105,7 +8723,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(FlushRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8129,7 +8747,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -8154,7 +8772,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8180,7 +8798,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -8205,7 +8823,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync<TDocument>(Action<FlushRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8231,7 +8849,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(FlushRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8255,7 +8873,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -8280,7 +8898,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8306,7 +8924,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(CancellationToken cancellationToken = default)
 	{
@@ -8331,7 +8949,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It is also possible to trigger a flush on one or more indices using the flush API, although it is rare for users to need to call this API directly.
 	/// If you call the flush API after indexing some documents then a successful response indicates that Elasticsearch has flushed all the documents that were indexed before the flush API was called.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-flush.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FlushResponse> FlushAsync(Action<FlushRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8425,7 +9043,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(ForcemergeRequest request)
@@ -8518,7 +9136,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(ForcemergeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -8610,7 +9228,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>(ForcemergeRequestDescriptor<TDocument> descriptor)
@@ -8703,7 +9321,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -8797,7 +9415,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor<TDocument>> configureRequest)
@@ -8892,7 +9510,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>()
@@ -8986,7 +9604,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest)
@@ -9081,7 +9699,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(ForcemergeRequestDescriptor descriptor)
@@ -9174,7 +9792,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -9268,7 +9886,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor> configureRequest)
@@ -9363,7 +9981,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge()
@@ -9457,7 +10075,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ForcemergeResponse Forcemerge(Action<ForcemergeRequestDescriptor> configureRequest)
@@ -9552,7 +10170,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(ForcemergeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9644,7 +10262,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -9737,7 +10355,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9831,7 +10449,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -9924,7 +10542,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync<TDocument>(Action<ForcemergeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10018,7 +10636,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(ForcemergeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10110,7 +10728,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -10203,7 +10821,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<ForcemergeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10297,7 +10915,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(CancellationToken cancellationToken = default)
 	{
@@ -10390,7 +11008,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <code>
 	/// POST /.ds-my-data-stream-2099.03.07-000001/_forcemerge?max_num_segments=1
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-forcemerge.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ForcemergeResponse> ForcemergeAsync(Action<ForcemergeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10406,7 +11024,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get(GetIndexRequest request)
@@ -10421,7 +11039,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync(GetIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10435,7 +11053,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>(GetIndexRequestDescriptor<TDocument> descriptor)
@@ -10450,7 +11068,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -10466,7 +11084,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor<TDocument>> configureRequest)
@@ -10483,7 +11101,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>()
@@ -10499,7 +11117,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get<TDocument>(Action<GetIndexRequestDescriptor<TDocument>> configureRequest)
@@ -10516,7 +11134,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get(GetIndexRequestDescriptor descriptor)
@@ -10531,7 +11149,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get(Elastic.Clients.Elasticsearch.Indices indices)
@@ -10547,7 +11165,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexResponse Get(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest)
@@ -10564,7 +11182,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(GetIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10578,7 +11196,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -10593,7 +11211,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10609,7 +11227,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -10624,7 +11242,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync<TDocument>(Action<GetIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10640,7 +11258,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync(GetIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10654,7 +11272,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -10669,7 +11287,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get information about one or more indices. For data streams, the API returns information about the
 	/// stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexResponse> GetAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GetIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10684,7 +11302,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(GetAliasRequest request)
@@ -10698,7 +11316,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(GetAliasRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10711,7 +11329,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>(GetAliasRequestDescriptor<TDocument> descriptor)
@@ -10725,7 +11343,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
@@ -10740,7 +11358,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest)
@@ -10756,7 +11374,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>()
@@ -10771,7 +11389,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias<TDocument>(Action<GetAliasRequestDescriptor<TDocument>> configureRequest)
@@ -10787,7 +11405,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(GetAliasRequestDescriptor descriptor)
@@ -10801,7 +11419,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
@@ -10816,7 +11434,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor> configureRequest)
@@ -10832,7 +11450,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias()
@@ -10847,7 +11465,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAliasResponse GetAlias(Action<GetAliasRequestDescriptor> configureRequest)
@@ -10863,7 +11481,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(GetAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10876,7 +11494,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -10890,7 +11508,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10905,7 +11523,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -10919,7 +11537,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync<TDocument>(Action<GetAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10934,7 +11552,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(GetAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10947,7 +11565,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -10961,7 +11579,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10976,7 +11594,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(CancellationToken cancellationToken = default)
 	{
@@ -10990,7 +11608,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get aliases.
 	/// Retrieves information for one or more data stream or index aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-alias.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAliasResponse> GetAliasAsync(Action<GetAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11003,9 +11621,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleResponse GetDataLifecycle(GetDataLifecycleRequest request)
@@ -11017,9 +11637,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(GetDataLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11030,9 +11652,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleResponse GetDataLifecycle(GetDataLifecycleRequestDescriptor descriptor)
@@ -11044,9 +11668,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
@@ -11059,9 +11685,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleResponse GetDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<GetDataLifecycleRequestDescriptor> configureRequest)
@@ -11075,9 +11703,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(GetDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11088,9 +11718,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
 	{
@@ -11102,9 +11734,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data stream lifecycles.
-	/// Retrieves the data stream lifecycle configuration of one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get the data stream lifecycle configuration of one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleResponse> GetDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<GetDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11119,7 +11753,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleStatsResponse GetDataLifecycleStats(GetDataLifecycleStatsRequest request)
@@ -11133,7 +11767,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(GetDataLifecycleStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11146,7 +11780,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleStatsResponse GetDataLifecycleStats(GetDataLifecycleStatsRequestDescriptor descriptor)
@@ -11160,7 +11794,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleStatsResponse GetDataLifecycleStats()
@@ -11175,7 +11809,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataLifecycleStatsResponse GetDataLifecycleStats(Action<GetDataLifecycleStatsRequestDescriptor> configureRequest)
@@ -11191,7 +11825,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(GetDataLifecycleStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11204,7 +11838,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -11218,7 +11852,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get data stream lifecycle stats.
 	/// Get statistics about the data streams that are managed by a data stream lifecycle.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/data-streams-get-lifecycle-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataLifecycleStatsResponse> GetDataLifecycleStatsAsync(Action<GetDataLifecycleStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11231,9 +11865,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(GetDataStreamRequest request)
@@ -11245,9 +11881,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(GetDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11258,9 +11896,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(GetDataStreamRequestDescriptor descriptor)
@@ -11272,9 +11912,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(Elastic.Clients.Elasticsearch.DataStreamNames? name)
@@ -11287,9 +11929,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(Elastic.Clients.Elasticsearch.DataStreamNames? name, Action<GetDataStreamRequestDescriptor> configureRequest)
@@ -11303,9 +11947,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream()
@@ -11318,9 +11964,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetDataStreamResponse GetDataStream(Action<GetDataStreamRequestDescriptor> configureRequest)
@@ -11334,9 +11982,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(GetDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11347,9 +11997,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames? name, CancellationToken cancellationToken = default)
 	{
@@ -11361,9 +12013,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(Elastic.Clients.Elasticsearch.DataStreamNames? name, Action<GetDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11376,9 +12030,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(CancellationToken cancellationToken = default)
 	{
@@ -11390,9 +12046,11 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get data streams.
-	/// Retrieves information about one or more data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get information about one or more data streams.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetDataStreamResponse> GetDataStreamAsync(Action<GetDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11411,7 +12069,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(GetFieldMappingRequest request)
@@ -11429,7 +12087,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(GetFieldMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11446,7 +12104,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping<TDocument>(GetFieldMappingRequestDescriptor<TDocument> descriptor)
@@ -11464,7 +12122,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields)
@@ -11483,7 +12141,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor<TDocument>> configureRequest)
@@ -11503,7 +12161,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Fields fields)
@@ -11522,7 +12180,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor<TDocument>> configureRequest)
@@ -11542,7 +12200,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(GetFieldMappingRequestDescriptor descriptor)
@@ -11560,7 +12218,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields)
@@ -11579,7 +12237,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor> configureRequest)
@@ -11599,7 +12257,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields)
@@ -11618,7 +12276,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFieldMappingResponse GetFieldMapping(Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor> configureRequest)
@@ -11638,7 +12296,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(GetFieldMappingRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11655,7 +12313,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, CancellationToken cancellationToken = default)
 	{
@@ -11673,7 +12331,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11692,7 +12350,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, CancellationToken cancellationToken = default)
 	{
@@ -11710,7 +12368,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11729,7 +12387,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(GetFieldMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11746,7 +12404,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, CancellationToken cancellationToken = default)
 	{
@@ -11764,7 +12422,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11783,7 +12441,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, CancellationToken cancellationToken = default)
 	{
@@ -11801,7 +12459,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-field-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFieldMappingResponse> GetFieldMappingAsync(Elastic.Clients.Elasticsearch.Fields fields, Action<GetFieldMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11816,7 +12474,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(GetIndexTemplateRequest request)
@@ -11830,7 +12488,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(GetIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11843,7 +12501,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(GetIndexTemplateRequestDescriptor descriptor)
@@ -11857,7 +12515,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(Elastic.Clients.Elasticsearch.Name? name)
@@ -11872,7 +12530,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(Elastic.Clients.Elasticsearch.Name? name, Action<GetIndexTemplateRequestDescriptor> configureRequest)
@@ -11888,7 +12546,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate()
@@ -11903,7 +12561,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndexTemplateResponse GetIndexTemplate(Action<GetIndexTemplateRequestDescriptor> configureRequest)
@@ -11919,7 +12577,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(GetIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11932,7 +12590,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -11946,7 +12604,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11961,7 +12619,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(CancellationToken cancellationToken = default)
 	{
@@ -11975,7 +12633,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get index templates.
 	/// Get information about one or more index templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndexTemplateResponse> GetIndexTemplateAsync(Action<GetIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11990,7 +12648,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(GetMappingRequest request)
@@ -12004,7 +12662,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(GetMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12017,7 +12675,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>(GetMappingRequestDescriptor<TDocument> descriptor)
@@ -12031,7 +12689,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -12046,7 +12704,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor<TDocument>> configureRequest)
@@ -12062,7 +12720,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>()
@@ -12077,7 +12735,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping<TDocument>(Action<GetMappingRequestDescriptor<TDocument>> configureRequest)
@@ -12093,7 +12751,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(GetMappingRequestDescriptor descriptor)
@@ -12107,7 +12765,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -12122,7 +12780,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor> configureRequest)
@@ -12138,7 +12796,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping()
@@ -12153,7 +12811,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetMappingResponse GetMapping(Action<GetMappingRequestDescriptor> configureRequest)
@@ -12169,7 +12827,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(GetMappingRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12182,7 +12840,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -12196,7 +12854,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12211,7 +12869,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -12225,7 +12883,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync<TDocument>(Action<GetMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12240,7 +12898,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(GetMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12253,7 +12911,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -12267,7 +12925,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<GetMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12282,7 +12940,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(CancellationToken cancellationToken = default)
 	{
@@ -12296,7 +12954,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get mapping definitions.
 	/// For data streams, the API retrieves mappings for the stream’s backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetMappingResponse> GetMappingAsync(Action<GetMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12308,11 +12966,308 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus(GetMigrateReindexStatusRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequest, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(GetMigrateReindexStatusRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequest, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(GetMigrateReindexStatusRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetMigrateReindexStatusRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>()
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus<TDocument>(Action<GetMigrateReindexStatusRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus(GetMigrateReindexStatusRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual GetMigrateReindexStatusResponse GetMigrateReindexStatus(Elastic.Clients.Elasticsearch.Indices indices, Action<GetMigrateReindexStatusRequestDescriptor> configureRequest)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(GetMigrateReindexStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<GetMigrateReindexStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync<TDocument>(Action<GetMigrateReindexStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor<TDocument>();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor<TDocument>, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(GetMigrateReindexStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor(indices);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Get the migration reindexing status.
+	/// </para>
+	/// <para>
+	/// Get the status of a migration reindex attempt for a data stream or index.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<GetMigrateReindexStatusResponse> GetMigrateReindexStatusAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<GetMigrateReindexStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new GetMigrateReindexStatusRequestDescriptor(indices);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<GetMigrateReindexStatusRequestDescriptor, GetMigrateReindexStatusResponse, GetMigrateReindexStatusRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Get index settings.
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(GetIndicesSettingsRequest request)
@@ -12327,7 +13282,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(GetIndicesSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12341,7 +13296,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(GetIndicesSettingsRequestDescriptor<TDocument> descriptor)
@@ -12356,7 +13311,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
@@ -12372,7 +13327,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
@@ -12389,7 +13344,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>()
@@ -12405,7 +13360,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings<TDocument>(Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
@@ -12422,7 +13377,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(GetIndicesSettingsRequestDescriptor descriptor)
@@ -12437,7 +13392,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
@@ -12453,7 +13408,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor> configureRequest)
@@ -12470,7 +13425,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings()
@@ -12486,7 +13441,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIndicesSettingsResponse GetSettings(Action<GetIndicesSettingsRequestDescriptor> configureRequest)
@@ -12503,7 +13458,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(GetIndicesSettingsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12517,7 +13472,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -12532,7 +13487,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12548,7 +13503,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -12563,7 +13518,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync<TDocument>(Action<GetIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12579,7 +13534,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(GetIndicesSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12593,7 +13548,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -12608,7 +13563,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name, Action<GetIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12624,7 +13579,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -12639,7 +13594,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get setting information for one or more indices.
 	/// For data streams, it returns setting information for the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIndicesSettingsResponse> GetSettingsAsync(Action<GetIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12657,7 +13612,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(GetTemplateRequest request)
@@ -12674,7 +13629,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(GetTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12690,7 +13645,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(GetTemplateRequestDescriptor descriptor)
@@ -12707,7 +13662,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name)
@@ -12725,7 +13680,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name, Action<GetTemplateRequestDescriptor> configureRequest)
@@ -12744,7 +13699,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate()
@@ -12762,7 +13717,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTemplateResponse GetTemplate(Action<GetTemplateRequestDescriptor> configureRequest)
@@ -12781,7 +13736,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(GetTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12797,7 +13752,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -12814,7 +13769,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12832,7 +13787,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(CancellationToken cancellationToken = default)
 	{
@@ -12849,7 +13804,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-get-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTemplateResponse> GetTemplateAsync(Action<GetTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12857,6 +13812,152 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<GetTemplateRequestDescriptor, GetTemplateResponse, GetTemplateRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual MigrateReindexResponse MigrateReindex(MigrateReindexRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<MigrateReindexRequest, MigrateReindexResponse, MigrateReindexRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MigrateReindexResponse> MigrateReindexAsync(MigrateReindexRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<MigrateReindexRequest, MigrateReindexResponse, MigrateReindexRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual MigrateReindexResponse MigrateReindex(MigrateReindexRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual MigrateReindexResponse MigrateReindex(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex reindex)
+	{
+		var descriptor = new MigrateReindexRequestDescriptor(reindex);
+		descriptor.BeforeRequest();
+		return DoRequest<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual MigrateReindexResponse MigrateReindex(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex reindex, Action<MigrateReindexRequestDescriptor> configureRequest)
+	{
+		var descriptor = new MigrateReindexRequestDescriptor(reindex);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MigrateReindexResponse> MigrateReindexAsync(MigrateReindexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MigrateReindexResponse> MigrateReindexAsync(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex reindex, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MigrateReindexRequestDescriptor(reindex);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Reindex legacy backing indices.
+	/// </para>
+	/// <para>
+	/// Reindex all legacy backing indices for a data stream.
+	/// This operation occurs in a persistent task.
+	/// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/migrate-data-stream.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<MigrateReindexResponse> MigrateReindexAsync(Elastic.Clients.Elasticsearch.IndexManagement.MigrateReindex reindex, Action<MigrateReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new MigrateReindexRequestDescriptor(reindex);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<MigrateReindexRequestDescriptor, MigrateReindexResponse, MigrateReindexRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -12873,7 +13974,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataStreamResponse MigrateToDataStream(MigrateToDataStreamRequest request)
@@ -12896,7 +13997,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(MigrateToDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12918,7 +14019,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataStreamResponse MigrateToDataStream(MigrateToDataStreamRequestDescriptor descriptor)
@@ -12941,7 +14042,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name)
@@ -12965,7 +14066,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataStreamResponse MigrateToDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<MigrateToDataStreamRequestDescriptor> configureRequest)
@@ -12990,7 +14091,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(MigrateToDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13012,7 +14113,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, CancellationToken cancellationToken = default)
 	{
@@ -13035,7 +14136,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The indices for the alias become hidden backing indices for the stream.
 	/// The write index for the alias becomes the write index for the stream.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-migrate-to-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataStreamResponse> MigrateToDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<MigrateToDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13050,7 +14151,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ModifyDataStreamResponse ModifyDataStream(ModifyDataStreamRequest request)
@@ -13064,7 +14165,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ModifyDataStreamResponse> ModifyDataStreamAsync(ModifyDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13077,7 +14178,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ModifyDataStreamResponse ModifyDataStream(ModifyDataStreamRequestDescriptor descriptor)
@@ -13091,7 +14192,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ModifyDataStreamResponse ModifyDataStream()
@@ -13106,7 +14207,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ModifyDataStreamResponse ModifyDataStream(Action<ModifyDataStreamRequestDescriptor> configureRequest)
@@ -13122,7 +14223,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ModifyDataStreamResponse> ModifyDataStreamAsync(ModifyDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13135,7 +14236,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ModifyDataStreamResponse> ModifyDataStreamAsync(CancellationToken cancellationToken = default)
 	{
@@ -13149,7 +14250,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data streams.
 	/// Performs one or more data stream modification actions in a single atomic operation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-modify-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ModifyDataStreamResponse> ModifyDataStreamAsync(Action<ModifyDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13191,7 +14292,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open(OpenIndexRequest request)
@@ -13232,7 +14333,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync(OpenIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13272,7 +14373,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>(OpenIndexRequestDescriptor<TDocument> descriptor)
@@ -13313,7 +14414,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -13355,7 +14456,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor<TDocument>> configureRequest)
@@ -13398,7 +14499,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>()
@@ -13440,7 +14541,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open<TDocument>(Action<OpenIndexRequestDescriptor<TDocument>> configureRequest)
@@ -13483,7 +14584,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open(OpenIndexRequestDescriptor descriptor)
@@ -13524,7 +14625,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open(Elastic.Clients.Elasticsearch.Indices indices)
@@ -13566,7 +14667,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenIndexResponse Open(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor> configureRequest)
@@ -13609,7 +14710,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(OpenIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13649,7 +14750,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -13690,7 +14791,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13732,7 +14833,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -13773,7 +14874,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync<TDocument>(Action<OpenIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13815,7 +14916,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync(OpenIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13855,7 +14956,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -13896,7 +14997,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Because opening or closing an index allocates its shards, the <c>wait_for_active_shards</c> setting on index creation applies to the <c>_open</c> and <c>_close</c> index actions as well.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-open-close.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenIndexResponse> OpenAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13922,7 +15023,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PromoteDataStreamResponse PromoteDataStream(PromoteDataStreamRequest request)
@@ -13947,7 +15048,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PromoteDataStreamResponse> PromoteDataStreamAsync(PromoteDataStreamRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13971,7 +15072,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PromoteDataStreamResponse PromoteDataStream(PromoteDataStreamRequestDescriptor descriptor)
@@ -13996,7 +15097,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name)
@@ -14022,7 +15123,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PromoteDataStreamResponse PromoteDataStream(Elastic.Clients.Elasticsearch.IndexName name, Action<PromoteDataStreamRequestDescriptor> configureRequest)
@@ -14049,7 +15150,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PromoteDataStreamResponse> PromoteDataStreamAsync(PromoteDataStreamRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14073,7 +15174,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, CancellationToken cancellationToken = default)
 	{
@@ -14098,7 +15199,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 	/// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-promote-data-stream">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PromoteDataStreamResponse> PromoteDataStreamAsync(Elastic.Clients.Elasticsearch.IndexName name, Action<PromoteDataStreamRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14113,7 +15214,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(PutAliasRequest request)
@@ -14127,7 +15228,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync(PutAliasRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14140,7 +15241,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias<TDocument>(PutAliasRequestDescriptor<TDocument> descriptor)
@@ -14154,7 +15255,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
@@ -14169,7 +15270,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest)
@@ -14185,7 +15286,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Name name)
@@ -14200,7 +15301,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest)
@@ -14216,7 +15317,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(PutAliasRequestDescriptor descriptor)
@@ -14230,7 +15331,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name)
@@ -14245,7 +15346,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutAliasResponse PutAlias(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor> configureRequest)
@@ -14261,7 +15362,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(PutAliasRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14274,7 +15375,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -14288,7 +15389,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14303,7 +15404,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -14317,7 +15418,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14332,7 +15433,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync(PutAliasRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14345,7 +15446,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -14359,7 +15460,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-alias">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAliasResponse> PutAliasAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Name name, Action<PutAliasRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14374,7 +15475,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataLifecycleResponse PutDataLifecycle(PutDataLifecycleRequest request)
@@ -14388,7 +15489,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(PutDataLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14401,7 +15502,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataLifecycleResponse PutDataLifecycle(PutDataLifecycleRequestDescriptor descriptor)
@@ -14415,7 +15516,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name)
@@ -14430,7 +15531,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutDataLifecycleResponse PutDataLifecycle(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<PutDataLifecycleRequestDescriptor> configureRequest)
@@ -14446,7 +15547,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(PutDataLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14459,7 +15560,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, CancellationToken cancellationToken = default)
 	{
@@ -14473,7 +15574,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Update data stream lifecycles.
 	/// Update the data stream lifecycle of the specified data streams.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/data-streams-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-data-lifecycle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutDataLifecycleResponse> PutDataLifecycleAsync(Elastic.Clients.Elasticsearch.DataStreamNames name, Action<PutDataLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14521,7 +15622,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate(PutIndexTemplateRequest request)
@@ -14568,7 +15669,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14614,7 +15715,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate<TDocument>(PutIndexTemplateRequestDescriptor<TDocument> descriptor)
@@ -14661,7 +15762,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name)
@@ -14709,7 +15810,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -14758,7 +15859,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate(PutIndexTemplateRequestDescriptor descriptor)
@@ -14805,7 +15906,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -14853,7 +15954,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndexTemplateResponse PutIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest)
@@ -14902,7 +16003,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(PutIndexTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14948,7 +16049,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -14995,7 +16096,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15043,7 +16144,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(PutIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15089,7 +16190,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -15136,7 +16237,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If an earlier component contains a <c>dynamic_templates</c> block, then by default new <c>dynamic_templates</c> entries are appended onto the end.
 	/// If an entry already exists with the same key, then it is overwritten by the new definition.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-put-index-template">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndexTemplateResponse> PutIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15187,7 +16288,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(PutMappingRequest request)
@@ -15237,7 +16338,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync(PutMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -15286,7 +16387,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping<TDocument>(PutMappingRequestDescriptor<TDocument> descriptor)
@@ -15336,7 +16437,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -15387,7 +16488,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor<TDocument>> configureRequest)
@@ -15439,7 +16540,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping<TDocument>()
@@ -15490,7 +16591,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping<TDocument>(Action<PutMappingRequestDescriptor<TDocument>> configureRequest)
@@ -15542,7 +16643,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(PutMappingRequestDescriptor descriptor)
@@ -15592,7 +16693,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices)
@@ -15643,7 +16744,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutMappingResponse PutMapping(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest)
@@ -15695,7 +16796,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(PutMappingRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15744,7 +16845,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -15794,7 +16895,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15845,7 +16946,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -15895,7 +16996,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync<TDocument>(Action<PutMappingRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15946,7 +17047,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync(PutMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15995,7 +17096,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -16045,7 +17146,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Renaming a field would invalidate data already indexed under the old field name.
 	/// Instead, add an alias field to create an alternate field name.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-put-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMappingResponse> PutMappingAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<PutMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16076,7 +17177,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(PutIndicesSettingsRequest request)
@@ -16106,7 +17207,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(PutIndicesSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -16135,7 +17236,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings<TDocument>(PutIndicesSettingsRequestDescriptor<TDocument> descriptor)
@@ -16165,7 +17266,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices)
@@ -16196,7 +17297,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, Action<PutIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
@@ -16228,7 +17329,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
@@ -16259,7 +17360,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Action<PutIndicesSettingsRequestDescriptor<TDocument>> configureRequest)
@@ -16291,7 +17392,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(PutIndicesSettingsRequestDescriptor descriptor)
@@ -16321,7 +17422,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices)
@@ -16352,7 +17453,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, Action<PutIndicesSettingsRequestDescriptor> configureRequest)
@@ -16384,7 +17485,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
@@ -16415,7 +17516,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutIndicesSettingsResponse PutSettings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Action<PutIndicesSettingsRequestDescriptor> configureRequest)
@@ -16447,7 +17548,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(PutIndicesSettingsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -16476,7 +17577,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -16506,7 +17607,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, Action<PutIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16537,7 +17638,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, CancellationToken cancellationToken = default)
 	{
@@ -16567,7 +17668,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Action<PutIndicesSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16598,7 +17699,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(PutIndicesSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -16627,7 +17728,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -16657,7 +17758,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices, Action<PutIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16688,7 +17789,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, CancellationToken cancellationToken = default)
 	{
@@ -16718,7 +17819,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// However, it does not affect the data stream's backing indices or their existing data.
 	/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutIndicesSettingsResponse> PutSettingsAsync(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Action<PutIndicesSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16758,7 +17859,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate(PutTemplateRequest request)
@@ -16797,7 +17898,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(PutTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -16835,7 +17936,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate<TDocument>(PutTemplateRequestDescriptor<TDocument> descriptor)
@@ -16874,7 +17975,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name)
@@ -16914,7 +18015,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -16955,7 +18056,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate(PutTemplateRequestDescriptor descriptor)
@@ -16994,7 +18095,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -17034,7 +18135,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest)
@@ -17075,7 +18176,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(PutTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17113,7 +18214,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -17152,7 +18253,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17192,7 +18293,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(PutTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17230,7 +18331,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -17269,7 +18370,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 	/// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-templates-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17335,7 +18436,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(RecoveryRequest request)
@@ -17400,7 +18501,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(RecoveryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -17464,7 +18565,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>(RecoveryRequestDescriptor<TDocument> descriptor)
@@ -17529,7 +18630,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -17595,7 +18696,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor<TDocument>> configureRequest)
@@ -17662,7 +18763,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>()
@@ -17728,7 +18829,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest)
@@ -17795,7 +18896,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(RecoveryRequestDescriptor descriptor)
@@ -17860,7 +18961,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -17926,7 +19027,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor> configureRequest)
@@ -17993,7 +19094,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery()
@@ -18059,7 +19160,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RecoveryResponse Recovery(Action<RecoveryRequestDescriptor> configureRequest)
@@ -18126,7 +19227,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(RecoveryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -18190,7 +19291,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -18255,7 +19356,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18321,7 +19422,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -18386,7 +19487,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync<TDocument>(Action<RecoveryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18452,7 +19553,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(RecoveryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -18516,7 +19617,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -18581,7 +19682,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<RecoveryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18647,7 +19748,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(CancellationToken cancellationToken = default)
 	{
@@ -18712,7 +19813,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// It only reports the last recovery for each shard copy and does not report historical information about earlier recoveries, nor does it report information about the recoveries of shard copies that no longer exist.
 	/// This means that if a shard copy completes a recovery and then Elasticsearch relocates it onto a different node then the information about the original recovery will not be shown in the recovery API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-recovery.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RecoveryResponse> RecoveryAsync(Action<RecoveryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18743,7 +19844,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(RefreshRequest request)
@@ -18773,7 +19874,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(RefreshRequest request, CancellationToken cancellationToken = default)
 	{
@@ -18802,7 +19903,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>(RefreshRequestDescriptor<TDocument> descriptor)
@@ -18832,7 +19933,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -18863,7 +19964,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor<TDocument>> configureRequest)
@@ -18895,7 +19996,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>()
@@ -18926,7 +20027,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest)
@@ -18958,7 +20059,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(RefreshRequestDescriptor descriptor)
@@ -18988,7 +20089,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -19019,7 +20120,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor> configureRequest)
@@ -19051,7 +20152,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh()
@@ -19082,7 +20183,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RefreshResponse Refresh(Action<RefreshRequestDescriptor> configureRequest)
@@ -19114,7 +20215,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(RefreshRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -19143,7 +20244,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -19173,7 +20274,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19204,7 +20305,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -19234,7 +20335,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync<TDocument>(Action<RefreshRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19265,7 +20366,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(RefreshRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -19294,7 +20395,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -19324,7 +20425,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<RefreshRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19355,7 +20456,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(CancellationToken cancellationToken = default)
 	{
@@ -19385,7 +20486,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If your application workflow indexes documents and then runs a search to retrieve the indexed document, it's recommended to use the index API's <c>refresh=wait_for</c> query parameter option.
 	/// This option ensures the indexing operation waits for a periodic refresh before running the search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-refresh.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RefreshResponse> RefreshAsync(Action<RefreshRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19415,7 +20516,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(ReloadSearchAnalyzersRequest request)
@@ -19444,7 +20545,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(ReloadSearchAnalyzersRequest request, CancellationToken cancellationToken = default)
 	{
@@ -19472,7 +20573,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(ReloadSearchAnalyzersRequestDescriptor<TDocument> descriptor)
@@ -19501,7 +20602,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -19531,7 +20632,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest)
@@ -19562,7 +20663,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>()
@@ -19592,7 +20693,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers<TDocument>(Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest)
@@ -19623,7 +20724,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(ReloadSearchAnalyzersRequestDescriptor descriptor)
@@ -19652,7 +20753,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices)
@@ -19682,7 +20783,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReloadSearchAnalyzersResponse ReloadSearchAnalyzers(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor> configureRequest)
@@ -19713,7 +20814,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(ReloadSearchAnalyzersRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -19741,7 +20842,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -19770,7 +20871,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19800,7 +20901,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -19829,7 +20930,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync<TDocument>(Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19859,7 +20960,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(ReloadSearchAnalyzersRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -19887,7 +20988,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -19916,7 +21017,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 	/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-reload-analyzers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReloadSearchAnalyzersResponse> ReloadSearchAnalyzersAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<ReloadSearchAnalyzersRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -19929,8 +21030,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -19945,7 +21048,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -19973,9 +21076,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20001,7 +21110,18 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveClusterResponse ResolveCluster(ResolveClusterRequest request)
@@ -20013,8 +21133,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20029,7 +21151,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20057,9 +21179,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20085,7 +21213,18 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(ResolveClusterRequest request, CancellationToken cancellationToken = default)
 	{
@@ -20096,8 +21235,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20112,7 +21253,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20140,9 +21281,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20168,7 +21315,18 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveClusterResponse ResolveCluster(ResolveClusterRequestDescriptor descriptor)
@@ -20180,8 +21338,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20196,7 +21356,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20224,9 +21384,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20252,10 +21418,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names name)
+	public virtual ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var descriptor = new ResolveClusterRequestDescriptor(name);
 		descriptor.BeforeRequest();
@@ -20265,8 +21442,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20281,7 +21460,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20309,9 +21488,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20337,10 +21522,21 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names name, Action<ResolveClusterRequestDescriptor> configureRequest)
+	public virtual ResolveClusterResponse ResolveCluster(Elastic.Clients.Elasticsearch.Names? name, Action<ResolveClusterRequestDescriptor> configureRequest)
 	{
 		var descriptor = new ResolveClusterRequestDescriptor(name);
 		configureRequest?.Invoke(descriptor);
@@ -20351,8 +21547,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20367,7 +21565,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20395,9 +21593,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20423,7 +21627,227 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ResolveClusterResponse ResolveCluster()
+	{
+		var descriptor = new ResolveClusterRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequest<ResolveClusterRequestDescriptor, ResolveClusterResponse, ResolveClusterRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Resolve the cluster.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+	/// </para>
+	/// <para>
+	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+	/// </para>
+	/// <para>
+	/// You use the same index expression with this endpoint as you would for cross-cluster search.
+	/// Index and cluster exclusions are also supported with this endpoint.
+	/// </para>
+	/// <para>
+	/// For each cluster in the index expression, information is returned about:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cluster version information, including the Elasticsearch server version.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+	/// </para>
+	/// Note on backwards compatibility
+	/// <para>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
+	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
+	/// <para>
+	/// You may want to exclude a cluster or index from a search when:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A remote cluster is an older version that does not support the feature you want to use in your search.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ResolveClusterResponse ResolveCluster(Action<ResolveClusterRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ResolveClusterRequestDescriptor();
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ResolveClusterRequestDescriptor, ResolveClusterResponse, ResolveClusterRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Resolve the cluster.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+	/// </para>
+	/// <para>
+	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+	/// </para>
+	/// <para>
+	/// You use the same index expression with this endpoint as you would for cross-cluster search.
+	/// Index and cluster exclusions are also supported with this endpoint.
+	/// </para>
+	/// <para>
+	/// For each cluster in the index expression, information is returned about:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cluster version information, including the Elasticsearch server version.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+	/// </para>
+	/// Note on backwards compatibility
+	/// <para>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
+	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
+	/// <para>
+	/// You may want to exclude a cluster or index from a search when:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A remote cluster is an older version that does not support the feature you want to use in your search.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(ResolveClusterRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -20434,8 +21858,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20450,7 +21876,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20478,9 +21904,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20506,9 +21938,20 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
+	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ResolveClusterRequestDescriptor(name);
 		descriptor.BeforeRequest();
@@ -20518,8 +21961,10 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Resolve the cluster.
-	/// Resolve the specified index expressions to return information about each cluster, including the local cluster, if included.
-	/// Multiple patterns and remote clusters are supported.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
 	/// </para>
 	/// <para>
 	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
@@ -20534,7 +21979,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// Whether the querying ("local") cluster is currently connected to each remote cluster in the index expression scope.
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
 	/// </para>
 	/// </item>
 	/// <item>
@@ -20562,9 +22007,15 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
 	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
 	/// </para>
+	/// Note on backwards compatibility
 	/// <para>
-	/// <strong>Advantages of using this endpoint before a cross-cluster search</strong>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
 	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
 	/// <para>
 	/// You may want to exclude a cluster or index from a search when:
 	/// </para>
@@ -20590,11 +22041,229 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names name, Action<ResolveClusterRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(Elastic.Clients.Elasticsearch.Names? name, Action<ResolveClusterRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
 		var descriptor = new ResolveClusterRequestDescriptor(name);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ResolveClusterRequestDescriptor, ResolveClusterResponse, ResolveClusterRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Resolve the cluster.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+	/// </para>
+	/// <para>
+	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+	/// </para>
+	/// <para>
+	/// You use the same index expression with this endpoint as you would for cross-cluster search.
+	/// Index and cluster exclusions are also supported with this endpoint.
+	/// </para>
+	/// <para>
+	/// For each cluster in the index expression, information is returned about:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cluster version information, including the Elasticsearch server version.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+	/// </para>
+	/// Note on backwards compatibility
+	/// <para>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
+	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
+	/// <para>
+	/// You may want to exclude a cluster or index from a search when:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A remote cluster is an older version that does not support the feature you want to use in your search.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ResolveClusterRequestDescriptor();
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ResolveClusterRequestDescriptor, ResolveClusterResponse, ResolveClusterRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Resolve the cluster.
+	/// </para>
+	/// <para>
+	/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+	/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+	/// </para>
+	/// <para>
+	/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+	/// </para>
+	/// <para>
+	/// You use the same index expression with this endpoint as you would for cross-cluster search.
+	/// Index and cluster exclusions are also supported with this endpoint.
+	/// </para>
+	/// <para>
+	/// For each cluster in the index expression, information is returned about:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cluster version information, including the Elasticsearch server version.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+	/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+	/// </para>
+	/// Note on backwards compatibility
+	/// <para>
+	/// The ability to query without an index expression was added in version 8.18, so when
+	/// querying remote clusters older than that, the local cluster will send the index
+	/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+	/// to that index expression even though you didn't request it. If it causes a problem, you can
+	/// instead include an index expression like <c>*:*</c> to bypass the issue.
+	/// </para>
+	/// Advantages of using this endpoint before a cross-cluster search
+	/// <para>
+	/// You may want to exclude a cluster or index from a search when:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// A remote cluster is an older version that does not support the feature you want to use in your search.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// Test availability of remote clusters
+	/// <para>
+	/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+	/// The remote cluster may be available, while the local cluster is not currently connected to it.
+	/// </para>
+	/// <para>
+	/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+	/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+	/// The <c>connected</c> field in the response will indicate whether it was successful.
+	/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-cluster-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ResolveClusterResponse> ResolveClusterAsync(Action<ResolveClusterRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ResolveClusterRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
 		return DoRequestAsync<ResolveClusterRequestDescriptor, ResolveClusterResponse, ResolveClusterRequestParameters>(descriptor, cancellationToken);
@@ -20606,7 +22275,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveIndexResponse ResolveIndex(ResolveIndexRequest request)
@@ -20621,7 +22290,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveIndexResponse> ResolveIndexAsync(ResolveIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -20635,7 +22304,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveIndexResponse ResolveIndex(ResolveIndexRequestDescriptor descriptor)
@@ -20650,7 +22319,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveIndexResponse ResolveIndex(Elastic.Clients.Elasticsearch.Names name)
@@ -20666,7 +22335,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResolveIndexResponse ResolveIndex(Elastic.Clients.Elasticsearch.Names name, Action<ResolveIndexRequestDescriptor> configureRequest)
@@ -20683,7 +22352,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveIndexResponse> ResolveIndexAsync(ResolveIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -20697,7 +22366,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveIndexResponse> ResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -20712,7 +22381,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Resolve the names and/or index patterns for indices, aliases, and data streams.
 	/// Multiple patterns and remote clusters are supported.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-resolve-index-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResolveIndexResponse> ResolveIndexAsync(Elastic.Clients.Elasticsearch.Names name, Action<ResolveIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -20775,7 +22444,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(RolloverRequest request)
@@ -20837,7 +22506,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(RolloverRequest request, CancellationToken cancellationToken = default)
 	{
@@ -20898,7 +22567,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover<TDocument>(RolloverRequestDescriptor<TDocument> descriptor)
@@ -20960,7 +22629,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
@@ -21023,7 +22692,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, Action<RolloverRequestDescriptor<TDocument>> configureRequest)
@@ -21087,7 +22756,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias)
@@ -21150,7 +22819,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor<TDocument>> configureRequest)
@@ -21214,7 +22883,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(RolloverRequestDescriptor descriptor)
@@ -21276,7 +22945,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex)
@@ -21339,7 +23008,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, Action<RolloverRequestDescriptor> configureRequest)
@@ -21403,7 +23072,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias)
@@ -21466,7 +23135,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RolloverResponse Rollover(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor> configureRequest)
@@ -21530,7 +23199,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(RolloverRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -21591,7 +23260,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, CancellationToken cancellationToken = default)
 	{
@@ -21653,7 +23322,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, Action<RolloverRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -21716,7 +23385,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, CancellationToken cancellationToken = default)
 	{
@@ -21778,7 +23447,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -21841,7 +23510,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(RolloverRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -21902,7 +23571,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, CancellationToken cancellationToken = default)
 	{
@@ -21964,7 +23633,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Elastic.Clients.Elasticsearch.IndexName? newIndex, Action<RolloverRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22027,7 +23696,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, CancellationToken cancellationToken = default)
 	{
@@ -22089,7 +23758,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// If you create the index on May 6, 2099, the index's name is <c>my-index-2099.05.06-000001</c>.
 	/// If you roll over the alias on May 7, 2099, the new index's name is <c>my-index-2099.05.07-000002</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-rollover-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RolloverResponse> RolloverAsync(Elastic.Clients.Elasticsearch.IndexAlias alias, Action<RolloverRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22105,7 +23774,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(SegmentsRequest request)
@@ -22120,7 +23789,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(SegmentsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -22134,7 +23803,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>(SegmentsRequestDescriptor<TDocument> descriptor)
@@ -22149,7 +23818,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -22165,7 +23834,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor<TDocument>> configureRequest)
@@ -22182,7 +23851,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>()
@@ -22198,7 +23867,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments<TDocument>(Action<SegmentsRequestDescriptor<TDocument>> configureRequest)
@@ -22215,7 +23884,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(SegmentsRequestDescriptor descriptor)
@@ -22230,7 +23899,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -22246,7 +23915,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor> configureRequest)
@@ -22263,7 +23932,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments()
@@ -22279,7 +23948,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SegmentsResponse Segments(Action<SegmentsRequestDescriptor> configureRequest)
@@ -22296,7 +23965,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(SegmentsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -22310,7 +23979,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -22325,7 +23994,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22341,7 +24010,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -22356,7 +24025,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync<TDocument>(Action<SegmentsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22372,7 +24041,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(SegmentsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -22386,7 +24055,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -22401,7 +24070,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<SegmentsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22417,7 +24086,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(CancellationToken cancellationToken = default)
 	{
@@ -22432,7 +24101,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Get low-level information about the Lucene segments in index shards.
 	/// For data streams, the API returns information about the stream's backing indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-segments.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SegmentsResponse> SegmentsAsync(Action<SegmentsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22476,7 +24145,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(ShardStoresRequest request)
@@ -22519,7 +24188,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(ShardStoresRequest request, CancellationToken cancellationToken = default)
 	{
@@ -22561,7 +24230,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>(ShardStoresRequestDescriptor<TDocument> descriptor)
@@ -22604,7 +24273,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -22648,7 +24317,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor<TDocument>> configureRequest)
@@ -22693,7 +24362,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>()
@@ -22737,7 +24406,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores<TDocument>(Action<ShardStoresRequestDescriptor<TDocument>> configureRequest)
@@ -22782,7 +24451,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(ShardStoresRequestDescriptor descriptor)
@@ -22825,7 +24494,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -22869,7 +24538,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor> configureRequest)
@@ -22914,7 +24583,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores()
@@ -22958,7 +24627,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShardStoresResponse ShardStores(Action<ShardStoresRequestDescriptor> configureRequest)
@@ -23003,7 +24672,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(ShardStoresRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -23045,7 +24714,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -23088,7 +24757,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23132,7 +24801,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -23175,7 +24844,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync<TDocument>(Action<ShardStoresRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23219,7 +24888,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(ShardStoresRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -23261,7 +24930,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -23304,7 +24973,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<ShardStoresRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23348,7 +25017,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(CancellationToken cancellationToken = default)
 	{
@@ -23391,7 +25060,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shards-stores.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShardStoresResponse> ShardStoresAsync(Action<ShardStoresRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23489,7 +25158,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink(ShrinkIndexRequest request)
@@ -23586,7 +25255,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync(ShrinkIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -23682,7 +25351,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink<TDocument>(ShrinkIndexRequestDescriptor<TDocument> descriptor)
@@ -23779,7 +25448,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
@@ -23877,7 +25546,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor<TDocument>> configureRequest)
@@ -23976,7 +25645,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink(ShrinkIndexRequestDescriptor descriptor)
@@ -24073,7 +25742,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
@@ -24171,7 +25840,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ShrinkIndexResponse Shrink(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor> configureRequest)
@@ -24270,7 +25939,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync<TDocument>(ShrinkIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -24366,7 +26035,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
@@ -24463,7 +26132,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24561,7 +26230,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync(ShrinkIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -24657,7 +26326,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
@@ -24754,7 +26423,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-shrink-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ShrinkIndexResponse> ShrinkAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<ShrinkIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24769,7 +26438,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateIndexTemplateResponse SimulateIndexTemplate(SimulateIndexTemplateRequest request)
@@ -24783,7 +26452,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(SimulateIndexTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -24796,7 +26465,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateIndexTemplateResponse SimulateIndexTemplate(SimulateIndexTemplateRequestDescriptor descriptor)
@@ -24810,7 +26479,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -24825,7 +26494,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateIndexTemplateResponse SimulateIndexTemplate(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor> configureRequest)
@@ -24841,7 +26510,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(SimulateIndexTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -24854,7 +26523,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -24868,7 +26537,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index.
 	/// Get the index configuration that would be applied to the specified index from an existing index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateIndexTemplateResponse> SimulateIndexTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<SimulateIndexTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24883,7 +26552,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(SimulateTemplateRequest request)
@@ -24897,7 +26566,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(SimulateTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -24910,7 +26579,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate<TDocument>(SimulateTemplateRequestDescriptor<TDocument> descriptor)
@@ -24924,7 +26593,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name? name)
@@ -24939,7 +26608,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name? name, Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -24955,7 +26624,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate<TDocument>()
@@ -24970,7 +26639,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate<TDocument>(Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -24986,7 +26655,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(SimulateTemplateRequestDescriptor descriptor)
@@ -25000,7 +26669,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(Elastic.Clients.Elasticsearch.Name? name)
@@ -25015,7 +26684,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(Elastic.Clients.Elasticsearch.Name? name, Action<SimulateTemplateRequestDescriptor> configureRequest)
@@ -25031,7 +26700,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate()
@@ -25046,7 +26715,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SimulateTemplateResponse SimulateTemplate(Action<SimulateTemplateRequestDescriptor> configureRequest)
@@ -25062,7 +26731,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(SimulateTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25075,7 +26744,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -25089,7 +26758,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name? name, Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25104,7 +26773,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -25118,7 +26787,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync<TDocument>(Action<SimulateTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25133,7 +26802,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(SimulateTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25146,7 +26815,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -25160,7 +26829,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, Action<SimulateTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25175,7 +26844,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(CancellationToken cancellationToken = default)
 	{
@@ -25189,7 +26858,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Simulate an index template.
 	/// Get the index configuration that would be applied by a particular index template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-simulate-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SimulateTemplateResponse> SimulateTemplateAsync(Action<SimulateTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25286,7 +26955,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split(SplitIndexRequest request)
@@ -25382,7 +27051,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync(SplitIndexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -25477,7 +27146,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split<TDocument>(SplitIndexRequestDescriptor<TDocument> descriptor)
@@ -25573,7 +27242,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
@@ -25670,7 +27339,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor<TDocument>> configureRequest)
@@ -25768,7 +27437,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split(SplitIndexRequestDescriptor descriptor)
@@ -25864,7 +27533,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
@@ -25961,7 +27630,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SplitIndexResponse Split(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor> configureRequest)
@@ -26059,7 +27728,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync<TDocument>(SplitIndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -26154,7 +27823,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
@@ -26250,7 +27919,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26347,7 +28016,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync(SplitIndexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -26442,7 +28111,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, CancellationToken cancellationToken = default)
 	{
@@ -26538,7 +28207,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-split-index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SplitIndexResponse> SplitAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target, Action<SplitIndexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26565,7 +28234,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(IndicesStatsRequest request)
@@ -26591,7 +28260,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(IndicesStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -26616,7 +28285,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>(IndicesStatsRequestDescriptor<TDocument> descriptor)
@@ -26642,7 +28311,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -26669,7 +28338,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -26697,7 +28366,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>()
@@ -26724,7 +28393,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats<TDocument>(Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest)
@@ -26752,7 +28421,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(IndicesStatsRequestDescriptor descriptor)
@@ -26778,7 +28447,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric)
@@ -26805,7 +28474,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor> configureRequest)
@@ -26833,7 +28502,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats()
@@ -26860,7 +28529,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndicesStatsResponse Stats(Action<IndicesStatsRequestDescriptor> configureRequest)
@@ -26888,7 +28557,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(IndicesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -26913,7 +28582,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -26939,7 +28608,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26966,7 +28635,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -26992,7 +28661,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync<TDocument>(Action<IndicesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27019,7 +28688,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(IndicesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -27044,7 +28713,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
 	{
@@ -27070,7 +28739,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Metrics? metric, Action<IndicesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27097,7 +28766,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -27123,7 +28792,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 	/// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndicesStatsResponse> StatsAsync(Action<IndicesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27138,7 +28807,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases(UpdateAliasesRequest request)
@@ -27152,7 +28821,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(UpdateAliasesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -27165,7 +28834,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases<TDocument>(UpdateAliasesRequestDescriptor<TDocument> descriptor)
@@ -27179,7 +28848,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases<TDocument>()
@@ -27194,7 +28863,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases<TDocument>(Action<UpdateAliasesRequestDescriptor<TDocument>> configureRequest)
@@ -27210,7 +28879,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases(UpdateAliasesRequestDescriptor descriptor)
@@ -27224,7 +28893,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases()
@@ -27239,7 +28908,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateAliasesResponse UpdateAliases(Action<UpdateAliasesRequestDescriptor> configureRequest)
@@ -27255,7 +28924,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(UpdateAliasesRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -27268,7 +28937,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -27282,7 +28951,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync<TDocument>(Action<UpdateAliasesRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27297,7 +28966,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(UpdateAliasesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -27310,7 +28979,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(CancellationToken cancellationToken = default)
 	{
@@ -27324,7 +28993,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Create or update an alias.
 	/// Adds a data stream or index to an alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-indices-update-aliases">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateAliasesResponse> UpdateAliasesAsync(Action<UpdateAliasesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27339,7 +29008,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(ValidateQueryRequest request)
@@ -27353,7 +29022,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(ValidateQueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -27366,7 +29035,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery<TDocument>(ValidateQueryRequestDescriptor<TDocument> descriptor)
@@ -27380,7 +29049,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -27395,7 +29064,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ValidateQueryRequestDescriptor<TDocument>> configureRequest)
@@ -27411,7 +29080,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery<TDocument>()
@@ -27426,7 +29095,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery<TDocument>(Action<ValidateQueryRequestDescriptor<TDocument>> configureRequest)
@@ -27442,7 +29111,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(ValidateQueryRequestDescriptor descriptor)
@@ -27456,7 +29125,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -27471,7 +29140,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(Elastic.Clients.Elasticsearch.Indices? indices, Action<ValidateQueryRequestDescriptor> configureRequest)
@@ -27487,7 +29156,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery()
@@ -27502,7 +29171,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ValidateQueryResponse ValidateQuery(Action<ValidateQueryRequestDescriptor> configureRequest)
@@ -27518,7 +29187,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(ValidateQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -27531,7 +29200,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -27545,7 +29214,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<ValidateQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27560,7 +29229,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -27574,7 +29243,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync<TDocument>(Action<ValidateQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27589,7 +29258,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(ValidateQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -27602,7 +29271,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -27616,7 +29285,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<ValidateQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -27631,7 +29300,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(CancellationToken cancellationToken = default)
 	{
@@ -27645,7 +29314,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// Validate a query.
 	/// Validates a query without running it.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-validate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ValidateQueryResponse> ValidateQueryAsync(Action<ValidateQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

@@ -65,7 +65,9 @@ public sealed partial class GetDataStreamRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Get data streams.
-/// Retrieves information about one or more data streams.
+/// </para>
+/// <para>
+/// Get information about one or more data streams.
 /// </para>
 /// </summary>
 public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamRequestParameters>
@@ -123,7 +125,9 @@ public sealed partial class GetDataStreamRequest : PlainRequest<GetDataStreamReq
 /// <summary>
 /// <para>
 /// Get data streams.
-/// Retrieves information about one or more data streams.
+/// </para>
+/// <para>
+/// Get information about one or more data streams.
 /// </para>
 /// </summary>
 public sealed partial class GetDataStreamRequestDescriptor : RequestDescriptor<GetDataStreamRequestDescriptor, GetDataStreamRequestParameters>

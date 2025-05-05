@@ -60,7 +60,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ActivateUserProfileResponse ActivateUserProfile(ActivateUserProfileRequest request)
@@ -90,7 +90,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(ActivateUserProfileRequest request, CancellationToken cancellationToken = default)
 	{
@@ -119,7 +119,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ActivateUserProfileResponse ActivateUserProfile(ActivateUserProfileRequestDescriptor descriptor)
@@ -149,7 +149,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ActivateUserProfileResponse ActivateUserProfile()
@@ -180,7 +180,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ActivateUserProfileResponse ActivateUserProfile(Action<ActivateUserProfileRequestDescriptor> configureRequest)
@@ -212,7 +212,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(ActivateUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -241,7 +241,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(CancellationToken cancellationToken = default)
 	{
@@ -271,7 +271,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When updating a profile document, the API enables the document if it was disabled.
 	/// Any updates do not change existing content for either the <c>labels</c> or <c>data</c> fields.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(Action<ActivateUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -291,7 +291,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AuthenticateResponse Authenticate(AuthenticateRequest request)
@@ -310,7 +310,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AuthenticateResponse> AuthenticateAsync(AuthenticateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -328,7 +328,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AuthenticateResponse Authenticate(AuthenticateRequestDescriptor descriptor)
@@ -347,7 +347,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AuthenticateResponse Authenticate()
@@ -367,7 +367,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AuthenticateResponse Authenticate(Action<AuthenticateRequestDescriptor> configureRequest)
@@ -388,7 +388,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AuthenticateResponse> AuthenticateAsync(AuthenticateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -406,7 +406,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AuthenticateResponse> AuthenticateAsync(CancellationToken cancellationToken = default)
 	{
@@ -425,7 +425,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 	/// If the user cannot be authenticated, this API returns a 401 status code.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AuthenticateResponse> AuthenticateAsync(Action<AuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -443,7 +443,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequest request)
@@ -460,7 +460,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -476,7 +476,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequestDescriptor descriptor)
@@ -493,7 +493,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkDeleteRoleResponse BulkDeleteRole()
@@ -511,7 +511,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkDeleteRoleResponse BulkDeleteRole(Action<BulkDeleteRoleRequestDescriptor> configureRequest)
@@ -530,7 +530,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -546,7 +546,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(CancellationToken cancellationToken = default)
 	{
@@ -563,7 +563,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk delete roles API cannot delete roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(Action<BulkDeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -581,7 +581,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequest request)
@@ -598,7 +598,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -614,7 +614,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor)
@@ -631,7 +631,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole<TDocument>()
@@ -649,7 +649,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest)
@@ -668,7 +668,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequestDescriptor descriptor)
@@ -685,7 +685,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole()
@@ -703,7 +703,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkPutRoleResponse BulkPutRole(Action<BulkPutRoleRequestDescriptor> configureRequest)
@@ -722,7 +722,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -738,7 +738,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -755,7 +755,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -773,7 +773,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -789,7 +789,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(CancellationToken cancellationToken = default)
 	{
@@ -806,7 +806,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The bulk create or update roles API cannot update roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(Action<BulkPutRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -841,7 +841,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys(BulkUpdateApiKeysRequest request)
@@ -875,7 +875,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(BulkUpdateApiKeysRequest request, CancellationToken cancellationToken = default)
 	{
@@ -908,7 +908,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys<TDocument>(BulkUpdateApiKeysRequestDescriptor<TDocument> descriptor)
@@ -942,7 +942,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys<TDocument>()
@@ -977,7 +977,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys<TDocument>(Action<BulkUpdateApiKeysRequestDescriptor<TDocument>> configureRequest)
@@ -1013,7 +1013,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys(BulkUpdateApiKeysRequestDescriptor descriptor)
@@ -1047,7 +1047,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys()
@@ -1082,7 +1082,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkUpdateApiKeysResponse BulkUpdateApiKeys(Action<BulkUpdateApiKeysRequestDescriptor> configureRequest)
@@ -1118,7 +1118,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync<TDocument>(BulkUpdateApiKeysRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1151,7 +1151,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1185,7 +1185,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync<TDocument>(Action<BulkUpdateApiKeysRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1220,7 +1220,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(BulkUpdateApiKeysRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1253,7 +1253,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(CancellationToken cancellationToken = default)
 	{
@@ -1287,7 +1287,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// A successful request returns a JSON structure that contains the IDs of all updated API keys, the IDs of API keys that already had the requested changes and did not require an update, and error details for any failed update.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-bulk-update-api-keys.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(Action<BulkUpdateApiKeysRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1304,7 +1304,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword(ChangePasswordRequest request)
@@ -1320,7 +1320,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1335,7 +1335,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword(ChangePasswordRequestDescriptor descriptor)
@@ -1351,7 +1351,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username)
@@ -1368,7 +1368,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username, Action<ChangePasswordRequestDescriptor> configureRequest)
@@ -1386,7 +1386,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword()
@@ -1403,7 +1403,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ChangePasswordResponse ChangePassword(Action<ChangePasswordRequestDescriptor> configureRequest)
@@ -1421,7 +1421,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1436,7 +1436,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, CancellationToken cancellationToken = default)
 	{
@@ -1452,7 +1452,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, Action<ChangePasswordRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1469,7 +1469,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(CancellationToken cancellationToken = default)
 	{
@@ -1485,7 +1485,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Change the passwords of users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Action<ChangePasswordRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1503,7 +1503,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(ClearApiKeyCacheRequest request)
@@ -1520,7 +1520,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(ClearApiKeyCacheRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1536,7 +1536,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(ClearApiKeyCacheRequestDescriptor descriptor)
@@ -1553,7 +1553,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids)
@@ -1571,7 +1571,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, Action<ClearApiKeyCacheRequestDescriptor> configureRequest)
@@ -1590,7 +1590,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(ClearApiKeyCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1606,7 +1606,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, CancellationToken cancellationToken = default)
 	{
@@ -1623,7 +1623,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict a subset of all entries from the API key cache.
 	/// The cache is also automatically cleared on state changes of the security index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, Action<ClearApiKeyCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1641,7 +1641,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(ClearCachedPrivilegesRequest request)
@@ -1658,7 +1658,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(ClearCachedPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1674,7 +1674,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(ClearCachedPrivilegesRequestDescriptor descriptor)
@@ -1691,7 +1691,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application)
@@ -1709,7 +1709,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, Action<ClearCachedPrivilegesRequestDescriptor> configureRequest)
@@ -1728,7 +1728,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(ClearCachedPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1744,7 +1744,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, CancellationToken cancellationToken = default)
 	{
@@ -1761,7 +1761,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Evict privileges from the native application privilege cache.
 	/// The cache is also automatically cleared for applications that have their privileges updated.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Action<ClearCachedPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1784,7 +1784,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRealmsResponse ClearCachedRealms(ClearCachedRealmsRequest request)
@@ -1806,7 +1806,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(ClearCachedRealmsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1827,7 +1827,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRealmsResponse ClearCachedRealms(ClearCachedRealmsRequestDescriptor descriptor)
@@ -1849,7 +1849,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms)
@@ -1872,7 +1872,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, Action<ClearCachedRealmsRequestDescriptor> configureRequest)
@@ -1896,7 +1896,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(ClearCachedRealmsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1917,7 +1917,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, CancellationToken cancellationToken = default)
 	{
@@ -1939,7 +1939,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// There are realm settings that you can use to configure the user cache.
 	/// For more information, refer to the documentation about controlling the user cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, Action<ClearCachedRealmsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1956,7 +1956,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRolesResponse ClearCachedRoles(ClearCachedRolesRequest request)
@@ -1972,7 +1972,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(ClearCachedRolesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1987,7 +1987,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRolesResponse ClearCachedRoles(ClearCachedRolesRequestDescriptor descriptor)
@@ -2003,7 +2003,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name)
@@ -2020,7 +2020,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedRolesRequestDescriptor> configureRequest)
@@ -2038,7 +2038,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(ClearCachedRolesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2053,7 +2053,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -2069,7 +2069,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Evict roles from the native role cache.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedRolesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2092,7 +2092,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(ClearCachedServiceTokensRequest request)
@@ -2114,7 +2114,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(ClearCachedServiceTokensRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2135,7 +2135,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(ClearCachedServiceTokensRequestDescriptor descriptor)
@@ -2157,7 +2157,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(string ns, string service, Elastic.Clients.Elasticsearch.Names name)
@@ -2180,7 +2180,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(string ns, string service, Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedServiceTokensRequestDescriptor> configureRequest)
@@ -2204,7 +2204,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(ClearCachedServiceTokensRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2225,7 +2225,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string ns, string service, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -2247,7 +2247,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
 	/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string ns, string service, Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedServiceTokensRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2279,7 +2279,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey(CreateApiKeyRequest request)
@@ -2310,7 +2310,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CreateApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2340,7 +2340,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey<TDocument>(CreateApiKeyRequestDescriptor<TDocument> descriptor)
@@ -2371,7 +2371,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey<TDocument>()
@@ -2403,7 +2403,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey<TDocument>(Action<CreateApiKeyRequestDescriptor<TDocument>> configureRequest)
@@ -2436,7 +2436,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey(CreateApiKeyRequestDescriptor descriptor)
@@ -2467,7 +2467,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey()
@@ -2499,7 +2499,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateApiKeyResponse CreateApiKey(Action<CreateApiKeyRequestDescriptor> configureRequest)
@@ -2532,7 +2532,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(CreateApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2562,7 +2562,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -2593,7 +2593,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(Action<CreateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2625,7 +2625,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CreateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2655,7 +2655,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CancellationToken cancellationToken = default)
 	{
@@ -2686,7 +2686,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 	/// To configure or turn off the API key service, refer to API key service setting documentation.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(Action<CreateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2723,7 +2723,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(CreateCrossClusterApiKeyRequest request)
@@ -2759,7 +2759,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CreateCrossClusterApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2794,7 +2794,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>(CreateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor)
@@ -2830,7 +2830,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>()
@@ -2867,7 +2867,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>(Action<CreateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest)
@@ -2905,7 +2905,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(CreateCrossClusterApiKeyRequestDescriptor descriptor)
@@ -2941,7 +2941,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey()
@@ -2978,7 +2978,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(Action<CreateCrossClusterApiKeyRequestDescriptor> configureRequest)
@@ -3016,7 +3016,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(CreateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3051,7 +3051,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -3087,7 +3087,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(Action<CreateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3124,7 +3124,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CreateCrossClusterApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3159,7 +3159,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CancellationToken cancellationToken = default)
 	{
@@ -3195,7 +3195,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(Action<CreateCrossClusterApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3216,7 +3216,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(CreateServiceTokenRequest request)
@@ -3236,7 +3236,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(CreateServiceTokenRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3255,7 +3255,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(CreateServiceTokenRequestDescriptor descriptor)
@@ -3275,7 +3275,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name? name)
@@ -3296,7 +3296,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, Action<CreateServiceTokenRequestDescriptor> configureRequest)
@@ -3318,7 +3318,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service)
@@ -3339,7 +3339,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Action<CreateServiceTokenRequestDescriptor> configureRequest)
@@ -3361,7 +3361,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(CreateServiceTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3380,7 +3380,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -3400,7 +3400,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, Action<CreateServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3421,7 +3421,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, CancellationToken cancellationToken = default)
 	{
@@ -3441,7 +3441,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: Service account tokens never expire.
 	/// You must actively delete them if they are no longer needed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Action<CreateServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3468,7 +3468,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DelegatePkiResponse DelegatePki(DelegatePkiRequest request)
@@ -3494,7 +3494,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DelegatePkiResponse> DelegatePkiAsync(DelegatePkiRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3519,7 +3519,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DelegatePkiResponse DelegatePki(DelegatePkiRequestDescriptor descriptor)
@@ -3545,7 +3545,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DelegatePkiResponse DelegatePki()
@@ -3572,7 +3572,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DelegatePkiResponse DelegatePki(Action<DelegatePkiRequestDescriptor> configureRequest)
@@ -3600,7 +3600,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DelegatePkiResponse> DelegatePkiAsync(DelegatePkiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3625,7 +3625,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DelegatePkiResponse> DelegatePkiAsync(CancellationToken cancellationToken = default)
 	{
@@ -3651,7 +3651,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 	/// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delegate-pki-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DelegatePkiResponse> DelegatePkiAsync(Action<DelegatePkiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3680,7 +3680,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePrivilegesResponse DeletePrivileges(DeletePrivilegesRequest request)
@@ -3708,7 +3708,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(DeletePrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3735,7 +3735,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePrivilegesResponse DeletePrivileges(DeletePrivilegesRequestDescriptor descriptor)
@@ -3763,7 +3763,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
@@ -3792,7 +3792,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<DeletePrivilegesRequestDescriptor> configureRequest)
@@ -3822,7 +3822,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(DeletePrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3849,7 +3849,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -3877,7 +3877,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<DeletePrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3896,7 +3896,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleResponse DeleteRole(DeleteRoleRequest request)
@@ -3914,7 +3914,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3931,7 +3931,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleResponse DeleteRole(DeleteRoleRequestDescriptor descriptor)
@@ -3949,7 +3949,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name)
@@ -3968,7 +3968,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleRequestDescriptor> configureRequest)
@@ -3988,7 +3988,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4005,7 +4005,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -4023,7 +4023,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The delete roles API cannot remove roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4042,7 +4042,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleMappingResponse DeleteRoleMapping(DeleteRoleMappingRequest request)
@@ -4060,7 +4060,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(DeleteRoleMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4077,7 +4077,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleMappingResponse DeleteRoleMapping(DeleteRoleMappingRequestDescriptor descriptor)
@@ -4095,7 +4095,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name)
@@ -4114,7 +4114,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleMappingRequestDescriptor> configureRequest)
@@ -4134,7 +4134,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(DeleteRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4151,7 +4151,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -4169,7 +4169,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4186,7 +4186,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteServiceTokenResponse DeleteServiceToken(DeleteServiceTokenRequest request)
@@ -4202,7 +4202,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(DeleteServiceTokenRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4217,7 +4217,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteServiceTokenResponse DeleteServiceToken(DeleteServiceTokenRequestDescriptor descriptor)
@@ -4233,7 +4233,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteServiceTokenResponse DeleteServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name name)
@@ -4250,7 +4250,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteServiceTokenResponse DeleteServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name name, Action<DeleteServiceTokenRequestDescriptor> configureRequest)
@@ -4268,7 +4268,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(DeleteServiceTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4283,7 +4283,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -4299,7 +4299,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete service account tokens for a service in a specified namespace.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name name, Action<DeleteServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4316,7 +4316,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteUserResponse DeleteUser(DeleteUserRequest request)
@@ -4332,7 +4332,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteUserResponse> DeleteUserAsync(DeleteUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4347,7 +4347,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteUserResponse DeleteUser(DeleteUserRequestDescriptor descriptor)
@@ -4363,7 +4363,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username)
@@ -4380,7 +4380,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, Action<DeleteUserRequestDescriptor> configureRequest)
@@ -4398,7 +4398,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteUserResponse> DeleteUserAsync(DeleteUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4413,7 +4413,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
 	{
@@ -4429,7 +4429,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete users from the native realm.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<DeleteUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4448,7 +4448,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserResponse DisableUser(DisableUserRequest request)
@@ -4466,7 +4466,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserResponse> DisableUserAsync(DisableUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4483,7 +4483,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserResponse DisableUser(DisableUserRequestDescriptor descriptor)
@@ -4501,7 +4501,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username)
@@ -4520,7 +4520,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, Action<DisableUserRequestDescriptor> configureRequest)
@@ -4540,7 +4540,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserResponse> DisableUserAsync(DisableUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4557,7 +4557,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
 	{
@@ -4575,7 +4575,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default, when you create users, they are enabled.
 	/// You can use this API to revoke a user's access to Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<DisableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4601,7 +4601,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserProfileResponse DisableUserProfile(DisableUserProfileRequest request)
@@ -4626,7 +4626,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(DisableUserProfileRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4650,7 +4650,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserProfileResponse DisableUserProfile(DisableUserProfileRequestDescriptor descriptor)
@@ -4675,7 +4675,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserProfileResponse DisableUserProfile(string uid)
@@ -4701,7 +4701,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DisableUserProfileResponse DisableUserProfile(string uid, Action<DisableUserProfileRequestDescriptor> configureRequest)
@@ -4728,7 +4728,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(DisableUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4752,7 +4752,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(string uid, CancellationToken cancellationToken = default)
 	{
@@ -4777,7 +4777,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, its automatically enabled and visible in user profile searches. You can use the disable user profile API to disable a user profile so it’s not visible in these searches.
 	/// To re-enable a disabled user profile, use the enable user profile API .
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(string uid, Action<DisableUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4795,7 +4795,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserResponse EnableUser(EnableUserRequest request)
@@ -4812,7 +4812,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserResponse> EnableUserAsync(EnableUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4828,7 +4828,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserResponse EnableUser(EnableUserRequestDescriptor descriptor)
@@ -4845,7 +4845,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username)
@@ -4863,7 +4863,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, Action<EnableUserRequestDescriptor> configureRequest)
@@ -4882,7 +4882,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserResponse> EnableUserAsync(EnableUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4898,7 +4898,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
 	{
@@ -4915,7 +4915,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Enable users in the native realm.
 	/// By default, when you create users, they are enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<EnableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4941,7 +4941,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserProfileResponse EnableUserProfile(EnableUserProfileRequest request)
@@ -4966,7 +4966,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(EnableUserProfileRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4990,7 +4990,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserProfileResponse EnableUserProfile(EnableUserProfileRequestDescriptor descriptor)
@@ -5015,7 +5015,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserProfileResponse EnableUserProfile(string uid)
@@ -5041,7 +5041,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnableUserProfileResponse EnableUserProfile(string uid, Action<EnableUserProfileRequestDescriptor> configureRequest)
@@ -5068,7 +5068,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(EnableUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5092,7 +5092,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(string uid, CancellationToken cancellationToken = default)
 	{
@@ -5117,7 +5117,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 	/// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(string uid, Action<EnableUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5138,7 +5138,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollKibanaResponse EnrollKibana(EnrollKibanaRequest request)
@@ -5158,7 +5158,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(EnrollKibanaRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5177,7 +5177,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollKibanaResponse EnrollKibana(EnrollKibanaRequestDescriptor descriptor)
@@ -5197,7 +5197,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollKibanaResponse EnrollKibana()
@@ -5218,7 +5218,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollKibanaResponse EnrollKibana(Action<EnrollKibanaRequestDescriptor> configureRequest)
@@ -5240,7 +5240,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(EnrollKibanaRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5259,7 +5259,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(CancellationToken cancellationToken = default)
 	{
@@ -5279,7 +5279,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: This API is currently intended for internal use only by Kibana.
 	/// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(Action<EnrollKibanaRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5300,7 +5300,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollNodeResponse EnrollNode(EnrollNodeRequest request)
@@ -5320,7 +5320,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(EnrollNodeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5339,7 +5339,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollNodeResponse EnrollNode(EnrollNodeRequestDescriptor descriptor)
@@ -5359,7 +5359,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollNodeResponse EnrollNode()
@@ -5380,7 +5380,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EnrollNodeResponse EnrollNode(Action<EnrollNodeRequestDescriptor> configureRequest)
@@ -5402,7 +5402,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(EnrollNodeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5421,7 +5421,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(CancellationToken cancellationToken = default)
 	{
@@ -5441,7 +5441,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
 	/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(Action<EnrollNodeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5460,7 +5460,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetApiKeyResponse GetApiKey(GetApiKeyRequest request)
@@ -5478,7 +5478,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(GetApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5495,7 +5495,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetApiKeyResponse GetApiKey(GetApiKeyRequestDescriptor descriptor)
@@ -5513,7 +5513,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetApiKeyResponse GetApiKey()
@@ -5532,7 +5532,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetApiKeyResponse GetApiKey(Action<GetApiKeyRequestDescriptor> configureRequest)
@@ -5552,7 +5552,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(GetApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5569,7 +5569,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(CancellationToken cancellationToken = default)
 	{
@@ -5587,7 +5587,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(Action<GetApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5604,7 +5604,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(GetBuiltinPrivilegesRequest request)
@@ -5620,7 +5620,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(GetBuiltinPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5635,7 +5635,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(GetBuiltinPrivilegesRequestDescriptor descriptor)
@@ -5651,7 +5651,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges()
@@ -5668,7 +5668,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(Action<GetBuiltinPrivilegesRequestDescriptor> configureRequest)
@@ -5686,7 +5686,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(GetBuiltinPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5701,7 +5701,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(CancellationToken cancellationToken = default)
 	{
@@ -5717,7 +5717,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Action<GetBuiltinPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5746,7 +5746,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges(GetPrivilegesRequest request)
@@ -5774,7 +5774,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(GetPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -5801,7 +5801,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges(GetPrivilegesRequestDescriptor descriptor)
@@ -5829,7 +5829,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name)
@@ -5858,7 +5858,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, Action<GetPrivilegesRequestDescriptor> configureRequest)
@@ -5888,7 +5888,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges()
@@ -5917,7 +5917,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetPrivilegesResponse GetPrivileges(Action<GetPrivilegesRequestDescriptor> configureRequest)
@@ -5947,7 +5947,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(GetPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5974,7 +5974,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -6002,7 +6002,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, Action<GetPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6031,7 +6031,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(CancellationToken cancellationToken = default)
 	{
@@ -6059,7 +6059,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Action<GetPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6078,7 +6078,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole(GetRoleRequest request)
@@ -6096,7 +6096,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(GetRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6113,7 +6113,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole(GetRoleRequestDescriptor descriptor)
@@ -6131,7 +6131,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name)
@@ -6150,7 +6150,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleRequestDescriptor> configureRequest)
@@ -6170,7 +6170,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole()
@@ -6189,7 +6189,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleResponse GetRole(Action<GetRoleRequestDescriptor> configureRequest)
@@ -6209,7 +6209,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(GetRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6226,7 +6226,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -6244,7 +6244,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6263,7 +6263,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(CancellationToken cancellationToken = default)
 	{
@@ -6281,7 +6281,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 	/// The get roles API cannot retrieve roles that are defined in roles files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleResponse> GetRoleAsync(Action<GetRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6300,7 +6300,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping(GetRoleMappingRequest request)
@@ -6318,7 +6318,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(GetRoleMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6335,7 +6335,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping(GetRoleMappingRequestDescriptor descriptor)
@@ -6353,7 +6353,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name)
@@ -6372,7 +6372,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleMappingRequestDescriptor> configureRequest)
@@ -6392,7 +6392,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping()
@@ -6411,7 +6411,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRoleMappingResponse GetRoleMapping(Action<GetRoleMappingRequestDescriptor> configureRequest)
@@ -6431,7 +6431,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(GetRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6448,7 +6448,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
 	{
@@ -6466,7 +6466,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6485,7 +6485,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(CancellationToken cancellationToken = default)
 	{
@@ -6503,7 +6503,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Action<GetRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6523,7 +6523,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts(GetServiceAccountsRequest request)
@@ -6542,7 +6542,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(GetServiceAccountsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6560,7 +6560,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts(GetServiceAccountsRequestDescriptor descriptor)
@@ -6579,7 +6579,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts(string? ns, string? service)
@@ -6599,7 +6599,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts(string? ns, string? service, Action<GetServiceAccountsRequestDescriptor> configureRequest)
@@ -6620,7 +6620,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts()
@@ -6640,7 +6640,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceAccountsResponse GetServiceAccounts(Action<GetServiceAccountsRequestDescriptor> configureRequest)
@@ -6661,7 +6661,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(GetServiceAccountsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6679,7 +6679,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(string? ns, string? service, CancellationToken cancellationToken = default)
 	{
@@ -6698,7 +6698,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(string? ns, string? service, Action<GetServiceAccountsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6718,7 +6718,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(CancellationToken cancellationToken = default)
 	{
@@ -6737,7 +6737,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: Currently, only the <c>elastic/fleet-server</c> service account is available.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(Action<GetServiceAccountsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6761,7 +6761,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceCredentialsResponse GetServiceCredentials(GetServiceCredentialsRequest request)
@@ -6784,7 +6784,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(GetServiceCredentialsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -6806,7 +6806,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceCredentialsResponse GetServiceCredentials(GetServiceCredentialsRequestDescriptor descriptor)
@@ -6829,7 +6829,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceCredentialsResponse GetServiceCredentials(string ns, Elastic.Clients.Elasticsearch.Name service)
@@ -6853,7 +6853,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetServiceCredentialsResponse GetServiceCredentials(string ns, Elastic.Clients.Elasticsearch.Name service, Action<GetServiceCredentialsRequestDescriptor> configureRequest)
@@ -6878,7 +6878,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(GetServiceCredentialsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6900,7 +6900,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(string ns, Elastic.Clients.Elasticsearch.Name service, CancellationToken cancellationToken = default)
 	{
@@ -6923,7 +6923,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: For tokens backed by the <c>service_tokens</c> file, the API collects them from all nodes of the cluster.
 	/// Tokens with the same name from different nodes are assumed to be the same token and are only counted once towards the total number of service tokens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(string ns, Elastic.Clients.Elasticsearch.Name service, Action<GetServiceCredentialsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -6954,7 +6954,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSecuritySettingsResponse GetSettings(GetSecuritySettingsRequest request)
@@ -6984,7 +6984,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSecuritySettingsResponse> GetSettingsAsync(GetSecuritySettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7013,7 +7013,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSecuritySettingsResponse GetSettings(GetSecuritySettingsRequestDescriptor descriptor)
@@ -7043,7 +7043,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSecuritySettingsResponse GetSettings()
@@ -7074,7 +7074,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSecuritySettingsResponse GetSettings(Action<GetSecuritySettingsRequestDescriptor> configureRequest)
@@ -7106,7 +7106,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSecuritySettingsResponse> GetSettingsAsync(GetSecuritySettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7135,7 +7135,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSecuritySettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -7165,7 +7165,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSecuritySettingsResponse> GetSettingsAsync(Action<GetSecuritySettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7196,7 +7196,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTokenResponse GetToken(GetTokenRequest request)
@@ -7226,7 +7226,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTokenResponse> GetTokenAsync(GetTokenRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7255,7 +7255,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTokenResponse GetToken(GetTokenRequestDescriptor descriptor)
@@ -7285,7 +7285,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTokenResponse GetToken()
@@ -7316,7 +7316,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTokenResponse GetToken(Action<GetTokenRequestDescriptor> configureRequest)
@@ -7348,7 +7348,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTokenResponse> GetTokenAsync(GetTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7377,7 +7377,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTokenResponse> GetTokenAsync(CancellationToken cancellationToken = default)
 	{
@@ -7407,7 +7407,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// That time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 	/// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTokenResponse> GetTokenAsync(Action<GetTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7424,7 +7424,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser(GetUserRequest request)
@@ -7440,7 +7440,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(GetUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7455,7 +7455,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser(GetUserRequestDescriptor descriptor)
@@ -7471,7 +7471,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username)
@@ -7488,7 +7488,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, Action<GetUserRequestDescriptor> configureRequest)
@@ -7506,7 +7506,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser()
@@ -7523,7 +7523,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserResponse GetUser(Action<GetUserRequestDescriptor> configureRequest)
@@ -7541,7 +7541,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(GetUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7556,7 +7556,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, CancellationToken cancellationToken = default)
 	{
@@ -7572,7 +7572,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, Action<GetUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7589,7 +7589,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(CancellationToken cancellationToken = default)
 	{
@@ -7605,7 +7605,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get information about users in the native realm and built-in users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserResponse> GetUserAsync(Action<GetUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7625,7 +7625,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserPrivilegesResponse GetUserPrivileges(GetUserPrivilegesRequest request)
@@ -7644,7 +7644,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(GetUserPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7662,7 +7662,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserPrivilegesResponse GetUserPrivileges(GetUserPrivilegesRequestDescriptor descriptor)
@@ -7681,7 +7681,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserPrivilegesResponse GetUserPrivileges()
@@ -7701,7 +7701,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserPrivilegesResponse GetUserPrivileges(Action<GetUserPrivilegesRequestDescriptor> configureRequest)
@@ -7722,7 +7722,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(GetUserPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7740,7 +7740,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(CancellationToken cancellationToken = default)
 	{
@@ -7759,7 +7759,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// To check the privileges of other users, you must use the run as feature.
 	/// To check whether a user has a specific list of privileges, use the has privileges API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(Action<GetUserPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7781,7 +7781,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserProfileResponse GetUserProfile(GetUserProfileRequest request)
@@ -7802,7 +7802,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7822,7 +7822,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserProfileResponse GetUserProfile(GetUserProfileRequestDescriptor descriptor)
@@ -7843,7 +7843,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserProfileResponse GetUserProfile(IReadOnlyCollection<string> uid)
@@ -7865,7 +7865,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetUserProfileResponse GetUserProfile(IReadOnlyCollection<string> uid, Action<GetUserProfileRequestDescriptor> configureRequest)
@@ -7888,7 +7888,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -7908,7 +7908,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(IReadOnlyCollection<string> uid, CancellationToken cancellationToken = default)
 	{
@@ -7929,7 +7929,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(IReadOnlyCollection<string> uid, Action<GetUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7982,7 +7982,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey(GrantApiKeyRequest request)
@@ -8034,7 +8034,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(GrantApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -8085,7 +8085,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey<TDocument>(GrantApiKeyRequestDescriptor<TDocument> descriptor)
@@ -8137,7 +8137,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey<TDocument>()
@@ -8190,7 +8190,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey<TDocument>(Action<GrantApiKeyRequestDescriptor<TDocument>> configureRequest)
@@ -8244,7 +8244,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey(GrantApiKeyRequestDescriptor descriptor)
@@ -8296,7 +8296,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey()
@@ -8349,7 +8349,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GrantApiKeyResponse GrantApiKey(Action<GrantApiKeyRequestDescriptor> configureRequest)
@@ -8403,7 +8403,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(GrantApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8454,7 +8454,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -8506,7 +8506,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(Action<GrantApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8559,7 +8559,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(GrantApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8610,7 +8610,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(CancellationToken cancellationToken = default)
 	{
@@ -8662,7 +8662,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(Action<GrantApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8681,7 +8681,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges(HasPrivilegesRequest request)
@@ -8699,7 +8699,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(HasPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -8716,7 +8716,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges(HasPrivilegesRequestDescriptor descriptor)
@@ -8734,7 +8734,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user)
@@ -8753,7 +8753,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user, Action<HasPrivilegesRequestDescriptor> configureRequest)
@@ -8773,7 +8773,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges()
@@ -8792,7 +8792,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesResponse HasPrivileges(Action<HasPrivilegesRequestDescriptor> configureRequest)
@@ -8812,7 +8812,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(HasPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8829,7 +8829,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, CancellationToken cancellationToken = default)
 	{
@@ -8847,7 +8847,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, Action<HasPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8866,7 +8866,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(CancellationToken cancellationToken = default)
 	{
@@ -8884,7 +8884,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// All users can use this API, but only to determine their own privileges.
 	/// To check the privileges of other users, you must use the run as feature.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Action<HasPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8905,7 +8905,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(HasPrivilegesUserProfileRequest request)
@@ -8925,7 +8925,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(HasPrivilegesUserProfileRequest request, CancellationToken cancellationToken = default)
 	{
@@ -8944,7 +8944,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(HasPrivilegesUserProfileRequestDescriptor descriptor)
@@ -8964,7 +8964,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile()
@@ -8985,7 +8985,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(Action<HasPrivilegesUserProfileRequestDescriptor> configureRequest)
@@ -9007,7 +9007,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(HasPrivilegesUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9026,7 +9026,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(CancellationToken cancellationToken = default)
 	{
@@ -9046,7 +9046,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(Action<HasPrivilegesUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9088,7 +9088,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateApiKeyResponse InvalidateApiKey(InvalidateApiKeyRequest request)
@@ -9129,7 +9129,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(InvalidateApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -9169,7 +9169,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateApiKeyResponse InvalidateApiKey(InvalidateApiKeyRequestDescriptor descriptor)
@@ -9210,7 +9210,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateApiKeyResponse InvalidateApiKey()
@@ -9252,7 +9252,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateApiKeyResponse InvalidateApiKey(Action<InvalidateApiKeyRequestDescriptor> configureRequest)
@@ -9295,7 +9295,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(InvalidateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9335,7 +9335,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(CancellationToken cancellationToken = default)
 	{
@@ -9376,7 +9376,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(Action<InvalidateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9405,7 +9405,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateTokenResponse InvalidateToken(InvalidateTokenRequest request)
@@ -9433,7 +9433,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(InvalidateTokenRequest request, CancellationToken cancellationToken = default)
 	{
@@ -9460,7 +9460,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateTokenResponse InvalidateToken(InvalidateTokenRequestDescriptor descriptor)
@@ -9488,7 +9488,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateTokenResponse InvalidateToken()
@@ -9517,7 +9517,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InvalidateTokenResponse InvalidateToken(Action<InvalidateTokenRequestDescriptor> configureRequest)
@@ -9547,7 +9547,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(InvalidateTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9574,7 +9574,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(CancellationToken cancellationToken = default)
 	{
@@ -9602,7 +9602,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
 	/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(Action<InvalidateTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9623,7 +9623,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcAuthenticateResponse OidcAuthenticate(OidcAuthenticateRequest request)
@@ -9643,7 +9643,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcAuthenticateResponse> OidcAuthenticateAsync(OidcAuthenticateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -9662,7 +9662,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcAuthenticateResponse OidcAuthenticate(OidcAuthenticateRequestDescriptor descriptor)
@@ -9682,7 +9682,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcAuthenticateResponse OidcAuthenticate()
@@ -9703,7 +9703,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcAuthenticateResponse OidcAuthenticate(Action<OidcAuthenticateRequestDescriptor> configureRequest)
@@ -9725,7 +9725,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcAuthenticateResponse> OidcAuthenticateAsync(OidcAuthenticateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9744,7 +9744,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcAuthenticateResponse> OidcAuthenticateAsync(CancellationToken cancellationToken = default)
 	{
@@ -9764,7 +9764,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcAuthenticateResponse> OidcAuthenticateAsync(Action<OidcAuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9788,7 +9788,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcLogoutResponse OidcLogout(OidcLogoutRequest request)
@@ -9811,7 +9811,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcLogoutResponse> OidcLogoutAsync(OidcLogoutRequest request, CancellationToken cancellationToken = default)
 	{
@@ -9833,7 +9833,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcLogoutResponse OidcLogout(OidcLogoutRequestDescriptor descriptor)
@@ -9856,7 +9856,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcLogoutResponse OidcLogout()
@@ -9880,7 +9880,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcLogoutResponse OidcLogout(Action<OidcLogoutRequestDescriptor> configureRequest)
@@ -9905,7 +9905,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcLogoutResponse> OidcLogoutAsync(OidcLogoutRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9927,7 +9927,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcLogoutResponse> OidcLogoutAsync(CancellationToken cancellationToken = default)
 	{
@@ -9950,7 +9950,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcLogoutResponse> OidcLogoutAsync(Action<OidcLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9974,7 +9974,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcPrepareAuthenticationResponse OidcPrepareAuthentication(OidcPrepareAuthenticationRequest request)
@@ -9997,7 +9997,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(OidcPrepareAuthenticationRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10019,7 +10019,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcPrepareAuthenticationResponse OidcPrepareAuthentication(OidcPrepareAuthenticationRequestDescriptor descriptor)
@@ -10042,7 +10042,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcPrepareAuthenticationResponse OidcPrepareAuthentication()
@@ -10066,7 +10066,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OidcPrepareAuthenticationResponse OidcPrepareAuthentication(Action<OidcPrepareAuthenticationRequestDescriptor> configureRequest)
@@ -10091,7 +10091,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(OidcPrepareAuthenticationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10113,7 +10113,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(CancellationToken cancellationToken = default)
 	{
@@ -10136,7 +10136,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch exposes all the necessary OpenID Connect related functionality with the OpenID Connect APIs.
 	/// These APIs are used internally by Kibana in order to provide OpenID Connect based authentication, but can also be used by other, custom web applications or other clients.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-oidc-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(Action<OidcPrepareAuthenticationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10206,7 +10206,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPrivilegesResponse PutPrivileges(PutPrivilegesRequest request)
@@ -10275,7 +10275,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(PutPrivilegesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10343,7 +10343,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPrivilegesResponse PutPrivileges(PutPrivilegesRequestDescriptor descriptor)
@@ -10412,7 +10412,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPrivilegesResponse PutPrivileges()
@@ -10482,7 +10482,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutPrivilegesResponse PutPrivileges(Action<PutPrivilegesRequestDescriptor> configureRequest)
@@ -10553,7 +10553,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(PutPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10621,7 +10621,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(CancellationToken cancellationToken = default)
 	{
@@ -10690,7 +10690,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: <c>/</c>, <c>*</c>, <c>:</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(Action<PutPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10709,7 +10709,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole(PutRoleRequest request)
@@ -10727,7 +10727,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync(PutRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10744,7 +10744,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole<TDocument>(PutRoleRequestDescriptor<TDocument> descriptor)
@@ -10762,7 +10762,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole<TDocument>(Elastic.Clients.Elasticsearch.Name name)
@@ -10781,7 +10781,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor<TDocument>> configureRequest)
@@ -10801,7 +10801,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole(PutRoleRequestDescriptor descriptor)
@@ -10819,7 +10819,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name)
@@ -10838,7 +10838,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor> configureRequest)
@@ -10858,7 +10858,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(PutRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10875,7 +10875,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -10893,7 +10893,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10912,7 +10912,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync(PutRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -10929,7 +10929,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -10947,7 +10947,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The create or update roles API cannot update roles that are defined in roles files.
 	/// File-based role management is not available in Elastic Serverless.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -10994,7 +10994,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleMappingResponse PutRoleMapping(PutRoleMappingRequest request)
@@ -11040,7 +11040,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(PutRoleMappingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11085,7 +11085,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleMappingResponse PutRoleMapping(PutRoleMappingRequestDescriptor descriptor)
@@ -11131,7 +11131,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name)
@@ -11178,7 +11178,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleMappingRequestDescriptor> configureRequest)
@@ -11226,7 +11226,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(PutRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11271,7 +11271,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -11317,7 +11317,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 	/// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11336,7 +11336,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A password is required for adding a new user but is optional when updating an existing user.
 	/// To change a user's password without updating any other fields, use the change password API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutUserResponse PutUser(PutUserRequest request)
@@ -11354,7 +11354,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A password is required for adding a new user but is optional when updating an existing user.
 	/// To change a user's password without updating any other fields, use the change password API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutUserResponse> PutUserAsync(PutUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11371,7 +11371,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A password is required for adding a new user but is optional when updating an existing user.
 	/// To change a user's password without updating any other fields, use the change password API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutUserResponse PutUser(PutUserRequestDescriptor descriptor)
@@ -11389,7 +11389,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// A password is required for adding a new user but is optional when updating an existing user.
 	/// To change a user's password without updating any other fields, use the change password API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutUserResponse> PutUserAsync(PutUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11410,7 +11410,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys(QueryApiKeysRequest request)
@@ -11432,7 +11432,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(QueryApiKeysRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11453,7 +11453,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>(QueryApiKeysRequestDescriptor<TDocument> descriptor)
@@ -11475,7 +11475,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>()
@@ -11498,7 +11498,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>(Action<QueryApiKeysRequestDescriptor<TDocument>> configureRequest)
@@ -11522,7 +11522,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys(QueryApiKeysRequestDescriptor descriptor)
@@ -11544,7 +11544,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys()
@@ -11567,7 +11567,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryApiKeysResponse QueryApiKeys(Action<QueryApiKeysRequestDescriptor> configureRequest)
@@ -11591,7 +11591,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(QueryApiKeysRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11612,7 +11612,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -11634,7 +11634,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(Action<QueryApiKeysRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11657,7 +11657,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(QueryApiKeysRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11678,7 +11678,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(CancellationToken cancellationToken = default)
 	{
@@ -11700,7 +11700,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
 	/// If you have the <c>read_security</c>, <c>manage_api_key</c>, or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(Action<QueryApiKeysRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11721,7 +11721,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole(QueryRoleRequest request)
@@ -11741,7 +11741,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -11760,7 +11760,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor)
@@ -11780,7 +11780,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole<TDocument>()
@@ -11801,7 +11801,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest)
@@ -11823,7 +11823,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole(QueryRoleRequestDescriptor descriptor)
@@ -11843,7 +11843,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole()
@@ -11864,7 +11864,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryRoleResponse QueryRole(Action<QueryRoleRequestDescriptor> configureRequest)
@@ -11886,7 +11886,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11905,7 +11905,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -11925,7 +11925,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11946,7 +11946,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11965,7 +11965,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync(CancellationToken cancellationToken = default)
 	{
@@ -11985,7 +11985,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// You can optionally filter the results with a query.
 	/// Also, the results can be paginated and sorted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryRoleResponse> QueryRoleAsync(Action<QueryRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12007,7 +12007,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser(QueryUserRequest request)
@@ -12028,7 +12028,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync(QueryUserRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12048,7 +12048,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser<TDocument>(QueryUserRequestDescriptor<TDocument> descriptor)
@@ -12069,7 +12069,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser<TDocument>()
@@ -12091,7 +12091,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser<TDocument>(Action<QueryUserRequestDescriptor<TDocument>> configureRequest)
@@ -12114,7 +12114,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser(QueryUserRequestDescriptor descriptor)
@@ -12135,7 +12135,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser()
@@ -12157,7 +12157,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryUserResponse QueryUser(Action<QueryUserRequestDescriptor> configureRequest)
@@ -12180,7 +12180,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(QueryUserRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12200,7 +12200,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -12221,7 +12221,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(Action<QueryUserRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12243,7 +12243,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync(QueryUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12263,7 +12263,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync(CancellationToken cancellationToken = default)
 	{
@@ -12284,7 +12284,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 	/// This API is only for native users.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryUserResponse> QueryUserAsync(Action<QueryUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12327,7 +12327,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlAuthenticateResponse SamlAuthenticate(SamlAuthenticateRequest request)
@@ -12369,7 +12369,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(SamlAuthenticateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12410,7 +12410,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlAuthenticateResponse SamlAuthenticate(SamlAuthenticateRequestDescriptor descriptor)
@@ -12452,7 +12452,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlAuthenticateResponse SamlAuthenticate()
@@ -12495,7 +12495,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlAuthenticateResponse SamlAuthenticate(Action<SamlAuthenticateRequestDescriptor> configureRequest)
@@ -12539,7 +12539,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(SamlAuthenticateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12580,7 +12580,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(CancellationToken cancellationToken = default)
 	{
@@ -12622,7 +12622,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation, Elasticsearch responds with an Elasticsearch internal access token and refresh token that can be subsequently used for authentication.
 	/// This API endpoint essentially exchanges SAML responses that indicate successful authentication in the IdP for Elasticsearch access and refresh tokens, which can be used for authentication against Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(Action<SamlAuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12650,7 +12650,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(SamlCompleteLogoutRequest request)
@@ -12677,7 +12677,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(SamlCompleteLogoutRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12703,7 +12703,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(SamlCompleteLogoutRequestDescriptor descriptor)
@@ -12730,7 +12730,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlCompleteLogoutResponse SamlCompleteLogout()
@@ -12758,7 +12758,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(Action<SamlCompleteLogoutRequestDescriptor> configureRequest)
@@ -12787,7 +12787,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(SamlCompleteLogoutRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12813,7 +12813,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(CancellationToken cancellationToken = default)
 	{
@@ -12840,7 +12840,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 	/// The caller of this API must prepare the request accordingly so that this API can handle either of them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Action<SamlCompleteLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12867,7 +12867,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlInvalidateResponse SamlInvalidate(SamlInvalidateRequest request)
@@ -12893,7 +12893,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(SamlInvalidateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12918,7 +12918,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlInvalidateResponse SamlInvalidate(SamlInvalidateRequestDescriptor descriptor)
@@ -12944,7 +12944,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlInvalidateResponse SamlInvalidate()
@@ -12971,7 +12971,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlInvalidateResponse SamlInvalidate(Action<SamlInvalidateRequestDescriptor> configureRequest)
@@ -12999,7 +12999,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(SamlInvalidateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13024,7 +13024,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(CancellationToken cancellationToken = default)
 	{
@@ -13050,7 +13050,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 	/// Thus the user can be redirected back to their IdP.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(Action<SamlInvalidateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13075,7 +13075,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlLogoutResponse SamlLogout(SamlLogoutRequest request)
@@ -13099,7 +13099,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(SamlLogoutRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13122,7 +13122,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlLogoutResponse SamlLogout(SamlLogoutRequestDescriptor descriptor)
@@ -13146,7 +13146,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlLogoutResponse SamlLogout()
@@ -13171,7 +13171,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlLogoutResponse SamlLogout(Action<SamlLogoutRequestDescriptor> configureRequest)
@@ -13197,7 +13197,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(SamlLogoutRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13220,7 +13220,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(CancellationToken cancellationToken = default)
 	{
@@ -13244,7 +13244,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 	/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(Action<SamlLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13274,7 +13274,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(SamlPrepareAuthenticationRequest request)
@@ -13303,7 +13303,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(SamlPrepareAuthenticationRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13331,7 +13331,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(SamlPrepareAuthenticationRequestDescriptor descriptor)
@@ -13360,7 +13360,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication()
@@ -13390,7 +13390,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(Action<SamlPrepareAuthenticationRequestDescriptor> configureRequest)
@@ -13421,7 +13421,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(SamlPrepareAuthenticationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13449,7 +13449,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(CancellationToken cancellationToken = default)
 	{
@@ -13478,7 +13478,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// It also returns a random string that uniquely identifies this SAML Authentication request.
 	/// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Action<SamlPrepareAuthenticationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13499,7 +13499,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(SamlServiceProviderMetadataRequest request)
@@ -13519,7 +13519,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(SamlServiceProviderMetadataRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13538,7 +13538,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(SamlServiceProviderMetadataRequestDescriptor descriptor)
@@ -13558,7 +13558,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName)
@@ -13579,7 +13579,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName, Action<SamlServiceProviderMetadataRequestDescriptor> configureRequest)
@@ -13601,7 +13601,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(SamlServiceProviderMetadataRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13620,7 +13620,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, CancellationToken cancellationToken = default)
 	{
@@ -13640,7 +13640,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 	/// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, Action<SamlServiceProviderMetadataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13662,7 +13662,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SuggestUserProfilesResponse SuggestUserProfiles(SuggestUserProfilesRequest request)
@@ -13683,7 +13683,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(SuggestUserProfilesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13703,7 +13703,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SuggestUserProfilesResponse SuggestUserProfiles(SuggestUserProfilesRequestDescriptor descriptor)
@@ -13724,7 +13724,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SuggestUserProfilesResponse SuggestUserProfiles()
@@ -13746,7 +13746,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SuggestUserProfilesResponse SuggestUserProfiles(Action<SuggestUserProfilesRequestDescriptor> configureRequest)
@@ -13769,7 +13769,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(SuggestUserProfilesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13789,7 +13789,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(CancellationToken cancellationToken = default)
 	{
@@ -13810,7 +13810,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// Individual users and external applications should not call this API directly.
 	/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(Action<SuggestUserProfilesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13849,7 +13849,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey(UpdateApiKeyRequest request)
@@ -13887,7 +13887,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(UpdateApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13924,7 +13924,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(UpdateApiKeyRequestDescriptor<TDocument> descriptor)
@@ -13962,7 +13962,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -14001,7 +14001,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor<TDocument>> configureRequest)
@@ -14041,7 +14041,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey(UpdateApiKeyRequestDescriptor descriptor)
@@ -14079,7 +14079,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
@@ -14118,7 +14118,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor> configureRequest)
@@ -14158,7 +14158,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(UpdateApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14195,7 +14195,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14233,7 +14233,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14272,7 +14272,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(UpdateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14309,7 +14309,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14347,7 +14347,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// IMPORTANT: If you don't specify <c>role_descriptors</c> in the request, a call to this API might still change the API key's access scope.
 	/// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14383,7 +14383,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(UpdateCrossClusterApiKeyRequest request)
@@ -14418,7 +14418,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(UpdateCrossClusterApiKeyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14452,7 +14452,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(UpdateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor)
@@ -14487,7 +14487,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -14523,7 +14523,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest)
@@ -14560,7 +14560,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(UpdateCrossClusterApiKeyRequestDescriptor descriptor)
@@ -14595,7 +14595,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id)
@@ -14631,7 +14631,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor> configureRequest)
@@ -14668,7 +14668,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(UpdateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14702,7 +14702,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14737,7 +14737,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14773,7 +14773,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(UpdateCrossClusterApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14807,7 +14807,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14842,7 +14842,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// NOTE: This API cannot update REST API keys, which should be updated by either the update API key or bulk update API keys API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14866,7 +14866,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings(UpdateSettingsRequest request)
@@ -14889,7 +14889,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync(UpdateSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14911,7 +14911,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings<TDocument>(UpdateSettingsRequestDescriptor<TDocument> descriptor)
@@ -14934,7 +14934,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings<TDocument>()
@@ -14958,7 +14958,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings<TDocument>(Action<UpdateSettingsRequestDescriptor<TDocument>> configureRequest)
@@ -14983,7 +14983,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings(UpdateSettingsRequestDescriptor descriptor)
@@ -15006,7 +15006,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings()
@@ -15030,7 +15030,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateSettingsResponse UpdateSettings(Action<UpdateSettingsRequestDescriptor> configureRequest)
@@ -15055,7 +15055,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync<TDocument>(UpdateSettingsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15077,7 +15077,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -15100,7 +15100,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync<TDocument>(Action<UpdateSettingsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15124,7 +15124,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync(UpdateSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15146,7 +15146,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -15169,7 +15169,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 	/// This API does not yet support configuring the settings for indices before they are in use.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateSettingsResponse> UpdateSettingsAsync(Action<UpdateSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15214,7 +15214,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(UpdateUserProfileDataRequest request)
@@ -15258,7 +15258,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(UpdateUserProfileDataRequest request, CancellationToken cancellationToken = default)
 	{
@@ -15301,7 +15301,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(UpdateUserProfileDataRequestDescriptor descriptor)
@@ -15345,7 +15345,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(string uid)
@@ -15390,7 +15390,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(string uid, Action<UpdateUserProfileDataRequestDescriptor> configureRequest)
@@ -15436,7 +15436,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(UpdateUserProfileDataRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15479,7 +15479,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, CancellationToken cancellationToken = default)
 	{
@@ -15523,7 +15523,7 @@ public partial class SecurityNamespacedClient : NamespacedClientProxy
 	/// For both labels and data, content is namespaced by the top-level fields.
 	/// The <c>update_profile_data</c> global privilege grants privileges for updating only the allowed namespaces.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, Action<UpdateUserProfileDataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

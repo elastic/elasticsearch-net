@@ -34,6 +34,13 @@ public sealed partial class PostVotingConfigExclusionsRequestParameters : Reques
 {
 	/// <summary>
 	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// A comma-separated list of the persistent ids of the nodes to exclude
 	/// from the voting configuration. If specified, you may not also specify node_names.
 	/// </para>
@@ -93,6 +100,14 @@ public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<Pos
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.post_voting_config_exclusions";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
@@ -165,6 +180,7 @@ public sealed partial class PostVotingConfigExclusionsRequestDescriptor : Reques
 
 	internal override string OperationName => "cluster.post_voting_config_exclusions";
 
+	public PostVotingConfigExclusionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PostVotingConfigExclusionsRequestDescriptor NodeIds(Elastic.Clients.Elasticsearch.Ids? nodeIds) => Qs("node_ids", nodeIds);
 	public PostVotingConfigExclusionsRequestDescriptor NodeNames(Elastic.Clients.Elasticsearch.Names? nodeNames) => Qs("node_names", nodeNames);
 	public PostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);

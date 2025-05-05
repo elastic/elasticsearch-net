@@ -310,7 +310,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequest request)
@@ -508,7 +508,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequest request, CancellationToken cancellationToken = default)
 	{
@@ -705,7 +705,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(BulkRequestDescriptor<TDocument> descriptor)
@@ -903,7 +903,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -1102,7 +1102,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -1302,7 +1302,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>()
@@ -1501,7 +1501,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest)
@@ -1701,7 +1701,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(BulkRequestDescriptor descriptor)
@@ -1899,7 +1899,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -2098,7 +2098,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest)
@@ -2298,7 +2298,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk()
@@ -2497,7 +2497,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual BulkResponse Bulk(Action<BulkRequestDescriptor> configureRequest)
@@ -2697,7 +2697,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(BulkRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2894,7 +2894,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -3092,7 +3092,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3291,7 +3291,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -3489,7 +3489,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync<TDocument>(Action<BulkRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3688,7 +3688,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(BulkRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3885,7 +3885,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -4083,7 +4083,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4282,7 +4282,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(CancellationToken cancellationToken = default)
 	{
@@ -4480,7 +4480,7 @@ public partial class ElasticsearchClient
 	/// The request will only wait for those three shards to refresh.
 	/// The other two shards that make up the index do not participate in the <c>_bulk</c> request at all.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-bulk.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<BulkResponse> BulkAsync(Action<BulkRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4495,7 +4495,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequest request)
@@ -4509,7 +4509,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4522,7 +4522,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(ClearScrollRequestDescriptor descriptor)
@@ -4536,7 +4536,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll()
@@ -4551,7 +4551,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearScrollResponse ClearScroll(Action<ClearScrollRequestDescriptor> configureRequest)
@@ -4567,7 +4567,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(ClearScrollRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4580,7 +4580,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(CancellationToken cancellationToken = default)
 	{
@@ -4594,7 +4594,7 @@ public partial class ElasticsearchClient
 	/// Clear a scrolling search.
 	/// Clear the search context and results for a scrolling search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearScrollResponse> ClearScrollAsync(Action<ClearScrollRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4612,7 +4612,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequest request)
@@ -4629,7 +4629,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4645,7 +4645,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(ClosePointInTimeRequestDescriptor descriptor)
@@ -4662,7 +4662,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime()
@@ -4680,7 +4680,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClosePointInTimeResponse ClosePointInTime(Action<ClosePointInTimeRequestDescriptor> configureRequest)
@@ -4699,7 +4699,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(ClosePointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -4715,7 +4715,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(CancellationToken cancellationToken = default)
 	{
@@ -4732,7 +4732,7 @@ public partial class ElasticsearchClient
 	/// A point in time is automatically closed when the <c>keep_alive</c> period has elapsed.
 	/// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClosePointInTimeResponse> ClosePointInTimeAsync(Action<ClosePointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -4759,7 +4759,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(CountRequest request)
@@ -4785,7 +4785,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(CountRequest request, CancellationToken cancellationToken = default)
 	{
@@ -4810,7 +4810,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count<TDocument>(CountRequestDescriptor<TDocument> descriptor)
@@ -4836,7 +4836,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -4863,7 +4863,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<CountRequestDescriptor<TDocument>> configureRequest)
@@ -4891,7 +4891,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count<TDocument>()
@@ -4918,7 +4918,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest)
@@ -4946,7 +4946,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(CountRequestDescriptor descriptor)
@@ -4972,7 +4972,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -4999,7 +4999,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(Elastic.Clients.Elasticsearch.Indices? indices, Action<CountRequestDescriptor> configureRequest)
@@ -5027,7 +5027,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count()
@@ -5054,7 +5054,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CountResponse Count(Action<CountRequestDescriptor> configureRequest)
@@ -5082,7 +5082,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync<TDocument>(CountRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5107,7 +5107,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -5133,7 +5133,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<CountRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5160,7 +5160,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -5186,7 +5186,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync<TDocument>(Action<CountRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5213,7 +5213,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(CountRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -5238,7 +5238,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -5264,7 +5264,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<CountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5291,7 +5291,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(CancellationToken cancellationToken = default)
 	{
@@ -5317,7 +5317,7 @@ public partial class ElasticsearchClient
 	/// For each shard ID group, a replica is chosen and the search is run against it.
 	/// This means that replicas increase the scalability of the count.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-count.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CountResponse> CountAsync(Action<CountRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -5398,7 +5398,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -5432,7 +5432,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(CreateRequest<TDocument> request)
@@ -5512,7 +5512,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -5546,7 +5546,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(CreateRequest<TDocument> request, CancellationToken cancellationToken = default)
 	{
@@ -5625,7 +5625,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -5659,7 +5659,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(CreateRequestDescriptor<TDocument> descriptor)
@@ -5739,7 +5739,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -5773,7 +5773,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -5854,7 +5854,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -5888,7 +5888,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -5970,7 +5970,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6004,7 +6004,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document)
@@ -6085,7 +6085,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6119,7 +6119,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -6201,7 +6201,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6235,7 +6235,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -6316,7 +6316,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6350,7 +6350,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -6432,7 +6432,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6466,7 +6466,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -6547,7 +6547,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6581,7 +6581,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual CreateResponse Create<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest)
@@ -6663,7 +6663,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6697,7 +6697,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(CreateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -6776,7 +6776,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6810,7 +6810,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -6890,7 +6890,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -6924,7 +6924,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7005,7 +7005,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7039,7 +7039,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -7119,7 +7119,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7153,7 +7153,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7234,7 +7234,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7268,7 +7268,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -7348,7 +7348,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7382,7 +7382,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7463,7 +7463,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7497,7 +7497,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -7577,7 +7577,7 @@ public partial class ElasticsearchClient
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
@@ -7611,7 +7611,7 @@ public partial class ElasticsearchClient
 	/// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 	/// The <c>_shards</c> section of the API response reveals the number of shard copies on which replication succeeded and failed.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<CreateResponse> CreateAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<CreateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -7675,7 +7675,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete(DeleteRequest request)
@@ -7738,7 +7738,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(DeleteRequest request, CancellationToken cancellationToken = default)
 	{
@@ -7800,7 +7800,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(DeleteRequestDescriptor<TDocument> descriptor)
@@ -7863,7 +7863,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -7927,7 +7927,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -7992,7 +7992,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document)
@@ -8056,7 +8056,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -8121,7 +8121,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -8185,7 +8185,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -8250,7 +8250,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -8314,7 +8314,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -8379,7 +8379,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -8443,7 +8443,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest)
@@ -8508,7 +8508,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete(DeleteRequestDescriptor descriptor)
@@ -8571,7 +8571,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -8635,7 +8635,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteResponse Delete(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest)
@@ -8700,7 +8700,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(DeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -8762,7 +8762,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -8825,7 +8825,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -8889,7 +8889,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -8952,7 +8952,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9016,7 +9016,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -9079,7 +9079,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9143,7 +9143,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -9206,7 +9206,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9270,7 +9270,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -9333,7 +9333,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9397,7 +9397,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(DeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -9459,7 +9459,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -9522,7 +9522,7 @@ public partial class ElasticsearchClient
 	/// The delete operation gets hashed into a specific shard ID.
 	/// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<DeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -9683,7 +9683,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequest request)
@@ -9843,7 +9843,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -10002,7 +10002,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(DeleteByQueryRequestDescriptor<TDocument> descriptor)
@@ -10162,7 +10162,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -10323,7 +10323,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest)
@@ -10485,7 +10485,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>()
@@ -10646,7 +10646,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery<TDocument>(Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest)
@@ -10808,7 +10808,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery(DeleteByQueryRequestDescriptor descriptor)
@@ -10968,7 +10968,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices)
@@ -11129,7 +11129,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryResponse DeleteByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest)
@@ -11291,7 +11291,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(DeleteByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -11450,7 +11450,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -11610,7 +11610,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -11771,7 +11771,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -11931,7 +11931,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync<TDocument>(Action<DeleteByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12092,7 +12092,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(DeleteByQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12251,7 +12251,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -12411,7 +12411,7 @@ public partial class ElasticsearchClient
 	/// Cancellation should happen quickly but might take a few seconds.
 	/// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryResponse> DeleteByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<DeleteByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12429,7 +12429,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequest request)
@@ -12446,7 +12446,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12462,7 +12462,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(DeleteByQueryRethrottleRequestDescriptor descriptor)
@@ -12479,7 +12479,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId taskId)
@@ -12497,7 +12497,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteByQueryRethrottleResponse DeleteByQueryRethrottle(Elastic.Clients.Elasticsearch.TaskId taskId, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest)
@@ -12516,7 +12516,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(DeleteByQueryRethrottleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12532,7 +12532,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId taskId, CancellationToken cancellationToken = default)
 	{
@@ -12549,7 +12549,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular delete by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-delete-by-query.html#docs-delete-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteByQueryRethrottleResponse> DeleteByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.TaskId taskId, Action<DeleteByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12564,7 +12564,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript(DeleteScriptRequest request)
@@ -12578,7 +12578,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12591,7 +12591,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript<TDocument>(DeleteScriptRequestDescriptor<TDocument> descriptor)
@@ -12605,7 +12605,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -12620,7 +12620,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest)
@@ -12636,7 +12636,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript(DeleteScriptRequestDescriptor descriptor)
@@ -12650,7 +12650,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id)
@@ -12665,7 +12665,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteScriptResponse DeleteScript(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest)
@@ -12681,7 +12681,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(DeleteScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12694,7 +12694,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -12708,7 +12708,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12723,7 +12723,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(DeleteScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -12736,7 +12736,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -12750,7 +12750,7 @@ public partial class ElasticsearchClient
 	/// Delete a script or search template.
 	/// Deletes a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteScriptResponse> DeleteScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -12786,7 +12786,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequest request)
@@ -12821,7 +12821,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -12855,7 +12855,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(ExistsRequestDescriptor<TDocument> descriptor)
@@ -12890,7 +12890,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -12926,7 +12926,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -12963,7 +12963,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document)
@@ -12999,7 +12999,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -13036,7 +13036,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -13072,7 +13072,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -13109,7 +13109,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -13145,7 +13145,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -13182,7 +13182,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -13218,7 +13218,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest)
@@ -13255,7 +13255,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(ExistsRequestDescriptor descriptor)
@@ -13290,7 +13290,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -13326,7 +13326,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsResponse Exists(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest)
@@ -13363,7 +13363,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(ExistsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13397,7 +13397,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -13432,7 +13432,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13468,7 +13468,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -13503,7 +13503,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13539,7 +13539,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -13574,7 +13574,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13610,7 +13610,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -13645,7 +13645,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13681,7 +13681,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -13716,7 +13716,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13752,7 +13752,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(ExistsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -13786,7 +13786,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -13821,7 +13821,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsResponse> ExistsAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -13845,7 +13845,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource(ExistsSourceRequest request)
@@ -13868,7 +13868,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -13890,7 +13890,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(ExistsSourceRequestDescriptor<TDocument> descriptor)
@@ -13913,7 +13913,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -13937,7 +13937,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
@@ -13962,7 +13962,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document)
@@ -13986,7 +13986,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
@@ -14011,7 +14011,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -14035,7 +14035,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
@@ -14060,7 +14060,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -14084,7 +14084,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
@@ -14109,7 +14109,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -14133,7 +14133,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest)
@@ -14158,7 +14158,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource(ExistsSourceRequestDescriptor descriptor)
@@ -14181,7 +14181,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -14205,7 +14205,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsSourceResponse ExistsSource(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest)
@@ -14230,7 +14230,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(ExistsSourceRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14252,7 +14252,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14275,7 +14275,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14299,7 +14299,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -14322,7 +14322,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14346,7 +14346,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -14369,7 +14369,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14393,7 +14393,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14416,7 +14416,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14440,7 +14440,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14463,7 +14463,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14487,7 +14487,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(ExistsSourceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14509,7 +14509,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14532,7 +14532,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// A document's source is not available if it is disabled in the mapping.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsSourceResponse> ExistsSourceAsync(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExistsSourceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14548,7 +14548,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(ExplainRequest request)
@@ -14563,7 +14563,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14577,7 +14577,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(ExplainRequestDescriptor<TDocument> descriptor)
@@ -14592,7 +14592,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -14608,7 +14608,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
@@ -14625,7 +14625,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document)
@@ -14641,7 +14641,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
@@ -14658,7 +14658,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -14674,7 +14674,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
@@ -14691,7 +14691,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -14707,7 +14707,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
@@ -14724,7 +14724,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -14740,7 +14740,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExplainResponse<TDocument> Explain<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest)
@@ -14757,7 +14757,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(ExplainRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -14771,7 +14771,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14786,7 +14786,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14802,7 +14802,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -14817,7 +14817,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14833,7 +14833,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -14848,7 +14848,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14864,7 +14864,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14879,7 +14879,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14895,7 +14895,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -14910,7 +14910,7 @@ public partial class ElasticsearchClient
 	/// Get information about why a specific document matches, or doesn't match, a query.
 	/// It computes a score explanation for a query and a specific document.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExplainResponse<TDocument>> ExplainAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<ExplainRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -14932,7 +14932,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(FieldCapsRequest request)
@@ -14953,7 +14953,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(FieldCapsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -14973,7 +14973,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps<TDocument>(FieldCapsRequestDescriptor<TDocument> descriptor)
@@ -14994,7 +14994,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -15016,7 +15016,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FieldCapsRequestDescriptor<TDocument>> configureRequest)
@@ -15039,7 +15039,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps<TDocument>()
@@ -15061,7 +15061,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest)
@@ -15084,7 +15084,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(FieldCapsRequestDescriptor descriptor)
@@ -15105,7 +15105,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -15127,7 +15127,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(Elastic.Clients.Elasticsearch.Indices? indices, Action<FieldCapsRequestDescriptor> configureRequest)
@@ -15150,7 +15150,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps()
@@ -15172,7 +15172,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FieldCapsResponse FieldCaps(Action<FieldCapsRequestDescriptor> configureRequest)
@@ -15195,7 +15195,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(FieldCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15215,7 +15215,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -15236,7 +15236,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<FieldCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15258,7 +15258,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -15279,7 +15279,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync<TDocument>(Action<FieldCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15301,7 +15301,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(FieldCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -15321,7 +15321,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -15342,7 +15342,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<FieldCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15364,7 +15364,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(CancellationToken cancellationToken = default)
 	{
@@ -15385,7 +15385,7 @@ public partial class ElasticsearchClient
 	/// It returns runtime fields like any other field.
 	/// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the <c>keyword</c> family.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-field-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FieldCapsResponse> FieldCapsAsync(Action<FieldCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -15466,7 +15466,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(GetRequest request)
@@ -15546,7 +15546,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequest request, CancellationToken cancellationToken = default)
 	{
@@ -15625,7 +15625,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(GetRequestDescriptor<TDocument> descriptor)
@@ -15705,7 +15705,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -15786,7 +15786,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -15868,7 +15868,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document)
@@ -15949,7 +15949,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -16031,7 +16031,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -16112,7 +16112,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -16194,7 +16194,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -16275,7 +16275,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -16357,7 +16357,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -16438,7 +16438,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetResponse<TDocument> Get<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest)
@@ -16520,7 +16520,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(GetRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -16599,7 +16599,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -16679,7 +16679,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16760,7 +16760,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -16840,7 +16840,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -16921,7 +16921,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -17001,7 +17001,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17082,7 +17082,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -17162,7 +17162,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17243,7 +17243,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -17323,7 +17323,7 @@ public partial class ElasticsearchClient
 	/// The old version of the document doesn't disappear immediately, although you won't be able to access it.
 	/// Elasticsearch cleans up deleted documents in the background as you continue to index more data.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetResponse<TDocument>> GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17338,7 +17338,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript(GetScriptRequest request)
@@ -17352,7 +17352,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(GetScriptRequest request, CancellationToken cancellationToken = default)
 	{
@@ -17365,7 +17365,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript<TDocument>(GetScriptRequestDescriptor<TDocument> descriptor)
@@ -17379,7 +17379,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -17394,7 +17394,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest)
@@ -17410,7 +17410,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript(GetScriptRequestDescriptor descriptor)
@@ -17424,7 +17424,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id)
@@ -17439,7 +17439,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptResponse GetScript(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor> configureRequest)
@@ -17455,7 +17455,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(GetScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17468,7 +17468,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -17482,7 +17482,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17497,7 +17497,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(GetScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17510,7 +17510,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -17524,7 +17524,7 @@ public partial class ElasticsearchClient
 	/// Get a script or search template.
 	/// Retrieves a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptResponse> GetScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17541,7 +17541,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptContextResponse GetScriptContext(GetScriptContextRequest request)
@@ -17557,7 +17557,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(GetScriptContextRequest request, CancellationToken cancellationToken = default)
 	{
@@ -17572,7 +17572,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptContextResponse GetScriptContext(GetScriptContextRequestDescriptor descriptor)
@@ -17588,7 +17588,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptContextResponse GetScriptContext()
@@ -17605,7 +17605,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptContextResponse GetScriptContext(Action<GetScriptContextRequestDescriptor> configureRequest)
@@ -17623,7 +17623,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(GetScriptContextRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17638,7 +17638,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(CancellationToken cancellationToken = default)
 	{
@@ -17654,7 +17654,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of supported script contexts and their methods.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-contexts-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptContextResponse> GetScriptContextAsync(Action<GetScriptContextRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17671,7 +17671,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptLanguagesResponse GetScriptLanguages(GetScriptLanguagesRequest request)
@@ -17687,7 +17687,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(GetScriptLanguagesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -17702,7 +17702,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptLanguagesResponse GetScriptLanguages(GetScriptLanguagesRequestDescriptor descriptor)
@@ -17718,7 +17718,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptLanguagesResponse GetScriptLanguages()
@@ -17735,7 +17735,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetScriptLanguagesResponse GetScriptLanguages(Action<GetScriptLanguagesRequestDescriptor> configureRequest)
@@ -17753,7 +17753,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(GetScriptLanguagesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -17768,7 +17768,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(CancellationToken cancellationToken = default)
 	{
@@ -17784,7 +17784,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Get a list of available script types, languages, and contexts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-script-languages-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetScriptLanguagesResponse> GetScriptLanguagesAsync(Action<GetScriptLanguagesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -17811,7 +17811,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequest request)
@@ -17837,7 +17837,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -17862,7 +17862,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(GetSourceRequestDescriptor<TDocument> descriptor)
@@ -17888,7 +17888,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -17915,7 +17915,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
@@ -17943,7 +17943,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document)
@@ -17970,7 +17970,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
@@ -17998,7 +17998,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -18025,7 +18025,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
@@ -18053,7 +18053,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -18080,7 +18080,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
@@ -18108,7 +18108,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -18135,7 +18135,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetSourceResponse<TDocument> GetSource<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest)
@@ -18163,7 +18163,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(GetSourceRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -18188,7 +18188,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -18214,7 +18214,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18241,7 +18241,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -18267,7 +18267,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18294,7 +18294,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -18320,7 +18320,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18347,7 +18347,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -18373,7 +18373,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18400,7 +18400,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -18426,7 +18426,7 @@ public partial class ElasticsearchClient
 	/// <code>
 	/// GET my-index-000001/_source/1/?_source_includes=*.id&amp;_source_excludes=entities
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetSourceResponse<TDocument>> GetSourceAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetSourceRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18462,7 +18462,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(HealthReportRequest request)
@@ -18497,7 +18497,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(HealthReportRequest request, CancellationToken cancellationToken = default)
 	{
@@ -18531,7 +18531,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(HealthReportRequestDescriptor descriptor)
@@ -18566,7 +18566,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(IReadOnlyCollection<string>? feature)
@@ -18602,7 +18602,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(IReadOnlyCollection<string>? feature, Action<HealthReportRequestDescriptor> configureRequest)
@@ -18639,7 +18639,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport()
@@ -18675,7 +18675,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthReportResponse HealthReport(Action<HealthReportRequestDescriptor> configureRequest)
@@ -18712,7 +18712,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(HealthReportRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -18746,7 +18746,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(IReadOnlyCollection<string>? feature, CancellationToken cancellationToken = default)
 	{
@@ -18781,7 +18781,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(IReadOnlyCollection<string>? feature, Action<HealthReportRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18817,7 +18817,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(CancellationToken cancellationToken = default)
 	{
@@ -18852,7 +18852,7 @@ public partial class ElasticsearchClient
 	/// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 	/// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/health-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthReportResponse> HealthReportAsync(Action<HealthReportRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -18949,13 +18949,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19033,7 +19029,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(IndexRequest<TDocument> request)
@@ -19129,13 +19125,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19213,7 +19205,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(IndexRequest<TDocument> request, CancellationToken cancellationToken = default)
 	{
@@ -19308,13 +19300,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19392,7 +19380,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(IndexRequestDescriptor<TDocument> descriptor)
@@ -19488,13 +19476,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19572,7 +19556,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
@@ -19669,13 +19653,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19753,7 +19733,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest)
@@ -19851,13 +19831,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -19935,7 +19911,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document)
@@ -20032,13 +20008,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -20116,7 +20088,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest)
@@ -20214,13 +20186,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -20298,7 +20266,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -20395,13 +20363,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -20479,7 +20443,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest)
@@ -20577,13 +20541,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -20661,7 +20621,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id)
@@ -20758,13 +20718,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -20842,7 +20798,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual IndexResponse Index<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest)
@@ -20940,13 +20896,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21024,7 +20976,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(IndexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -21119,13 +21071,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21203,7 +21151,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -21299,13 +21247,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21383,7 +21327,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -21480,13 +21424,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21564,7 +21504,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -21660,13 +21600,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21744,7 +21680,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -21841,13 +21777,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -21925,7 +21857,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -22021,13 +21953,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -22105,7 +22033,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22202,13 +22130,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -22286,7 +22210,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -22382,13 +22306,9 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 	/// </para>
-	/// <list type="bullet">
-	/// <item>
 	/// <para>
-	/// ** Distributed**
+	/// <strong>Distributed</strong>
 	/// </para>
-	/// </item>
-	/// </list>
 	/// <para>
 	/// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 	/// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -22466,7 +22386,7 @@ public partial class ElasticsearchClient
 	/// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 	/// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-index_.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<IndexResponse> IndexAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, Action<IndexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22481,7 +22401,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InfoResponse Info(InfoRequest request)
@@ -22495,7 +22415,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(InfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -22508,7 +22428,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InfoResponse Info(InfoRequestDescriptor descriptor)
@@ -22522,7 +22442,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InfoResponse Info()
@@ -22537,7 +22457,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InfoResponse Info(Action<InfoRequestDescriptor> configureRequest)
@@ -22553,7 +22473,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(InfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -22566,7 +22486,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(CancellationToken cancellationToken = default)
 	{
@@ -22580,7 +22500,7 @@ public partial class ElasticsearchClient
 	/// Get cluster info.
 	/// Get basic build, version, and cluster information.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rest-api-root.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InfoResponse> InfoAsync(Action<InfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -22608,7 +22528,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(MultiTermVectorsRequest request)
@@ -22635,7 +22555,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(MultiTermVectorsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -22661,7 +22581,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors<TDocument>(MultiTermVectorsRequestDescriptor<TDocument> descriptor)
@@ -22688,7 +22608,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -22716,7 +22636,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -22745,7 +22665,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors<TDocument>()
@@ -22773,7 +22693,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors<TDocument>(Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -22802,7 +22722,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(MultiTermVectorsRequestDescriptor descriptor)
@@ -22829,7 +22749,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -22857,7 +22777,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiTermVectorsRequestDescriptor> configureRequest)
@@ -22886,7 +22806,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors()
@@ -22914,7 +22834,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiTermVectorsResponse Mtermvectors(Action<MultiTermVectorsRequestDescriptor> configureRequest)
@@ -22943,7 +22863,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(MultiTermVectorsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -22969,7 +22889,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -22996,7 +22916,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23024,7 +22944,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -23051,7 +22971,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync<TDocument>(Action<MultiTermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23079,7 +22999,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(MultiTermVectorsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -23105,7 +23025,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -23132,7 +23052,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiTermVectorsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23160,7 +23080,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(CancellationToken cancellationToken = default)
 	{
@@ -23187,7 +23107,7 @@ public partial class ElasticsearchClient
 	/// You can also use <c>mtermvectors</c> to generate term vectors for artificial documents provided in the body of the request.
 	/// The mapping used is determined by the specified <c>_index</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiTermVectorsResponse> MtermvectorsAsync(Action<MultiTermVectorsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23222,7 +23142,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequest request)
@@ -23256,7 +23176,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequest request, CancellationToken cancellationToken = default)
 	{
@@ -23289,7 +23209,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(MultiGetRequestDescriptor<TDocument> descriptor)
@@ -23323,7 +23243,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index)
@@ -23358,7 +23278,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiGetRequestDescriptor<TDocument>> configureRequest)
@@ -23394,7 +23314,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>()
@@ -23429,7 +23349,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiGetResponse<TDocument> MultiGet<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest)
@@ -23465,7 +23385,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(MultiGetRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -23498,7 +23418,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, CancellationToken cancellationToken = default)
 	{
@@ -23532,7 +23452,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName? index, Action<MultiGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23567,7 +23487,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -23601,7 +23521,7 @@ public partial class ElasticsearchClient
 	/// Any requested fields that are not stored are ignored.
 	/// You can include the <c>stored_fields</c> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-multi-get.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiGetResponse<TDocument>> MultiGetAsync<TDocument>(Action<MultiGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23633,7 +23553,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequest request)
@@ -23664,7 +23584,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(MultiSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -23694,7 +23614,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(MultiSearchRequestDescriptor<TDocument> descriptor)
@@ -23725,7 +23645,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -23757,7 +23677,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<MultiSearchRequestDescriptor<TDocument>> configureRequest)
@@ -23790,7 +23710,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>()
@@ -23822,7 +23742,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchResponse<TDocument> MultiSearch<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest)
@@ -23855,7 +23775,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(MultiSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -23885,7 +23805,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -23916,7 +23836,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<MultiSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -23948,7 +23868,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -23979,7 +23899,7 @@ public partial class ElasticsearchClient
 	/// Each newline character may be preceded by a carriage return <c>\r</c>.
 	/// When sending requests to this endpoint the <c>Content-Type</c> header should be set to <c>application/x-ndjson</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-multi-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchResponse<TDocument>> MultiSearchAsync<TDocument>(Action<MultiSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24007,7 +23927,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequest request)
@@ -24034,7 +23954,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -24060,7 +23980,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(MultiSearchTemplateRequestDescriptor<TDocument> descriptor)
@@ -24087,7 +24007,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -24115,7 +24035,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -24144,7 +24064,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>()
@@ -24172,7 +24092,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MultiSearchTemplateResponse<TDocument> MultiSearchTemplate<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -24201,7 +24121,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(MultiSearchTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -24227,7 +24147,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -24254,7 +24174,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24282,7 +24202,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -24309,7 +24229,7 @@ public partial class ElasticsearchClient
 	/// 
 	/// $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/multi-search-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MultiSearchTemplateResponse<TDocument>> MultiSearchTemplateAsync<TDocument>(Action<MultiSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -24370,7 +24290,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequest request)
@@ -24430,7 +24350,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequest request, CancellationToken cancellationToken = default)
 	{
@@ -24489,7 +24409,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor)
@@ -24549,7 +24469,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -24610,7 +24530,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -24672,7 +24592,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>()
@@ -24733,7 +24653,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest)
@@ -24795,7 +24715,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(OpenPointInTimeRequestDescriptor descriptor)
@@ -24855,7 +24775,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices)
@@ -24916,7 +24836,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual OpenPointInTimeResponse OpenPointInTime(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest)
@@ -24978,7 +24898,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(OpenPointInTimeRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25037,7 +24957,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -25097,7 +25017,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25158,7 +25078,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -25218,7 +25138,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync<TDocument>(Action<OpenPointInTimeRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25279,7 +25199,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(OpenPointInTimeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25338,7 +25258,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -25398,7 +25318,7 @@ public partial class ElasticsearchClient
 	/// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 	/// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/point-in-time-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<OpenPointInTimeResponse> OpenPointInTimeAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<OpenPointInTimeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25413,7 +25333,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PingResponse Ping(PingRequest request)
@@ -25427,7 +25347,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(PingRequest request, CancellationToken cancellationToken = default)
 	{
@@ -25440,7 +25360,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PingResponse Ping(PingRequestDescriptor descriptor)
@@ -25454,7 +25374,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PingResponse Ping()
@@ -25469,7 +25389,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PingResponse Ping(Action<PingRequestDescriptor> configureRequest)
@@ -25485,7 +25405,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(PingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25498,7 +25418,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(CancellationToken cancellationToken = default)
 	{
@@ -25512,7 +25432,7 @@ public partial class ElasticsearchClient
 	/// Ping the cluster.
 	/// Get information about whether the cluster is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PingResponse> PingAsync(Action<PingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25527,7 +25447,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(PutScriptRequest request)
@@ -25541,7 +25461,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(PutScriptRequest request, CancellationToken cancellationToken = default)
 	{
@@ -25554,7 +25474,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript<TDocument>(PutScriptRequestDescriptor<TDocument> descriptor)
@@ -25568,7 +25488,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context)
@@ -25583,7 +25503,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, Action<PutScriptRequestDescriptor<TDocument>> configureRequest)
@@ -25599,7 +25519,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -25614,7 +25534,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest)
@@ -25630,7 +25550,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(PutScriptRequestDescriptor descriptor)
@@ -25644,7 +25564,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context)
@@ -25659,7 +25579,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, Action<PutScriptRequestDescriptor> configureRequest)
@@ -25675,7 +25595,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id)
@@ -25690,7 +25610,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutScriptResponse PutScript(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest)
@@ -25706,7 +25626,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(PutScriptRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25719,7 +25639,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, CancellationToken cancellationToken = default)
 	{
@@ -25733,7 +25653,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25748,7 +25668,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -25762,7 +25682,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25777,7 +25697,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(PutScriptRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -25790,7 +25710,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, CancellationToken cancellationToken = default)
 	{
@@ -25804,7 +25724,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25819,7 +25739,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -25833,7 +25753,7 @@ public partial class ElasticsearchClient
 	/// Create or update a script or search template.
 	/// Creates or updates a stored script or search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/create-stored-script-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutScriptResponse> PutScriptAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutScriptRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -25850,7 +25770,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(RankEvalRequest request)
@@ -25866,7 +25786,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(RankEvalRequest request, CancellationToken cancellationToken = default)
 	{
@@ -25881,7 +25801,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval<TDocument>(RankEvalRequestDescriptor<TDocument> descriptor)
@@ -25897,7 +25817,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -25914,7 +25834,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
@@ -25932,7 +25852,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval<TDocument>()
@@ -25949,7 +25869,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest)
@@ -25967,7 +25887,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(RankEvalRequestDescriptor descriptor)
@@ -25983,7 +25903,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -26000,7 +25920,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(Elastic.Clients.Elasticsearch.Indices? indices, Action<RankEvalRequestDescriptor> configureRequest)
@@ -26018,7 +25938,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval()
@@ -26035,7 +25955,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RankEvalResponse RankEval(Action<RankEvalRequestDescriptor> configureRequest)
@@ -26053,7 +25973,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(RankEvalRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -26068,7 +25988,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -26084,7 +26004,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26101,7 +26021,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -26117,7 +26037,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync<TDocument>(Action<RankEvalRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26134,7 +26054,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(RankEvalRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -26149,7 +26069,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -26165,7 +26085,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26182,7 +26102,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(CancellationToken cancellationToken = default)
 	{
@@ -26198,7 +26118,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Evaluate the quality of ranked search results over a set of typical search queries.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-rank-eval.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RankEvalResponse> RankEvalAsync(Action<RankEvalRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -26313,7 +26233,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -26500,7 +26420,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex(ReindexRequest request)
@@ -26614,7 +26534,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -26801,7 +26721,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(ReindexRequest request, CancellationToken cancellationToken = default)
 	{
@@ -26914,7 +26834,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -27101,7 +27021,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex<TDocument>(ReindexRequestDescriptor<TDocument> descriptor)
@@ -27215,7 +27135,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -27402,7 +27322,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex<TDocument>()
@@ -27517,7 +27437,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -27704,7 +27624,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest)
@@ -27820,7 +27740,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -28007,7 +27927,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex(ReindexRequestDescriptor descriptor)
@@ -28121,7 +28041,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -28308,7 +28228,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex()
@@ -28423,7 +28343,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -28610,7 +28530,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexResponse Reindex(Action<ReindexRequestDescriptor> configureRequest)
@@ -28726,7 +28646,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -28913,7 +28833,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(ReindexRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -29026,7 +28946,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -29213,7 +29133,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -29327,7 +29247,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -29514,7 +29434,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync<TDocument>(Action<ReindexRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -29629,7 +29549,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -29816,7 +29736,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(ReindexRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -29929,7 +29849,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -30116,7 +30036,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(CancellationToken cancellationToken = default)
 	{
@@ -30230,7 +30150,7 @@ public partial class ElasticsearchClient
 	/// done
 	/// </code>
 	/// <para>
-	/// ** Throttling**
+	/// <strong>Throttling</strong>
 	/// </para>
 	/// <para>
 	/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -30417,7 +30337,7 @@ public partial class ElasticsearchClient
 	/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
 	/// It is not possible to configure SSL in the body of the reindex request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexResponse> ReindexAsync(Action<ReindexRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -30443,7 +30363,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequest request)
@@ -30468,7 +30388,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -30492,7 +30412,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexRethrottleResponse ReindexRethrottle(ReindexRethrottleRequestDescriptor descriptor)
@@ -30517,7 +30437,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id taskId)
@@ -30543,7 +30463,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ReindexRethrottleResponse ReindexRethrottle(Elastic.Clients.Elasticsearch.Id taskId, Action<ReindexRethrottleRequestDescriptor> configureRequest)
@@ -30570,7 +30490,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexRethrottleResponse> ReindexRethrottleAsync(ReindexRethrottleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -30594,7 +30514,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
 	{
@@ -30619,7 +30539,7 @@ public partial class ElasticsearchClient
 	/// Rethrottling that slows down the query will take effect after completing the current batch.
 	/// This behavior prevents scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-reindex.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ReindexRethrottleResponse> ReindexRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, Action<ReindexRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -30636,7 +30556,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequest request)
@@ -30652,7 +30572,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(RenderSearchTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -30667,7 +30587,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate<TDocument>(RenderSearchTemplateRequestDescriptor<TDocument> descriptor)
@@ -30683,7 +30603,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate<TDocument>()
@@ -30700,7 +30620,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate<TDocument>(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -30718,7 +30638,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate(RenderSearchTemplateRequestDescriptor descriptor)
@@ -30734,7 +30654,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate()
@@ -30751,7 +30671,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RenderSearchTemplateResponse RenderSearchTemplate(Action<RenderSearchTemplateRequestDescriptor> configureRequest)
@@ -30769,7 +30689,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync<TDocument>(RenderSearchTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -30784,7 +30704,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -30800,7 +30720,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync<TDocument>(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -30817,7 +30737,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(RenderSearchTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -30832,7 +30752,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(CancellationToken cancellationToken = default)
 	{
@@ -30848,7 +30768,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Render a search template as a search request body.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/render-search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RenderSearchTemplateResponse> RenderSearchTemplateAsync(Action<RenderSearchTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -30861,9 +30781,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(ScriptsPainlessExecuteRequest request)
@@ -30875,9 +30805,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(ScriptsPainlessExecuteRequest request, CancellationToken cancellationToken = default)
 	{
@@ -30888,9 +30828,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(ScriptsPainlessExecuteRequestDescriptor<TResult> descriptor)
@@ -30902,9 +30852,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>()
@@ -30917,9 +30877,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScriptsPainlessExecuteResponse<TResult> ScriptsPainlessExecute<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor<TResult>> configureRequest)
@@ -30933,9 +30903,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(ScriptsPainlessExecuteRequestDescriptor<TResult> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -30946,9 +30926,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(CancellationToken cancellationToken = default)
 	{
@@ -30960,9 +30950,19 @@ public partial class ElasticsearchClient
 	/// <summary>
 	/// <para>
 	/// Run a script.
-	/// Runs a script and returns a result.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/master/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Runs a script and returns a result.
+	/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+	/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+	/// </para>
+	/// <para>
+	/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+	/// </para>
+	/// <para>
+	/// Each context requires a script, but additional parameters depend on the context you're using for that script.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/painless/8.18/painless-execute-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScriptsPainlessExecuteResponse<TResult>> ScriptsPainlessExecuteAsync<TResult>(Action<ScriptsPainlessExecuteRequestDescriptor<TResult>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -30993,7 +30993,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScrollResponse<TDocument> Scroll<TDocument>(ScrollRequest request)
@@ -31023,7 +31023,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/scroll-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScrollResponse<TDocument>> ScrollAsync<TDocument>(ScrollRequest request, CancellationToken cancellationToken = default)
 	{
@@ -31060,7 +31060,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(SearchRequest request)
@@ -31098,7 +31098,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -31135,7 +31135,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(SearchRequestDescriptor<TDocument> descriptor)
@@ -31173,7 +31173,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -31212,7 +31212,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchRequestDescriptor<TDocument>> configureRequest)
@@ -31252,7 +31252,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>()
@@ -31291,7 +31291,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchResponse<TDocument> Search<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest)
@@ -31331,7 +31331,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(SearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -31368,7 +31368,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -31406,7 +31406,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -31445,7 +31445,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -31483,7 +31483,7 @@ public partial class ElasticsearchClient
 	/// If different PIT IDs are used, slices can overlap and miss documents.
 	/// This situation can occur because the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchResponse<TDocument>> SearchAsync<TDocument>(Action<SearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -31687,7 +31687,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt(SearchMvtRequest request)
@@ -31890,7 +31890,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(SearchMvtRequest request, CancellationToken cancellationToken = default)
 	{
@@ -32092,7 +32092,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt<TDocument>(SearchMvtRequestDescriptor<TDocument> descriptor)
@@ -32295,7 +32295,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
@@ -32499,7 +32499,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest)
@@ -32704,7 +32704,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
@@ -32908,7 +32908,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt<TDocument>(Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest)
@@ -33113,7 +33113,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt(SearchMvtRequestDescriptor descriptor)
@@ -33316,7 +33316,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
@@ -33520,7 +33520,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchMvtResponse SearchMvt(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor> configureRequest)
@@ -33725,7 +33725,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(SearchMvtRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -33927,7 +33927,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
 	{
@@ -34130,7 +34130,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -34334,7 +34334,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
 	{
@@ -34537,7 +34537,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync<TDocument>(Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -34741,7 +34741,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(SearchMvtRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -34943,7 +34943,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, CancellationToken cancellationToken = default)
 	{
@@ -35146,7 +35146,7 @@ public partial class ElasticsearchClient
 	/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
 	/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-vector-tile-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchMvtResponse> SearchMvtAsync(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y, Action<SearchMvtRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35168,7 +35168,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(SearchShardsRequest request)
@@ -35189,7 +35189,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(SearchShardsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -35209,7 +35209,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards<TDocument>(SearchShardsRequestDescriptor<TDocument> descriptor)
@@ -35230,7 +35230,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -35252,7 +35252,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchShardsRequestDescriptor<TDocument>> configureRequest)
@@ -35275,7 +35275,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards<TDocument>()
@@ -35297,7 +35297,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest)
@@ -35320,7 +35320,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(SearchShardsRequestDescriptor descriptor)
@@ -35341,7 +35341,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -35363,7 +35363,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchShardsRequestDescriptor> configureRequest)
@@ -35386,7 +35386,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards()
@@ -35408,7 +35408,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchShardsResponse SearchShards(Action<SearchShardsRequestDescriptor> configureRequest)
@@ -35431,7 +35431,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(SearchShardsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -35451,7 +35451,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -35472,7 +35472,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchShardsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35494,7 +35494,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -35515,7 +35515,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync<TDocument>(Action<SearchShardsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35537,7 +35537,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(SearchShardsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -35557,7 +35557,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -35578,7 +35578,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchShardsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35600,7 +35600,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(CancellationToken cancellationToken = default)
 	{
@@ -35621,7 +35621,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// If the Elasticsearch security features are enabled, you must have the <c>view_index_metadata</c> or <c>manage</c> index privilege for the target data stream, index, or alias.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-shards.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchShardsResponse> SearchShardsAsync(Action<SearchShardsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35635,7 +35635,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequest request)
@@ -35648,7 +35648,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(SearchTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -35660,7 +35660,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(SearchTemplateRequestDescriptor<TDocument> descriptor)
@@ -35673,7 +35673,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -35687,7 +35687,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -35702,7 +35702,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>()
@@ -35716,7 +35716,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual SearchTemplateResponse<TDocument> SearchTemplate<TDocument>(Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -35731,7 +35731,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(SearchTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -35743,7 +35743,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -35756,7 +35756,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35770,7 +35770,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -35783,7 +35783,7 @@ public partial class ElasticsearchClient
 	/// <para>
 	/// Run a search with a search template.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-template-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<SearchTemplateResponse<TDocument>> SearchTemplateAsync<TDocument>(Action<SearchTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -35805,7 +35805,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum(TermsEnumRequest request)
@@ -35826,7 +35826,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync(TermsEnumRequest request, CancellationToken cancellationToken = default)
 	{
@@ -35846,7 +35846,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum<TDocument>(TermsEnumRequestDescriptor<TDocument> descriptor)
@@ -35867,7 +35867,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -35889,7 +35889,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
@@ -35912,7 +35912,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum<TDocument>()
@@ -35934,7 +35934,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest)
@@ -35957,7 +35957,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum(TermsEnumRequestDescriptor descriptor)
@@ -35978,7 +35978,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index)
@@ -36000,7 +36000,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermsEnumResponse TermsEnum(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest)
@@ -36023,7 +36023,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(TermsEnumRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -36043,7 +36043,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -36064,7 +36064,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -36086,7 +36086,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -36107,7 +36107,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync<TDocument>(Action<TermsEnumRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -36129,7 +36129,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync(TermsEnumRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -36149,7 +36149,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -36170,7 +36170,7 @@ public partial class ElasticsearchClient
 	/// info
 	/// The terms enum API may return terms from deleted documents. Deleted documents are initially only marked as deleted. It is not until their segments are merged that documents are actually deleted. Until that happens, the terms enum API will return terms from these documents.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/search-terms-enum.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermsEnumResponse> TermsEnumAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<TermsEnumRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -36250,7 +36250,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TermVectorsRequest<TDocument> request)
@@ -36329,7 +36329,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TermVectorsRequest<TDocument> request, CancellationToken cancellationToken = default)
 	{
@@ -36407,7 +36407,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TermVectorsRequestDescriptor<TDocument> descriptor)
@@ -36486,7 +36486,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id)
@@ -36566,7 +36566,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -36647,7 +36647,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -36727,7 +36727,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -36808,7 +36808,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document)
@@ -36888,7 +36888,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -36969,7 +36969,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -37049,7 +37049,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -37130,7 +37130,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id)
@@ -37210,7 +37210,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -37291,7 +37291,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -37371,7 +37371,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TermVectorsResponse Termvectors<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest)
@@ -37452,7 +37452,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TermVectorsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -37530,7 +37530,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -37609,7 +37609,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -37689,7 +37689,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -37768,7 +37768,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -37848,7 +37848,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -37927,7 +37927,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -38007,7 +38007,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -38086,7 +38086,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -38166,7 +38166,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -38245,7 +38245,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -38325,7 +38325,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -38404,7 +38404,7 @@ public partial class ElasticsearchClient
 	/// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 	/// Use <c>routing</c> only to hit a particular shard.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-termvectors.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TermVectorsResponse> TermvectorsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<TermVectorsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -38454,7 +38454,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request)
@@ -38503,7 +38503,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequest<TDocument, TPartialDocument> request, CancellationToken cancellationToken = default)
 	{
@@ -38551,7 +38551,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(UpdateRequestDescriptor<TDocument, TPartialDocument> descriptor)
@@ -38600,7 +38600,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id)
@@ -38650,7 +38650,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
@@ -38701,7 +38701,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document)
@@ -38751,7 +38751,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
@@ -38802,7 +38802,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index)
@@ -38852,7 +38852,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
@@ -38903,7 +38903,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id)
@@ -38953,7 +38953,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
@@ -39004,7 +39004,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -39054,7 +39054,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest)
@@ -39105,7 +39105,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(UpdateRequestDescriptor<TDocument, TPartialDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -39153,7 +39153,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -39202,7 +39202,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -39252,7 +39252,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, CancellationToken cancellationToken = default)
 	{
@@ -39301,7 +39301,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -39351,7 +39351,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -39400,7 +39400,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.IndexName index, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -39450,7 +39450,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -39499,7 +39499,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -39549,7 +39549,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -39598,7 +39598,7 @@ public partial class ElasticsearchClient
 	/// The <c>_source</c> field must be enabled to use this API.
 	/// In addition to <c>_source</c>, you can access the following variables through the <c>ctx</c> map: <c>_index</c>, <c>_type</c>, <c>_id</c>, <c>_version</c>, <c>_routing</c>, and <c>_now</c> (the current timestamp).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -39765,7 +39765,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequest request)
@@ -39931,7 +39931,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -40096,7 +40096,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(UpdateByQueryRequestDescriptor<TDocument> descriptor)
@@ -40262,7 +40262,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -40429,7 +40429,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest)
@@ -40597,7 +40597,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>()
@@ -40764,7 +40764,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery<TDocument>(Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest)
@@ -40932,7 +40932,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery(UpdateByQueryRequestDescriptor descriptor)
@@ -41098,7 +41098,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices)
@@ -41265,7 +41265,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryResponse UpdateByQuery(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest)
@@ -41433,7 +41433,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(UpdateByQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -41598,7 +41598,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -41764,7 +41764,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -41931,7 +41931,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -42097,7 +42097,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync<TDocument>(Action<UpdateByQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -42264,7 +42264,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(UpdateByQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -42429,7 +42429,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -42595,7 +42595,7 @@ public partial class ElasticsearchClient
 	/// Setting any other field in <c>ctx</c> is an error.
 	/// This API enables you to only modify the source of matching documents; you cannot move them.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryResponse> UpdateByQueryAsync(Elastic.Clients.Elasticsearch.Indices indices, Action<UpdateByQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -42613,7 +42613,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequest request)
@@ -42630,7 +42630,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(UpdateByQueryRethrottleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -42646,7 +42646,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(UpdateByQueryRethrottleRequestDescriptor descriptor)
@@ -42663,7 +42663,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id taskId)
@@ -42681,7 +42681,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateByQueryRethrottleResponse UpdateByQueryRethrottle(Elastic.Clients.Elasticsearch.Id taskId, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest)
@@ -42700,7 +42700,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(UpdateByQueryRethrottleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -42716,7 +42716,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, CancellationToken cancellationToken = default)
 	{
@@ -42733,7 +42733,7 @@ public partial class ElasticsearchClient
 	/// Change the number of requests per second for a particular update by query operation.
 	/// Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query takes effect after completing the current batch to prevent scroll timeouts.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/docs-update-by-query.html#docs-update-by-query-rethrottle">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateByQueryRethrottleResponse> UpdateByQueryRethrottleAsync(Elastic.Clients.Elasticsearch.Id taskId, Action<UpdateByQueryRethrottleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

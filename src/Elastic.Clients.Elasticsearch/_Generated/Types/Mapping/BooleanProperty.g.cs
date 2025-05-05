@@ -44,6 +44,8 @@ public sealed partial class BooleanProperty : IProperty
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
+	[JsonInclude, JsonPropertyName("ignore_malformed")]
+	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
 
@@ -56,12 +58,24 @@ public sealed partial class BooleanProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
 	public bool? NullValue { get; set; }
+	[JsonInclude, JsonPropertyName("on_script_error")]
+	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("time_series_dimension")]
+	public bool? TimeSeriesDimension { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "boolean";
@@ -84,12 +98,18 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
+	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
+	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public BooleanPropertyDescriptor<TDocument> Boost(double? boost)
 	{
@@ -165,6 +185,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	{
+		IgnoreMalformedValue = ignoreMalformed;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor<TDocument> Index(bool? index = true)
 	{
 		IndexValue = index;
@@ -188,6 +214,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
@@ -208,6 +240,30 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
+		ScriptValue = script;
+		return Self;
+	}
+
+	public BooleanPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public BooleanPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor<TDocument> Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -217,6 +273,17 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 	public BooleanPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
 	{
 		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	public BooleanPropertyDescriptor<TDocument> TimeSeriesDimension(bool? timeSeriesDimension = true)
+	{
+		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -275,6 +342,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
+		if (IgnoreMalformedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_malformed");
+			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+		}
+
 		if (IndexValue.HasValue)
 		{
 			writer.WritePropertyName("index");
@@ -293,10 +366,32 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 			writer.WriteBooleanValue(NullValueValue.Value);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (StoreValue.HasValue)
@@ -309,6 +404,12 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		{
 			writer.WritePropertyName("synthetic_source_keep");
 			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
+		if (TimeSeriesDimensionValue.HasValue)
+		{
+			writer.WritePropertyName("time_series_dimension");
+			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
 		}
 
 		writer.WritePropertyName("type");
@@ -340,6 +441,30 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		return null;
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -349,12 +474,16 @@ public sealed partial class BooleanPropertyDescriptor<TDocument> : SerializableD
 		Fielddata = BuildFielddata(),
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
 		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = BuildScript(),
 		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }
 
@@ -375,12 +504,18 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataDescriptor> FielddataDescriptorAction { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
 	private int? IgnoreAboveValue { get; set; }
+	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private bool? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
+	private bool? TimeSeriesDimensionValue { get; set; }
 
 	public BooleanPropertyDescriptor Boost(double? boost)
 	{
@@ -456,6 +591,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	{
+		IgnoreMalformedValue = ignoreMalformed;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor Index(bool? index = true)
 	{
 		IndexValue = index;
@@ -479,6 +620,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
 	{
 		PropertiesValue = properties;
@@ -499,6 +646,30 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return Self;
 	}
 
+	public BooleanPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
+		ScriptValue = script;
+		return Self;
+	}
+
+	public BooleanPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public BooleanPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
+		return Self;
+	}
+
 	public BooleanPropertyDescriptor Store(bool? store = true)
 	{
 		StoreValue = store;
@@ -508,6 +679,17 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 	public BooleanPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? syntheticSourceKeep)
 	{
 		SyntheticSourceKeepValue = syntheticSourceKeep;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+	/// </para>
+	/// </summary>
+	public BooleanPropertyDescriptor TimeSeriesDimension(bool? timeSeriesDimension = true)
+	{
+		TimeSeriesDimensionValue = timeSeriesDimension;
 		return Self;
 	}
 
@@ -566,6 +748,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 			writer.WriteNumberValue(IgnoreAboveValue.Value);
 		}
 
+		if (IgnoreMalformedValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_malformed");
+			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
+		}
+
 		if (IndexValue.HasValue)
 		{
 			writer.WritePropertyName("index");
@@ -584,10 +772,32 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 			writer.WriteBooleanValue(NullValueValue.Value);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PropertiesValue is not null)
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (StoreValue.HasValue)
@@ -600,6 +810,12 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		{
 			writer.WritePropertyName("synthetic_source_keep");
 			JsonSerializer.Serialize(writer, SyntheticSourceKeepValue, options);
+		}
+
+		if (TimeSeriesDimensionValue.HasValue)
+		{
+			writer.WritePropertyName("time_series_dimension");
+			writer.WriteBooleanValue(TimeSeriesDimensionValue.Value);
 		}
 
 		writer.WritePropertyName("type");
@@ -631,6 +847,30 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		return null;
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	BooleanProperty IBuildableDescriptor<BooleanProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -640,11 +880,15 @@ public sealed partial class BooleanPropertyDescriptor : SerializableDescriptor<B
 		Fielddata = BuildFielddata(),
 		Fields = FieldsValue,
 		IgnoreAbove = IgnoreAboveValue,
+		IgnoreMalformed = IgnoreMalformedValue,
 		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		Properties = PropertiesValue,
+		Script = BuildScript(),
 		Store = StoreValue,
-		SyntheticSourceKeep = SyntheticSourceKeepValue
+		SyntheticSourceKeep = SyntheticSourceKeepValue,
+		TimeSeriesDimension = TimeSeriesDimensionValue
 	};
 }

@@ -34,6 +34,13 @@ public sealed partial class SimulateTemplateRequestParameters : RequestParameter
 {
 	/// <summary>
 	/// <para>
+	/// User defined reason for dry-run creating the new template for simulation purposes
+	/// </para>
+	/// </summary>
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
+
+	/// <summary>
+	/// <para>
 	/// If true, the template passed in the body is only used if no existing templates match the same index patterns. If false, the simulation uses the template with the highest priority. Note that the template is not permanently added or updated in either case; it is only used for the simulation.
 	/// </para>
 	/// </summary>
@@ -77,6 +84,14 @@ public sealed partial class SimulateTemplateRequest : PlainRequest<SimulateTempl
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.simulate_template";
+
+	/// <summary>
+	/// <para>
+	/// User defined reason for dry-run creating the new template for simulation purposes
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Cause { get => Q<string?>("cause"); set => Q("cause", value); }
 
 	/// <summary>
 	/// <para>
@@ -223,6 +238,7 @@ public sealed partial class SimulateTemplateRequestDescriptor<TDocument> : Reque
 
 	internal override string OperationName => "indices.simulate_template";
 
+	public SimulateTemplateRequestDescriptor<TDocument> Cause(string? cause) => Qs("cause", cause);
 	public SimulateTemplateRequestDescriptor<TDocument> Create(bool? create = true) => Qs("create", create);
 	public SimulateTemplateRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateTemplateRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
@@ -521,6 +537,7 @@ public sealed partial class SimulateTemplateRequestDescriptor : RequestDescripto
 
 	internal override string OperationName => "indices.simulate_template";
 
+	public SimulateTemplateRequestDescriptor Cause(string? cause) => Qs("cause", cause);
 	public SimulateTemplateRequestDescriptor Create(bool? create = true) => Qs("create", create);
 	public SimulateTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
 	public SimulateTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);

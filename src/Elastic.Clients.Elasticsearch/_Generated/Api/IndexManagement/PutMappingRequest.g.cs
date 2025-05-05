@@ -223,7 +223,7 @@ public sealed partial class PutMappingRequest : PlainRequest<PutMappingRequestPa
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("dynamic_templates")]
-	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
+	public ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -379,7 +379,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
@@ -434,7 +434,7 @@ public sealed partial class PutMappingRequestDescriptor<TDocument> : RequestDesc
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public PutMappingRequestDescriptor<TDocument> DynamicTemplates(ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -781,7 +781,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor> FieldNamesDescriptorAction { get; set; }
@@ -836,7 +836,7 @@ public sealed partial class PutMappingRequestDescriptor : RequestDescriptor<PutM
 	/// Specify dynamic templates for the mapping.
 	/// </para>
 	/// </summary>
-	public PutMappingRequestDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public PutMappingRequestDescriptor DynamicTemplates(ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;

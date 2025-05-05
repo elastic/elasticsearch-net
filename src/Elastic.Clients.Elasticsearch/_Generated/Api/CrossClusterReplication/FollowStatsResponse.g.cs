@@ -28,6 +28,11 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowStatsResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// An array of follower index statistics.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowIndexStats> Indices { get; init; }
 }

@@ -47,7 +47,7 @@ public sealed partial class DynamicTemplate
 	internal string VariantName { get; }
 
 	public static DynamicTemplate Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => new DynamicTemplate("mapping", property);
-	public static DynamicTemplate Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => new DynamicTemplate("runtime", property);
+	public static DynamicTemplate Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeField runtimeField) => new DynamicTemplate("runtime", runtimeField);
 
 	[JsonInclude, JsonPropertyName("match")]
 	public ICollection<string>? Match { get; set; }
@@ -160,7 +160,7 @@ internal sealed partial class DynamicTemplateConverter : JsonConverter<DynamicTe
 
 			if (propertyName == "runtime")
 			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.IProperty?>(ref reader, options);
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Mapping.RuntimeField?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -233,7 +233,7 @@ internal sealed partial class DynamicTemplateConverter : JsonConverter<DynamicTe
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Mapping.IProperty>(writer, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, options);
 					break;
 				case "runtime":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Mapping.IProperty>(writer, (Elastic.Clients.Elasticsearch.Mapping.IProperty)value.Variant, options);
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(writer, (Elastic.Clients.Elasticsearch.Mapping.RuntimeField)value.Variant, options);
 					break;
 			}
 		}
@@ -324,7 +324,8 @@ public sealed partial class DynamicTemplateDescriptor<TDocument> : SerializableD
 	}
 
 	public DynamicTemplateDescriptor<TDocument> Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "mapping");
-	public DynamicTemplateDescriptor<TDocument> Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "runtime");
+	public DynamicTemplateDescriptor<TDocument> Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeField runtimeField) => Set(runtimeField, "runtime");
+	public DynamicTemplateDescriptor<TDocument> Runtime(Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> configure) => Set(configure, "runtime");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -470,7 +471,8 @@ public sealed partial class DynamicTemplateDescriptor : SerializableDescriptor<D
 	}
 
 	public DynamicTemplateDescriptor Mapping(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "mapping");
-	public DynamicTemplateDescriptor Runtime(Elastic.Clients.Elasticsearch.Mapping.IProperty property) => Set(property, "runtime");
+	public DynamicTemplateDescriptor Runtime(Elastic.Clients.Elasticsearch.Mapping.RuntimeField runtimeField) => Set(runtimeField, "runtime");
+	public DynamicTemplateDescriptor Runtime<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> configure) => Set(configure, "runtime");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

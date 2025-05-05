@@ -150,7 +150,26 @@ public enum DenseVectorIndexOptionsType
 	/// </para>
 	/// </summary>
 	[EnumMember(Value = "flat")]
-	Flat
+	Flat,
+	/// <summary>
+	/// <para>
+	/// This utilizes the HNSW algorithm in addition to automatic binary quantization for scalable approximate kNN
+	/// search with <c>element_type</c> of <c>float</c>.
+	/// </para>
+	/// <para>
+	/// This can reduce the memory footprint by nearly 32x at the cost of some accuracy.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "bbq_hnsw")]
+	BbqHnsw,
+	/// <summary>
+	/// <para>
+	/// This utilizes a brute-force search algorithm in addition to automatically quantizing to binary vectors.
+	/// Only supports <c>element_type</c> of <c>float</c>.
+	/// </para>
+	/// </summary>
+	[EnumMember(Value = "bbq_flat")]
+	BbqFlat
 }
 
 internal sealed class DenseVectorIndexOptionsTypeConverter : JsonConverter<DenseVectorIndexOptionsType>
@@ -172,6 +191,10 @@ internal sealed class DenseVectorIndexOptionsTypeConverter : JsonConverter<Dense
 				return DenseVectorIndexOptionsType.Hnsw;
 			case "flat":
 				return DenseVectorIndexOptionsType.Flat;
+			case "bbq_hnsw":
+				return DenseVectorIndexOptionsType.BbqHnsw;
+			case "bbq_flat":
+				return DenseVectorIndexOptionsType.BbqFlat;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -199,6 +222,12 @@ internal sealed class DenseVectorIndexOptionsTypeConverter : JsonConverter<Dense
 				return;
 			case DenseVectorIndexOptionsType.Flat:
 				writer.WriteStringValue("flat");
+				return;
+			case DenseVectorIndexOptionsType.BbqHnsw:
+				writer.WriteStringValue("bbq_hnsw");
+				return;
+			case DenseVectorIndexOptionsType.BbqFlat:
+				writer.WriteStringValue("bbq_flat");
 				return;
 		}
 
@@ -403,6 +432,8 @@ public enum FieldType
 	RankFeature,
 	[EnumMember(Value = "percolator")]
 	Percolator,
+	[EnumMember(Value = "passthrough")]
+	Passthrough,
 	[EnumMember(Value = "object")]
 	Object,
 	[EnumMember(Value = "none")]
@@ -457,6 +488,8 @@ public enum FieldType
 	DateNanos,
 	[EnumMember(Value = "date")]
 	Date,
+	[EnumMember(Value = "counted_keyword")]
+	CountedKeyword,
 	[EnumMember(Value = "constant_keyword")]
 	ConstantKeyword,
 	[EnumMember(Value = "completion")]
@@ -504,6 +537,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.RankFeature;
 			case "percolator":
 				return FieldType.Percolator;
+			case "passthrough":
+				return FieldType.Passthrough;
 			case "object":
 				return FieldType.Object;
 			case "none":
@@ -558,6 +593,8 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return FieldType.DateNanos;
 			case "date":
 				return FieldType.Date;
+			case "counted_keyword":
+				return FieldType.CountedKeyword;
 			case "constant_keyword":
 				return FieldType.ConstantKeyword;
 			case "completion":
@@ -617,6 +654,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Percolator:
 				writer.WriteStringValue("percolator");
+				return;
+			case FieldType.Passthrough:
+				writer.WriteStringValue("passthrough");
 				return;
 			case FieldType.Object:
 				writer.WriteStringValue("object");
@@ -698,6 +738,9 @@ internal sealed class FieldTypeConverter : JsonConverter<FieldType>
 				return;
 			case FieldType.Date:
 				writer.WriteStringValue("date");
+				return;
+			case FieldType.CountedKeyword:
+				writer.WriteStringValue("counted_keyword");
 				return;
 			case FieldType.ConstantKeyword:
 				writer.WriteStringValue("constant_keyword");
@@ -967,6 +1010,8 @@ public enum RuntimeFieldType
 	Keyword,
 	[EnumMember(Value = "ip")]
 	Ip,
+	[EnumMember(Value = "geo_shape")]
+	GeoShape,
 	[EnumMember(Value = "geo_point")]
 	GeoPoint,
 	[EnumMember(Value = "double")]
@@ -994,6 +1039,8 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 				return RuntimeFieldType.Keyword;
 			case "ip":
 				return RuntimeFieldType.Ip;
+			case "geo_shape":
+				return RuntimeFieldType.GeoShape;
 			case "geo_point":
 				return RuntimeFieldType.GeoPoint;
 			case "double":
@@ -1025,6 +1072,9 @@ internal sealed class RuntimeFieldTypeConverter : JsonConverter<RuntimeFieldType
 				return;
 			case RuntimeFieldType.Ip:
 				writer.WriteStringValue("ip");
+				return;
+			case RuntimeFieldType.GeoShape:
+				writer.WriteStringValue("geo_shape");
 				return;
 			case RuntimeFieldType.GeoPoint:
 				writer.WriteStringValue("geo_point");
@@ -1095,6 +1145,55 @@ internal sealed class SourceFieldModeConverter : JsonConverter<SourceFieldMode>
 				return;
 			case SourceFieldMode.Disabled:
 				writer.WriteStringValue("disabled");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(SubobjectsConverter))]
+public enum Subobjects
+{
+	[EnumMember(Value = "true")]
+	True,
+	[EnumMember(Value = "false")]
+	False,
+	[EnumMember(Value = "auto")]
+	Auto
+}
+
+internal sealed class SubobjectsConverter : JsonConverter<Subobjects>
+{
+	public override Subobjects Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "true":
+				return Subobjects.True;
+			case "false":
+				return Subobjects.False;
+			case "auto":
+				return Subobjects.Auto;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Subobjects value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Subobjects.True:
+				writer.WriteStringValue("true");
+				return;
+			case Subobjects.False:
+				writer.WriteStringValue("false");
+				return;
+			case Subobjects.Auto:
+				writer.WriteStringValue("auto");
 				return;
 		}
 

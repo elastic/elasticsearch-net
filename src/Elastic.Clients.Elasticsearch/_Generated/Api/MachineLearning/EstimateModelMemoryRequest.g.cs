@@ -37,8 +37,10 @@ public sealed partial class EstimateModelMemoryRequestParameters : RequestParame
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
 /// </para>
 /// </summary>
@@ -91,8 +93,10 @@ public sealed partial class EstimateModelMemoryRequest : PlainRequest<EstimateMo
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
 /// </para>
 /// </summary>
@@ -218,8 +222,10 @@ public sealed partial class EstimateModelMemoryRequestDescriptor<TDocument> : Re
 /// <summary>
 /// <para>
 /// Estimate job model memory usage.
-/// Makes an estimation of the memory usage for an anomaly detection job model.
-/// It is based on analysis configuration details for the job and cardinality
+/// </para>
+/// <para>
+/// Make an estimation of the memory usage for an anomaly detection job model.
+/// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
 /// </para>
 /// </summary>

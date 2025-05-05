@@ -47,7 +47,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequest request)
@@ -64,7 +64,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequest request, CancellationToken cancellationToken = default)
 	{
@@ -80,7 +80,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(AllocationExplainRequestDescriptor descriptor)
@@ -97,7 +97,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain()
@@ -115,7 +115,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AllocationExplainResponse AllocationExplain(Action<AllocationExplainRequestDescriptor> configureRequest)
@@ -134,7 +134,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(AllocationExplainRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -150,7 +150,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(CancellationToken cancellationToken = default)
 	{
@@ -167,7 +167,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 	/// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-allocation-explain.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AllocationExplainResponse> AllocationExplainAsync(Action<AllocationExplainRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -182,7 +182,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequest request)
@@ -196,7 +196,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -209,7 +209,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(DeleteComponentTemplateRequestDescriptor descriptor)
@@ -223,7 +223,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
@@ -238,7 +238,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteComponentTemplateResponse DeleteComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest)
@@ -254,7 +254,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(DeleteComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -267,7 +267,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -281,7 +281,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Delete component templates.
 	/// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteComponentTemplateResponse> DeleteComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<DeleteComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -296,7 +296,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequest request)
@@ -310,7 +310,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -323,7 +323,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(DeleteVotingConfigExclusionsRequestDescriptor descriptor)
@@ -337,7 +337,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions()
@@ -352,7 +352,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteVotingConfigExclusionsResponse DeleteVotingConfigExclusions(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest)
@@ -368,7 +368,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(DeleteVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -381,7 +381,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
 	{
@@ -395,7 +395,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Clear cluster voting config exclusions.
 	/// Remove master-eligible nodes from the voting configuration exclusion list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteVotingConfigExclusionsResponse> DeleteVotingConfigExclusionsAsync(Action<DeleteVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -410,7 +410,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequest request)
@@ -424,7 +424,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -437,7 +437,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(ExistsComponentTemplateRequestDescriptor descriptor)
@@ -451,7 +451,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name)
@@ -466,7 +466,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ExistsComponentTemplateResponse ExistsComponentTemplate(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest)
@@ -482,7 +482,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(ExistsComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -495,7 +495,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
 	{
@@ -509,7 +509,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Check component templates.
 	/// Returns information about whether a particular component template exists.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ExistsComponentTemplateResponse> ExistsComponentTemplateAsync(Elastic.Clients.Elasticsearch.Names name, Action<ExistsComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -524,7 +524,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequest request)
@@ -538,7 +538,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -551,7 +551,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(GetComponentTemplateRequestDescriptor descriptor)
@@ -565,7 +565,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name? name)
@@ -580,7 +580,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(Elastic.Clients.Elasticsearch.Name? name, Action<GetComponentTemplateRequestDescriptor> configureRequest)
@@ -596,7 +596,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate()
@@ -611,7 +611,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetComponentTemplateResponse GetComponentTemplate(Action<GetComponentTemplateRequestDescriptor> configureRequest)
@@ -627,7 +627,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(GetComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -640,7 +640,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -654,7 +654,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -669,7 +669,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(CancellationToken cancellationToken = default)
 	{
@@ -683,7 +683,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get component templates.
 	/// Get information about component templates.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetComponentTemplateResponse> GetComponentTemplateAsync(Action<GetComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -698,7 +698,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequest request)
@@ -712,7 +712,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -725,7 +725,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(GetClusterSettingsRequestDescriptor descriptor)
@@ -739,7 +739,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings()
@@ -754,7 +754,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetClusterSettingsResponse GetSettings(Action<GetClusterSettingsRequestDescriptor> configureRequest)
@@ -770,7 +770,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(GetClusterSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -783,7 +783,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(CancellationToken cancellationToken = default)
 	{
@@ -797,7 +797,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster-wide settings.
 	/// By default, it returns only settings that have been explicitly defined.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-get-settings.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetClusterSettingsResponse> GetSettingsAsync(Action<GetClusterSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -822,7 +822,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(HealthRequest request)
@@ -846,7 +846,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequest request, CancellationToken cancellationToken = default)
 	{
@@ -869,7 +869,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>(HealthRequestDescriptor<TDocument> descriptor)
@@ -893,7 +893,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -918,7 +918,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest)
@@ -944,7 +944,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>()
@@ -969,7 +969,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest)
@@ -995,7 +995,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(HealthRequestDescriptor descriptor)
@@ -1019,7 +1019,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -1044,7 +1044,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest)
@@ -1070,7 +1070,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health()
@@ -1095,7 +1095,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual HealthResponse Health(Action<HealthRequestDescriptor> configureRequest)
@@ -1121,7 +1121,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(HealthRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1144,7 +1144,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -1168,7 +1168,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1193,7 +1193,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1217,7 +1217,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync<TDocument>(Action<HealthRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1242,7 +1242,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(HealthRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1265,7 +1265,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices? indices, CancellationToken cancellationToken = default)
 	{
@@ -1289,7 +1289,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(Elastic.Clients.Elasticsearch.Indices? indices, Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1314,7 +1314,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(CancellationToken cancellationToken = default)
 	{
@@ -1338,7 +1338,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 	/// The cluster status is controlled by the worst index status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-health.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<HealthResponse> HealthAsync(Action<HealthRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1353,7 +1353,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterInfoResponse Info(ClusterInfoRequest request)
@@ -1367,7 +1367,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1380,7 +1380,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterInfoResponse Info(ClusterInfoRequestDescriptor descriptor)
@@ -1394,7 +1394,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
@@ -1409,7 +1409,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterInfoResponse Info(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest)
@@ -1425,7 +1425,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(ClusterInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1438,7 +1438,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, CancellationToken cancellationToken = default)
 	{
@@ -1452,7 +1452,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster info.
 	/// Returns basic information about the cluster.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterInfoResponse> InfoAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target, Action<ClusterInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1472,7 +1472,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequest request)
@@ -1491,7 +1491,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1509,7 +1509,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(PendingTasksRequestDescriptor descriptor)
@@ -1528,7 +1528,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks()
@@ -1548,7 +1548,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PendingTasksResponse PendingTasks(Action<PendingTasksRequestDescriptor> configureRequest)
@@ -1569,7 +1569,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(PendingTasksRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1587,7 +1587,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(CancellationToken cancellationToken = default)
 	{
@@ -1606,7 +1606,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// These are distinct from the tasks reported by the task management API which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests.
 	/// However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-pending.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PendingTasksResponse> PendingTasksAsync(Action<PendingTasksRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1640,7 +1640,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequest request)
@@ -1673,7 +1673,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1705,7 +1705,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(PostVotingConfigExclusionsRequestDescriptor descriptor)
@@ -1738,7 +1738,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions()
@@ -1772,7 +1772,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PostVotingConfigExclusionsResponse PostVotingConfigExclusions(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest)
@@ -1807,7 +1807,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(PostVotingConfigExclusionsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1839,7 +1839,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(CancellationToken cancellationToken = default)
 	{
@@ -1872,7 +1872,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 	/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/voting-config-exclusions.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-cluster-post-voting-config-exclusions">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PostVotingConfigExclusionsResponse> PostVotingConfigExclusionsAsync(Action<PostVotingConfigExclusionsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1911,7 +1911,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequest request)
@@ -1949,7 +1949,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1986,7 +1986,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor)
@@ -2024,7 +2024,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name)
@@ -2063,7 +2063,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest)
@@ -2103,7 +2103,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate(PutComponentTemplateRequestDescriptor descriptor)
@@ -2141,7 +2141,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name)
@@ -2180,7 +2180,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutComponentTemplateResponse PutComponentTemplate(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest)
@@ -2220,7 +2220,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(PutComponentTemplateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2257,7 +2257,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -2295,7 +2295,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2334,7 +2334,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(PutComponentTemplateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2371,7 +2371,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -2409,7 +2409,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// You cannot directly apply a component template to a data stream or index.
 	/// To be applied, a component template must be included in an index template's <c>composed_of</c> list.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-component-template.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutComponentTemplateResponse> PutComponentTemplateAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutComponentTemplateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2424,7 +2424,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(ClusterStatsRequest request)
@@ -2438,7 +2438,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2451,7 +2451,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(ClusterStatsRequestDescriptor descriptor)
@@ -2465,7 +2465,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
@@ -2480,7 +2480,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ClusterStatsRequestDescriptor> configureRequest)
@@ -2496,7 +2496,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats()
@@ -2511,7 +2511,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClusterStatsResponse Stats(Action<ClusterStatsRequestDescriptor> configureRequest)
@@ -2527,7 +2527,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(ClusterStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2540,7 +2540,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
 	{
@@ -2554,7 +2554,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2569,7 +2569,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
 	{
@@ -2583,7 +2583,7 @@ public partial class ClusterNamespacedClient : NamespacedClientProxy
 	/// Get cluster statistics.
 	/// Get basic index metrics (shard numbers, store size, memory usage) and information about the current nodes that form the cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/cluster-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClusterStatsResponse> StatsAsync(Action<ClusterStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

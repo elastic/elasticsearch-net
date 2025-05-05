@@ -59,7 +59,7 @@ public sealed partial class UpdateInferenceRequest : PlainRequest<UpdateInferenc
 
 	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceUpdate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -95,7 +95,7 @@ public sealed partial class UpdateInferenceRequestDescriptor : RequestDescriptor
 
 	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceUpdate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 

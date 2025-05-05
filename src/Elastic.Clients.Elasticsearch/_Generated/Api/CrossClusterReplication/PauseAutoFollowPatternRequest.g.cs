@@ -32,11 +32,21 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class PauseAutoFollowPatternRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Pause an auto-follow pattern.
+/// </para>
+/// <para>
 /// Pause a cross-cluster replication auto-follow pattern.
 /// When the API returns, the auto-follow pattern is inactive.
 /// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
@@ -60,11 +70,23 @@ public sealed partial class PauseAutoFollowPatternRequest : PlainRequest<PauseAu
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.pause_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Pause an auto-follow pattern.
+/// </para>
+/// <para>
 /// Pause a cross-cluster replication auto-follow pattern.
 /// When the API returns, the auto-follow pattern is inactive.
 /// New indices that are created on the remote cluster and match the auto-follow patterns are ignored.
@@ -90,6 +112,8 @@ public sealed partial class PauseAutoFollowPatternRequestDescriptor : RequestDes
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.pause_auto_follow_pattern";
+
+	public PauseAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public PauseAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

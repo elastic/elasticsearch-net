@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class ForgetFollowerRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -66,6 +72,13 @@ public sealed partial class ForgetFollowerRequest : PlainRequest<ForgetFollowerR
 
 	internal override string OperationName => "ccr.forget_follower";
 
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonInclude, JsonPropertyName("follower_cluster")]
 	public string? FollowerCluster { get; set; }
 	[JsonInclude, JsonPropertyName("follower_index")]
@@ -113,6 +126,8 @@ public sealed partial class ForgetFollowerRequestDescriptor<TDocument> : Request
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.forget_follower";
+
+	public ForgetFollowerRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public ForgetFollowerRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -213,6 +228,8 @@ public sealed partial class ForgetFollowerRequestDescriptor : RequestDescriptor<
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.forget_follower";
+
+	public ForgetFollowerRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public ForgetFollowerRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{

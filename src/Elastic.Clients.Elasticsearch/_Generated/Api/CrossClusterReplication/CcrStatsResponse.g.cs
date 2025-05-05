@@ -28,8 +28,19 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class CcrStatsResponse : ElasticsearchResponse
 {
+	/// <summary>
+	/// <para>
+	/// Statistics for the auto-follow coordinator.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("auto_follow_stats")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.AutoFollowStats AutoFollowStats { get; init; }
+
+	/// <summary>
+	/// <para>
+	/// Shard-level statistics for follower indices.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("follow_stats")]
 	public Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowStats FollowStats { get; init; }
 }

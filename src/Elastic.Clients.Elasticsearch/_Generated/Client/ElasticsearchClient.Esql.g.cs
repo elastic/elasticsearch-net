@@ -47,7 +47,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery(AsyncQueryRequest request)
@@ -64,7 +64,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(AsyncQueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -80,7 +80,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery<TDocument>(AsyncQueryRequestDescriptor<TDocument> descriptor)
@@ -97,7 +97,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery<TDocument>()
@@ -115,7 +115,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery<TDocument>(Action<AsyncQueryRequestDescriptor<TDocument>> configureRequest)
@@ -134,7 +134,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery(AsyncQueryRequestDescriptor descriptor)
@@ -151,7 +151,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery()
@@ -169,7 +169,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryResponse AsyncQuery(Action<AsyncQueryRequestDescriptor> configureRequest)
@@ -188,7 +188,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(AsyncQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -204,7 +204,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -221,7 +221,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync<TDocument>(Action<AsyncQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -239,7 +239,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(AsyncQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -255,7 +255,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(CancellationToken cancellationToken = default)
 	{
@@ -272,7 +272,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryResponse> AsyncQueryAsync(Action<AsyncQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -303,7 +303,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(AsyncQueryDeleteRequest request)
@@ -333,7 +333,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(AsyncQueryDeleteRequest request, CancellationToken cancellationToken = default)
 	{
@@ -362,7 +362,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(AsyncQueryDeleteRequestDescriptor<TDocument> descriptor)
@@ -392,7 +392,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -423,7 +423,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor<TDocument>> configureRequest)
@@ -455,7 +455,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(AsyncQueryDeleteRequestDescriptor descriptor)
@@ -485,7 +485,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Id id)
@@ -516,7 +516,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryDeleteResponse AsyncQueryDelete(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor> configureRequest)
@@ -548,7 +548,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(AsyncQueryDeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -577,7 +577,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -607,7 +607,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -638,7 +638,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(AsyncQueryDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -667,7 +667,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -697,7 +697,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-delete-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryDeleteResponse> AsyncQueryDeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryDeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -713,7 +713,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet(AsyncQueryGetRequest request)
@@ -728,7 +728,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(AsyncQueryGetRequest request, CancellationToken cancellationToken = default)
 	{
@@ -742,7 +742,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(AsyncQueryGetRequestDescriptor<TDocument> descriptor)
@@ -757,7 +757,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -773,7 +773,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor<TDocument>> configureRequest)
@@ -790,7 +790,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet(AsyncQueryGetRequestDescriptor descriptor)
@@ -805,7 +805,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Id id)
@@ -821,7 +821,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual AsyncQueryGetResponse AsyncQueryGet(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor> configureRequest)
@@ -838,7 +838,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(AsyncQueryGetRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -852,7 +852,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -867,7 +867,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -883,7 +883,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(AsyncQueryGetRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -897,7 +897,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -912,7 +912,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Get the current status and available results or stored results for an ES|QL asynchronous query.
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-get-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<AsyncQueryGetResponse> AsyncQueryGetAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryGetRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -924,10 +924,253 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop(AsyncQueryStopRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequest, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync(AsyncQueryStopRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequest, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop<TDocument>(AsyncQueryStopRequestDescriptor<TDocument> descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryStopRequestDescriptor<TDocument>> configureRequest)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop(AsyncQueryStopRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual AsyncQueryStopResponse AsyncQueryStop(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryStopRequestDescriptor> configureRequest)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync<TDocument>(AsyncQueryStopRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor<TDocument>(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryStopRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor<TDocument>(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor<TDocument>, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync(AsyncQueryStopRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor(id);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Stop async ES|QL query.
+	/// </para>
+	/// <para>
+	/// This API interrupts the query execution and returns the results so far.
+	/// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-async-query-stop-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<AsyncQueryStopResponse> AsyncQueryStopAsync(Elastic.Clients.Elasticsearch.Id id, Action<AsyncQueryStopRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new AsyncQueryStopRequestDescriptor(id);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<AsyncQueryStopRequestDescriptor, AsyncQueryStopResponse, AsyncQueryStopRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query(EsqlQueryRequest request)
@@ -941,7 +1184,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -954,7 +1197,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor)
@@ -968,7 +1211,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query<TDocument>()
@@ -983,7 +1226,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest)
@@ -999,7 +1242,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query(EsqlQueryRequestDescriptor descriptor)
@@ -1013,7 +1256,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query()
@@ -1028,7 +1271,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual EsqlQueryResponse Query(Action<EsqlQueryRequestDescriptor> configureRequest)
@@ -1044,7 +1287,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(EsqlQueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1057,7 +1300,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1071,7 +1314,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync<TDocument>(Action<EsqlQueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1086,7 +1329,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(EsqlQueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1099,7 +1342,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(CancellationToken cancellationToken = default)
 	{
@@ -1113,7 +1356,7 @@ public partial class EsqlNamespacedClient : NamespacedClientProxy
 	/// Run an ES|QL query.
 	/// Get search results for an ES|QL (Elasticsearch query language) query.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/esql-rest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<EsqlQueryResponse> QueryAsync(Action<EsqlQueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

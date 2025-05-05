@@ -30,7 +30,7 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public sealed partial class StreamInferenceRequestParameters : RequestParameters
+public sealed partial class StreamCompletionRequestParameters : RequestParameters
 {
 }
 
@@ -47,23 +47,19 @@ public sealed partial class StreamInferenceRequestParameters : RequestParameters
 /// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
 /// </para>
 /// </summary>
-public sealed partial class StreamInferenceRequest : PlainRequest<StreamInferenceRequestParameters>
+public sealed partial class StreamCompletionRequest : PlainRequest<StreamCompletionRequestParameters>
 {
-	public StreamInferenceRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
+	public StreamCompletionRequest(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
 	}
 
-	public StreamInferenceRequest(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceStreamInference;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceStreamCompletion;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
-	internal override string OperationName => "inference.stream_inference";
+	internal override string OperationName => "inference.stream_completion";
 
 	/// <summary>
 	/// <para>
@@ -77,6 +73,14 @@ public sealed partial class StreamInferenceRequest : PlainRequest<StreamInferenc
 	[JsonInclude, JsonPropertyName("input")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string> Input { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Optional task settings
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("task_settings")]
+	public object? TaskSettings { get; set; }
 }
 
 /// <summary>
@@ -92,39 +96,30 @@ public sealed partial class StreamInferenceRequest : PlainRequest<StreamInferenc
 /// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
 /// </para>
 /// </summary>
-public sealed partial class StreamInferenceRequestDescriptor : RequestDescriptor<StreamInferenceRequestDescriptor, StreamInferenceRequestParameters>
+public sealed partial class StreamCompletionRequestDescriptor : RequestDescriptor<StreamCompletionRequestDescriptor, StreamCompletionRequestParameters>
 {
-	internal StreamInferenceRequestDescriptor(Action<StreamInferenceRequestDescriptor> configure) => configure.Invoke(this);
+	internal StreamCompletionRequestDescriptor(Action<StreamCompletionRequestDescriptor> configure) => configure.Invoke(this);
 
-	public StreamInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Optional("task_type", taskType).Required("inference_id", inferenceId))
+	public StreamCompletionRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
 	{
 	}
 
-	public StreamInferenceRequestDescriptor(Elastic.Clients.Elasticsearch.Id inferenceId) : base(r => r.Required("inference_id", inferenceId))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceStreamInference;
+	internal override ApiUrls ApiUrls => ApiUrlLookup.InferenceStreamCompletion;
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
-	internal override string OperationName => "inference.stream_inference";
+	internal override string OperationName => "inference.stream_completion";
 
-	public StreamInferenceRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public StreamCompletionRequestDescriptor InferenceId(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
 		RouteValues.Required("inference_id", inferenceId);
 		return Self;
 	}
 
-	public StreamInferenceRequestDescriptor TaskType(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType)
-	{
-		RouteValues.Optional("task_type", taskType);
-		return Self;
-	}
-
 	private ICollection<string> InputValue { get; set; }
+	private object? TaskSettingsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -135,9 +130,20 @@ public sealed partial class StreamInferenceRequestDescriptor : RequestDescriptor
 	/// NOTE: Inference endpoints for the completion task type currently only support a single string as input.
 	/// </para>
 	/// </summary>
-	public StreamInferenceRequestDescriptor Input(ICollection<string> input)
+	public StreamCompletionRequestDescriptor Input(ICollection<string> input)
 	{
 		InputValue = input;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional task settings
+	/// </para>
+	/// </summary>
+	public StreamCompletionRequestDescriptor TaskSettings(object? taskSettings)
+	{
+		TaskSettingsValue = taskSettings;
 		return Self;
 	}
 
@@ -146,6 +152,12 @@ public sealed partial class StreamInferenceRequestDescriptor : RequestDescriptor
 		writer.WriteStartObject();
 		writer.WritePropertyName("input");
 		SingleOrManySerializationHelper.Serialize<string>(InputValue, writer, options);
+		if (TaskSettingsValue is not null)
+		{
+			writer.WritePropertyName("task_settings");
+			JsonSerializer.Serialize(writer, TaskSettingsValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }

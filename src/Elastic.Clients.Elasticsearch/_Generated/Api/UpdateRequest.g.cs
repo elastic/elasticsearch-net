@@ -48,6 +48,13 @@ public sealed partial class UpdateRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
 	/// The script language.
 	/// </para>
 	/// </summary>
@@ -186,6 +193,14 @@ public sealed partial class UpdateRequest<TDocument, TPartialDocument> : PlainRe
 	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
 	/// <summary>
 	/// <para>
@@ -403,6 +418,7 @@ public sealed partial class UpdateRequestDescriptor<TDocument, TPartialDocument>
 
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+	public UpdateRequestDescriptor<TDocument, TPartialDocument> IncludeSourceOnError(bool? includeSourceOnError = true) => Qs("include_source_on_error", includeSourceOnError);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Lang(string? lang) => Qs("lang", lang);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
 	public UpdateRequestDescriptor<TDocument, TPartialDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);

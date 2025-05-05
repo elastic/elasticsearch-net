@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public sealed partial class DeletePolicyRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -53,6 +59,14 @@ public sealed partial class DeletePolicyRequest : PlainRequest<DeletePolicyReque
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.delete_policy";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -76,6 +90,8 @@ public sealed partial class DeletePolicyRequestDescriptor : RequestDescriptor<De
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "enrich.delete_policy";
+
+	public DeletePolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public DeletePolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

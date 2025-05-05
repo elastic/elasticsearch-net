@@ -72,16 +72,6 @@ public sealed partial class AsyncQueryRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? KeepOnCompletion { get => Q<bool?>("keep_on_completion"); set => Q("keep_on_completion", value); }
-
-	/// <summary>
-	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
@@ -151,17 +141,6 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for the request to finish.
-	/// By default, the request waits for 1 second for the query results.
-	/// If the query completes during this period, results are returned
-	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
-	/// </para>
-	/// </summary>
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
-
-	/// <summary>
-	/// <para>
 	/// By default, ES|QL returns results as rows. For example, FROM returns each individual document as one row. For the JSON, YAML, CBOR and smile formats, ES|QL can return the results in a columnar fashion where one row represents all the values of a certain column in the results.
 	/// </para>
 	/// </summary>
@@ -214,6 +193,17 @@ public sealed partial class AsyncQueryRequest : PlainRequest<AsyncQueryRequestPa
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
 	public string Query { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
+	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
 /// <summary>
@@ -246,7 +236,6 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	public AsyncQueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
 	public AsyncQueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public AsyncQueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public AsyncQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
@@ -257,6 +246,7 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
 	private bool? ProfileValue { get; set; }
 	private string QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -353,6 +343,20 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	public AsyncQueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	{
+		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -404,6 +408,12 @@ public sealed partial class AsyncQueryRequestDescriptor<TDocument> : RequestDesc
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (WaitForCompletionTimeoutValue is not null)
+		{
+			writer.WritePropertyName("wait_for_completion_timeout");
+			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }
@@ -438,7 +448,6 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	public AsyncQueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Esql.EsqlFormat? format) => Qs("format", format);
 	public AsyncQueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
 	public AsyncQueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true) => Qs("keep_on_completion", keepOnCompletion);
-	public AsyncQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
 
 	private bool? ColumnarValue { get; set; }
 	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
@@ -449,6 +458,7 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 	private ICollection<Elastic.Clients.Elasticsearch.FieldValue>? ParamsValue { get; set; }
 	private bool? ProfileValue { get; set; }
 	private string QueryValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -545,6 +555,20 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// The period to wait for the request to finish.
+	/// By default, the request waits for 1 second for the query results.
+	/// If the query completes during this period, results are returned
+	/// Otherwise, a query ID is returned that can later be used to retrieve the results.
+	/// </para>
+	/// </summary>
+	public AsyncQueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	{
+		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
@@ -596,6 +620,12 @@ public sealed partial class AsyncQueryRequestDescriptor : RequestDescriptor<Asyn
 
 		writer.WritePropertyName("query");
 		writer.WriteStringValue(QueryValue);
+		if (WaitForCompletionTimeoutValue is not null)
+		{
+			writer.WritePropertyName("wait_for_completion_timeout");
+			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
+		}
+
 		writer.WriteEndObject();
 	}
 }

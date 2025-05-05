@@ -45,6 +45,13 @@ public sealed partial class AllocationExplainRequestParameters : RequestParamete
 	/// </para>
 	/// </summary>
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -81,6 +88,14 @@ public sealed partial class AllocationExplainRequest : PlainRequest<AllocationEx
 	/// </summary>
 	[JsonIgnore]
 	public bool? IncludeYesDecisions { get => Q<bool?>("include_yes_decisions"); set => Q("include_yes_decisions", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
@@ -142,6 +157,7 @@ public sealed partial class AllocationExplainRequestDescriptor : RequestDescript
 
 	public AllocationExplainRequestDescriptor IncludeDiskInfo(bool? includeDiskInfo = true) => Qs("include_disk_info", includeDiskInfo);
 	public AllocationExplainRequestDescriptor IncludeYesDecisions(bool? includeYesDecisions = true) => Qs("include_yes_decisions", includeYesDecisions);
+	public AllocationExplainRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	private string? CurrentNodeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexName? IndexValue { get; set; }

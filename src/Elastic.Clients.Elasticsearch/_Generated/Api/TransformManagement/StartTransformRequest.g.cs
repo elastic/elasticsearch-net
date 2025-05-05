@@ -50,7 +50,6 @@ public sealed partial class StartTransformRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Start a transform.
-/// Starts a transform.
 /// </para>
 /// <para>
 /// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -104,7 +103,6 @@ public sealed partial class StartTransformRequest : PlainRequest<StartTransformR
 /// <summary>
 /// <para>
 /// Start a transform.
-/// Starts a transform.
 /// </para>
 /// <para>
 /// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is

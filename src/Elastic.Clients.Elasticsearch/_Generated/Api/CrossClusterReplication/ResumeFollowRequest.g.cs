@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class ResumeFollowRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -57,6 +63,13 @@ public sealed partial class ResumeFollowRequest : PlainRequest<ResumeFollowReque
 
 	internal override string OperationName => "ccr.resume_follow";
 
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
 	public long? MaxOutstandingReadRequests { get; set; }
 	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
@@ -107,6 +120,8 @@ public sealed partial class ResumeFollowRequestDescriptor<TDocument> : RequestDe
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.resume_follow";
+
+	public ResumeFollowRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public ResumeFollowRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{
@@ -276,6 +291,8 @@ public sealed partial class ResumeFollowRequestDescriptor : RequestDescriptor<Re
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ccr.resume_follow";
+
+	public ResumeFollowRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public ResumeFollowRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
 	{

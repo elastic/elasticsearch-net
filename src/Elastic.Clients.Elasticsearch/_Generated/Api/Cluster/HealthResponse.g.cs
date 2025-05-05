@@ -46,6 +46,14 @@ public sealed partial class HealthResponse : ElasticsearchResponse
 
 	/// <summary>
 	/// <para>
+	/// The ratio of active shards in the cluster expressed as a string formatted percentage.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("active_shards_percent")]
+	public string? ActiveShardsPercent { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// The ratio of active shards in the cluster expressed as a percentage.
 	/// </para>
 	/// </summary>

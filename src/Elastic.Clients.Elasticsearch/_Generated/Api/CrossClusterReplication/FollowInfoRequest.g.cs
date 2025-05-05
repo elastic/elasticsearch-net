@@ -32,11 +32,21 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class FollowInfoRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get follower information.
+/// </para>
+/// <para>
 /// Get information about all cross-cluster replication follower indices.
 /// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
@@ -54,11 +64,23 @@ public sealed partial class FollowInfoRequest : PlainRequest<FollowInfoRequestPa
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.follow_info";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get follower information.
+/// </para>
+/// <para>
 /// Get information about all cross-cluster replication follower indices.
 /// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
@@ -83,6 +105,8 @@ public sealed partial class FollowInfoRequestDescriptor<TDocument> : RequestDesc
 
 	internal override string OperationName => "ccr.follow_info";
 
+	public FollowInfoRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
+
 	public FollowInfoRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
 		RouteValues.Required("index", indices);
@@ -97,6 +121,8 @@ public sealed partial class FollowInfoRequestDescriptor<TDocument> : RequestDesc
 /// <summary>
 /// <para>
 /// Get follower information.
+/// </para>
+/// <para>
 /// Get information about all cross-cluster replication follower indices.
 /// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
 /// </para>
@@ -116,6 +142,8 @@ public sealed partial class FollowInfoRequestDescriptor : RequestDescriptor<Foll
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.follow_info";
+
+	public FollowInfoRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public FollowInfoRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{

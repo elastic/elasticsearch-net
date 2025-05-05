@@ -30,6 +30,6 @@ public sealed partial class ExecutePolicyResponse : ElasticsearchResponse
 {
 	[JsonInclude, JsonPropertyName("status")]
 	public Elastic.Clients.Elasticsearch.Enrich.ExecuteEnrichPolicyStatus? Status { get; init; }
-	[JsonInclude, JsonPropertyName("task_id")]
-	public Elastic.Clients.Elasticsearch.TaskId? TaskId { get; init; }
+	[JsonInclude, JsonPropertyName("task")]
+	public Elastic.Clients.Elasticsearch.TaskId? Task { get; init; }
 }

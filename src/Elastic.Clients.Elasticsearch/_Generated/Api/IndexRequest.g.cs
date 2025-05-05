@@ -48,6 +48,13 @@ public sealed partial class IndexRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
+
+	/// <summary>
+	/// <para>
 	/// Set to <c>create</c> to only index the document if it does not already exist (put if absent).
 	/// If a document with the specified <c>_id</c> already exists, the indexing operation will fail.
 	/// The behavior is the same as using the <c>&lt;index>/_create</c> endpoint.
@@ -215,13 +222,9 @@ public sealed partial class IndexRequestParameters : RequestParameters
 /// <para>
 /// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 /// </para>
-/// <list type="bullet">
-/// <item>
 /// <para>
-/// ** Distributed**
+/// <strong>Distributed</strong>
 /// </para>
-/// </item>
-/// </list>
 /// <para>
 /// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 /// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -333,6 +336,14 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 	/// </summary>
 	[JsonIgnore]
 	public long? IfSeqNo { get => Q<long?>("if_seq_no"); set => Q("if_seq_no", value); }
+
+	/// <summary>
+	/// <para>
+	/// True or false if to include the document source in the error message in case of parsing errors.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? IncludeSourceOnError { get => Q<bool?>("include_source_on_error"); set => Q("include_source_on_error", value); }
 
 	/// <summary>
 	/// <para>
@@ -519,13 +530,9 @@ public sealed partial class IndexRequest<TDocument> : PlainRequest<IndexRequestP
 /// <para>
 /// NOTE: Data streams do not support custom routing unless they were created with the <c>allow_custom_routing</c> setting enabled in the template.
 /// </para>
-/// <list type="bullet">
-/// <item>
 /// <para>
-/// ** Distributed**
+/// <strong>Distributed</strong>
 /// </para>
-/// </item>
-/// </list>
 /// <para>
 /// The index operation is directed to the primary shard based on its route and performed on the actual node containing this shard.
 /// After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
@@ -631,6 +638,7 @@ public sealed partial class IndexRequestDescriptor<TDocument> : RequestDescripto
 
 	public IndexRequestDescriptor<TDocument> IfPrimaryTerm(long? ifPrimaryTerm) => Qs("if_primary_term", ifPrimaryTerm);
 	public IndexRequestDescriptor<TDocument> IfSeqNo(long? ifSeqNo) => Qs("if_seq_no", ifSeqNo);
+	public IndexRequestDescriptor<TDocument> IncludeSourceOnError(bool? includeSourceOnError = true) => Qs("include_source_on_error", includeSourceOnError);
 	public IndexRequestDescriptor<TDocument> OpType(Elastic.Clients.Elasticsearch.OpType? opType) => Qs("op_type", opType);
 	public IndexRequestDescriptor<TDocument> Pipeline(string? pipeline) => Qs("pipeline", pipeline);
 	public IndexRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);

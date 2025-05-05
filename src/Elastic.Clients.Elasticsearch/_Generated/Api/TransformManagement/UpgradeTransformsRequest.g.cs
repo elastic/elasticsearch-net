@@ -51,6 +51,8 @@ public sealed partial class UpgradeTransformsRequestParameters : RequestParamete
 /// <summary>
 /// <para>
 /// Upgrade all transforms.
+/// </para>
+/// <para>
 /// Transforms are compatible across minor versions and between supported major versions.
 /// However, over time, the format of transform configuration information may change.
 /// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -99,6 +101,8 @@ public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTrans
 /// <summary>
 /// <para>
 /// Upgrade all transforms.
+/// </para>
+/// <para>
 /// Transforms are compatible across minor versions and between supported major versions.
 /// However, over time, the format of transform configuration information may change.
 /// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.

@@ -357,8 +357,8 @@ public sealed partial class PutDatafeedRequest : PlainRequest<PutDatafeedRequest
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
-	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices")]
@@ -604,8 +604,8 @@ public sealed partial class PutDatafeedRequestDescriptor<TDocument> : RequestDes
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
-	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
@@ -1044,8 +1044,8 @@ public sealed partial class PutDatafeedRequestDescriptor : RequestDescriptor<Put
 
 	/// <summary>
 	/// <para>
-	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the master
-	/// nodes and the machine learning nodes must have the <c>remote_cluster_client</c> role.
+	/// An array of index names. Wildcards are supported. If any of the indices are in remote clusters, the machine
+	/// learning nodes must have the <c>remote_cluster_client</c> role.
 	/// </para>
 	/// </summary>
 	public PutDatafeedRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)

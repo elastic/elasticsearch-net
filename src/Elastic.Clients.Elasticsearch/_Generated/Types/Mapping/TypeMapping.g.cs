@@ -40,7 +40,7 @@ public sealed partial class TypeMapping
 	[JsonInclude, JsonPropertyName("dynamic_date_formats")]
 	public ICollection<string>? DynamicDateFormats { get; set; }
 	[JsonInclude, JsonPropertyName("dynamic_templates")]
-	public ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
+	public ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplates { get; set; }
 	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 	[JsonInclude, JsonPropertyName("_field_names")]
@@ -62,7 +62,7 @@ public sealed partial class TypeMapping
 	[JsonInclude, JsonPropertyName("_source")]
 	public Elastic.Clients.Elasticsearch.Mapping.SourceField? Source { get; set; }
 	[JsonInclude, JsonPropertyName("subobjects")]
-	public bool? Subobjects { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.Subobjects? Subobjects { get; set; }
 }
 
 public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescriptor<TypeMappingDescriptor<TDocument>>
@@ -82,7 +82,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
@@ -103,7 +103,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-	private bool? SubobjectsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.Subobjects? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor<TDocument> AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
 	{
@@ -171,7 +171,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public TypeMappingDescriptor<TDocument> DynamicTemplates(ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -341,7 +341,7 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 		return Self;
 	}
 
-	public TypeMappingDescriptor<TDocument> Subobjects(bool? subobjects = true)
+	public TypeMappingDescriptor<TDocument> Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? subobjects)
 	{
 		SubobjectsValue = subobjects;
 		return Self;
@@ -516,10 +516,10 @@ public sealed partial class TypeMappingDescriptor<TDocument> : SerializableDescr
 			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		if (SubobjectsValue.HasValue)
+		if (SubobjectsValue is not null)
 		{
 			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
+			JsonSerializer.Serialize(writer, SubobjectsValue, options);
 		}
 
 		writer.WriteEndObject();
@@ -543,7 +543,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 	private bool? DateDetectionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
 	private ICollection<string>? DynamicDateFormatsValue { get; set; }
-	private ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
+	private ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? DynamicTemplatesValue { get; set; }
 	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesField? FieldNamesValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor FieldNamesDescriptor { get; set; }
@@ -564,7 +564,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 	private Elastic.Clients.Elasticsearch.Mapping.SourceField? SourceValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor SourceDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor> SourceDescriptorAction { get; set; }
-	private bool? SubobjectsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.Subobjects? SubobjectsValue { get; set; }
 
 	public TypeMappingDescriptor AllField(Elastic.Clients.Elasticsearch.Mapping.AllField? allField)
 	{
@@ -632,7 +632,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor DynamicTemplates(ICollection<IDictionary<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
+	public TypeMappingDescriptor DynamicTemplates(ICollection<KeyValuePair<string, Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate>>? dynamicTemplates)
 	{
 		DynamicTemplatesValue = dynamicTemplates;
 		return Self;
@@ -802,7 +802,7 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 		return Self;
 	}
 
-	public TypeMappingDescriptor Subobjects(bool? subobjects = true)
+	public TypeMappingDescriptor Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? subobjects)
 	{
 		SubobjectsValue = subobjects;
 		return Self;
@@ -977,10 +977,10 @@ public sealed partial class TypeMappingDescriptor : SerializableDescriptor<TypeM
 			JsonSerializer.Serialize(writer, SourceValue, options);
 		}
 
-		if (SubobjectsValue.HasValue)
+		if (SubobjectsValue is not null)
 		{
 			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
+			JsonSerializer.Serialize(writer, SubobjectsValue, options);
 		}
 
 		writer.WriteEndObject();

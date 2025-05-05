@@ -212,7 +212,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -645,7 +645,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
@@ -1169,7 +1169,7 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 /// done
 /// </code>
 /// <para>
-/// ** Throttling**
+/// <strong>Throttling</strong>
 /// </para>
 /// <para>
 /// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.

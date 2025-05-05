@@ -51,6 +51,8 @@ public sealed partial class PutGeoipDatabaseRequestParameters : RequestParameter
 /// <summary>
 /// <para>
 /// Create or update a GeoIP database configuration.
+/// </para>
+/// <para>
 /// Refer to the create or update IP geolocation database configuration API.
 /// </para>
 /// </summary>
@@ -106,6 +108,8 @@ public sealed partial class PutGeoipDatabaseRequest : PlainRequest<PutGeoipDatab
 /// <summary>
 /// <para>
 /// Create or update a GeoIP database configuration.
+/// </para>
+/// <para>
 /// Refer to the create or update IP geolocation database configuration API.
 /// </para>
 /// </summary>
@@ -208,6 +212,8 @@ public sealed partial class PutGeoipDatabaseRequestDescriptor<TDocument> : Reque
 /// <summary>
 /// <para>
 /// Create or update a GeoIP database configuration.
+/// </para>
+/// <para>
 /// Refer to the create or update IP geolocation database configuration API.
 /// </para>
 /// </summary>

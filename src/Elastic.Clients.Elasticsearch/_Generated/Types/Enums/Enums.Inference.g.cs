@@ -28,6 +28,1399 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
+[JsonConverter(typeof(AlibabaCloudServiceTypeConverter))]
+public enum AlibabaCloudServiceType
+{
+	[EnumMember(Value = "alibabacloud-ai-search")]
+	AlibabacloudAiSearch
+}
+
+internal sealed class AlibabaCloudServiceTypeConverter : JsonConverter<AlibabaCloudServiceType>
+{
+	public override AlibabaCloudServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "alibabacloud-ai-search":
+				return AlibabaCloudServiceType.AlibabacloudAiSearch;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AlibabaCloudServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AlibabaCloudServiceType.AlibabacloudAiSearch:
+				writer.WriteStringValue("alibabacloud-ai-search");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AlibabaCloudTaskTypeConverter))]
+public enum AlibabaCloudTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "space_embedding")]
+	SpaceEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class AlibabaCloudTaskTypeConverter : JsonConverter<AlibabaCloudTaskType>
+{
+	public override AlibabaCloudTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return AlibabaCloudTaskType.TextEmbedding;
+			case "space_embedding":
+				return AlibabaCloudTaskType.SpaceEmbedding;
+			case "rerank":
+				return AlibabaCloudTaskType.Rerank;
+			case "completion":
+				return AlibabaCloudTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AlibabaCloudTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AlibabaCloudTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case AlibabaCloudTaskType.SpaceEmbedding:
+				writer.WriteStringValue("space_embedding");
+				return;
+			case AlibabaCloudTaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+			case AlibabaCloudTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AmazonBedrockServiceTypeConverter))]
+public enum AmazonBedrockServiceType
+{
+	[EnumMember(Value = "amazonbedrock")]
+	Amazonbedrock
+}
+
+internal sealed class AmazonBedrockServiceTypeConverter : JsonConverter<AmazonBedrockServiceType>
+{
+	public override AmazonBedrockServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "amazonbedrock":
+				return AmazonBedrockServiceType.Amazonbedrock;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AmazonBedrockServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AmazonBedrockServiceType.Amazonbedrock:
+				writer.WriteStringValue("amazonbedrock");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AmazonBedrockTaskTypeConverter))]
+public enum AmazonBedrockTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class AmazonBedrockTaskTypeConverter : JsonConverter<AmazonBedrockTaskType>
+{
+	public override AmazonBedrockTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return AmazonBedrockTaskType.TextEmbedding;
+			case "completion":
+				return AmazonBedrockTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AmazonBedrockTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AmazonBedrockTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case AmazonBedrockTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AnthropicServiceTypeConverter))]
+public enum AnthropicServiceType
+{
+	[EnumMember(Value = "anthropic")]
+	Anthropic
+}
+
+internal sealed class AnthropicServiceTypeConverter : JsonConverter<AnthropicServiceType>
+{
+	public override AnthropicServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "anthropic":
+				return AnthropicServiceType.Anthropic;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AnthropicServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AnthropicServiceType.Anthropic:
+				writer.WriteStringValue("anthropic");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AnthropicTaskTypeConverter))]
+public enum AnthropicTaskType
+{
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class AnthropicTaskTypeConverter : JsonConverter<AnthropicTaskType>
+{
+	public override AnthropicTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "completion":
+				return AnthropicTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AnthropicTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AnthropicTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AzureAiStudioServiceTypeConverter))]
+public enum AzureAiStudioServiceType
+{
+	[EnumMember(Value = "azureaistudio")]
+	Azureaistudio
+}
+
+internal sealed class AzureAiStudioServiceTypeConverter : JsonConverter<AzureAiStudioServiceType>
+{
+	public override AzureAiStudioServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "azureaistudio":
+				return AzureAiStudioServiceType.Azureaistudio;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AzureAiStudioServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AzureAiStudioServiceType.Azureaistudio:
+				writer.WriteStringValue("azureaistudio");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AzureAiStudioTaskTypeConverter))]
+public enum AzureAiStudioTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class AzureAiStudioTaskTypeConverter : JsonConverter<AzureAiStudioTaskType>
+{
+	public override AzureAiStudioTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return AzureAiStudioTaskType.TextEmbedding;
+			case "completion":
+				return AzureAiStudioTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AzureAiStudioTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AzureAiStudioTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case AzureAiStudioTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AzureOpenAIServiceTypeConverter))]
+public enum AzureOpenAIServiceType
+{
+	[EnumMember(Value = "azureopenai")]
+	Azureopenai
+}
+
+internal sealed class AzureOpenAIServiceTypeConverter : JsonConverter<AzureOpenAIServiceType>
+{
+	public override AzureOpenAIServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "azureopenai":
+				return AzureOpenAIServiceType.Azureopenai;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AzureOpenAIServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AzureOpenAIServiceType.Azureopenai:
+				writer.WriteStringValue("azureopenai");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(AzureOpenAITaskTypeConverter))]
+public enum AzureOpenAITaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class AzureOpenAITaskTypeConverter : JsonConverter<AzureOpenAITaskType>
+{
+	public override AzureOpenAITaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return AzureOpenAITaskType.TextEmbedding;
+			case "completion":
+				return AzureOpenAITaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, AzureOpenAITaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case AzureOpenAITaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case AzureOpenAITaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereEmbeddingTypeConverter))]
+public enum CohereEmbeddingType
+{
+	[EnumMember(Value = "int8")]
+	Int8,
+	[EnumMember(Value = "float")]
+	Float,
+	[EnumMember(Value = "byte")]
+	Byte
+}
+
+internal sealed class CohereEmbeddingTypeConverter : JsonConverter<CohereEmbeddingType>
+{
+	public override CohereEmbeddingType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "int8":
+				return CohereEmbeddingType.Int8;
+			case "float":
+				return CohereEmbeddingType.Float;
+			case "byte":
+				return CohereEmbeddingType.Byte;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereEmbeddingType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereEmbeddingType.Int8:
+				writer.WriteStringValue("int8");
+				return;
+			case CohereEmbeddingType.Float:
+				writer.WriteStringValue("float");
+				return;
+			case CohereEmbeddingType.Byte:
+				writer.WriteStringValue("byte");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereInputTypeConverter))]
+public enum CohereInputType
+{
+	[EnumMember(Value = "search")]
+	Search,
+	[EnumMember(Value = "ingest")]
+	Ingest,
+	[EnumMember(Value = "clustering")]
+	Clustering,
+	[EnumMember(Value = "classification")]
+	Classification
+}
+
+internal sealed class CohereInputTypeConverter : JsonConverter<CohereInputType>
+{
+	public override CohereInputType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "search":
+				return CohereInputType.Search;
+			case "ingest":
+				return CohereInputType.Ingest;
+			case "clustering":
+				return CohereInputType.Clustering;
+			case "classification":
+				return CohereInputType.Classification;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereInputType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereInputType.Search:
+				writer.WriteStringValue("search");
+				return;
+			case CohereInputType.Ingest:
+				writer.WriteStringValue("ingest");
+				return;
+			case CohereInputType.Clustering:
+				writer.WriteStringValue("clustering");
+				return;
+			case CohereInputType.Classification:
+				writer.WriteStringValue("classification");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereServiceTypeConverter))]
+public enum CohereServiceType
+{
+	[EnumMember(Value = "cohere")]
+	Cohere
+}
+
+internal sealed class CohereServiceTypeConverter : JsonConverter<CohereServiceType>
+{
+	public override CohereServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "cohere":
+				return CohereServiceType.Cohere;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereServiceType.Cohere:
+				writer.WriteStringValue("cohere");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereSimilarityTypeConverter))]
+public enum CohereSimilarityType
+{
+	[EnumMember(Value = "l2_norm")]
+	L2Norm,
+	[EnumMember(Value = "dot_product")]
+	DotProduct,
+	[EnumMember(Value = "cosine")]
+	Cosine
+}
+
+internal sealed class CohereSimilarityTypeConverter : JsonConverter<CohereSimilarityType>
+{
+	public override CohereSimilarityType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "l2_norm":
+				return CohereSimilarityType.L2Norm;
+			case "dot_product":
+				return CohereSimilarityType.DotProduct;
+			case "cosine":
+				return CohereSimilarityType.Cosine;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereSimilarityType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereSimilarityType.L2Norm:
+				writer.WriteStringValue("l2_norm");
+				return;
+			case CohereSimilarityType.DotProduct:
+				writer.WriteStringValue("dot_product");
+				return;
+			case CohereSimilarityType.Cosine:
+				writer.WriteStringValue("cosine");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereTaskTypeConverter))]
+public enum CohereTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class CohereTaskTypeConverter : JsonConverter<CohereTaskType>
+{
+	public override CohereTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return CohereTaskType.TextEmbedding;
+			case "rerank":
+				return CohereTaskType.Rerank;
+			case "completion":
+				return CohereTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case CohereTaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+			case CohereTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(CohereTruncateTypeConverter))]
+public enum CohereTruncateType
+{
+	[EnumMember(Value = "START")]
+	Start,
+	[EnumMember(Value = "NONE")]
+	None,
+	[EnumMember(Value = "END")]
+	End
+}
+
+internal sealed class CohereTruncateTypeConverter : JsonConverter<CohereTruncateType>
+{
+	public override CohereTruncateType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "START":
+				return CohereTruncateType.Start;
+			case "NONE":
+				return CohereTruncateType.None;
+			case "END":
+				return CohereTruncateType.End;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CohereTruncateType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CohereTruncateType.Start:
+				writer.WriteStringValue("START");
+				return;
+			case CohereTruncateType.None:
+				writer.WriteStringValue("NONE");
+				return;
+			case CohereTruncateType.End:
+				writer.WriteStringValue("END");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(ElasticsearchServiceTypeConverter))]
+public enum ElasticsearchServiceType
+{
+	[EnumMember(Value = "elasticsearch")]
+	Elasticsearch
+}
+
+internal sealed class ElasticsearchServiceTypeConverter : JsonConverter<ElasticsearchServiceType>
+{
+	public override ElasticsearchServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "elasticsearch":
+				return ElasticsearchServiceType.Elasticsearch;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ElasticsearchServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ElasticsearchServiceType.Elasticsearch:
+				writer.WriteStringValue("elasticsearch");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(ElasticsearchTaskTypeConverter))]
+public enum ElasticsearchTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank
+}
+
+internal sealed class ElasticsearchTaskTypeConverter : JsonConverter<ElasticsearchTaskType>
+{
+	public override ElasticsearchTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return ElasticsearchTaskType.TextEmbedding;
+			case "sparse_embedding":
+				return ElasticsearchTaskType.SparseEmbedding;
+			case "rerank":
+				return ElasticsearchTaskType.Rerank;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ElasticsearchTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ElasticsearchTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case ElasticsearchTaskType.SparseEmbedding:
+				writer.WriteStringValue("sparse_embedding");
+				return;
+			case ElasticsearchTaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(ElserServiceTypeConverter))]
+public enum ElserServiceType
+{
+	[EnumMember(Value = "elser")]
+	Elser
+}
+
+internal sealed class ElserServiceTypeConverter : JsonConverter<ElserServiceType>
+{
+	public override ElserServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "elser":
+				return ElserServiceType.Elser;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ElserServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ElserServiceType.Elser:
+				writer.WriteStringValue("elser");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(ElserTaskTypeConverter))]
+public enum ElserTaskType
+{
+	[EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding
+}
+
+internal sealed class ElserTaskTypeConverter : JsonConverter<ElserTaskType>
+{
+	public override ElserTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "sparse_embedding":
+				return ElserTaskType.SparseEmbedding;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ElserTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ElserTaskType.SparseEmbedding:
+				writer.WriteStringValue("sparse_embedding");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GoogleAiServiceTypeConverter))]
+public enum GoogleAiServiceType
+{
+	[EnumMember(Value = "googleaistudio")]
+	Googleaistudio
+}
+
+internal sealed class GoogleAiServiceTypeConverter : JsonConverter<GoogleAiServiceType>
+{
+	public override GoogleAiServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "googleaistudio":
+				return GoogleAiServiceType.Googleaistudio;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GoogleAiServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GoogleAiServiceType.Googleaistudio:
+				writer.WriteStringValue("googleaistudio");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GoogleAiStudioTaskTypeConverter))]
+public enum GoogleAiStudioTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "completion")]
+	Completion
+}
+
+internal sealed class GoogleAiStudioTaskTypeConverter : JsonConverter<GoogleAiStudioTaskType>
+{
+	public override GoogleAiStudioTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return GoogleAiStudioTaskType.TextEmbedding;
+			case "completion":
+				return GoogleAiStudioTaskType.Completion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GoogleAiStudioTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GoogleAiStudioTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case GoogleAiStudioTaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GoogleVertexAIServiceTypeConverter))]
+public enum GoogleVertexAIServiceType
+{
+	[EnumMember(Value = "googlevertexai")]
+	Googlevertexai
+}
+
+internal sealed class GoogleVertexAIServiceTypeConverter : JsonConverter<GoogleVertexAIServiceType>
+{
+	public override GoogleVertexAIServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "googlevertexai":
+				return GoogleVertexAIServiceType.Googlevertexai;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GoogleVertexAIServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GoogleVertexAIServiceType.Googlevertexai:
+				writer.WriteStringValue("googlevertexai");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(GoogleVertexAITaskTypeConverter))]
+public enum GoogleVertexAITaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank
+}
+
+internal sealed class GoogleVertexAITaskTypeConverter : JsonConverter<GoogleVertexAITaskType>
+{
+	public override GoogleVertexAITaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return GoogleVertexAITaskType.TextEmbedding;
+			case "rerank":
+				return GoogleVertexAITaskType.Rerank;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, GoogleVertexAITaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case GoogleVertexAITaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case GoogleVertexAITaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(HuggingFaceServiceTypeConverter))]
+public enum HuggingFaceServiceType
+{
+	[EnumMember(Value = "hugging_face")]
+	HuggingFace
+}
+
+internal sealed class HuggingFaceServiceTypeConverter : JsonConverter<HuggingFaceServiceType>
+{
+	public override HuggingFaceServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "hugging_face":
+				return HuggingFaceServiceType.HuggingFace;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, HuggingFaceServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case HuggingFaceServiceType.HuggingFace:
+				writer.WriteStringValue("hugging_face");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(HuggingFaceTaskTypeConverter))]
+public enum HuggingFaceTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+internal sealed class HuggingFaceTaskTypeConverter : JsonConverter<HuggingFaceTaskType>
+{
+	public override HuggingFaceTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return HuggingFaceTaskType.TextEmbedding;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, HuggingFaceTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case HuggingFaceTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(JinaAIServiceTypeConverter))]
+public enum JinaAIServiceType
+{
+	[EnumMember(Value = "jinaai")]
+	Jinaai
+}
+
+internal sealed class JinaAIServiceTypeConverter : JsonConverter<JinaAIServiceType>
+{
+	public override JinaAIServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "jinaai":
+				return JinaAIServiceType.Jinaai;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, JinaAIServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case JinaAIServiceType.Jinaai:
+				writer.WriteStringValue("jinaai");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(JinaAISimilarityTypeConverter))]
+public enum JinaAISimilarityType
+{
+	[EnumMember(Value = "l2_norm")]
+	L2Norm,
+	[EnumMember(Value = "dot_product")]
+	DotProduct,
+	[EnumMember(Value = "cosine")]
+	Cosine
+}
+
+internal sealed class JinaAISimilarityTypeConverter : JsonConverter<JinaAISimilarityType>
+{
+	public override JinaAISimilarityType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "l2_norm":
+				return JinaAISimilarityType.L2Norm;
+			case "dot_product":
+				return JinaAISimilarityType.DotProduct;
+			case "cosine":
+				return JinaAISimilarityType.Cosine;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, JinaAISimilarityType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case JinaAISimilarityType.L2Norm:
+				writer.WriteStringValue("l2_norm");
+				return;
+			case JinaAISimilarityType.DotProduct:
+				writer.WriteStringValue("dot_product");
+				return;
+			case JinaAISimilarityType.Cosine:
+				writer.WriteStringValue("cosine");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(JinaAITaskTypeConverter))]
+public enum JinaAITaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank
+}
+
+internal sealed class JinaAITaskTypeConverter : JsonConverter<JinaAITaskType>
+{
+	public override JinaAITaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return JinaAITaskType.TextEmbedding;
+			case "rerank":
+				return JinaAITaskType.Rerank;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, JinaAITaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case JinaAITaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case JinaAITaskType.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(JinaAITextEmbeddingTaskConverter))]
+public enum JinaAITextEmbeddingTask
+{
+	[EnumMember(Value = "search")]
+	Search,
+	[EnumMember(Value = "ingest")]
+	Ingest,
+	[EnumMember(Value = "clustering")]
+	Clustering,
+	[EnumMember(Value = "classification")]
+	Classification
+}
+
+internal sealed class JinaAITextEmbeddingTaskConverter : JsonConverter<JinaAITextEmbeddingTask>
+{
+	public override JinaAITextEmbeddingTask Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "search":
+				return JinaAITextEmbeddingTask.Search;
+			case "ingest":
+				return JinaAITextEmbeddingTask.Ingest;
+			case "clustering":
+				return JinaAITextEmbeddingTask.Clustering;
+			case "classification":
+				return JinaAITextEmbeddingTask.Classification;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, JinaAITextEmbeddingTask value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case JinaAITextEmbeddingTask.Search:
+				writer.WriteStringValue("search");
+				return;
+			case JinaAITextEmbeddingTask.Ingest:
+				writer.WriteStringValue("ingest");
+				return;
+			case JinaAITextEmbeddingTask.Clustering:
+				writer.WriteStringValue("clustering");
+				return;
+			case JinaAITextEmbeddingTask.Classification:
+				writer.WriteStringValue("classification");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(MistralServiceTypeConverter))]
+public enum MistralServiceType
+{
+	[EnumMember(Value = "mistral")]
+	Mistral
+}
+
+internal sealed class MistralServiceTypeConverter : JsonConverter<MistralServiceType>
+{
+	public override MistralServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "mistral":
+				return MistralServiceType.Mistral;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, MistralServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case MistralServiceType.Mistral:
+				writer.WriteStringValue("mistral");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(MistralTaskTypeConverter))]
+public enum MistralTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+internal sealed class MistralTaskTypeConverter : JsonConverter<MistralTaskType>
+{
+	public override MistralTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return MistralTaskType.TextEmbedding;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, MistralTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case MistralTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(OpenAIServiceTypeConverter))]
+public enum OpenAIServiceType
+{
+	[EnumMember(Value = "openai")]
+	Openai
+}
+
+internal sealed class OpenAIServiceTypeConverter : JsonConverter<OpenAIServiceType>
+{
+	public override OpenAIServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "openai":
+				return OpenAIServiceType.Openai;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, OpenAIServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case OpenAIServiceType.Openai:
+				writer.WriteStringValue("openai");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(OpenAITaskTypeConverter))]
+public enum OpenAITaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "completion")]
+	Completion,
+	[EnumMember(Value = "chat_completion")]
+	ChatCompletion
+}
+
+internal sealed class OpenAITaskTypeConverter : JsonConverter<OpenAITaskType>
+{
+	public override OpenAITaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return OpenAITaskType.TextEmbedding;
+			case "completion":
+				return OpenAITaskType.Completion;
+			case "chat_completion":
+				return OpenAITaskType.ChatCompletion;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, OpenAITaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case OpenAITaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case OpenAITaskType.Completion:
+				writer.WriteStringValue("completion");
+				return;
+			case OpenAITaskType.ChatCompletion:
+				writer.WriteStringValue("chat_completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(TaskTypeConverter))]
 public enum TaskType
 {
@@ -38,7 +1431,9 @@ public enum TaskType
 	[EnumMember(Value = "rerank")]
 	Rerank,
 	[EnumMember(Value = "completion")]
-	Completion
+	Completion,
+	[EnumMember(Value = "chat_completion")]
+	ChatCompletion
 }
 
 internal sealed class TaskTypeConverter : JsonConverter<TaskType>
@@ -56,6 +1451,8 @@ internal sealed class TaskTypeConverter : JsonConverter<TaskType>
 				return TaskType.Rerank;
 			case "completion":
 				return TaskType.Completion;
+			case "chat_completion":
+				return TaskType.ChatCompletion;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -77,6 +1474,79 @@ internal sealed class TaskTypeConverter : JsonConverter<TaskType>
 				return;
 			case TaskType.Completion:
 				writer.WriteStringValue("completion");
+				return;
+			case TaskType.ChatCompletion:
+				writer.WriteStringValue("chat_completion");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(WatsonxServiceTypeConverter))]
+public enum WatsonxServiceType
+{
+	[EnumMember(Value = "watsonxai")]
+	Watsonxai
+}
+
+internal sealed class WatsonxServiceTypeConverter : JsonConverter<WatsonxServiceType>
+{
+	public override WatsonxServiceType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "watsonxai":
+				return WatsonxServiceType.Watsonxai;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, WatsonxServiceType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case WatsonxServiceType.Watsonxai:
+				writer.WriteStringValue("watsonxai");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(WatsonxTaskTypeConverter))]
+public enum WatsonxTaskType
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+internal sealed class WatsonxTaskTypeConverter : JsonConverter<WatsonxTaskType>
+{
+	public override WatsonxTaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return WatsonxTaskType.TextEmbedding;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, WatsonxTaskType value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case WatsonxTaskType.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
 				return;
 		}
 

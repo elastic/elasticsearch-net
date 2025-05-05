@@ -67,7 +67,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequest request)
@@ -104,7 +104,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -140,7 +140,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor)
@@ -177,7 +177,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -215,7 +215,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest)
@@ -254,7 +254,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(DeleteJobRequestDescriptor descriptor)
@@ -291,7 +291,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id)
@@ -329,7 +329,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteJobResponse DeleteJob(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest)
@@ -368,7 +368,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(DeleteJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -404,7 +404,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -441,7 +441,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -479,7 +479,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(DeleteJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -515,7 +515,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -552,7 +552,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	///   }
 	/// }
 	/// </code>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-delete-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteJobResponse> DeleteJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -572,7 +572,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequest request)
@@ -591,7 +591,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -609,7 +609,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor)
@@ -628,7 +628,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -648,7 +648,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
@@ -669,7 +669,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>()
@@ -689,7 +689,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest)
@@ -710,7 +710,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(GetJobsRequestDescriptor descriptor)
@@ -729,7 +729,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id)
@@ -749,7 +749,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest)
@@ -770,7 +770,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs()
@@ -790,7 +790,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetJobsResponse GetJobs(Action<GetJobsRequestDescriptor> configureRequest)
@@ -811,7 +811,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(GetJobsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -829,7 +829,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -848,7 +848,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -868,7 +868,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -887,7 +887,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync<TDocument>(Action<GetJobsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -907,7 +907,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(GetJobsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -925,7 +925,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -944,7 +944,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -964,7 +964,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(CancellationToken cancellationToken = default)
 	{
@@ -983,7 +983,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 	/// For details about a historical rollup job, the rollup capabilities API may be more useful.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetJobsResponse> GetJobsAsync(Action<GetJobsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1015,7 +1015,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequest request)
@@ -1046,7 +1046,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1076,7 +1076,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor)
@@ -1107,7 +1107,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
@@ -1139,7 +1139,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
@@ -1172,7 +1172,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>()
@@ -1204,7 +1204,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest)
@@ -1237,7 +1237,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(GetRollupCapsRequestDescriptor descriptor)
@@ -1268,7 +1268,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id)
@@ -1300,7 +1300,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest)
@@ -1333,7 +1333,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps()
@@ -1365,7 +1365,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupCapsResponse GetRollupCaps(Action<GetRollupCapsRequestDescriptor> configureRequest)
@@ -1398,7 +1398,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(GetRollupCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1428,7 +1428,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -1459,7 +1459,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1491,7 +1491,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1522,7 +1522,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync<TDocument>(Action<GetRollupCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1554,7 +1554,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(GetRollupCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1584,7 +1584,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
 	{
@@ -1615,7 +1615,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1647,7 +1647,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(CancellationToken cancellationToken = default)
 	{
@@ -1678,7 +1678,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupCapsResponse> GetRollupCapsAsync(Action<GetRollupCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1706,7 +1706,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequest request)
@@ -1733,7 +1733,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1759,7 +1759,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor)
@@ -1786,7 +1786,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index)
@@ -1814,7 +1814,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest)
@@ -1843,7 +1843,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(GetRollupIndexCapsRequestDescriptor descriptor)
@@ -1870,7 +1870,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index)
@@ -1898,7 +1898,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetRollupIndexCapsResponse GetRollupIndexCaps(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest)
@@ -1927,7 +1927,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(GetRollupIndexCapsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1953,7 +1953,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
 	{
@@ -1980,7 +1980,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2008,7 +2008,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(GetRollupIndexCapsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2034,7 +2034,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, CancellationToken cancellationToken = default)
 	{
@@ -2061,7 +2061,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-get-rollup-index-caps.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetRollupIndexCapsResponse> GetRollupIndexCapsAsync(Elastic.Clients.Elasticsearch.Ids index, Action<GetRollupIndexCapsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2087,7 +2087,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequest request)
@@ -2112,7 +2112,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2136,7 +2136,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(PutJobRequestDescriptor<TDocument> descriptor)
@@ -2161,7 +2161,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -2187,7 +2187,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest)
@@ -2214,7 +2214,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(PutJobRequestDescriptor descriptor)
@@ -2239,7 +2239,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id)
@@ -2265,7 +2265,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutJobResponse PutJob(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest)
@@ -2292,7 +2292,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(PutJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2316,7 +2316,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2341,7 +2341,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2367,7 +2367,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(PutJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2391,7 +2391,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -2416,7 +2416,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Jobs are created in a <c>STOPPED</c> state. You can start them with the start rollup jobs API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-put-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJobResponse> PutJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2479,7 +2479,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequest request)
@@ -2541,7 +2541,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2602,7 +2602,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor)
@@ -2664,7 +2664,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices)
@@ -2727,7 +2727,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
@@ -2791,7 +2791,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>()
@@ -2854,7 +2854,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RollupSearchResponse<TDocument> RollupSearch<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest)
@@ -2918,7 +2918,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(RollupSearchRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2979,7 +2979,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
 	{
@@ -3041,7 +3041,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Indices indices, Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3104,7 +3104,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -3166,7 +3166,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
 	/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RollupSearchResponse<TDocument>> RollupSearchAsync<TDocument>(Action<RollupSearchRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3182,7 +3182,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequest request)
@@ -3197,7 +3197,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3211,7 +3211,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(StartJobRequestDescriptor<TDocument> descriptor)
@@ -3226,7 +3226,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -3242,7 +3242,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest)
@@ -3259,7 +3259,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(StartJobRequestDescriptor descriptor)
@@ -3274,7 +3274,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id)
@@ -3290,7 +3290,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartJobResponse StartJob(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest)
@@ -3307,7 +3307,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(StartJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3321,7 +3321,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -3336,7 +3336,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3352,7 +3352,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(StartJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3366,7 +3366,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -3381,7 +3381,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// If you try to start a job that does not exist, an exception occurs.
 	/// If you try to start a job that is already started, nothing happens.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-start-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartJobResponse> StartJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StartJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3408,7 +3408,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequest request)
@@ -3434,7 +3434,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequest request, CancellationToken cancellationToken = default)
 	{
@@ -3459,7 +3459,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(StopJobRequestDescriptor<TDocument> descriptor)
@@ -3485,7 +3485,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -3512,7 +3512,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest)
@@ -3540,7 +3540,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(StopJobRequestDescriptor descriptor)
@@ -3566,7 +3566,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id)
@@ -3593,7 +3593,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopJobResponse StopJob(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest)
@@ -3621,7 +3621,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(StopJobRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3646,7 +3646,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -3672,7 +3672,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -3699,7 +3699,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(StopJobRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -3724,7 +3724,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -3750,7 +3750,7 @@ public partial class RollupNamespacedClient : NamespacedClientProxy
 	/// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 	/// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/rollup-stop-job.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopJobResponse> StopJobAsync(Elastic.Clients.Elasticsearch.Id id, Action<StopJobRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

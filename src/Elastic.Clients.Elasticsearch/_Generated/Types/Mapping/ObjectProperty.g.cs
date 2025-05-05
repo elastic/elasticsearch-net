@@ -53,7 +53,7 @@ public sealed partial class ObjectProperty : IProperty
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("subobjects")]
-	public bool? Subobjects { get; set; }
+	public Elastic.Clients.Elasticsearch.Mapping.Subobjects? Subobjects { get; set; }
 	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
 	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 
@@ -77,7 +77,7 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? SubobjectsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.Subobjects? SubobjectsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public ObjectPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -161,7 +161,7 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 		return Self;
 	}
 
-	public ObjectPropertyDescriptor<TDocument> Subobjects(bool? subobjects = true)
+	public ObjectPropertyDescriptor<TDocument> Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? subobjects)
 	{
 		SubobjectsValue = subobjects;
 		return Self;
@@ -224,10 +224,10 @@ public sealed partial class ObjectPropertyDescriptor<TDocument> : SerializableDe
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (SubobjectsValue.HasValue)
+		if (SubobjectsValue is not null)
 		{
 			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
+			JsonSerializer.Serialize(writer, SubobjectsValue, options);
 		}
 
 		if (SyntheticSourceKeepValue is not null)
@@ -272,7 +272,7 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
 	private bool? StoreValue { get; set; }
-	private bool? SubobjectsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.Subobjects? SubobjectsValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
 	public ObjectPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
@@ -356,7 +356,7 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 		return Self;
 	}
 
-	public ObjectPropertyDescriptor Subobjects(bool? subobjects = true)
+	public ObjectPropertyDescriptor Subobjects(Elastic.Clients.Elasticsearch.Mapping.Subobjects? subobjects)
 	{
 		SubobjectsValue = subobjects;
 		return Self;
@@ -419,10 +419,10 @@ public sealed partial class ObjectPropertyDescriptor : SerializableDescriptor<Ob
 			writer.WriteBooleanValue(StoreValue.Value);
 		}
 
-		if (SubobjectsValue.HasValue)
+		if (SubobjectsValue is not null)
 		{
 			writer.WritePropertyName("subobjects");
-			writer.WriteBooleanValue(SubobjectsValue.Value);
+			JsonSerializer.Serialize(writer, SubobjectsValue, options);
 		}
 
 		if (SyntheticSourceKeepValue is not null)

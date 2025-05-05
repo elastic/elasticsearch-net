@@ -91,7 +91,7 @@ public sealed partial class DeleteByQueryRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// Skips the specified number of documents.
 	/// </para>
 	/// </summary>
 	public long? From { get => Q<long?>("from"); set => Q("from", value); }
@@ -487,7 +487,7 @@ public sealed partial class DeleteByQueryRequest : PlainRequest<DeleteByQueryReq
 
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// Skips the specified number of documents.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]

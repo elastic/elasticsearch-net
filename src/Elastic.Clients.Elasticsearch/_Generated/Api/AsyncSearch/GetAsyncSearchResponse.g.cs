@@ -30,8 +30,8 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 {
 	/// <summary>
 	/// <para>
-	/// Indicates when the async search completed. Only present
-	/// when the search has completed.
+	/// Indicates when the async search completed.
+	/// It is present only when the search has completed.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("completion_time")]
@@ -63,7 +63,10 @@ public sealed partial class GetAsyncSearchResponse<TDocument> : ElasticsearchRes
 	/// <summary>
 	/// <para>
 	/// Indicates whether the search is still running or has completed.
-	/// NOTE: If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
+	/// </para>
+	/// <para>
+	/// info
+	/// If the search failed after some shards returned their results or the node that is coordinating the async search dies, results may be partial even though <c>is_running</c> is <c>false</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("is_running")]

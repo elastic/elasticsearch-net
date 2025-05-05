@@ -43,7 +43,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCursorResponse ClearCursor(ClearCursorRequest request)
@@ -56,7 +56,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(ClearCursorRequest request, CancellationToken cancellationToken = default)
 	{
@@ -68,7 +68,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCursorResponse ClearCursor(ClearCursorRequestDescriptor descriptor)
@@ -81,7 +81,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCursorResponse ClearCursor()
@@ -95,7 +95,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ClearCursorResponse ClearCursor(Action<ClearCursorRequestDescriptor> configureRequest)
@@ -110,7 +110,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(ClearCursorRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -122,7 +122,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(CancellationToken cancellationToken = default)
 	{
@@ -135,7 +135,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Clear an SQL search cursor.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/clear-sql-cursor-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ClearCursorResponse> ClearCursorAsync(Action<ClearCursorRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -166,7 +166,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequest request)
@@ -196,7 +196,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync(DeleteAsyncRequest request, CancellationToken cancellationToken = default)
 	{
@@ -225,7 +225,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync<TDocument>(DeleteAsyncRequestDescriptor<TDocument> descriptor)
@@ -255,7 +255,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -286,7 +286,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor<TDocument>> configureRequest)
@@ -318,7 +318,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync(DeleteAsyncRequestDescriptor descriptor)
@@ -348,7 +348,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync(Elastic.Clients.Elasticsearch.Id id)
@@ -379,7 +379,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteAsyncResponse DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor> configureRequest)
@@ -411,7 +411,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync<TDocument>(DeleteAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -440,7 +440,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -470,7 +470,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -501,7 +501,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync(DeleteAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -530,7 +530,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -560,7 +560,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteAsyncResponse> DeleteAsyncAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeleteAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -578,7 +578,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync(GetAsyncRequest request)
@@ -595,7 +595,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync(GetAsyncRequest request, CancellationToken cancellationToken = default)
 	{
@@ -611,7 +611,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync<TDocument>(GetAsyncRequestDescriptor<TDocument> descriptor)
@@ -628,7 +628,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -646,7 +646,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor<TDocument>> configureRequest)
@@ -665,7 +665,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync(GetAsyncRequestDescriptor descriptor)
@@ -682,7 +682,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync(Elastic.Clients.Elasticsearch.Id id)
@@ -700,7 +700,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncResponse GetAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor> configureRequest)
@@ -719,7 +719,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync<TDocument>(GetAsyncRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -735,7 +735,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -752,7 +752,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -770,7 +770,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync(GetAsyncRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -786,7 +786,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -803,7 +803,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncResponse> GetAsyncAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -818,7 +818,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequest request)
@@ -832,7 +832,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync(GetAsyncStatusRequest request, CancellationToken cancellationToken = default)
 	{
@@ -845,7 +845,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus<TDocument>(GetAsyncStatusRequestDescriptor<TDocument> descriptor)
@@ -859,7 +859,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id)
@@ -874,7 +874,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor<TDocument>> configureRequest)
@@ -890,7 +890,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus(GetAsyncStatusRequestDescriptor descriptor)
@@ -904,7 +904,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus(Elastic.Clients.Elasticsearch.Id id)
@@ -919,7 +919,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetAsyncStatusResponse GetAsyncStatus(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor> configureRequest)
@@ -935,7 +935,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync<TDocument>(GetAsyncStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -948,7 +948,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -962,7 +962,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -977,7 +977,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync(GetAsyncStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -990,7 +990,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
 	{
@@ -1004,7 +1004,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get the async SQL search status.
 	/// Get the current status of an async SQL search or a stored synchronous SQL search.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-async-sql-search-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetAsyncStatusResponse> GetAsyncStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetAsyncStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1019,7 +1019,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query(QueryRequest request)
@@ -1033,7 +1033,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync(QueryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1046,7 +1046,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query<TDocument>(QueryRequestDescriptor<TDocument> descriptor)
@@ -1060,7 +1060,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query<TDocument>()
@@ -1075,7 +1075,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query<TDocument>(Action<QueryRequestDescriptor<TDocument>> configureRequest)
@@ -1091,7 +1091,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query(QueryRequestDescriptor descriptor)
@@ -1105,7 +1105,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query()
@@ -1120,7 +1120,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual QueryResponse Query(Action<QueryRequestDescriptor> configureRequest)
@@ -1136,7 +1136,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync<TDocument>(QueryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1149,7 +1149,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1163,7 +1163,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync<TDocument>(Action<QueryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1178,7 +1178,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync(QueryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1191,7 +1191,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync(CancellationToken cancellationToken = default)
 	{
@@ -1205,7 +1205,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Get SQL search results.
 	/// Run an SQL request.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<QueryResponse> QueryAsync(Action<QueryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1221,7 +1221,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate(TranslateRequest request)
@@ -1236,7 +1236,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync(TranslateRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1250,7 +1250,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate<TDocument>(TranslateRequestDescriptor<TDocument> descriptor)
@@ -1265,7 +1265,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate<TDocument>()
@@ -1281,7 +1281,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate<TDocument>(Action<TranslateRequestDescriptor<TDocument>> configureRequest)
@@ -1298,7 +1298,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate(TranslateRequestDescriptor descriptor)
@@ -1313,7 +1313,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate()
@@ -1329,7 +1329,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TranslateResponse Translate(Action<TranslateRequestDescriptor> configureRequest)
@@ -1346,7 +1346,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync<TDocument>(TranslateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1360,7 +1360,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1375,7 +1375,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync<TDocument>(Action<TranslateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1391,7 +1391,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync(TranslateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1405,7 +1405,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync(CancellationToken cancellationToken = default)
 	{
@@ -1420,7 +1420,7 @@ public partial class SqlNamespacedClient : NamespacedClientProxy
 	/// Translate an SQL search into a search API request containing Query DSL.
 	/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/sql-translate-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TranslateResponse> TranslateAsync(Action<TranslateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

@@ -38,7 +38,6 @@ public sealed partial class CloneSnapshotRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
@@ -68,8 +67,6 @@ public sealed partial class CloneSnapshotRequest : PlainRequest<CloneSnapshotReq
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 	[JsonInclude, JsonPropertyName("indices")]
 	public string Indices { get; set; }
 }
@@ -97,7 +94,6 @@ public sealed partial class CloneSnapshotRequestDescriptor : RequestDescriptor<C
 	internal override string OperationName => "snapshot.clone";
 
 	public CloneSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public CloneSnapshotRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public CloneSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name repository)
 	{

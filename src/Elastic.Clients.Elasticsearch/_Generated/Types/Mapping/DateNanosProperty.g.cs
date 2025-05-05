@@ -58,10 +58,14 @@ public sealed partial class DateNanosProperty : IProperty
 	public IDictionary<string, string>? Meta { get; set; }
 	[JsonInclude, JsonPropertyName("null_value")]
 	public DateTimeOffset? NullValue { get; set; }
+	[JsonInclude, JsonPropertyName("on_script_error")]
+	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
 	[JsonInclude, JsonPropertyName("precision_step")]
 	public int? PrecisionStep { get; set; }
 	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
+	[JsonInclude, JsonPropertyName("script")]
+	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
 	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
 	[JsonInclude, JsonPropertyName("synthetic_source_keep")]
@@ -90,8 +94,12 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private DateTimeOffset? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
@@ -180,6 +188,12 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		return Self;
 	}
 
+	public DateNanosPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public DateNanosPropertyDescriptor<TDocument> PrecisionStep(int? precisionStep)
 	{
 		PrecisionStepValue = precisionStep;
@@ -203,6 +217,30 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
+		ScriptValue = script;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -287,6 +325,12 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 			JsonSerializer.Serialize(writer, NullValueValue, options);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PrecisionStepValue.HasValue)
 		{
 			writer.WritePropertyName("precision_step");
@@ -297,6 +341,22 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (StoreValue.HasValue)
@@ -316,6 +376,30 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	DateNanosProperty IBuildableDescriptor<DateNanosProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -329,8 +413,10 @@ public sealed partial class DateNanosPropertyDescriptor<TDocument> : Serializabl
 		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
+		Script = BuildScript(),
 		Store = StoreValue,
 		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};
@@ -355,8 +441,12 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private DateTimeOffset? NullValueValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
 	private int? PrecisionStepValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
+	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private bool? StoreValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeepValue { get; set; }
 
@@ -445,6 +535,12 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		return Self;
 	}
 
+	public DateNanosPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	{
+		OnScriptErrorValue = onScriptError;
+		return Self;
+	}
+
 	public DateNanosPropertyDescriptor PrecisionStep(int? precisionStep)
 	{
 		PrecisionStepValue = precisionStep;
@@ -468,6 +564,30 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
 		configure?.Invoke(descriptor);
 		PropertiesValue = descriptor.PromisedValue;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	{
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = null;
+		ScriptValue = script;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	{
+		ScriptValue = null;
+		ScriptDescriptorAction = null;
+		ScriptDescriptor = descriptor;
+		return Self;
+	}
+
+	public DateNanosPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	{
+		ScriptValue = null;
+		ScriptDescriptor = null;
+		ScriptDescriptorAction = configure;
 		return Self;
 	}
 
@@ -552,6 +672,12 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 			JsonSerializer.Serialize(writer, NullValueValue, options);
 		}
 
+		if (OnScriptErrorValue is not null)
+		{
+			writer.WritePropertyName("on_script_error");
+			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
+		}
+
 		if (PrecisionStepValue.HasValue)
 		{
 			writer.WritePropertyName("precision_step");
@@ -562,6 +688,22 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		{
 			writer.WritePropertyName("properties");
 			JsonSerializer.Serialize(writer, PropertiesValue, options);
+		}
+
+		if (ScriptDescriptor is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
+		}
+		else if (ScriptDescriptorAction is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
+		}
+		else if (ScriptValue is not null)
+		{
+			writer.WritePropertyName("script");
+			JsonSerializer.Serialize(writer, ScriptValue, options);
 		}
 
 		if (StoreValue.HasValue)
@@ -581,6 +723,30 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		writer.WriteEndObject();
 	}
 
+	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	{
+		if (ScriptValue is not null)
+		{
+			return ScriptValue;
+		}
+
+		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
+		{
+			return buildable.Build();
+		}
+
+		if (ScriptDescriptorAction is not null)
+		{
+			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
+			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
+			{
+				return buildableFromAction.Build();
+			}
+		}
+
+		return null;
+	}
+
 	DateNanosProperty IBuildableDescriptor<DateNanosProperty>.Build() => new()
 	{
 		Boost = BoostValue,
@@ -594,8 +760,10 @@ public sealed partial class DateNanosPropertyDescriptor : SerializableDescriptor
 		Index = IndexValue,
 		Meta = MetaValue,
 		NullValue = NullValueValue,
+		OnScriptError = OnScriptErrorValue,
 		PrecisionStep = PrecisionStepValue,
 		Properties = PropertiesValue,
+		Script = BuildScript(),
 		Store = StoreValue,
 		SyntheticSourceKeep = SyntheticSourceKeepValue
 	};

@@ -37,7 +37,17 @@ public sealed partial class ScriptsPainlessExecuteRequestParameters : RequestPar
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<ScriptsPainlessExecuteRequestParameters>
@@ -53,14 +63,16 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("context")]
-	public string? Context { get; set; }
+	public Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? Context { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("context_setup")]
@@ -68,7 +80,7 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// The Painless script to run.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
@@ -78,7 +90,17 @@ public sealed partial class ScriptsPainlessExecuteRequest : PlainRequest<Scripts
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor<TDocument>, ScriptsPainlessExecuteRequestParameters>
@@ -97,7 +119,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 
 	internal override string OperationName => "scripts_painless_execute";
 
-	private string? ContextValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? ContextValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument> ContextSetupDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor<TDocument>> ContextSetupDescriptorAction { get; set; }
@@ -108,9 +130,10 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(string? context)
+	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? context)
 	{
 		ContextValue = context;
 		return Self;
@@ -119,6 +142,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor<TDocument> ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
@@ -147,7 +171,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// The Painless script to run.
 	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
@@ -177,10 +201,10 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContextValue))
+		if (ContextValue is not null)
 		{
 			writer.WritePropertyName("context");
-			writer.WriteStringValue(ContextValue);
+			JsonSerializer.Serialize(writer, ContextValue, options);
 		}
 
 		if (ContextSetupDescriptor is not null)
@@ -222,7 +246,17 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor<TDocument> :
 /// <summary>
 /// <para>
 /// Run a script.
+/// </para>
+/// <para>
 /// Runs a script and returns a result.
+/// Use this API to build and test scripts, such as when defining a script for a runtime field.
+/// This API requires very few dependencies and is especially useful if you don't have permissions to write documents on a cluster.
+/// </para>
+/// <para>
+/// The API uses several <em>contexts</em>, which control how scripts are run, what variables are available at runtime, and what the return type is.
+/// </para>
+/// <para>
+/// Each context requires a script, but additional parameters depend on the context you're using for that script.
 /// </para>
 /// </summary>
 public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDescriptor<ScriptsPainlessExecuteRequestDescriptor, ScriptsPainlessExecuteRequestParameters>
@@ -241,7 +275,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 
 	internal override string OperationName => "scripts_painless_execute";
 
-	private string? ContextValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? ContextValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? ContextSetupValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor ContextSetupDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetupDescriptor> ContextSetupDescriptorAction { get; set; }
@@ -252,9 +286,10 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	/// <summary>
 	/// <para>
 	/// The context that the script should run in.
+	/// NOTE: Result ordering in the field contexts is not guaranteed.
 	/// </para>
 	/// </summary>
-	public ScriptsPainlessExecuteRequestDescriptor Context(string? context)
+	public ScriptsPainlessExecuteRequestDescriptor Context(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContext? context)
 	{
 		ContextValue = context;
 		return Self;
@@ -263,6 +298,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	/// <summary>
 	/// <para>
 	/// Additional parameters for the <c>context</c>.
+	/// NOTE: This parameter is required for all contexts except <c>painless_test</c>, which is the default if no value is provided for <c>context</c>.
 	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor ContextSetup(Elastic.Clients.Elasticsearch.Core.ScriptsPainlessExecute.PainlessContextSetup? contextSetup)
@@ -291,7 +327,7 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 
 	/// <summary>
 	/// <para>
-	/// The Painless script to execute.
+	/// The Painless script to run.
 	/// </para>
 	/// </summary>
 	public ScriptsPainlessExecuteRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
@@ -321,10 +357,10 @@ public sealed partial class ScriptsPainlessExecuteRequestDescriptor : RequestDes
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContextValue))
+		if (ContextValue is not null)
 		{
 			writer.WritePropertyName("context");
-			writer.WriteStringValue(ContextValue);
+			JsonSerializer.Serialize(writer, ContextValue, options);
 		}
 
 		if (ContextSetupDescriptor is not null)

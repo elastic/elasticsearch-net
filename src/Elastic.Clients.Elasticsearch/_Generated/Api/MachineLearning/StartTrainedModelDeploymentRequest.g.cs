@@ -56,6 +56,7 @@ public sealed partial class StartTrainedModelDeploymentRequestParameters : Reque
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
 	public int? NumberOfAllocations { get => Q<int?>("number_of_allocations"); set => Q("number_of_allocations", value); }
@@ -117,7 +118,7 @@ public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<St
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.start_trained_model_deployment";
 
@@ -147,6 +148,7 @@ public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<St
 	/// Increasing this value generally increases the throughput.
 	/// If this setting is greater than the number of hardware threads
 	/// it will automatically be changed to a value less than the number of hardware threads.
+	/// If adaptive_allocations is enabled, do not set this value, because it’s automatically set.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -196,6 +198,16 @@ public sealed partial class StartTrainedModelDeploymentRequest : PlainRequest<St
 	/// </summary>
 	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState? WaitFor { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.DeploymentAllocationState?>("wait_for"); set => Q("wait_for", value); }
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("adaptive_allocations")]
+	public Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocations { get; set; }
 }
 
 /// <summary>
@@ -216,7 +228,7 @@ public sealed partial class StartTrainedModelDeploymentRequestDescriptor : Reque
 
 	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
 
-	internal override bool SupportsBody => false;
+	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.start_trained_model_deployment";
 
@@ -235,7 +247,60 @@ public sealed partial class StartTrainedModelDeploymentRequestDescriptor : Reque
 		return Self;
 	}
 
+	private Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? AdaptiveAllocationsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor AdaptiveAllocationsDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> AdaptiveAllocationsDescriptorAction { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Adaptive allocations configuration. When enabled, the number of allocations
+	/// is set based on the current load.
+	/// If adaptive_allocations is enabled, do not set the number of allocations manually.
+	/// </para>
+	/// </summary>
+	public StartTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettings? adaptiveAllocations)
+	{
+		AdaptiveAllocationsDescriptor = null;
+		AdaptiveAllocationsDescriptorAction = null;
+		AdaptiveAllocationsValue = adaptiveAllocations;
+		return Self;
+	}
+
+	public StartTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor descriptor)
+	{
+		AdaptiveAllocationsValue = null;
+		AdaptiveAllocationsDescriptorAction = null;
+		AdaptiveAllocationsDescriptor = descriptor;
+		return Self;
+	}
+
+	public StartTrainedModelDeploymentRequestDescriptor AdaptiveAllocations(Action<Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor> configure)
+	{
+		AdaptiveAllocationsValue = null;
+		AdaptiveAllocationsDescriptor = null;
+		AdaptiveAllocationsDescriptorAction = configure;
+		return Self;
+	}
+
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
+		writer.WriteStartObject();
+		if (AdaptiveAllocationsDescriptor is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, AdaptiveAllocationsDescriptor, options);
+		}
+		else if (AdaptiveAllocationsDescriptorAction is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AdaptiveAllocationsSettingsDescriptor(AdaptiveAllocationsDescriptorAction), options);
+		}
+		else if (AdaptiveAllocationsValue is not null)
+		{
+			writer.WritePropertyName("adaptive_allocations");
+			JsonSerializer.Serialize(writer, AdaptiveAllocationsValue, options);
+		}
+
+		writer.WriteEndObject();
 	}
 }

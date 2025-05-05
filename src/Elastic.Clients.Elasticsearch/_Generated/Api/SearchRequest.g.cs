@@ -142,7 +142,7 @@ public sealed partial class SearchRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// The minimum version of the node that can handle the request.
+	/// The minimum version of the node that can handle the request
 	/// Any handling node with a lower version will fail the request.
 	/// </para>
 	/// </summary>
@@ -151,7 +151,8 @@ public sealed partial class SearchRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
+	/// Valid values are:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
@@ -384,7 +385,7 @@ internal sealed partial class SearchRequestConverter : JsonConverter<SearchReque
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
@@ -926,7 +927,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// The minimum version of the node that can handle the request.
+	/// The minimum version of the node that can handle the request
 	/// Any handling node with a lower version will fail the request.
 	/// </para>
 	/// </summary>
@@ -936,7 +937,8 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// <summary>
 	/// <para>
 	/// The nodes and shards used for the search.
-	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness. Valid values are:
+	/// By default, Elasticsearch selects from eligible nodes and shards using adaptive replica selection, accounting for allocation awareness.
+	/// Valid values are:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
@@ -1198,7 +1200,7 @@ public partial class SearchRequest : PlainRequest<SearchRequestParameters>
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1541,7 +1543,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> KnnDescriptorAction { get; set; }
@@ -1787,7 +1789,7 @@ public sealed partial class SearchRequestDescriptor<TDocument> : RequestDescript
 	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
-	public SearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SearchRequestDescriptor<TDocument> IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -2840,7 +2842,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> KnnDescriptorAction { get; set; }
@@ -3086,7 +3088,7 @@ public sealed partial class SearchRequestDescriptor : RequestDescriptor<SearchRe
 	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
 	/// </para>
 	/// </summary>
-	public SearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SearchRequestDescriptor IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;

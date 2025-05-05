@@ -44,6 +44,8 @@ public sealed partial class TransformSummary
 	/// </summary>
 	[JsonInclude, JsonPropertyName("create_time")]
 	public long? CreateTime { get; init; }
+	[JsonInclude, JsonPropertyName("create_time_string")]
+	public DateTimeOffset? CreateTimeString { get; init; }
 
 	/// <summary>
 	/// <para>

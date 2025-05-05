@@ -81,7 +81,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure(FindFieldStructureRequest request)
@@ -132,7 +132,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequest request, CancellationToken cancellationToken = default)
 	{
@@ -182,7 +182,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>(FindFieldStructureRequestDescriptor<TDocument> descriptor)
@@ -233,7 +233,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>()
@@ -285,7 +285,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure<TDocument>(Action<FindFieldStructureRequestDescriptor<TDocument>> configureRequest)
@@ -338,7 +338,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure(FindFieldStructureRequestDescriptor descriptor)
@@ -389,7 +389,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure()
@@ -441,7 +441,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindFieldStructureResponse FindFieldStructure(Action<FindFieldStructureRequestDescriptor> configureRequest)
@@ -494,7 +494,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(FindFieldStructureRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -544,7 +544,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -595,7 +595,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(Action<FindFieldStructureRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -647,7 +647,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(FindFieldStructureRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -697,7 +697,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(CancellationToken cancellationToken = default)
 	{
@@ -748,7 +748,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-field-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindFieldStructureResponse> FindFieldStructureAsync(Action<FindFieldStructureRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -797,7 +797,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure(FindMessageStructureRequest request)
@@ -845,7 +845,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(FindMessageStructureRequest request, CancellationToken cancellationToken = default)
 	{
@@ -892,7 +892,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>(FindMessageStructureRequestDescriptor<TDocument> descriptor)
@@ -940,7 +940,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>()
@@ -989,7 +989,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure<TDocument>(Action<FindMessageStructureRequestDescriptor<TDocument>> configureRequest)
@@ -1039,7 +1039,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure(FindMessageStructureRequestDescriptor descriptor)
@@ -1087,7 +1087,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure()
@@ -1136,7 +1136,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual FindMessageStructureResponse FindMessageStructure(Action<FindMessageStructureRequestDescriptor> configureRequest)
@@ -1186,7 +1186,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(FindMessageStructureRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1233,7 +1233,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1281,7 +1281,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(Action<FindMessageStructureRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1330,7 +1330,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(FindMessageStructureRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1377,7 +1377,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(CancellationToken cancellationToken = default)
 	{
@@ -1425,7 +1425,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// If the structure finder produces unexpected results, specify the <c>explain</c> query parameter and an explanation will appear in the response.
 	/// It helps determine why the returned structure was chosen.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/find-message-structure.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<FindMessageStructureResponse> FindMessageStructureAsync(Action<FindMessageStructureRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1441,7 +1441,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TestGrokPatternResponse TestGrokPattern(TestGrokPatternRequest request)
@@ -1456,7 +1456,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1470,7 +1470,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TestGrokPatternResponse TestGrokPattern(TestGrokPatternRequestDescriptor descriptor)
@@ -1485,7 +1485,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TestGrokPatternResponse TestGrokPattern()
@@ -1501,7 +1501,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual TestGrokPatternResponse TestGrokPattern(Action<TestGrokPatternRequestDescriptor> configureRequest)
@@ -1518,7 +1518,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1532,7 +1532,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(CancellationToken cancellationToken = default)
 	{
@@ -1547,7 +1547,7 @@ public partial class TextStructureNamespacedClient : NamespacedClientProxy
 	/// Test a Grok pattern on one or more lines of text.
 	/// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(Action<TestGrokPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

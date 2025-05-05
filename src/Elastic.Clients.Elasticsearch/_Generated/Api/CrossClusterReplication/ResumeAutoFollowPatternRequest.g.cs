@@ -32,11 +32,21 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class ResumeAutoFollowPatternRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Resume an auto-follow pattern.
+/// </para>
+/// <para>
 /// Resume a cross-cluster replication auto-follow pattern that was paused.
 /// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
 /// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
@@ -55,11 +65,23 @@ public sealed partial class ResumeAutoFollowPatternRequest : PlainRequest<Resume
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.resume_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Resume an auto-follow pattern.
+/// </para>
+/// <para>
 /// Resume a cross-cluster replication auto-follow pattern that was paused.
 /// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
 /// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
@@ -80,6 +102,8 @@ public sealed partial class ResumeAutoFollowPatternRequestDescriptor : RequestDe
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.resume_auto_follow_pattern";
+
+	public ResumeAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public ResumeAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

@@ -55,7 +55,7 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("ef_construction")]
@@ -66,7 +66,7 @@ public sealed partial class DenseVectorIndexOptions
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("m")]
@@ -123,7 +123,7 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// The number of candidates to track while assembling the list of nearest neighbors for each new node.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public DenseVectorIndexOptionsDescriptor EfConstruction(int? efConstruction)
@@ -137,7 +137,7 @@ public sealed partial class DenseVectorIndexOptionsDescriptor : SerializableDesc
 	/// The number of neighbors each node will be connected to in the HNSW graph.
 	/// </para>
 	/// <para>
-	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, and <c>int4_hnsw</c> index types.
+	/// Only applicable to <c>hnsw</c>, <c>int8_hnsw</c>, <c>bbq_hnsw</c>, and <c>int4_hnsw</c> index types.
 	/// </para>
 	/// </summary>
 	public DenseVectorIndexOptionsDescriptor m(int? m)

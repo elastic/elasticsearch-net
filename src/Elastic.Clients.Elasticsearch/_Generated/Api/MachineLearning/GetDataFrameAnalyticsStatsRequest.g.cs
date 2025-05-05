@@ -87,7 +87,7 @@ public sealed partial class GetDataFrameAnalyticsStatsRequestParameters : Reques
 
 /// <summary>
 /// <para>
-/// Get data frame analytics jobs usage info.
+/// Get data frame analytics job stats.
 /// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<GetDataFrameAnalyticsStatsRequestParameters>
@@ -167,7 +167,7 @@ public sealed partial class GetDataFrameAnalyticsStatsRequest : PlainRequest<Get
 
 /// <summary>
 /// <para>
-/// Get data frame analytics jobs usage info.
+/// Get data frame analytics job stats.
 /// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor<TDocument> : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor<TDocument>, GetDataFrameAnalyticsStatsRequestParameters>
@@ -208,7 +208,7 @@ public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor<TDocumen
 
 /// <summary>
 /// <para>
-/// Get data frame analytics jobs usage info.
+/// Get data frame analytics job stats.
 /// </para>
 /// </summary>
 public sealed partial class GetDataFrameAnalyticsStatsRequestDescriptor : RequestDescriptor<GetDataFrameAnalyticsStatsRequestDescriptor, GetDataFrameAnalyticsStatsRequestParameters>

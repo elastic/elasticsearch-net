@@ -44,7 +44,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequest request)
@@ -58,7 +58,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -71,7 +71,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequestDescriptor descriptor)
@@ -85,7 +85,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name)
@@ -100,7 +100,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name, Action<DeleteLifecycleRequestDescriptor> configureRequest)
@@ -116,7 +116,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -129,7 +129,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -143,7 +143,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Delete a lifecycle policy.
 	/// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -157,7 +157,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequest request)
@@ -170,7 +170,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -182,7 +182,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequestDescriptor descriptor)
@@ -195,7 +195,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name)
@@ -209,7 +209,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name, Action<GetLifecycleRequestDescriptor> configureRequest)
@@ -224,7 +224,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle()
@@ -238,7 +238,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetLifecycleResponse GetLifecycle(Action<GetLifecycleRequestDescriptor> configureRequest)
@@ -253,7 +253,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -265,7 +265,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
 	{
@@ -278,7 +278,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -292,7 +292,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
 	{
@@ -305,7 +305,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// Get lifecycle policies.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -318,9 +318,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIlmStatusResponse GetStatus(GetIlmStatusRequest request)
@@ -332,9 +334,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIlmStatusResponse> GetStatusAsync(GetIlmStatusRequest request, CancellationToken cancellationToken = default)
 	{
@@ -345,9 +349,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIlmStatusResponse GetStatus(GetIlmStatusRequestDescriptor descriptor)
@@ -359,9 +365,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIlmStatusResponse GetStatus()
@@ -374,9 +382,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetIlmStatusResponse GetStatus(Action<GetIlmStatusRequestDescriptor> configureRequest)
@@ -390,9 +400,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIlmStatusResponse> GetStatusAsync(GetIlmStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -403,9 +415,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIlmStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
 	{
@@ -417,9 +431,11 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <summary>
 	/// <para>
 	/// Get the ILM status.
+	/// </para>
+	/// <para>
 	/// Get the current index lifecycle management status.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetIlmStatusResponse> GetStatusAsync(Action<GetIlmStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -461,7 +477,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataTiersResponse MigrateToDataTiers(MigrateToDataTiersRequest request)
@@ -502,7 +518,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(MigrateToDataTiersRequest request, CancellationToken cancellationToken = default)
 	{
@@ -542,7 +558,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataTiersResponse MigrateToDataTiers(MigrateToDataTiersRequestDescriptor descriptor)
@@ -583,7 +599,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataTiersResponse MigrateToDataTiers()
@@ -625,7 +641,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MigrateToDataTiersResponse MigrateToDataTiers(Action<MigrateToDataTiersRequestDescriptor> configureRequest)
@@ -668,7 +684,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(MigrateToDataTiersRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -708,7 +724,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(CancellationToken cancellationToken = default)
 	{
@@ -749,7 +765,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM must be stopped before performing the migration.
 	/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(Action<MigrateToDataTiersRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -779,7 +795,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep(MoveToStepRequest request)
@@ -808,7 +824,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync(MoveToStepRequest request, CancellationToken cancellationToken = default)
 	{
@@ -836,7 +852,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep<TDocument>(MoveToStepRequestDescriptor<TDocument> descriptor)
@@ -865,7 +881,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -895,7 +911,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor<TDocument>> configureRequest)
@@ -926,7 +942,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep<TDocument>()
@@ -956,7 +972,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep<TDocument>(Action<MoveToStepRequestDescriptor<TDocument>> configureRequest)
@@ -987,7 +1003,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep(MoveToStepRequestDescriptor descriptor)
@@ -1016,7 +1032,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1046,7 +1062,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor> configureRequest)
@@ -1077,7 +1093,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(MoveToStepRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1105,7 +1121,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1134,7 +1150,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1164,7 +1180,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1193,7 +1209,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Action<MoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1223,7 +1239,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync(MoveToStepRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1251,7 +1267,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1280,7 +1296,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Only actions specified in the ILM policy are considered valid.
 	/// An index cannot move to a step that is not part of its policy.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1298,7 +1314,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequest request)
@@ -1315,7 +1331,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1331,7 +1347,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequestDescriptor descriptor)
@@ -1348,7 +1364,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name)
@@ -1366,7 +1382,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name, Action<PutLifecycleRequestDescriptor> configureRequest)
@@ -1385,7 +1401,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1401,7 +1417,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
 	{
@@ -1418,7 +1434,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// <para>
 	/// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1434,7 +1450,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy(RemovePolicyRequest request)
@@ -1449,7 +1465,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(RemovePolicyRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1463,7 +1479,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy<TDocument>(RemovePolicyRequestDescriptor<TDocument> descriptor)
@@ -1478,7 +1494,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1494,7 +1510,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest)
@@ -1511,7 +1527,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy<TDocument>()
@@ -1527,7 +1543,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest)
@@ -1544,7 +1560,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy(RemovePolicyRequestDescriptor descriptor)
@@ -1559,7 +1575,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1575,7 +1591,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor> configureRequest)
@@ -1592,7 +1608,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(RemovePolicyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1606,7 +1622,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1621,7 +1637,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1637,7 +1653,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1652,7 +1668,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1668,7 +1684,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(RemovePolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1682,7 +1698,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1697,7 +1713,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 	/// It also stops managing the indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1714,7 +1730,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry(RetryRequest request)
@@ -1730,7 +1746,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync(RetryRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1745,7 +1761,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry<TDocument>(RetryRequestDescriptor<TDocument> descriptor)
@@ -1761,7 +1777,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1778,7 +1794,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor<TDocument>> configureRequest)
@@ -1796,7 +1812,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry<TDocument>()
@@ -1813,7 +1829,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry<TDocument>(Action<RetryRequestDescriptor<TDocument>> configureRequest)
@@ -1831,7 +1847,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry(RetryRequestDescriptor descriptor)
@@ -1847,7 +1863,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
@@ -1864,7 +1880,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor> configureRequest)
@@ -1882,7 +1898,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync<TDocument>(RetryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1897,7 +1913,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1913,7 +1929,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1930,7 +1946,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync<TDocument>(CancellationToken cancellationToken = default)
 	{
@@ -1946,7 +1962,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync<TDocument>(Action<RetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1963,7 +1979,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync(RetryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1978,7 +1994,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
 	{
@@ -1994,7 +2010,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API sets the policy back to the step where the error occurred and runs the step.
 	/// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2011,7 +2027,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartIlmResponse Start(StartIlmRequest request)
@@ -2027,7 +2043,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartIlmResponse> StartAsync(StartIlmRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2042,7 +2058,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartIlmResponse Start(StartIlmRequestDescriptor descriptor)
@@ -2058,7 +2074,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartIlmResponse Start()
@@ -2075,7 +2091,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartIlmResponse Start(Action<StartIlmRequestDescriptor> configureRequest)
@@ -2093,7 +2109,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartIlmResponse> StartAsync(StartIlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2108,7 +2124,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartIlmResponse> StartAsync(CancellationToken cancellationToken = default)
 	{
@@ -2124,7 +2140,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// ILM is started automatically when the cluster is formed.
 	/// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartIlmResponse> StartAsync(Action<StartIlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2144,7 +2160,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopIlmResponse Stop(StopIlmRequest request)
@@ -2163,7 +2179,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopIlmResponse> StopAsync(StopIlmRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2181,7 +2197,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopIlmResponse Stop(StopIlmRequestDescriptor descriptor)
@@ -2200,7 +2216,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopIlmResponse Stop()
@@ -2220,7 +2236,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopIlmResponse Stop(Action<StopIlmRequestDescriptor> configureRequest)
@@ -2241,7 +2257,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopIlmResponse> StopAsync(StopIlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2259,7 +2275,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopIlmResponse> StopAsync(CancellationToken cancellationToken = default)
 	{
@@ -2278,7 +2294,7 @@ public partial class IndexLifecycleManagementNamespacedClient : NamespacedClient
 	/// The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
 	/// Use the get ILM status API to check whether ILM is running.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopIlmResponse> StopAsync(Action<StopIlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

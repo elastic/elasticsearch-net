@@ -41,9 +41,221 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ChatCompletionUnifiedResponse ChatCompletionUnified(ChatCompletionUnifiedRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<ChatCompletionUnifiedRequest, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(ChatCompletionUnifiedRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<ChatCompletionUnifiedRequest, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ChatCompletionUnifiedResponse ChatCompletionUnified(ChatCompletionUnifiedRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion chatCompletionRequest, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new ChatCompletionUnifiedRequestDescriptor(chatCompletionRequest, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion chatCompletionRequest, Elastic.Clients.Elasticsearch.Id inferenceId, Action<ChatCompletionUnifiedRequestDescriptor> configureRequest)
+	{
+		var descriptor = new ChatCompletionUnifiedRequestDescriptor(chatCompletionRequest, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(ChatCompletionUnifiedRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion chatCompletionRequest, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ChatCompletionUnifiedRequestDescriptor(chatCompletionRequest, inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform chat completion inference
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Inference.RequestChatCompletion chatCompletionRequest, Elastic.Clients.Elasticsearch.Id inferenceId, Action<ChatCompletionUnifiedRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new ChatCompletionUnifiedRequestDescriptor(chatCompletionRequest, inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<ChatCompletionUnifiedRequestDescriptor, ChatCompletionUnifiedResponse, ChatCompletionUnifiedRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CompletionResponse Completion(CompletionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<CompletionRequest, CompletionResponse, CompletionRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CompletionResponse> CompletionAsync(CompletionRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<CompletionRequest, CompletionResponse, CompletionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CompletionResponse Completion(CompletionRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CompletionResponse Completion(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new CompletionRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual CompletionResponse Completion(Elastic.Clients.Elasticsearch.Id inferenceId, Action<CompletionRequestDescriptor> configureRequest)
+	{
+		var descriptor = new CompletionRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CompletionResponse> CompletionAsync(CompletionRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CompletionResponse> CompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CompletionRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform completion inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<CompletionResponse> CompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<CompletionRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new CompletionRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<CompletionRequestDescriptor, CompletionResponse, CompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequest request)
@@ -56,7 +268,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -68,7 +280,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequestDescriptor descriptor)
@@ -81,7 +293,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -95,7 +307,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
@@ -110,7 +322,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -124,7 +336,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
@@ -139,7 +351,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -151,7 +363,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -164,7 +376,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -178,7 +390,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -191,7 +403,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Delete an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -205,7 +417,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get(GetInferenceRequest request)
@@ -218,7 +430,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -230,7 +442,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get(GetInferenceRequestDescriptor descriptor)
@@ -243,7 +455,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
@@ -257,7 +469,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest)
@@ -272,7 +484,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get()
@@ -286,7 +498,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetInferenceResponse Get(Action<GetInferenceRequestDescriptor> configureRequest)
@@ -301,7 +513,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -313,7 +525,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -326,7 +538,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -340,7 +552,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(CancellationToken cancellationToken = default)
 	{
@@ -353,7 +565,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Get an inference endpoint
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetInferenceResponse> GetAsync(Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -365,9 +577,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(InferenceRequest request)
@@ -378,9 +602,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -390,9 +626,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(InferenceRequestDescriptor descriptor)
@@ -403,9 +651,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -417,9 +677,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest)
@@ -432,9 +704,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -446,9 +730,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest)
@@ -461,9 +757,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -473,9 +781,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -486,9 +806,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -500,9 +832,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -513,9 +857,21 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform inference on the service
+	/// Perform inference on the service.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+	/// It returns a response with the results of the tasks.
+	/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+	/// </para>
+	/// <para>
+	/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+	/// </para>
+	/// <para>
+	/// info
+	/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -539,7 +895,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(PutInferenceRequest request)
@@ -562,7 +918,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -584,7 +940,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(PutInferenceRequestDescriptor descriptor)
@@ -607,7 +963,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -631,7 +987,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
@@ -656,7 +1012,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -680,7 +1036,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
@@ -705,7 +1061,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -727,7 +1083,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -750,7 +1106,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -774,7 +1130,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -797,7 +1153,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -809,260 +1165,4032 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(StreamInferenceRequest request)
+	public virtual PutAlibabacloudResponse PutAlibabacloud(PutAlibabacloudRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StreamInferenceRequest, StreamInferenceResponse, StreamInferenceRequestParameters>(request);
+		return DoRequest<PutAlibabacloudRequest, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(request);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(StreamInferenceRequest request, CancellationToken cancellationToken = default)
+	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(PutAlibabacloudRequest request, CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequest, StreamInferenceResponse, StreamInferenceRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<PutAlibabacloudRequest, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(StreamInferenceRequestDescriptor descriptor)
+	public virtual PutAlibabacloudResponse PutAlibabacloud(PutAlibabacloudRequestDescriptor descriptor)
 	{
 		descriptor.BeforeRequest();
-		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+		return DoRequest<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual PutAlibabacloudResponse PutAlibabacloud(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		var descriptor = new PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
 		descriptor.BeforeRequest();
-		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+		return DoRequest<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest)
+	public virtual PutAlibabacloudResponse PutAlibabacloud(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, Action<PutAlibabacloudRequestDescriptor> configureRequest)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		var descriptor = new PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+		return DoRequest<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an AlibabaCloud AI Search inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(PutAlibabacloudRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an AlibabaCloud AI Search inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an AlibabaCloud AI Search inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, Action<PutAlibabacloudRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAlibabacloudRequestDescriptor, PutAlibabacloudResponse, PutAlibabacloudRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Amazon Bedrock inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual PutAmazonbedrockResponse PutAmazonbedrock(PutAmazonbedrockRequest request)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequest<PutAmazonbedrockRequest, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(request);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Amazon Bedrock inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(PutAmazonbedrockRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutAmazonbedrockRequest, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Amazon Bedrock inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StreamInferenceResponse StreamInference(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest)
+	public virtual PutAmazonbedrockResponse PutAmazonbedrock(PutAmazonbedrockRequestDescriptor descriptor)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Amazon Bedrock inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAmazonbedrockResponse PutAmazonbedrock(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId)
+	{
+		var descriptor = new PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Amazon Bedrock inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAmazonbedrockResponse PutAmazonbedrock(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, Action<PutAmazonbedrockRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequest<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor);
+		return DoRequest<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Amazon Bedrock inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(StreamInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(PutAmazonbedrockRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Amazon Bedrock inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		var descriptor = new PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Amazon Bedrock inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Creates an inference endpoint to perform an inference task with the <c>amazonbedrock</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// info
+	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, Action<PutAmazonbedrockRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(taskType, inferenceId);
+		var descriptor = new PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+		return DoRequestAsync<PutAmazonbedrockRequestDescriptor, PutAmazonbedrockResponse, PutAmazonbedrockRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Anthropic inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAnthropicResponse PutAnthropic(PutAnthropicRequest request)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		request.BeforeRequest();
+		return DoRequest<PutAnthropicRequest, PutAnthropicResponse, PutAnthropicRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(PutAnthropicRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutAnthropicRequest, PutAnthropicResponse, PutAnthropicRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAnthropicResponse PutAnthropic(PutAnthropicRequestDescriptor descriptor)
+	{
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor);
 	}
 
 	/// <summary>
 	/// <para>
-	/// Perform streaming inference.
-	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
-	/// This API works only with the completion task type.
+	/// Create an Anthropic inference endpoint.
 	/// </para>
 	/// <para>
-	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
 	/// <para>
-	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
-	public virtual Task<StreamInferenceResponse> StreamInferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAnthropicResponse PutAnthropic(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId)
 	{
-		var descriptor = new StreamInferenceRequestDescriptor(inferenceId);
+		var descriptor = new PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAnthropicResponse PutAnthropic(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, Action<PutAnthropicRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
 		configureRequest?.Invoke(descriptor);
 		descriptor.BeforeRequest();
-		return DoRequestAsync<StreamInferenceRequestDescriptor, StreamInferenceResponse, StreamInferenceRequestParameters>(descriptor, cancellationToken);
+		return DoRequest<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(PutAnthropicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Anthropic inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, Action<PutAnthropicRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAnthropicRequestDescriptor, PutAnthropicResponse, PutAnthropicRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureaistudioResponse PutAzureaistudio(PutAzureaistudioRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutAzureaistudioRequest, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(PutAzureaistudioRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutAzureaistudioRequest, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureaistudioResponse PutAzureaistudio(PutAzureaistudioRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureaistudioResponse PutAzureaistudio(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId)
+	{
+		var descriptor = new PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureaistudioResponse PutAzureaistudio(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, Action<PutAzureaistudioRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(PutAzureaistudioRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure AI studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, Action<PutAzureaistudioRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureaistudioRequestDescriptor, PutAzureaistudioResponse, PutAzureaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureopenaiResponse PutAzureopenai(PutAzureopenaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutAzureopenaiRequest, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(PutAzureopenaiRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutAzureopenaiRequest, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureopenaiResponse PutAzureopenai(PutAzureopenaiRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureopenaiResponse PutAzureopenai(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId)
+	{
+		var descriptor = new PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutAzureopenaiResponse PutAzureopenai(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, Action<PutAzureopenaiRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(PutAzureopenaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Azure OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>azureopenai</c> service.
+	/// </para>
+	/// <para>
+	/// The list of chat completion models that you can choose from in your Azure OpenAI deployment include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-4-and-gpt-4-turbo-models">GPT-4 and GPT-4 Turbo models</a>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#gpt-35">GPT-3.5</a>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, Action<PutAzureopenaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutAzureopenaiRequestDescriptor, PutAzureopenaiResponse, PutAzureopenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutCohereResponse PutCohere(PutCohereRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutCohereRequest, PutCohereResponse, PutCohereRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutCohereResponse> PutCohereAsync(PutCohereRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutCohereRequest, PutCohereResponse, PutCohereRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutCohereResponse PutCohere(PutCohereRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutCohereResponse PutCohere(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId)
+	{
+		var descriptor = new PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutCohereResponse PutCohere(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, Action<PutCohereRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutCohereResponse> PutCohereAsync(PutCohereRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutCohereResponse> PutCohereAsync(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Cohere inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutCohereResponse> PutCohereAsync(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, Action<PutCohereRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutCohereRequestDescriptor, PutCohereResponse, PutCohereRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElasticsearchResponse PutElasticsearch(PutElasticsearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutElasticsearchRequest, PutElasticsearchResponse, PutElasticsearchRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElasticsearchResponse> PutElasticsearchAsync(PutElasticsearchRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutElasticsearchRequest, PutElasticsearchResponse, PutElasticsearchRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElasticsearchResponse PutElasticsearch(PutElasticsearchRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElasticsearchResponse PutElasticsearch(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId)
+	{
+		var descriptor = new PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElasticsearchResponse PutElasticsearch(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, Action<PutElasticsearchRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElasticsearchResponse> PutElasticsearchAsync(PutElasticsearchRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElasticsearchResponse> PutElasticsearchAsync(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Elasticsearch inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elasticsearch</c> service.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains preconfigured ELSER and E5 inference endpoints, you only need to create the enpoints using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// If you use the ELSER or the E5 model through the <c>elasticsearch</c> service, the API request will automatically download and deploy the model if it isn't downloaded yet.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elasticsearch.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElasticsearchResponse> PutElasticsearchAsync(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, Action<PutElasticsearchRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElasticsearchRequestDescriptor, PutElasticsearchResponse, PutElasticsearchRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElserResponse PutElser(PutElserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutElserRequest, PutElserResponse, PutElserRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElserResponse> PutElserAsync(PutElserRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutElserRequest, PutElserResponse, PutElserRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElserResponse PutElser(PutElserRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElserResponse PutElser(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId)
+	{
+		var descriptor = new PutElserRequestDescriptor(taskType, elserInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutElserResponse PutElser(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, Action<PutElserRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutElserRequestDescriptor(taskType, elserInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElserResponse> PutElserAsync(PutElserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElserResponse> PutElserAsync(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutElserRequestDescriptor(taskType, elserInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an ELSER inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>elser</c> service.
+	/// You can also deploy ELSER by using the Elasticsearch inference integration.
+	/// </para>
+	/// <para>
+	/// info
+	/// Your Elasticsearch deployment contains a preconfigured ELSER inference endpoint, you only need to create the enpoint using the API if you want to customize the settings.
+	/// </para>
+	/// <para>
+	/// The API request will automatically download and deploy the ELSER model if it isn't already downloaded.
+	/// </para>
+	/// <para>
+	/// info
+	/// You might see a 502 bad gateway error in the response when using the Kibana Console. This error usually just reflects a timeout, while the model downloads in the background. You can check the download progress in the Machine Learning UI. If using the Python client, you can set the timeout parameter to a higher value.
+	/// </para>
+	/// <para>
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-elser.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutElserResponse> PutElserAsync(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, Action<PutElserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutElserRequestDescriptor(taskType, elserInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutElserRequestDescriptor, PutElserResponse, PutElserRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGoogleaistudioResponse PutGoogleaistudio(PutGoogleaistudioRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutGoogleaistudioRequest, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(PutGoogleaistudioRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutGoogleaistudioRequest, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGoogleaistudioResponse PutGoogleaistudio(PutGoogleaistudioRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGoogleaistudioResponse PutGoogleaistudio(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId)
+	{
+		var descriptor = new PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGoogleaistudioResponse PutGoogleaistudio(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, Action<PutGoogleaistudioRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(PutGoogleaistudioRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an Google AI Studio inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, Action<PutGoogleaistudioRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGoogleaistudioRequestDescriptor, PutGoogleaistudioResponse, PutGoogleaistudioRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGooglevertexaiResponse PutGooglevertexai(PutGooglevertexaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutGooglevertexaiRequest, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(PutGooglevertexaiRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutGooglevertexaiRequest, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGooglevertexaiResponse PutGooglevertexai(PutGooglevertexaiRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGooglevertexaiResponse PutGooglevertexai(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId)
+	{
+		var descriptor = new PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutGooglevertexaiResponse PutGooglevertexai(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, Action<PutGooglevertexaiRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(PutGooglevertexaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Google Vertex AI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, Action<PutGooglevertexaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutGooglevertexaiRequestDescriptor, PutGooglevertexaiResponse, PutGooglevertexaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutHuggingFaceResponse PutHuggingFace(PutHuggingFaceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutHuggingFaceRequest, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(PutHuggingFaceRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutHuggingFaceRequest, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutHuggingFaceResponse PutHuggingFace(PutHuggingFaceRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId)
+	{
+		var descriptor = new PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, Action<PutHuggingFaceRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(PutHuggingFaceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Hugging Face inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>hugging_face</c> service.
+	/// </para>
+	/// <para>
+	/// You must first create an inference endpoint on the Hugging Face endpoint page to get an endpoint URL.
+	/// Select the model you want to use on the new endpoint creation page (for example <c>intfloat/e5-small-v2</c>), then select the sentence embeddings task under the advanced configuration section.
+	/// Create the endpoint and copy the URL after the endpoint initialization has been finished.
+	/// </para>
+	/// <para>
+	/// The following models are recommended for the Hugging Face service:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L6-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-MiniLM-L12-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>all-mpnet-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-base-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>e5-small-v2</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-base</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>multilingual-e5-small</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, Action<PutHuggingFaceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutHuggingFaceRequestDescriptor, PutHuggingFaceResponse, PutHuggingFaceRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJinaaiResponse PutJinaai(PutJinaaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutJinaaiRequest, PutJinaaiResponse, PutJinaaiRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(PutJinaaiRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutJinaaiRequest, PutJinaaiResponse, PutJinaaiRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJinaaiResponse PutJinaai(PutJinaaiRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJinaaiResponse PutJinaai(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId)
+	{
+		var descriptor = new PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutJinaaiResponse PutJinaai(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, Action<PutJinaaiRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(PutJinaaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an JinaAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>jinaai</c> service.
+	/// </para>
+	/// <para>
+	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
+	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, Action<PutJinaaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutJinaaiRequestDescriptor, PutJinaaiResponse, PutJinaaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMistralResponse PutMistral(PutMistralRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutMistralRequest, PutMistralResponse, PutMistralRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMistralResponse> PutMistralAsync(PutMistralRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutMistralRequest, PutMistralResponse, PutMistralRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMistralResponse PutMistral(PutMistralRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMistralResponse PutMistral(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId)
+	{
+		var descriptor = new PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutMistralResponse PutMistral(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, Action<PutMistralRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMistralResponse> PutMistralAsync(PutMistralRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMistralResponse> PutMistralAsync(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Mistral inference endpoint.
+	/// </para>
+	/// <para>
+	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutMistralResponse> PutMistralAsync(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, Action<PutMistralRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutMistralRequestDescriptor, PutMistralResponse, PutMistralRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutOpenaiResponse PutOpenai(PutOpenaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutOpenaiRequest, PutOpenaiResponse, PutOpenaiRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(PutOpenaiRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutOpenaiRequest, PutOpenaiResponse, PutOpenaiRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutOpenaiResponse PutOpenai(PutOpenaiRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId)
+	{
+		var descriptor = new PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, Action<PutOpenaiRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(PutOpenaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create an OpenAI inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, Action<PutOpenaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutOpenaiRequestDescriptor, PutOpenaiResponse, PutOpenaiRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutWatsonxResponse PutWatsonx(PutWatsonxRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<PutWatsonxRequest, PutWatsonxResponse, PutWatsonxRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(PutWatsonxRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<PutWatsonxRequest, PutWatsonxResponse, PutWatsonxRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutWatsonxResponse PutWatsonx(PutWatsonxRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutWatsonxResponse PutWatsonx(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId)
+	{
+		var descriptor = new PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual PutWatsonxResponse PutWatsonx(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, Action<PutWatsonxRequestDescriptor> configureRequest)
+	{
+		var descriptor = new PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(PutWatsonxRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Create a Watsonx inference endpoint.
+	/// </para>
+	/// <para>
+	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
+	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
+	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+	/// </para>
+	/// <para>
+	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
+	/// After creating the endpoint, wait for the model deployment to complete before using it.
+	/// To verify the deployment status, use the get trained model statistics API.
+	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
+	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, Action<PutWatsonxRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<PutWatsonxRequestDescriptor, PutWatsonxResponse, PutWatsonxRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RerankResponse Rerank(RerankRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<RerankRequest, RerankResponse, RerankRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RerankResponse> RerankAsync(RerankRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<RerankRequest, RerankResponse, RerankRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RerankResponse Rerank(RerankRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RerankResponse Rerank(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new RerankRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual RerankResponse Rerank(Elastic.Clients.Elasticsearch.Id inferenceId, Action<RerankRequestDescriptor> configureRequest)
+	{
+		var descriptor = new RerankRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RerankResponse> RerankAsync(RerankRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RerankResponse> RerankAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RerankRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform rereanking inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<RerankResponse> RerankAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<RerankRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new RerankRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<RerankRequestDescriptor, RerankResponse, RerankRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SparseEmbeddingResponse SparseEmbedding(SparseEmbeddingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<SparseEmbeddingRequest, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SparseEmbeddingResponse> SparseEmbeddingAsync(SparseEmbeddingRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<SparseEmbeddingRequest, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SparseEmbeddingResponse SparseEmbedding(SparseEmbeddingRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SparseEmbeddingResponse SparseEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new SparseEmbeddingRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual SparseEmbeddingResponse SparseEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId, Action<SparseEmbeddingRequestDescriptor> configureRequest)
+	{
+		var descriptor = new SparseEmbeddingRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SparseEmbeddingResponse> SparseEmbeddingAsync(SparseEmbeddingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SparseEmbeddingResponse> SparseEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SparseEmbeddingRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform sparse embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<SparseEmbeddingResponse> SparseEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<SparseEmbeddingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new SparseEmbeddingRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<SparseEmbeddingRequestDescriptor, SparseEmbeddingResponse, SparseEmbeddingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamCompletionResponse StreamCompletion(StreamCompletionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<StreamCompletionRequest, StreamCompletionResponse, StreamCompletionRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamCompletionResponse> StreamCompletionAsync(StreamCompletionRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<StreamCompletionRequest, StreamCompletionResponse, StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamCompletionResponse StreamCompletion(StreamCompletionRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new StreamCompletionRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamCompletionRequestDescriptor> configureRequest)
+	{
+		var descriptor = new StreamCompletionRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamCompletionResponse> StreamCompletionAsync(StreamCompletionRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamCompletionRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform streaming inference.
+	/// Get real-time responses for completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// This API works only with the completion task type.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// This API requires the <c>monitor_inference</c> cluster privilege (the built-in <c>inference_admin</c> and <c>inference_user</c> roles grant this privilege). You must use a client that supports streaming.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stream-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<StreamCompletionRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new StreamCompletionRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<StreamCompletionRequestDescriptor, StreamCompletionResponse, StreamCompletionRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual TextEmbeddingResponse TextEmbedding(TextEmbeddingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<TextEmbeddingRequest, TextEmbeddingResponse, TextEmbeddingRequestParameters>(request);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TextEmbeddingResponse> TextEmbeddingAsync(TextEmbeddingRequest request, CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<TextEmbeddingRequest, TextEmbeddingResponse, TextEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual TextEmbeddingResponse TextEmbedding(TextEmbeddingRequestDescriptor descriptor)
+	{
+		descriptor.BeforeRequest();
+		return DoRequest<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var descriptor = new TextEmbeddingRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequest<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
+	public virtual TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId, Action<TextEmbeddingRequestDescriptor> configureRequest)
+	{
+		var descriptor = new TextEmbeddingRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequest<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TextEmbeddingResponse> TextEmbeddingAsync(TextEmbeddingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	{
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TextEmbeddingResponse> TextEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TextEmbeddingRequestDescriptor(inferenceId);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor, cancellationToken);
+	}
+
+	/// <summary>
+	/// <para>
+	/// Perform text embedding inference on the service
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// </summary>
+	public virtual Task<TextEmbeddingResponse> TextEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<TextEmbeddingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	{
+		var descriptor = new TextEmbeddingRequestDescriptor(inferenceId);
+		configureRequest?.Invoke(descriptor);
+		descriptor.BeforeRequest();
+		return DoRequestAsync<TextEmbeddingRequestDescriptor, TextEmbeddingResponse, TextEmbeddingRequestParameters>(descriptor, cancellationToken);
 	}
 
 	/// <summary>
@@ -1077,7 +5205,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(UpdateInferenceRequest request)
@@ -1098,7 +5226,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(UpdateInferenceRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1118,7 +5246,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(UpdateInferenceRequestDescriptor descriptor)
@@ -1139,7 +5267,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -1161,7 +5289,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest)
@@ -1184,7 +5312,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
@@ -1206,7 +5334,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest)
@@ -1229,7 +5357,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(UpdateInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1249,7 +5377,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -1270,7 +5398,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1292,7 +5420,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
 	{
@@ -1313,7 +5441,7 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 	/// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/update-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<UpdateInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

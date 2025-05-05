@@ -38,11 +38,20 @@ public sealed partial class DeleteTrainedModelRequestParameters : RequestParamet
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete an unreferenced trained model.
+/// </para>
+/// <para>
 /// The request deletes a trained inference model that is not referenced by an ingest pipeline.
 /// </para>
 /// </summary>
@@ -67,11 +76,21 @@ public sealed partial class DeleteTrainedModelRequest : PlainRequest<DeleteTrain
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Delete an unreferenced trained model.
+/// </para>
+/// <para>
 /// The request deletes a trained inference model that is not referenced by an ingest pipeline.
 /// </para>
 /// </summary>
@@ -92,6 +111,7 @@ public sealed partial class DeleteTrainedModelRequestDescriptor : RequestDescrip
 	internal override string OperationName => "ml.delete_trained_model";
 
 	public DeleteTrainedModelRequestDescriptor Force(bool? force = true) => Qs("force", force);
+	public DeleteTrainedModelRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public DeleteTrainedModelRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
 	{

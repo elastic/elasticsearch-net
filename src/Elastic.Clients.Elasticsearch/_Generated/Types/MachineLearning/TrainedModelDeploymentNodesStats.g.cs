@@ -106,8 +106,8 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// The number of inference requests that were not processed because the queue was full.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("rejection_execution_count")]
-	public int? RejectionExecutionCount { get; init; }
+	[JsonInclude, JsonPropertyName("rejected_execution_count")]
+	public int? RejectedExecutionCount { get; init; }
 
 	/// <summary>
 	/// <para>
@@ -115,7 +115,7 @@ public sealed partial class TrainedModelDeploymentNodesStats
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("routing_state")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingTable RoutingState { get; init; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.TrainedModelAssignmentRoutingStateAndReason RoutingState { get; init; }
 
 	/// <summary>
 	/// <para>

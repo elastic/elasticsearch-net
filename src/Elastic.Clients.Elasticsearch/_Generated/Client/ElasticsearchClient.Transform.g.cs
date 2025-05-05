@@ -42,9 +42,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequest request)
@@ -56,9 +55,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -69,9 +67,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTransformResponse DeleteTransform(DeleteTransformRequestDescriptor descriptor)
@@ -83,9 +80,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -98,9 +94,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual DeleteTransformResponse DeleteTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<DeleteTransformRequestDescriptor> configureRequest)
@@ -114,9 +109,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(DeleteTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -127,9 +121,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -141,9 +134,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a transform.
-	/// Deletes a transform.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/delete-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<DeleteTransformResponse> DeleteTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<DeleteTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -156,9 +148,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(GetTransformRequest request)
@@ -170,9 +162,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -183,9 +175,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(GetTransformRequestDescriptor descriptor)
@@ -197,9 +189,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId)
@@ -212,9 +204,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(Elastic.Clients.Elasticsearch.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest)
@@ -228,9 +220,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform()
@@ -243,9 +235,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformResponse GetTransform(Action<GetTransformRequestDescriptor> configureRequest)
@@ -259,9 +251,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(GetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -272,9 +264,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, CancellationToken cancellationToken = default)
 	{
@@ -286,9 +278,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Elastic.Clients.Elasticsearch.Names? transformId, Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -301,9 +293,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(CancellationToken cancellationToken = default)
 	{
@@ -315,9 +307,9 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transforms.
-	/// Retrieves configuration information for transforms.
+	/// Get configuration information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformResponse> GetTransformAsync(Action<GetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -330,9 +322,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequest request)
@@ -344,9 +338,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -357,9 +353,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformStatsResponse GetTransformStats(GetTransformStatsRequestDescriptor descriptor)
@@ -371,9 +369,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId)
@@ -386,9 +386,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetTransformStatsResponse GetTransformStats(Elastic.Clients.Elasticsearch.Names transformId, Action<GetTransformStatsRequestDescriptor> configureRequest)
@@ -402,9 +404,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(GetTransformStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -415,9 +419,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, CancellationToken cancellationToken = default)
 	{
@@ -429,9 +435,11 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Get transform stats.
-	/// Retrieves usage information for transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para>
+	/// Get usage information for transforms.
+	/// </para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-transform-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetTransformStatsResponse> GetTransformStatsAsync(Elastic.Clients.Elasticsearch.Names transformId, Action<GetTransformStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -451,7 +459,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(PreviewTransformRequest request)
@@ -470,7 +478,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -488,7 +496,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor)
@@ -507,7 +515,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId)
@@ -527,7 +535,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest)
@@ -548,7 +556,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>()
@@ -568,7 +576,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PreviewTransformResponse<TTransform> PreviewTransform<TTransform>(Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest)
@@ -589,7 +597,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(PreviewTransformRequestDescriptor<TTransform> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -607,7 +615,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, CancellationToken cancellationToken = default)
 	{
@@ -626,7 +634,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Elastic.Clients.Elasticsearch.Id? transformId, Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -646,7 +654,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(CancellationToken cancellationToken = default)
 	{
@@ -665,7 +673,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// generates a list of mappings and settings for the destination index. These values are determined based on the field
 	/// types of the source index and the transform aggregations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/preview-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PreviewTransformResponse<TTransform>> PreviewTransformAsync<TTransform>(Action<PreviewTransformRequestDescriptor<TTransform>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -704,7 +712,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform(PutTransformRequest request)
@@ -742,7 +750,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -779,7 +787,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform<TDocument>(PutTransformRequestDescriptor<TDocument> descriptor)
@@ -817,7 +825,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId)
@@ -856,7 +864,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor<TDocument>> configureRequest)
@@ -896,7 +904,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform(PutTransformRequestDescriptor descriptor)
@@ -934,7 +942,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -973,7 +981,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual PutTransformResponse PutTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor> configureRequest)
@@ -1013,7 +1021,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(PutTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1050,7 +1058,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -1088,7 +1096,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1127,7 +1135,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync(PutTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1164,7 +1172,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -1202,7 +1210,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// not give users any privileges on <c>.transform-internal*</c> indices. If you used transforms prior to 7.5, also do not
 	/// give users any privileges on <c>.data-frame-internal*</c> indices.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/put-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutTransformResponse> PutTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<PutTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1215,11 +1223,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetTransformResponse ResetTransform(ResetTransformRequest request)
@@ -1231,11 +1240,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1246,11 +1256,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetTransformResponse ResetTransform(ResetTransformRequestDescriptor descriptor)
@@ -1262,11 +1273,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -1279,11 +1291,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetTransformResponse ResetTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<ResetTransformRequestDescriptor> configureRequest)
@@ -1297,11 +1310,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(ResetTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1312,11 +1326,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -1328,11 +1343,12 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Reset a transform.
-	/// Resets a transform.
+	/// </para>
+	/// <para>
 	/// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 	/// If the destination index was created by the transform, it is deleted.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetTransformResponse> ResetTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<ResetTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1345,15 +1361,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequest request)
@@ -1365,15 +1381,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1384,15 +1400,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScheduleNowTransformResponse ScheduleNowTransform(ScheduleNowTransformRequestDescriptor descriptor)
@@ -1404,15 +1420,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -1425,15 +1441,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ScheduleNowTransformResponse ScheduleNowTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<ScheduleNowTransformRequestDescriptor> configureRequest)
@@ -1447,15 +1463,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(ScheduleNowTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1466,15 +1482,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -1486,15 +1502,15 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Schedule a transform to start now.
-	/// Instantly runs a transform to process data.
 	/// </para>
 	/// <para>
-	/// If you _schedule_now a transform, it will process the new data instantly,
-	/// without waiting for the configured frequency interval. After _schedule_now API is called,
-	/// the transform will be processed again at now + frequency unless _schedule_now API
+	/// Instantly run a transform to process data.
+	/// If you run this API, the transform will process the new data instantly,
+	/// without waiting for the configured frequency interval. After the API is called,
+	/// the transform will be processed again at <c>now + frequency</c> unless the API
 	/// is called again in the meantime.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/schedule-now-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ScheduleNowTransformResponse> ScheduleNowTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<ScheduleNowTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1507,7 +1523,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1526,7 +1541,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTransformResponse StartTransform(StartTransformRequest request)
@@ -1538,7 +1553,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1557,7 +1571,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1568,7 +1582,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1587,7 +1600,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTransformResponse StartTransform(StartTransformRequestDescriptor descriptor)
@@ -1599,7 +1612,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1618,7 +1630,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -1631,7 +1643,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1650,7 +1661,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StartTransformResponse StartTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<StartTransformRequestDescriptor> configureRequest)
@@ -1664,7 +1675,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1683,7 +1693,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartTransformResponse> StartTransformAsync(StartTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1694,7 +1704,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1713,7 +1722,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -1725,7 +1734,6 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Start a transform.
-	/// Starts a transform.
 	/// </para>
 	/// <para>
 	/// When you start a transform, it creates the destination index if it does not already exist. The <c>number_of_shards</c> is
@@ -1744,7 +1752,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 	/// destination indices, the transform fails when it attempts unauthorized operations.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/start-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StartTransformResponse> StartTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<StartTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1759,7 +1767,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTransformResponse StopTransform(StopTransformRequest request)
@@ -1773,7 +1781,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1786,7 +1794,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTransformResponse StopTransform(StopTransformRequestDescriptor descriptor)
@@ -1800,7 +1808,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId)
@@ -1815,7 +1823,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual StopTransformResponse StopTransform(Elastic.Clients.Elasticsearch.Name transformId, Action<StopTransformRequestDescriptor> configureRequest)
@@ -1831,7 +1839,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(StopTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -1844,7 +1852,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, CancellationToken cancellationToken = default)
 	{
@@ -1858,7 +1866,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Stop transforms.
 	/// Stops one or more transforms.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/stop-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<StopTransformResponse> StopTransformAsync(Elastic.Clients.Elasticsearch.Name transformId, Action<StopTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -1880,7 +1888,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequest request)
@@ -1901,7 +1909,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequest request, CancellationToken cancellationToken = default)
 	{
@@ -1921,7 +1929,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform<TDocument>(UpdateTransformRequestDescriptor<TDocument> descriptor)
@@ -1942,7 +1950,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId)
@@ -1964,7 +1972,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor<TDocument>> configureRequest)
@@ -1987,7 +1995,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform(UpdateTransformRequestDescriptor descriptor)
@@ -2008,7 +2016,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId)
@@ -2030,7 +2038,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateTransformResponse UpdateTransform(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest)
@@ -2053,7 +2061,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(UpdateTransformRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2073,7 +2081,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -2094,7 +2102,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync<TDocument>(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2116,7 +2124,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(UpdateTransformRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2136,7 +2144,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, CancellationToken cancellationToken = default)
 	{
@@ -2157,7 +2165,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 	/// time of update and runs with those privileges.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/update-transform.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-update-transform">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpdateTransformResponse> UpdateTransformAsync(Elastic.Clients.Elasticsearch.Id transformId, Action<UpdateTransformRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -2170,6 +2178,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2186,7 +2196,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequest request)
@@ -2198,6 +2208,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2214,7 +2226,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequest request, CancellationToken cancellationToken = default)
 	{
@@ -2225,6 +2237,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2241,7 +2255,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeTransformsResponse UpgradeTransforms(UpgradeTransformsRequestDescriptor descriptor)
@@ -2253,6 +2267,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2269,7 +2285,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeTransformsResponse UpgradeTransforms()
@@ -2282,6 +2298,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2298,7 +2316,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpgradeTransformsResponse UpgradeTransforms(Action<UpgradeTransformsRequestDescriptor> configureRequest)
@@ -2312,6 +2330,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2328,7 +2348,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(UpgradeTransformsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -2339,6 +2359,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2355,7 +2377,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(CancellationToken cancellationToken = default)
 	{
@@ -2367,6 +2389,8 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Upgrade all transforms.
+	/// </para>
+	/// <para>
 	/// Transforms are compatible across minor versions and between supported major versions.
 	/// However, over time, the format of transform configuration information may change.
 	/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
@@ -2383,7 +2407,7 @@ public partial class TransformManagementNamespacedClient : NamespacedClientProxy
 	/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 	/// You may want to perform a recent cluster backup prior to the upgrade.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/upgrade-transforms.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v8/operation/operation-transform-upgrade-transforms">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<UpgradeTransformsResponse> UpgradeTransformsAsync(Action<UpgradeTransformsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

@@ -52,6 +52,13 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : RequestPara
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	public string? Resource { get => Q<string?>("resource"); set => Q("resource", value); }
 }
 
 /// <summary>
@@ -112,6 +119,14 @@ public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSe
 	/// </summary>
 	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public string? Resource { get => Q<string?>("resource"); set => Q("resource", value); }
 }
 
 /// <summary>
@@ -158,6 +173,7 @@ public sealed partial class ReloadSearchAnalyzersRequestDescriptor<TDocument> : 
 	public ReloadSearchAnalyzersRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ReloadSearchAnalyzersRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ReloadSearchAnalyzersRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public ReloadSearchAnalyzersRequestDescriptor<TDocument> Resource(string? resource) => Qs("resource", resource);
 
 	public ReloadSearchAnalyzersRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{
@@ -210,6 +226,7 @@ public sealed partial class ReloadSearchAnalyzersRequestDescriptor : RequestDesc
 	public ReloadSearchAnalyzersRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
 	public ReloadSearchAnalyzersRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
 	public ReloadSearchAnalyzersRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
+	public ReloadSearchAnalyzersRequestDescriptor Resource(string? resource) => Qs("resource", resource);
 
 	public ReloadSearchAnalyzersRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
 	{

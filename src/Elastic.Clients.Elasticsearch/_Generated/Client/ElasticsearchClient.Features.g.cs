@@ -54,7 +54,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequest request)
@@ -78,7 +78,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -101,7 +101,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFeaturesResponse GetFeatures(GetFeaturesRequestDescriptor descriptor)
@@ -125,7 +125,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFeaturesResponse GetFeatures()
@@ -150,7 +150,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual GetFeaturesResponse GetFeatures(Action<GetFeaturesRequestDescriptor> configureRequest)
@@ -176,7 +176,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(GetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -199,7 +199,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(CancellationToken cancellationToken = default)
 	{
@@ -223,7 +223,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// The features listed by this API are a combination of built-in features and features defined by plugins.
 	/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/get-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<GetFeaturesResponse> GetFeaturesAsync(Action<GetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{
@@ -259,7 +259,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequest request)
@@ -294,7 +294,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequest request, CancellationToken cancellationToken = default)
 	{
@@ -328,7 +328,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetFeaturesResponse ResetFeatures(ResetFeaturesRequestDescriptor descriptor)
@@ -363,7 +363,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetFeaturesResponse ResetFeatures()
@@ -399,7 +399,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual ResetFeaturesResponse ResetFeatures(Action<ResetFeaturesRequestDescriptor> configureRequest)
@@ -436,7 +436,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(ResetFeaturesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
 	{
@@ -470,7 +470,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(CancellationToken cancellationToken = default)
 	{
@@ -505,7 +505,7 @@ public partial class FeaturesNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/reset-features-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ResetFeaturesResponse> ResetFeaturesAsync(Action<ResetFeaturesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
 	{

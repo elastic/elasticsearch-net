@@ -32,6 +32,12 @@ namespace Elastic.Clients.Elasticsearch.Enrich;
 
 public sealed partial class PutPolicyRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
@@ -53,6 +59,14 @@ public sealed partial class PutPolicyRequest : PlainRequest<PutPolicyRequestPara
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "enrich.put_policy";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
@@ -100,6 +114,8 @@ public sealed partial class PutPolicyRequestDescriptor<TDocument> : RequestDescr
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "enrich.put_policy";
+
+	public PutPolicyRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public PutPolicyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
 	{
@@ -280,6 +296,8 @@ public sealed partial class PutPolicyRequestDescriptor : RequestDescriptor<PutPo
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "enrich.put_policy";
+
+	public PutPolicyRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public PutPolicyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
 	{

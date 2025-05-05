@@ -55,6 +55,15 @@ public sealed partial class DataStreamLifecycleWithRollover
 
 	/// <summary>
 	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("enabled")]
+	public bool? Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// The conditions which will trigger the rollover of a backing index as configured by the cluster setting <c>cluster.lifecycle.default.rollover</c>.
 	/// This property is an implementation detail and it will only be retrieved when the query param <c>include_defaults</c> is set to true.
 	/// The contents of this field are subject to change.
@@ -82,6 +91,7 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? DownsamplingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor DownsamplingDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> DownsamplingDescriptorAction { get; set; }
+	private bool? EnabledValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditions? RolloverValue { get; set; }
 	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor RolloverDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleRolloverConditionsDescriptor> RolloverDescriptorAction { get; set; }
@@ -125,6 +135,18 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 		DownsamplingValue = null;
 		DownsamplingDescriptor = null;
 		DownsamplingDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public DataStreamLifecycleWithRolloverDescriptor Enabled(bool? enabled = true)
+	{
+		EnabledValue = enabled;
 		return Self;
 	}
 
@@ -182,6 +204,12 @@ public sealed partial class DataStreamLifecycleWithRolloverDescriptor : Serializ
 		{
 			writer.WritePropertyName("downsampling");
 			JsonSerializer.Serialize(writer, DownsamplingValue, options);
+		}
+
+		if (EnabledValue.HasValue)
+		{
+			writer.WritePropertyName("enabled");
+			writer.WriteBooleanValue(EnabledValue.Value);
 		}
 
 		if (RolloverDescriptor is not null)

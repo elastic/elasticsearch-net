@@ -51,7 +51,6 @@ public sealed partial class UserIndicesPrivileges
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("names")]
-	[SingleOrManyCollectionConverter(typeof(string))]
 	public IReadOnlyCollection<string> Names { get; init; }
 
 	/// <summary>

@@ -34,6 +34,20 @@ public sealed partial class ExistsIndexTemplateRequestParameters : RequestParame
 {
 	/// <summary>
 	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -43,6 +57,8 @@ public sealed partial class ExistsIndexTemplateRequestParameters : RequestParame
 /// <summary>
 /// <para>
 /// Check index templates.
+/// </para>
+/// <para>
 /// Check whether index templates exist.
 /// </para>
 /// </summary>
@@ -62,6 +78,22 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 
 	/// <summary>
 	/// <para>
+	/// If true, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
+
+	/// <summary>
+	/// <para>
+	/// If true, the request retrieves information from the local node only. Defaults to false, which means information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node. If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
@@ -72,6 +104,8 @@ public sealed partial class ExistsIndexTemplateRequest : PlainRequest<ExistsInde
 /// <summary>
 /// <para>
 /// Check index templates.
+/// </para>
+/// <para>
 /// Check whether index templates exist.
 /// </para>
 /// </summary>
@@ -91,6 +125,8 @@ public sealed partial class ExistsIndexTemplateRequestDescriptor : RequestDescri
 
 	internal override string OperationName => "indices.exists_index_template";
 
+	public ExistsIndexTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
+	public ExistsIndexTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
 	public ExistsIndexTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public ExistsIndexTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)

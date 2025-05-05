@@ -92,6 +92,8 @@ public sealed partial class RuntimeField
 	/// </summary>
 	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldType Type { get; set; }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate(RuntimeField runtimeField) => Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate.Runtime(runtimeField);
 }
 
 public sealed partial class RuntimeFieldDescriptor<TDocument> : SerializableDescriptor<RuntimeFieldDescriptor<TDocument>>

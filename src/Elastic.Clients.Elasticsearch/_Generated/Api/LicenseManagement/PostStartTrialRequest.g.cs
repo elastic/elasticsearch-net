@@ -38,6 +38,13 @@ public sealed partial class PostStartTrialRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
 }
 
@@ -71,6 +78,14 @@ public sealed partial class PostStartTrialRequest : PlainRequest<PostStartTrialR
 	/// </summary>
 	[JsonIgnore]
 	public bool? Acknowledge { get => Q<bool?>("acknowledge"); set => Q("acknowledge", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	[JsonIgnore]
 	public string? TypeQueryString { get => Q<string?>("type_query_string"); set => Q("type_query_string", value); }
 }
@@ -105,6 +120,7 @@ public sealed partial class PostStartTrialRequestDescriptor : RequestDescriptor<
 	internal override string OperationName => "license.post_start_trial";
 
 	public PostStartTrialRequestDescriptor Acknowledge(bool? acknowledge = true) => Qs("acknowledge", acknowledge);
+	public PostStartTrialRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 	public PostStartTrialRequestDescriptor TypeQueryString(string? typeQueryString) => Qs("type_query_string", typeQueryString);
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)

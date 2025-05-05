@@ -32,11 +32,21 @@ namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
 public sealed partial class GetAutoFollowPatternRequestParameters : RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get auto-follow patterns.
+/// </para>
+/// <para>
 /// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
@@ -57,11 +67,23 @@ public sealed partial class GetAutoFollowPatternRequest : PlainRequest<GetAutoFo
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.get_auto_follow_pattern";
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get auto-follow patterns.
+/// </para>
+/// <para>
 /// Get cross-cluster replication auto-follow patterns.
 /// </para>
 /// </summary>
@@ -84,6 +106,8 @@ public sealed partial class GetAutoFollowPatternRequestDescriptor : RequestDescr
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ccr.get_auto_follow_pattern";
+
+	public GetAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
 
 	public GetAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
 	{

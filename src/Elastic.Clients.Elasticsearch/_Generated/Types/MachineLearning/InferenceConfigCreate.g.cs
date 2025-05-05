@@ -53,6 +53,7 @@ public sealed partial class InferenceConfigCreate
 
 	public static InferenceConfigCreate Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfigCreate("classification", classificationInferenceOptions);
 	public static InferenceConfigCreate FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => new InferenceConfigCreate("fill_mask", fillMaskInferenceOptions);
+	public static InferenceConfigCreate LearningToRank(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig learningToRankConfig) => new InferenceConfigCreate("learning_to_rank", learningToRankConfig);
 	public static InferenceConfigCreate Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => new InferenceConfigCreate("ner", nerInferenceOptions);
 	public static InferenceConfigCreate PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => new InferenceConfigCreate("pass_through", passThroughInferenceOptions);
 	public static InferenceConfigCreate QuestionAnswering(Elastic.Clients.Elasticsearch.MachineLearning.QuestionAnsweringInferenceOptions questionAnsweringInferenceOptions) => new InferenceConfigCreate("question_answering", questionAnsweringInferenceOptions);
@@ -110,6 +111,13 @@ internal sealed partial class InferenceConfigCreateConverter : JsonConverter<Inf
 			if (propertyName == "fill_mask")
 			{
 				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
+			if (propertyName == "learning_to_rank")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig?>(ref reader, options);
 				variantNameValue = propertyName;
 				continue;
 			}
@@ -191,6 +199,9 @@ internal sealed partial class InferenceConfigCreateConverter : JsonConverter<Inf
 				case "fill_mask":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions)value.Variant, options);
 					break;
+				case "learning_to_rank":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig)value.Variant, options);
+					break;
 				case "ner":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions)value.Variant, options);
 					break;
@@ -257,6 +268,8 @@ public sealed partial class InferenceConfigCreateDescriptor<TDocument> : Seriali
 	public InferenceConfigCreateDescriptor<TDocument> Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
 	public InferenceConfigCreateDescriptor<TDocument> FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
 	public InferenceConfigCreateDescriptor<TDocument> FillMask(Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
+	public InferenceConfigCreateDescriptor<TDocument> LearningToRank(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig learningToRankConfig) => Set(learningToRankConfig, "learning_to_rank");
+	public InferenceConfigCreateDescriptor<TDocument> LearningToRank(Action<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor<TDocument>> configure) => Set(configure, "learning_to_rank");
 	public InferenceConfigCreateDescriptor<TDocument> Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
 	public InferenceConfigCreateDescriptor<TDocument> Ner(Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
 	public InferenceConfigCreateDescriptor<TDocument> PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");
@@ -329,6 +342,8 @@ public sealed partial class InferenceConfigCreateDescriptor : SerializableDescri
 	public InferenceConfigCreateDescriptor Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
 	public InferenceConfigCreateDescriptor FillMask(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptions fillMaskInferenceOptions) => Set(fillMaskInferenceOptions, "fill_mask");
 	public InferenceConfigCreateDescriptor FillMask(Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceOptionsDescriptor> configure) => Set(configure, "fill_mask");
+	public InferenceConfigCreateDescriptor LearningToRank(Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfig learningToRankConfig) => Set(learningToRankConfig, "learning_to_rank");
+	public InferenceConfigCreateDescriptor LearningToRank<TDocument>(Action<Elastic.Clients.Elasticsearch.MachineLearning.LearningToRankConfigDescriptor> configure) => Set(configure, "learning_to_rank");
 	public InferenceConfigCreateDescriptor Ner(Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptions nerInferenceOptions) => Set(nerInferenceOptions, "ner");
 	public InferenceConfigCreateDescriptor Ner(Action<Elastic.Clients.Elasticsearch.MachineLearning.NerInferenceOptionsDescriptor> configure) => Set(configure, "ner");
 	public InferenceConfigCreateDescriptor PassThrough(Elastic.Clients.Elasticsearch.MachineLearning.PassThroughInferenceOptions passThroughInferenceOptions) => Set(passThroughInferenceOptions, "pass_through");

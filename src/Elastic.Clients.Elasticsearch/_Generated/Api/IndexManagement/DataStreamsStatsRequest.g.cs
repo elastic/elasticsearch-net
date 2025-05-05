@@ -44,7 +44,9 @@ public sealed partial class DataStreamsStatsRequestParameters : RequestParameter
 /// <summary>
 /// <para>
 /// Get data stream stats.
-/// Retrieves statistics for one or more data streams.
+/// </para>
+/// <para>
+/// Get statistics for one or more data streams.
 /// </para>
 /// </summary>
 public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsStatsRequestParameters>
@@ -78,7 +80,9 @@ public sealed partial class DataStreamsStatsRequest : PlainRequest<DataStreamsSt
 /// <summary>
 /// <para>
 /// Get data stream stats.
-/// Retrieves statistics for one or more data streams.
+/// </para>
+/// <para>
+/// Get statistics for one or more data streams.
 /// </para>
 /// </summary>
 public sealed partial class DataStreamsStatsRequestDescriptor : RequestDescriptor<DataStreamsStatsRequestDescriptor, DataStreamsStatsRequestParameters>

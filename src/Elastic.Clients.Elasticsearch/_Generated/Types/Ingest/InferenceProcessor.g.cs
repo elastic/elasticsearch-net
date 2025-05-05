@@ -65,11 +65,31 @@ public sealed partial class InferenceProcessor
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("ignore_missing")]
+	public bool? IgnoreMissing { get; set; }
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("input_output")]
+	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.InputConfig))]
+	public ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutput { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -119,9 +139,14 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
+	private bool? IgnoreMissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutputValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor InputOutputDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor> InputOutputDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] InputOutputDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
@@ -178,6 +203,19 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	{
+		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
@@ -202,6 +240,48 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public InferenceProcessorDescriptor<TDocument> InputOutput(ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? inputOutput)
+	{
+		InputOutputDescriptor = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = null;
+		InputOutputValue = inputOutput;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor<TDocument> InputOutput(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor descriptor)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = null;
+		InputOutputDescriptor = descriptor;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor<TDocument> InputOutput(Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor> configure)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptor = null;
+		InputOutputDescriptorActions = null;
+		InputOutputDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor<TDocument> InputOutput(params Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] configure)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptor = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = configure;
 		return Self;
 	}
 
@@ -329,6 +409,12 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 			writer.WriteBooleanValue(IgnoreFailureValue.Value);
 		}
 
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (InferenceConfigDescriptor is not null)
 		{
 			writer.WritePropertyName("inference_config");
@@ -343,6 +429,35 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 		{
 			writer.WritePropertyName("inference_config");
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+		}
+
+		if (InputOutputDescriptor is not null)
+		{
+			writer.WritePropertyName("input_output");
+			JsonSerializer.Serialize(writer, InputOutputDescriptor, options);
+		}
+		else if (InputOutputDescriptorAction is not null)
+		{
+			writer.WritePropertyName("input_output");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor(InputOutputDescriptorAction), options);
+		}
+		else if (InputOutputDescriptorActions is not null)
+		{
+			writer.WritePropertyName("input_output");
+			if (InputOutputDescriptorActions.Length != 1)
+				writer.WriteStartArray();
+			foreach (var action in InputOutputDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor(action), options);
+			}
+
+			if (InputOutputDescriptorActions.Length != 1)
+				writer.WriteEndArray();
+		}
+		else if (InputOutputValue is not null)
+		{
+			writer.WritePropertyName("input_output");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(InputOutputValue, writer, options);
 		}
 
 		writer.WritePropertyName("model_id");
@@ -406,9 +521,14 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
 	private string? IfValue { get; set; }
 	private bool? IgnoreFailureValue { get; set; }
+	private bool? IgnoreMissingValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
+	private ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutputValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor InputOutputDescriptor { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor> InputOutputDescriptorAction { get; set; }
+	private Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] InputOutputDescriptorActions { get; set; }
 	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
@@ -465,6 +585,19 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 
 	/// <summary>
 	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public InferenceProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	{
+		IgnoreMissingValue = ignoreMissing;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
@@ -489,6 +622,48 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		InferenceConfigValue = null;
 		InferenceConfigDescriptor = null;
 		InferenceConfigDescriptorAction = configure;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public InferenceProcessorDescriptor InputOutput(ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? inputOutput)
+	{
+		InputOutputDescriptor = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = null;
+		InputOutputValue = inputOutput;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor InputOutput(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor descriptor)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = null;
+		InputOutputDescriptor = descriptor;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor InputOutput(Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor> configure)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptor = null;
+		InputOutputDescriptorActions = null;
+		InputOutputDescriptorAction = configure;
+		return Self;
+	}
+
+	public InferenceProcessorDescriptor InputOutput(params Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] configure)
+	{
+		InputOutputValue = null;
+		InputOutputDescriptor = null;
+		InputOutputDescriptorAction = null;
+		InputOutputDescriptorActions = configure;
 		return Self;
 	}
 
@@ -616,6 +791,12 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 			writer.WriteBooleanValue(IgnoreFailureValue.Value);
 		}
 
+		if (IgnoreMissingValue.HasValue)
+		{
+			writer.WritePropertyName("ignore_missing");
+			writer.WriteBooleanValue(IgnoreMissingValue.Value);
+		}
+
 		if (InferenceConfigDescriptor is not null)
 		{
 			writer.WritePropertyName("inference_config");
@@ -630,6 +811,35 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 		{
 			writer.WritePropertyName("inference_config");
 			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
+		}
+
+		if (InputOutputDescriptor is not null)
+		{
+			writer.WritePropertyName("input_output");
+			JsonSerializer.Serialize(writer, InputOutputDescriptor, options);
+		}
+		else if (InputOutputDescriptorAction is not null)
+		{
+			writer.WritePropertyName("input_output");
+			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor(InputOutputDescriptorAction), options);
+		}
+		else if (InputOutputDescriptorActions is not null)
+		{
+			writer.WritePropertyName("input_output");
+			if (InputOutputDescriptorActions.Length != 1)
+				writer.WriteStartArray();
+			foreach (var action in InputOutputDescriptorActions)
+			{
+				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor(action), options);
+			}
+
+			if (InputOutputDescriptorActions.Length != 1)
+				writer.WriteEndArray();
+		}
+		else if (InputOutputValue is not null)
+		{
+			writer.WritePropertyName("input_output");
+			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(InputOutputValue, writer, options);
 		}
 
 		writer.WritePropertyName("model_id");

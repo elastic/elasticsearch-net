@@ -37,14 +37,16 @@ public sealed partial class DeleteExpiredDataRequestParameters : RequestParamete
 /// <summary>
 /// <para>
 /// Delete expired ML data.
-/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// </para>
+/// <para>
+/// Delete all job results, model snapshots and forecast data that have exceeded
 /// their retention days period. Machine learning state documents that are not
 /// associated with any job are also deleted.
 /// You can limit the request to a single or set of anomaly detection jobs by
 /// using a job identifier, a group name, a comma-separated list of jobs, or a
 /// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
-/// &lt;job_id>.
+/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
+/// <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpiredDataRequestParameters>
@@ -86,14 +88,16 @@ public sealed partial class DeleteExpiredDataRequest : PlainRequest<DeleteExpire
 /// <summary>
 /// <para>
 /// Delete expired ML data.
-/// Deletes all job results, model snapshots and forecast data that have exceeded
+/// </para>
+/// <para>
+/// Delete all job results, model snapshots and forecast data that have exceeded
 /// their retention days period. Machine learning state documents that are not
 /// associated with any job are also deleted.
 /// You can limit the request to a single or set of anomaly detection jobs by
 /// using a job identifier, a group name, a comma-separated list of jobs, or a
 /// wildcard expression. You can delete expired data for all anomaly detection
-/// jobs by using _all, by specifying * as the &lt;job_id>, or by omitting the
-/// &lt;job_id>.
+/// jobs by using <c>_all</c>, by specifying <c>*</c> as the <c>&lt;job_id></c>, or by omitting the
+/// <c>&lt;job_id></c>.
 /// </para>
 /// </summary>
 public sealed partial class DeleteExpiredDataRequestDescriptor : RequestDescriptor<DeleteExpiredDataRequestDescriptor, DeleteExpiredDataRequestParameters>

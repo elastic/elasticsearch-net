@@ -55,6 +55,7 @@ public sealed partial class TokenizationConfig
 	public static TokenizationConfig BertJa(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("bert_ja", nlpBertTokenizationConfig);
 	public static TokenizationConfig Mpnet(Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfig nlpBertTokenizationConfig) => new TokenizationConfig("mpnet", nlpBertTokenizationConfig);
 	public static TokenizationConfig Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => new TokenizationConfig("roberta", nlpRobertaTokenizationConfig);
+	public static TokenizationConfig XlmRoberta(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig xlmRobertaTokenizationConfig) => new TokenizationConfig("xlm_roberta", xlmRobertaTokenizationConfig);
 
 	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
 	{
@@ -122,6 +123,13 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 				continue;
 			}
 
+			if (propertyName == "xlm_roberta")
+			{
+				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig?>(ref reader, options);
+				variantNameValue = propertyName;
+				continue;
+			}
+
 			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'TokenizationConfig' from the response.");
 		}
 
@@ -148,6 +156,9 @@ internal sealed partial class TokenizationConfigConverter : JsonConverter<Tokeni
 					break;
 				case "roberta":
 					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig)value.Variant, options);
+					break;
+				case "xlm_roberta":
+					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig)value.Variant, options);
 					break;
 			}
 		}
@@ -195,6 +206,8 @@ public sealed partial class TokenizationConfigDescriptor<TDocument> : Serializab
 	public TokenizationConfigDescriptor<TDocument> Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 	public TokenizationConfigDescriptor<TDocument> Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
 	public TokenizationConfigDescriptor<TDocument> Roberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
+	public TokenizationConfigDescriptor<TDocument> XlmRoberta(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig xlmRobertaTokenizationConfig) => Set(xlmRobertaTokenizationConfig, "xlm_roberta");
+	public TokenizationConfigDescriptor<TDocument> XlmRoberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor> configure) => Set(configure, "xlm_roberta");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
@@ -255,6 +268,8 @@ public sealed partial class TokenizationConfigDescriptor : SerializableDescripto
 	public TokenizationConfigDescriptor Mpnet(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpBertTokenizationConfigDescriptor> configure) => Set(configure, "mpnet");
 	public TokenizationConfigDescriptor Roberta(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Set(nlpRobertaTokenizationConfig, "roberta");
 	public TokenizationConfigDescriptor Roberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor> configure) => Set(configure, "roberta");
+	public TokenizationConfigDescriptor XlmRoberta(Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfig xlmRobertaTokenizationConfig) => Set(xlmRobertaTokenizationConfig, "xlm_roberta");
+	public TokenizationConfigDescriptor XlmRoberta(Action<Elastic.Clients.Elasticsearch.MachineLearning.XlmRobertaTokenizationConfigDescriptor> configure) => Set(configure, "xlm_roberta");
 
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{

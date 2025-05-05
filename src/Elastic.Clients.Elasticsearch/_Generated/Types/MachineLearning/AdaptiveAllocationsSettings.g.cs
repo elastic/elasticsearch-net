@@ -29,10 +29,99 @@ namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
 public sealed partial class AdaptiveAllocationsSettings
 {
+	/// <summary>
+	/// <para>
+	/// If true, adaptive_allocations is enabled
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
+	public bool Enabled { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of allocations to scale to.
+	/// If set, it must be greater than or equal to min_number_of_allocations.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_number_of_allocations")]
-	public int? MaxNumberOfAllocations { get; init; }
+	public int? MaxNumberOfAllocations { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Specifies the minimum number of allocations to scale to.
+	/// If set, it must be greater than or equal to 0.
+	/// If not defined, the deployment scales to 0.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_number_of_allocations")]
-	public int? MinNumberOfAllocations { get; init; }
+	public int? MinNumberOfAllocations { get; set; }
+}
+
+public sealed partial class AdaptiveAllocationsSettingsDescriptor : SerializableDescriptor<AdaptiveAllocationsSettingsDescriptor>
+{
+	internal AdaptiveAllocationsSettingsDescriptor(Action<AdaptiveAllocationsSettingsDescriptor> configure) => configure.Invoke(this);
+
+	public AdaptiveAllocationsSettingsDescriptor() : base()
+	{
+	}
+
+	private bool EnabledValue { get; set; }
+	private int? MaxNumberOfAllocationsValue { get; set; }
+	private int? MinNumberOfAllocationsValue { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If true, adaptive_allocations is enabled
+	/// </para>
+	/// </summary>
+	public AdaptiveAllocationsSettingsDescriptor Enabled(bool enabled = true)
+	{
+		EnabledValue = enabled;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of allocations to scale to.
+	/// If set, it must be greater than or equal to min_number_of_allocations.
+	/// </para>
+	/// </summary>
+	public AdaptiveAllocationsSettingsDescriptor MaxNumberOfAllocations(int? maxNumberOfAllocations)
+	{
+		MaxNumberOfAllocationsValue = maxNumberOfAllocations;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the minimum number of allocations to scale to.
+	/// If set, it must be greater than or equal to 0.
+	/// If not defined, the deployment scales to 0.
+	/// </para>
+	/// </summary>
+	public AdaptiveAllocationsSettingsDescriptor MinNumberOfAllocations(int? minNumberOfAllocations)
+	{
+		MinNumberOfAllocationsValue = minNumberOfAllocations;
+		return Self;
+	}
+
+	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName("enabled");
+		writer.WriteBooleanValue(EnabledValue);
+		if (MaxNumberOfAllocationsValue.HasValue)
+		{
+			writer.WritePropertyName("max_number_of_allocations");
+			writer.WriteNumberValue(MaxNumberOfAllocationsValue.Value);
+		}
+
+		if (MinNumberOfAllocationsValue.HasValue)
+		{
+			writer.WritePropertyName("min_number_of_allocations");
+			writer.WriteNumberValue(MinNumberOfAllocationsValue.Value);
+		}
+
+		writer.WriteEndObject();
+	}
 }

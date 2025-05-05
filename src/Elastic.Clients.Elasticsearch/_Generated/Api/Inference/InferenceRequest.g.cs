@@ -34,7 +34,7 @@ public sealed partial class InferenceRequestParameters : RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
+	/// The amount of time to wait for the inference request to complete.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -42,7 +42,19 @@ public sealed partial class InferenceRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Perform inference on the service
+/// Perform inference on the service.
+/// </para>
+/// <para>
+/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+/// It returns a response with the results of the tasks.
+/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+/// </para>
+/// <para>
+/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+/// </para>
+/// <para>
+/// info
+/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
 public sealed partial class InferenceRequest : PlainRequest<InferenceRequestParameters>
@@ -65,7 +77,7 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Specifies the amount of time to wait for the inference request to complete.
+	/// The amount of time to wait for the inference request to complete.
 	/// </para>
 	/// </summary>
 	[JsonIgnore]
@@ -73,8 +85,12 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
+	/// The text on which you want to perform the inference task.
+	/// It can be a single string or an array.
+	/// </para>
+	/// <para>
+	/// info
+	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("input")]
@@ -83,8 +99,8 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Query input, required for rerank task.
-	/// Not required for other tasks.
+	/// The query input, which is required only for the <c>rerank</c> task.
+	/// It is not required for other tasks.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("query")]
@@ -92,7 +108,8 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request.
+	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_settings")]
@@ -101,7 +118,19 @@ public sealed partial class InferenceRequest : PlainRequest<InferenceRequestPara
 
 /// <summary>
 /// <para>
-/// Perform inference on the service
+/// Perform inference on the service.
+/// </para>
+/// <para>
+/// This API enables you to use machine learning models to perform specific tasks on data that you provide as an input.
+/// It returns a response with the results of the tasks.
+/// The inference endpoint you use can perform one specific task that has been defined when the endpoint was created with the create inference API.
+/// </para>
+/// <para>
+/// For details about using this API with a service, such as Amazon Bedrock, Anthropic, or HuggingFace, refer to the service-specific documentation.
+/// </para>
+/// <para>
+/// info
+/// The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face. For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
 /// </para>
 /// </summary>
 public sealed partial class InferenceRequestDescriptor : RequestDescriptor<InferenceRequestDescriptor, InferenceRequestParameters>
@@ -144,8 +173,12 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 
 	/// <summary>
 	/// <para>
-	/// Inference input.
-	/// Either a string or an array of strings.
+	/// The text on which you want to perform the inference task.
+	/// It can be a single string or an array.
+	/// </para>
+	/// <para>
+	/// info
+	/// Inference endpoints for the <c>completion</c> task type currently only support a single string as input.
 	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor Input(ICollection<string> input)
@@ -156,8 +189,8 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 
 	/// <summary>
 	/// <para>
-	/// Query input, required for rerank task.
-	/// Not required for other tasks.
+	/// The query input, which is required only for the <c>rerank</c> task.
+	/// It is not required for other tasks.
 	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor Query(string? query)
@@ -168,7 +201,8 @@ public sealed partial class InferenceRequestDescriptor : RequestDescriptor<Infer
 
 	/// <summary>
 	/// <para>
-	/// Optional task settings
+	/// Task settings for the individual inference request.
+	/// These settings are specific to the task type you specified and override the task settings specified when initializing the service.
 	/// </para>
 	/// </summary>
 	public InferenceRequestDescriptor TaskSettings(object? taskSettings)

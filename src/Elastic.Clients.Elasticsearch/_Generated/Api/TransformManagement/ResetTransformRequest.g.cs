@@ -39,12 +39,20 @@ public sealed partial class ResetTransformRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Reset a transform.
-/// Resets a transform.
+/// </para>
+/// <para>
 /// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 /// If the destination index was created by the transform, it is deleted.
 /// </para>
@@ -71,12 +79,21 @@ public sealed partial class ResetTransformRequest : PlainRequest<ResetTransformR
 	/// </summary>
 	[JsonIgnore]
 	public bool? Force { get => Q<bool?>("force"); set => Q("force", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Reset a transform.
-/// Resets a transform.
+/// </para>
+/// <para>
 /// Before you can reset it, you must stop it; alternatively, use the <c>force</c> query parameter.
 /// If the destination index was created by the transform, it is deleted.
 /// </para>
@@ -98,6 +115,7 @@ public sealed partial class ResetTransformRequestDescriptor : RequestDescriptor<
 	internal override string OperationName => "transform.reset_transform";
 
 	public ResetTransformRequestDescriptor Force(bool? force = true) => Qs("force", force);
+	public ResetTransformRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
 
 	public ResetTransformRequestDescriptor TransformId(Elastic.Clients.Elasticsearch.Id transformId)
 	{

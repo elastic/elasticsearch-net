@@ -32,7 +32,7 @@ namespace Elastic.Clients.Elasticsearch.Mapping;
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapeProperty : IProperty
 {
@@ -53,6 +53,8 @@ public sealed partial class GeoShapeProperty : IProperty
 	public bool? IgnoreMalformed { get; set; }
 	[JsonInclude, JsonPropertyName("ignore_z_value")]
 	public bool? IgnoreZValue { get; set; }
+	[JsonInclude, JsonPropertyName("index")]
+	public bool? Index { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -81,7 +83,7 @@ public sealed partial class GeoShapeProperty : IProperty
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor<TDocument> : SerializableDescriptor<GeoShapePropertyDescriptor<TDocument>>, IBuildableDescriptor<GeoShapeProperty>
 {
@@ -99,6 +101,7 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IgnoreZValueValue { get; set; }
+	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
@@ -165,6 +168,12 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 	public GeoShapePropertyDescriptor<TDocument> IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
+		return Self;
+	}
+
+	public GeoShapePropertyDescriptor<TDocument> Index(bool? index = true)
+	{
+		IndexValue = index;
 		return Self;
 	}
 
@@ -274,6 +283,12 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -325,6 +340,7 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
+		Index = IndexValue,
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,
@@ -339,7 +355,7 @@ public sealed partial class GeoShapePropertyDescriptor<TDocument> : Serializable
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.17/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<GeoShapePropertyDescriptor>, IBuildableDescriptor<GeoShapeProperty>
 {
@@ -357,6 +373,7 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	private int? IgnoreAboveValue { get; set; }
 	private bool? IgnoreMalformedValue { get; set; }
 	private bool? IgnoreZValueValue { get; set; }
+	private bool? IndexValue { get; set; }
 	private IDictionary<string, string>? MetaValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.GeoOrientation? OrientationValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
@@ -423,6 +440,12 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 	public GeoShapePropertyDescriptor IgnoreZValue(bool? ignoreZValue = true)
 	{
 		IgnoreZValueValue = ignoreZValue;
+		return Self;
+	}
+
+	public GeoShapePropertyDescriptor Index(bool? index = true)
+	{
+		IndexValue = index;
 		return Self;
 	}
 
@@ -532,6 +555,12 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 			writer.WriteBooleanValue(IgnoreZValueValue.Value);
 		}
 
+		if (IndexValue.HasValue)
+		{
+			writer.WritePropertyName("index");
+			writer.WriteBooleanValue(IndexValue.Value);
+		}
+
 		if (MetaValue is not null)
 		{
 			writer.WritePropertyName("meta");
@@ -583,6 +612,7 @@ public sealed partial class GeoShapePropertyDescriptor : SerializableDescriptor<
 		IgnoreAbove = IgnoreAboveValue,
 		IgnoreMalformed = IgnoreMalformedValue,
 		IgnoreZValue = IgnoreZValueValue,
+		Index = IndexValue,
 		Meta = MetaValue,
 		Orientation = OrientationValue,
 		Properties = PropertiesValue,

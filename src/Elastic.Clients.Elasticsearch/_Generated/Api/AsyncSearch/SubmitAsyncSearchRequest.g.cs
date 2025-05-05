@@ -302,7 +302,7 @@ internal sealed partial class SubmitAsyncSearchRequestConverter : JsonConverter<
 
 				if (property == "indices_boost")
 				{
-					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
+					variant.IndicesBoost = JsonSerializer.Deserialize<ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>?>(ref reader, options);
 					continue;
 				}
 
@@ -975,7 +975,7 @@ public sealed partial class SubmitAsyncSearchRequest : PlainRequest<SubmitAsyncS
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("indices_boost")]
-	public ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
+	public ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -1233,7 +1233,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument> HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument> KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>> KnnDescriptorAction { get; set; }
@@ -1455,7 +1455,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor<TDocument> : Requ
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SubmitAsyncSearchRequestDescriptor<TDocument> IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;
@@ -2356,7 +2356,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	private Elastic.Clients.Elasticsearch.Core.Search.Highlight? HighlightValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor HighlightDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> HighlightDescriptorAction { get; set; }
-	private ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
+	private ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoostValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? KnnValue { get; set; }
 	private Elastic.Clients.Elasticsearch.KnnSearchDescriptor KnnDescriptor { get; set; }
 	private Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor> KnnDescriptorAction { get; set; }
@@ -2578,7 +2578,7 @@ public sealed partial class SubmitAsyncSearchRequestDescriptor : RequestDescript
 	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
-	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<IDictionary<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
+	public SubmitAsyncSearchRequestDescriptor IndicesBoost(ICollection<KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? indicesBoost)
 	{
 		IndicesBoostValue = indicesBoost;
 		return Self;

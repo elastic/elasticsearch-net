@@ -329,6 +329,41 @@ internal sealed class ManagedByConverter : JsonConverter<ManagedBy>
 	}
 }
 
+[JsonConverter(typeof(ModeEnumConverter))]
+public enum ModeEnum
+{
+	[EnumMember(Value = "upgrade")]
+	Upgrade
+}
+
+internal sealed class ModeEnumConverter : JsonConverter<ModeEnum>
+{
+	public override ModeEnum Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "upgrade":
+				return ModeEnum.Upgrade;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, ModeEnum value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case ModeEnum.Upgrade:
+				writer.WriteStringValue("upgrade");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(NumericFielddataFormatConverter))]
 public enum NumericFielddataFormat
 {

@@ -37,6 +37,8 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequestParameters : 
 /// <summary>
 /// <para>
 /// Clear trained model deployment cache.
+/// </para>
+/// <para>
 /// Cache will be cleared on all nodes where the trained model is assigned.
 /// A trained model deployment may have an inference cache enabled.
 /// As requests are handled by each allocated node, their responses may be cached on that individual node.
@@ -61,6 +63,8 @@ public sealed partial class ClearTrainedModelDeploymentCacheRequest : PlainReque
 /// <summary>
 /// <para>
 /// Clear trained model deployment cache.
+/// </para>
+/// <para>
 /// Cache will be cleared on all nodes where the trained model is assigned.
 /// A trained model deployment may have an inference cache enabled.
 /// As requests are handled by each allocated node, their responses may be cached on that individual node.

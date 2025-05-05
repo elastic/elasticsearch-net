@@ -42,8 +42,7 @@ public sealed partial class GetBuiltinPrivilegesResponse : ElasticsearchResponse
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("index")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string> Indices { get; init; }
+	public IReadOnlyCollection<string> Index { get; init; }
 
 	/// <summary>
 	/// <para>

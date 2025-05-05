@@ -31,12 +31,14 @@ public sealed partial class Checkpointing
 {
 	[JsonInclude, JsonPropertyName("changes_last_detected_at")]
 	public long? ChangesLastDetectedAt { get; init; }
-	[JsonInclude, JsonPropertyName("changes_last_detected_at_date_time")]
-	public DateTimeOffset? ChangesLastDetectedAtDateTime { get; init; }
+	[JsonInclude, JsonPropertyName("changes_last_detected_at_string")]
+	public DateTimeOffset? ChangesLastDetectedAtString { get; init; }
 	[JsonInclude, JsonPropertyName("last")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats Last { get; init; }
 	[JsonInclude, JsonPropertyName("last_search_time")]
 	public long? LastSearchTime { get; init; }
+	[JsonInclude, JsonPropertyName("last_search_time_string")]
+	public DateTimeOffset? LastSearchTimeString { get; init; }
 	[JsonInclude, JsonPropertyName("next")]
 	public Elastic.Clients.Elasticsearch.TransformManagement.CheckpointStats? Next { get; init; }
 	[JsonInclude, JsonPropertyName("operations_behind")]

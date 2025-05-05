@@ -37,6 +37,8 @@ public sealed partial class DeleteTrainedModelAliasRequestParameters : RequestPa
 /// <summary>
 /// <para>
 /// Delete a trained model alias.
+/// </para>
+/// <para>
 /// This API deletes an existing model alias that refers to a trained model. If
 /// the model alias is missing or refers to a model other than the one identified
 /// by the <c>model_id</c>, this API returns an error.
@@ -60,6 +62,8 @@ public sealed partial class DeleteTrainedModelAliasRequest : PlainRequest<Delete
 /// <summary>
 /// <para>
 /// Delete a trained model alias.
+/// </para>
+/// <para>
 /// This API deletes an existing model alias that refers to a trained model. If
 /// the model alias is missing or refers to a model other than the one identified
 /// by the <c>model_id</c>, this API returns an error.
