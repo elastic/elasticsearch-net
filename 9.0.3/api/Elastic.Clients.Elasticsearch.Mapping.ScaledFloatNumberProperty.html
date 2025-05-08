@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ScaledFloatNumberProperty | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ScaledFloatNumberProperty | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.3/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty" class="text-break">
+Class ScaledFloatNumberProperty  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.html">Mapping</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(ScaledFloatNumberPropertyConverter))]
+public sealed class ScaledFloatNumberProperty : IProperty</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ScaledFloatNumberProperty</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IProperty.html">IProperty</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty__ctor" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.#ctor">
+  ScaledFloatNumberProperty()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L244"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ScaledFloatNumberProperty()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Boost_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Boost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Boost" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Boost">
+  Boost
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? Boost { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Coerce_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Coerce*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Coerce" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Coerce">
+  Coerce
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L255"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Coerce { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_CopyTo_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.CopyTo*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_CopyTo" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.CopyTo">
+  CopyTo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L256"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Fields? CopyTo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_DocValues_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.DocValues*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_DocValues" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.DocValues">
+  DocValues
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? DocValues { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Dynamic_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Dynamic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Dynamic" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Dynamic">
+  Dynamic
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L258"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DynamicMapping? Dynamic { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.html">DynamicMapping</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Fields_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Fields" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Fields">
+  Fields
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Properties? Fields { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_IgnoreAbove_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.IgnoreAbove*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_IgnoreAbove" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.IgnoreAbove">
+  IgnoreAbove
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L260"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? IgnoreAbove { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_IgnoreMalformed_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.IgnoreMalformed*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_IgnoreMalformed" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.IgnoreMalformed">
+  IgnoreMalformed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? IgnoreMalformed { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Index_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Index" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Index { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Meta" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Meta">
+  Meta
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Metadata about the field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, string&gt;? Meta { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_NullValue_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.NullValue*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_NullValue" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.NullValue">
+  NullValue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L270"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? NullValue { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_OnScriptError_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.OnScriptError*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_OnScriptError" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.OnScriptError">
+  OnScriptError
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OnScriptError? OnScriptError { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.OnScriptError.html">OnScriptError</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Properties" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Properties">
+  Properties
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L272"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Properties? Properties { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_ScalingFactor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.ScalingFactor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_ScalingFactor" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.ScalingFactor">
+  ScalingFactor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L273"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double? ScalingFactor { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Script_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Script*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Script" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Script">
+  Script
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L274"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Script? Script { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Script.html">Script</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Store_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Store*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Store" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Store">
+  Store
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Store { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_SyntheticSourceKeep_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.SyntheticSourceKeep*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_SyntheticSourceKeep" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.SyntheticSourceKeep">
+  SyntheticSourceKeep
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum.html">SyntheticSourceKeepEnum</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_TimeSeriesDimension_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.TimeSeriesDimension*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_TimeSeriesDimension" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.TimeSeriesDimension">
+  TimeSeriesDimension
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? TimeSeriesDimension { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_TimeSeriesMetric_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.TimeSeriesMetric*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_TimeSeriesMetric" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.TimeSeriesMetric">
+  TimeSeriesMetric
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L290"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSeriesMetricType? TimeSeriesMetric { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType.html">TimeSeriesMetricType</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Type_" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Type*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_ScaledFloatNumberProperty_Type" data-uid="Elastic.Clients.Elasticsearch.Mapping.ScaledFloatNumberProperty.Type">
+  Type
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.3/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/ScaledFloatNumberProperty.g.cs/#L292"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Type { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
