@@ -336,13 +336,13 @@ public partial class IndexRequest<TDocument> : Elastic.Clients.Elasticsearch.Req
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", typeof(TDocument)).Optional("id", id))
+	public IndexRequest(TDocument document, Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Required("index", (Elastic.Clients.Elasticsearch.IndexName)typeof(TDocument)).Optional("id", id))
 	{
 		Document = document;
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public IndexRequest(TDocument document) : base(r => r.Required("index", typeof(TDocument)).Optional("id", Elastic.Clients.Elasticsearch.Id.From(document)))
+	public IndexRequest(TDocument document) : base(r => r.Required("index", (Elastic.Clients.Elasticsearch.IndexName)typeof(TDocument)).Optional("id", Elastic.Clients.Elasticsearch.Id.From(document)))
 	{
 		Document = document;
 	}

@@ -176,7 +176,45 @@ public sealed partial class CreateIndexRequest : Elastic.Clients.Elasticsearch.R
 	/// <summary>
 	/// <para>
 	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public
 #if NET7_0_OR_GREATER
@@ -314,7 +352,45 @@ public readonly partial struct CreateIndexRequestDescriptor
 	/// <summary>
 	/// <para>
 	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
@@ -731,7 +807,45 @@ public readonly partial struct CreateIndexRequestDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{

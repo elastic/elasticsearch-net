@@ -23,7 +23,7 @@ using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-internal sealed partial class PipelineSimulationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>
+internal sealed partial class PipelineProcessorResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
 	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
@@ -33,7 +33,7 @@ internal sealed partial class PipelineSimulationConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
 	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
 
-	public override Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
@@ -41,7 +41,7 @@ internal sealed partial class PipelineSimulationConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propIgnoredError = default;
 		LocalJsonValue<string?> propProcessorType = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions?> propStatus = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions?> propStatus = default;
 		LocalJsonValue<string?> propTag = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -90,7 +90,7 @@ internal sealed partial class PipelineSimulationConverter : System.Text.Json.Ser
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
-		return new Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		return new Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			Description = propDescription.Value,
 			Doc = propDoc.Value,
@@ -102,7 +102,7 @@ internal sealed partial class PipelineSimulationConverter : System.Text.Json.Ser
 		};
 	}
 
-	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation value, System.Text.Json.JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
@@ -116,21 +116,21 @@ internal sealed partial class PipelineSimulationConverter : System.Text.Json.Ser
 	}
 }
 
-[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationConverter))]
-public sealed partial class PipelineSimulation
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResultConverter))]
+public sealed partial class PipelineProcessorResult
 {
 #if NET7_0_OR_GREATER
-	public PipelineSimulation()
+	public PipelineProcessorResult()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
-	public PipelineSimulation()
+	public PipelineProcessorResult()
 	{
 	}
 #endif
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	internal PipelineSimulation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	internal PipelineProcessorResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
 	{
 		_ = sentinel;
 	}
@@ -140,6 +140,6 @@ public sealed partial class PipelineSimulation
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? IgnoredError { get; set; }
 	public string? ProcessorType { get; set; }
-	public Elastic.Clients.Elasticsearch.Watcher.ActionStatusOptions? Status { get; set; }
+	public Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions? Status { get; set; }
 	public string? Tag { get; set; }
 }

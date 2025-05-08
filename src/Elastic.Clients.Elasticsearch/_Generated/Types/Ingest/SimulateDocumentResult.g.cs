@@ -34,7 +34,7 @@ internal sealed partial class SimulateDocumentResultConverter : System.Text.Json
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation?> propDoc = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
-		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>?> propProcessorResults = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>?> propProcessorResults = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
@@ -47,7 +47,7 @@ internal sealed partial class SimulateDocumentResultConverter : System.Text.Json
 				continue;
 			}
 
-			if (propProcessorResults.TryReadProperty(ref reader, options, PropProcessorResults, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>(o, null)))
+			if (propProcessorResults.TryReadProperty(ref reader, options, PropProcessorResults, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>(o, null)))
 			{
 				continue;
 			}
@@ -75,7 +75,7 @@ internal sealed partial class SimulateDocumentResultConverter : System.Text.Json
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
 		writer.WriteProperty(options, PropError, value.Error, null, null);
-		writer.WriteProperty(options, PropProcessorResults, value.ProcessorResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>(o, v, null));
+		writer.WriteProperty(options, PropProcessorResults, value.ProcessorResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>(o, v, null));
 		writer.WriteEndObject();
 	}
 }
@@ -101,5 +101,5 @@ public sealed partial class SimulateDocumentResult
 
 	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; set; }
 	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
-	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? ProcessorResults { get; set; }
 }

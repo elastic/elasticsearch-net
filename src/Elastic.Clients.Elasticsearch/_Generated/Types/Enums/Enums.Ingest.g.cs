@@ -604,6 +604,105 @@ internal sealed partial class UserAgentPropertyConverter : System.Text.Json.Seri
 	}
 }
 
+internal sealed partial class PipelineSimulationStatusOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDropped = System.Text.Json.JsonEncodedText.Encode("dropped");
+	private static readonly System.Text.Json.JsonEncodedText MemberError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText MemberErrorIgnored = System.Text.Json.JsonEncodedText.Encode("error_ignored");
+	private static readonly System.Text.Json.JsonEncodedText MemberSkipped = System.Text.Json.JsonEncodedText.Encode("skipped");
+	private static readonly System.Text.Json.JsonEncodedText MemberSuccess = System.Text.Json.JsonEncodedText.Encode("success");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDropped))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Dropped;
+		}
+
+		if (reader.ValueTextEquals(MemberError))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Error;
+		}
+
+		if (reader.ValueTextEquals(MemberErrorIgnored))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.ErrorIgnored;
+		}
+
+		if (reader.ValueTextEquals(MemberSkipped))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Skipped;
+		}
+
+		if (reader.ValueTextEquals(MemberSuccess))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Success;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDropped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Dropped;
+		}
+
+		if (string.Equals(value, MemberError.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Error;
+		}
+
+		if (string.Equals(value, MemberErrorIgnored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.ErrorIgnored;
+		}
+
+		if (string.Equals(value, MemberSkipped.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Skipped;
+		}
+
+		if (string.Equals(value, MemberSuccess.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Success;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Dropped:
+				writer.WriteStringValue(MemberDropped);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Error:
+				writer.WriteStringValue(MemberError);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.ErrorIgnored:
+				writer.WriteStringValue(MemberErrorIgnored);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Skipped:
+				writer.WriteStringValue(MemberSkipped);
+				break;
+			case Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions.Success:
+				writer.WriteStringValue(MemberSuccess);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.ShapeTypeConverter))]
 public enum ShapeType
 {
@@ -701,4 +800,19 @@ public enum UserAgentProperty
 	Os,
 	[System.Runtime.Serialization.EnumMember(Value = "version")]
 	Version
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.PipelineSimulationStatusOptionsConverter))]
+public enum PipelineSimulationStatusOptions
+{
+	[System.Runtime.Serialization.EnumMember(Value = "dropped")]
+	Dropped,
+	[System.Runtime.Serialization.EnumMember(Value = "error")]
+	Error,
+	[System.Runtime.Serialization.EnumMember(Value = "error_ignored")]
+	ErrorIgnored,
+	[System.Runtime.Serialization.EnumMember(Value = "skipped")]
+	Skipped,
+	[System.Runtime.Serialization.EnumMember(Value = "success")]
+	Success
 }

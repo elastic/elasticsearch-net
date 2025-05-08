@@ -25,7 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 internal sealed partial class DictionaryDecompounderTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropHyphenationPatternsPath = System.Text.Json.JsonEncodedText.Encode("hyphenation_patterns_path");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSubwordSize = System.Text.Json.JsonEncodedText.Encode("max_subword_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMinSubwordSize = System.Text.Json.JsonEncodedText.Encode("min_subword_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMinWordSize = System.Text.Json.JsonEncodedText.Encode("min_word_size");
@@ -38,7 +37,6 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 	public override Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propHyphenationPatternsPath = default;
 		LocalJsonValue<int?> propMaxSubwordSize = default;
 		LocalJsonValue<int?> propMinSubwordSize = default;
 		LocalJsonValue<int?> propMinWordSize = default;
@@ -48,11 +46,6 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 		LocalJsonValue<string?> propWordListPath = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propHyphenationPatternsPath.TryReadProperty(ref reader, options, PropHyphenationPatternsPath, null))
-			{
-				continue;
-			}
-
 			if (propMaxSubwordSize.TryReadProperty(ref reader, options, PropMaxSubwordSize, null))
 			{
 				continue;
@@ -106,7 +99,6 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			HyphenationPatternsPath = propHyphenationPatternsPath.Value,
 			MaxSubwordSize = propMaxSubwordSize.Value,
 			MinSubwordSize = propMinSubwordSize.Value,
 			MinWordSize = propMinWordSize.Value,
@@ -120,7 +112,6 @@ internal sealed partial class DictionaryDecompounderTokenFilterConverter : Syste
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropHyphenationPatternsPath, value.HyphenationPatternsPath, null, null);
 		writer.WriteProperty(options, PropMaxSubwordSize, value.MaxSubwordSize, null, null);
 		writer.WriteProperty(options, PropMinSubwordSize, value.MinSubwordSize, null, null);
 		writer.WriteProperty(options, PropMinWordSize, value.MinWordSize, null, null);
@@ -152,16 +143,53 @@ public sealed partial class DictionaryDecompounderTokenFilter : Elastic.Clients.
 		_ = sentinel;
 	}
 
-	public string? HyphenationPatternsPath { get; set; }
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public int? MaxSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public int? MinSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public int? MinWordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? OnlyLongestMatch { get; set; }
 
 	public string Type => "dictionary_decompounder";
 
 	public string? Version { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? WordList { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public string? WordListPath { get; set; }
 }
 
@@ -184,30 +212,44 @@ public readonly partial struct DictionaryDecompounderTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? value)
-	{
-		Instance.HyphenationPatternsPath = value;
-		return this;
-	}
-
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor MaxSubwordSize(int? value)
 	{
 		Instance.MaxSubwordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor MinSubwordSize(int? value)
 	{
 		Instance.MinSubwordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor MinWordSize(int? value)
 	{
 		Instance.MinWordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? value = true)
 	{
 		Instance.OnlyLongestMatch = value;
@@ -220,18 +262,37 @@ public readonly partial struct DictionaryDecompounderTokenFilterDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordList(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.WordList = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordList(params string[] values)
 	{
 		Instance.WordList = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DictionaryDecompounderTokenFilterDescriptor WordListPath(string? value)
 	{
 		Instance.WordListPath = value;

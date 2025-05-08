@@ -114,11 +114,22 @@ public sealed partial class ConditionTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	System.Collections.Generic.ICollection<string> Filter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -149,30 +160,55 @@ public readonly partial struct ConditionTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter(Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor Filter(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Filter = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor Filter(params string[] values)
 	{
 		Instance.Filter = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
 		Instance.Script = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor Script()
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
 		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);

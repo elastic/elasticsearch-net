@@ -37,7 +37,7 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propIgnoreCase = default;
 		LocalJsonValue<bool?> propRemoveTrailing = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
 		LocalJsonValue<string?> propStopwordsPath = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -52,7 +52,7 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
 			{
 				continue;
 			}
@@ -98,7 +98,7 @@ internal sealed partial class StopTokenFilterConverter : System.Text.Json.Serial
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropIgnoreCase, value.IgnoreCase, null, null);
 		writer.WriteProperty(options, PropRemoveTrailing, value.RemoveTrailing, null, null);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
@@ -125,9 +125,33 @@ public sealed partial class StopTokenFilter : Elastic.Clients.Elasticsearch.Anal
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? IgnoreCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? RemoveTrailing { get; set; }
-	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of stop words to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "stop";
@@ -154,30 +178,45 @@ public readonly partial struct StopTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StopTokenFilter(Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor IgnoreCase(bool? value = true)
 	{
 		Instance.IgnoreCase = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor RemoveTrailing(bool? value = true)
 	{
 		Instance.RemoveTrailing = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
+	/// <summary>
+	/// <para>
+	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor Stopwords(params string[] values)
-	{
-		Instance.Stopwords = [.. values];
-		return this;
-	}
-
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of stop words to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StopTokenFilterDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;

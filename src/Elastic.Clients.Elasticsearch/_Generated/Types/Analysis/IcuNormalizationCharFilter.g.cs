@@ -28,6 +28,7 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
 	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropUnicodeSetFilter = System.Text.Json.JsonEncodedText.Encode("unicode_set_filter");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -35,6 +36,7 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode?> propMode = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType?> propName = default;
+		LocalJsonValue<string?> propUnicodeSetFilter = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -51,6 +53,11 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 			if (reader.ValueTextEquals(PropType))
 			{
 				reader.Skip();
+				continue;
+			}
+
+			if (propUnicodeSetFilter.TryReadProperty(ref reader, options, PropUnicodeSetFilter, null))
+			{
 				continue;
 			}
 
@@ -73,6 +80,7 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 		{
 			Mode = propMode.Value,
 			Name = propName.Value,
+			UnicodeSetFilter = propUnicodeSetFilter.Value,
 			Version = propVersion.Value
 		};
 	}
@@ -83,6 +91,7 @@ internal sealed partial class IcuNormalizationCharFilterConverter : System.Text.
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
 		writer.WriteProperty(options, PropName, value.Name, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropUnicodeSetFilter, value.UnicodeSetFilter, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -112,6 +121,7 @@ public sealed partial class IcuNormalizationCharFilter : Elastic.Clients.Elastic
 
 	public string Type => "icu_normalizer";
 
+	public string? UnicodeSetFilter { get; set; }
 	public string? Version { get; set; }
 }
 
@@ -143,6 +153,12 @@ public readonly partial struct IcuNormalizationCharFilterDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor Name(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? value)
 	{
 		Instance.Name = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationCharFilterDescriptor UnicodeSetFilter(string? value)
+	{
+		Instance.UnicodeSetFilter = value;
 		return this;
 	}
 

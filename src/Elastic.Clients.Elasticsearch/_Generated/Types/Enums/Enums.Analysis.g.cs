@@ -478,33 +478,114 @@ internal sealed partial class KeepTypesModeConverter : System.Text.Json.Serializ
 	}
 }
 
+internal sealed partial class LowercaseTokenFilterLanguagesConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberGreek = System.Text.Json.JsonEncodedText.Encode("greek");
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("irish");
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("turkish");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberGreek))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Greek;
+		}
+
+		if (reader.ValueTextEquals(MemberIrish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Irish;
+		}
+
+		if (reader.ValueTextEquals(MemberTurkish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Turkish;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberGreek.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Greek;
+		}
+
+		if (string.Equals(value, MemberIrish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Irish;
+		}
+
+		if (string.Equals(value, MemberTurkish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Turkish;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Greek:
+				writer.WriteStringValue(MemberGreek);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Irish:
+				writer.WriteStringValue(MemberIrish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages.Turkish:
+				writer.WriteStringValue(MemberTurkish);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class SnowballLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberArabic = System.Text.Json.JsonEncodedText.Encode("Arabic");
 	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("Armenian");
 	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("Basque");
 	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("Catalan");
 	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("Danish");
 	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("Dutch");
 	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("English");
+	private static readonly System.Text.Json.JsonEncodedText MemberEstonian = System.Text.Json.JsonEncodedText.Encode("Estonian");
 	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("Finnish");
 	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("French");
 	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("German");
 	private static readonly System.Text.Json.JsonEncodedText MemberGerman2 = System.Text.Json.JsonEncodedText.Encode("German2");
 	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("Hungarian");
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("Irish");
 	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("Italian");
 	private static readonly System.Text.Json.JsonEncodedText MemberKp = System.Text.Json.JsonEncodedText.Encode("Kp");
+	private static readonly System.Text.Json.JsonEncodedText MemberLithuanian = System.Text.Json.JsonEncodedText.Encode("Lithuanian");
 	private static readonly System.Text.Json.JsonEncodedText MemberLovins = System.Text.Json.JsonEncodedText.Encode("Lovins");
 	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("Norwegian");
 	private static readonly System.Text.Json.JsonEncodedText MemberPorter = System.Text.Json.JsonEncodedText.Encode("Porter");
 	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("Portuguese");
 	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("Romanian");
 	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("Russian");
+	private static readonly System.Text.Json.JsonEncodedText MemberSerbian = System.Text.Json.JsonEncodedText.Encode("Serbian");
 	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("Spanish");
 	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("Swedish");
 	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("Turkish");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberArabic))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Arabic;
+		}
+
 		if (reader.ValueTextEquals(MemberArmenian))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian;
@@ -535,6 +616,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English;
 		}
 
+		if (reader.ValueTextEquals(MemberEstonian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Estonian;
+		}
+
 		if (reader.ValueTextEquals(MemberFinnish))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish;
@@ -560,6 +646,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian;
 		}
 
+		if (reader.ValueTextEquals(MemberIrish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Irish;
+		}
+
 		if (reader.ValueTextEquals(MemberItalian))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian;
@@ -568,6 +659,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 		if (reader.ValueTextEquals(MemberKp))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp;
+		}
+
+		if (reader.ValueTextEquals(MemberLithuanian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lithuanian;
 		}
 
 		if (reader.ValueTextEquals(MemberLovins))
@@ -600,6 +696,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian;
 		}
 
+		if (reader.ValueTextEquals(MemberSerbian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Serbian;
+		}
+
 		if (reader.ValueTextEquals(MemberSpanish))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish;
@@ -616,6 +717,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberArabic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Arabic;
+		}
+
 		if (string.Equals(value, MemberArmenian.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian;
@@ -646,6 +752,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English;
 		}
 
+		if (string.Equals(value, MemberEstonian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Estonian;
+		}
+
 		if (string.Equals(value, MemberFinnish.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish;
@@ -671,6 +782,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian;
 		}
 
+		if (string.Equals(value, MemberIrish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Irish;
+		}
+
 		if (string.Equals(value, MemberItalian.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian;
@@ -679,6 +795,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 		if (string.Equals(value, MemberKp.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp;
+		}
+
+		if (string.Equals(value, MemberLithuanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lithuanian;
 		}
 
 		if (string.Equals(value, MemberLovins.Value, System.StringComparison.OrdinalIgnoreCase))
@@ -711,6 +832,11 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian;
 		}
 
+		if (string.Equals(value, MemberSerbian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Serbian;
+		}
+
 		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish;
@@ -733,6 +859,9 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Arabic:
+				writer.WriteStringValue(MemberArabic);
+				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Armenian:
 				writer.WriteStringValue(MemberArmenian);
 				break;
@@ -751,6 +880,9 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.English:
 				writer.WriteStringValue(MemberEnglish);
 				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Estonian:
+				writer.WriteStringValue(MemberEstonian);
+				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Finnish:
 				writer.WriteStringValue(MemberFinnish);
 				break;
@@ -766,11 +898,17 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Hungarian:
 				writer.WriteStringValue(MemberHungarian);
 				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Irish:
+				writer.WriteStringValue(MemberIrish);
+				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Italian:
 				writer.WriteStringValue(MemberItalian);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Kp:
 				writer.WriteStringValue(MemberKp);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lithuanian:
+				writer.WriteStringValue(MemberLithuanian);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Lovins:
 				writer.WriteStringValue(MemberLovins);
@@ -789,6 +927,9 @@ internal sealed partial class SnowballLanguageConverter : System.Text.Json.Seria
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Russian:
 				writer.WriteStringValue(MemberRussian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Serbian:
+				writer.WriteStringValue(MemberSerbian);
 				break;
 			case Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage.Spanish:
 				writer.WriteStringValue(MemberSpanish);
@@ -1637,6 +1778,91 @@ internal sealed partial class TokenCharConverter : System.Text.Json.Serializatio
 	}
 }
 
+internal sealed partial class CjkBigramIgnoredScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberHan = System.Text.Json.JsonEncodedText.Encode("han");
+	private static readonly System.Text.Json.JsonEncodedText MemberHangul = System.Text.Json.JsonEncodedText.Encode("hangul");
+	private static readonly System.Text.Json.JsonEncodedText MemberHiragana = System.Text.Json.JsonEncodedText.Encode("hiragana");
+	private static readonly System.Text.Json.JsonEncodedText MemberKatakana = System.Text.Json.JsonEncodedText.Encode("katakana");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberHan))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Han;
+		}
+
+		if (reader.ValueTextEquals(MemberHangul))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hangul;
+		}
+
+		if (reader.ValueTextEquals(MemberHiragana))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hiragana;
+		}
+
+		if (reader.ValueTextEquals(MemberKatakana))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Katakana;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberHan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Han;
+		}
+
+		if (string.Equals(value, MemberHangul.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hangul;
+		}
+
+		if (string.Equals(value, MemberHiragana.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hiragana;
+		}
+
+		if (string.Equals(value, MemberKatakana.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Katakana;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Han:
+				writer.WriteStringValue(MemberHan);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hangul:
+				writer.WriteStringValue(MemberHangul);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Hiragana:
+				writer.WriteStringValue(MemberHiragana);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript.Katakana:
+				writer.WriteStringValue(MemberKatakana);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScript value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguage>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberAny = System.Text.Json.JsonEncodedText.Encode("any");
@@ -1834,6 +2060,553 @@ internal sealed partial class PhoneticLanguageConverter : System.Text.Json.Seria
 	}
 }
 
+internal sealed partial class StopWordLanguageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberArabic = System.Text.Json.JsonEncodedText.Encode("_arabic_");
+	private static readonly System.Text.Json.JsonEncodedText MemberArmenian = System.Text.Json.JsonEncodedText.Encode("_armenian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberBasque = System.Text.Json.JsonEncodedText.Encode("_basque_");
+	private static readonly System.Text.Json.JsonEncodedText MemberBengali = System.Text.Json.JsonEncodedText.Encode("_bengali_");
+	private static readonly System.Text.Json.JsonEncodedText MemberBrazilian = System.Text.Json.JsonEncodedText.Encode("_brazilian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberBulgarian = System.Text.Json.JsonEncodedText.Encode("_bulgarian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberCatalan = System.Text.Json.JsonEncodedText.Encode("_catalan_");
+	private static readonly System.Text.Json.JsonEncodedText MemberCjk = System.Text.Json.JsonEncodedText.Encode("_cjk_");
+	private static readonly System.Text.Json.JsonEncodedText MemberCzech = System.Text.Json.JsonEncodedText.Encode("_czech_");
+	private static readonly System.Text.Json.JsonEncodedText MemberDanish = System.Text.Json.JsonEncodedText.Encode("_danish_");
+	private static readonly System.Text.Json.JsonEncodedText MemberDutch = System.Text.Json.JsonEncodedText.Encode("_dutch_");
+	private static readonly System.Text.Json.JsonEncodedText MemberEnglish = System.Text.Json.JsonEncodedText.Encode("_english_");
+	private static readonly System.Text.Json.JsonEncodedText MemberEstonian = System.Text.Json.JsonEncodedText.Encode("_estonian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberFinnish = System.Text.Json.JsonEncodedText.Encode("_finnish_");
+	private static readonly System.Text.Json.JsonEncodedText MemberFrench = System.Text.Json.JsonEncodedText.Encode("_french_");
+	private static readonly System.Text.Json.JsonEncodedText MemberGalician = System.Text.Json.JsonEncodedText.Encode("_galician_");
+	private static readonly System.Text.Json.JsonEncodedText MemberGerman = System.Text.Json.JsonEncodedText.Encode("_german_");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreek = System.Text.Json.JsonEncodedText.Encode("_greek_");
+	private static readonly System.Text.Json.JsonEncodedText MemberHindi = System.Text.Json.JsonEncodedText.Encode("_hindi_");
+	private static readonly System.Text.Json.JsonEncodedText MemberHungarian = System.Text.Json.JsonEncodedText.Encode("_hungarian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberIndonesian = System.Text.Json.JsonEncodedText.Encode("_indonesian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberIrish = System.Text.Json.JsonEncodedText.Encode("_irish_");
+	private static readonly System.Text.Json.JsonEncodedText MemberItalian = System.Text.Json.JsonEncodedText.Encode("_italian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberLatvian = System.Text.Json.JsonEncodedText.Encode("_latvian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberLithuanian = System.Text.Json.JsonEncodedText.Encode("_lithuanian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("_none_");
+	private static readonly System.Text.Json.JsonEncodedText MemberNorwegian = System.Text.Json.JsonEncodedText.Encode("_norwegian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberPersian = System.Text.Json.JsonEncodedText.Encode("_persian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberPortuguese = System.Text.Json.JsonEncodedText.Encode("_portuguese_");
+	private static readonly System.Text.Json.JsonEncodedText MemberRomanian = System.Text.Json.JsonEncodedText.Encode("_romanian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberRussian = System.Text.Json.JsonEncodedText.Encode("_russian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberSerbian = System.Text.Json.JsonEncodedText.Encode("_serbian_");
+	private static readonly System.Text.Json.JsonEncodedText MemberSorani = System.Text.Json.JsonEncodedText.Encode("_sorani_");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpanish = System.Text.Json.JsonEncodedText.Encode("_spanish_");
+	private static readonly System.Text.Json.JsonEncodedText MemberSwedish = System.Text.Json.JsonEncodedText.Encode("_swedish_");
+	private static readonly System.Text.Json.JsonEncodedText MemberThai = System.Text.Json.JsonEncodedText.Encode("_thai_");
+	private static readonly System.Text.Json.JsonEncodedText MemberTurkish = System.Text.Json.JsonEncodedText.Encode("_turkish_");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberArabic))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Arabic;
+		}
+
+		if (reader.ValueTextEquals(MemberArmenian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Armenian;
+		}
+
+		if (reader.ValueTextEquals(MemberBasque))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Basque;
+		}
+
+		if (reader.ValueTextEquals(MemberBengali))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bengali;
+		}
+
+		if (reader.ValueTextEquals(MemberBrazilian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Brazilian;
+		}
+
+		if (reader.ValueTextEquals(MemberBulgarian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bulgarian;
+		}
+
+		if (reader.ValueTextEquals(MemberCatalan))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Catalan;
+		}
+
+		if (reader.ValueTextEquals(MemberCjk))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Cjk;
+		}
+
+		if (reader.ValueTextEquals(MemberCzech))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Czech;
+		}
+
+		if (reader.ValueTextEquals(MemberDanish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Danish;
+		}
+
+		if (reader.ValueTextEquals(MemberDutch))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Dutch;
+		}
+
+		if (reader.ValueTextEquals(MemberEnglish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.English;
+		}
+
+		if (reader.ValueTextEquals(MemberEstonian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Estonian;
+		}
+
+		if (reader.ValueTextEquals(MemberFinnish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Finnish;
+		}
+
+		if (reader.ValueTextEquals(MemberFrench))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.French;
+		}
+
+		if (reader.ValueTextEquals(MemberGalician))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Galician;
+		}
+
+		if (reader.ValueTextEquals(MemberGerman))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.German;
+		}
+
+		if (reader.ValueTextEquals(MemberGreek))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Greek;
+		}
+
+		if (reader.ValueTextEquals(MemberHindi))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hindi;
+		}
+
+		if (reader.ValueTextEquals(MemberHungarian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hungarian;
+		}
+
+		if (reader.ValueTextEquals(MemberIndonesian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Indonesian;
+		}
+
+		if (reader.ValueTextEquals(MemberIrish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Irish;
+		}
+
+		if (reader.ValueTextEquals(MemberItalian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Italian;
+		}
+
+		if (reader.ValueTextEquals(MemberLatvian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Latvian;
+		}
+
+		if (reader.ValueTextEquals(MemberLithuanian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Lithuanian;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.None;
+		}
+
+		if (reader.ValueTextEquals(MemberNorwegian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Norwegian;
+		}
+
+		if (reader.ValueTextEquals(MemberPersian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Persian;
+		}
+
+		if (reader.ValueTextEquals(MemberPortuguese))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Portuguese;
+		}
+
+		if (reader.ValueTextEquals(MemberRomanian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Romanian;
+		}
+
+		if (reader.ValueTextEquals(MemberRussian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Russian;
+		}
+
+		if (reader.ValueTextEquals(MemberSerbian))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Serbian;
+		}
+
+		if (reader.ValueTextEquals(MemberSorani))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Sorani;
+		}
+
+		if (reader.ValueTextEquals(MemberSpanish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Spanish;
+		}
+
+		if (reader.ValueTextEquals(MemberSwedish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Swedish;
+		}
+
+		if (reader.ValueTextEquals(MemberThai))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Thai;
+		}
+
+		if (reader.ValueTextEquals(MemberTurkish))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Turkish;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberArabic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Arabic;
+		}
+
+		if (string.Equals(value, MemberArmenian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Armenian;
+		}
+
+		if (string.Equals(value, MemberBasque.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Basque;
+		}
+
+		if (string.Equals(value, MemberBengali.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bengali;
+		}
+
+		if (string.Equals(value, MemberBrazilian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Brazilian;
+		}
+
+		if (string.Equals(value, MemberBulgarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bulgarian;
+		}
+
+		if (string.Equals(value, MemberCatalan.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Catalan;
+		}
+
+		if (string.Equals(value, MemberCjk.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Cjk;
+		}
+
+		if (string.Equals(value, MemberCzech.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Czech;
+		}
+
+		if (string.Equals(value, MemberDanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Danish;
+		}
+
+		if (string.Equals(value, MemberDutch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Dutch;
+		}
+
+		if (string.Equals(value, MemberEnglish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.English;
+		}
+
+		if (string.Equals(value, MemberEstonian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Estonian;
+		}
+
+		if (string.Equals(value, MemberFinnish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Finnish;
+		}
+
+		if (string.Equals(value, MemberFrench.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.French;
+		}
+
+		if (string.Equals(value, MemberGalician.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Galician;
+		}
+
+		if (string.Equals(value, MemberGerman.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.German;
+		}
+
+		if (string.Equals(value, MemberGreek.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Greek;
+		}
+
+		if (string.Equals(value, MemberHindi.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hindi;
+		}
+
+		if (string.Equals(value, MemberHungarian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hungarian;
+		}
+
+		if (string.Equals(value, MemberIndonesian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Indonesian;
+		}
+
+		if (string.Equals(value, MemberIrish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Irish;
+		}
+
+		if (string.Equals(value, MemberItalian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Italian;
+		}
+
+		if (string.Equals(value, MemberLatvian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Latvian;
+		}
+
+		if (string.Equals(value, MemberLithuanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Lithuanian;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.None;
+		}
+
+		if (string.Equals(value, MemberNorwegian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Norwegian;
+		}
+
+		if (string.Equals(value, MemberPersian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Persian;
+		}
+
+		if (string.Equals(value, MemberPortuguese.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Portuguese;
+		}
+
+		if (string.Equals(value, MemberRomanian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Romanian;
+		}
+
+		if (string.Equals(value, MemberRussian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Russian;
+		}
+
+		if (string.Equals(value, MemberSerbian.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Serbian;
+		}
+
+		if (string.Equals(value, MemberSorani.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Sorani;
+		}
+
+		if (string.Equals(value, MemberSpanish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Spanish;
+		}
+
+		if (string.Equals(value, MemberSwedish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Swedish;
+		}
+
+		if (string.Equals(value, MemberThai.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Thai;
+		}
+
+		if (string.Equals(value, MemberTurkish.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Turkish;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Arabic:
+				writer.WriteStringValue(MemberArabic);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Armenian:
+				writer.WriteStringValue(MemberArmenian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Basque:
+				writer.WriteStringValue(MemberBasque);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bengali:
+				writer.WriteStringValue(MemberBengali);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Brazilian:
+				writer.WriteStringValue(MemberBrazilian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Bulgarian:
+				writer.WriteStringValue(MemberBulgarian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Catalan:
+				writer.WriteStringValue(MemberCatalan);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Cjk:
+				writer.WriteStringValue(MemberCjk);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Czech:
+				writer.WriteStringValue(MemberCzech);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Danish:
+				writer.WriteStringValue(MemberDanish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Dutch:
+				writer.WriteStringValue(MemberDutch);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.English:
+				writer.WriteStringValue(MemberEnglish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Estonian:
+				writer.WriteStringValue(MemberEstonian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Finnish:
+				writer.WriteStringValue(MemberFinnish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.French:
+				writer.WriteStringValue(MemberFrench);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Galician:
+				writer.WriteStringValue(MemberGalician);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.German:
+				writer.WriteStringValue(MemberGerman);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Greek:
+				writer.WriteStringValue(MemberGreek);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hindi:
+				writer.WriteStringValue(MemberHindi);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Hungarian:
+				writer.WriteStringValue(MemberHungarian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Indonesian:
+				writer.WriteStringValue(MemberIndonesian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Irish:
+				writer.WriteStringValue(MemberIrish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Italian:
+				writer.WriteStringValue(MemberItalian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Latvian:
+				writer.WriteStringValue(MemberLatvian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Lithuanian:
+				writer.WriteStringValue(MemberLithuanian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Norwegian:
+				writer.WriteStringValue(MemberNorwegian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Persian:
+				writer.WriteStringValue(MemberPersian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Portuguese:
+				writer.WriteStringValue(MemberPortuguese);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Romanian:
+				writer.WriteStringValue(MemberRomanian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Russian:
+				writer.WriteStringValue(MemberRussian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Serbian:
+				writer.WriteStringValue(MemberSerbian);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Sorani:
+				writer.WriteStringValue(MemberSorani);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Spanish:
+				writer.WriteStringValue(MemberSpanish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Swedish:
+				writer.WriteStringValue(MemberSwedish);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Thai:
+				writer.WriteStringValue(MemberThai);
+				break;
+			case Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage.Turkish:
+				writer.WriteStringValue(MemberTurkish);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KuromojiTokenizationModeConverter))]
 public enum KuromojiTokenizationMode
 {
@@ -1905,9 +2678,22 @@ public enum KeepTypesMode
 	Include
 }
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguagesConverter))]
+public enum LowercaseTokenFilterLanguages
+{
+	[System.Runtime.Serialization.EnumMember(Value = "greek")]
+	Greek,
+	[System.Runtime.Serialization.EnumMember(Value = "irish")]
+	Irish,
+	[System.Runtime.Serialization.EnumMember(Value = "turkish")]
+	Turkish
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguageConverter))]
 public enum SnowballLanguage
 {
+	[System.Runtime.Serialization.EnumMember(Value = "Arabic")]
+	Arabic,
 	[System.Runtime.Serialization.EnumMember(Value = "Armenian")]
 	Armenian,
 	[System.Runtime.Serialization.EnumMember(Value = "Basque")]
@@ -1920,6 +2706,8 @@ public enum SnowballLanguage
 	Dutch,
 	[System.Runtime.Serialization.EnumMember(Value = "English")]
 	English,
+	[System.Runtime.Serialization.EnumMember(Value = "Estonian")]
+	Estonian,
 	[System.Runtime.Serialization.EnumMember(Value = "Finnish")]
 	Finnish,
 	[System.Runtime.Serialization.EnumMember(Value = "French")]
@@ -1930,10 +2718,14 @@ public enum SnowballLanguage
 	German2,
 	[System.Runtime.Serialization.EnumMember(Value = "Hungarian")]
 	Hungarian,
+	[System.Runtime.Serialization.EnumMember(Value = "Irish")]
+	Irish,
 	[System.Runtime.Serialization.EnumMember(Value = "Italian")]
 	Italian,
 	[System.Runtime.Serialization.EnumMember(Value = "Kp")]
 	Kp,
+	[System.Runtime.Serialization.EnumMember(Value = "Lithuanian")]
+	Lithuanian,
 	[System.Runtime.Serialization.EnumMember(Value = "Lovins")]
 	Lovins,
 	[System.Runtime.Serialization.EnumMember(Value = "Norwegian")]
@@ -1946,6 +2738,8 @@ public enum SnowballLanguage
 	Romanian,
 	[System.Runtime.Serialization.EnumMember(Value = "Russian")]
 	Russian,
+	[System.Runtime.Serialization.EnumMember(Value = "Serbian")]
+	Serbian,
 	[System.Runtime.Serialization.EnumMember(Value = "Spanish")]
 	Spanish,
 	[System.Runtime.Serialization.EnumMember(Value = "Swedish")]
@@ -2080,6 +2874,19 @@ public enum TokenChar
 	Whitespace
 }
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.CjkBigramIgnoredScriptConverter))]
+public enum CjkBigramIgnoredScript
+{
+	[System.Runtime.Serialization.EnumMember(Value = "han")]
+	Han,
+	[System.Runtime.Serialization.EnumMember(Value = "hangul")]
+	Hangul,
+	[System.Runtime.Serialization.EnumMember(Value = "hiragana")]
+	Hiragana,
+	[System.Runtime.Serialization.EnumMember(Value = "katakana")]
+	Katakana
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticLanguageConverter))]
 public enum PhoneticLanguage
 {
@@ -2107,4 +2914,83 @@ public enum PhoneticLanguage
 	Russian,
 	[System.Runtime.Serialization.EnumMember(Value = "spanish")]
 	Spanish
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.StopWordLanguageConverter))]
+public enum StopWordLanguage
+{
+	[System.Runtime.Serialization.EnumMember(Value = "_arabic_")]
+	Arabic,
+	[System.Runtime.Serialization.EnumMember(Value = "_armenian_")]
+	Armenian,
+	[System.Runtime.Serialization.EnumMember(Value = "_basque_")]
+	Basque,
+	[System.Runtime.Serialization.EnumMember(Value = "_bengali_")]
+	Bengali,
+	[System.Runtime.Serialization.EnumMember(Value = "_brazilian_")]
+	Brazilian,
+	[System.Runtime.Serialization.EnumMember(Value = "_bulgarian_")]
+	Bulgarian,
+	[System.Runtime.Serialization.EnumMember(Value = "_catalan_")]
+	Catalan,
+	[System.Runtime.Serialization.EnumMember(Value = "_cjk_")]
+	Cjk,
+	[System.Runtime.Serialization.EnumMember(Value = "_czech_")]
+	Czech,
+	[System.Runtime.Serialization.EnumMember(Value = "_danish_")]
+	Danish,
+	[System.Runtime.Serialization.EnumMember(Value = "_dutch_")]
+	Dutch,
+	[System.Runtime.Serialization.EnumMember(Value = "_english_")]
+	English,
+	[System.Runtime.Serialization.EnumMember(Value = "_estonian_")]
+	Estonian,
+	[System.Runtime.Serialization.EnumMember(Value = "_finnish_")]
+	Finnish,
+	[System.Runtime.Serialization.EnumMember(Value = "_french_")]
+	French,
+	[System.Runtime.Serialization.EnumMember(Value = "_galician_")]
+	Galician,
+	[System.Runtime.Serialization.EnumMember(Value = "_german_")]
+	German,
+	[System.Runtime.Serialization.EnumMember(Value = "_greek_")]
+	Greek,
+	[System.Runtime.Serialization.EnumMember(Value = "_hindi_")]
+	Hindi,
+	[System.Runtime.Serialization.EnumMember(Value = "_hungarian_")]
+	Hungarian,
+	[System.Runtime.Serialization.EnumMember(Value = "_indonesian_")]
+	Indonesian,
+	[System.Runtime.Serialization.EnumMember(Value = "_irish_")]
+	Irish,
+	[System.Runtime.Serialization.EnumMember(Value = "_italian_")]
+	Italian,
+	[System.Runtime.Serialization.EnumMember(Value = "_latvian_")]
+	Latvian,
+	[System.Runtime.Serialization.EnumMember(Value = "_lithuanian_")]
+	Lithuanian,
+	[System.Runtime.Serialization.EnumMember(Value = "_none_")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "_norwegian_")]
+	Norwegian,
+	[System.Runtime.Serialization.EnumMember(Value = "_persian_")]
+	Persian,
+	[System.Runtime.Serialization.EnumMember(Value = "_portuguese_")]
+	Portuguese,
+	[System.Runtime.Serialization.EnumMember(Value = "_romanian_")]
+	Romanian,
+	[System.Runtime.Serialization.EnumMember(Value = "_russian_")]
+	Russian,
+	[System.Runtime.Serialization.EnumMember(Value = "_serbian_")]
+	Serbian,
+	[System.Runtime.Serialization.EnumMember(Value = "_sorani_")]
+	Sorani,
+	[System.Runtime.Serialization.EnumMember(Value = "_spanish_")]
+	Spanish,
+	[System.Runtime.Serialization.EnumMember(Value = "_swedish_")]
+	Swedish,
+	[System.Runtime.Serialization.EnumMember(Value = "_thai_")]
+	Thai,
+	[System.Runtime.Serialization.EnumMember(Value = "_turkish_")]
+	Turkish
 }
