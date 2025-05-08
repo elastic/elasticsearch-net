@@ -107,7 +107,18 @@ public sealed partial class DelimitedPayloadTokenFilter : Elastic.Clients.Elasti
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
 	public string? Delimiter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
 	public string Type => "delimited_payload";
@@ -134,12 +145,22 @@ public readonly partial struct DelimitedPayloadTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor Delimiter(string? value)
 	{
 		Instance.Delimiter = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? value)
 	{
 		Instance.Encoding = value;

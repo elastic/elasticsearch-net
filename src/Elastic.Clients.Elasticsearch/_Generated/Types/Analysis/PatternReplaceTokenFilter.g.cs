@@ -26,7 +26,6 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("all");
-	private static readonly System.Text.Json.JsonEncodedText PropFlags = System.Text.Json.JsonEncodedText.Encode("flags");
 	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
 	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
@@ -36,18 +35,12 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool?> propAll = default;
-		LocalJsonValue<string?> propFlags = default;
 		LocalJsonValue<string> propPattern = default;
 		LocalJsonValue<string?> propReplacement = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
-			{
-				continue;
-			}
-
-			if (propFlags.TryReadProperty(ref reader, options, PropFlags, null))
 			{
 				continue;
 			}
@@ -86,7 +79,6 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 		return new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			All = propAll.Value,
-			Flags = propFlags.Value,
 			Pattern = propPattern.Value,
 			Replacement = propReplacement.Value,
 			Version = propVersion.Value
@@ -97,7 +89,6 @@ internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.J
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAll, value.All, null, null);
-		writer.WriteProperty(options, PropFlags, value.Flags, null, null);
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
@@ -131,13 +122,29 @@ public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elastics
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? All { get; set; }
-	public string? Flags { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	string Pattern { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
 	public string? Replacement { get; set; }
 
 	public string Type => "pattern_replace";
@@ -164,24 +171,33 @@ public readonly partial struct PatternReplaceTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor All(bool? value = true)
 	{
 		Instance.All = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Flags(string? value)
-	{
-		Instance.Flags = value;
-		return this;
-	}
-
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Replacement(string? value)
 	{
 		Instance.Replacement = value;

@@ -107,7 +107,18 @@ public sealed partial class LimitTokenCountTokenFilter : Elastic.Clients.Elastic
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the limit filter exhausts the token stream, even if the <c>max_token_count</c> has already been reached. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? ConsumeAllTokens { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to keep. Once this limit is reached, any remaining tokens are excluded from the output. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public int? MaxTokenCount { get; set; }
 
 	public string Type => "limit";
@@ -134,12 +145,22 @@ public readonly partial struct LimitTokenCountTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter(Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the limit filter exhausts the token stream, even if the <c>max_token_count</c> has already been reached. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? value = true)
 	{
 		Instance.ConsumeAllTokens = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to keep. Once this limit is reached, any remaining tokens are excluded from the output. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? value)
 	{
 		Instance.MaxTokenCount = value;

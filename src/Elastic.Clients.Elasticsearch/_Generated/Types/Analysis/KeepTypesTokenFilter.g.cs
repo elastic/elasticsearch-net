@@ -34,7 +34,7 @@ internal sealed partial class KeepTypesTokenFilterConverter : System.Text.Json.S
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode?> propMode = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propTypes = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propTypes = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -49,7 +49,7 @@ internal sealed partial class KeepTypesTokenFilterConverter : System.Text.Json.S
 				continue;
 			}
 
-			if (propTypes.TryReadProperty(ref reader, options, PropTypes, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			if (propTypes.TryReadProperty(ref reader, options, PropTypes, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -82,7 +82,7 @@ internal sealed partial class KeepTypesTokenFilterConverter : System.Text.Json.S
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMode, value.Mode, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
@@ -91,12 +91,18 @@ internal sealed partial class KeepTypesTokenFilterConverter : System.Text.Json.S
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterConverter))]
 public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepTypesTokenFilter(System.Collections.Generic.ICollection<string> types)
+	{
+		Types = types;
+	}
 #if NET7_0_OR_GREATER
 	public KeepTypesTokenFilter()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public KeepTypesTokenFilter()
 	{
 	}
@@ -107,11 +113,25 @@ public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
 	public string Type => "keep_types";
 
-	public System.Collections.Generic.ICollection<string>? Types { get; set; }
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Types { get; set; }
 	public string? Version { get; set; }
 }
 
@@ -134,18 +154,33 @@ public readonly partial struct KeepTypesTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? value)
 	{
 		Instance.Mode = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(System.Collections.Generic.ICollection<string>? value)
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Types = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(params string[] values)
 	{
 		Instance.Types = [.. values];
@@ -159,13 +194,8 @@ public readonly partial struct KeepTypesTokenFilterDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

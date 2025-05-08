@@ -73,6 +73,42 @@ public readonly partial struct TokenFiltersDescriptor
 	{
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Apostrophe(string key, Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Apostrophe(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Apostrophe(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ArabicNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -88,6 +124,60 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor AsciiFolding(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkBigram(string key, Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkBigram(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkBigram(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkWidth(string key, Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkWidth(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor CjkWidth(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Classic(string key, Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Classic(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Classic(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -118,6 +208,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Condition(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DecimalDigit(string key, Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DecimalDigit(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor DecimalDigit(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -211,6 +319,60 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FlattenGraph(string key, Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FlattenGraph(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor FlattenGraph(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor GermanNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HindiNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HindiNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HindiNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Hunspell(string key, Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -229,13 +391,7 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key)
-	{
-		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor HyphenationDecompounder(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor.Build(action));
 		return this;
@@ -295,6 +451,42 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IndicNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IndicNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor IndicNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor JaStop(string key, Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor JaStop(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor JaStop(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepWords(string key, Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -319,13 +511,7 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key)
-	{
-		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeepTypes(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor.Build(action));
 		return this;
@@ -346,6 +532,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordMarker(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordRepeat(string key, Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordRepeat(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor KeywordRepeat(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -457,6 +661,24 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor MinHash(string key, Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor MinHash(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor MinHash(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Multiplexer(string key, Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -526,6 +748,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PatternReplace(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor PersianNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor.Build(action));
 		return this;
 	}
 
@@ -607,6 +847,60 @@ public readonly partial struct TokenFiltersDescriptor
 		return this;
 	}
 
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianFolding(string key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianFolding(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianFolding(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor ScandinavianNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SerbianNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SerbianNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SerbianNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Shingle(string key, Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter value)
 	{
 		_items.Add(key, value);
@@ -640,6 +934,24 @@ public readonly partial struct TokenFiltersDescriptor
 	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor Snowball(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor>? action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SoraniNormalization(string key, Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter value)
+	{
+		_items.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SoraniNormalization(string key)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.TokenFiltersDescriptor SoraniNormalization(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor>? action)
+	{
+		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor.Build(action));
 		return this;
 	}
 

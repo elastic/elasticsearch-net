@@ -103,13 +103,6 @@ internal sealed partial class PutAmazonbedrockRequestConverter : System.Text.Jso
 /// info
 /// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 /// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestConverter))]
 public sealed partial class PutAmazonbedrockRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>
@@ -210,13 +203,6 @@ public sealed partial class PutAmazonbedrockRequest : Elastic.Clients.Elasticsea
 /// <para>
 /// info
 /// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-/// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// </summary>
 public readonly partial struct PutAmazonbedrockRequestDescriptor

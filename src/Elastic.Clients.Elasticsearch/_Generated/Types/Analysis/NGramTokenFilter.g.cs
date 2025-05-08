@@ -116,8 +116,25 @@ public sealed partial class NGramTokenFilter : Elastic.Clients.Elasticsearch.Ana
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum length of characters in a gram. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public int? MaxGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum length of characters in a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public int? MinGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "ngram";
@@ -144,18 +161,33 @@ public readonly partial struct NGramTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilter(Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Maximum length of characters in a gram. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor MaxGram(int? value)
 	{
 		Instance.MaxGram = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum length of characters in a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor MinGram(int? value)
 	{
 		Instance.MinGram = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.NGramTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

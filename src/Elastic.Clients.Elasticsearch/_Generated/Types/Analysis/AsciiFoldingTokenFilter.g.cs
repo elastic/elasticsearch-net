@@ -98,6 +98,11 @@ public sealed partial class AsciiFoldingTokenFilter : Elastic.Clients.Elasticsea
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "asciifolding";
@@ -124,6 +129,11 @@ public readonly partial struct AsciiFoldingTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

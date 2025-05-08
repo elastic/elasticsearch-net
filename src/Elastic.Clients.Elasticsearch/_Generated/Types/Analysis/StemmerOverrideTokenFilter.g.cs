@@ -107,7 +107,18 @@ public sealed partial class StemmerOverrideTokenFilter : Elastic.Clients.Elastic
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of mapping rules to use.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? Rules { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A path (either relative to <c>config</c> location, or absolute) to a list of mappings.
+	/// </para>
+	/// </summary>
 	public string? RulesPath { get; set; }
 
 	public string Type => "stemmer_override";
@@ -134,18 +145,33 @@ public readonly partial struct StemmerOverrideTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A list of mapping rules to use.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.Rules = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of mapping rules to use.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor Rules(params string[] values)
 	{
 		Instance.Rules = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A path (either relative to <c>config</c> location, or absolute) to a list of mappings.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor RulesPath(string? value)
 	{
 		Instance.RulesPath = value;
