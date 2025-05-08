@@ -20,7 +20,11 @@ public abstract class Request
 	internal Request()
 	{ }
 
-	[JsonIgnore] protected internal virtual IRequestConfiguration? RequestConfig { get; set; }
+	/// <summary>
+	/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
+	/// </summary>
+	[JsonIgnore]
+	public virtual IRequestConfiguration? RequestConfiguration { get; set; }
 
 	/// <summary>
 	/// The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.

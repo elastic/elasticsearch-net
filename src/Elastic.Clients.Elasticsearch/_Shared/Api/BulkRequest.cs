@@ -25,7 +25,7 @@ public partial class BulkRequest : IStreamSerializable
 
 	internal Request Self => this;
 
-	protected internal override IRequestConfiguration RequestConfig => RequestConfigSingleton;
+	public override IRequestConfiguration RequestConfiguration => RequestConfigSingleton;
 
 	public BulkOperationsCollection? Operations { get; set; }
 
