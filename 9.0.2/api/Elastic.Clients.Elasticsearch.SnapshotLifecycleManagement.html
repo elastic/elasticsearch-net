@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement">
+
+  <h1 id="Elastic_Clients_Elasticsearch_SnapshotLifecycleManagement" data-uid="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement" class="text-break">Namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></dt>
+      <dd><p>
+Delete a policy.
+Delete a snapshot lifecycle policy definition.
+This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters.html">DeleteLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest.html">ExecuteLifecycleRequest</a></dt>
+      <dd><p>
+Run a policy.
+Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters.html">ExecuteLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse.html">ExecuteLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest.html">ExecuteRetentionRequest</a></dt>
+      <dd><p>
+Run a retention policy.
+Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+The retention policy is normally applied according to its schedule.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters.html">ExecuteRetentionRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse.html">ExecuteRetentionResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></dt>
+      <dd><p>
+Get policy information.
+Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters.html">GetLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest.html">GetSlmStatusRequest</a></dt>
+      <dd><p>
+Get the snapshot lifecycle management status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters.html">GetSlmStatusRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse.html">GetSlmStatusResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest.html">GetStatsRequest</a></dt>
+      <dd><p>
+Get snapshot lifecycle management statistics.
+Get global and policy-level statistics about actions taken by snapshot lifecycle management.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters.html">GetStatsRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse.html">GetStatsResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress.html">InProgress</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation.html">Invocation</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></dt>
+      <dd><p>
+Create or update a policy.
+Create or update a snapshot lifecycle policy.
+If the policy already exists, this request increments the policy version.
+Only the latest version of a policy is stored.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters.html">PutLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Retention.html">Retention</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfiguration.html">SlmConfiguration</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy.html">SlmPolicy</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle.html">SnapshotLifecycle</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient.html">SnapshotLifecycleManagementNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest.html">StartSlmRequest</a></dt>
+      <dd><p>
+Start snapshot lifecycle management.
+Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters.html">StartSlmRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse.html">StartSlmResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics.html">Statistics</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest.html">StopSlmRequest</a></dt>
+      <dd><p>
+Stop snapshot lifecycle management.
+Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+Stopping SLM does not stop any snapshots that are in progress.
+You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+</p>
+<p>
+The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+Use the get snapshot lifecycle management status API to see if SLM is running.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters.html">StopSlmRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse.html">StopSlmResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor.html">DeleteLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Delete a policy.
+Delete a snapshot lifecycle policy definition.
+This operation prevents any future snapshots from being taken but does not cancel in-progress snapshots or remove previously-taken snapshots.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor.html">ExecuteLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Run a policy.
+Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
+The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor.html">ExecuteRetentionRequestDescriptor</a></dt>
+      <dd><p>
+Run a retention policy.
+Manually apply the retention policy to force immediate removal of snapshots that are expired according to the snapshot lifecycle policy retention rules.
+The retention policy is normally applied according to its schedule.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Get policy information.
+Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor.html">GetSlmStatusRequestDescriptor</a></dt>
+      <dd><p>
+Get the snapshot lifecycle management status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor.html">GetStatsRequestDescriptor</a></dt>
+      <dd><p>
+Get snapshot lifecycle management statistics.
+Get global and policy-level statistics about actions taken by snapshot lifecycle management.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor.html">PutLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a policy.
+Create or update a snapshot lifecycle policy.
+If the policy already exists, this request increments the policy version.
+Only the latest version of a policy is stored.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.RetentionDescriptor.html">RetentionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmConfigurationDescriptor.html">SlmConfigurationDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor.html">StartSlmRequestDescriptor</a></dt>
+      <dd><p>
+Start snapshot lifecycle management.
+Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
+Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor.html">StopSlmRequestDescriptor</a></dt>
+      <dd><p>
+Stop snapshot lifecycle management.
+Stop all snapshot lifecycle management (SLM) operations and the SLM plugin.
+This API is useful when you are performing maintenance on a cluster and need to prevent SLM from performing any actions on your data streams or indices.
+Stopping SLM does not stop any snapshots that are in progress.
+You can manually trigger snapshots with the run snapshot lifecycle policy API even if SLM is stopped.
+</p>
+<p>
+The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
+Use the get snapshot lifecycle management status API to see if SLM is running.
+</p>
+</dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
