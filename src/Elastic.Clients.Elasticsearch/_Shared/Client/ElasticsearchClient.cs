@@ -161,8 +161,8 @@ public partial class ElasticsearchClient
 			var openTelemetryDataMutator = GetOpenTelemetryDataMutator<TRequest, TRequestParameters>(request, resolvedRouteValues);
 
 			return isAsync
-				? new ValueTask<TResponse>(_transport.RequestAsync<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfig, cancellationToken))
-				: new ValueTask<TResponse>(_transport.Request<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfig));
+				? new ValueTask<TResponse>(_transport.RequestAsync<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfiguration, cancellationToken))
+				: new ValueTask<TResponse>(_transport.Request<TResponse>(endpointPath, postData, openTelemetryDataMutator, request.RequestConfiguration));
 		}
 
 		async ValueTask<TResponse> SendRequestWithProductCheck()
@@ -189,15 +189,15 @@ public partial class ElasticsearchClient
 			// Attach product check header
 
 			// TODO: The copy constructor should accept null values
-			var requestConfig = (request.RequestConfig is null)
+			var requestConfig = (request.RequestConfiguration is null)
 				? new RequestConfiguration()
 				{
 					ResponseHeadersToParse = new HeadersList("x-elastic-product")
 				}
-				: new RequestConfiguration(request.RequestConfig)
+				: new RequestConfiguration(request.RequestConfiguration)
 				{
-					ResponseHeadersToParse = (request.RequestConfig.ResponseHeadersToParse is { Count: > 0 })
-						? new HeadersList(request.RequestConfig.ResponseHeadersToParse, "x-elastic-product")
+					ResponseHeadersToParse = (request.RequestConfiguration.ResponseHeadersToParse is { Count: > 0 })
+						? new HeadersList(request.RequestConfiguration.ResponseHeadersToParse, "x-elastic-product")
 						: new HeadersList("x-elastic-product")
 				};
 
