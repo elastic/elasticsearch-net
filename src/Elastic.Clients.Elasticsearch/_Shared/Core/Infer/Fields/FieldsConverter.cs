@@ -21,6 +21,11 @@ internal sealed class FieldsConverter :
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
 	{
+		if (value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
 		writer.WriteCollectionValue(options, value.ListOfFields, null);
 	}
 }
@@ -61,6 +66,11 @@ internal sealed class SingleOrManyFieldsConverter :
 
 	public override void Write(Utf8JsonWriter writer, Fields value, JsonSerializerOptions options)
 	{
+		if (value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
 		writer.WriteSingleOrManyCollectionValue(options, value.ListOfFields, null);
 	}
 }
