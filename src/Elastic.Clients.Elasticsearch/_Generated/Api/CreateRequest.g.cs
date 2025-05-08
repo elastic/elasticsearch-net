@@ -283,13 +283,13 @@ public sealed partial class CreateRequest<TDocument> : Elastic.Clients.Elasticse
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", typeof(TDocument)).Required("id", id))
+	public CreateRequest(TDocument document, Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("index", (Elastic.Clients.Elasticsearch.IndexName)typeof(TDocument)).Required("id", id))
 	{
 		Document = document;
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public CreateRequest(TDocument document) : base(r => r.Required("index", typeof(TDocument)).Required("id", Elastic.Clients.Elasticsearch.Id.From(document)))
+	public CreateRequest(TDocument document) : base(r => r.Required("index", (Elastic.Clients.Elasticsearch.IndexName)typeof(TDocument)).Required("id", Elastic.Clients.Elasticsearch.Id.From(document)))
 	{
 		Document = document;
 	}

@@ -25,6 +25,7 @@ namespace Elastic.Clients.Elasticsearch.Cluster;
 
 internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCcs = System.Text.Json.JsonEncodedText.Encode("ccs");
 	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
 	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
 	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
@@ -36,6 +37,7 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.CCSStats> propCcs = default;
 		LocalJsonValue<string> propClusterName = default;
 		LocalJsonValue<string> propClusterUuid = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices> propIndices = default;
@@ -45,6 +47,11 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 		LocalJsonValue<long> propTimestamp = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
+			if (propCcs.TryReadProperty(ref reader, options, PropCcs, null))
+			{
+				continue;
+			}
+
 			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
 			{
 				continue;
@@ -92,6 +99,7 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
+			Ccs = propCcs.Value,
 			ClusterName = propClusterName.Value,
 			ClusterUuid = propClusterUuid.Value,
 			Indices = propIndices.Value,
@@ -105,6 +113,7 @@ internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.S
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCcs, value.Ccs, null, null);
 		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
 		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid, null, null);
 		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
@@ -129,6 +138,17 @@ public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.El
 	{
 		_ = sentinel;
 	}
+
+	/// <summary>
+	/// <para>
+	/// Cross-cluster stats
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; set; }
 
 	/// <summary>
 	/// <para>

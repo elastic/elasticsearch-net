@@ -113,11 +113,22 @@ public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elastics
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	System.Collections.Generic.ICollection<string> Patterns { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
 	public bool? PreserveOriginal { get; set; }
 
 	public string Type => "pattern_capture";
@@ -144,18 +155,33 @@ public readonly partial struct PatternCaptureTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Patterns = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(params string[] values)
 	{
 		Instance.Patterns = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;

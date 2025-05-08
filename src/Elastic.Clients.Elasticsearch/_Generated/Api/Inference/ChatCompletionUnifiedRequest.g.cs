@@ -50,6 +50,20 @@ internal sealed partial class ChatCompletionUnifiedRequestConverter : System.Tex
 /// <para>
 /// Perform chat completion inference
 /// </para>
+/// <para>
+/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+/// </para>
+/// <para>
+/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+/// </para>
+/// <para>
+/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
+/// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestConverter))]
 public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>
@@ -111,6 +125,20 @@ public sealed partial class ChatCompletionUnifiedRequest : Elastic.Clients.Elast
 /// <summary>
 /// <para>
 /// Perform chat completion inference
+/// </para>
+/// <para>
+/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+/// </para>
+/// <para>
+/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+/// </para>
+/// <para>
+/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
 /// </para>
 /// </summary>
 public readonly partial struct ChatCompletionUnifiedRequestDescriptor

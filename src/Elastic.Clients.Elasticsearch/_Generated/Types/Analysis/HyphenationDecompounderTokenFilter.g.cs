@@ -29,6 +29,8 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSubwordSize = System.Text.Json.JsonEncodedText.Encode("max_subword_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMinSubwordSize = System.Text.Json.JsonEncodedText.Encode("min_subword_size");
 	private static readonly System.Text.Json.JsonEncodedText PropMinWordSize = System.Text.Json.JsonEncodedText.Encode("min_word_size");
+	private static readonly System.Text.Json.JsonEncodedText PropNoOverlappingMatches = System.Text.Json.JsonEncodedText.Encode("no_overlapping_matches");
+	private static readonly System.Text.Json.JsonEncodedText PropNoSubMatches = System.Text.Json.JsonEncodedText.Encode("no_sub_matches");
 	private static readonly System.Text.Json.JsonEncodedText PropOnlyLongestMatch = System.Text.Json.JsonEncodedText.Encode("only_longest_match");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
@@ -38,10 +40,12 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 	public override Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propHyphenationPatternsPath = default;
+		LocalJsonValue<string> propHyphenationPatternsPath = default;
 		LocalJsonValue<int?> propMaxSubwordSize = default;
 		LocalJsonValue<int?> propMinSubwordSize = default;
 		LocalJsonValue<int?> propMinWordSize = default;
+		LocalJsonValue<bool?> propNoOverlappingMatches = default;
+		LocalJsonValue<bool?> propNoSubMatches = default;
 		LocalJsonValue<bool?> propOnlyLongestMatch = default;
 		LocalJsonValue<string?> propVersion = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propWordList = default;
@@ -64,6 +68,16 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 			}
 
 			if (propMinWordSize.TryReadProperty(ref reader, options, PropMinWordSize, null))
+			{
+				continue;
+			}
+
+			if (propNoOverlappingMatches.TryReadProperty(ref reader, options, PropNoOverlappingMatches, null))
+			{
+				continue;
+			}
+
+			if (propNoSubMatches.TryReadProperty(ref reader, options, PropNoSubMatches, null))
 			{
 				continue;
 			}
@@ -110,6 +124,8 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 			MaxSubwordSize = propMaxSubwordSize.Value,
 			MinSubwordSize = propMinSubwordSize.Value,
 			MinWordSize = propMinWordSize.Value,
+			NoOverlappingMatches = propNoOverlappingMatches.Value,
+			NoSubMatches = propNoSubMatches.Value,
 			OnlyLongestMatch = propOnlyLongestMatch.Value,
 			Version = propVersion.Value,
 			WordList = propWordList.Value,
@@ -124,6 +140,8 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 		writer.WriteProperty(options, PropMaxSubwordSize, value.MaxSubwordSize, null, null);
 		writer.WriteProperty(options, PropMinSubwordSize, value.MinSubwordSize, null, null);
 		writer.WriteProperty(options, PropMinWordSize, value.MinWordSize, null, null);
+		writer.WriteProperty(options, PropNoOverlappingMatches, value.NoOverlappingMatches, null, null);
+		writer.WriteProperty(options, PropNoSubMatches, value.NoSubMatches, null, null);
 		writer.WriteProperty(options, PropOnlyLongestMatch, value.OnlyLongestMatch, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
@@ -136,12 +154,18 @@ internal sealed partial class HyphenationDecompounderTokenFilterConverter : Syst
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterConverter))]
 public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HyphenationDecompounderTokenFilter(string hyphenationPatternsPath)
+	{
+		HyphenationPatternsPath = hyphenationPatternsPath;
+	}
 #if NET7_0_OR_GREATER
 	public HyphenationDecompounderTokenFilter()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public HyphenationDecompounderTokenFilter()
 	{
 	}
@@ -152,16 +176,79 @@ public sealed partial class HyphenationDecompounderTokenFilter : Elastic.Clients
 		_ = sentinel;
 	}
 
-	public string? HyphenationPatternsPath { get; set; }
+	/// <summary>
+	/// <para>
+	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
+	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HyphenationPatternsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public int? MaxSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public int? MinSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public int? MinWordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? NoOverlappingMatches { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public bool? NoSubMatches { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? OnlyLongestMatch { get; set; }
 
 	public string Type => "hyphenation_decompounder";
 
 	public string? Version { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? WordList { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public string? WordListPath { get; set; }
 }
 
@@ -184,30 +271,78 @@ public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? value)
+	/// <summary>
+	/// <para>
+	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
+	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string value)
 	{
 		Instance.HyphenationPatternsPath = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MaxSubwordSize(int? value)
 	{
 		Instance.MaxSubwordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MinSubwordSize(int? value)
 	{
 		Instance.MinSubwordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor MinWordSize(int? value)
 	{
 		Instance.MinWordSize = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor NoOverlappingMatches(bool? value = true)
+	{
+		Instance.NoOverlappingMatches = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor NoSubMatches(bool? value = true)
+	{
+		Instance.NoSubMatches = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? value = true)
 	{
 		Instance.OnlyLongestMatch = value;
@@ -220,18 +355,37 @@ public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordList(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.WordList = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordList(params string[] values)
 	{
 		Instance.WordList = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor WordListPath(string? value)
 	{
 		Instance.WordListPath = value;
@@ -239,13 +393,8 @@ public readonly partial struct HyphenationDecompounderTokenFilterDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.HyphenationDecompounderTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

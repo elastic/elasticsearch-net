@@ -107,7 +107,18 @@ public sealed partial class LengthTokenFilter : Elastic.Clients.Elasticsearch.An
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a token. Longer tokens are excluded from the output. Defaults to <c>Integer.MAX_VALUE</c>, which is <c>2^31-1</c> or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
 	public int? Max { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a token. Shorter tokens are excluded from the output. Defaults to <c>0</c>.
+	/// </para>
+	/// </summary>
 	public int? Min { get; set; }
 
 	public string Type => "length";
@@ -134,12 +145,22 @@ public readonly partial struct LengthTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilter(Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a token. Longer tokens are excluded from the output. Defaults to <c>Integer.MAX_VALUE</c>, which is <c>2^31-1</c> or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor Max(int? value)
 	{
 		Instance.Max = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a token. Shorter tokens are excluded from the output. Defaults to <c>0</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.LengthTokenFilterDescriptor Min(int? value)
 	{
 		Instance.Min = value;
