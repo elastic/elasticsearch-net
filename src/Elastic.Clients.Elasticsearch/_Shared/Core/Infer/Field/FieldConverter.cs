@@ -22,6 +22,11 @@ internal sealed class FieldConverter :
 
 	public override void Write(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
 	{
+		if (value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
 		var settings = options.GetContext<IElasticsearchClientSettings>();
 		var fieldName = settings.Inferrer.Field(value);
 
@@ -37,6 +42,11 @@ internal sealed class FieldConverter :
 
 	public override void WriteAsPropertyName(Utf8JsonWriter writer, Field value, JsonSerializerOptions options)
 	{
+		if (value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
 		var settings = options.GetContext<IElasticsearchClientSettings>();
 
 		writer.WritePropertyName(settings.Inferrer.Field(value));
