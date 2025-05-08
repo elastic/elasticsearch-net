@@ -66,10 +66,4 @@ public abstract class PlainRequest<TParameters> : Request<TParameters>
 		get => Q<string>("source");
 		set => Q("source", value);
 	}
-
-	/// <summary>
-	/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
-	/// </summary>
-	[JsonIgnore]
-	public IRequestConfiguration? RequestConfiguration { get; set; }
 }
