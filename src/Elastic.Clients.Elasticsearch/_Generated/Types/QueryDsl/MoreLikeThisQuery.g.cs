@@ -65,7 +65,7 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 		LocalJsonValue<int?> propMinWordLength = default;
 		LocalJsonValue<string?> propQueryName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopWords = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopWords = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>?> propUnlike = default;
 		LocalJsonValue<long?> propVersion = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
@@ -151,7 +151,7 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 				continue;
 			}
 
-			if (propStopWords.TryReadProperty(ref reader, options, PropStopWords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			if (propStopWords.TryReadProperty(ref reader, options, PropStopWords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
 			{
 				continue;
 			}
@@ -225,7 +225,7 @@ internal sealed partial class MoreLikeThisQueryConverter : System.Text.Json.Seri
 		writer.WriteProperty(options, PropMinWordLength, value.MinWordLength, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
-		writer.WriteProperty(options, PropStopWords, value.StopWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopWords, value.StopWords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropUnlike, value.Unlike, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Like>(o, v, null));
 		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
@@ -376,7 +376,7 @@ public sealed partial class MoreLikeThisQuery
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<string>? StopWords { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? StopWords { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -627,21 +627,9 @@ public readonly partial struct MoreLikeThisQueryDescriptor<TDocument>
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(System.Collections.Generic.ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.StopWords = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor<TDocument> StopWords(params string[] values)
-	{
-		Instance.StopWords = [.. values];
 		return this;
 	}
 
@@ -961,21 +949,9 @@ public readonly partial struct MoreLikeThisQueryDescriptor
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(System.Collections.Generic.ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.StopWords = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An array of stop words.
-	/// Any word in this set is ignored.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.MoreLikeThisQueryDescriptor StopWords(params string[] values)
-	{
-		Instance.StopWords = [.. values];
 		return this;
 	}
 

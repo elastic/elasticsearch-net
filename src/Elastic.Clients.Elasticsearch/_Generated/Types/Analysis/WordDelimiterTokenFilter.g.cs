@@ -206,21 +206,98 @@ public sealed partial class WordDelimiterTokenFilter : Elastic.Clients.Elasticse
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphanumeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? CatenateAll { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of numeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? CatenateNumbers { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphabetical characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? CatenateWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only numeric characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? GenerateNumberParts { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only alphabetical characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? GenerateWordParts { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes the original version of any split tokens in the output. This original version includes non-alphanumeric delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? PreserveOriginal { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Array of tokens the filter won’t split.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? ProtectedWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of tokens the filter won’t split.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public string? ProtectedWordsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter case transitions. For example: camelCase -> [ camel, Case ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? SplitOnCaseChange { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter-number transitions. For example: j2se -> [ j, 2, se ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? SplitOnNumerics { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter removes the English possessive (<c>'s</c>) from the end of each token. For example: O'Neil's -> [ O, Neil ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? StemEnglishPossessive { get; set; }
 
 	public string Type => "word_delimiter";
 
+	/// <summary>
+	/// <para>
+	/// Array of custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? TypeTable { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public string? TypeTablePath { get; set; }
 	public string? Version { get; set; }
 }
@@ -244,90 +321,166 @@ public readonly partial struct WordDelimiterTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilter(Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphanumeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateAll(bool? value = true)
 	{
 		Instance.CatenateAll = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of numeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateNumbers(bool? value = true)
 	{
 		Instance.CatenateNumbers = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphabetical characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor CatenateWords(bool? value = true)
 	{
 		Instance.CatenateWords = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only numeric characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor GenerateNumberParts(bool? value = true)
 	{
 		Instance.GenerateNumberParts = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only alphabetical characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor GenerateWordParts(bool? value = true)
 	{
 		Instance.GenerateWordParts = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes the original version of any split tokens in the output. This original version includes non-alphanumeric delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
 		Instance.PreserveOriginal = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of tokens the filter won’t split.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.ProtectedWords = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of tokens the filter won’t split.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWords(params string[] values)
 	{
 		Instance.ProtectedWords = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of tokens the filter won’t split.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor ProtectedWordsPath(string? value)
 	{
 		Instance.ProtectedWordsPath = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter case transitions. For example: camelCase -> [ camel, Case ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor SplitOnCaseChange(bool? value = true)
 	{
 		Instance.SplitOnCaseChange = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter-number transitions. For example: j2se -> [ j, 2, se ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor SplitOnNumerics(bool? value = true)
 	{
 		Instance.SplitOnNumerics = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter removes the English possessive (<c>'s</c>) from the end of each token. For example: O'Neil's -> [ O, Neil ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor StemEnglishPossessive(bool? value = true)
 	{
 		Instance.StemEnglishPossessive = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTable(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.TypeTable = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTable(params string[] values)
 	{
 		Instance.TypeTable = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.WordDelimiterTokenFilterDescriptor TypeTablePath(string? value)
 	{
 		Instance.TypeTablePath = value;

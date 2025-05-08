@@ -178,7 +178,15 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 	/// <item>
 	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
 	/// </item>
@@ -879,7 +887,15 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// <item>
 	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
 	/// </item>
@@ -1590,7 +1606,15 @@ public readonly partial struct SearchRequestDescriptor
 	/// <item>
 	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
 	/// </item>
@@ -3326,7 +3350,15 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// <item>
 	/// <para>
 	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
 	/// <c>&lt;custom-string></c> (any string that does not start with <c>_</c>) to route searches with the same <c>&lt;custom-string></c> to the same shards in the same order.
 	/// </para>
 	/// </item>

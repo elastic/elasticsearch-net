@@ -34,7 +34,7 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage> propLanguage = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStopwords = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -43,7 +43,7 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)))
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
 			{
 				continue;
 			}
@@ -83,7 +83,7 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
-		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 #pragma warning disable CS0618
 		writer.WriteProperty(options, PropVersion, value.Version, null, null)
@@ -123,7 +123,7 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
-	public System.Collections.Generic.ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 
 	public string Type => "snowball";
 
@@ -156,15 +156,9 @@ public readonly partial struct SnowballAnalyzerDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(System.Collections.Generic.ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Stopwords(params string[] values)
-	{
-		Instance.Stopwords = [.. values];
 		return this;
 	}
 

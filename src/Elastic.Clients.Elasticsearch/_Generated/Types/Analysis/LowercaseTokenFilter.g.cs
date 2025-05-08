@@ -32,7 +32,7 @@ internal sealed partial class LowercaseTokenFilterConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propLanguage = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages?> propLanguage = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -98,7 +98,12 @@ public sealed partial class LowercaseTokenFilter : Elastic.Clients.Elasticsearch
 		_ = sentinel;
 	}
 
-	public string? Language { get; set; }
+	/// <summary>
+	/// <para>
+	/// Language-specific lowercase token filter to use.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? Language { get; set; }
 
 	public string Type => "lowercase";
 
@@ -124,7 +129,12 @@ public readonly partial struct LowercaseTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor Language(string? value)
+	/// <summary>
+	/// <para>
+	/// Language-specific lowercase token filter to use.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? value)
 	{
 		Instance.Language = value;
 		return this;

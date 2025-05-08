@@ -98,6 +98,11 @@ public sealed partial class UniqueTokenFilter : Elastic.Clients.Elasticsearch.An
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? OnlyOnSamePosition { get; set; }
 
 	public string Type => "unique";
@@ -124,6 +129,11 @@ public readonly partial struct UniqueTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? value = true)
 	{
 		Instance.OnlyOnSamePosition = value;

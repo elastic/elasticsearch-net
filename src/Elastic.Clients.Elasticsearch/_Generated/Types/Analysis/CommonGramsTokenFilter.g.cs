@@ -125,9 +125,48 @@ public sealed partial class CommonGramsTokenFilter : Elastic.Clients.Elasticsear
 		_ = sentinel;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of tokens. The filter generates bigrams for these tokens.
+	/// Either this or the <c>common_words_path</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public System.Collections.Generic.ICollection<string>? CommonWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file containing a list of tokens. The filter generates bigrams for these tokens.
+	/// This path must be absolute or relative to the <c>config</c> location. The file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this or the <c>common_words</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public string? CommonWordsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matches for common words matching are case-insensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? IgnoreCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter excludes the following tokens from the output:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Unigrams for common words
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Unigrams for terms followed by common words
+	/// Defaults to <c>false</c>. We recommend enabling this parameter for search analyzers.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	public bool? QueryMode { get; set; }
 
 	public string Type => "common_grams";
@@ -154,30 +193,72 @@ public readonly partial struct CommonGramsTokenFilterDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter(Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor descriptor) => descriptor.Instance;
 
+	/// <summary>
+	/// <para>
+	/// A list of tokens. The filter generates bigrams for these tokens.
+	/// Either this or the <c>common_words_path</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWords(System.Collections.Generic.ICollection<string>? value)
 	{
 		Instance.CommonWords = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of tokens. The filter generates bigrams for these tokens.
+	/// Either this or the <c>common_words_path</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWords(params string[] values)
 	{
 		Instance.CommonWords = [.. values];
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file containing a list of tokens. The filter generates bigrams for these tokens.
+	/// This path must be absolute or relative to the <c>config</c> location. The file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this or the <c>common_words</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor CommonWordsPath(string? value)
 	{
 		Instance.CommonWordsPath = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matches for common words matching are case-insensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor IgnoreCase(bool? value = true)
 	{
 		Instance.IgnoreCase = value;
 		return this;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter excludes the following tokens from the output:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Unigrams for common words
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Unigrams for terms followed by common words
+	/// Defaults to <c>false</c>. We recommend enabling this parameter for search analyzers.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor QueryMode(bool? value = true)
 	{
 		Instance.QueryMode = value;
