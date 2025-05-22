@@ -29,10 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class NGramTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Maximum length of characters in a gram. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_gram")]
 	public int? MaxGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum length of characters in a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
@@ -56,18 +73,33 @@ public sealed partial class NGramTokenFilterDescriptor : SerializableDescriptor<
 	private bool? PreserveOriginalValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Maximum length of characters in a gram. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public NGramTokenFilterDescriptor MaxGram(int? maxGram)
 	{
 		MaxGramValue = maxGram;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum length of characters in a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public NGramTokenFilterDescriptor MinGram(int? minGram)
 	{
 		MinGramValue = minGram;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public NGramTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;

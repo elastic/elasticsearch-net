@@ -36,8 +36,7 @@ public sealed partial class FingerprintAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("separator")]
 	public string Separator { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
@@ -59,7 +58,7 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 	private int MaxOutputSizeValue { get; set; }
 	private bool PreserveOriginalValue { get; set; }
 	private string SeparatorValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? StopwordsPathValue { get; set; }
 	private string? VersionValue { get; set; }
 
@@ -81,7 +80,7 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 		return Self;
 	}
 
-	public FingerprintAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public FingerprintAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -111,7 +110,7 @@ public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescript
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(StopwordsPathValue))

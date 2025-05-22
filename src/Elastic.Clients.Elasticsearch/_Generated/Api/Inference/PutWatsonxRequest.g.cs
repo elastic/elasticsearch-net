@@ -43,13 +43,6 @@ public sealed partial class PutWatsonxRequestParameters : RequestParameters
 /// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 /// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
 /// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
 /// </summary>
 public sealed partial class PutWatsonxRequest : PlainRequest<PutWatsonxRequestParameters>
 {
@@ -90,13 +83,6 @@ public sealed partial class PutWatsonxRequest : PlainRequest<PutWatsonxRequestPa
 /// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
 /// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 /// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-/// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// </summary>
 public sealed partial class PutWatsonxRequestDescriptor : RequestDescriptor<PutWatsonxRequestDescriptor, PutWatsonxRequestParameters>

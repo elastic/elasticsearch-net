@@ -74,5 +74,5 @@ public sealed partial class PutJinaaiResponse : ElasticsearchResponse
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("task_type")]
-	public Elastic.Clients.Elasticsearch.Inference.TaskType TaskType { get; init; }
+	public Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi TaskType { get; init; }
 }

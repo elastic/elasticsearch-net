@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class AsciiFoldingTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
@@ -50,6 +55,11 @@ public sealed partial class AsciiFoldingTokenFilterDescriptor : SerializableDesc
 	private bool? PreserveOriginalValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, emit both original tokens and folded tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;

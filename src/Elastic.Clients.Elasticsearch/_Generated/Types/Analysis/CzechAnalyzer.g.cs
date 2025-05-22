@@ -32,8 +32,7 @@ public sealed partial class CzechAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("stem_exclusion")]
 	public ICollection<string>? StemExclusion { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
@@ -50,7 +49,7 @@ public sealed partial class CzechAnalyzerDescriptor : SerializableDescriptor<Cze
 	}
 
 	private ICollection<string>? StemExclusionValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? StopwordsPathValue { get; set; }
 
 	public CzechAnalyzerDescriptor StemExclusion(ICollection<string>? stemExclusion)
@@ -59,7 +58,7 @@ public sealed partial class CzechAnalyzerDescriptor : SerializableDescriptor<Cze
 		return Self;
 	}
 
-	public CzechAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public CzechAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -83,7 +82,7 @@ public sealed partial class CzechAnalyzerDescriptor : SerializableDescriptor<Cze
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(StopwordsPathValue))

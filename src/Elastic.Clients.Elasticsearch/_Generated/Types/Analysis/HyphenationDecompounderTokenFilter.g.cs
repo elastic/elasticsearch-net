@@ -29,14 +29,60 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
+	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("hyphenation_patterns_path")]
-	public string? HyphenationPatternsPath { get; set; }
+	public string HyphenationPatternsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_subword_size")]
 	public int? MaxSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_subword_size")]
 	public int? MinSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_size")]
 	public int? MinWordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("no_overlapping_matches")]
+	public bool? NoOverlappingMatches { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("no_sub_matches")]
+	public bool? NoSubMatches { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("only_longest_match")]
 	public bool? OnlyLongestMatch { get; set; }
 
@@ -45,8 +91,23 @@ public sealed partial class HyphenationDecompounderTokenFilter : ITokenFilter
 
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("word_list")]
 	public ICollection<string>? WordList { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("word_list_path")]
 	public string? WordListPath { get; set; }
 }
@@ -59,39 +120,89 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 	{
 	}
 
-	private string? HyphenationPatternsPathValue { get; set; }
+	private string HyphenationPatternsPathValue { get; set; }
 	private int? MaxSubwordSizeValue { get; set; }
 	private int? MinSubwordSizeValue { get; set; }
 	private int? MinWordSizeValue { get; set; }
+	private bool? NoOverlappingMatchesValue { get; set; }
+	private bool? NoSubMatchesValue { get; set; }
 	private bool? OnlyLongestMatchValue { get; set; }
 	private string? VersionValue { get; set; }
 	private ICollection<string>? WordListValue { get; set; }
 	private string? WordListPathValue { get; set; }
 
-	public HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? hyphenationPatternsPath)
+	/// <summary>
+	/// <para>
+	/// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
+	/// This path must be absolute or relative to the <c>config</c> location. Only FOP v1.2 compatible files are supported.
+	/// </para>
+	/// </summary>
+	public HyphenationDecompounderTokenFilterDescriptor HyphenationPatternsPath(string hyphenationPatternsPath)
 	{
 		HyphenationPatternsPathValue = hyphenationPatternsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor MaxSubwordSize(int? maxSubwordSize)
 	{
 		MaxSubwordSizeValue = maxSubwordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor MinSubwordSize(int? minSubwordSize)
 	{
 		MinSubwordSizeValue = minSubwordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor MinWordSize(int? minWordSize)
 	{
 		MinWordSizeValue = minWordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not allow overlapping tokens. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public HyphenationDecompounderTokenFilterDescriptor NoOverlappingMatches(bool? noOverlappingMatches = true)
+	{
+		NoOverlappingMatchesValue = noOverlappingMatches;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, do not match sub tokens in tokens that are in the word list. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public HyphenationDecompounderTokenFilterDescriptor NoSubMatches(bool? noSubMatches = true)
+	{
+		NoSubMatchesValue = noSubMatches;
+		return Self;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? onlyLongestMatch = true)
 	{
 		OnlyLongestMatchValue = onlyLongestMatch;
@@ -104,12 +215,25 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor WordList(ICollection<string>? wordList)
 	{
 		WordListValue = wordList;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public HyphenationDecompounderTokenFilterDescriptor WordListPath(string? wordListPath)
 	{
 		WordListPathValue = wordListPath;
@@ -119,12 +243,8 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(HyphenationPatternsPathValue))
-		{
-			writer.WritePropertyName("hyphenation_patterns_path");
-			writer.WriteStringValue(HyphenationPatternsPathValue);
-		}
-
+		writer.WritePropertyName("hyphenation_patterns_path");
+		writer.WriteStringValue(HyphenationPatternsPathValue);
 		if (MaxSubwordSizeValue.HasValue)
 		{
 			writer.WritePropertyName("max_subword_size");
@@ -141,6 +261,18 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 		{
 			writer.WritePropertyName("min_word_size");
 			writer.WriteNumberValue(MinWordSizeValue.Value);
+		}
+
+		if (NoOverlappingMatchesValue.HasValue)
+		{
+			writer.WritePropertyName("no_overlapping_matches");
+			writer.WriteBooleanValue(NoOverlappingMatchesValue.Value);
+		}
+
+		if (NoSubMatchesValue.HasValue)
+		{
+			writer.WritePropertyName("no_sub_matches");
+			writer.WriteBooleanValue(NoSubMatchesValue.Value);
 		}
 
 		if (OnlyLongestMatchValue.HasValue)
@@ -178,6 +310,8 @@ public sealed partial class HyphenationDecompounderTokenFilterDescriptor : Seria
 		MaxSubwordSize = MaxSubwordSizeValue,
 		MinSubwordSize = MinSubwordSizeValue,
 		MinWordSize = MinWordSizeValue,
+		NoOverlappingMatches = NoOverlappingMatchesValue,
+		NoSubMatches = NoSubMatchesValue,
 		OnlyLongestMatch = OnlyLongestMatchValue,
 		Version = VersionValue,
 		WordList = WordListValue,

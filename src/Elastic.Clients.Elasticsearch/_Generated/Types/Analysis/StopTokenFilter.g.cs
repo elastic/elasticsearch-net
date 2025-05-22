@@ -29,13 +29,36 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class StopTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("remove_trailing")]
 	public bool? RemoveTrailing { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of stop words to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
@@ -56,28 +79,49 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 
 	private bool? IgnoreCaseValue { get; set; }
 	private bool? RemoveTrailingValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? StopwordsPathValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, stop word matching is case insensitive. For example, if <c>true</c>, a stop word of the matches and removes <c>The</c>, <c>THE</c>, or <c>the</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)
 	{
 		IgnoreCaseValue = ignoreCase;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the last token of a stream is removed if it’s a stop word. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true)
 	{
 		RemoveTrailingValue = removeTrailing;
 		return Self;
 	}
 
-	public StopTokenFilterDescriptor Stopwords(ICollection<string>? stopwords)
+	/// <summary>
+	/// <para>
+	/// Language value, such as <c>_arabic_</c> or <c>_thai_</c>. Defaults to <c>_english_</c>.
+	/// </para>
+	/// </summary>
+	public StopTokenFilterDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of stop words to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each stop word in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public StopTokenFilterDescriptor StopwordsPath(string? stopwordsPath)
 	{
 		StopwordsPathValue = stopwordsPath;
@@ -108,7 +152,7 @@ public sealed partial class StopTokenFilterDescriptor : SerializableDescriptor<S
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(StopwordsPathValue))

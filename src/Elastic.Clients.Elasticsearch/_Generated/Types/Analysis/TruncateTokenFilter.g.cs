@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class TruncateTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("length")]
 	public int? Length { get; set; }
 
@@ -50,6 +55,11 @@ public sealed partial class TruncateTokenFilterDescriptor : SerializableDescript
 	private int? LengthValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
+	/// </para>
+	/// </summary>
 	public TruncateTokenFilterDescriptor Length(int? length)
 	{
 		LengthValue = length;

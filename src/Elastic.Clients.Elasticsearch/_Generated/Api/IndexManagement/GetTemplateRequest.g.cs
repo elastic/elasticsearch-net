@@ -57,7 +57,7 @@ public sealed partial class GetTemplateRequestParameters : RequestParameters
 
 /// <summary>
 /// <para>
-/// Get index templates.
+/// Get legacy index templates.
 /// Get information about one or more index templates.
 /// </para>
 /// <para>
@@ -110,7 +110,7 @@ public sealed partial class GetTemplateRequest : PlainRequest<GetTemplateRequest
 
 /// <summary>
 /// <para>
-/// Get index templates.
+/// Get legacy index templates.
 /// Get information about one or more index templates.
 /// </para>
 /// <para>

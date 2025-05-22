@@ -6075,6 +6075,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6088,6 +6089,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6100,6 +6102,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6113,6 +6116,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6127,6 +6131,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6142,6 +6147,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6154,6 +6160,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -6167,6 +6174,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Delete a legacy index template.
+	/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/indices-delete-template-v1.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -13606,7 +13614,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13623,7 +13631,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13639,7 +13647,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13656,7 +13664,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13674,7 +13682,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13693,7 +13701,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13711,7 +13719,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13730,7 +13738,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13746,7 +13754,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13763,7 +13771,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13781,7 +13789,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -13798,7 +13806,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Get index templates.
+	/// Get legacy index templates.
 	/// Get information about one or more index templates.
 	/// </para>
 	/// <para>
@@ -17831,7 +17839,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -17870,7 +17878,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -17908,7 +17916,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -17947,7 +17955,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -17987,7 +17995,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18028,7 +18036,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18067,7 +18075,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18107,7 +18115,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18148,7 +18156,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18186,7 +18194,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18225,7 +18233,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18265,7 +18273,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18303,7 +18311,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>
@@ -18342,7 +18350,7 @@ public partial class IndicesNamespacedClient : NamespacedClientProxy
 
 	/// <summary>
 	/// <para>
-	/// Create or update an index template.
+	/// Create or update a legacy index template.
 	/// Index templates define settings, mappings, and aliases that can be applied automatically to new indices.
 	/// Elasticsearch applies templates to new indices based on an index pattern that matches the index name.
 	/// </para>

@@ -29,24 +29,62 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class SynonymTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Expands definitions for equivalent synonym rules. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("expand")]
 	public bool? Expand { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Sets the synonym rules format.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("format")]
 	public Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? Format { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> ignores errors while parsing the synonym rules. It is important to note that only those synonym rules which cannot get parsed are ignored. Defaults to the value of the <c>updateable</c> setting.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("lenient")]
 	public bool? Lenient { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Used to define inline synonyms.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms")]
 	public ICollection<string>? Synonyms { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_path")]
 	public string? SynonymsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Provide a synonym set created via Synonyms Management APIs.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("synonyms_set")]
 	public string? SynonymsSet { get; set; }
-	[JsonInclude, JsonPropertyName("tokenizer")]
-	public string? Tokenizer { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "synonym";
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> allows reloading search analyzers to pick up changes to synonym files. Only to be used for search analyzers. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("updateable")]
 	public bool? Updateable { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
@@ -67,52 +105,80 @@ public sealed partial class SynonymTokenFilterDescriptor : SerializableDescripto
 	private ICollection<string>? SynonymsValue { get; set; }
 	private string? SynonymsPathValue { get; set; }
 	private string? SynonymsSetValue { get; set; }
-	private string? TokenizerValue { get; set; }
 	private bool? UpdateableValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Expands definitions for equivalent synonym rules. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor Expand(bool? expand = true)
 	{
 		ExpandValue = expand;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Sets the synonym rules format.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor Format(Elastic.Clients.Elasticsearch.Analysis.SynonymFormat? format)
 	{
 		FormatValue = format;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> ignores errors while parsing the synonym rules. It is important to note that only those synonym rules which cannot get parsed are ignored. Defaults to the value of the <c>updateable</c> setting.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor Lenient(bool? lenient = true)
 	{
 		LenientValue = lenient;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Used to define inline synonyms.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor Synonyms(ICollection<string>? synonyms)
 	{
 		SynonymsValue = synonyms;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Used to provide a synonym file. This path must be absolute or relative to the <c>config</c> location.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor SynonymsPath(string? synonymsPath)
 	{
 		SynonymsPathValue = synonymsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Provide a synonym set created via Synonyms Management APIs.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor SynonymsSet(string? synonymsSet)
 	{
 		SynonymsSetValue = synonymsSet;
 		return Self;
 	}
 
-	public SynonymTokenFilterDescriptor Tokenizer(string? tokenizer)
-	{
-		TokenizerValue = tokenizer;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> allows reloading search analyzers to pick up changes to synonym files. Only to be used for search analyzers. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public SynonymTokenFilterDescriptor Updateable(bool? updateable = true)
 	{
 		UpdateableValue = updateable;
@@ -164,12 +230,6 @@ public sealed partial class SynonymTokenFilterDescriptor : SerializableDescripto
 			writer.WriteStringValue(SynonymsSetValue);
 		}
 
-		if (!string.IsNullOrEmpty(TokenizerValue))
-		{
-			writer.WritePropertyName("tokenizer");
-			writer.WriteStringValue(TokenizerValue);
-		}
-
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("synonym");
 		if (UpdateableValue.HasValue)
@@ -195,7 +255,6 @@ public sealed partial class SynonymTokenFilterDescriptor : SerializableDescripto
 		Synonyms = SynonymsValue,
 		SynonymsPath = SynonymsPathValue,
 		SynonymsSet = SynonymsSetValue,
-		Tokenizer = TokenizerValue,
 		Updateable = UpdateableValue,
 		Version = VersionValue
 	};

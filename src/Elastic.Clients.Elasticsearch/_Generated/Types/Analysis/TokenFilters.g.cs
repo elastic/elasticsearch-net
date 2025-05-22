@@ -66,15 +66,33 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	{
 	}
 
+	public TokenFiltersDescriptor Apostrophe(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor, ApostropheTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor Apostrophe(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilterDescriptor, ApostropheTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor Apostrophe(string tokenFilterName, ApostropheTokenFilter apostropheTokenFilter) => AssignVariant(tokenFilterName, apostropheTokenFilter);
+	public TokenFiltersDescriptor ArabicNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor, ArabicNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor ArabicNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilterDescriptor, ArabicNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor ArabicNormalization(string tokenFilterName, ArabicNormalizationTokenFilter arabicNormalizationTokenFilter) => AssignVariant(tokenFilterName, arabicNormalizationTokenFilter);
 	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilterDescriptor, AsciiFoldingTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor AsciiFolding(string tokenFilterName, AsciiFoldingTokenFilter asciiFoldingTokenFilter) => AssignVariant(tokenFilterName, asciiFoldingTokenFilter);
+	public TokenFiltersDescriptor CjkBigram(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor, CjkBigramTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor CjkBigram(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilterDescriptor, CjkBigramTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor CjkBigram(string tokenFilterName, CjkBigramTokenFilter cjkBigramTokenFilter) => AssignVariant(tokenFilterName, cjkBigramTokenFilter);
+	public TokenFiltersDescriptor CjkWidth(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor, CjkWidthTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor CjkWidth(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilterDescriptor, CjkWidthTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor CjkWidth(string tokenFilterName, CjkWidthTokenFilter cjkWidthTokenFilter) => AssignVariant(tokenFilterName, cjkWidthTokenFilter);
+	public TokenFiltersDescriptor Classic(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor, ClassicTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor Classic(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilterDescriptor, ClassicTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor Classic(string tokenFilterName, ClassicTokenFilter classicTokenFilter) => AssignVariant(tokenFilterName, classicTokenFilter);
 	public TokenFiltersDescriptor CommonGrams(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor CommonGrams(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilterDescriptor, CommonGramsTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor CommonGrams(string tokenFilterName, CommonGramsTokenFilter commonGramsTokenFilter) => AssignVariant(tokenFilterName, commonGramsTokenFilter);
 	public TokenFiltersDescriptor Condition(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Condition(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilterDescriptor, ConditionTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Condition(string tokenFilterName, ConditionTokenFilter conditionTokenFilter) => AssignVariant(tokenFilterName, conditionTokenFilter);
+	public TokenFiltersDescriptor DecimalDigit(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor, DecimalDigitTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor DecimalDigit(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilterDescriptor, DecimalDigitTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor DecimalDigit(string tokenFilterName, DecimalDigitTokenFilter decimalDigitTokenFilter) => AssignVariant(tokenFilterName, decimalDigitTokenFilter);
 	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor, DelimitedPayloadTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor DelimitedPayload(string tokenFilterName, DelimitedPayloadTokenFilter delimitedPayloadTokenFilter) => AssignVariant(tokenFilterName, delimitedPayloadTokenFilter);
@@ -90,6 +108,15 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor Fingerprint(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Fingerprint(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor, FingerprintTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Fingerprint(string tokenFilterName, FingerprintTokenFilter fingerprintTokenFilter) => AssignVariant(tokenFilterName, fingerprintTokenFilter);
+	public TokenFiltersDescriptor FlattenGraph(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor, FlattenGraphTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor FlattenGraph(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilterDescriptor, FlattenGraphTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor FlattenGraph(string tokenFilterName, FlattenGraphTokenFilter flattenGraphTokenFilter) => AssignVariant(tokenFilterName, flattenGraphTokenFilter);
+	public TokenFiltersDescriptor GermanNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor, GermanNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor GermanNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilterDescriptor, GermanNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor GermanNormalization(string tokenFilterName, GermanNormalizationTokenFilter germanNormalizationTokenFilter) => AssignVariant(tokenFilterName, germanNormalizationTokenFilter);
+	public TokenFiltersDescriptor HindiNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor, HindiNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor HindiNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilterDescriptor, HindiNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor HindiNormalization(string tokenFilterName, HindiNormalizationTokenFilter hindiNormalizationTokenFilter) => AssignVariant(tokenFilterName, hindiNormalizationTokenFilter);
 	public TokenFiltersDescriptor Hunspell(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Hunspell(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilterDescriptor, HunspellTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Hunspell(string tokenFilterName, HunspellTokenFilter hunspellTokenFilter) => AssignVariant(tokenFilterName, hunspellTokenFilter);
@@ -108,6 +135,12 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilterDescriptor, IcuTransformTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor IcuTransform(string tokenFilterName, IcuTransformTokenFilter icuTransformTokenFilter) => AssignVariant(tokenFilterName, icuTransformTokenFilter);
+	public TokenFiltersDescriptor IndicNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor, IndicNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor IndicNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilterDescriptor, IndicNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor IndicNormalization(string tokenFilterName, IndicNormalizationTokenFilter indicNormalizationTokenFilter) => AssignVariant(tokenFilterName, indicNormalizationTokenFilter);
+	public TokenFiltersDescriptor JaStop(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor, JaStopTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor JaStop(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilterDescriptor, JaStopTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor JaStop(string tokenFilterName, JaStopTokenFilter jaStopTokenFilter) => AssignVariant(tokenFilterName, jaStopTokenFilter);
 	public TokenFiltersDescriptor KeepTypes(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor KeepTypes(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor, KeepTypesTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor KeepTypes(string tokenFilterName, KeepTypesTokenFilter keepTypesTokenFilter) => AssignVariant(tokenFilterName, keepTypesTokenFilter);
@@ -117,6 +150,9 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilterDescriptor, KeywordMarkerTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor KeywordMarker(string tokenFilterName, KeywordMarkerTokenFilter keywordMarkerTokenFilter) => AssignVariant(tokenFilterName, keywordMarkerTokenFilter);
+	public TokenFiltersDescriptor KeywordRepeat(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor, KeywordRepeatTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor KeywordRepeat(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilterDescriptor, KeywordRepeatTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor KeywordRepeat(string tokenFilterName, KeywordRepeatTokenFilter keywordRepeatTokenFilter) => AssignVariant(tokenFilterName, keywordRepeatTokenFilter);
 	public TokenFiltersDescriptor KStem(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor KStem(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilterDescriptor, KStemTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor KStem(string tokenFilterName, KStemTokenFilter kStemTokenFilter) => AssignVariant(tokenFilterName, kStemTokenFilter);
@@ -138,6 +174,9 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor Lowercase(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Lowercase(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterDescriptor, LowercaseTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Lowercase(string tokenFilterName, LowercaseTokenFilter lowercaseTokenFilter) => AssignVariant(tokenFilterName, lowercaseTokenFilter);
+	public TokenFiltersDescriptor MinHash(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor, MinHashTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor MinHash(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilterDescriptor, MinHashTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor MinHash(string tokenFilterName, MinHashTokenFilter minHashTokenFilter) => AssignVariant(tokenFilterName, minHashTokenFilter);
 	public TokenFiltersDescriptor Multiplexer(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Multiplexer(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilterDescriptor, MultiplexerTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Multiplexer(string tokenFilterName, MultiplexerTokenFilter multiplexerTokenFilter) => AssignVariant(tokenFilterName, multiplexerTokenFilter);
@@ -153,6 +192,9 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor PatternReplace(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor PatternReplace(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor, PatternReplaceTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor PatternReplace(string tokenFilterName, PatternReplaceTokenFilter patternReplaceTokenFilter) => AssignVariant(tokenFilterName, patternReplaceTokenFilter);
+	public TokenFiltersDescriptor PersianNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor, PersianNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor PersianNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilterDescriptor, PersianNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor PersianNormalization(string tokenFilterName, PersianNormalizationTokenFilter persianNormalizationTokenFilter) => AssignVariant(tokenFilterName, persianNormalizationTokenFilter);
 	public TokenFiltersDescriptor Phonetic(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Phonetic(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilterDescriptor, PhoneticTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Phonetic(string tokenFilterName, PhoneticTokenFilter phoneticTokenFilter) => AssignVariant(tokenFilterName, phoneticTokenFilter);
@@ -168,12 +210,24 @@ public sealed partial class TokenFiltersDescriptor : IsADictionaryDescriptor<Tok
 	public TokenFiltersDescriptor Reverse(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Reverse(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilterDescriptor, ReverseTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Reverse(string tokenFilterName, ReverseTokenFilter reverseTokenFilter) => AssignVariant(tokenFilterName, reverseTokenFilter);
+	public TokenFiltersDescriptor ScandinavianFolding(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor, ScandinavianFoldingTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor ScandinavianFolding(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilterDescriptor, ScandinavianFoldingTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor ScandinavianFolding(string tokenFilterName, ScandinavianFoldingTokenFilter scandinavianFoldingTokenFilter) => AssignVariant(tokenFilterName, scandinavianFoldingTokenFilter);
+	public TokenFiltersDescriptor ScandinavianNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor, ScandinavianNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor ScandinavianNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilterDescriptor, ScandinavianNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor ScandinavianNormalization(string tokenFilterName, ScandinavianNormalizationTokenFilter scandinavianNormalizationTokenFilter) => AssignVariant(tokenFilterName, scandinavianNormalizationTokenFilter);
+	public TokenFiltersDescriptor SerbianNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor, SerbianNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor SerbianNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilterDescriptor, SerbianNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor SerbianNormalization(string tokenFilterName, SerbianNormalizationTokenFilter serbianNormalizationTokenFilter) => AssignVariant(tokenFilterName, serbianNormalizationTokenFilter);
 	public TokenFiltersDescriptor Shingle(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Shingle(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor, ShingleTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Shingle(string tokenFilterName, ShingleTokenFilter shingleTokenFilter) => AssignVariant(tokenFilterName, shingleTokenFilter);
 	public TokenFiltersDescriptor Snowball(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor Snowball(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilterDescriptor, SnowballTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor Snowball(string tokenFilterName, SnowballTokenFilter snowballTokenFilter) => AssignVariant(tokenFilterName, snowballTokenFilter);
+	public TokenFiltersDescriptor SoraniNormalization(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor, SoraniNormalizationTokenFilter>(tokenFilterName, null);
+	public TokenFiltersDescriptor SoraniNormalization(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilterDescriptor, SoraniNormalizationTokenFilter>(tokenFilterName, configure);
+	public TokenFiltersDescriptor SoraniNormalization(string tokenFilterName, SoraniNormalizationTokenFilter soraniNormalizationTokenFilter) => AssignVariant(tokenFilterName, soraniNormalizationTokenFilter);
 	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterName, null);
 	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName, Action<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor> configure) => AssignVariant<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilterDescriptor, StemmerOverrideTokenFilter>(tokenFilterName, configure);
 	public TokenFiltersDescriptor StemmerOverride(string tokenFilterName, StemmerOverrideTokenFilter stemmerOverrideTokenFilter) => AssignVariant(tokenFilterName, stemmerOverrideTokenFilter);
@@ -223,12 +277,24 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 
 		switch (type)
 		{
+			case "apostrophe":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter>(ref reader, options);
+			case "arabic_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter>(ref reader, options);
 			case "asciifolding":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter>(ref reader, options);
+			case "cjk_bigram":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter>(ref reader, options);
+			case "cjk_width":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter>(ref reader, options);
+			case "classic":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter>(ref reader, options);
 			case "common_grams":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter>(ref reader, options);
 			case "condition":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter>(ref reader, options);
+			case "decimal_digit":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter>(ref reader, options);
 			case "delimited_payload":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>(ref reader, options);
 			case "dictionary_decompounder":
@@ -239,6 +305,12 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ElisionTokenFilter>(ref reader, options);
 			case "fingerprint":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>(ref reader, options);
+			case "flatten_graph":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter>(ref reader, options);
+			case "german_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter>(ref reader, options);
+			case "hindi_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter>(ref reader, options);
 			case "hunspell":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter>(ref reader, options);
 			case "hyphenation_decompounder":
@@ -251,12 +323,18 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationTokenFilter>(ref reader, options);
 			case "icu_transform":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter>(ref reader, options);
+			case "indic_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter>(ref reader, options);
+			case "ja_stop":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter>(ref reader, options);
 			case "keep_types":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>(ref reader, options);
 			case "keep":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeepWordsTokenFilter>(ref reader, options);
 			case "keyword_marker":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter>(ref reader, options);
+			case "keyword_repeat":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter>(ref reader, options);
 			case "kstem":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter>(ref reader, options);
 			case "kuromoji_part_of_speech":
@@ -271,6 +349,8 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LimitTokenCountTokenFilter>(ref reader, options);
 			case "lowercase":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter>(ref reader, options);
+			case "min_hash":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter>(ref reader, options);
 			case "multiplexer":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter>(ref reader, options);
 			case "ngram":
@@ -281,6 +361,8 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>(ref reader, options);
 			case "pattern_replace":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>(ref reader, options);
+			case "persian_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter>(ref reader, options);
 			case "phonetic":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter>(ref reader, options);
 			case "porter_stem":
@@ -291,10 +373,18 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.RemoveDuplicatesTokenFilter>(ref reader, options);
 			case "reverse":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter>(ref reader, options);
+			case "scandinavian_folding":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter>(ref reader, options);
+			case "scandinavian_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter>(ref reader, options);
+			case "serbian_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter>(ref reader, options);
 			case "shingle":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>(ref reader, options);
 			case "snowball":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter>(ref reader, options);
+			case "sorani_normalization":
+				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter>(ref reader, options);
 			case "stemmer_override":
 				return JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter>(ref reader, options);
 			case "stemmer":
@@ -333,14 +423,32 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 
 		switch (value.Type)
 		{
+			case "apostrophe":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ApostropheTokenFilter), options);
+				return;
+			case "arabic_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ArabicNormalizationTokenFilter), options);
+				return;
 			case "asciifolding":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.AsciiFoldingTokenFilter), options);
+				return;
+			case "cjk_bigram":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CjkBigramTokenFilter), options);
+				return;
+			case "cjk_width":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CjkWidthTokenFilter), options);
+				return;
+			case "classic":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ClassicTokenFilter), options);
 				return;
 			case "common_grams":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.CommonGramsTokenFilter), options);
 				return;
 			case "condition":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ConditionTokenFilter), options);
+				return;
+			case "decimal_digit":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DecimalDigitTokenFilter), options);
 				return;
 			case "delimited_payload":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter), options);
@@ -356,6 +464,15 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return;
 			case "fingerprint":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter), options);
+				return;
+			case "flatten_graph":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.FlattenGraphTokenFilter), options);
+				return;
+			case "german_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.GermanNormalizationTokenFilter), options);
+				return;
+			case "hindi_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HindiNormalizationTokenFilter), options);
 				return;
 			case "hunspell":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.HunspellTokenFilter), options);
@@ -375,6 +492,12 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 			case "icu_transform":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTransformTokenFilter), options);
 				return;
+			case "indic_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.IndicNormalizationTokenFilter), options);
+				return;
+			case "ja_stop":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.JaStopTokenFilter), options);
+				return;
 			case "keep_types":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter), options);
 				return;
@@ -383,6 +506,9 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return;
 			case "keyword_marker":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordMarkerTokenFilter), options);
+				return;
+			case "keyword_repeat":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KeywordRepeatTokenFilter), options);
 				return;
 			case "kstem":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.KStemTokenFilter), options);
@@ -405,6 +531,9 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 			case "lowercase":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilter), options);
 				return;
+			case "min_hash":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MinHashTokenFilter), options);
+				return;
 			case "multiplexer":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.MultiplexerTokenFilter), options);
 				return;
@@ -419,6 +548,9 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 				return;
 			case "pattern_replace":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter), options);
+				return;
+			case "persian_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PersianNormalizationTokenFilter), options);
 				return;
 			case "phonetic":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.PhoneticTokenFilter), options);
@@ -435,11 +567,23 @@ internal sealed partial class TokenFilterInterfaceConverter : JsonConverter<ITok
 			case "reverse":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ReverseTokenFilter), options);
 				return;
+			case "scandinavian_folding":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ScandinavianFoldingTokenFilter), options);
+				return;
+			case "scandinavian_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ScandinavianNormalizationTokenFilter), options);
+				return;
+			case "serbian_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SerbianNormalizationTokenFilter), options);
+				return;
 			case "shingle":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter), options);
 				return;
 			case "snowball":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SnowballTokenFilter), options);
+				return;
+			case "sorani_normalization":
+				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.SoraniNormalizationTokenFilter), options);
 				return;
 			case "stemmer_override":
 				JsonSerializer.Serialize(writer, value, typeof(Elastic.Clients.Elasticsearch.Analysis.StemmerOverrideTokenFilter), options);

@@ -36,8 +36,7 @@ public sealed partial class PatternAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern";
@@ -57,7 +56,7 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 	private string? FlagsValue { get; set; }
 	private bool? LowercaseValue { get; set; }
 	private string PatternValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? VersionValue { get; set; }
 
 	public PatternAnalyzerDescriptor Flags(string? flags)
@@ -78,7 +77,7 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 		return Self;
 	}
 
-	public PatternAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public PatternAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -110,7 +109,7 @@ public sealed partial class PatternAnalyzerDescriptor : SerializableDescriptor<P
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		writer.WritePropertyName("type");

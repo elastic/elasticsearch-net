@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class LimitTokenCountTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the limit filter exhausts the token stream, even if the <c>max_token_count</c> has already been reached. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("consume_all_tokens")]
 	public bool? ConsumeAllTokens { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to keep. Once this limit is reached, any remaining tokens are excluded from the output. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_token_count")]
 	public int? MaxTokenCount { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class LimitTokenCountTokenFilterDescriptor : SerializableD
 	private int? MaxTokenCountValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the limit filter exhausts the token stream, even if the <c>max_token_count</c> has already been reached. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public LimitTokenCountTokenFilterDescriptor ConsumeAllTokens(bool? consumeAllTokens = true)
 	{
 		ConsumeAllTokensValue = consumeAllTokens;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to keep. Once this limit is reached, any remaining tokens are excluded from the output. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount)
 	{
 		MaxTokenCountValue = maxTokenCount;

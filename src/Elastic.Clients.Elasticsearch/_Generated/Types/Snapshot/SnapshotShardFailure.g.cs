@@ -38,7 +38,7 @@ public sealed partial class SnapshotShardFailure
 	[JsonInclude, JsonPropertyName("reason")]
 	public string Reason { get; init; }
 	[JsonInclude, JsonPropertyName("shard_id")]
-	public string ShardId { get; init; }
+	public int ShardId { get; init; }
 	[JsonInclude, JsonPropertyName("status")]
 	public string Status { get; init; }
 }

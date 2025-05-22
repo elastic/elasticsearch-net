@@ -29,12 +29,27 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class PatternReplaceTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("all")]
 	public bool? All { get; set; }
-	[JsonInclude, JsonPropertyName("flags")]
-	public string? Flags { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("pattern")]
 	public string Pattern { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("replacement")]
 	public string? Replacement { get; set; }
 
@@ -54,29 +69,37 @@ public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDe
 	}
 
 	private bool? AllValue { get; set; }
-	private string? FlagsValue { get; set; }
 	private string PatternValue { get; set; }
 	private string? ReplacementValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public PatternReplaceTokenFilterDescriptor All(bool? all = true)
 	{
 		AllValue = all;
 		return Self;
 	}
 
-	public PatternReplaceTokenFilterDescriptor Flags(string? flags)
-	{
-		FlagsValue = flags;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
 	public PatternReplaceTokenFilterDescriptor Pattern(string pattern)
 	{
 		PatternValue = pattern;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
 	public PatternReplaceTokenFilterDescriptor Replacement(string? replacement)
 	{
 		ReplacementValue = replacement;
@@ -96,12 +119,6 @@ public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDe
 		{
 			writer.WritePropertyName("all");
 			writer.WriteBooleanValue(AllValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FlagsValue))
-		{
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(FlagsValue);
 		}
 
 		writer.WritePropertyName("pattern");
@@ -126,7 +143,6 @@ public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDe
 	PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
 	{
 		All = AllValue,
-		Flags = FlagsValue,
 		Pattern = PatternValue,
 		Replacement = ReplacementValue,
 		Version = VersionValue

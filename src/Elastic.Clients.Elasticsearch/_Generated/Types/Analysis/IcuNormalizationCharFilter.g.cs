@@ -37,6 +37,8 @@ public sealed partial class IcuNormalizationCharFilter : ICharFilter
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "icu_normalizer";
 
+	[JsonInclude, JsonPropertyName("unicode_set_filter")]
+	public string? UnicodeSetFilter { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -51,6 +53,7 @@ public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableD
 
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? ModeValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? NameValue { get; set; }
+	private string? UnicodeSetFilterValue { get; set; }
 	private string? VersionValue { get; set; }
 
 	public IcuNormalizationCharFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationMode? mode)
@@ -62,6 +65,12 @@ public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableD
 	public IcuNormalizationCharFilterDescriptor Name(Elastic.Clients.Elasticsearch.Analysis.IcuNormalizationType? name)
 	{
 		NameValue = name;
+		return Self;
+	}
+
+	public IcuNormalizationCharFilterDescriptor UnicodeSetFilter(string? unicodeSetFilter)
+	{
+		UnicodeSetFilterValue = unicodeSetFilter;
 		return Self;
 	}
 
@@ -88,6 +97,12 @@ public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableD
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("icu_normalizer");
+		if (!string.IsNullOrEmpty(UnicodeSetFilterValue))
+		{
+			writer.WritePropertyName("unicode_set_filter");
+			writer.WriteStringValue(UnicodeSetFilterValue);
+		}
+
 		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");
@@ -101,6 +116,7 @@ public sealed partial class IcuNormalizationCharFilterDescriptor : SerializableD
 	{
 		Mode = ModeValue,
 		Name = NameValue,
+		UnicodeSetFilter = UnicodeSetFilterValue,
 		Version = VersionValue
 	};
 }

@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class MultiplexerTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// A list of token filters to apply to incoming tokens.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filters")]
 	public ICollection<string> Filters { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (the default) then emit the original token in addition to the filtered tokens.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class MultiplexerTokenFilterDescriptor : SerializableDescr
 	private bool? PreserveOriginalValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// A list of token filters to apply to incoming tokens.
+	/// </para>
+	/// </summary>
 	public MultiplexerTokenFilterDescriptor Filters(ICollection<string> filters)
 	{
 		FiltersValue = filters;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (the default) then emit the original token in addition to the filtered tokens.
+	/// </para>
+	/// </summary>
 	public MultiplexerTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;

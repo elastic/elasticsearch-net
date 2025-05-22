@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class PatternCaptureTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("patterns")]
 	public ICollection<string> Patterns { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDe
 	private bool? PreserveOriginalValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
 	public PatternCaptureTokenFilterDescriptor Patterns(ICollection<string> patterns)
 	{
 		PatternsValue = patterns;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
 	public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;

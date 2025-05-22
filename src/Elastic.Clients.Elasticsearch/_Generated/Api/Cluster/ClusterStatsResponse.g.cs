@@ -30,6 +30,14 @@ public sealed partial class ClusterStatsResponse : ElasticsearchResponse
 {
 	/// <summary>
 	/// <para>
+	/// Cross-cluster stats
+	/// </para>
+	/// </summary>
+	[JsonInclude, JsonPropertyName("ccs")]
+	public Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; init; }
+
+	/// <summary>
+	/// <para>
 	/// Name of the cluster, based on the cluster name setting.
 	/// </para>
 	/// </summary>

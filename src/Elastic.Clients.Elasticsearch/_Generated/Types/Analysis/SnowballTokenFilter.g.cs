@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class SnowballTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Controls the language used by the stemmer.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? Language { get; set; }
 
@@ -50,6 +55,11 @@ public sealed partial class SnowballTokenFilterDescriptor : SerializableDescript
 	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? LanguageValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Controls the language used by the stemmer.
+	/// </para>
+	/// </summary>
 	public SnowballTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage? language)
 	{
 		LanguageValue = language;

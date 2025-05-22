@@ -45,13 +45,6 @@ public sealed partial class PutJinaaiRequestParameters : RequestParameters
 /// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 /// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 /// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-/// </para>
 /// </summary>
 public sealed partial class PutJinaaiRequest : PlainRequest<PutJinaaiRequestParameters>
 {
@@ -111,13 +104,6 @@ public sealed partial class PutJinaaiRequest : PlainRequest<PutJinaaiRequestPara
 /// <para>
 /// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 /// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
-/// </para>
-/// <para>
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// </summary>
 public sealed partial class PutJinaaiRequestDescriptor : RequestDescriptor<PutJinaaiRequestDescriptor, PutJinaaiRequestParameters>

@@ -32,8 +32,7 @@ public sealed partial class SnowballAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("language")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage Language { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "snowball";
@@ -51,7 +50,7 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage LanguageValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? VersionValue { get; set; }
 
 	public SnowballAnalyzerDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.SnowballLanguage language)
@@ -60,7 +59,7 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public SnowballAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public SnowballAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -80,7 +79,7 @@ public sealed partial class SnowballAnalyzerDescriptor : SerializableDescriptor<
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		writer.WritePropertyName("type");

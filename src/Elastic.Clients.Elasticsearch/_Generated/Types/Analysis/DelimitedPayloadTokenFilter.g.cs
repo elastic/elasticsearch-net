@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("delimiter")]
 	public string? Delimiter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("encoding")]
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class DelimitedPayloadTokenFilterDescriptor : Serializable
 	private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
 	public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)
 	{
 		DelimiterValue = delimiter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
 	public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? encoding)
 	{
 		EncodingValue = encoding;

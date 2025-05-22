@@ -29,13 +29,40 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class KeywordMarkerTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matching for the <c>keywords</c> and <c>keywords_path</c> parameters ignores letter case. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Array of keywords. Tokens that match these keywords are not stemmed.
+	/// This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keywords")]
 	[SingleOrManyCollectionConverter(typeof(string))]
 	public ICollection<string>? Keywords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of keywords. Tokens that match these keywords are not stemmed.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+	/// This parameter, <c>keywords</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keywords_path")]
 	public string? KeywordsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Java regular expression used to match tokens. Tokens that match this expression are marked as keywords and not stemmed.
+	/// This parameter, <c>keywords</c>, or <c>keywords_path</c> must be specified. You cannot specify this parameter and <c>keywords</c> or <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keywords_pattern")]
 	public string? KeywordsPattern { get; set; }
 
@@ -60,24 +87,48 @@ public sealed partial class KeywordMarkerTokenFilterDescriptor : SerializableDes
 	private string? KeywordsPatternValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matching for the <c>keywords</c> and <c>keywords_path</c> parameters ignores letter case. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)
 	{
 		IgnoreCaseValue = ignoreCase;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of keywords. Tokens that match these keywords are not stemmed.
+	/// This parameter, <c>keywords_path</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	public KeywordMarkerTokenFilterDescriptor Keywords(ICollection<string>? keywords)
 	{
 		KeywordsValue = keywords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of keywords. Tokens that match these keywords are not stemmed.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+	/// This parameter, <c>keywords</c>, or <c>keywords_pattern</c> must be specified. You cannot specify this parameter and <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	public KeywordMarkerTokenFilterDescriptor KeywordsPath(string? keywordsPath)
 	{
 		KeywordsPathValue = keywordsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Java regular expression used to match tokens. Tokens that match this expression are marked as keywords and not stemmed.
+	/// This parameter, <c>keywords</c>, or <c>keywords_path</c> must be specified. You cannot specify this parameter and <c>keywords</c> or <c>keywords_pattern</c>.
+	/// </para>
+	/// </summary>
 	public KeywordMarkerTokenFilterDescriptor KeywordsPattern(string? keywordsPattern)
 	{
 		KeywordsPatternValue = keywordsPattern;

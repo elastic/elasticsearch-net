@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class UniqueTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("only_on_same_position")]
 	public bool? OnlyOnSamePosition { get; set; }
 
@@ -50,6 +55,11 @@ public sealed partial class UniqueTokenFilterDescriptor : SerializableDescriptor
 	private bool? OnlyOnSamePositionValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? onlyOnSamePosition = true)
 	{
 		OnlyOnSamePositionValue = onlyOnSamePosition;

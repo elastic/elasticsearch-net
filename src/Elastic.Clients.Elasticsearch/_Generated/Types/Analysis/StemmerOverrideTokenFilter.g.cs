@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class StemmerOverrideTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// A list of mapping rules to use.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rules")]
 	public ICollection<string>? Rules { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A path (either relative to <c>config</c> location, or absolute) to a list of mappings.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("rules_path")]
 	public string? RulesPath { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class StemmerOverrideTokenFilterDescriptor : SerializableD
 	private string? RulesPathValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// A list of mapping rules to use.
+	/// </para>
+	/// </summary>
 	public StemmerOverrideTokenFilterDescriptor Rules(ICollection<string>? rules)
 	{
 		RulesValue = rules;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A path (either relative to <c>config</c> location, or absolute) to a list of mappings.
+	/// </para>
+	/// </summary>
 	public StemmerOverrideTokenFilterDescriptor RulesPath(string? rulesPath)
 	{
 		RulesPathValue = rulesPath;

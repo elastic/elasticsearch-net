@@ -46,5 +46,5 @@ public sealed partial class ShardProfile
 	[JsonInclude, JsonPropertyName("searches")]
 	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> Searches { get; init; }
 	[JsonInclude, JsonPropertyName("shard_id")]
-	public long ShardId { get; init; }
+	public int ShardId { get; init; }
 }

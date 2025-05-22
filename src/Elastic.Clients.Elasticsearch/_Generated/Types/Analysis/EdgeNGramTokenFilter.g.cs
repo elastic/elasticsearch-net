@@ -29,12 +29,35 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class EdgeNGramTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a gram. For custom token filters, defaults to <c>2</c>. For the built-in edge_ngram filter, defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_gram")]
 	public int? MaxGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_gram")]
 	public int? MinGram { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to truncate tokens from the <c>front</c> or <c>back</c>. Defaults to <c>front</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("side")]
 	public Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? Side { get; set; }
 
@@ -59,24 +82,44 @@ public sealed partial class EdgeNGramTokenFilterDescriptor : SerializableDescrip
 	private Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? SideValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a gram. For custom token filters, defaults to <c>2</c>. For the built-in edge_ngram filter, defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram)
 	{
 		MaxGramValue = maxGram;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a gram. Defaults to <c>1</c>.
+	/// </para>
+	/// </summary>
 	public EdgeNGramTokenFilterDescriptor MinGram(int? minGram)
 	{
 		MinGramValue = minGram;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Emits original token when set to <c>true</c>. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public EdgeNGramTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Indicates whether to truncate tokens from the <c>front</c> or <c>back</c>. Defaults to <c>front</c>.
+	/// </para>
+	/// </summary>
 	public EdgeNGramTokenFilterDescriptor Side(Elastic.Clients.Elasticsearch.Analysis.EdgeNGramSide? side)
 	{
 		SideValue = side;

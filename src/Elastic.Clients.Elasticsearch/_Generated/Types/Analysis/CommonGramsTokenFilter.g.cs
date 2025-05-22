@@ -29,12 +29,51 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class CommonGramsTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// A list of tokens. The filter generates bigrams for these tokens.
+	/// Either this or the <c>common_words_path</c> parameter is required.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("common_words")]
 	public ICollection<string>? CommonWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file containing a list of tokens. The filter generates bigrams for these tokens.
+	/// This path must be absolute or relative to the <c>config</c> location. The file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this or the <c>common_words</c> parameter is required.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("common_words_path")]
 	public string? CommonWordsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matches for common words matching are case-insensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_case")]
 	public bool? IgnoreCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter excludes the following tokens from the output:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Unigrams for common words
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Unigrams for terms followed by common words
+	/// Defaults to <c>false</c>. We recommend enabling this parameter for search analyzers.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("query_mode")]
 	public bool? QueryMode { get; set; }
 
@@ -59,24 +98,60 @@ public sealed partial class CommonGramsTokenFilterDescriptor : SerializableDescr
 	private bool? QueryModeValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// A list of tokens. The filter generates bigrams for these tokens.
+	/// Either this or the <c>common_words_path</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public CommonGramsTokenFilterDescriptor CommonWords(ICollection<string>? commonWords)
 	{
 		CommonWordsValue = commonWords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file containing a list of tokens. The filter generates bigrams for these tokens.
+	/// This path must be absolute or relative to the <c>config</c> location. The file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this or the <c>common_words</c> parameter is required.
+	/// </para>
+	/// </summary>
 	public CommonGramsTokenFilterDescriptor CommonWordsPath(string? commonWordsPath)
 	{
 		CommonWordsPathValue = commonWordsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, matches for common words matching are case-insensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public CommonGramsTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true)
 	{
 		IgnoreCaseValue = ignoreCase;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter excludes the following tokens from the output:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Unigrams for common words
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Unigrams for terms followed by common words
+	/// Defaults to <c>false</c>. We recommend enabling this parameter for search analyzers.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
 	public CommonGramsTokenFilterDescriptor QueryMode(bool? queryMode = true)
 	{
 		QueryModeValue = queryMode;

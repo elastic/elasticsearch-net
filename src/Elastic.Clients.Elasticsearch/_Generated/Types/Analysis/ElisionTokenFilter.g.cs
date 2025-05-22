@@ -29,10 +29,32 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class ElisionTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// List of elisions to remove.
+	/// To be removed, the elision must be at the beginning of a token and be immediately followed by an apostrophe. Both the elision and apostrophe are removed.
+	/// For custom <c>elision</c> filters, either this parameter or <c>articles_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("articles")]
 	public ICollection<string>? Articles { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, elision matching is case insensitive. If <c>false</c>, elision matching is case sensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("articles_case")]
 	public bool? ArticlesCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of elisions to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each elision in the file must be separated by a line break.
+	/// To be removed, the elision must be at the beginning of a token and be immediately followed by an apostrophe. Both the elision and apostrophe are removed.
+	/// For custom <c>elision</c> filters, either this parameter or <c>articles</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("articles_path")]
 	public string? ArticlesPath { get; set; }
 
@@ -56,18 +78,38 @@ public sealed partial class ElisionTokenFilterDescriptor : SerializableDescripto
 	private string? ArticlesPathValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// List of elisions to remove.
+	/// To be removed, the elision must be at the beginning of a token and be immediately followed by an apostrophe. Both the elision and apostrophe are removed.
+	/// For custom <c>elision</c> filters, either this parameter or <c>articles_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public ElisionTokenFilterDescriptor Articles(ICollection<string>? articles)
 	{
 		ArticlesValue = articles;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, elision matching is case insensitive. If <c>false</c>, elision matching is case sensitive. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public ElisionTokenFilterDescriptor ArticlesCase(bool? articlesCase = true)
 	{
 		ArticlesCaseValue = articlesCase;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of elisions to remove.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each elision in the file must be separated by a line break.
+	/// To be removed, the elision must be at the beginning of a token and be immediately followed by an apostrophe. Both the elision and apostrophe are removed.
+	/// For custom <c>elision</c> filters, either this parameter or <c>articles</c> must be specified.
+	/// </para>
+	/// </summary>
 	public ElisionTokenFilterDescriptor ArticlesPath(string? articlesPath)
 	{
 		ArticlesPathValue = articlesPath;

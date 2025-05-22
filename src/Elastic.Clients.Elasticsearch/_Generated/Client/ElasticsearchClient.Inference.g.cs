@@ -43,6 +43,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Perform chat completion inference
 	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -56,6 +70,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Perform chat completion inference
 	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(ChatCompletionUnifiedRequest request, CancellationToken cancellationToken = default)
@@ -67,6 +95,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Perform chat completion inference
+	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -81,6 +123,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Perform chat completion inference
 	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -94,6 +150,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Perform chat completion inference
+	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -110,6 +180,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Perform chat completion inference
 	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
+	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(ChatCompletionUnifiedRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -121,6 +205,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Perform chat completion inference
+	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -134,6 +232,20 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Perform chat completion inference
+	/// </para>
+	/// <para>
+	/// The chat completion inference API enables real-time responses for chat completion tasks by delivering answers incrementally, reducing response times during computation.
+	/// It only works with the <c>chat_completion</c> task type for <c>openai</c> and <c>elastic</c> inference services.
+	/// </para>
+	/// <para>
+	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
+	/// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models. However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+	/// </para>
+	/// <para>
+	/// NOTE: The <c>chat_completion</c> task type is only available within the _stream API and only supports streaming.
+	/// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
+	/// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
+	/// If you use the <c>openai</c> service or the <c>elastic</c> service, use the Chat completion inference API.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/chat-completion-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -884,11 +996,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -907,11 +1014,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -929,11 +1031,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -952,11 +1049,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -976,11 +1068,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1001,11 +1088,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1025,11 +1107,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1050,11 +1127,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1072,11 +1144,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1095,11 +1162,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1119,11 +1181,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1142,11 +1199,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <summary>
 	/// <para>
 	/// Create an inference endpoint.
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para>
 	/// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -1170,13 +1222,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1193,13 +1238,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(PutAlibabacloudRequest request, CancellationToken cancellationToken = default)
@@ -1214,13 +1252,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1238,13 +1269,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1261,13 +1285,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1287,13 +1304,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAlibabacloudResponse> PutAlibabacloudAsync(PutAlibabacloudRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1308,13 +1318,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1331,13 +1334,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>alibabacloud-ai-search</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-alibabacloud-ai-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1360,13 +1356,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1387,13 +1376,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(PutAmazonbedrockRequest request, CancellationToken cancellationToken = default)
@@ -1412,13 +1394,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1440,13 +1415,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1467,13 +1435,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1497,13 +1458,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(PutAmazonbedrockRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1522,13 +1476,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1550,13 +1497,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// info
 	/// You need to provide the access and secret keys only once, during the inference model creation. The get inference API does not retrieve your access or secret keys. After creating the inference model, you cannot change the associated key pairs. If you want to use a different access and secret key pair, delete the inference model and recreate it with the same name and the updated keys.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-amazon-bedrock.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, Action<PutAmazonbedrockRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -1574,13 +1514,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1597,13 +1530,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(PutAnthropicRequest request, CancellationToken cancellationToken = default)
@@ -1618,13 +1544,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1642,13 +1561,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1665,13 +1577,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1691,13 +1596,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAnthropicResponse> PutAnthropicAsync(PutAnthropicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1712,13 +1610,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1735,13 +1626,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>anthropic</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-anthropic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1760,13 +1644,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1783,13 +1660,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(PutAzureaistudioRequest request, CancellationToken cancellationToken = default)
@@ -1804,13 +1674,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1828,13 +1691,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -1851,13 +1707,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1877,13 +1726,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAzureaistudioResponse> PutAzureaistudioAsync(PutAzureaistudioRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -1898,13 +1740,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1921,13 +1756,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>azureaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -1964,13 +1792,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -2005,13 +1826,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(PutAzureopenaiRequest request, CancellationToken cancellationToken = default)
@@ -2044,13 +1858,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </list>
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2086,13 +1893,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -2127,13 +1927,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </list>
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2171,13 +1964,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(PutAzureopenaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2210,13 +1996,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </list>
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2252,13 +2031,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// The list of embeddings models that you can choose from in your deployment can be found in the <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#embeddings">Azure models documentation</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-azure-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, Action<PutAzureopenaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -2276,13 +2048,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -2299,13 +2064,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutCohereResponse> PutCohereAsync(PutCohereRequest request, CancellationToken cancellationToken = default)
@@ -2320,13 +2078,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2344,13 +2095,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -2367,13 +2111,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2393,13 +2130,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutCohereResponse> PutCohereAsync(PutCohereRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -2414,13 +2144,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -2437,13 +2160,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>cohere</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-cohere.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3002,13 +2718,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3025,13 +2734,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(PutGoogleaistudioRequest request, CancellationToken cancellationToken = default)
@@ -3046,13 +2748,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3070,13 +2765,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3093,13 +2781,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3119,13 +2800,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGoogleaistudioResponse> PutGoogleaistudioAsync(PutGoogleaistudioRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3140,13 +2814,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3163,13 +2830,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googleaistudio</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-ai-studio.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3188,13 +2848,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3211,13 +2864,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(PutGooglevertexaiRequest request, CancellationToken cancellationToken = default)
@@ -3232,13 +2878,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3256,13 +2895,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3279,13 +2911,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3305,13 +2930,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutGooglevertexaiResponse> PutGooglevertexaiAsync(PutGooglevertexaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3326,13 +2944,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3349,13 +2960,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>googlevertexai</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-google-vertex-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -3419,13 +3023,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3487,13 +3084,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(PutHuggingFaceRequest request, CancellationToken cancellationToken = default)
@@ -3554,13 +3144,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3622,13 +3205,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3691,13 +3267,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3761,13 +3330,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(PutHuggingFaceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -3828,13 +3390,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, CancellationToken cancellationToken = default)
@@ -3896,13 +3451,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// </item>
 	/// </list>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-hugging-face.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, Action<PutHuggingFaceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -3924,13 +3472,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -3951,13 +3492,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(PutJinaaiRequest request, CancellationToken cancellationToken = default)
@@ -3976,13 +3510,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4004,13 +3531,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4031,13 +3551,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4061,13 +3574,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(PutJinaaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -4086,13 +3592,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4114,13 +3613,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// To review the available <c>rerank</c> models, refer to <a href="https://jina.ai/reranker">https://jina.ai/reranker</a>.
 	/// To review the available <c>text_embedding</c> models, refer to the <a href="https://jina.ai/embeddings/">https://jina.ai/embeddings/</a>.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-jinaai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, Action<PutJinaaiRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
@@ -4138,13 +3630,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4161,13 +3646,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMistralResponse> PutMistralAsync(PutMistralRequest request, CancellationToken cancellationToken = default)
@@ -4182,13 +3660,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4206,13 +3677,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4229,13 +3693,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4255,13 +3712,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutMistralResponse> PutMistralAsync(PutMistralRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -4276,13 +3726,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4299,13 +3742,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Creates an inference endpoint to perform an inference task with the <c>mistral</c> service.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/{brnach}/infer-service-mistral.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4324,13 +3760,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4347,13 +3776,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(PutOpenaiRequest request, CancellationToken cancellationToken = default)
@@ -4368,13 +3790,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4392,13 +3807,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4415,13 +3823,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4441,13 +3842,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutOpenaiResponse> PutOpenaiAsync(PutOpenaiRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -4462,13 +3856,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4485,13 +3872,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// </para>
 	/// <para>
 	/// Create an inference endpoint to perform an inference task with the <c>openai</c> service or <c>openai</c> compatible APIs.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-openai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4512,13 +3892,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4537,13 +3910,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(PutWatsonxRequest request, CancellationToken cancellationToken = default)
@@ -4560,13 +3926,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4586,13 +3945,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
@@ -4611,13 +3963,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4639,13 +3984,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
 	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
-	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
 	public virtual Task<PutWatsonxResponse> PutWatsonxAsync(PutWatsonxRequestDescriptor descriptor, CancellationToken cancellationToken = default)
@@ -4662,13 +4000,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>
@@ -4687,13 +4018,6 @@ public partial class InferenceNamespacedClient : NamespacedClientProxy
 	/// Create an inference endpoint to perform an inference task with the <c>watsonxai</c> service.
 	/// You need an IBM Cloud Databases for Elasticsearch deployment to use the <c>watsonxai</c> inference service.
 	/// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
-	/// </para>
-	/// <para>
-	/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-	/// After creating the endpoint, wait for the model deployment to complete before using it.
-	/// To verify the deployment status, use the get trained model statistics API.
-	/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-	/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 	/// </para>
 	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.18/infer-service-watsonx-ai.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 	/// </summary>

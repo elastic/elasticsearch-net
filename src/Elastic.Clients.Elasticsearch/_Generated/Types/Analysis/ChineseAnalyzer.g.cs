@@ -30,8 +30,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 public sealed partial class ChineseAnalyzer : IAnalyzer
 {
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords_path")]
 	public string? StopwordsPath { get; set; }
 
@@ -47,10 +46,10 @@ public sealed partial class ChineseAnalyzerDescriptor : SerializableDescriptor<C
 	{
 	}
 
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 	private string? StopwordsPathValue { get; set; }
 
-	public ChineseAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public ChineseAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -68,7 +67,7 @@ public sealed partial class ChineseAnalyzerDescriptor : SerializableDescriptor<C
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		if (!string.IsNullOrEmpty(StopwordsPathValue))

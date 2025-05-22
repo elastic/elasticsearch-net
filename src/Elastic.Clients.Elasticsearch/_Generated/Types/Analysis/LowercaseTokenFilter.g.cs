@@ -29,8 +29,13 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class LowercaseTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Language-specific lowercase token filter to use.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("language")]
-	public string? Language { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? Language { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "lowercase";
@@ -47,10 +52,15 @@ public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescrip
 	{
 	}
 
-	private string? LanguageValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? LanguageValue { get; set; }
 	private string? VersionValue { get; set; }
 
-	public LowercaseTokenFilterDescriptor Language(string? language)
+	/// <summary>
+	/// <para>
+	/// Language-specific lowercase token filter to use.
+	/// </para>
+	/// </summary>
+	public LowercaseTokenFilterDescriptor Language(Elastic.Clients.Elasticsearch.Analysis.LowercaseTokenFilterLanguages? language)
 	{
 		LanguageValue = language;
 		return Self;
@@ -65,10 +75,10 @@ public sealed partial class LowercaseTokenFilterDescriptor : SerializableDescrip
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(LanguageValue))
+		if (LanguageValue is not null)
 		{
 			writer.WritePropertyName("language");
-			writer.WriteStringValue(LanguageValue);
+			JsonSerializer.Serialize(writer, LanguageValue, options);
 		}
 
 		writer.WritePropertyName("type");

@@ -162,8 +162,7 @@ public sealed partial class MoreLikeThisQuery
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("stop_words")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? StopWords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWords { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -205,7 +204,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	private int? MinWordLengthValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private ICollection<string>? StopWordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
@@ -390,7 +389,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor<TDocument> StopWords(ICollection<string>? stopWords)
+	public MoreLikeThisQueryDescriptor<TDocument> StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
@@ -517,7 +516,7 @@ public sealed partial class MoreLikeThisQueryDescriptor<TDocument> : Serializabl
 		if (StopWordsValue is not null)
 		{
 			writer.WritePropertyName("stop_words");
-			SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopWordsValue, options);
 		}
 
 		if (UnlikeValue is not null)
@@ -566,7 +565,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	private int? MinWordLengthValue { get; set; }
 	private string? QueryNameValue { get; set; }
 	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private ICollection<string>? StopWordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopWordsValue { get; set; }
 	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Like>? UnlikeValue { get; set; }
 	private long? VersionValue { get; set; }
 	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
@@ -751,7 +750,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 	/// Any word in this set is ignored.
 	/// </para>
 	/// </summary>
-	public MoreLikeThisQueryDescriptor StopWords(ICollection<string>? stopWords)
+	public MoreLikeThisQueryDescriptor StopWords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopWords)
 	{
 		StopWordsValue = stopWords;
 		return Self;
@@ -878,7 +877,7 @@ public sealed partial class MoreLikeThisQueryDescriptor : SerializableDescriptor
 		if (StopWordsValue is not null)
 		{
 			writer.WritePropertyName("stop_words");
-			SingleOrManySerializationHelper.Serialize<string>(StopWordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopWordsValue, options);
 		}
 
 		if (UnlikeValue is not null)

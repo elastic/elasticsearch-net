@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class NoriPartOfSpeechTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// An array of part-of-speech tags that should be removed.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stoptags")]
 	public ICollection<string>? Stoptags { get; set; }
 
@@ -50,6 +55,11 @@ public sealed partial class NoriPartOfSpeechTokenFilterDescriptor : Serializable
 	private ICollection<string>? StoptagsValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// An array of part-of-speech tags that should be removed.
+	/// </para>
+	/// </summary>
 	public NoriPartOfSpeechTokenFilterDescriptor Stoptags(ICollection<string>? stoptags)
 	{
 		StoptagsValue = stoptags;

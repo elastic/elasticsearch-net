@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class LengthTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a token. Longer tokens are excluded from the output. Defaults to <c>Integer.MAX_VALUE</c>, which is <c>2^31-1</c> or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max")]
 	public int? Max { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a token. Shorter tokens are excluded from the output. Defaults to <c>0</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min")]
 	public int? Min { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class LengthTokenFilterDescriptor : SerializableDescriptor
 	private int? MinValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Maximum character length of a token. Longer tokens are excluded from the output. Defaults to <c>Integer.MAX_VALUE</c>, which is <c>2^31-1</c> or <c>2147483647</c>.
+	/// </para>
+	/// </summary>
 	public LengthTokenFilterDescriptor Max(int? max)
 	{
 		MaxValue = max;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum character length of a token. Shorter tokens are excluded from the output. Defaults to <c>0</c>.
+	/// </para>
+	/// </summary>
 	public LengthTokenFilterDescriptor Min(int? min)
 	{
 		MinValue = min;

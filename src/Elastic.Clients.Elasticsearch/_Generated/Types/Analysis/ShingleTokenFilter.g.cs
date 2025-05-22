@@ -29,16 +29,51 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class ShingleTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filler_token")]
 	public string? FillerToken { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_shingle_size")]
-	public object? MaxShingleSize { get; set; }
+	public int? MaxShingleSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_shingle_size")]
-	public object? MinShingleSize { get; set; }
+	public int? MinShingleSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("output_unigrams")]
 	public bool? OutputUnigrams { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("output_unigrams_if_no_shingles")]
 	public bool? OutputUnigramsIfNoShingles { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("token_separator")]
 	public string? TokenSeparator { get; set; }
 
@@ -58,43 +93,73 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 	}
 
 	private string? FillerTokenValue { get; set; }
-	private object? MaxShingleSizeValue { get; set; }
-	private object? MinShingleSizeValue { get; set; }
+	private int? MaxShingleSizeValue { get; set; }
+	private int? MinShingleSizeValue { get; set; }
 	private bool? OutputUnigramsValue { get; set; }
 	private bool? OutputUnigramsIfNoShinglesValue { get; set; }
 	private string? TokenSeparatorValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
+	/// </para>
+	/// </summary>
 	public ShingleTokenFilterDescriptor FillerToken(string? fillerToken)
 	{
 		FillerTokenValue = fillerToken;
 		return Self;
 	}
 
-	public ShingleTokenFilterDescriptor MaxShingleSize(object? maxShingleSize)
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public ShingleTokenFilterDescriptor MaxShingleSize(int? maxShingleSize)
 	{
 		MaxShingleSizeValue = maxShingleSize;
 		return Self;
 	}
 
-	public ShingleTokenFilterDescriptor MinShingleSize(object? minShingleSize)
+	/// <summary>
+	/// <para>
+	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public ShingleTokenFilterDescriptor MinShingleSize(int? minShingleSize)
 	{
 		MinShingleSizeValue = minShingleSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public ShingleTokenFilterDescriptor OutputUnigrams(bool? outputUnigrams = true)
 	{
 		OutputUnigramsValue = outputUnigrams;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? outputUnigramsIfNoShingles = true)
 	{
 		OutputUnigramsIfNoShinglesValue = outputUnigramsIfNoShingles;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
+	/// </para>
+	/// </summary>
 	public ShingleTokenFilterDescriptor TokenSeparator(string? tokenSeparator)
 	{
 		TokenSeparatorValue = tokenSeparator;
@@ -116,16 +181,16 @@ public sealed partial class ShingleTokenFilterDescriptor : SerializableDescripto
 			writer.WriteStringValue(FillerTokenValue);
 		}
 
-		if (MaxShingleSizeValue is not null)
+		if (MaxShingleSizeValue.HasValue)
 		{
 			writer.WritePropertyName("max_shingle_size");
-			JsonSerializer.Serialize(writer, MaxShingleSizeValue, options);
+			writer.WriteNumberValue(MaxShingleSizeValue.Value);
 		}
 
-		if (MinShingleSizeValue is not null)
+		if (MinShingleSizeValue.HasValue)
 		{
 			writer.WritePropertyName("min_shingle_size");
-			JsonSerializer.Serialize(writer, MinShingleSizeValue, options);
+			writer.WriteNumberValue(MinShingleSizeValue.Value);
 		}
 
 		if (OutputUnigramsValue.HasValue)

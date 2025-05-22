@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class FingerprintTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_output_size")]
 	public int? MaxOutputSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Character to use to concatenate the token stream input. Defaults to a space.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
@@ -53,12 +64,22 @@ public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescr
 	private string? SeparatorValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
+	/// </para>
+	/// </summary>
 	public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize)
 	{
 		MaxOutputSizeValue = maxOutputSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Character to use to concatenate the token stream input. Defaults to a space.
+	/// </para>
+	/// </summary>
 	public FingerprintTokenFilterDescriptor Separator(string? separator)
 	{
 		SeparatorValue = separator;

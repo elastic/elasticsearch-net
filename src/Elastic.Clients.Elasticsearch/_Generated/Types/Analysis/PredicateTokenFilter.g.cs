@@ -29,6 +29,11 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class PredicateTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
@@ -52,6 +57,11 @@ public sealed partial class PredicateTokenFilterDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
+	/// </para>
+	/// </summary>
 	public PredicateTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptDescriptor = null;

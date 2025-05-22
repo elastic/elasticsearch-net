@@ -28,6 +28,62 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+[JsonConverter(typeof(CjkBigramIgnoredScriptConverter))]
+public enum CjkBigramIgnoredScript
+{
+	[EnumMember(Value = "katakana")]
+	Katakana,
+	[EnumMember(Value = "hiragana")]
+	Hiragana,
+	[EnumMember(Value = "hangul")]
+	Hangul,
+	[EnumMember(Value = "han")]
+	Han
+}
+
+internal sealed class CjkBigramIgnoredScriptConverter : JsonConverter<CjkBigramIgnoredScript>
+{
+	public override CjkBigramIgnoredScript Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "katakana":
+				return CjkBigramIgnoredScript.Katakana;
+			case "hiragana":
+				return CjkBigramIgnoredScript.Hiragana;
+			case "hangul":
+				return CjkBigramIgnoredScript.Hangul;
+			case "han":
+				return CjkBigramIgnoredScript.Han;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, CjkBigramIgnoredScript value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case CjkBigramIgnoredScript.Katakana:
+				writer.WriteStringValue("katakana");
+				return;
+			case CjkBigramIgnoredScript.Hiragana:
+				writer.WriteStringValue("hiragana");
+				return;
+			case CjkBigramIgnoredScript.Hangul:
+				writer.WriteStringValue("hangul");
+				return;
+			case CjkBigramIgnoredScript.Han:
+				writer.WriteStringValue("han");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(DelimitedPayloadEncodingConverter))]
 public enum DelimitedPayloadEncoding
 {
@@ -532,6 +588,55 @@ internal sealed class KuromojiTokenizationModeConverter : JsonConverter<Kuromoji
 	}
 }
 
+[JsonConverter(typeof(LowercaseTokenFilterLanguagesConverter))]
+public enum LowercaseTokenFilterLanguages
+{
+	[EnumMember(Value = "turkish")]
+	Turkish,
+	[EnumMember(Value = "irish")]
+	Irish,
+	[EnumMember(Value = "greek")]
+	Greek
+}
+
+internal sealed class LowercaseTokenFilterLanguagesConverter : JsonConverter<LowercaseTokenFilterLanguages>
+{
+	public override LowercaseTokenFilterLanguages Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "turkish":
+				return LowercaseTokenFilterLanguages.Turkish;
+			case "irish":
+				return LowercaseTokenFilterLanguages.Irish;
+			case "greek":
+				return LowercaseTokenFilterLanguages.Greek;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, LowercaseTokenFilterLanguages value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case LowercaseTokenFilterLanguages.Turkish:
+				writer.WriteStringValue("turkish");
+				return;
+			case LowercaseTokenFilterLanguages.Irish:
+				writer.WriteStringValue("irish");
+				return;
+			case LowercaseTokenFilterLanguages.Greek:
+				writer.WriteStringValue("greek");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(NoriDecompoundModeConverter))]
 public enum NoriDecompoundMode
 {
@@ -905,6 +1010,8 @@ public enum SnowballLanguage
 	Swedish,
 	[EnumMember(Value = "Spanish")]
 	Spanish,
+	[EnumMember(Value = "Serbian")]
+	Serbian,
 	[EnumMember(Value = "Russian")]
 	Russian,
 	[EnumMember(Value = "Romanian")]
@@ -917,10 +1024,14 @@ public enum SnowballLanguage
 	Norwegian,
 	[EnumMember(Value = "Lovins")]
 	Lovins,
+	[EnumMember(Value = "Lithuanian")]
+	Lithuanian,
 	[EnumMember(Value = "Kp")]
 	Kp,
 	[EnumMember(Value = "Italian")]
 	Italian,
+	[EnumMember(Value = "Irish")]
+	Irish,
 	[EnumMember(Value = "Hungarian")]
 	Hungarian,
 	[EnumMember(Value = "German2")]
@@ -931,6 +1042,8 @@ public enum SnowballLanguage
 	French,
 	[EnumMember(Value = "Finnish")]
 	Finnish,
+	[EnumMember(Value = "Estonian")]
+	Estonian,
 	[EnumMember(Value = "English")]
 	English,
 	[EnumMember(Value = "Dutch")]
@@ -942,7 +1055,9 @@ public enum SnowballLanguage
 	[EnumMember(Value = "Basque")]
 	Basque,
 	[EnumMember(Value = "Armenian")]
-	Armenian
+	Armenian,
+	[EnumMember(Value = "Arabic")]
+	Arabic
 }
 
 internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage>
@@ -958,6 +1073,8 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return SnowballLanguage.Swedish;
 			case "Spanish":
 				return SnowballLanguage.Spanish;
+			case "Serbian":
+				return SnowballLanguage.Serbian;
 			case "Russian":
 				return SnowballLanguage.Russian;
 			case "Romanian":
@@ -970,10 +1087,14 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return SnowballLanguage.Norwegian;
 			case "Lovins":
 				return SnowballLanguage.Lovins;
+			case "Lithuanian":
+				return SnowballLanguage.Lithuanian;
 			case "Kp":
 				return SnowballLanguage.Kp;
 			case "Italian":
 				return SnowballLanguage.Italian;
+			case "Irish":
+				return SnowballLanguage.Irish;
 			case "Hungarian":
 				return SnowballLanguage.Hungarian;
 			case "German2":
@@ -984,6 +1105,8 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return SnowballLanguage.French;
 			case "Finnish":
 				return SnowballLanguage.Finnish;
+			case "Estonian":
+				return SnowballLanguage.Estonian;
 			case "English":
 				return SnowballLanguage.English;
 			case "Dutch":
@@ -996,6 +1119,8 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return SnowballLanguage.Basque;
 			case "Armenian":
 				return SnowballLanguage.Armenian;
+			case "Arabic":
+				return SnowballLanguage.Arabic;
 		}
 
 		ThrowHelper.ThrowJsonException();
@@ -1015,6 +1140,9 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 			case SnowballLanguage.Spanish:
 				writer.WriteStringValue("Spanish");
 				return;
+			case SnowballLanguage.Serbian:
+				writer.WriteStringValue("Serbian");
+				return;
 			case SnowballLanguage.Russian:
 				writer.WriteStringValue("Russian");
 				return;
@@ -1033,11 +1161,17 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 			case SnowballLanguage.Lovins:
 				writer.WriteStringValue("Lovins");
 				return;
+			case SnowballLanguage.Lithuanian:
+				writer.WriteStringValue("Lithuanian");
+				return;
 			case SnowballLanguage.Kp:
 				writer.WriteStringValue("Kp");
 				return;
 			case SnowballLanguage.Italian:
 				writer.WriteStringValue("Italian");
+				return;
+			case SnowballLanguage.Irish:
+				writer.WriteStringValue("Irish");
 				return;
 			case SnowballLanguage.Hungarian:
 				writer.WriteStringValue("Hungarian");
@@ -1053,6 +1187,9 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return;
 			case SnowballLanguage.Finnish:
 				writer.WriteStringValue("Finnish");
+				return;
+			case SnowballLanguage.Estonian:
+				writer.WriteStringValue("Estonian");
 				return;
 			case SnowballLanguage.English:
 				writer.WriteStringValue("English");
@@ -1071,6 +1208,296 @@ internal sealed class SnowballLanguageConverter : JsonConverter<SnowballLanguage
 				return;
 			case SnowballLanguage.Armenian:
 				writer.WriteStringValue("Armenian");
+				return;
+			case SnowballLanguage.Arabic:
+				writer.WriteStringValue("Arabic");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
+[JsonConverter(typeof(StopWordLanguageConverter))]
+public enum StopWordLanguage
+{
+	[EnumMember(Value = "_turkish_")]
+	Turkish,
+	[EnumMember(Value = "_thai_")]
+	Thai,
+	[EnumMember(Value = "_swedish_")]
+	Swedish,
+	[EnumMember(Value = "_spanish_")]
+	Spanish,
+	[EnumMember(Value = "_sorani_")]
+	Sorani,
+	[EnumMember(Value = "_serbian_")]
+	Serbian,
+	[EnumMember(Value = "_russian_")]
+	Russian,
+	[EnumMember(Value = "_romanian_")]
+	Romanian,
+	[EnumMember(Value = "_portuguese_")]
+	Portuguese,
+	[EnumMember(Value = "_persian_")]
+	Persian,
+	[EnumMember(Value = "_norwegian_")]
+	Norwegian,
+	[EnumMember(Value = "_none_")]
+	None,
+	[EnumMember(Value = "_lithuanian_")]
+	Lithuanian,
+	[EnumMember(Value = "_latvian_")]
+	Latvian,
+	[EnumMember(Value = "_italian_")]
+	Italian,
+	[EnumMember(Value = "_irish_")]
+	Irish,
+	[EnumMember(Value = "_indonesian_")]
+	Indonesian,
+	[EnumMember(Value = "_hungarian_")]
+	Hungarian,
+	[EnumMember(Value = "_hindi_")]
+	Hindi,
+	[EnumMember(Value = "_greek_")]
+	Greek,
+	[EnumMember(Value = "_german_")]
+	German,
+	[EnumMember(Value = "_galician_")]
+	Galician,
+	[EnumMember(Value = "_french_")]
+	French,
+	[EnumMember(Value = "_finnish_")]
+	Finnish,
+	[EnumMember(Value = "_estonian_")]
+	Estonian,
+	[EnumMember(Value = "_english_")]
+	English,
+	[EnumMember(Value = "_dutch_")]
+	Dutch,
+	[EnumMember(Value = "_danish_")]
+	Danish,
+	[EnumMember(Value = "_czech_")]
+	Czech,
+	[EnumMember(Value = "_cjk_")]
+	Cjk,
+	[EnumMember(Value = "_catalan_")]
+	Catalan,
+	[EnumMember(Value = "_bulgarian_")]
+	Bulgarian,
+	[EnumMember(Value = "_brazilian_")]
+	Brazilian,
+	[EnumMember(Value = "_bengali_")]
+	Bengali,
+	[EnumMember(Value = "_basque_")]
+	Basque,
+	[EnumMember(Value = "_armenian_")]
+	Armenian,
+	[EnumMember(Value = "_arabic_")]
+	Arabic
+}
+
+internal sealed class StopWordLanguageConverter : JsonConverter<StopWordLanguage>
+{
+	public override StopWordLanguage Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "_turkish_":
+				return StopWordLanguage.Turkish;
+			case "_thai_":
+				return StopWordLanguage.Thai;
+			case "_swedish_":
+				return StopWordLanguage.Swedish;
+			case "_spanish_":
+				return StopWordLanguage.Spanish;
+			case "_sorani_":
+				return StopWordLanguage.Sorani;
+			case "_serbian_":
+				return StopWordLanguage.Serbian;
+			case "_russian_":
+				return StopWordLanguage.Russian;
+			case "_romanian_":
+				return StopWordLanguage.Romanian;
+			case "_portuguese_":
+				return StopWordLanguage.Portuguese;
+			case "_persian_":
+				return StopWordLanguage.Persian;
+			case "_norwegian_":
+				return StopWordLanguage.Norwegian;
+			case "_none_":
+				return StopWordLanguage.None;
+			case "_lithuanian_":
+				return StopWordLanguage.Lithuanian;
+			case "_latvian_":
+				return StopWordLanguage.Latvian;
+			case "_italian_":
+				return StopWordLanguage.Italian;
+			case "_irish_":
+				return StopWordLanguage.Irish;
+			case "_indonesian_":
+				return StopWordLanguage.Indonesian;
+			case "_hungarian_":
+				return StopWordLanguage.Hungarian;
+			case "_hindi_":
+				return StopWordLanguage.Hindi;
+			case "_greek_":
+				return StopWordLanguage.Greek;
+			case "_german_":
+				return StopWordLanguage.German;
+			case "_galician_":
+				return StopWordLanguage.Galician;
+			case "_french_":
+				return StopWordLanguage.French;
+			case "_finnish_":
+				return StopWordLanguage.Finnish;
+			case "_estonian_":
+				return StopWordLanguage.Estonian;
+			case "_english_":
+				return StopWordLanguage.English;
+			case "_dutch_":
+				return StopWordLanguage.Dutch;
+			case "_danish_":
+				return StopWordLanguage.Danish;
+			case "_czech_":
+				return StopWordLanguage.Czech;
+			case "_cjk_":
+				return StopWordLanguage.Cjk;
+			case "_catalan_":
+				return StopWordLanguage.Catalan;
+			case "_bulgarian_":
+				return StopWordLanguage.Bulgarian;
+			case "_brazilian_":
+				return StopWordLanguage.Brazilian;
+			case "_bengali_":
+				return StopWordLanguage.Bengali;
+			case "_basque_":
+				return StopWordLanguage.Basque;
+			case "_armenian_":
+				return StopWordLanguage.Armenian;
+			case "_arabic_":
+				return StopWordLanguage.Arabic;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, StopWordLanguage value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case StopWordLanguage.Turkish:
+				writer.WriteStringValue("_turkish_");
+				return;
+			case StopWordLanguage.Thai:
+				writer.WriteStringValue("_thai_");
+				return;
+			case StopWordLanguage.Swedish:
+				writer.WriteStringValue("_swedish_");
+				return;
+			case StopWordLanguage.Spanish:
+				writer.WriteStringValue("_spanish_");
+				return;
+			case StopWordLanguage.Sorani:
+				writer.WriteStringValue("_sorani_");
+				return;
+			case StopWordLanguage.Serbian:
+				writer.WriteStringValue("_serbian_");
+				return;
+			case StopWordLanguage.Russian:
+				writer.WriteStringValue("_russian_");
+				return;
+			case StopWordLanguage.Romanian:
+				writer.WriteStringValue("_romanian_");
+				return;
+			case StopWordLanguage.Portuguese:
+				writer.WriteStringValue("_portuguese_");
+				return;
+			case StopWordLanguage.Persian:
+				writer.WriteStringValue("_persian_");
+				return;
+			case StopWordLanguage.Norwegian:
+				writer.WriteStringValue("_norwegian_");
+				return;
+			case StopWordLanguage.None:
+				writer.WriteStringValue("_none_");
+				return;
+			case StopWordLanguage.Lithuanian:
+				writer.WriteStringValue("_lithuanian_");
+				return;
+			case StopWordLanguage.Latvian:
+				writer.WriteStringValue("_latvian_");
+				return;
+			case StopWordLanguage.Italian:
+				writer.WriteStringValue("_italian_");
+				return;
+			case StopWordLanguage.Irish:
+				writer.WriteStringValue("_irish_");
+				return;
+			case StopWordLanguage.Indonesian:
+				writer.WriteStringValue("_indonesian_");
+				return;
+			case StopWordLanguage.Hungarian:
+				writer.WriteStringValue("_hungarian_");
+				return;
+			case StopWordLanguage.Hindi:
+				writer.WriteStringValue("_hindi_");
+				return;
+			case StopWordLanguage.Greek:
+				writer.WriteStringValue("_greek_");
+				return;
+			case StopWordLanguage.German:
+				writer.WriteStringValue("_german_");
+				return;
+			case StopWordLanguage.Galician:
+				writer.WriteStringValue("_galician_");
+				return;
+			case StopWordLanguage.French:
+				writer.WriteStringValue("_french_");
+				return;
+			case StopWordLanguage.Finnish:
+				writer.WriteStringValue("_finnish_");
+				return;
+			case StopWordLanguage.Estonian:
+				writer.WriteStringValue("_estonian_");
+				return;
+			case StopWordLanguage.English:
+				writer.WriteStringValue("_english_");
+				return;
+			case StopWordLanguage.Dutch:
+				writer.WriteStringValue("_dutch_");
+				return;
+			case StopWordLanguage.Danish:
+				writer.WriteStringValue("_danish_");
+				return;
+			case StopWordLanguage.Czech:
+				writer.WriteStringValue("_czech_");
+				return;
+			case StopWordLanguage.Cjk:
+				writer.WriteStringValue("_cjk_");
+				return;
+			case StopWordLanguage.Catalan:
+				writer.WriteStringValue("_catalan_");
+				return;
+			case StopWordLanguage.Bulgarian:
+				writer.WriteStringValue("_bulgarian_");
+				return;
+			case StopWordLanguage.Brazilian:
+				writer.WriteStringValue("_brazilian_");
+				return;
+			case StopWordLanguage.Bengali:
+				writer.WriteStringValue("_bengali_");
+				return;
+			case StopWordLanguage.Basque:
+				writer.WriteStringValue("_basque_");
+				return;
+			case StopWordLanguage.Armenian:
+				writer.WriteStringValue("_armenian_");
+				return;
+			case StopWordLanguage.Arabic:
+				writer.WriteStringValue("_arabic_");
 				return;
 		}
 

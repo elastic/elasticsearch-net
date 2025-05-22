@@ -29,14 +29,35 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class DictionaryDecompounderTokenFilter : ITokenFilter
 {
-	[JsonInclude, JsonPropertyName("hyphenation_patterns_path")]
-	public string? HyphenationPatternsPath { get; set; }
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("max_subword_size")]
 	public int? MaxSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_subword_size")]
 	public int? MinSubwordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("min_word_size")]
 	public int? MinWordSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("only_longest_match")]
 	public bool? OnlyLongestMatch { get; set; }
 
@@ -45,8 +66,23 @@ public sealed partial class DictionaryDecompounderTokenFilter : ITokenFilter
 
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("word_list")]
 	public ICollection<string>? WordList { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("word_list_path")]
 	public string? WordListPath { get; set; }
 }
@@ -59,7 +95,6 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 	{
 	}
 
-	private string? HyphenationPatternsPathValue { get; set; }
 	private int? MaxSubwordSizeValue { get; set; }
 	private int? MinSubwordSizeValue { get; set; }
 	private int? MinWordSizeValue { get; set; }
@@ -68,30 +103,44 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 	private ICollection<string>? WordListValue { get; set; }
 	private string? WordListPathValue { get; set; }
 
-	public DictionaryDecompounderTokenFilterDescriptor HyphenationPatternsPath(string? hyphenationPatternsPath)
-	{
-		HyphenationPatternsPathValue = hyphenationPatternsPath;
-		return Self;
-	}
-
+	/// <summary>
+	/// <para>
+	/// Maximum subword character length. Longer subword tokens are excluded from the output. Defaults to <c>15</c>.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor MaxSubwordSize(int? maxSubwordSize)
 	{
 		MaxSubwordSizeValue = maxSubwordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum subword character length. Shorter subword tokens are excluded from the output. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor MinSubwordSize(int? minSubwordSize)
 	{
 		MinSubwordSizeValue = minSubwordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Minimum word character length. Shorter word tokens are excluded from the output. Defaults to <c>5</c>.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor MinWordSize(int? minWordSize)
 	{
 		MinWordSizeValue = minWordSize;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only include the longest matching subword. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor OnlyLongestMatch(bool? onlyLongestMatch = true)
 	{
 		OnlyLongestMatchValue = onlyLongestMatch;
@@ -104,12 +153,25 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// A list of subwords to look for in the token stream. If found, the subword is included in the token output.
+	/// Either this parameter or <c>word_list_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor WordList(ICollection<string>? wordList)
 	{
 		WordListValue = wordList;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of subwords to find in the token stream. If found, the subword is included in the token output.
+	/// This path must be absolute or relative to the config location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// Either this parameter or <c>word_list</c> must be specified.
+	/// </para>
+	/// </summary>
 	public DictionaryDecompounderTokenFilterDescriptor WordListPath(string? wordListPath)
 	{
 		WordListPathValue = wordListPath;
@@ -119,12 +181,6 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(HyphenationPatternsPathValue))
-		{
-			writer.WritePropertyName("hyphenation_patterns_path");
-			writer.WriteStringValue(HyphenationPatternsPathValue);
-		}
-
 		if (MaxSubwordSizeValue.HasValue)
 		{
 			writer.WritePropertyName("max_subword_size");
@@ -174,7 +230,6 @@ public sealed partial class DictionaryDecompounderTokenFilterDescriptor : Serial
 
 	DictionaryDecompounderTokenFilter IBuildableDescriptor<DictionaryDecompounderTokenFilter>.Build() => new()
 	{
-		HyphenationPatternsPath = HyphenationPatternsPathValue,
 		MaxSubwordSize = MaxSubwordSizeValue,
 		MinSubwordSize = MinSubwordSizeValue,
 		MinWordSize = MinWordSizeValue,

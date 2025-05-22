@@ -1484,6 +1484,48 @@ internal sealed class TaskTypeConverter : JsonConverter<TaskType>
 	}
 }
 
+[JsonConverter(typeof(TaskTypeJinaAiConverter))]
+public enum TaskTypeJinaAi
+{
+	[EnumMember(Value = "text_embedding")]
+	TextEmbedding,
+	[EnumMember(Value = "rerank")]
+	Rerank
+}
+
+internal sealed class TaskTypeJinaAiConverter : JsonConverter<TaskTypeJinaAi>
+{
+	public override TaskTypeJinaAi Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		var enumString = reader.GetString();
+		switch (enumString)
+		{
+			case "text_embedding":
+				return TaskTypeJinaAi.TextEmbedding;
+			case "rerank":
+				return TaskTypeJinaAi.Rerank;
+		}
+
+		ThrowHelper.ThrowJsonException();
+		return default;
+	}
+
+	public override void Write(Utf8JsonWriter writer, TaskTypeJinaAi value, JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case TaskTypeJinaAi.TextEmbedding:
+				writer.WriteStringValue("text_embedding");
+				return;
+			case TaskTypeJinaAi.Rerank:
+				writer.WriteStringValue("rerank");
+				return;
+		}
+
+		writer.WriteNullValue();
+	}
+}
+
 [JsonConverter(typeof(WatsonxServiceTypeConverter))]
 public enum WatsonxServiceType
 {

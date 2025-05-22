@@ -32,8 +32,7 @@ public sealed partial class StandardAnalyzer : IAnalyzer
 	[JsonInclude, JsonPropertyName("max_token_length")]
 	public int? MaxTokenLength { get; set; }
 	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
+	public Elastic.Clients.Elasticsearch.Analysis.StopWords? Stopwords { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "standard";
@@ -48,7 +47,7 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 	}
 
 	private int? MaxTokenLengthValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
+	private Elastic.Clients.Elasticsearch.Analysis.StopWords? StopwordsValue { get; set; }
 
 	public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength)
 	{
@@ -56,7 +55,7 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 		return Self;
 	}
 
-	public StandardAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Analysis.StopWords? stopwords)
 	{
 		StopwordsValue = stopwords;
 		return Self;
@@ -74,7 +73,7 @@ public sealed partial class StandardAnalyzerDescriptor : SerializableDescriptor<
 		if (StopwordsValue is not null)
 		{
 			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			JsonSerializer.Serialize(writer, StopwordsValue, options);
 		}
 
 		writer.WritePropertyName("type");

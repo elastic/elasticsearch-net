@@ -29,8 +29,19 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class ConditionTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("filter")]
 	public ICollection<string> Filter { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
 
@@ -55,12 +66,22 @@ public sealed partial class ConditionTokenFilterDescriptor : SerializableDescrip
 	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Array of token filters. If a token matches the predicate script in the <c>script</c> parameter, these filters are applied to the token in the order provided.
+	/// </para>
+	/// </summary>
 	public ConditionTokenFilterDescriptor Filter(ICollection<string> filter)
 	{
 		FilterValue = filter;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Predicate script used to apply token filters. If a token matches this script, the filters in the <c>filter</c> parameter are applied to the token.
+	/// </para>
+	/// </summary>
 	public ConditionTokenFilterDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
 	{
 		ScriptDescriptor = null;

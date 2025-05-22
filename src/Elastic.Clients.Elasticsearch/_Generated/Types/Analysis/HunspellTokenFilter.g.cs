@@ -27,21 +27,122 @@ using System.Text.Json.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
+internal sealed partial class HunspellTokenFilterConverter : JsonConverter<HunspellTokenFilter>
+{
+	public override HunspellTokenFilter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		if (reader.TokenType != JsonTokenType.StartObject)
+			throw new JsonException("Unexpected JSON detected.");
+		var variant = new HunspellTokenFilter();
+		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		{
+			if (reader.TokenType == JsonTokenType.PropertyName)
+			{
+				var property = reader.GetString();
+				if (property == "dedup")
+				{
+					variant.Dedup = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "dictionary")
+				{
+					variant.Dictionary = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "locale" || property == "lang" || property == "language")
+				{
+					variant.Locale = JsonSerializer.Deserialize<string>(ref reader, options);
+					continue;
+				}
+
+				if (property == "longest_only")
+				{
+					variant.LongestOnly = JsonSerializer.Deserialize<bool?>(ref reader, options);
+					continue;
+				}
+
+				if (property == "version")
+				{
+					variant.Version = JsonSerializer.Deserialize<string?>(ref reader, options);
+					continue;
+				}
+			}
+		}
+
+		return variant;
+	}
+
+	public override void Write(Utf8JsonWriter writer, HunspellTokenFilter value, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		if (value.Dedup.HasValue)
+		{
+			writer.WritePropertyName("dedup");
+			writer.WriteBooleanValue(value.Dedup.Value);
+		}
+
+		if (!string.IsNullOrEmpty(value.Dictionary))
+		{
+			writer.WritePropertyName("dictionary");
+			writer.WriteStringValue(value.Dictionary);
+		}
+
+		writer.WritePropertyName("locale");
+		writer.WriteStringValue(value.Locale);
+		if (value.LongestOnly.HasValue)
+		{
+			writer.WritePropertyName("longest_only");
+			writer.WriteBooleanValue(value.LongestOnly.Value);
+		}
+
+		writer.WritePropertyName("type");
+		writer.WriteStringValue("hunspell");
+		if (!string.IsNullOrEmpty(value.Version))
+		{
+			writer.WritePropertyName("version");
+			writer.WriteStringValue(value.Version);
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[JsonConverter(typeof(HunspellTokenFilterConverter))]
 public sealed partial class HunspellTokenFilter : ITokenFilter
 {
-	[JsonInclude, JsonPropertyName("dedup")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, duplicate tokens are removed from the filter’s output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? Dedup { get; set; }
-	[JsonInclude, JsonPropertyName("dictionary")]
+
+	/// <summary>
+	/// <para>
+	/// One or more <c>.dic</c> files (e.g, <c>en_US.dic</c>, my_custom.dic) to use for the Hunspell dictionary.
+	/// By default, the <c>hunspell</c> filter uses all <c>.dic</c> files in the <c>&lt;$ES_PATH_CONF>/hunspell/&lt;locale></c> directory specified using the <c>lang</c>, <c>language</c>, or <c>locale</c> parameter.
+	/// </para>
+	/// </summary>
 	public string? Dictionary { get; set; }
-	[JsonInclude, JsonPropertyName("locale")]
+
+	/// <summary>
+	/// <para>
+	/// Locale directory used to specify the <c>.aff</c> and <c>.dic</c> files for a Hunspell dictionary.
+	/// </para>
+	/// </summary>
 	public string Locale { get; set; }
-	[JsonInclude, JsonPropertyName("longest_only")]
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only the longest stemmed version of each token is included in the output. If <c>false</c>, all stemmed versions of the token are included. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? LongestOnly { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "hunspell";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
@@ -59,24 +160,45 @@ public sealed partial class HunspellTokenFilterDescriptor : SerializableDescript
 	private bool? LongestOnlyValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, duplicate tokens are removed from the filter’s output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public HunspellTokenFilterDescriptor Dedup(bool? dedup = true)
 	{
 		DedupValue = dedup;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// One or more <c>.dic</c> files (e.g, <c>en_US.dic</c>, my_custom.dic) to use for the Hunspell dictionary.
+	/// By default, the <c>hunspell</c> filter uses all <c>.dic</c> files in the <c>&lt;$ES_PATH_CONF>/hunspell/&lt;locale></c> directory specified using the <c>lang</c>, <c>language</c>, or <c>locale</c> parameter.
+	/// </para>
+	/// </summary>
 	public HunspellTokenFilterDescriptor Dictionary(string? dictionary)
 	{
 		DictionaryValue = dictionary;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Locale directory used to specify the <c>.aff</c> and <c>.dic</c> files for a Hunspell dictionary.
+	/// </para>
+	/// </summary>
 	public HunspellTokenFilterDescriptor Locale(string locale)
 	{
 		LocaleValue = locale;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only the longest stemmed version of each token is included in the output. If <c>false</c>, all stemmed versions of the token are included. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public HunspellTokenFilterDescriptor LongestOnly(bool? longestOnly = true)
 	{
 		LongestOnlyValue = longestOnly;

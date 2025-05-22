@@ -29,10 +29,30 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class KeepWordsTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// List of words to keep. Only tokens that match words in this list are included in the output.
+	/// Either this parameter or <c>keep_words_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_words")]
 	public ICollection<string>? KeepWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, lowercase all keep words. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_words_case")]
 	public bool? KeepWordsCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of words to keep. Only tokens that match words in this list are included in the output.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+	/// Either this parameter or <c>keep_words</c> must be specified.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("keep_words_path")]
 	public string? KeepWordsPath { get; set; }
 
@@ -56,18 +76,36 @@ public sealed partial class KeepWordsTokenFilterDescriptor : SerializableDescrip
 	private string? KeepWordsPathValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// List of words to keep. Only tokens that match words in this list are included in the output.
+	/// Either this parameter or <c>keep_words_path</c> must be specified.
+	/// </para>
+	/// </summary>
 	public KeepWordsTokenFilterDescriptor KeepWords(ICollection<string>? keepWords)
 	{
 		KeepWordsValue = keepWords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, lowercase all keep words. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public KeepWordsTokenFilterDescriptor KeepWordsCase(bool? keepWordsCase = true)
 	{
 		KeepWordsCaseValue = keepWordsCase;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of words to keep. Only tokens that match words in this list are included in the output.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each word in the file must be separated by a line break.
+	/// Either this parameter or <c>keep_words</c> must be specified.
+	/// </para>
+	/// </summary>
 	public KeepWordsTokenFilterDescriptor KeepWordsPath(string? keepWordsPath)
 	{
 		KeepWordsPathValue = keepWordsPath;

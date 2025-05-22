@@ -40,6 +40,8 @@ public sealed partial class RequestChatCompletion
 	/// <summary>
 	/// <para>
 	/// A list of objects representing the conversation.
+	/// Requests should generally only add new messages from the user (role <c>user</c>).
+	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
 	/// </para>
 	/// </summary>
 	[JsonInclude, JsonPropertyName("messages")]
@@ -131,6 +133,8 @@ public sealed partial class RequestChatCompletionDescriptor : SerializableDescri
 	/// <summary>
 	/// <para>
 	/// A list of objects representing the conversation.
+	/// Requests should generally only add new messages from the user (role <c>user</c>).
+	/// The other message roles (<c>assistant</c>, <c>system</c>, or <c>tool</c>) should generally only be copied from the response to a previous completion request, such that the messages array is built up throughout a conversation.
 	/// </para>
 	/// </summary>
 	public RequestChatCompletionDescriptor Messages(ICollection<Elastic.Clients.Elasticsearch.Inference.Message> messages)

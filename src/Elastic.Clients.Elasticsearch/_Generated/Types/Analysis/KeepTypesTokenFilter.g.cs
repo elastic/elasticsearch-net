@@ -29,14 +29,24 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class KeepTypesTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("mode")]
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep_types";
 
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("types")]
-	public ICollection<string>? Types { get; set; }
+	public ICollection<string> Types { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
@@ -50,16 +60,26 @@ public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescrip
 	}
 
 	private Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? ModeValue { get; set; }
-	private ICollection<string>? TypesValue { get; set; }
+	private ICollection<string> TypesValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
 	public KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? mode)
 	{
 		ModeValue = mode;
 		return Self;
 	}
 
-	public KeepTypesTokenFilterDescriptor Types(ICollection<string>? types)
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public KeepTypesTokenFilterDescriptor Types(ICollection<string> types)
 	{
 		TypesValue = types;
 		return Self;
@@ -82,12 +102,8 @@ public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescrip
 
 		writer.WritePropertyName("type");
 		writer.WriteStringValue("keep_types");
-		if (TypesValue is not null)
-		{
-			writer.WritePropertyName("types");
-			JsonSerializer.Serialize(writer, TypesValue, options);
-		}
-
+		writer.WritePropertyName("types");
+		JsonSerializer.Serialize(writer, TypesValue, options);
 		if (!string.IsNullOrEmpty(VersionValue))
 		{
 			writer.WritePropertyName("version");

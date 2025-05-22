@@ -37,11 +37,6 @@ public sealed partial class PutInferenceRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Create an inference endpoint.
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// <para>
 /// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
@@ -79,11 +74,6 @@ public sealed partial class PutInferenceRequest : PlainRequest<PutInferenceReque
 /// <summary>
 /// <para>
 /// Create an inference endpoint.
-/// When you create an inference endpoint, the associated machine learning model is automatically deployed if it is not already running.
-/// After creating the endpoint, wait for the model deployment to complete before using it.
-/// To verify the deployment status, use the get trained model statistics API.
-/// Look for <c>"state": "fully_allocated"</c> in the response and ensure that the <c>"allocation_count"</c> matches the <c>"target_allocation_count"</c>.
-/// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
 /// </para>
 /// <para>
 /// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Mistral, Azure OpenAI, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.

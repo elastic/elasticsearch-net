@@ -29,38 +29,127 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 
 public sealed partial class WordDelimiterGraphTokenFilter : ITokenFilter
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter adjusts the offsets of split or catenated tokens to better reflect their actual position in the token stream. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("adjust_offsets")]
 	public bool? AdjustOffsets { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphanumeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("catenate_all")]
 	public bool? CatenateAll { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of numeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("catenate_numbers")]
 	public bool? CatenateNumbers { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphabetical characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("catenate_words")]
 	public bool? CatenateWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only numeric characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("generate_number_parts")]
 	public bool? GenerateNumberParts { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only alphabetical characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("generate_word_parts")]
 	public bool? GenerateWordParts { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter skips tokens with a keyword attribute of true. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("ignore_keywords")]
 	public bool? IgnoreKeywords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes the original version of any split tokens in the output. This original version includes non-alphanumeric delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("preserve_original")]
 	public bool? PreserveOriginal { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Array of tokens the filter won’t split.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("protected_words")]
 	public ICollection<string>? ProtectedWords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of tokens the filter won’t split.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("protected_words_path")]
 	public string? ProtectedWordsPath { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter case transitions. For example: camelCase -> [ camel, Case ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("split_on_case_change")]
 	public bool? SplitOnCaseChange { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter-number transitions. For example: j2se -> [ j, 2, se ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("split_on_numerics")]
 	public bool? SplitOnNumerics { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter removes the English possessive (<c>'s</c>) from the end of each token. For example: O'Neil's -> [ O, Neil ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("stem_english_possessive")]
 	public bool? StemEnglishPossessive { get; set; }
 
 	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "word_delimiter_graph";
 
+	/// <summary>
+	/// <para>
+	/// Array of custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type_table")]
 	public ICollection<string>? TypeTable { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	[JsonInclude, JsonPropertyName("type_table_path")]
 	public string? TypeTablePath { get; set; }
 	[JsonInclude, JsonPropertyName("version")]
@@ -92,90 +181,166 @@ public sealed partial class WordDelimiterGraphTokenFilterDescriptor : Serializab
 	private string? TypeTablePathValue { get; set; }
 	private string? VersionValue { get; set; }
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter adjusts the offsets of split or catenated tokens to better reflect their actual position in the token stream. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor AdjustOffsets(bool? adjustOffsets = true)
 	{
 		AdjustOffsetsValue = adjustOffsets;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphanumeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor CatenateAll(bool? catenateAll = true)
 	{
 		CatenateAllValue = catenateAll;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of numeric characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor CatenateNumbers(bool? catenateNumbers = true)
 	{
 		CatenateNumbersValue = catenateNumbers;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter produces catenated tokens for chains of alphabetical characters separated by non-alphabetic delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor CatenateWords(bool? catenateWords = true)
 	{
 		CatenateWordsValue = catenateWords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only numeric characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor GenerateNumberParts(bool? generateNumberParts = true)
 	{
 		GenerateNumberPartsValue = generateNumberParts;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes tokens consisting of only alphabetical characters in the output. If <c>false</c>, the filter excludes these tokens from the output. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor GenerateWordParts(bool? generateWordParts = true)
 	{
 		GenerateWordPartsValue = generateWordParts;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter skips tokens with a keyword attribute of true. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor IgnoreKeywords(bool? ignoreKeywords = true)
 	{
 		IgnoreKeywordsValue = ignoreKeywords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter includes the original version of any split tokens in the output. This original version includes non-alphanumeric delimiters. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
 	{
 		PreserveOriginalValue = preserveOriginal;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of tokens the filter won’t split.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor ProtectedWords(ICollection<string>? protectedWords)
 	{
 		ProtectedWordsValue = protectedWords;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains a list of tokens the filter won’t split.
+	/// This path must be absolute or relative to the <c>config</c> location, and the file must be UTF-8 encoded. Each token in the file must be separated by a line break.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor ProtectedWordsPath(string? protectedWordsPath)
 	{
 		ProtectedWordsPathValue = protectedWordsPath;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter case transitions. For example: camelCase -> [ camel, Case ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor SplitOnCaseChange(bool? splitOnCaseChange = true)
 	{
 		SplitOnCaseChangeValue = splitOnCaseChange;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter splits tokens at letter-number transitions. For example: j2se -> [ j, 2, se ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor SplitOnNumerics(bool? splitOnNumerics = true)
 	{
 		SplitOnNumericsValue = splitOnNumerics;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the filter removes the English possessive (<c>'s</c>) from the end of each token. For example: O'Neil's -> [ O, Neil ]. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor StemEnglishPossessive(bool? stemEnglishPossessive = true)
 	{
 		StemEnglishPossessiveValue = stemEnglishPossessive;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Array of custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor TypeTable(ICollection<string>? typeTable)
 	{
 		TypeTableValue = typeTable;
 		return Self;
 	}
 
+	/// <summary>
+	/// <para>
+	/// Path to a file that contains custom type mappings for characters. This allows you to map non-alphanumeric characters as numeric or alphanumeric to avoid splitting on those characters.
+	/// </para>
+	/// </summary>
 	public WordDelimiterGraphTokenFilterDescriptor TypeTablePath(string? typeTablePath)
 	{
 		TypeTablePathValue = typeTablePath;

@@ -52,6 +52,7 @@ public sealed partial class DeleteTemplateRequestParameters : RequestParameters
 /// <summary>
 /// <para>
 /// Delete a legacy index template.
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateRequestParameters>
@@ -90,6 +91,7 @@ public sealed partial class DeleteTemplateRequest : PlainRequest<DeleteTemplateR
 /// <summary>
 /// <para>
 /// Delete a legacy index template.
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public sealed partial class DeleteTemplateRequestDescriptor : RequestDescriptor<DeleteTemplateRequestDescriptor, DeleteTemplateRequestParameters>
