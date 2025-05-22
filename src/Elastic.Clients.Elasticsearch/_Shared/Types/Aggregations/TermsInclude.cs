@@ -7,7 +7,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 #nullable enable
+
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
 /// <summary>
@@ -79,24 +82,15 @@ internal sealed class TermsIncludeConverter : JsonConverter<TermsInclude>
 {
 	public override TermsInclude? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.Null)
-		{
-			reader.Read();
-			return null;
-		}
-
-		TermsInclude termsInclude;
-
 		switch (reader.TokenType)
 		{
 			case JsonTokenType.StartArray:
-				var terms = JsonSerializer.Deserialize<string[]>(ref reader, options) ?? Array.Empty<string>();
-				termsInclude = new TermsInclude(terms);
-				break;
+				return new TermsInclude(reader.ReadCollectionValue<string>(options, null)!);
+
 			case JsonTokenType.StartObject:
 				long partition = 0;
 				long numberOfPartitions = 0;
-				while(reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+				while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
 				{
 					if (reader.TokenType == JsonTokenType.PropertyName)
 					{
@@ -107,38 +101,36 @@ internal sealed class TermsIncludeConverter : JsonConverter<TermsInclude>
 							case "partition":
 								partition = reader.GetInt64();
 								break;
+
 							case "num_partitions":
 								numberOfPartitions = reader.GetInt64();
 								break;
+
 							default:
 								throw new JsonException($"Unexpected property name '{propertyName}' encountered when deserializing TermsInclude.");
 						}
 					}
 				}
-				termsInclude = new TermsInclude(partition, numberOfPartitions);
-				break;
+				return new TermsInclude(partition, numberOfPartitions);
+
 			case JsonTokenType.String:
-				var regex = reader.GetString();
-				termsInclude = new TermsInclude(regex!);
-				break;
+				return new TermsInclude(reader.ReadValue<string>(options)!);
+
 			default:
 				throw new JsonException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsInclude)}");
 		}
-
-		return termsInclude;
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsInclude value, JsonSerializerOptions options)
 	{
 		if (value is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
 		if (value.Values is not null)
 		{
-			JsonSerializer.Serialize(writer, value.Values, options);
+			writer.WriteCollectionValue(options, value.Values, null);
 			return;
 		}
 

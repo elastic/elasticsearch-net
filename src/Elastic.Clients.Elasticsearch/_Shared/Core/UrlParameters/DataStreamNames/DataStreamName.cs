@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -86,18 +86,16 @@ internal sealed class DataStreamNameConverter : JsonConverter<DataStreamName>
 {
 	public override DataStreamName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.String)
-			throw new JsonException($"Unexpected token '{reader.TokenType}' for DataStreamName");
+		reader.ValidateToken(JsonTokenType.String);
 
 		return reader.GetString();
 	}
 
 	public override void Write(Utf8JsonWriter writer, DataStreamName value, JsonSerializerOptions options)
 	{
-		if (value is null || value.Name is null)
+		if (value?.Name is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
 		writer.WriteStringValue(value.Name);

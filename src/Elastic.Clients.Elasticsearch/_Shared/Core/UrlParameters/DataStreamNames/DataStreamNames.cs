@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -146,22 +147,20 @@ public sealed class DataStreamNames :
 
 internal sealed class DataStreamNamesConverter : JsonConverter<DataStreamNames>
 {
-	public override DataStreamNames? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override DataStreamNames Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Expected {JsonTokenType.StartArray} token but read '{reader.TokenType}' token for DataStreamNames.");
+		var fields = reader.ReadCollectionValue<DataStreamName>(options, null)!;
 
-		return JsonSerializer.Deserialize<string[]>(ref reader, options);
+		return new DataStreamNames(fields);
 	}
 
 	public override void Write(Utf8JsonWriter writer, DataStreamNames value, JsonSerializerOptions options)
 	{
 		if (value is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
-		JsonSerializer.Serialize(writer, value.Names, options);
+		writer.WriteCollectionValue(options, value.Names, null);
 	}
 }

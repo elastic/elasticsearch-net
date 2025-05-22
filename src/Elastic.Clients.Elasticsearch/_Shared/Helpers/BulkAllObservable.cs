@@ -221,11 +221,11 @@ public sealed class BulkAllObservable<T> : IDisposable, IObservable<BulkAllRespo
 	{
 		var clientException = response.ApiCallDetails.OriginalException as TransportException;
 		var failureReason = clientException?.FailureReason;
-		var reason = failureReason?.GetStringValue() ?? nameof(PipelineFailure.BadRequest);
+		var reason = (failureReason is null) ? nameof(PipelineFailure.BadRequest) : EnumValue<PipelineFailure>.GetString(failureReason.Value);
 		switch (failureReason)
 		{
 			case PipelineFailure.MaxRetriesReached:
-				if (response.ApiCallDetails.AuditTrail.Last().Event == AuditEvent.FailedOverAllNodes)
+				if (response.ApiCallDetails.AuditTrail?.Last().Event == AuditEvent.FailedOverAllNodes)
 					throw ThrowOnBadBulk(response, $"{nameof(BulkAll)} halted after attempted bulk failed over all the active nodes");
 
 				ThrowOnExhaustedRetries();

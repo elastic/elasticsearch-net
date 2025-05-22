@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
@@ -32,7 +33,7 @@ internal sealed class SqlRowConverter : JsonConverter<SqlRow>
 
 			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
 			{
-				var value = JsonSerializer.Deserialize<SqlValue>(ref reader, options);
+				var value = reader.ReadValue<SqlValue>(options);
 				values.Add(value);
 			}
 

@@ -4,90 +4,84 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Reflection;
 
 namespace Elastic.Clients.Elasticsearch;
 
 public class IdResolver
 {
-	private static readonly ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new();
+	private static readonly ConcurrentDictionary<Type, Func<object, string?>?> GlobalDelegateCache = new();
 
-	private static readonly MethodInfo MakeDelegateMethodInfo =
-		typeof(IdResolver).GetMethod(nameof(MakeDelegate), BindingFlags.Static | BindingFlags.NonPublic);
+	private readonly IElasticsearchClientSettings _settings;
+	private readonly ConcurrentDictionary<Type, Func<object, string?>?> _localDelegateCache = new();
 
-	private readonly IElasticsearchClientSettings _elasticsearchClientSettings;
-	private readonly ConcurrentDictionary<Type, Func<object, string>> _localIdDelegates = new();
-
-	public IdResolver(IElasticsearchClientSettings elasticsearchClientSettings) =>
-		_elasticsearchClientSettings = elasticsearchClientSettings;
-
-	private PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
-		=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-
-	internal Func<T, string> CreateIdSelector<T>() where T : class
+	public IdResolver(IElasticsearchClientSettings settings)
 	{
-		Func<T, string> idSelector = Resolve;
-		return idSelector;
+		_settings = settings;
 	}
 
-	internal static Func<object, object> MakeDelegate<T, TReturn>(MethodInfo @get)
+	public string? Resolve<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T instance)
 	{
-		var f = (Func<T, TReturn>)@get.CreateDelegate(typeof(Func<T, TReturn>));
-		return t => f((T)t);
-	}
-
-	public string Resolve<T>(T @object) =>
-		_elasticsearchClientSettings.DefaultDisableIdInference || @object == null
-			? null
-			: Resolve(@object.GetType(), @object);
-
-	public string Resolve(Type type, object @object)
-	{
-		if (type == null || @object == null)
-			return null;
-		if (_elasticsearchClientSettings.DefaultDisableIdInference ||
-		    _elasticsearchClientSettings.DisableIdInference.Contains(type))
-			return null;
-
-		var preferLocal = _elasticsearchClientSettings.IdProperties.TryGetValue(type, out _);
-
-		if (_localIdDelegates.TryGetValue(type, out var cachedLookup))
-			return cachedLookup(@object);
-
-		if (!preferLocal && IdDelegates.TryGetValue(type, out cachedLookup))
-			return cachedLookup(@object);
-
-		var idProperty = GetInferredId(type);
-		if (idProperty == null)
-			return null;
-
-		var getMethod = idProperty.GetMethod;
-		var generic = MakeDelegateMethodInfo.MakeGenericMethod(type, getMethod.ReturnType);
-		var func = (Func<object, object>)generic.Invoke(null, new object[] {getMethod});
-		cachedLookup = o =>
+		if (_settings.DefaultDisableIdInference || (instance is null))
 		{
-			var v = func(o);
-			return (v is IFormattable f) ? f.ToString(null, CultureInfo.InvariantCulture) : v?.ToString();
-		};
-		if (preferLocal)
-			_localIdDelegates.TryAdd(type, cachedLookup);
-		else
-			IdDelegates.TryAdd(type, cachedLookup);
-		return cachedLookup(@object);
+			return null;
+		}
+
+		return Resolve(instance.GetType(), instance);
 	}
 
-	private PropertyInfo GetInferredId(Type type)
+	public string? Resolve([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance)
 	{
-		// if the type specifies through ElasticAttribute what the id prop is
-		// use that no matter what
+		if (type is null)
+		{
+			throw new ArgumentNullException(nameof(type));
+		}
 
-		_elasticsearchClientSettings.IdProperties.TryGetValue(type, out var propertyName);
-		if (!propertyName.IsNullOrEmpty())
-			return GetPropertyCaseInsensitive(type, propertyName);
+		if (instance is null)
+		{
+			throw new ArgumentNullException(nameof(instance));
+		}
 
-		propertyName = "Id";
+		if (_settings.DefaultDisableIdInference || _settings.DisableIdInference.Contains(type))
+		{
+			return null;
+		}
 
-		return GetPropertyCaseInsensitive(type, propertyName);
+		var localIdPropertyName =
+			_settings.IdProperties.TryGetValue(type, out var propertyName) && !string.IsNullOrEmpty(propertyName)
+				? propertyName
+				: null;
+		var idPropertyName = localIdPropertyName ?? "Id";
+
+		var delegateCache = string.IsNullOrEmpty(localIdPropertyName) ? GlobalDelegateCache : _localDelegateCache;
+		if (delegateCache.TryGetValue(type, out var getterDelegate))
+		{
+			return getterDelegate?.Invoke(instance);
+		}
+
+		if (!DynamicPropertyAccessor.TryCreateGetterDelegate(type, idPropertyName, out getterDelegate, GetAndFormatAsString))
+		{
+			if (!string.IsNullOrEmpty(localIdPropertyName))
+			{
+				throw new ArgumentException($"Type '{type.Name}' does not have a public property with name '{localIdPropertyName}'.");
+			}
+
+			// Avoid reflection calls for subsequent invocations.
+			delegateCache.TryAdd(type, null);
+
+			return null;
+		}
+
+		return getterDelegate(instance);
+	}
+
+	private static string? GetAndFormatAsString(Func<object, object?> genericGetter, object instance)
+	{
+		var value = genericGetter(instance);
+
+		return (value is IFormattable formattable)
+			? formattable.ToString(null, CultureInfo.InvariantCulture)
+			: value?.ToString();
 	}
 }
