@@ -39,7 +39,7 @@ internal sealed partial class SnapshotShardFailureConverter : System.Text.Json.S
 		LocalJsonValue<string> propIndexUuid = default;
 		LocalJsonValue<string?> propNodeId = default;
 		LocalJsonValue<string> propReason = default;
-		LocalJsonValue<string> propShardId = default;
+		LocalJsonValue<int> propShardId = default;
 		LocalJsonValue<string> propStatus = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -111,7 +111,7 @@ internal sealed partial class SnapshotShardFailureConverter : System.Text.Json.S
 public sealed partial class SnapshotShardFailure
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SnapshotShardFailure(string index, string indexUuid, string reason, string shardId, string status)
+	public SnapshotShardFailure(string index, string indexUuid, string reason, int shardId, string status)
 	{
 		Index = index;
 		IndexUuid = indexUuid;
@@ -156,7 +156,7 @@ public sealed partial class SnapshotShardFailure
 #if NET7_0_OR_GREATER
 	required
 #endif
-	string ShardId { get; set; }
+	int ShardId { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

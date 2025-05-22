@@ -1208,6 +1208,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(name);
@@ -1216,6 +1217,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse DeleteTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(name);
@@ -1231,6 +1233,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(name);
@@ -1239,6 +1242,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateResponse> DeleteTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestDescriptor(name);
@@ -3350,6 +3354,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate()
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor();
@@ -3358,6 +3363,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor();
@@ -3367,6 +3373,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor(name);
@@ -3375,6 +3382,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse GetTemplate(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor(name);
@@ -3390,6 +3398,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor();
@@ -3398,6 +3407,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor();
@@ -3407,6 +3417,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor(name);
@@ -3415,6 +3426,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateResponse> GetTemplateAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetTemplateRequestDescriptor(name);
@@ -4156,6 +4168,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(name);
@@ -4164,6 +4177,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(name);
@@ -4173,6 +4187,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse PutTemplate<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>> action)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>(name);
@@ -4188,6 +4203,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(name);
@@ -4196,6 +4212,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor(name);
@@ -4205,6 +4222,7 @@ public partial class IndicesNamespacedClient : Elastic.Clients.Elasticsearch.Nam
 		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequest, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse, Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestParameters>(request, cancellationToken);
 	}
 
+	[System.Obsolete("Deprecated in '7.8.0'.")]
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateResponse> PutTemplateAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutTemplateRequestDescriptor<TDocument>(name);

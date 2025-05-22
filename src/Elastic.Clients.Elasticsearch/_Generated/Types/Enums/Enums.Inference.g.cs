@@ -1034,6 +1034,63 @@ internal sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serial
 	}
 }
 
+internal sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
@@ -1643,6 +1700,15 @@ public enum VoyageAITaskType
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskTypeConverter))]
 public enum WatsonxTaskType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAiConverter))]
+public enum TaskTypeJinaAi
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
 	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
 	TextEmbedding
 }

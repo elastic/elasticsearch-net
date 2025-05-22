@@ -74,6 +74,7 @@ internal sealed partial class DeleteTemplateRequestConverter : System.Text.Json.
 /// <summary>
 /// <para>
 /// Delete a legacy index template.
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DeleteTemplateRequestConverter))]
@@ -134,6 +135,7 @@ public sealed partial class DeleteTemplateRequest : Elastic.Clients.Elasticsearc
 /// <summary>
 /// <para>
 /// Delete a legacy index template.
+/// IMPORTANT: This documentation is about legacy index templates, which are deprecated and will be replaced by the composable templates introduced in Elasticsearch 7.8.
 /// </para>
 /// </summary>
 public readonly partial struct DeleteTemplateRequestDescriptor
