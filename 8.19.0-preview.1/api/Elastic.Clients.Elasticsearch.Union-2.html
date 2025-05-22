@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Union&lt;T1, T2&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Union&lt;T1, T2&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Represents the union of two types, T1 and T2.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0-preview.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Union_2.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Union%602%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Union`2">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Union_2" data-uid="Elastic.Clients.Elasticsearch.Union`2" class="text-break">
+Class Union&lt;T1, T2&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Represents the union of two types, <code class="typeparamref">T1</code> and <code class="typeparamref">T2</code>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Union&lt;T1, T2&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T1</code></dt>
+    <dd><p>The first type.</p>
+</dd>
+    <dt><code>T2</code></dt>
+    <dd><p>The second type.</p>
+</dd>
+  </dl>
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Union&lt;T1, T2&gt;</span></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Derived</dt>
+    <dd>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Buckets-1.html">Buckets&lt;TBucket&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.CategorizeTextAnalyzer.html">CategorizeTextAnalyzer</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath.html">FieldDateMath</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Aggregations.Percentiles.html">Percentiles</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.ByteSize.html">ByteSize</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetResponseItem-1.html">MultiGetResponseItem&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.MSearch.MultiSearchResponseItem-1.html">MultiSearchResponseItem&lt;TDocument&gt;</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.Context.html">Context</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfig.html">SourceConfig</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TrackHits.html">TrackHits</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fuzziness.html">Fuzziness</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.GeohashPrecision.html">GeohashPrecision</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.CategorizationAnalyzer.html">CategorizationAnalyzer</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.MinimumShouldMatch.html">MinimumShouldMatch</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Percentage.html">Percentage</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Like.html">Like</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.TermsQueryField.html">TermsQueryField</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Slices.html">Slices</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Tasks.TaskInfos.html">TaskInfos</a></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2__ctor_" data-uid="Elastic.Clients.Elasticsearch.Union`2.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2__ctor__0_" data-uid="Elastic.Clients.Elasticsearch.Union`2.#ctor(`0)">
+  Union(T1?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union&lt;T1, T2&gt;</a> that encapsulates a <code class="paramref">value</code> of
+type <code class="typeparamref">T1</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Union(T1? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T1</span></dt>
+    <dd><p>The value to encapsulate.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2__ctor_" data-uid="Elastic.Clients.Elasticsearch.Union`2.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2__ctor__1_" data-uid="Elastic.Clients.Elasticsearch.Union`2.#ctor(`1)">
+  Union(T2?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L64"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a new instance of <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union&lt;T1, T2&gt;</a> that encapsulates a <code class="paramref">value</code> of
+type <code class="typeparamref">T2</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Union(T2? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <span class="xref">T2</span></dt>
+    <dd><p>The value to encapsulate.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_Tag_" data-uid="Elastic.Clients.Elasticsearch.Union`2.Tag*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_Tag" data-uid="Elastic.Clients.Elasticsearch.Union`2.Tag">
+  Tag
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>A tag that signals which value type is encapsulated in the union.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnionTag Tag { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.UnionTag.html">UnionTag</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Elastic_Clients_Elasticsearch_Union_2_Tag_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This tag should be used as the discriminator in <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/operators/switch-expression">switch</a> expressions before accessing the actual encapsulated
+value in either <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Value1">Value1</a> or <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Value2">Value2</a>.</p>
+<p>
+    As an alternative, the <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Match_System_Action__0__System_Action__1__">Match(Action&lt;T1?&gt;?, Action&lt;T2?&gt;?)</a> or <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Match__1_System_Func__0___0__System_Func__1___0__">Match&lt;T&gt;(Func&lt;T1?, T&gt;, Func&lt;T2?, T&gt;)</a> method might be used to access the encapsulated value
+    in a safe way.
+</p>
+</div>
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_Value1_" data-uid="Elastic.Clients.Elasticsearch.Union`2.Value1*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_Value1" data-uid="Elastic.Clients.Elasticsearch.Union`2.Value1">
+  Value1
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The <code class="typeparamref">T1</code> value. This property is initialized only when <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Tag">Tag</a> contains <a class="xref" href="Elastic.Clients.Elasticsearch.UnionTag.html#Elastic_Clients_Elasticsearch_UnionTag_T1">T1</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T1? Value1 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T1</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_Value2_" data-uid="Elastic.Clients.Elasticsearch.Union`2.Value2*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_Value2" data-uid="Elastic.Clients.Elasticsearch.Union`2.Value2">
+  Value2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The <code class="typeparamref">T2</code> value. This property is initialized only when <a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html#Elastic_Clients_Elasticsearch_Union_2_Tag">Tag</a> contains <a class="xref" href="Elastic.Clients.Elasticsearch.UnionTag.html#Elastic_Clients_Elasticsearch_UnionTag_T2">T2</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T2? Value2 { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T2</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_Match_" data-uid="Elastic.Clients.Elasticsearch.Union`2.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_Match_System_Action__0__System_Action__1__" data-uid="Elastic.Clients.Elasticsearch.Union`2.Match(System.Action{`0},System.Action{`1})">
+  Match(Action&lt;T1?&gt;?, Action&lt;T2?&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Runs an <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action&lt;T&gt;</a> delegate against the encapsulated value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Match(Action&lt;T1?&gt;? first, Action&lt;T2?&gt;? second)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>first</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T1&gt;</dt>
+    <dd><p>The delegate to run when this instance encapsulates a value of type <code class="typeparamref">T1</code>.</p>
+</dd>
+    <dt><code>second</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;T2&gt;</dt>
+    <dd><p>The delegate to run when this instance encapsulates a value of type <code class="typeparamref">T2</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_Match_" data-uid="Elastic.Clients.Elasticsearch.Union`2.Match*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="Elastic.Clients.Elasticsearch.Union`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">
+  Match&lt;T&gt;(Func&lt;T1?, T&gt;, Func&lt;T2?, T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Runs a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func&lt;T, TResult&gt;</a> delegate against the encapsulated value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Match&lt;T&gt;(Func&lt;T1?, T&gt; first, Func&lt;T2?, T&gt; second)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>first</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T1, T&gt;</dt>
+    <dd><p>The delegate to run when this instance encapsulates a value of type <code class="typeparamref">T1</code>.</p>
+</dd>
+    <dt><code>second</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T2, T&gt;</dt>
+    <dd><p>The delegate to run when this instance encapsulates a value of type <code class="typeparamref">T2</code>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Union`2.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_op_Implicit__0__Elastic_Clients_Elasticsearch_Union__0__1_" data-uid="Elastic.Clients.Elasticsearch.Union`2.op_Implicit(`0)~Elastic.Clients.Elasticsearch.Union{`0,`1}">
+  implicit operator Union&lt;T1, T2&gt;(T1?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L119"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Union&lt;T1, T2&gt;(T1? first)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>first</code> <span class="xref">T1</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;T1, T2&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Union_2_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Union`2.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Union_2_op_Implicit__1__Elastic_Clients_Elasticsearch_Union__0__1_" data-uid="Elastic.Clients.Elasticsearch.Union`2.op_Implicit(`1)~Elastic.Clients.Elasticsearch.Union{`0,`1}">
+  implicit operator Union&lt;T1, T2&gt;(T2?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.1/src/Elastic.Clients.Elasticsearch/_Shared/Core/Union/Union.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Union&lt;T1, T2&gt;(T2? second)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>second</code> <span class="xref">T2</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Union-2.html">Union</a>&lt;T1, T2&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
