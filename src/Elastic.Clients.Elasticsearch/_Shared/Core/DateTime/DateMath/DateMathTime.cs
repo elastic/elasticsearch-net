@@ -79,8 +79,9 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 		{
 			"M" => DateMathTimeUnit.Month,
 			"m" => DateMathTimeUnit.Minute,
-			_ => intervalValue.ToEnum<DateMathTimeUnit>().GetValueOrDefault(),
+			_ => EnumValue<DateMathTimeUnit>.TryParse(intervalValue, out var result) ? result : default
 		};
+
 		SetWholeFactorIntervalAndSeconds(fraction, interval, rounding);
 	}
 

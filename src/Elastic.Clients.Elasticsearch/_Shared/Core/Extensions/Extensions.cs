@@ -3,14 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,100 +14,6 @@ namespace Elastic.Clients.Elasticsearch;
 
 internal static class Extensions
 {
-	private static readonly ConcurrentDictionary<string, object> EnumCache = new();
-
-	//internal static bool NotWritable(this Query q) => q == null || !q.IsWritable;
-
-	//internal static bool NotWritable(this IEnumerable<Query> qs) => qs == null || qs.All(q => q.NotWritable());
-
-	internal static string ToEnumValue<T>(this T enumValue) where T : struct
-	{
-		var enumType = typeof(T);
-		var name = Enum.GetName(enumType, enumValue);
-		var enumMemberAttribute = enumType.GetField(name).GetCustomAttribute<EnumMemberAttribute>();
-
-		//if (enumMemberAttribute != null)
-			//return enumMemberAttribute.Value;
-
-		//var alternativeEnumMemberAttribute = enumType.GetField(name).GetCustomAttribute<AlternativeEnumMemberAttribute>();
-
-		return enumMemberAttribute != null
-			? enumMemberAttribute.Value
-			: enumValue.ToString();
-	}
-
-	internal static T? ToEnum<T>(this string str, StringComparison comparison = StringComparison.OrdinalIgnoreCase) where T : struct
-	{
-		if (str == null)
-			return null;
-
-		var enumType = typeof(T);
-		var key = $"{enumType.Name}.{str}";
-		if (EnumCache.TryGetValue(key, out var value))
-			return (T)value;
-
-		foreach (var name in Enum.GetNames(enumType))
-		{
-			if (name.Equals(str, comparison))
-			{
-				var v = (T)Enum.Parse(enumType, name, true);
-				EnumCache.TryAdd(key, v);
-				return v;
-			}
-
-			var enumFieldInfo = enumType.GetField(name);
-			var enumMemberAttribute = enumFieldInfo.GetCustomAttribute<EnumMemberAttribute>();
-			if (enumMemberAttribute?.Value.Equals(str, comparison) ?? false)
-			{
-				var v = (T)Enum.Parse(enumType, name);
-				EnumCache.TryAdd(key, v);
-				return v;
-			}
-
-			//var alternativeEnumMemberAttribute = enumFieldInfo.GetCustomAttribute<AlternativeEnumMemberAttribute>();
-			//if (alternativeEnumMemberAttribute?.Value.Equals(str, comparison) ?? false)
-			//{
-			//	var v = (T)Enum.Parse(enumType, name);
-			//	EnumCache.TryAdd(key, v);
-			//	return v;
-			//}
-		}
-
-		return null;
-	}
-
-	internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
-		where T : class, TReturn where TReturn : class =>
-		func?.Invoke(@default) ?? @default;
-
-	internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default,
-		T2 param2)
-		where T1 : class, TReturn where TReturn : class =>
-		func?.Invoke(@default, param2) ?? @default;
-
-	internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property) =>
-		items.GroupBy(property).Select(x => x.First());
-
-	internal static string Utf8String(this byte[] bytes) =>
-		bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-
-	internal static byte[] Utf8Bytes(this string s) => s.IsNullOrEmpty() ? null : Encoding.UTF8.GetBytes(s);
-
-	internal static bool IsNullOrEmpty(this IndexName value) => value == null || value.GetHashCode() == 0;
-
-	internal static bool IsNullable(this Type type) =>
-		type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-
-	internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
-	{
-		@object.ThrowIfNull(parameterName, when);
-		if (string.IsNullOrWhiteSpace(@object))
-		{
-			throw new ArgumentException(
-				"Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
-		}
-	}
-
 	// ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Global
 	internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 	{
@@ -164,9 +66,6 @@ internal static class Extensions
 		return l;
 	}
 
-	internal static bool HasAny<T>(this IEnumerable<T> list, Func<T, bool> predicate) =>
-		list != null && list.Any(predicate);
-
 	internal static bool HasAny<T>(this IEnumerable<T> list) => list != null && list.Any();
 
 	internal static bool IsNullOrEmpty<T>(this IEnumerable<T>? list)
@@ -195,7 +94,7 @@ internal static class Extensions
 		if (string.IsNullOrWhiteSpace(value))
 			return true;
 
-		split = value.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+		split = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
 			.Where(t => !t.IsNullOrEmpty())
 			.Select(t => t.Trim())
 			.ToArray();
@@ -222,12 +121,6 @@ internal static class Extensions
 			return;
 
 		list.AddRange(item.Where(x => x != null));
-	}
-
-	internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
-	{
-		var i = dictionary?.Count;
-		return i.GetValueOrDefault(0) > 0 ? dictionary : null;
 	}
 
 	internal static async Task ForEachAsync<TSource, TResult>(
@@ -296,15 +189,5 @@ internal static class Extensions
 			localRateLimiter?.Release();
 			additionalRateLimiter?.Release();
 		}
-	}
-
-	internal static bool NullOrEquals<T>(this T o, T other)
-	{
-		if (o == null && other == null)
-			return true;
-		if (o == null || other == null)
-			return false;
-
-		return o.Equals(other);
 	}
 }

@@ -41,7 +41,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 
 			var propertyName = reader.GetString();
 			reader.Read();
-			var property = JsonSerializer.Deserialize<IProperty>(ref reader, options);
+			var property = reader.ReadValue<IProperty>(options);
 			properties.Add(propertyName, property);
 		}
 
@@ -71,7 +71,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 			continue;
 		}
 
-		JsonSerializer.Serialize(writer, properties.BackingDictionary, options);
+		writer.WriteDictionaryValue(options, properties.BackingDictionary, null, null);
 	}
 }
 

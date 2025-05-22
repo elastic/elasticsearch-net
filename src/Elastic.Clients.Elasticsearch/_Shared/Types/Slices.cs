@@ -42,7 +42,7 @@ public partial class Slices :
 			return true;
 		}
 
-		if (EnumValueParser<SlicesCalculation>.TryParse(s, out var computed))
+		if (EnumValue<SlicesCalculation>.TryParse(s, out var computed))
 		{
 			result = new Slices(computed);
 			return true;

@@ -62,23 +62,9 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 			settings.SourceSerializer.Serialize(PartialUpdate, writer);
 		}
 
-		if (Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, Script, options);
-		}
-
-		if (ScriptedUpsert.HasValue)
-		{
-			writer.WritePropertyName("scripted_upsert");
-			JsonSerializer.Serialize(writer, ScriptedUpsert.Value, options);
-		}
-
-		if (DocAsUpsert.HasValue)
-		{
-			writer.WritePropertyName("doc_as_upsert");
-			JsonSerializer.Serialize(writer, DocAsUpsert.Value, options);
-		}
+		writer.WriteProperty(options, "script", Script);
+		writer.WriteProperty(options, "scripted_upsert", ScriptedUpsert);
+		writer.WriteProperty(options, "doc_as_upsert", DocAsUpsert);
 
 		if (Upsert is not null)
 		{
@@ -92,11 +78,13 @@ internal class BulkUpdateBody<TDocument, TPartialUpdate> : BulkUpdateBody
 			switch (Source.Tag)
 			{
 				case UnionTag.T1:
-					JsonSerializer.Serialize(writer, Source.Value1, options);
+					writer.WriteValue(options, Source.Value1);
 					break;
+
 				case UnionTag.T2:
-					JsonSerializer.Serialize(writer, Source.Value2, options);
+					writer.WriteValue(options, Source.Value2);
 					break;
+
 				default:
 					throw new InvalidOperationException();
 			}
