@@ -79,7 +79,7 @@ internal sealed partial class GetTemplateRequestConverter : System.Text.Json.Ser
 
 /// <summary>
 /// <para>
-/// Get index templates.
+/// Get legacy index templates.
 /// Get information about one or more index templates.
 /// </para>
 /// <para>
@@ -150,7 +150,7 @@ public sealed partial class GetTemplateRequest : Elastic.Clients.Elasticsearch.R
 
 /// <summary>
 /// <para>
-/// Get index templates.
+/// Get legacy index templates.
 /// Get information about one or more index templates.
 /// </para>
 /// <para>

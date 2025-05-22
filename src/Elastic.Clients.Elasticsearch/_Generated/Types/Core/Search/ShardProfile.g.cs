@@ -46,7 +46,7 @@ internal sealed partial class ShardProfileConverter : System.Text.Json.Serializa
 		LocalJsonValue<string> propIndex = default;
 		LocalJsonValue<string> propNodeId = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile>> propSearches = default;
-		LocalJsonValue<long> propShardId = default;
+		LocalJsonValue<int> propShardId = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile>(o, null)!))
@@ -138,7 +138,7 @@ internal sealed partial class ShardProfileConverter : System.Text.Json.Serializa
 public sealed partial class ShardProfile
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public ShardProfile(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> aggregations, string cluster, string id, string index, string nodeId, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> searches, long shardId)
+	public ShardProfile(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.AggregationProfile> aggregations, string cluster, string id, string index, string nodeId, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile> searches, int shardId)
 	{
 		Aggregations = aggregations;
 		Cluster = cluster;
@@ -201,5 +201,5 @@ public sealed partial class ShardProfile
 #if NET7_0_OR_GREATER
 	required
 #endif
-	long ShardId { get; set; }
+	int ShardId { get; set; }
 }
