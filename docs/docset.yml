@@ -1,4 +1,6 @@
 project: '.NET client'
+products:
+  - id: elasticsearch-client
 cross_links:
   - apm-agent-dotnet
   - docs-content
