@@ -71,7 +71,10 @@ public partial class EsqlNamespacedClient
 	{
 		// TODO: Improve performance
 
+		// TODO: fixme
+#pragma warning disable IL2026, IL3050
 		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Data) ?? throw new JsonException();
+#pragma warning restore IL2026, IL3050
 
 		if (!doc.RootElement.TryGetProperty("columns"u8, out var columns) || (columns.ValueKind is not JsonValueKind.Array))
 			throw new JsonException("");

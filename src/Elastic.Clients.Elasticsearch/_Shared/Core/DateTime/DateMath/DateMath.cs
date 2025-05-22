@@ -45,10 +45,10 @@ public abstract class DateMath
 
 	public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
-	public static DateMath FromString(string dateMath)
+	public static DateMath FromString(string? dateMath)
 	{
-		if (dateMath == null)
-			return null;
+		if (dateMath is null)
+			throw new ArgumentNullException(nameof(dateMath));
 
 		var match = DateMathRegex.Match(dateMath);
 		if (!match.Success)
@@ -61,9 +61,12 @@ public abstract class DateMath
 			var rangeString = match.Groups["ranges"].Value;
 			do
 			{
-				var nextRangeStart = rangeString.Substring(1).IndexOfAny(new[] { '+', '-', '/' });
+				var nextRangeStart = rangeString[1..].IndexOfAny(['+', '-', '/']);
 				if (nextRangeStart == -1)
+				{
 					nextRangeStart = rangeString.Length - 1;
+				}
+
 				var unit = rangeString.Substring(1, nextRangeStart);
 				if (rangeString.StartsWith("+", StringComparison.Ordinal))
 				{
@@ -73,19 +76,25 @@ public abstract class DateMath
 				else if (rangeString.StartsWith("-", StringComparison.Ordinal))
 				{
 					math = math.Subtract(unit);
-					rangeString = rangeString.Substring(nextRangeStart + 1);
+					rangeString = rangeString[(nextRangeStart + 1)..];
 				}
 				else
-					rangeString = null;
+				{
+					break;
+				}
 			} while (!rangeString.IsNullOrEmpty());
 		}
 
-		if (match.Groups["rounding"].Success)
+		if (!match.Groups["rounding"].Success)
 		{
-			var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<DateMathTimeUnit>(StringComparison.Ordinal);
-			if (rounding.HasValue)
-				return math.RoundTo(rounding.Value);
+			return math;
 		}
+
+		if (EnumValue<DateMathTimeUnit>.TryParse(match.Groups["rounding"].Value[1..], out var rounding))
+		{
+			return math.RoundTo(rounding);
+		}
+
 		return math;
 	}
 

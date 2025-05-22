@@ -3,6 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
@@ -20,22 +22,7 @@ public sealed class Inferrer
 		RelationNameResolver = new RelationNameResolver(elasticsearchClientSettings);
 		FieldResolver = new FieldResolver(elasticsearchClientSettings);
 		RoutingResolver = new RoutingResolver(elasticsearchClientSettings, IdResolver);
-
-		//CreateMultiHitDelegates =
-		//	new ConcurrentDictionary<Type,
-		//		Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>>();
-		//CreateSearchResponseDelegates =
-		//	new ConcurrentDictionary<Type,
-		//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, ElasticsearchResponse>>>();
 	}
-
-	//internal ConcurrentDictionary<Type, Action<MultiGetResponseFormatter.MultiHitTuple, IJsonFormatterResolver, ICollection<IMultiGetHit<object>>>
-	//	>
-	//	CreateMultiHitDelegates { get; }
-
-	//internal ConcurrentDictionary<Type,
-	//		Action<MultiSearchResponseFormatter.SearchHitTuple, IJsonFormatterResolver, IDictionary<string, ElasticsearchResponse>>>
-	//	CreateSearchResponseDelegates { get; }
 
 	private FieldResolver FieldResolver { get; }
 	private IdResolver IdResolver { get; }
@@ -53,15 +40,15 @@ public sealed class Inferrer
 
 	public string IndexName(IndexName index) => IndexNameResolver.Resolve(index);
 
-	public string Id<T>(T instance) => IdResolver.Resolve(instance);
+	public string? Id<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T instance) => IdResolver.Resolve(instance);
 
-	public string Id(Type type, object instance) => IdResolver.Resolve(type, instance);
+	public string? Id([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance) => IdResolver.Resolve(type, instance);
 
 	public string RelationName<T>() => RelationNameResolver.Resolve<T>();
 
 	public string RelationName(RelationName type) => RelationNameResolver.Resolve(type);
 
-	public string Routing<T>(T document) => RoutingResolver.Resolve(document);
+	public string? Routing<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] T>(T document) => RoutingResolver.Resolve(document);
 
-	public string Routing(Type type, object instance) => RoutingResolver.Resolve(type, instance);
+	public string? Routing([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] Type type, object instance) => RoutingResolver.Resolve(type, instance);
 }

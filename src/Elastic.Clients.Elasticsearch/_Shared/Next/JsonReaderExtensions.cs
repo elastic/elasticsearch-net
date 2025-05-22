@@ -263,7 +263,7 @@ internal static class JsonReaderExtensions
 	/// the default converter for the item type <typeparamref name="T"/>.
 	/// </param>
 	/// <returns>An instance of <see cref="List{T}"/>, or <see langword="null"/>.</returns>
-	public static List<T?>? ReadCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+	public static List<T>? ReadCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
 		JsonReadFunc<T>? readElement)
 	{
 		if (reader.TokenType is JsonTokenType.Null)
@@ -275,7 +275,7 @@ internal static class JsonReaderExtensions
 
 		readElement ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<T>(ref r, o);
 
-		var result = new List<T?>();
+		var result = new List<T>();
 
 		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndArray))
 		{
@@ -302,7 +302,7 @@ internal static class JsonReaderExtensions
 	/// </param>
 	/// <returns>An instance of <see cref="Dictionary{TKey, TValue}"/>, or <see langword="null"/>.</returns>
 	/// <exception cref="JsonException">If any dictionary key value is <see langword="null"/>.</exception>
-	public static Dictionary<TKey, TValue?>? ReadDictionaryValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+	public static Dictionary<TKey, TValue>? ReadDictionaryValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
 		JsonReadFunc<TKey>? readKey, JsonReadFunc<TValue>? readValue)
 		where TKey : notnull
 	{
@@ -316,7 +316,7 @@ internal static class JsonReaderExtensions
 		readKey ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadPropertyName<TKey>(ref r, o);
 		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<TValue>(ref r, o);
 
-		var result = new Dictionary<TKey, TValue?>();
+		var result = new Dictionary<TKey, TValue>();
 
 		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndObject))
 		{
@@ -346,7 +346,7 @@ internal static class JsonReaderExtensions
 	/// converter for the type <typeparamref name="TValue"/>.
 	/// </param>
 	/// <returns>An instance of <see cref="KeyValuePair{TKey, TValue}"/>.</returns>
-	public static KeyValuePair<TKey, TValue?> ReadKeyValuePairValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+	public static KeyValuePair<TKey, TValue> ReadKeyValuePairValue<TKey, TValue>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
 		JsonReadFunc<TKey>? readKey, JsonReadFunc<TValue>? readValue)
 		where TKey : notnull
 	{
@@ -360,7 +360,7 @@ internal static class JsonReaderExtensions
 		readKey ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadPropertyName<TKey>(ref r, o);
 		readValue ??= static (ref Utf8JsonReader r, JsonSerializerOptions o) => ReadValue<TValue>(ref r, o);
 
-		KeyValuePair<TKey, TValue?> result = default;
+		KeyValuePair<TKey, TValue> result = default;
 		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndObject))
 		{
 			var key = readKey(ref reader, options);
@@ -421,7 +421,7 @@ internal static class JsonReaderExtensions
 	/// the default converter for the item type <typeparamref name="T"/>.
 	/// </param>
 	/// <returns>An instance of <see cref="List{T}"/>, or <see langword="null"/>.</returns>
-	public static List<T?>? ReadSingleOrManyCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
+	public static List<T>? ReadSingleOrManyCollectionValue<T>(this ref Utf8JsonReader reader, JsonSerializerOptions options,
 		JsonReadFunc<T>? readElement)
 	{
 		if (reader.TokenType is JsonTokenType.Null)
@@ -436,7 +436,7 @@ internal static class JsonReaderExtensions
 			return [readElement(ref reader, options)];
 		}
 
-		var result = new List<T?>();
+		var result = new List<T>();
 
 		while (reader.Read() && (reader.TokenType is not JsonTokenType.EndArray))
 		{
