@@ -36,6 +36,11 @@ public partial class SearchRequest
 [JsonConverter(typeof(SearchRequestOfTConverterFactory))]
 public partial class SearchRequest<TInferDocument> : SearchRequest
 {
+	static SearchRequest()
+	{
+		DynamicallyAccessed.PublicConstructors(typeof(SearchRequestOfTConverter<TInferDocument>));
+	}
+
 	public SearchRequest(Indices? indices) : base(indices)
 	{
 	}
@@ -67,7 +72,9 @@ internal sealed class SearchRequestOfTConverterFactory :
 	{
 		var args = typeToConvert.GetGenericArguments();
 
+#pragma warning disable IL3050
 		return (JsonConverter)Activator.CreateInstance(typeof(SearchRequestOfTConverter<>).MakeGenericType(args[0]));
+#pragma warning restore IL3050
 	}
 }
 

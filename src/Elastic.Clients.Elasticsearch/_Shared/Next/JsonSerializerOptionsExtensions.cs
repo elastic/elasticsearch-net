@@ -20,7 +20,9 @@ internal static partial class JsonSerializerOptionsExtensions
 		// to directly use converters like we do.
 		// When getting a default generic converter from `JsonSerializerOptions` that are not read-only, a
 		// `NotSupportedException` is thrown as soon as we call `converter.Read()` or `converter.Write()`.
+#pragma warning disable IL2026, IL3050
 		options.MakeReadOnly(true);
+#pragma warning restore IL2026, IL3050
 
 #pragma warning disable IL2026, IL3050
 		var rawConverter = options.GetConverter(markerType ?? typeof(T));

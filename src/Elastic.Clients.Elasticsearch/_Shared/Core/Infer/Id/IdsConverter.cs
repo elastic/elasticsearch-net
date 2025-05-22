@@ -3,9 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
@@ -13,18 +14,7 @@ internal sealed class IdsConverter : JsonConverter<Ids>
 {
 	public override Ids? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Unexpected JSON token. Expected {JsonTokenType.StartArray} but read {reader.TokenType}");
-
-		var ids = new List<Id>();
-
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-		{
-			var id = JsonSerializer.Deserialize<Id>(ref reader, options);
-
-			if (id is not null)
-				ids.Add(id);
-		}
+		var ids = reader.ReadCollectionValue<Id>(options, null)!;
 
 		return new Ids(ids);
 	}
@@ -33,17 +23,9 @@ internal sealed class IdsConverter : JsonConverter<Ids>
 	{
 		if (value is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
-		writer.WriteStartArray();
-
-		foreach (var id in value.IdsToSerialize)
-		{
-			JsonSerializer.Serialize<Id>(writer, id, options);
-		}
-
-		writer.WriteEndArray();
+		writer.WriteCollectionValue(options, value.IdsToSerialize, null);
 	}
 }

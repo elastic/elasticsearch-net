@@ -12,16 +12,22 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Elastic.Transport;
+using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch.Serialization;
 
 /// <summary>
 /// The built-in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize built in types.
 /// </summary>
-internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerializer
+internal sealed class DefaultRequestResponseSerializer :
+	SystemTextJsonSerializer
 {
 	private readonly IElasticsearchClientSettings _settings;
 
+	/// <summary>
+	/// Constructs a new <see cref="DefaultRequestResponseSerializer"/> instance.
+	/// </summary>
+	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer will be linked.</param>
 	public DefaultRequestResponseSerializer(IElasticsearchClientSettings settings) :
 		base(new DefaultRequestResponseSerializerOptionsProvider(settings))
 	{
@@ -70,7 +76,7 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		return base.Deserialize(type, stream);
 	}
 
-	public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	public override ValueTask<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default)
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(typeof(T)))
 		{
@@ -79,7 +85,7 @@ internal sealed class DefaultRequestResponseSerializer : SystemTextJsonSerialize
 		return base.DeserializeAsync<T>(stream, cancellationToken);
 	}
 
-	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = new CancellationToken())
+	public override ValueTask<object?> DeserializeAsync(Type type, Stream stream, CancellationToken cancellationToken = default)
 	{
 		if (typeof(IStreamSerializable).IsAssignableFrom(type))
 		{
@@ -137,10 +143,57 @@ internal sealed class DefaultRequestResponseSerializerOptionsProvider :
 
 	private static void MutateOptions(JsonSerializerOptions options)
 	{
-		options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
+#pragma warning disable IL2026, IL3050
+		options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
+			RequestResponseSerializerContext.Default,
+			ElasticsearchTransportSerializerContext.Default,
+			new DefaultJsonTypeInfoResolver()
+		);
+#pragma warning restore IL2026, IL3050
+
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.IncludeFields = true;
 		options.NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.AllowNamedFloatingPointLiterals;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 	}
+}
+
+[JsonSerializable(typeof(JsonElement))]
+[JsonSerializable(typeof(bool))]
+[JsonSerializable(typeof(bool?))]
+[JsonSerializable(typeof(byte))]
+[JsonSerializable(typeof(byte?))]
+[JsonSerializable(typeof(sbyte))]
+[JsonSerializable(typeof(sbyte?))]
+[JsonSerializable(typeof(char))]
+[JsonSerializable(typeof(char?))]
+[JsonSerializable(typeof(decimal))]
+[JsonSerializable(typeof(decimal?))]
+[JsonSerializable(typeof(double))]
+[JsonSerializable(typeof(double?))]
+[JsonSerializable(typeof(float))]
+[JsonSerializable(typeof(float?))]
+[JsonSerializable(typeof(int))]
+[JsonSerializable(typeof(int?))]
+[JsonSerializable(typeof(uint))]
+[JsonSerializable(typeof(uint?))]
+[JsonSerializable(typeof(nint))]
+[JsonSerializable(typeof(nint?))]
+[JsonSerializable(typeof(nuint))]
+[JsonSerializable(typeof(nuint?))]
+[JsonSerializable(typeof(long))]
+[JsonSerializable(typeof(long?))]
+[JsonSerializable(typeof(ulong))]
+[JsonSerializable(typeof(ulong?))]
+[JsonSerializable(typeof(short))]
+[JsonSerializable(typeof(short?))]
+[JsonSerializable(typeof(ushort))]
+[JsonSerializable(typeof(ushort?))]
+[JsonSerializable(typeof(object))]
+[JsonSerializable(typeof(string))]
+[JsonSerializable(typeof(DateTimeOffset))]
+[JsonSerializable(typeof(TimeSpan))]
+internal sealed partial class RequestResponseSerializerContext :
+	JsonSerializerContext
+{
 }
