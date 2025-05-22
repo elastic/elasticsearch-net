@@ -29,9 +29,6 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
 	private static readonly System.Text.Json.JsonEncodedText PropEndTime = System.Text.Json.JsonEncodedText.Encode("end_time");
 	private static readonly System.Text.Json.JsonEncodedText PropEventId = System.Text.Json.JsonEncodedText.Encode("event_id");
-	private static readonly System.Text.Json.JsonEncodedText PropForceTimeShift = System.Text.Json.JsonEncodedText.Encode("force_time_shift");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipModelUpdate = System.Text.Json.JsonEncodedText.Encode("skip_model_update");
-	private static readonly System.Text.Json.JsonEncodedText PropSkipResult = System.Text.Json.JsonEncodedText.Encode("skip_result");
 	private static readonly System.Text.Json.JsonEncodedText PropStartTime = System.Text.Json.JsonEncodedText.Encode("start_time");
 
 	public override Elastic.Clients.Elasticsearch.MachineLearning.CalendarEvent Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -41,9 +38,6 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 		LocalJsonValue<string> propDescription = default;
 		LocalJsonValue<System.DateTimeOffset> propEndTime = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propEventId = default;
-		LocalJsonValue<int?> propForceTimeShift = default;
-		LocalJsonValue<bool?> propSkipModelUpdate = default;
-		LocalJsonValue<bool?> propSkipResult = default;
 		LocalJsonValue<System.DateTimeOffset> propStartTime = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -63,21 +57,6 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 			}
 
 			if (propEventId.TryReadProperty(ref reader, options, PropEventId, null))
-			{
-				continue;
-			}
-
-			if (propForceTimeShift.TryReadProperty(ref reader, options, PropForceTimeShift, null))
-			{
-				continue;
-			}
-
-			if (propSkipModelUpdate.TryReadProperty(ref reader, options, PropSkipModelUpdate, null))
-			{
-				continue;
-			}
-
-			if (propSkipResult.TryReadProperty(ref reader, options, PropSkipResult, null))
 			{
 				continue;
 			}
@@ -103,9 +82,6 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 			Description = propDescription.Value,
 			EndTime = propEndTime.Value,
 			EventId = propEventId.Value,
-			ForceTimeShift = propForceTimeShift.Value,
-			SkipModelUpdate = propSkipModelUpdate.Value,
-			SkipResult = propSkipResult.Value,
 			StartTime = propStartTime.Value
 		};
 	}
@@ -117,9 +93,6 @@ internal sealed partial class CalendarEventConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropEndTime, value.EndTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteProperty(options, PropEventId, value.EventId, null, null);
-		writer.WriteProperty(options, PropForceTimeShift, value.ForceTimeShift, null, null);
-		writer.WriteProperty(options, PropSkipModelUpdate, value.SkipModelUpdate, null, null);
-		writer.WriteProperty(options, PropSkipResult, value.SkipResult, null, null);
 		writer.WriteProperty(options, PropStartTime, value.StartTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
 		writer.WriteEndObject();
 	}
@@ -181,27 +154,6 @@ public sealed partial class CalendarEvent
 #endif
 	System.DateTimeOffset EndTime { get; set; }
 	public Elastic.Clients.Elasticsearch.Id? EventId { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Shift time by this many seconds. For example adjust time for daylight savings changes
-	/// </para>
-	/// </summary>
-	public int? ForceTimeShift { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When true the model will not be updated for this calendar period.
-	/// </para>
-	/// </summary>
-	public bool? SkipModelUpdate { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When true the model will not create results for this calendar period.
-	/// </para>
-	/// </summary>
-	public bool? SkipResult { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -270,39 +222,6 @@ public readonly partial struct CalendarEventDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor EventId(Elastic.Clients.Elasticsearch.Id? value)
 	{
 		Instance.EventId = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Shift time by this many seconds. For example adjust time for daylight savings changes
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor ForceTimeShift(int? value)
-	{
-		Instance.ForceTimeShift = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// When true the model will not be updated for this calendar period.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor SkipModelUpdate(bool? value = true)
-	{
-		Instance.SkipModelUpdate = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// When true the model will not create results for this calendar period.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.CalendarEventDescriptor SkipResult(bool? value = true)
-	{
-		Instance.SkipResult = value;
 		return this;
 	}
 

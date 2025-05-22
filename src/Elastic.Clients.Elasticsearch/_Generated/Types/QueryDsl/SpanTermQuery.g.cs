@@ -28,7 +28,6 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropValue = System.Text.Json.JsonEncodedText.Encode("value");
-	private static readonly System.Text.Json.JsonEncodedText PropValue1 = System.Text.Json.JsonEncodedText.Encode("term");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -39,7 +38,7 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 		reader.Read();
 		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
 		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.FieldValue>(options, null);
+			var value = reader.ReadValue<string>(options, null);
 			reader.Read();
 			return new Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 			{
@@ -51,7 +50,7 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue> propValue = default;
+		LocalJsonValue<string> propValue = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
@@ -64,7 +63,7 @@ internal sealed partial class SpanTermQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propValue.TryReadProperty(ref reader, options, PropValue, null) || propValue.TryReadProperty(ref reader, options, PropValue1, null))
+			if (propValue.TryReadProperty(ref reader, options, PropValue, null))
 			{
 				continue;
 			}
@@ -113,7 +112,7 @@ public sealed partial class SpanTermQuery
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public SpanTermQuery(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.FieldValue value)
+	public SpanTermQuery(Elastic.Clients.Elasticsearch.Field field, string value)
 	{
 		Field = field;
 		Value = value;
@@ -148,7 +147,7 @@ public sealed partial class SpanTermQuery
 #if NET7_0_OR_GREATER
 	required
 #endif
-	Elastic.Clients.Elasticsearch.FieldValue Value { get; set; }
+	string Value { get; set; }
 }
 
 public readonly partial struct SpanTermQueryDescriptor<TDocument>
@@ -202,7 +201,7 @@ public readonly partial struct SpanTermQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument> Value(Elastic.Clients.Elasticsearch.FieldValue value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor<TDocument> Value(string value)
 	{
 		Instance.Value = value;
 		return this;
@@ -268,7 +267,7 @@ public readonly partial struct SpanTermQueryDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor Value(Elastic.Clients.Elasticsearch.FieldValue value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.SpanTermQueryDescriptor Value(string value)
 	{
 		Instance.Value = value;
 		return this;

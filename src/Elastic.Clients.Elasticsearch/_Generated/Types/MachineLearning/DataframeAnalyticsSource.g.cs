@@ -276,18 +276,7 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor<TDocument>
 	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Source()
-	{
-		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
@@ -467,18 +456,7 @@ public readonly partial struct DataframeAnalyticsSourceDescriptor
 	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Source()
-	{
-		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specify <c>includes</c> and/or `excludes patterns to select which fields will be present in the destination. Fields that are excluded cannot be included in the analysis.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalyticsSourceDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.Source = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;

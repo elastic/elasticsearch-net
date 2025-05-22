@@ -36,7 +36,7 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<bool> propAllowRestrictedIndices = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>?> propFieldSecurity = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<string>> propNames = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>> propNames = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>> propPrivileges = default;
 		LocalJsonValue<object?> propQuery = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -51,7 +51,7 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 				continue;
 			}
 
-			if (propNames.TryReadProperty(ref reader, options, PropNames, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<string>(o, null)!))
+			if (propNames.TryReadProperty(ref reader, options, PropNames, static System.Collections.Generic.IReadOnlyCollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -91,7 +91,7 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropAllowRestrictedIndices, value.AllowRestrictedIndices, null, null);
 		writer.WriteProperty(options, PropFieldSecurity, value.FieldSecurity, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.FieldSecurity>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.FieldSecurity>(o, v, null));
-		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteSingleOrManyCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropNames, value.Names, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.IndexPrivilege>(o, v, null));
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
 		writer.WriteEndObject();
@@ -102,7 +102,7 @@ internal sealed partial class UserIndicesPrivilegesConverter : System.Text.Json.
 public sealed partial class UserIndicesPrivileges
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public UserIndicesPrivileges(bool allowRestrictedIndices, System.Collections.Generic.ICollection<string> names, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
+	public UserIndicesPrivileges(bool allowRestrictedIndices, System.Collections.Generic.IReadOnlyCollection<string> names, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.IndexPrivilege> privileges)
 	{
 		AllowRestrictedIndices = allowRestrictedIndices;
 		Names = names;
@@ -152,7 +152,7 @@ public sealed partial class UserIndicesPrivileges
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.Collections.Generic.ICollection<string> Names { get; set; }
+	System.Collections.Generic.IReadOnlyCollection<string> Names { get; set; }
 
 	/// <summary>
 	/// <para>

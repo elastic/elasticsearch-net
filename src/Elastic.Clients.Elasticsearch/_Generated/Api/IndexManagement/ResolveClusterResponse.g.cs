@@ -27,12 +27,12 @@ internal sealed partial class ResolveClusterResponseConverter : System.Text.Json
 {
 	public override Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Infos = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Infos, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>(o, v, null, null));
+		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class ResolveClusterResponse : Elastic.Transport.Products.
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> Infos { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterInfo> Values { get; set; }
 }

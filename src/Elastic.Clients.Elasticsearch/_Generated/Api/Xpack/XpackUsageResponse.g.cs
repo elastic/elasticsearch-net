@@ -36,6 +36,7 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 	private static readonly System.Text.Json.JsonEncodedText PropEnrich = System.Text.Json.JsonEncodedText.Encode("enrich");
 	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql");
 	private static readonly System.Text.Json.JsonEncodedText PropFlattened = System.Text.Json.JsonEncodedText.Encode("flattened");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenIndices = System.Text.Json.JsonEncodedText.Encode("frozen_indices");
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph");
 	private static readonly System.Text.Json.JsonEncodedText PropHealthApi = System.Text.Json.JsonEncodedText.Encode("health_api");
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
@@ -68,6 +69,7 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base?> propEnrich = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Eql> propEql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Flattened?> propFlattened = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.FrozenIndices> propFrozenIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Base> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.HealthStatistics?> propHealthApi = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Ilm> propIlm = default;
@@ -138,6 +140,11 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 			}
 
 			if (propFlattened.TryReadProperty(ref reader, options, PropFlattened, null))
+			{
+				continue;
+			}
+
+			if (propFrozenIndices.TryReadProperty(ref reader, options, PropFrozenIndices, null))
 			{
 				continue;
 			}
@@ -250,6 +257,7 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 			Enrich = propEnrich.Value,
 			Eql = propEql.Value,
 			Flattened = propFlattened.Value,
+			FrozenIndices = propFrozenIndices.Value,
 			Graph = propGraph.Value,
 			HealthApi = propHealthApi.Value,
 			Ilm = propIlm.Value,
@@ -284,6 +292,7 @@ internal sealed partial class XpackUsageResponseConverter : System.Text.Json.Ser
 		writer.WriteProperty(options, PropEnrich, value.Enrich, null, null);
 		writer.WriteProperty(options, PropEql, value.Eql, null, null);
 		writer.WriteProperty(options, PropFlattened, value.Flattened, null, null);
+		writer.WriteProperty(options, PropFrozenIndices, value.FrozenIndices, null, null);
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropHealthApi, value.HealthApi, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
@@ -354,6 +363,11 @@ public sealed partial class XpackUsageResponse : Elastic.Transport.Products.Elas
 #endif
 		Elastic.Clients.Elasticsearch.Xpack.Eql Eql { get; set; }
 	public Elastic.Clients.Elasticsearch.Xpack.Flattened? Flattened { get; set; }
+	public
+#if NET7_0_OR_GREATER
+		required
+#endif
+		Elastic.Clients.Elasticsearch.Xpack.FrozenIndices FrozenIndices { get; set; }
 	public
 #if NET7_0_OR_GREATER
 		required

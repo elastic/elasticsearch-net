@@ -27,12 +27,12 @@ internal sealed partial class GetLifecycleResponseConverter : System.Text.Json.S
 {
 	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Lifecycles = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Lifecycles, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>(o, v, null, null));
+		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class GetLifecycleResponse : Elastic.Transport.Products.El
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> Lifecycles { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle> Values { get; set; }
 }

@@ -27,12 +27,12 @@ internal sealed partial class GetRepositoryResponseConverter : System.Text.Json.
 {
 	public override Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Repositories = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.Repositories>(options, null) };
+		return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<Elastic.Clients.Elasticsearch.Snapshot.Repositories>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Repositories, null);
+		writer.WriteValue(options, value.Values, null);
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class GetRepositoryResponse : Elastic.Transport.Products.E
 #if NET7_0_OR_GREATER
 required
 #endif
-Elastic.Clients.Elasticsearch.Snapshot.Repositories Repositories { get; set; }
+Elastic.Clients.Elasticsearch.Snapshot.Repositories Values { get; set; }
 }

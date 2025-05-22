@@ -27,9 +27,7 @@ public sealed partial class DeleteSnapshotRequestParameters : Elastic.Transport.
 {
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -97,7 +95,7 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// The name of the repository to delete a snapshot from.
+	/// A repository name
 	/// </para>
 	/// </summary>
 	public
@@ -108,8 +106,7 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of snapshot names to delete.
-	/// It also accepts wildcards (<c>*</c>).
+	/// A comma-separated list of snapshot names
 	/// </para>
 	/// </summary>
 	public
@@ -120,9 +117,7 @@ public sealed partial class DeleteSnapshotRequest : Elastic.Clients.Elasticsearc
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -159,7 +154,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the repository to delete a snapshot from.
+	/// A repository name
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
@@ -170,8 +165,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of snapshot names to delete.
-	/// It also accepts wildcards (<c>*</c>).
+	/// A comma-separated list of snapshot names
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
@@ -182,9 +176,7 @@ public readonly partial struct DeleteSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.DeleteSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)

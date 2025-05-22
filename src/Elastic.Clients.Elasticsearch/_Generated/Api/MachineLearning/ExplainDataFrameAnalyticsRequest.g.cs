@@ -398,22 +398,7 @@ public readonly partial struct ExplainDataFrameAnalyticsRequestDescriptor
 	/// be included in the analysis.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specify includes and/or excludes patterns to select which fields will be
-	/// included in the analysis. The patterns specified in excludes are applied
-	/// last, therefore excludes takes precedence. In other words, if the same
-	/// field is specified in both includes and excludes, then the field will not
-	/// be included in the analysis.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
@@ -708,22 +693,7 @@ public readonly partial struct ExplainDataFrameAnalyticsRequestDescriptor<TDocum
 	/// be included in the analysis.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specify includes and/or excludes patterns to select which fields will be
-	/// included in the analysis. The patterns specified in excludes are applied
-	/// last, therefore excludes takes precedence. In other words, if the same
-	/// field is specified in both includes and excludes, then the field will not
-	/// be included in the analysis.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExplainDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;

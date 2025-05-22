@@ -41,7 +41,7 @@ internal sealed partial class FingerprintProcessorConverter : System.Text.Json.S
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.FingerprintDigest?> propMethod = default;
@@ -194,7 +194,7 @@ public sealed partial class FingerprintProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -311,31 +311,9 @@ public readonly partial struct FingerprintProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -529,31 +507,9 @@ public readonly partial struct FingerprintProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.FingerprintProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

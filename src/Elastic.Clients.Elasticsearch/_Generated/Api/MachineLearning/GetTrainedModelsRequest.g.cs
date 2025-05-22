@@ -87,6 +87,14 @@ public sealed partial class GetTrainedModelsRequestParameters : Elastic.Transpor
 
 	/// <summary>
 	/// <para>
+	/// parameter is deprecated! Use [include=definition] instead
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.10.0'.")]
+	public bool? IncludeModelDefinition { get => Q<bool?>("include_model_definition"); set => Q("include_model_definition", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies the maximum number of models to obtain.
 	/// </para>
 	/// </summary>
@@ -240,6 +248,14 @@ public sealed partial class GetTrainedModelsRequest : Elastic.Clients.Elasticsea
 
 	/// <summary>
 	/// <para>
+	/// parameter is deprecated! Use [include=definition] instead
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.10.0'.")]
+	public bool? IncludeModelDefinition { get => Q<bool?>("include_model_definition"); set => Q("include_model_definition", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies the maximum number of models to obtain.
 	/// </para>
 	/// </summary>
@@ -376,6 +392,18 @@ public readonly partial struct GetTrainedModelsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Include(Elastic.Clients.Elasticsearch.MachineLearning.Include? value)
 	{
 		Instance.Include = value;
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.10.0'.")]
+	/// <summary>
+	/// <para>
+	/// parameter is deprecated! Use [include=definition] instead
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor IncludeModelDefinition(bool? value = true)
+	{
+		Instance.IncludeModelDefinition = value;
 		return this;
 	}
 

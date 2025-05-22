@@ -40,9 +40,9 @@ internal sealed partial class ScriptProcessorConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.ScriptLanguage?> propLang = default;
+		LocalJsonValue<string?> propLang = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
 		LocalJsonValue<string?> propSource = default;
@@ -174,7 +174,7 @@ public sealed partial class ScriptProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -188,7 +188,7 @@ public sealed partial class ScriptProcessor
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
+	public string? Lang { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -269,31 +269,9 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -313,7 +291,7 @@ public readonly partial struct ScriptProcessorDescriptor<TDocument>
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor<TDocument> Lang(string? value)
 	{
 		Instance.Lang = value;
 		return this;
@@ -484,31 +462,9 @@ public readonly partial struct ScriptProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -528,7 +484,7 @@ public readonly partial struct ScriptProcessorDescriptor
 	/// Script language.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ScriptProcessorDescriptor Lang(string? value)
 	{
 		Instance.Lang = value;
 		return this;

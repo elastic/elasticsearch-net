@@ -33,7 +33,7 @@ internal sealed partial class HopConverter : System.Text.Json.Serialization.Json
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Graph.Hop?> propConnections = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query> propQuery = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition>> propVertices = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -84,8 +84,9 @@ internal sealed partial class HopConverter : System.Text.Json.Serialization.Json
 public sealed partial class Hop
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Hop(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
+	public Hop(Elastic.Clients.Elasticsearch.QueryDsl.Query query, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Graph.VertexDefinition> vertices)
 	{
+		Query = query;
 		Vertices = vertices;
 	}
 #if NET7_0_OR_GREATER
@@ -117,7 +118,11 @@ public sealed partial class Hop
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.QueryDsl.Query Query { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -177,7 +182,7 @@ public readonly partial struct HopDescriptor<TDocument>
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;
@@ -299,7 +304,7 @@ public readonly partial struct HopDescriptor
 	/// An optional guiding query that constrains the Graph API as it explores connected terms.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	public Elastic.Clients.Elasticsearch.Graph.HopDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query value)
 	{
 		Instance.Query = value;
 		return this;

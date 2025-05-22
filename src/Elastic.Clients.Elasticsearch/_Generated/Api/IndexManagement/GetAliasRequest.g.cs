@@ -52,11 +52,11 @@ public sealed partial class GetAliasRequestParameters : Elastic.Transport.Reques
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	[System.Obsolete("Deprecated in '8.12.0'.")]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 internal sealed partial class GetAliasRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequest>
@@ -177,11 +177,11 @@ public sealed partial class GetAliasRequest : Elastic.Clients.Elasticsearch.Requ
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+	[System.Obsolete("Deprecated in '8.12.0'.")]
+	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 }
 
 /// <summary>
@@ -300,15 +300,15 @@ public readonly partial struct GetAliasRequestDescriptor
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '8.12.0'.")]
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor Local(bool? value = true)
 	{
-		Instance.MasterTimeout = value;
+		Instance.Local = value;
 		return this;
 	}
 
@@ -484,15 +484,15 @@ public readonly partial struct GetAliasRequestDescriptor<TDocument>
 		return this;
 	}
 
+	[System.Obsolete("Deprecated in '8.12.0'.")]
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// If <c>true</c>, the request retrieves information from the local node only.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetAliasRequestDescriptor<TDocument> Local(bool? value = true)
 	{
-		Instance.MasterTimeout = value;
+		Instance.Local = value;
 		return this;
 	}
 

@@ -26,6 +26,7 @@ namespace Elastic.Clients.Elasticsearch.Analysis;
 internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropMaxOutputSize = System.Text.Json.JsonEncodedText.Encode("max_output_size");
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
 	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
@@ -35,14 +36,20 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 	public override Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<int?> propMaxOutputSize = default;
-		LocalJsonValue<string?> propSeparator = default;
+		LocalJsonValue<int> propMaxOutputSize = default;
+		LocalJsonValue<bool> propPreserveOriginal = default;
+		LocalJsonValue<string> propSeparator = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
 		LocalJsonValue<string?> propStopwordsPath = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
+			{
+				continue;
+			}
+
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
 			{
 				continue;
 			}
@@ -86,12 +93,11 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 		return new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			MaxOutputSize = propMaxOutputSize.Value,
+			PreserveOriginal = propPreserveOriginal.Value,
 			Separator = propSeparator.Value,
 			Stopwords = propStopwords.Value,
 			StopwordsPath = propStopwordsPath.Value,
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -99,14 +105,12 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
 		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -114,12 +118,20 @@ internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Se
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerConverter))]
 public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintAnalyzer(int maxOutputSize, bool preserveOriginal, string separator)
+	{
+		MaxOutputSize = maxOutputSize;
+		PreserveOriginal = preserveOriginal;
+		Separator = separator;
+	}
 #if NET7_0_OR_GREATER
 	public FingerprintAnalyzer()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public FingerprintAnalyzer()
 	{
 	}
@@ -130,40 +142,26 @@ public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum token size to emit. Tokens larger than this size will be discarded.
-	/// Defaults to <c>255</c>
-	/// </para>
-	/// </summary>
-	public int? MaxOutputSize { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The character to use to concatenate the terms.
-	/// Defaults to a space.
-	/// </para>
-	/// </summary>
-	public string? Separator { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaxOutputSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool PreserveOriginal { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Separator { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "fingerprint";
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -186,54 +184,36 @@ public readonly partial struct FingerprintAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum token size to emit. Tokens larger than this size will be discarded.
-	/// Defaults to <c>255</c>
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor MaxOutputSize(int? value)
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor MaxOutputSize(int value)
 	{
 		Instance.MaxOutputSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The character to use to concatenate the terms.
-	/// Defaults to a space.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Separator(string? value)
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor PreserveOriginal(bool value = true)
+	{
+		Instance.PreserveOriginal = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Separator(string value)
 	{
 		Instance.Separator = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;
 		return this;
 	}
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;
@@ -241,13 +221,8 @@ public readonly partial struct FingerprintAnalyzerDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

@@ -73,9 +73,7 @@ internal sealed partial class StopAnalyzerConverter : System.Text.Json.Serializa
 		{
 			Stopwords = propStopwords.Value,
 			StopwordsPath = propStopwordsPath.Value,
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -85,10 +83,7 @@ internal sealed partial class StopAnalyzerConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -112,24 +107,11 @@ public sealed partial class StopAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
 	public string? StopwordsPath { get; set; }
 
 	public string Type => "stop";
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -152,30 +134,18 @@ public readonly partial struct StopAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StopAnalyzer(Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor StopwordsPath(string? value)
 	{
 		Instance.StopwordsPath = value;
 		return this;
 	}
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.StopAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;

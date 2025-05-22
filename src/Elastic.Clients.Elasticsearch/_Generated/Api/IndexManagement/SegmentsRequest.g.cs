@@ -49,6 +49,13 @@ public sealed partial class SegmentsRequestParameters : Elastic.Transport.Reques
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 internal sealed partial class SegmentsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequest>
@@ -150,6 +157,13 @@ public sealed partial class SegmentsRequest : Elastic.Clients.Elasticsearch.Requ
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
 /// <summary>
@@ -243,6 +257,17 @@ public readonly partial struct SegmentsRequestDescriptor
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
 		return this;
 	}
 
@@ -393,6 +418,17 @@ public readonly partial struct SegmentsRequestDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
 	{
 		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request returns a verbose response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.SegmentsRequestDescriptor<TDocument> Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
 		return this;
 	}
 

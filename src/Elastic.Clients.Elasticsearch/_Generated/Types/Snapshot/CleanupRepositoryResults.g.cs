@@ -99,8 +99,7 @@ public sealed partial class CleanupRepositoryResults
 
 	/// <summary>
 	/// <para>
-	/// The number of binary large objects (blobs) removed from the snapshot repository during cleanup operations.
-	/// A non-zero value indicates that unreferenced blobs were found and subsequently cleaned up.
+	/// Number of binary large objects (blobs) removed during cleanup.
 	/// </para>
 	/// </summary>
 	public
@@ -111,7 +110,7 @@ public sealed partial class CleanupRepositoryResults
 
 	/// <summary>
 	/// <para>
-	/// The number of bytes freed by cleanup operations.
+	/// Number of bytes freed by cleanup operations.
 	/// </para>
 	/// </summary>
 	public

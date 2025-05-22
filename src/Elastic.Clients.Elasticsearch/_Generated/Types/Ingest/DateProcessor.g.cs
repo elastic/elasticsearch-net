@@ -43,7 +43,7 @@ internal sealed partial class DateProcessorConverter : System.Text.Json.Serializ
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>> propFormats = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<string?> propLocale = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
@@ -214,7 +214,7 @@ public sealed partial class DateProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -352,31 +352,9 @@ public readonly partial struct DateProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -591,31 +569,9 @@ public readonly partial struct DateProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

@@ -39,7 +39,7 @@ internal sealed partial class ForeachProcessorConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
@@ -175,7 +175,7 @@ public sealed partial class ForeachProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -276,31 +276,9 @@ public readonly partial struct ForeachProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -466,31 +444,9 @@ public readonly partial struct ForeachProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.ForeachProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

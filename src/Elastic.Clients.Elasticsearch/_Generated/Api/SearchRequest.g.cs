@@ -151,7 +151,15 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -162,27 +170,27 @@ public sealed partial class SearchRequestParameters : Elastic.Transport.RequestP
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node.
+	/// <c>_only_local</c> to run the search only on shards on the local node;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method.
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs. If suitable shards exist on more than one selected node, use shards on those nodes using the default method. If none of the specified nodes are available, select shards from any available node using the default method.
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
 	/// </para>
 	/// </item>
 	/// <item>
@@ -860,7 +868,15 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+
+	/// <summary>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -871,27 +887,27 @@ public partial class SearchRequest : Elastic.Clients.Elasticsearch.Requests.Plai
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node.
+	/// <c>_only_local</c> to run the search only on shards on the local node;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method.
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs. If suitable shards exist on more than one selected node, use shards on those nodes using the default method. If none of the specified nodes are available, select shards from any available node using the default method.
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
 	/// </para>
 	/// </item>
 	/// <item>
@@ -1575,9 +1591,21 @@ public readonly partial struct SearchRequestDescriptor
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MaxConcurrentShardRequests(int? value)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor MinCompatibleShardNode(string? value)
+	{
+		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
@@ -1590,27 +1618,27 @@ public readonly partial struct SearchRequestDescriptor
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node.
+	/// <c>_only_local</c> to run the search only on shards on the local node;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method.
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs. If suitable shards exist on more than one selected node, use shards on those nodes using the default method. If none of the specified nodes are available, select shards from any available node using the default method.
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
 	/// </para>
 	/// </item>
 	/// <item>
@@ -3319,9 +3347,21 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The minimum version of the node that can handle the request
+	/// Any handling node with a lower version will fail the request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? value)
+	{
+		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
@@ -3334,27 +3374,27 @@ public readonly partial struct SearchRequestDescriptor<TDocument>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// <c>_only_local</c> to run the search only on shards on the local node.
+	/// <c>_only_local</c> to run the search only on shards on the local node;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method.
+	/// <c>_local</c> to, if possible, run the search on shards on the local node, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs. If suitable shards exist on more than one selected node, use shards on those nodes using the default method. If none of the specified nodes are available, select shards from any available node using the default method.
+	/// <c>_only_nodes:&lt;node-id>,&lt;node-id></c> to run the search on only the specified nodes IDs, where, if suitable shards exist on more than one selected node, use shards on those nodes using the default method, or if none of the specified nodes are available, select shards from any available node using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs. If not, select shards using the default method.
+	/// <c>_prefer_nodes:&lt;node-id>,&lt;node-id></c> to if possible, run the search on the specified nodes IDs, or if not, select shards using the default method;
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards. You can combine this value with other <c>preference</c> values. However, the <c>_shards</c> value must come first. For example: <c>_shards:2,3|_local</c>.
+	/// <c>_shards:&lt;shard>,&lt;shard></c> to run the search only on the specified shards;
 	/// </para>
 	/// </item>
 	/// <item>

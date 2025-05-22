@@ -41,7 +41,7 @@ internal sealed partial class UriPartsProcessorConverter : System.Text.Json.Seri
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<bool?> propIgnoreMissing = default;
 		LocalJsonValue<bool?> propKeepOriginal = default;
@@ -192,7 +192,7 @@ public sealed partial class UriPartsProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -304,31 +304,9 @@ public readonly partial struct UriPartsProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -517,31 +495,9 @@ public readonly partial struct UriPartsProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.UriPartsProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

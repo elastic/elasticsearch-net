@@ -27,12 +27,12 @@ internal sealed partial class DiskUsageResponseConverter : System.Text.Json.Seri
 {
 	public override Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { DiskUsage = reader.ReadValue<object>(options, null) };
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Value = reader.ReadValue<object>(options, null) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DiskUsageResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.DiskUsage, null);
+		writer.WriteValue(options, value.Value, null);
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class DiskUsageResponse : Elastic.Transport.Products.Elast
 #if NET7_0_OR_GREATER
 required
 #endif
-object DiskUsage { get; set; }
+object Value { get; set; }
 }

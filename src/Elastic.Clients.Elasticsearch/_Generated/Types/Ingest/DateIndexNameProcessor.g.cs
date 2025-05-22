@@ -41,11 +41,11 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 	public override Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propDateFormats = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propDateFormats = default;
 		LocalJsonValue<string> propDateRounding = default;
 		LocalJsonValue<string?> propDescription = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<string?> propIf = default;
 		LocalJsonValue<bool?> propIgnoreFailure = default;
 		LocalJsonValue<string?> propIndexNameFormat = default;
 		LocalJsonValue<string?> propIndexNamePrefix = default;
@@ -55,7 +55,7 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 		LocalJsonValue<string?> propTimezone = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propDateFormats.TryReadProperty(ref reader, options, PropDateFormats, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			if (propDateFormats.TryReadProperty(ref reader, options, PropDateFormats, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -145,7 +145,7 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessor value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropDateFormats, value.DateFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropDateFormats, value.DateFormats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropDateRounding, value.DateRounding, null, null);
 		writer.WriteProperty(options, PropDescription, value.Description, null, null);
 		writer.WriteProperty(options, PropField, value.Field, null, null);
@@ -165,8 +165,9 @@ internal sealed partial class DateIndexNameProcessorConverter : System.Text.Json
 public sealed partial class DateIndexNameProcessor
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public DateIndexNameProcessor(string dateRounding, Elastic.Clients.Elasticsearch.Field field)
+	public DateIndexNameProcessor(System.Collections.Generic.ICollection<string> dateFormats, string dateRounding, Elastic.Clients.Elasticsearch.Field field)
 	{
+		DateFormats = dateFormats;
 		DateRounding = dateRounding;
 		Field = field;
 	}
@@ -193,7 +194,11 @@ public sealed partial class DateIndexNameProcessor
 	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
 	/// </para>
 	/// </summary>
-	public System.Collections.Generic.ICollection<string>? DateFormats { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> DateFormats { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -232,7 +237,7 @@ public sealed partial class DateIndexNameProcessor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
+	public string? If { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -313,7 +318,7 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(System.Collections.Generic.ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> DateFormats(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.DateFormats = value;
 		return this;
@@ -383,31 +388,9 @@ public readonly partial struct DateIndexNameProcessorDescriptor<TDocument>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 
@@ -554,7 +537,7 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 	/// Can be a java time pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(System.Collections.Generic.ICollection<string>? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor DateFormats(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.DateFormats = value;
 		return this;
@@ -624,31 +607,9 @@ public readonly partial struct DateIndexNameProcessorDescriptor
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If(string? value)
 	{
 		Instance.If = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If()
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Ingest.DateIndexNameProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
-	{
-		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
 		return this;
 	}
 

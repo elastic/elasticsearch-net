@@ -183,7 +183,7 @@ internal sealed partial class ShapePropertyConverter : System.Text.Json.Serializ
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.ShapePropertyConverter))]
 public sealed partial class ShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
@@ -232,7 +232,7 @@ public sealed partial class ShapeProperty : Elastic.Clients.Elasticsearch.Mappin
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct ShapePropertyDescriptor<TDocument>
 {
@@ -402,7 +402,7 @@ public readonly partial struct ShapePropertyDescriptor<TDocument>
 /// The <c>shape</c> data type facilitates the indexing of and searching with arbitrary <c>x, y</c> cartesian shapes such as
 /// rectangles and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct ShapePropertyDescriptor
 {

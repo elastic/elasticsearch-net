@@ -27,7 +27,6 @@ internal sealed partial class IndicatorsConverter : System.Text.Json.Serializati
 {
 	private static readonly System.Text.Json.JsonEncodedText PropDataStreamLifecycle = System.Text.Json.JsonEncodedText.Encode("data_stream_lifecycle");
 	private static readonly System.Text.Json.JsonEncodedText PropDisk = System.Text.Json.JsonEncodedText.Encode("disk");
-	private static readonly System.Text.Json.JsonEncodedText PropFileSettings = System.Text.Json.JsonEncodedText.Encode("file_settings");
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
 	private static readonly System.Text.Json.JsonEncodedText PropMasterIsStable = System.Text.Json.JsonEncodedText.Encode("master_is_stable");
 	private static readonly System.Text.Json.JsonEncodedText PropRepositoryIntegrity = System.Text.Json.JsonEncodedText.Encode("repository_integrity");
@@ -40,7 +39,6 @@ internal sealed partial class IndicatorsConverter : System.Text.Json.Serializati
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator?> propDataStreamLifecycle = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator?> propDisk = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator?> propFileSettings = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator?> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator?> propMasterIsStable = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator?> propRepositoryIntegrity = default;
@@ -55,11 +53,6 @@ internal sealed partial class IndicatorsConverter : System.Text.Json.Serializati
 			}
 
 			if (propDisk.TryReadProperty(ref reader, options, PropDisk, null))
-			{
-				continue;
-			}
-
-			if (propFileSettings.TryReadProperty(ref reader, options, PropFileSettings, null))
 			{
 				continue;
 			}
@@ -108,7 +101,6 @@ internal sealed partial class IndicatorsConverter : System.Text.Json.Serializati
 		{
 			DataStreamLifecycle = propDataStreamLifecycle.Value,
 			Disk = propDisk.Value,
-			FileSettings = propFileSettings.Value,
 			Ilm = propIlm.Value,
 			MasterIsStable = propMasterIsStable.Value,
 			RepositoryIntegrity = propRepositoryIntegrity.Value,
@@ -123,7 +115,6 @@ internal sealed partial class IndicatorsConverter : System.Text.Json.Serializati
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropDataStreamLifecycle, value.DataStreamLifecycle, null, null);
 		writer.WriteProperty(options, PropDisk, value.Disk, null, null);
-		writer.WriteProperty(options, PropFileSettings, value.FileSettings, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropMasterIsStable, value.MasterIsStable, null, null);
 		writer.WriteProperty(options, PropRepositoryIntegrity, value.RepositoryIntegrity, null, null);
@@ -155,7 +146,6 @@ public sealed partial class Indicators
 
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DataStreamLifecycleIndicator? DataStreamLifecycle { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.DiskIndicator? Disk { get; set; }
-	public Elastic.Clients.Elasticsearch.Core.HealthReport.FileSettingsIndicator? FileSettings { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.IlmIndicator? Ilm { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.MasterIsStableIndicator? MasterIsStable { get; set; }
 	public Elastic.Clients.Elasticsearch.Core.HealthReport.RepositoryIntegrityIndicator? RepositoryIntegrity { get; set; }

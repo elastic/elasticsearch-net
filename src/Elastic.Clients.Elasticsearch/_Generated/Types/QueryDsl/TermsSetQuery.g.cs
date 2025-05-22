@@ -45,7 +45,7 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propMinimumShouldMatchField = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propMinimumShouldMatchScript = default;
 		LocalJsonValue<string?> propQueryName = default;
-		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> propTerms = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propTerms = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
@@ -73,7 +73,7 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 				continue;
 			}
 
-			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!))
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
 			{
 				continue;
 			}
@@ -112,7 +112,7 @@ internal sealed partial class TermsSetQueryConverter : System.Text.Json.Serializ
 		writer.WriteProperty(options, PropMinimumShouldMatchField, value.MinimumShouldMatchField, null, null);
 		writer.WriteProperty(options, PropMinimumShouldMatchScript, value.MinimumShouldMatchScript, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
-		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
+		writer.WriteProperty(options, PropTerms, value.Terms, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -128,7 +128,7 @@ public sealed partial class TermsSetQuery
 	}
 
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public TermsSetQuery(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> terms)
+	public TermsSetQuery(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<string> terms)
 	{
 		Field = field;
 		Terms = terms;
@@ -190,7 +190,7 @@ public sealed partial class TermsSetQuery
 #if NET7_0_OR_GREATER
 	required
 #endif
-	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> Terms { get; set; }
+	System.Collections.Generic.ICollection<string> Terms { get; set; }
 }
 
 public readonly partial struct TermsSetQueryDescriptor<TDocument>
@@ -315,7 +315,7 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Terms = value;
 		return this;
@@ -326,7 +326,7 @@ public readonly partial struct TermsSetQueryDescriptor<TDocument>
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor<TDocument> Terms(params string[] values)
 	{
 		Instance.Terms = [.. values];
 		return this;
@@ -463,7 +463,7 @@ public readonly partial struct TermsSetQueryDescriptor
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(System.Collections.Generic.ICollection<string> value)
 	{
 		Instance.Terms = value;
 		return this;
@@ -474,7 +474,7 @@ public readonly partial struct TermsSetQueryDescriptor
 	/// Array of terms you wish to find in the provided field.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(params Elastic.Clients.Elasticsearch.FieldValue[] values)
+	public Elastic.Clients.Elasticsearch.QueryDsl.TermsSetQueryDescriptor Terms(params string[] values)
 	{
 		Instance.Terms = [.. values];
 		return this;

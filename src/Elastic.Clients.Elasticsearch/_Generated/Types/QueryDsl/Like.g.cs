@@ -62,7 +62,7 @@ internal sealed partial class LikeConverter : System.Text.Json.Serialization.Jso
 /// <para>
 /// Text that we want similar documents for or a lookup to a document's field for the text.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-mlt-query#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.LikeConverter))]
 public sealed partial class Like : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>

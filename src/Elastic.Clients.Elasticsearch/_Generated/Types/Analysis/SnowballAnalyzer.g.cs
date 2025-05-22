@@ -73,9 +73,7 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 		{
 			Language = propLanguage.Value,
 			Stopwords = propStopwords.Value,
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -85,10 +83,7 @@ internal sealed partial class SnowballAnalyzerConverter : System.Text.Json.Seria
 		writer.WriteProperty(options, PropLanguage, value.Language, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -127,7 +122,6 @@ public sealed partial class SnowballAnalyzer : Elastic.Clients.Elasticsearch.Ana
 
 	public string Type => "snowball";
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -162,7 +156,6 @@ public readonly partial struct SnowballAnalyzerDescriptor
 		return this;
 	}
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.SnowballAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;

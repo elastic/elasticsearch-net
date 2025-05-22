@@ -27,7 +27,6 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 {
 	private static readonly System.Text.Json.JsonEncodedText PropMaxTokenLength = System.Text.Json.JsonEncodedText.Encode("max_token_length");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
-	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
 	public override Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
@@ -35,7 +34,6 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<int?> propMaxTokenLength = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
-		LocalJsonValue<string?> propStopwordsPath = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propMaxTokenLength.TryReadProperty(ref reader, options, PropMaxTokenLength, null))
@@ -44,11 +42,6 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 			}
 
 			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
-			{
-				continue;
-			}
-
-			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
 			{
 				continue;
 			}
@@ -72,8 +65,7 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 		return new Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
 			MaxTokenLength = propMaxTokenLength.Value,
-			Stopwords = propStopwords.Value,
-			StopwordsPath = propStopwordsPath.Value
+			Stopwords = propStopwords.Value
 		};
 	}
 
@@ -82,7 +74,6 @@ internal sealed partial class StandardAnalyzerConverter : System.Text.Json.Seria
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropMaxTokenLength, value.MaxTokenLength, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
-		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
 	}
@@ -107,28 +98,8 @@ public sealed partial class StandardAnalyzer : Elastic.Clients.Elasticsearch.Ana
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum token length. If a token is seen that exceeds this length then it is split at <c>max_token_length</c> intervals.
-	/// Defaults to <c>255</c>.
-	/// </para>
-	/// </summary>
 	public int? MaxTokenLength { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
-	public string? StopwordsPath { get; set; }
 
 	public string Type => "standard";
 }
@@ -152,38 +123,15 @@ public readonly partial struct StandardAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzer(Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The maximum token length. If a token is seen that exceeds this length then it is split at <c>max_token_length</c> intervals.
-	/// Defaults to <c>255</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor MaxTokenLength(int? value)
 	{
 		Instance.MaxTokenLength = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.StandardAnalyzerDescriptor StopwordsPath(string? value)
-	{
-		Instance.StopwordsPath = value;
 		return this;
 	}
 

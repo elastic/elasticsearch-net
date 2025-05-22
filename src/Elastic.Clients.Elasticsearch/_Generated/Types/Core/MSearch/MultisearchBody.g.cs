@@ -41,15 +41,12 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropPostFilter = System.Text.Json.JsonEncodedText.Encode("post_filter");
 	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
 	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
-	private static readonly System.Text.Json.JsonEncodedText PropRank = System.Text.Json.JsonEncodedText.Encode("rank");
 	private static readonly System.Text.Json.JsonEncodedText PropRescore = System.Text.Json.JsonEncodedText.Encode("rescore");
-	private static readonly System.Text.Json.JsonEncodedText PropRetriever = System.Text.Json.JsonEncodedText.Encode("retriever");
 	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
 	private static readonly System.Text.Json.JsonEncodedText PropScriptFields = System.Text.Json.JsonEncodedText.Encode("script_fields");
 	private static readonly System.Text.Json.JsonEncodedText PropSearchAfter = System.Text.Json.JsonEncodedText.Encode("search_after");
 	private static readonly System.Text.Json.JsonEncodedText PropSeqNoPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("seq_no_primary_term");
 	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
-	private static readonly System.Text.Json.JsonEncodedText PropSlice = System.Text.Json.JsonEncodedText.Encode("slice");
 	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
 	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("_source");
 	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
@@ -79,15 +76,12 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propPostFilter = default;
 		LocalJsonValue<bool?> propProfile = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Rank?> propRank = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>?> propRescore = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Retriever?> propRetriever = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
 		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>?> propScriptFields = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>?> propSearchAfter = default;
 		LocalJsonValue<bool?> propSeqNoPrimaryTerm = default;
 		LocalJsonValue<int?> propSize = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.SlicedScroll?> propSlice = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SourceConfig?> propSource = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStats = default;
@@ -175,17 +169,7 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 				continue;
 			}
 
-			if (propRank.TryReadProperty(ref reader, options, PropRank, null))
-			{
-				continue;
-			}
-
 			if (propRescore.TryReadProperty(ref reader, options, PropRescore, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(o, null)))
-			{
-				continue;
-			}
-
-			if (propRetriever.TryReadProperty(ref reader, options, PropRetriever, null))
 			{
 				continue;
 			}
@@ -211,11 +195,6 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 			}
 
 			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
-			{
-				continue;
-			}
-
-			if (propSlice.TryReadProperty(ref reader, options, PropSlice, null))
 			{
 				continue;
 			}
@@ -297,15 +276,12 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 			PostFilter = propPostFilter.Value,
 			Profile = propProfile.Value,
 			Query = propQuery.Value,
-			Rank = propRank.Value,
 			Rescore = propRescore.Value,
-			Retriever = propRetriever.Value,
 			RuntimeMappings = propRuntimeMappings.Value,
 			ScriptFields = propScriptFields.Value,
 			SearchAfter = propSearchAfter.Value,
 			SeqNoPrimaryTerm = propSeqNoPrimaryTerm.Value,
 			Size = propSize.Value,
-			Slice = propSlice.Value,
 			Sort = propSort.Value,
 			Source = propSource.Value,
 			Stats = propStats.Value,
@@ -337,15 +313,12 @@ internal sealed partial class MultisearchBodyConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropPostFilter, value.PostFilter, null, null);
 		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
 		writer.WriteProperty(options, PropQuery, value.Query, null, null);
-		writer.WriteProperty(options, PropRank, value.Rank, null, null);
 		writer.WriteProperty(options, PropRescore, value.Rescore, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Rescore>(o, v, null));
-		writer.WriteProperty(options, PropRetriever, value.Retriever, null, null);
 		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
 		writer.WriteProperty(options, PropScriptFields, value.ScriptFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.ScriptField>(o, v, null, null));
 		writer.WriteProperty(options, PropSearchAfter, value.SearchAfter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null));
 		writer.WriteProperty(options, PropSeqNoPrimaryTerm, value.SeqNoPrimaryTerm, null, null);
 		writer.WriteProperty(options, PropSize, value.Size, null, null);
-		writer.WriteProperty(options, PropSlice, value.Slice, null, null);
 		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
 		writer.WriteProperty(options, PropSource, value.Source, null, null);
 		writer.WriteProperty(options, PropStats, value.Stats, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
@@ -379,31 +352,20 @@ public sealed partial class MultisearchBody
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? Collapse { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? DocvalueFields { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
+	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	public bool? Explain { get; set; }
@@ -417,41 +379,32 @@ public sealed partial class MultisearchBody
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
 	/// </para>
 	/// </summary>
 	public int? From { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.Highlight? Highlight { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? IndicesBoost { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? Knn { get; set; }
@@ -459,69 +412,33 @@ public sealed partial class MultisearchBody
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public double? MinScore { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? Pit { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? PostFilter { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
 	public bool? Profile { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Rank? Rank { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? Rescore { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Retriever? Retriever { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
@@ -532,102 +449,67 @@ public sealed partial class MultisearchBody
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.ScriptField>? ScriptFields { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? SearchAfter { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
 	public bool? SeqNoPrimaryTerm { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
 	public int? Size { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.SlicedScroll? Slice { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? Source { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
 	/// </para>
 	/// </summary>
 	public System.Collections.Generic.ICollection<string>? Stats { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Fields? StoredFields { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.Suggester? Suggest { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
 	public long? TerminateAfter { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
@@ -635,23 +517,24 @@ public sealed partial class MultisearchBody
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	public bool? TrackScores { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
+	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
 	public bool? Version { get; set; }
@@ -676,33 +559,18 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument>(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
@@ -723,22 +591,12 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<TDocument>.Build(action);
@@ -747,8 +605,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
@@ -759,8 +617,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
@@ -771,8 +629,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
@@ -789,7 +647,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
+	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Explain(bool? value = true)
@@ -840,8 +698,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
@@ -852,8 +710,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
@@ -864,8 +722,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
@@ -882,9 +740,9 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> From(int? value)
@@ -893,22 +751,12 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<TDocument>.Build(action);
@@ -917,10 +765,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
@@ -931,10 +776,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost()
@@ -945,10 +787,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
@@ -966,7 +805,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
@@ -977,7 +816,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
@@ -988,7 +827,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<TDocument>>[] actions)
@@ -1006,7 +845,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> MinScore(double? value)
@@ -1017,8 +856,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
@@ -1029,8 +868,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
@@ -1039,38 +878,18 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Profile(bool? value = true)
 	{
 		Instance.Profile = value;
@@ -1079,7 +898,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
@@ -1090,7 +909,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
@@ -1099,55 +918,18 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rank(Elastic.Clients.Elasticsearch.Rank? value)
-	{
-		Instance.Rank = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
-	{
-		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -1162,32 +944,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
-	{
-		Instance.Retriever = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>> action)
-	{
-		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
@@ -1198,8 +956,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings()
@@ -1210,8 +968,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
@@ -1295,22 +1053,12 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -1319,7 +1067,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> SeqNoPrimaryTerm(bool? value = true)
@@ -1330,9 +1079,9 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Size(int? value)
@@ -1341,55 +1090,18 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
-	{
-		Instance.Slice = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>> action)
-	{
-		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<TDocument>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -1404,10 +1116,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
@@ -1418,10 +1128,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<TDocument>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
@@ -1432,9 +1140,9 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Stats(System.Collections.Generic.ICollection<string>? value)
@@ -1445,9 +1153,9 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Stats(params string[] values)
@@ -1458,10 +1166,10 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
@@ -1472,10 +1180,10 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> StoredFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
@@ -1484,33 +1192,18 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<TDocument>.Build(action);
@@ -1519,18 +1212,9 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TerminateAfter(long? value)
@@ -1541,8 +1225,8 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
@@ -1554,7 +1238,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackScores(bool? value = true)
@@ -1565,9 +1249,10 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
@@ -1578,9 +1263,10 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
@@ -1591,7 +1277,7 @@ public readonly partial struct MultisearchBodyDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
+	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor<TDocument> Version(bool? value = true)
@@ -1633,44 +1319,24 @@ public readonly partial struct MultisearchBodyDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody instance) => new Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBody(Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
 		Instance.Aggregations = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations()
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines the aggregations that are run as part of the search request.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
 		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
@@ -1698,33 +1364,18 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse(Elastic.Clients.Elasticsearch.Core.Search.FieldCollapse? value)
 	{
 		Instance.Collapse = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Collapses search results the values of the specified field.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Collapse<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>> action)
 	{
 		Instance.Collapse = Elastic.Clients.Elasticsearch.Core.Search.FieldCollapseDescriptor<T>.Build(action);
@@ -1733,8 +1384,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
@@ -1745,8 +1396,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
@@ -1757,8 +1408,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
@@ -1775,8 +1426,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns doc values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns doc values for field
+	/// names matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor DocvalueFields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
@@ -1793,7 +1444,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns detailed information about score computation as part of a hit.
+	/// If true, returns detailed information about score computation as part of a hit.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Explain(bool? value = true)
@@ -1844,8 +1495,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
@@ -1856,8 +1507,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
@@ -1868,8 +1519,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
@@ -1886,8 +1537,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// An array of wildcard (<c>*</c>) field patterns.
-	/// The request returns values for field names matching these patterns in the <c>hits.fields</c> property of the response.
+	/// Array of wildcard (*) patterns. The request returns values for field names
+	/// matching these patterns in the hits.fields property of the response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
@@ -1904,9 +1555,9 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The starting document offset, which must be non-negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> parameter.
+	/// Starting document offset. By default, you cannot page through more than 10,000
+	/// hits using the from and size parameters. To page through more hits, use the
+	/// search_after parameter.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor From(int? value)
@@ -1915,33 +1566,18 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight(Elastic.Clients.Elasticsearch.Core.Search.Highlight? value)
 	{
 		Instance.Highlight = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Specifies the highlighter to use for retrieving highlighted snippets from one or more fields in your search results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Highlight<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>> action)
 	{
 		Instance.Highlight = Elastic.Clients.Elasticsearch.Core.Search.HighlightDescriptor<T>.Build(action);
@@ -1950,10 +1586,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost(System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.IndexName, double>>? value)
@@ -1964,10 +1597,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost()
@@ -1978,10 +1608,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Boost the <c>_score</c> of documents from specified indices.
-	/// The boost value is the factor by which scores are multiplied.
-	/// A boost value greater than <c>1.0</c> increases the score.
-	/// A boost value between <c>0</c> and <c>1.0</c> decreases the score.
+	/// Boosts the _score of documents from specified indices.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor IndicesBoost(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentCollectionOfKeyValuePairOfIndexNameDouble>? action)
@@ -1999,7 +1626,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.KnnSearch>? value)
@@ -2010,7 +1637,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(params Elastic.Clients.Elasticsearch.KnnSearch[] values)
@@ -2021,7 +1648,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor>[] actions)
@@ -2038,7 +1665,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The approximate kNN search to run.
+	/// Defines the approximate kNN search to run.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Knn<T>(params System.Action<Elastic.Clients.Elasticsearch.KnnSearchDescriptor<T>>[] actions)
@@ -2056,7 +1683,7 @@ public readonly partial struct MultisearchBodyDescriptor
 	/// <summary>
 	/// <para>
 	/// The minimum <c>_score</c> for matching documents.
-	/// Documents with a lower <c>_score</c> are not included in search results or results collected by aggregations.
+	/// Documents with a lower <c>_score</c> are not included in search results and results collected by aggregations.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor MinScore(double? value)
@@ -2067,8 +1694,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Pit(Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReference? value)
@@ -2079,8 +1706,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Limit the search to a point in time (PIT).
-	/// If you provide a PIT, you cannot specify an <c>&lt;index></c> in the request path.
+	/// Limits the search to a point in time (PIT). If you provide a PIT, you
+	/// cannot specify an &lt;index> in the request path.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Pit(System.Action<Elastic.Clients.Elasticsearch.Core.Search.PointInTimeReferenceDescriptor> action)
@@ -2089,51 +1716,24 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
 		Instance.PostFilter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Use the <c>post_filter</c> parameter to filter search results.
-	/// The search hits are filtered after the aggregations are calculated.
-	/// A post filter has no impact on the aggregation results.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor PostFilter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
 		Instance.PostFilter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Set to <c>true</c> to return detailed timing information about the execution of individual components in a search request.
-	/// NOTE: This is a debugging tool and adds significant overhead to search execution.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Profile(bool? value = true)
 	{
 		Instance.Profile = value;
@@ -2142,7 +1742,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
@@ -2153,7 +1753,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
@@ -2164,7 +1764,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The search definition using the Query DSL.
+	/// Defines the search definition using the Query DSL.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
@@ -2173,55 +1773,18 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rank(Elastic.Clients.Elasticsearch.Rank? value)
-	{
-		Instance.Rank = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The Reciprocal Rank Fusion (RRF) to use.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rank(System.Action<Elastic.Clients.Elasticsearch.RankDescriptor> action)
-	{
-		Instance.Rank = Elastic.Clients.Elasticsearch.RankDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.Rescore>? value)
 	{
 		Instance.Rescore = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(params Elastic.Clients.Elasticsearch.Core.Search.Rescore[] values)
 	{
 		Instance.Rescore = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -2234,11 +1797,6 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Can be used to improve precision by reordering just the top (for example 100 - 500) documents returned by the <c>query</c> and <c>post_filter</c> phases.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Rescore<T>(params System.Action<Elastic.Clients.Elasticsearch.Core.Search.RescoreDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.Rescore>();
@@ -2253,44 +1811,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever(Elastic.Clients.Elasticsearch.Retriever? value)
-	{
-		Instance.Retriever = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor> action)
-	{
-		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A retriever is a specification to describe top documents returned from a search.
-	/// A retriever replaces other elements of the search API that also return top documents such as <c>query</c> and <c>knn</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Retriever<T>(System.Action<Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>> action)
-	{
-		Instance.Retriever = Elastic.Clients.Elasticsearch.RetrieverDescriptor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
@@ -2301,8 +1823,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings()
@@ -2313,8 +1835,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
@@ -2325,8 +1847,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// One or more runtime fields in the search request.
-	/// These fields take precedence over mapped fields with the same name.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
@@ -2424,22 +1946,12 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SearchAfter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>? value)
 	{
 		Instance.SearchAfter = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Used to retrieve the next page of hits using a set of sort values from the previous page.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SearchAfter(params Elastic.Clients.Elasticsearch.FieldValue[] values)
 	{
 		Instance.SearchAfter = [.. values];
@@ -2448,7 +1960,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns sequence number and primary term of the last modification of each hit.
+	/// If true, returns sequence number and primary term of the last modification
+	/// of each hit. See Optimistic concurrency control.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor SeqNoPrimaryTerm(bool? value = true)
@@ -2459,9 +1972,9 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The number of hits to return, which must not be negative.
-	/// By default, you cannot page through more than 10,000 hits using the <c>from</c> and <c>size</c> parameters.
-	/// To page through more hits, use the <c>search_after</c> property.
+	/// The number of hits to return. By default, you cannot page through more
+	/// than 10,000 hits using the from and size parameters. To page through more
+	/// hits, use the search_after parameter.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Size(int? value)
@@ -2470,66 +1983,18 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice(Elastic.Clients.Elasticsearch.SlicedScroll? value)
-	{
-		Instance.Slice = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor> action)
-	{
-		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Split a scrolled search into multiple slices that can be consumed independently.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Slice<T>(System.Action<Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>> action)
-	{
-		Instance.Slice = Elastic.Clients.Elasticsearch.SlicedScrollDescriptor<T>.Build(action);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
 		Instance.Sort = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
 	{
 		Instance.Sort = [.. values];
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2542,11 +2007,6 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of &lt;field>:&lt;direction> pairs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
 	{
 		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
@@ -2561,10 +2021,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfig? value)
@@ -2575,10 +2033,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
@@ -2589,10 +2045,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The source fields that are returned for matching documents.
-	/// These fields are returned in the <c>hits._source</c> property of the search response.
-	/// If the <c>stored_fields</c> property is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// Otherwise, it defaults to <c>true</c>.
+	/// Indicates which source fields are returned for matching documents. These
+	/// fields are returned in the hits._source property of the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Source<T>(System.Func<Elastic.Clients.Elasticsearch.Core.Search.SourceConfigFactory<T>, Elastic.Clients.Elasticsearch.Core.Search.SourceConfig> action)
@@ -2603,9 +2057,9 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Stats(System.Collections.Generic.ICollection<string>? value)
@@ -2616,9 +2070,9 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The stats groups to associate with the search.
-	/// Each group maintains a statistics aggregation for its associated searches.
-	/// You can retrieve these stats using the indices stats API.
+	/// Stats groups to associate with the search. Each group maintains a statistics
+	/// aggregation for its associated searches. You can retrieve these stats using
+	/// the indices stats API.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Stats(params string[] values)
@@ -2629,10 +2083,10 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor StoredFields(Elastic.Clients.Elasticsearch.Fields? value)
@@ -2643,10 +2097,10 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// A comma-separated list of stored fields to return as part of a hit.
-	/// If no fields are specified, no stored fields are included in the response.
-	/// If this field is specified, the <c>_source</c> property defaults to <c>false</c>.
-	/// You can pass <c>_source: true</c> to return both source fields and stored fields in the search response.
+	/// List of stored fields to return as part of a hit. If no fields are specified,
+	/// no stored fields are included in the response. If this field is specified, the _source
+	/// parameter defaults to false. You can pass _source: true to return both source fields
+	/// and stored fields in the search response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor StoredFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
@@ -2655,44 +2109,24 @@ public readonly partial struct MultisearchBodyDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest(Elastic.Clients.Elasticsearch.Core.Search.Suggester? value)
 	{
 		Instance.Suggest = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest()
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Defines a suggester that provides similar looking terms based on a provided text.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Suggest<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>>? action)
 	{
 		Instance.Suggest = Elastic.Clients.Elasticsearch.Core.Search.SuggesterDescriptor<T>.Build(action);
@@ -2701,18 +2135,9 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of documents to collect for each shard.
-	/// If a query reaches this limit, Elasticsearch terminates the query early.
-	/// Elasticsearch collects documents before sorting.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: Use with caution.
-	/// Elasticsearch applies this property to each shard handling the request.
-	/// When possible, let Elasticsearch perform early termination automatically.
-	/// Avoid specifying this property for requests that target data streams with backing indices across multiple data tiers.
-	/// </para>
-	/// <para>
-	/// If set to <c>0</c> (default), the query does not terminate early.
+	/// Maximum number of documents to collect for each shard. If a query reaches this
+	/// limit, Elasticsearch terminates the query early. Elasticsearch collects documents
+	/// before sorting. Defaults to 0, which does not terminate query execution early.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TerminateAfter(long? value)
@@ -2723,8 +2148,8 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period of time to wait for a response from each shard.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// Specifies the period of time to wait for a response from each shard. If no response
+	/// is received before the timeout expires, the request fails and returns an error.
 	/// Defaults to no timeout.
 	/// </para>
 	/// </summary>
@@ -2736,7 +2161,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, calculate and return document scores, even if the scores are not used for sorting.
+	/// If true, calculate and return document scores, even if the scores are not used for sorting.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackScores(bool? value = true)
@@ -2747,9 +2172,10 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
@@ -2760,9 +2186,10 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately.
-	/// If <c>true</c>, the exact number of hits is returned at the cost of some performance.
-	/// If <c>false</c>, the  response does not include the total number of hits matching the query.
+	/// Number of hits matching the query to count accurately. If true, the exact
+	/// number of hits is returned at the cost of some performance. If false, the
+	/// response does not include the total number of hits matching the query.
+	/// Defaults to 10,000 hits.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
@@ -2773,7 +2200,7 @@ public readonly partial struct MultisearchBodyDescriptor
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the request returns the document version as part of a hit.
+	/// If true, returns document version as part of a hit.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Core.MSearch.MultisearchBodyDescriptor Version(bool? value = true)

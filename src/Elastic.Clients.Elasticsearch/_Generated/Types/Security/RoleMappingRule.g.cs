@@ -65,7 +65,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 			{
 				variantType = VariantField.Value;
 				reader.Read();
-				variant = reader.ReadValue<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>(options, static System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, null)!));
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.Security.FieldRule>(options, null);
 				continue;
 			}
 
@@ -103,7 +103,7 @@ internal sealed partial class RoleMappingRuleConverter : System.Text.Json.Serial
 				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.RoleMappingRule)value.Variant, null, null);
 				break;
 			case "field":
-				writer.WriteProperty(options, value.VariantType, (System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>)value.Variant, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> v) => w.WriteKeyValuePairValue<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.FieldValue>(o, v, null)));
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.Security.FieldRule)value.Variant, null, null);
 				break;
 			default:
 				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Security.RoleMappingRule)}'.");
@@ -137,9 +137,9 @@ public sealed partial class RoleMappingRule
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? All { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>("all"); set => SetVariant("all", value); }
 	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? Any { get => GetVariant<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>>("any"); set => SetVariant("any", value); }
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRule? Except { get => GetVariant<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>("except"); set => SetVariant("except", value); }
-	public System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? Field { get => GetVariant<System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>>("field"); set => SetVariant("field", value); }
+	public Elastic.Clients.Elasticsearch.Security.FieldRule? Field { get => GetVariant<Elastic.Clients.Elasticsearch.Security.FieldRule>("field"); set => SetVariant("field", value); }
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleMappingRule(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>> value) => new Elastic.Clients.Elasticsearch.Security.RoleMappingRule { Field = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleMappingRule(Elastic.Clients.Elasticsearch.Security.FieldRule value) => new Elastic.Clients.Elasticsearch.Security.RoleMappingRule { Field = value };
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	private T? GetVariant<T>(string type)
@@ -157,124 +157,6 @@ public sealed partial class RoleMappingRule
 	{
 		VariantType = type;
 		Variant = value;
-	}
-}
-
-public readonly partial struct RoleMappingRuleDescriptor<TDocument>
-{
-	internal Elastic.Clients.Elasticsearch.Security.RoleMappingRule Instance { get; init; }
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RoleMappingRuleDescriptor(Elastic.Clients.Elasticsearch.Security.RoleMappingRule instance)
-	{
-		Instance = instance;
-	}
-
-	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public RoleMappingRuleDescriptor()
-	{
-		Instance = new Elastic.Clients.Elasticsearch.Security.RoleMappingRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-	}
-
-	public static explicit operator Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.RoleMappingRule instance) => new Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>(instance);
-	public static implicit operator Elastic.Clients.Elasticsearch.Security.RoleMappingRule(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> descriptor) => descriptor.Instance;
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? value)
-	{
-		Instance.All = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All(params Elastic.Clients.Elasticsearch.Security.RoleMappingRule[] values)
-	{
-		Instance.All = [.. values];
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> All(params System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>.Build(action));
-		}
-
-		Instance.All = items;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? value)
-	{
-		Instance.Any = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any(params Elastic.Clients.Elasticsearch.Security.RoleMappingRule[] values)
-	{
-		Instance.Any = [.. values];
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Any(params System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>.Build(action));
-		}
-
-		Instance.Any = items;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Except(Elastic.Clients.Elasticsearch.Security.RoleMappingRule? value)
-	{
-		Instance.Except = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Except(System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>> action)
-	{
-		Instance.Except = Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? value)
-	{
-		Instance.Field = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field key, params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, [.. values]);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, [.. values]);
-		return this;
-	}
-
-	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Security.RoleMappingRule Build(System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.RoleMappingRule(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
-		action.Invoke(builder);
-		return builder.Instance;
 	}
 }
 
@@ -321,18 +203,6 @@ public readonly partial struct RoleMappingRuleDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor All<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>.Build(action));
-		}
-
-		Instance.All = items;
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>? value)
 	{
 		Instance.Any = value;
@@ -357,18 +227,6 @@ public readonly partial struct RoleMappingRuleDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Any<T>(params System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>>[] actions)
-	{
-		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Security.RoleMappingRule>();
-		foreach (var action in actions)
-		{
-			items.Add(Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>.Build(action));
-		}
-
-		Instance.Any = items;
-		return this;
-	}
-
 	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Except(Elastic.Clients.Elasticsearch.Security.RoleMappingRule? value)
 	{
 		Instance.Except = value;
@@ -381,39 +239,15 @@ public readonly partial struct RoleMappingRuleDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Except<T>(System.Action<Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>> action)
-	{
-		Instance.Except = Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor<T>.Build(action);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>? value)
+	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(Elastic.Clients.Elasticsearch.Security.FieldRule? value)
 	{
 		Instance.Field = value;
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(Elastic.Clients.Elasticsearch.Field key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
+	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(System.Action<Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor> action)
 	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue> value)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, value);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field(Elastic.Clients.Elasticsearch.Field key, params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, [.. values]);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRuleDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, params Elastic.Clients.Elasticsearch.FieldValue[] values)
-	{
-		Instance.Field = new System.Collections.Generic.KeyValuePair<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.FieldValue>>(key, [.. values]);
+		Instance.Field = Elastic.Clients.Elasticsearch.Security.FieldRuleDescriptor.Build(action);
 		return this;
 	}
 

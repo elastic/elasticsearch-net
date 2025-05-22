@@ -104,22 +104,12 @@ public sealed partial class ReadOnlyUrlRepository : Elastic.Clients.Elasticsearc
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The read-only URL repository type.
-	/// </para>
-	/// </summary>
 	public string Type => "url";
 
 	public string? Uuid { get; set; }
@@ -144,22 +134,12 @@ public readonly partial struct ReadOnlyUrlRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepository(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor> action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor.Build(action);

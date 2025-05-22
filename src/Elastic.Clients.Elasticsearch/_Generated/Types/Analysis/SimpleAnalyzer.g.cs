@@ -57,9 +57,7 @@ internal sealed partial class SimpleAnalyzerConverter : System.Text.Json.Seriali
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -67,10 +65,7 @@ internal sealed partial class SimpleAnalyzerConverter : System.Text.Json.Seriali
 	{
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -96,7 +91,6 @@ public sealed partial class SimpleAnalyzer : Elastic.Clients.Elasticsearch.Analy
 
 	public string Type => "simple";
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -119,7 +113,6 @@ public readonly partial struct SimpleAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzer(Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.SimpleAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;

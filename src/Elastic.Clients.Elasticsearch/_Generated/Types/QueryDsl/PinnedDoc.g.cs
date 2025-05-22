@@ -32,7 +32,7 @@ internal sealed partial class PinnedDocConverter : System.Text.Json.Serializatio
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propId = default;
-		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propId.TryReadProperty(ref reader, options, PropId, null))
@@ -75,9 +75,10 @@ internal sealed partial class PinnedDocConverter : System.Text.Json.Serializatio
 public sealed partial class PinnedDoc
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public PinnedDoc(Elastic.Clients.Elasticsearch.Id id)
+	public PinnedDoc(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.IndexName index)
 	{
 		Id = id;
+		Index = index;
 	}
 #if NET7_0_OR_GREATER
 	public PinnedDoc()
@@ -112,7 +113,11 @@ public sealed partial class PinnedDoc
 	/// The index that contains the document.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.IndexName? Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 }
 
 public readonly partial struct PinnedDocDescriptor
@@ -150,7 +155,7 @@ public readonly partial struct PinnedDocDescriptor
 	/// The index that contains the document.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName? value)
+	public Elastic.Clients.Elasticsearch.QueryDsl.PinnedDocDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
 		Instance.Index = value;
 		return this;

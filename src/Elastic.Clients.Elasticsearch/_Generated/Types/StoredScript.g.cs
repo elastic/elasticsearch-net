@@ -109,7 +109,7 @@ public sealed partial class StoredScript
 	/// <summary>
 	/// <para>
 	/// The language the script is written in.
-	/// For search templates, use <c>mustache</c>.
+	/// For serach templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	public
@@ -154,7 +154,7 @@ public readonly partial struct StoredScriptDescriptor
 	/// <summary>
 	/// <para>
 	/// The language the script is written in.
-	/// For search templates, use <c>mustache</c>.
+	/// For serach templates, use <c>mustache</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.StoredScriptDescriptor Language(Elastic.Clients.Elasticsearch.ScriptLanguage value)

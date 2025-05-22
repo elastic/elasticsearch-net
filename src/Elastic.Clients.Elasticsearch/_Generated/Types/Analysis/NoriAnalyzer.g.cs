@@ -81,9 +81,7 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 			DecompoundMode = propDecompoundMode.Value,
 			Stoptags = propStoptags.Value,
 			UserDictionary = propUserDictionary.Value,
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -94,10 +92,7 @@ internal sealed partial class NoriAnalyzerConverter : System.Text.Json.Serializa
 		writer.WriteProperty(options, PropStoptags, value.Stoptags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
 		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteProperty(options, PropUserDictionary, value.UserDictionary, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -127,7 +122,6 @@ public sealed partial class NoriAnalyzer : Elastic.Clients.Elasticsearch.Analysi
 	public string Type => "nori";
 
 	public string? UserDictionary { get; set; }
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -174,7 +168,6 @@ public readonly partial struct NoriAnalyzerDescriptor
 		return this;
 	}
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.NoriAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;

@@ -142,14 +142,6 @@ public sealed partial class Http
 
 	/// <summary>
 	/// <para>
-	/// Detailed HTTP stats broken down by route
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("routes")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> Routes { get; init; }
-
-	/// <summary>
-	/// <para>
 	/// Total number of HTTP connections opened for the node.
 	/// </para>
 	/// </summary>

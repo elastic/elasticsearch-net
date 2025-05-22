@@ -27,12 +27,12 @@ internal sealed partial class GetRoleMappingResponseConverter : System.Text.Json
 {
 	public override Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { RoleMappings = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.RoleMappings, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>(o, v, null, null));
+		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleMapping>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class GetRoleMappingResponse : Elastic.Transport.Products.
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> RoleMappings { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleMapping> Values { get; set; }
 }

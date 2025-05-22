@@ -27,12 +27,12 @@ internal sealed partial class GetRollupIndexCapsResponseConverter : System.Text.
 {
 	public override Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Capabilities = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>(o, null, null)!) };
+		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Values = reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>(o, null, null)!) };
 	}
 
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.GetRollupIndexCapsResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
-		writer.WriteValue(options, value.Capabilities, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>(o, v, null, null));
+		writer.WriteValue(options, value.Values, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities>(o, v, null, null));
 	}
 }
 
@@ -54,5 +54,5 @@ public sealed partial class GetRollupIndexCapsResponse : Elastic.Transport.Produ
 #if NET7_0_OR_GREATER
 required
 #endif
-System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> Capabilities { get; set; }
+System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Rollup.IndexCapabilities> Values { get; set; }
 }

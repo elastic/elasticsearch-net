@@ -14,5 +14,5 @@ public partial class GetAliasResponse
 	/// the client considers the response to be valid.
 	/// </para>
 	/// </summary>
-	public override bool IsValidResponse => base.IsValidResponse || Aliases?.Count > 0;
+	public override bool IsValidResponse => base.IsValidResponse || Values?.Count > 0;
 }

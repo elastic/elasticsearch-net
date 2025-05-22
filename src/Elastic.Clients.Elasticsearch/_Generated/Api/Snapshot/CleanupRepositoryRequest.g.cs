@@ -27,18 +27,14 @@ public sealed partial class CleanupRepositoryRequestParameters : Elastic.Transpo
 {
 	/// <summary>
 	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
+	/// Period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -107,7 +103,7 @@ public sealed partial class CleanupRepositoryRequest : Elastic.Clients.Elasticse
 
 	/// <summary>
 	/// <para>
-	/// The name of the snapshot repository to clean up.
+	/// Snapshot repository to clean up.
 	/// </para>
 	/// </summary>
 	public
@@ -118,18 +114,14 @@ public sealed partial class CleanupRepositoryRequest : Elastic.Clients.Elasticse
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
+	/// Period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -167,7 +159,7 @@ public readonly partial struct CleanupRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the snapshot repository to clean up.
+	/// Snapshot repository to clean up.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
@@ -178,9 +170,7 @@ public readonly partial struct CleanupRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for a connection to the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>
+	/// Period to wait for a connection to the master node.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -191,9 +181,7 @@ public readonly partial struct CleanupRepositoryRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for a response from all relevant nodes in the cluster after updating the cluster metadata.
-	/// If no response is received before the timeout expires, the cluster metadata update still applies but the response will indicate that it was not completely acknowledged.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Period to wait for a response.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CleanupRepositoryRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)

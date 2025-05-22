@@ -27,9 +27,7 @@ public sealed partial class CloneSnapshotRequestParameters : Elastic.Transport.R
 {
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
@@ -115,7 +113,7 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The name of the snapshot repository that both source and target snapshot belong to.
+	/// A repository name
 	/// </para>
 	/// </summary>
 	public
@@ -126,7 +124,7 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The source snapshot name.
+	/// The name of the snapshot to clone from
 	/// </para>
 	/// </summary>
 	public
@@ -137,7 +135,7 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The target snapshot name.
+	/// The name of the cloned snapshot to create
 	/// </para>
 	/// </summary>
 	public
@@ -148,19 +146,10 @@ public sealed partial class CloneSnapshotRequest : Elastic.Clients.Elasticsearch
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
-
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of indices to include in the snapshot.
-	/// Multi-target syntax is supported.
-	/// </para>
-	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -202,7 +191,7 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the snapshot repository that both source and target snapshot belong to.
+	/// A repository name
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Repository(Elastic.Clients.Elasticsearch.Name value)
@@ -213,7 +202,7 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The source snapshot name.
+	/// The name of the snapshot to clone from
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Snapshot(Elastic.Clients.Elasticsearch.Name value)
@@ -224,7 +213,7 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The target snapshot name.
+	/// The name of the cloned snapshot to create
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor TargetSnapshot(Elastic.Clients.Elasticsearch.Name value)
@@ -235,9 +224,7 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The period to wait for the master node.
-	/// If the master node is not available before the timeout expires, the request fails and returns an error.
-	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// Explicit operation timeout for connection to master node
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
@@ -246,12 +233,6 @@ public readonly partial struct CloneSnapshotRequestDescriptor
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A comma-separated list of indices to include in the snapshot.
-	/// Multi-target syntax is supported.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.CloneSnapshotRequestDescriptor Indices(string value)
 	{
 		Instance.Indices = value;

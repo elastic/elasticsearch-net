@@ -513,45 +513,7 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor
 	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
@@ -944,45 +906,7 @@ public readonly partial struct PutDataFrameAnalyticsRequestDescriptor<TDocument>
 	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Specifies <c>includes</c> and/or <c>excludes</c> patterns to select which fields
-	/// will be included in the analysis. The patterns specified in <c>excludes</c>
-	/// are applied last, therefore <c>excludes</c> takes precedence. In other words,
-	/// if the same field is specified in both <c>includes</c> and <c>excludes</c>, then
-	/// the field will not be included in the analysis. If <c>analyzed_fields</c> is
-	/// not set, only the relevant fields will be included. For example, all the
-	/// numeric fields for outlier detection.
-	/// The supported fields vary for each type of analysis. Outlier detection
-	/// requires numeric or <c>boolean</c> data to analyze. The algorithms don’t
-	/// support missing values therefore fields that have data types other than
-	/// numeric or boolean are ignored. Documents where included fields contain
-	/// missing values, null values, or an array are also ignored. Therefore the
-	/// <c>dest</c> index may contain documents that don’t have an outlier score.
-	/// Regression supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the regression analysis.
-	/// Classification supports fields that are numeric, <c>boolean</c>, <c>text</c>,
-	/// <c>keyword</c>, and <c>ip</c> data types. It is also tolerant of missing values.
-	/// Fields that are supported are included in the analysis, other fields are
-	/// ignored. Documents where included fields contain an array with two or
-	/// more values are also ignored. Documents in the <c>dest</c> index that don’t
-	/// contain a results field are not included in the classification analysis.
-	/// Classification analysis can be improved by mapping ordinal variable
-	/// values to a single number. For example, in case of age ranges, you can
-	/// model the values as <c>0-14 = 0</c>, <c>15-24 = 1</c>, <c>25-34 = 2</c>, and so on.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutDataFrameAnalyticsRequestDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;

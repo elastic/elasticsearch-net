@@ -37,17 +37,7 @@ internal sealed partial class TermQueryConverter : System.Text.Json.Serializatio
 		reader.Read();
 		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
-		{
-			var value = reader.ReadValue<Elastic.Clients.Elasticsearch.FieldValue>(options, null);
-			reader.Read();
-			return new Elastic.Clients.Elasticsearch.QueryDsl.TermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-			{
-				Field = propField.Value,
-				Value = value
-			};
-		}
-
+		var readerSnapshot = reader;
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
 		LocalJsonValue<bool?> propCaseInsensitive = default;
@@ -75,13 +65,20 @@ internal sealed partial class TermQueryConverter : System.Text.Json.Serializatio
 				continue;
 			}
 
-			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			try
 			{
-				reader.Skip();
-				continue;
+				reader = readerSnapshot;
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.FieldValue>(options, null);
+				return new Elastic.Clients.Elasticsearch.QueryDsl.TermQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+				{
+					Field = propField.Value,
+					Value = result
+				};
 			}
-
-			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+			catch (System.Text.Json.JsonException)
+			{
+				throw;
+			}
 		}
 
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);

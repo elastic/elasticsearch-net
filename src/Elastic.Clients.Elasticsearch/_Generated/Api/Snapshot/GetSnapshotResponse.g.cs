@@ -25,7 +25,6 @@ namespace Elastic.Clients.Elasticsearch.Snapshot;
 
 internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse>
 {
-	private static readonly System.Text.Json.JsonEncodedText PropNext = System.Text.Json.JsonEncodedText.Encode("next");
 	private static readonly System.Text.Json.JsonEncodedText PropRemaining = System.Text.Json.JsonEncodedText.Encode("remaining");
 	private static readonly System.Text.Json.JsonEncodedText PropResponses = System.Text.Json.JsonEncodedText.Encode("responses");
 	private static readonly System.Text.Json.JsonEncodedText PropSnapshots = System.Text.Json.JsonEncodedText.Encode("snapshots");
@@ -34,18 +33,12 @@ internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Se
 	public override Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<string?> propNext = default;
 		LocalJsonValue<int> propRemaining = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>?> propResponses = default;
 		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>?> propSnapshots = default;
 		LocalJsonValue<int> propTotal = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (propNext.TryReadProperty(ref reader, options, PropNext, null))
-			{
-				continue;
-			}
-
 			if (propRemaining.TryReadProperty(ref reader, options, PropRemaining, null))
 			{
 				continue;
@@ -78,7 +71,6 @@ internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Se
 		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		return new Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
 		{
-			Next = propNext.Value,
 			Remaining = propRemaining.Value,
 			Responses = propResponses.Value,
 			Snapshots = propSnapshots.Value,
@@ -89,7 +81,6 @@ internal sealed partial class GetSnapshotResponseConverter : System.Text.Json.Se
 	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetSnapshotResponse value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WriteProperty(options, PropNext, value.Next, null, null);
 		writer.WriteProperty(options, PropRemaining, value.Remaining, null, null);
 		writer.WriteProperty(options, PropResponses, value.Responses, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotResponseItem>(o, v, null));
 		writer.WriteProperty(options, PropSnapshots, value.Snapshots, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Snapshot.SnapshotInfo>(o, v, null));
@@ -114,15 +105,7 @@ public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Ela
 
 	/// <summary>
 	/// <para>
-	/// If the request contained a size limit and there might be more results, a <c>next</c> field will be added to the response.
-	/// It can be used as the <c>after</c> query parameter to fetch additional results.
-	/// </para>
-	/// </summary>
-	public string? Next { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the <c>next</c> field value.
+	/// The number of remaining snapshots that were not returned due to size limits and that can be fetched by additional requests using the next field value.
 	/// </para>
 	/// </summary>
 	public
@@ -135,7 +118,7 @@ public sealed partial class GetSnapshotResponse : Elastic.Transport.Products.Ela
 
 	/// <summary>
 	/// <para>
-	/// The total number of snapshots that match the request when ignoring the size limit or <c>after</c> query parameter.
+	/// The total number of snapshots that match the request when ignoring size limit or after query parameter.
 	/// </para>
 	/// </summary>
 	public

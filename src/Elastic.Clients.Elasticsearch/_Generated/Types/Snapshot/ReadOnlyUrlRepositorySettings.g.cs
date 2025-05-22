@@ -150,107 +150,13 @@ public sealed partial class ReadOnlyUrlRepositorySettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? ChunkSize { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
 	public bool? Compress { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of retries for HTTP and HTTPS URLs.
-	/// </para>
-	/// </summary>
 	public int? HttpMaxRetries { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum wait time for data transfers over a connection.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? HttpSocketTimeout { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
 	public int? MaxNumberOfSnapshots { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The URL location of the root of the shared filesystem repository.
-	/// The following protocols are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>file</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ftp</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>http</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>https</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jar</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
-	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
-	/// </para>
-	/// <para>
-	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
-	/// This location must be registered in the <c>path.repo</c> setting.
-	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
-	/// </para>
-	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -277,176 +183,66 @@ public readonly partial struct ReadOnlyUrlRepositorySettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings instance) => new Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettings(Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor ChunkSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.ChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor Compress(bool? value = true)
 	{
 		Instance.Compress = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of retries for HTTP and HTTPS URLs.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor HttpMaxRetries(int? value)
 	{
 		Instance.HttpMaxRetries = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum wait time for data transfers over a connection.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor HttpSocketTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
 		Instance.HttpSocketTimeout = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of snapshots the repository can contain.
-	/// The default is <c>Integer.MAX_VALUE</c>, which is 2^31-1 or <c>2147483647</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxNumberOfSnapshots(int? value)
 	{
 		Instance.MaxNumberOfSnapshots = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxRestoreBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxRestoreBytesPerSec = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxSnapshotBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxSnapshotBytesPerSec = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The URL location of the root of the shared filesystem repository.
-	/// The following protocols are supported:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// <c>file</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>ftp</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>http</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>https</c>
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// <c>jar</c>
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para>
-	/// URLs using the HTTP, HTTPS, or FTP protocols must be explicitly allowed with the <c>repositories.url.allowed_urls</c> cluster setting.
-	/// This setting supports wildcards in the place of a host, path, query, or fragment in the URL.
-	/// </para>
-	/// <para>
-	/// URLs using the file protocol must point to the location of a shared filesystem accessible to all master and data nodes in the cluster.
-	/// This location must be registered in the <c>path.repo</c> setting.
-	/// You don't need to register URLs using the FTP, HTTP, HTTPS, or JAR protocols in the <c>path.repo</c> setting.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.ReadOnlyUrlRepositorySettingsDescriptor Url(string value)
 	{
 		Instance.Url = value;

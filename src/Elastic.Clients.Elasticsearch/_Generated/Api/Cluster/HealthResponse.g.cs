@@ -414,14 +414,6 @@ public sealed partial class HealthResponse : Elastic.Transport.Products.Elastics
 
 	/// <summary>
 	/// <para>
-	/// The number of primary shards that are not allocated.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("unassigned_primary_shards")]
-	public int UnassignedPrimaryShards { get; init; }
-
-	/// <summary>
-	/// <para>
 	/// The number of shards that are not allocated.
 	/// </para>
 	/// </summary>

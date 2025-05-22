@@ -96,12 +96,7 @@ public readonly partial struct RepositoryFactory
 		return value;
 	}
 
-	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Azure()
-	{
-		return Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor.Build(null);
-	}
-
-	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Azure(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Snapshot.IRepository Azure(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor> action)
 	{
 		return Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor.Build(action);
 	}

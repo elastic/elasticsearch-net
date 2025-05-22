@@ -30,17 +30,8 @@ internal sealed partial class VertexIncludeConverter : System.Text.Json.Serializ
 
 	public override Elastic.Clients.Elasticsearch.Graph.VertexInclude Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
-		{
-			var value = reader.ReadValue<string>(options, null);
-			return new Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
-			{
-				Term = value
-			};
-		}
-
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<double> propBoost = default;
 		LocalJsonValue<string> propTerm = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -84,8 +75,9 @@ internal sealed partial class VertexIncludeConverter : System.Text.Json.Serializ
 public sealed partial class VertexInclude
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public VertexInclude(string term)
+	public VertexInclude(double boost, string term)
 	{
+		Boost = boost;
 		Term = term;
 	}
 #if NET7_0_OR_GREATER
@@ -105,7 +97,11 @@ public sealed partial class VertexInclude
 		_ = sentinel;
 	}
 
-	public double? Boost { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Boost { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required
@@ -132,7 +128,7 @@ public readonly partial struct VertexIncludeDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(Elastic.Clients.Elasticsearch.Graph.VertexInclude instance) => new Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Graph.VertexInclude(Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor descriptor) => descriptor.Instance;
 
-	public Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor Boost(double? value)
+	public Elastic.Clients.Elasticsearch.Graph.VertexIncludeDescriptor Boost(double value)
 	{
 		Instance.Boost = value;
 		return this;

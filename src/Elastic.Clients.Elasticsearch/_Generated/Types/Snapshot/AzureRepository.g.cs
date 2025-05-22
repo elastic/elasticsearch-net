@@ -32,7 +32,7 @@ internal sealed partial class AzureRepositoryConverter : System.Text.Json.Serial
 	public override Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings?> propSettings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings> propSettings = default;
 		LocalJsonValue<string?> propUuid = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -82,12 +82,18 @@ internal sealed partial class AzureRepositoryConverter : System.Text.Json.Serial
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryConverter))]
 public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snapshot.IRepository
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AzureRepository(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings settings)
+	{
+		Settings = settings;
+	}
 #if NET7_0_OR_GREATER
 	public AzureRepository()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public AzureRepository()
 	{
 	}
@@ -98,18 +104,12 @@ public sealed partial class AzureRepository : Elastic.Clients.Elasticsearch.Snap
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? Settings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings Settings { get; set; }
 
-	/// <summary>
-	/// <para>
-	/// The Azure repository type.
-	/// </para>
-	/// </summary>
 	public string Type => "azure";
 
 	public string? Uuid { get; set; }
@@ -134,33 +134,18 @@ public readonly partial struct AzureRepositoryDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(Elastic.Clients.Elasticsearch.Snapshot.AzureRepository instance) => new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings? value)
+	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings value)
 	{
 		Instance.Settings = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings()
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(null);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The repository settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor>? action)
 	{
 		Instance.Settings = Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor.Build(action);
@@ -174,13 +159,8 @@ public readonly partial struct AzureRepositoryDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Snapshot.AzureRepository Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositoryDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.AzureRepository(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

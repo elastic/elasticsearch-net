@@ -176,13 +176,7 @@ public readonly partial struct DataframePreviewConfigDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor<TDocument> AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;
@@ -264,13 +258,7 @@ public readonly partial struct DataframePreviewConfigDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields()
-	{
-		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(null);
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframePreviewConfigDescriptor AnalyzedFields(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor> action)
 	{
 		Instance.AnalyzedFields = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisAnalyzedFieldsDescriptor.Build(action);
 		return this;

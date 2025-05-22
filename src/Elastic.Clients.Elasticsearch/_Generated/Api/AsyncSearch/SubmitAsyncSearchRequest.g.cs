@@ -130,7 +130,8 @@ public sealed partial class SubmitAsyncSearchRequestParameters : Elastic.Transpo
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -708,7 +709,8 @@ public partial class SubmitAsyncSearchRequest : Elastic.Clients.Elasticsearch.Re
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	public int? MaxConcurrentShardRequests { get => Q<int?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public long? MaxConcurrentShardRequests { get => Q<long?>("max_concurrent_shard_requests"); set => Q("max_concurrent_shard_requests", value); }
+	public string? MinCompatibleShardNode { get => Q<string?>("min_compatible_shard_node"); set => Q("min_compatible_shard_node", value); }
 
 	/// <summary>
 	/// <para>
@@ -1218,9 +1220,15 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(int? value)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor MinCompatibleShardNode(string? value)
+	{
+		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 
@@ -2597,9 +2605,15 @@ public readonly partial struct SubmitAsyncSearchRequestDescriptor<TDocument>
 	/// The number of concurrent shard requests per node this search executes concurrently. This value should be used to limit the impact of the search on the cluster in order to limit the number of concurrent shard requests
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(int? value)
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MaxConcurrentShardRequests(long? value)
 	{
 		Instance.MaxConcurrentShardRequests = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.AsyncSearch.SubmitAsyncSearchRequestDescriptor<TDocument> MinCompatibleShardNode(string? value)
+	{
+		Instance.MinCompatibleShardNode = value;
 		return this;
 	}
 

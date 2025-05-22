@@ -30,9 +30,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 	private static readonly System.Text.Json.JsonEncodedText PropClient = System.Text.Json.JsonEncodedText.Encode("client");
 	private static readonly System.Text.Json.JsonEncodedText PropCompress = System.Text.Json.JsonEncodedText.Encode("compress");
 	private static readonly System.Text.Json.JsonEncodedText PropContainer = System.Text.Json.JsonEncodedText.Encode("container");
-	private static readonly System.Text.Json.JsonEncodedText PropDeleteObjectsMaxSize = System.Text.Json.JsonEncodedText.Encode("delete_objects_max_size");
 	private static readonly System.Text.Json.JsonEncodedText PropLocationMode = System.Text.Json.JsonEncodedText.Encode("location_mode");
-	private static readonly System.Text.Json.JsonEncodedText PropMaxConcurrentBatchDeletes = System.Text.Json.JsonEncodedText.Encode("max_concurrent_batch_deletes");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxRestoreBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_restore_bytes_per_sec");
 	private static readonly System.Text.Json.JsonEncodedText PropMaxSnapshotBytesPerSec = System.Text.Json.JsonEncodedText.Encode("max_snapshot_bytes_per_sec");
 	private static readonly System.Text.Json.JsonEncodedText PropReadonly = System.Text.Json.JsonEncodedText.Encode("readonly");
@@ -45,9 +43,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 		LocalJsonValue<string?> propClient = default;
 		LocalJsonValue<bool?> propCompress = default;
 		LocalJsonValue<string?> propContainer = default;
-		LocalJsonValue<int?> propDeleteObjectsMaxSize = default;
 		LocalJsonValue<string?> propLocationMode = default;
-		LocalJsonValue<int?> propMaxConcurrentBatchDeletes = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxRestoreBytesPerSec = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxSnapshotBytesPerSec = default;
 		LocalJsonValue<bool?> propReadonly = default;
@@ -78,17 +74,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 				continue;
 			}
 
-			if (propDeleteObjectsMaxSize.TryReadProperty(ref reader, options, PropDeleteObjectsMaxSize, null))
-			{
-				continue;
-			}
-
 			if (propLocationMode.TryReadProperty(ref reader, options, PropLocationMode, null))
-			{
-				continue;
-			}
-
-			if (propMaxConcurrentBatchDeletes.TryReadProperty(ref reader, options, PropMaxConcurrentBatchDeletes, null))
 			{
 				continue;
 			}
@@ -125,9 +111,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 			Client = propClient.Value,
 			Compress = propCompress.Value,
 			Container = propContainer.Value,
-			DeleteObjectsMaxSize = propDeleteObjectsMaxSize.Value,
 			LocationMode = propLocationMode.Value,
-			MaxConcurrentBatchDeletes = propMaxConcurrentBatchDeletes.Value,
 			MaxRestoreBytesPerSec = propMaxRestoreBytesPerSec.Value,
 			MaxSnapshotBytesPerSec = propMaxSnapshotBytesPerSec.Value,
 			Readonly = propReadonly.Value
@@ -142,9 +126,7 @@ internal sealed partial class AzureRepositorySettingsConverter : System.Text.Jso
 		writer.WriteProperty(options, PropClient, value.Client, null, null);
 		writer.WriteProperty(options, PropCompress, value.Compress, null, null);
 		writer.WriteProperty(options, PropContainer, value.Container, null, null);
-		writer.WriteProperty(options, PropDeleteObjectsMaxSize, value.DeleteObjectsMaxSize, null, null);
 		writer.WriteProperty(options, PropLocationMode, value.LocationMode, null, null);
-		writer.WriteProperty(options, PropMaxConcurrentBatchDeletes, value.MaxConcurrentBatchDeletes, null, null);
 		writer.WriteProperty(options, PropMaxRestoreBytesPerSec, value.MaxRestoreBytesPerSec, null, null);
 		writer.WriteProperty(options, PropMaxSnapshotBytesPerSec, value.MaxSnapshotBytesPerSec, null, null);
 		writer.WriteProperty(options, PropReadonly, value.Readonly, null, null);
@@ -171,109 +153,14 @@ public sealed partial class AzureRepositorySettings
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the container.
-	/// It defaults to the root directory.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
 	public string? BasePath { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? ChunkSize { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The name of the Azure repository client to use.
-	/// </para>
-	/// </summary>
 	public string? Client { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
 	public bool? Compress { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The Azure container.
-	/// </para>
-	/// </summary>
 	public string? Container { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
-	/// Defaults to 256 which is the maximum number supported by the Azure blob batch API.
-	/// </para>
-	/// </summary>
-	public int? DeleteObjectsMaxSize { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Either <c>primary_only</c> or <c>secondary_only</c>.
-	/// Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> to <c>true</c>.
-	/// </para>
-	/// </summary>
 	public string? LocationMode { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
-	/// Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
-	/// Defaults to 10, minimum is 1, maximum is 100.
-	/// </para>
-	/// </summary>
-	public int? MaxConcurrentBatchDeletes { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxRestoreBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxSnapshotBytesPerSec { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
 	public bool? Readonly { get; set; }
 }
 
@@ -296,190 +183,72 @@ public readonly partial struct AzureRepositorySettingsDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings instance) => new Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettings(Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// The path to the repository data within the container.
-	/// It defaults to the root directory.
-	/// </para>
-	/// <para>
-	/// NOTE: Don't set <c>base_path</c> when configuring a snapshot repository for Elastic Cloud Enterprise.
-	/// Elastic Cloud Enterprise automatically generates the <c>base_path</c> for each deployment so that multiple deployments can share the same bucket.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor BasePath(string? value)
 	{
 		Instance.BasePath = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor ChunkSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.ChunkSize = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Big files can be broken down into multiple smaller blobs in the blob store during snapshotting.
-	/// It is not recommended to change this value from its default unless there is an explicit reason for limiting the size of blobs in the repository.
-	/// Setting a value lower than the default can result in an increased number of API calls to the blob store during snapshot create and restore operations compared to using the default value and thus make both operations slower and more costly.
-	/// Specify the chunk size as a byte unit, for example: <c>10MB</c>, <c>5KB</c>, 500B.
-	/// The default varies by repository type.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor ChunkSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.ChunkSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The name of the Azure repository client to use.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor Client(string? value)
 	{
 		Instance.Client = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// When set to <c>true</c>, metadata files are stored in compressed format.
-	/// This setting doesn't affect index files that are already compressed by default.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor Compress(bool? value = true)
 	{
 		Instance.Compress = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The Azure container.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor Container(string? value)
 	{
 		Instance.Container = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maxmimum batch size, between 1 and 256, used for <c>BlobBatch</c> requests.
-	/// Defaults to 256 which is the maximum number supported by the Azure blob batch API.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor DeleteObjectsMaxSize(int? value)
-	{
-		Instance.DeleteObjectsMaxSize = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Either <c>primary_only</c> or <c>secondary_only</c>.
-	/// Note that if you set it to <c>secondary_only</c>, it will force <c>readonly</c> to <c>true</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor LocationMode(string? value)
 	{
 		Instance.LocationMode = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum number of concurrent batch delete requests that will be submitted for any individual bulk delete with <c>BlobBatch</c>.
-	/// Note that the effective number of concurrent deletes is further limited by the Azure client connection and event loop thread limits.
-	/// Defaults to 10, minimum is 1, maximum is 100.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxConcurrentBatchDeletes(int? value)
-	{
-		Instance.MaxConcurrentBatchDeletes = value;
-		return this;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxRestoreBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxRestoreBytesPerSec = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot restore rate per node.
-	/// It defaults to unlimited.
-	/// Note that restores are also throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxRestoreBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxRestoreBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxSnapshotBytesPerSec(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
 		Instance.MaxSnapshotBytesPerSec = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The maximum snapshot creation rate per node.
-	/// It defaults to 40mb per second.
-	/// Note that if the recovery settings for managed services are set, then it defaults to unlimited, and the rate is additionally throttled through recovery settings.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor MaxSnapshotBytesPerSec(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
 		Instance.MaxSnapshotBytesPerSec = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// If <c>true</c>, the repository is read-only.
-	/// The cluster can retrieve and restore snapshots from the repository but not write to the repository or create snapshots in it.
-	/// </para>
-	/// <para>
-	/// Only a cluster with write access can create snapshots in the repository.
-	/// All other clusters connected to the repository should have the <c>readonly</c> parameter set to <c>true</c>.
-	/// If <c>false</c>, the cluster can write to the repository and create snapshots in it.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: If you register the same snapshot repository with multiple clusters, only one cluster should have write access to the repository.
-	/// Having multiple clusters write to the repository at the same time risks corrupting the contents of the repository.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Snapshot.AzureRepositorySettingsDescriptor Readonly(bool? value = true)
 	{
 		Instance.Readonly = value;

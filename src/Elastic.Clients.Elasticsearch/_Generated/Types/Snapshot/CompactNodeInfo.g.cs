@@ -87,13 +87,6 @@ public sealed partial class CompactNodeInfo
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A human-readable name for the node.
-	/// You can set this name using the <c>node.name</c> property in <c>elasticsearch.yml</c>.
-	/// The default value is the machine's hostname.
-	/// </para>
-	/// </summary>
 	public
 #if NET7_0_OR_GREATER
 	required

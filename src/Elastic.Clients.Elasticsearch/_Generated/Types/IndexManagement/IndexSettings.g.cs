@@ -564,7 +564,7 @@ internal sealed partial class IndexSettingsConverter : System.Text.Json.Serializ
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsConverter))]
 public sealed partial class IndexSettings
@@ -681,7 +681,7 @@ public sealed partial class IndexSettings
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct IndexSettingsDescriptor<TDocument>
 {
@@ -1399,7 +1399,7 @@ public readonly partial struct IndexSettingsDescriptor<TDocument>
 }
 
 /// <summary>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/index-modules">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/index-modules.html#index-modules-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct IndexSettingsDescriptor
 {

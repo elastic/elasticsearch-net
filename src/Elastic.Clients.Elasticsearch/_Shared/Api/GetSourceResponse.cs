@@ -8,6 +8,6 @@ namespace Elastic.Clients.Elasticsearch;
 
 public partial class GetSourceResponse<TDocument>
 {
-	[Obsolete($"Use '{nameof(Source)}' instead.")]
-	public TDocument Body { get => Source; set => Source = value; }
+	[Obsolete($"Use '{nameof(Document)}' instead.")]
+	public TDocument Body { get => Document; set => Document = value; }
 }

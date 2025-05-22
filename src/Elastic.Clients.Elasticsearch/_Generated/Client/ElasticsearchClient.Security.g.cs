@@ -2557,15 +2557,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
 	}
 
-	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>> action)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>(name);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
-	}
-
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
@@ -2583,15 +2574,6 @@ public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.Na
 	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
 		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
-		action.Invoke(builder);
-		var request = builder.Instance;
-		request.BeforeRequest();
-		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
-	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
-	{
-		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>(name);
 		action.Invoke(builder);
 		var request = builder.Instance;
 		request.BeforeRequest();

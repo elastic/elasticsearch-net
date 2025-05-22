@@ -201,7 +201,7 @@ internal sealed partial class GeoShapePropertyConverter : System.Text.Json.Seria
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/geo-shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.GeoShapePropertyConverter))]
 public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
@@ -252,7 +252,7 @@ public sealed partial class GeoShapeProperty : Elastic.Clients.Elasticsearch.Map
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/geo-shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 {
@@ -434,7 +434,7 @@ public readonly partial struct GeoShapePropertyDescriptor<TDocument>
 /// The <c>geo_shape</c> data type facilitates the indexing of and searching with arbitrary geo shapes such as rectangles
 /// and polygons.
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/geo-shape">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/geo-shape.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct GeoShapePropertyDescriptor
 {

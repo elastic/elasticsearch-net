@@ -35,6 +35,7 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 	private static readonly System.Text.Json.JsonEncodedText PropEnterpriseSearch = System.Text.Json.JsonEncodedText.Encode("enterprise_search");
 	private static readonly System.Text.Json.JsonEncodedText PropEql = System.Text.Json.JsonEncodedText.Encode("eql");
 	private static readonly System.Text.Json.JsonEncodedText PropEsql = System.Text.Json.JsonEncodedText.Encode("esql");
+	private static readonly System.Text.Json.JsonEncodedText PropFrozenIndices = System.Text.Json.JsonEncodedText.Encode("frozen_indices");
 	private static readonly System.Text.Json.JsonEncodedText PropGraph = System.Text.Json.JsonEncodedText.Encode("graph");
 	private static readonly System.Text.Json.JsonEncodedText PropIlm = System.Text.Json.JsonEncodedText.Encode("ilm");
 	private static readonly System.Text.Json.JsonEncodedText PropLogsdb = System.Text.Json.JsonEncodedText.Encode("logsdb");
@@ -66,6 +67,7 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEnterpriseSearch = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEql = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propEsql = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propFrozenIndices = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propGraph = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propIlm = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Xpack.Feature> propLogsdb = default;
@@ -131,6 +133,11 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 			}
 
 			if (propEsql.TryReadProperty(ref reader, options, PropEsql, null))
+			{
+				continue;
+			}
+
+			if (propFrozenIndices.TryReadProperty(ref reader, options, PropFrozenIndices, null))
 			{
 				continue;
 			}
@@ -242,6 +249,7 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 			EnterpriseSearch = propEnterpriseSearch.Value,
 			Eql = propEql.Value,
 			Esql = propEsql.Value,
+			FrozenIndices = propFrozenIndices.Value,
 			Graph = propGraph.Value,
 			Ilm = propIlm.Value,
 			Logsdb = propLogsdb.Value,
@@ -275,6 +283,7 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 		writer.WriteProperty(options, PropEnterpriseSearch, value.EnterpriseSearch, null, null);
 		writer.WriteProperty(options, PropEql, value.Eql, null, null);
 		writer.WriteProperty(options, PropEsql, value.Esql, null, null);
+		writer.WriteProperty(options, PropFrozenIndices, value.FrozenIndices, null, null);
 		writer.WriteProperty(options, PropGraph, value.Graph, null, null);
 		writer.WriteProperty(options, PropIlm, value.Ilm, null, null);
 		writer.WriteProperty(options, PropLogsdb, value.Logsdb, null, null);
@@ -300,7 +309,7 @@ internal sealed partial class FeaturesConverter : System.Text.Json.Serialization
 public sealed partial class Features
 {
 	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
-	public Features(Elastic.Clients.Elasticsearch.Xpack.Feature aggregateMetric, Elastic.Clients.Elasticsearch.Xpack.Feature analytics, Elastic.Clients.Elasticsearch.Xpack.Feature archive, Elastic.Clients.Elasticsearch.Xpack.Feature ccr, Elastic.Clients.Elasticsearch.Xpack.Feature dataStreams, Elastic.Clients.Elasticsearch.Xpack.Feature dataTiers, Elastic.Clients.Elasticsearch.Xpack.Feature enrich, Elastic.Clients.Elasticsearch.Xpack.Feature enterpriseSearch, Elastic.Clients.Elasticsearch.Xpack.Feature eql, Elastic.Clients.Elasticsearch.Xpack.Feature esql, Elastic.Clients.Elasticsearch.Xpack.Feature graph, Elastic.Clients.Elasticsearch.Xpack.Feature ilm, Elastic.Clients.Elasticsearch.Xpack.Feature logsdb, Elastic.Clients.Elasticsearch.Xpack.Feature logstash, Elastic.Clients.Elasticsearch.Xpack.Feature ml, Elastic.Clients.Elasticsearch.Xpack.Feature monitoring, Elastic.Clients.Elasticsearch.Xpack.Feature rollup, Elastic.Clients.Elasticsearch.Xpack.Feature searchableSnapshots, Elastic.Clients.Elasticsearch.Xpack.Feature security, Elastic.Clients.Elasticsearch.Xpack.Feature slm, Elastic.Clients.Elasticsearch.Xpack.Feature spatial, Elastic.Clients.Elasticsearch.Xpack.Feature sql, Elastic.Clients.Elasticsearch.Xpack.Feature transform, Elastic.Clients.Elasticsearch.Xpack.Feature universalProfiling, Elastic.Clients.Elasticsearch.Xpack.Feature votingOnly, Elastic.Clients.Elasticsearch.Xpack.Feature watcher)
+	public Features(Elastic.Clients.Elasticsearch.Xpack.Feature aggregateMetric, Elastic.Clients.Elasticsearch.Xpack.Feature analytics, Elastic.Clients.Elasticsearch.Xpack.Feature archive, Elastic.Clients.Elasticsearch.Xpack.Feature ccr, Elastic.Clients.Elasticsearch.Xpack.Feature dataStreams, Elastic.Clients.Elasticsearch.Xpack.Feature dataTiers, Elastic.Clients.Elasticsearch.Xpack.Feature enrich, Elastic.Clients.Elasticsearch.Xpack.Feature enterpriseSearch, Elastic.Clients.Elasticsearch.Xpack.Feature eql, Elastic.Clients.Elasticsearch.Xpack.Feature esql, Elastic.Clients.Elasticsearch.Xpack.Feature frozenIndices, Elastic.Clients.Elasticsearch.Xpack.Feature graph, Elastic.Clients.Elasticsearch.Xpack.Feature ilm, Elastic.Clients.Elasticsearch.Xpack.Feature logsdb, Elastic.Clients.Elasticsearch.Xpack.Feature logstash, Elastic.Clients.Elasticsearch.Xpack.Feature ml, Elastic.Clients.Elasticsearch.Xpack.Feature monitoring, Elastic.Clients.Elasticsearch.Xpack.Feature rollup, Elastic.Clients.Elasticsearch.Xpack.Feature searchableSnapshots, Elastic.Clients.Elasticsearch.Xpack.Feature security, Elastic.Clients.Elasticsearch.Xpack.Feature slm, Elastic.Clients.Elasticsearch.Xpack.Feature spatial, Elastic.Clients.Elasticsearch.Xpack.Feature sql, Elastic.Clients.Elasticsearch.Xpack.Feature transform, Elastic.Clients.Elasticsearch.Xpack.Feature universalProfiling, Elastic.Clients.Elasticsearch.Xpack.Feature votingOnly, Elastic.Clients.Elasticsearch.Xpack.Feature watcher)
 	{
 		AggregateMetric = aggregateMetric;
 		Analytics = analytics;
@@ -312,6 +321,7 @@ public sealed partial class Features
 		EnterpriseSearch = enterpriseSearch;
 		Eql = eql;
 		Esql = esql;
+		FrozenIndices = frozenIndices;
 		Graph = graph;
 		Ilm = ilm;
 		Logsdb = logsdb;
@@ -396,6 +406,11 @@ public sealed partial class Features
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Xpack.Feature Esql { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Xpack.Feature FrozenIndices { get; set; }
 	public
 #if NET7_0_OR_GREATER
 	required

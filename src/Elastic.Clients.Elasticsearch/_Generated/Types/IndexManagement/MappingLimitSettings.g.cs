@@ -138,7 +138,7 @@ internal sealed partial class MappingLimitSettingsConverter : System.Text.Json.S
 /// <para>
 /// Mapping Limit Settings
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsConverter))]
 public sealed partial class MappingLimitSettings
@@ -174,7 +174,7 @@ public sealed partial class MappingLimitSettings
 /// <para>
 /// Mapping Limit Settings
 /// </para>
-/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/100.0/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
 public readonly partial struct MappingLimitSettingsDescriptor
 {

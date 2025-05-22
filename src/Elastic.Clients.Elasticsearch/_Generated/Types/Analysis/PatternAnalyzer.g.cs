@@ -29,7 +29,6 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 	private static readonly System.Text.Json.JsonEncodedText PropLowercase = System.Text.Json.JsonEncodedText.Encode("lowercase");
 	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
 	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
-	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
 	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
@@ -38,9 +37,8 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<string?> propFlags = default;
 		LocalJsonValue<bool?> propLowercase = default;
-		LocalJsonValue<string?> propPattern = default;
+		LocalJsonValue<string> propPattern = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
-		LocalJsonValue<string?> propStopwordsPath = default;
 		LocalJsonValue<string?> propVersion = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
@@ -60,11 +58,6 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 			}
 
 			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
-			{
-				continue;
-			}
-
-			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
 			{
 				continue;
 			}
@@ -96,10 +89,7 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 			Lowercase = propLowercase.Value,
 			Pattern = propPattern.Value,
 			Stopwords = propStopwords.Value,
-			StopwordsPath = propStopwordsPath.Value,
-#pragma warning disable CS0618
 			Version = propVersion.Value
-#pragma warning restore CS0618
 		};
 	}
 
@@ -110,12 +100,8 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 		writer.WriteProperty(options, PropLowercase, value.Lowercase, null, null);
 		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
 		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
-		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
 		writer.WriteProperty(options, PropType, value.Type, null, null);
-#pragma warning disable CS0618
-		writer.WriteProperty(options, PropVersion, value.Version, null, null)
-#pragma warning restore CS0618
-		;
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
 		writer.WriteEndObject();
 	}
 }
@@ -123,12 +109,18 @@ internal sealed partial class PatternAnalyzerConverter : System.Text.Json.Serial
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerConverter))]
 public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternAnalyzer(string pattern)
+	{
+		Pattern = pattern;
+	}
 #if NET7_0_OR_GREATER
 	public PatternAnalyzer()
 	{
 	}
 #endif
 #if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
 	public PatternAnalyzer()
 	{
 	}
@@ -139,47 +131,17 @@ public sealed partial class PatternAnalyzer : Elastic.Clients.Elasticsearch.Anal
 		_ = sentinel;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression flags. Flags should be pipe-separated, eg "CASE_INSENSITIVE|COMMENTS".
-	/// </para>
-	/// </summary>
 	public string? Flags { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Should terms be lowercased or not.
-	/// Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
 	public bool? Lowercase { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A Java regular expression.
-	/// Defaults to <c>\W+</c>.
-	/// </para>
-	/// </summary>
-	public string? Pattern { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Pattern { get; set; }
 	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
-	public string? StopwordsPath { get; set; }
 
 	public string Type => "pattern";
 
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
@@ -202,65 +164,30 @@ public readonly partial struct PatternAnalyzerDescriptor
 	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor(instance);
 	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer(Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor descriptor) => descriptor.Instance;
 
-	/// <summary>
-	/// <para>
-	/// Java regular expression flags. Flags should be pipe-separated, eg "CASE_INSENSITIVE|COMMENTS".
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Flags(string? value)
 	{
 		Instance.Flags = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Should terms be lowercased or not.
-	/// Defaults to <c>true</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Lowercase(bool? value = true)
 	{
 		Instance.Lowercase = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A Java regular expression.
-	/// Defaults to <c>\W+</c>.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Pattern(string? value)
+	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Pattern(string value)
 	{
 		Instance.Pattern = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
-	/// Defaults to <c>_none_</c>.
-	/// </para>
-	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
 		Instance.Stopwords = value;
 		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The path to a file containing stop words.
-	/// </para>
-	/// </summary>
-	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor StopwordsPath(string? value)
-	{
-		Instance.StopwordsPath = value;
-		return this;
-	}
-
-	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor Version(string? value)
 	{
 		Instance.Version = value;
@@ -268,13 +195,8 @@ public readonly partial struct PatternAnalyzerDescriptor
 	}
 
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-	internal static Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor>? action)
+	internal static Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor> action)
 	{
-		if (action is null)
-		{
-			return new Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
-		}
-
 		var builder = new Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
 		action.Invoke(builder);
 		return builder.Instance;

@@ -98,7 +98,7 @@ public sealed partial class GetSynonymRuleResponse : Elastic.Transport.Products.
 
 	/// <summary>
 	/// <para>
-	/// Synonyms, in Solr format, that conform the synonym rule.
+	/// Synonyms, in Solr format, that conform the synonym rule. See https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-synonym-graph-tokenfilter.html#_solr_synonyms_2
 	/// </para>
 	/// </summary>
 	public

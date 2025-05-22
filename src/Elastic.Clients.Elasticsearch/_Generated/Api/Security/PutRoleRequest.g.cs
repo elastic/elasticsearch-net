@@ -191,7 +191,7 @@ public sealed partial class PutRoleRequest : Elastic.Clients.Elasticsearch.Reque
 
 	/// <summary>
 	/// <para>
-	/// The name of the role that is being created or updated. On Elasticsearch Serverless, the role name must begin with a letter or digit and can only contain letters, digits and the characters '_', '-', and '.'. Each role must have a unique name, as this will serve as the identifier for that role.
+	/// The name of the role.
 	/// </para>
 	/// </summary>
 	public
@@ -318,7 +318,7 @@ public readonly partial struct PutRoleRequestDescriptor
 
 	/// <summary>
 	/// <para>
-	/// The name of the role that is being created or updated. On Elasticsearch Serverless, the role name must begin with a letter or digit and can only contain letters, digits and the characters '_', '-', and '.'. Each role must have a unique name, as this will serve as the identifier for that role.
+	/// The name of the role.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
@@ -806,7 +806,7 @@ public readonly partial struct PutRoleRequestDescriptor<TDocument>
 
 	/// <summary>
 	/// <para>
-	/// The name of the role that is being created or updated. On Elasticsearch Serverless, the role name must begin with a letter or digit and can only contain letters, digits and the characters '_', '-', and '.'. Each role must have a unique name, as this will serve as the identifier for that role.
+	/// The name of the role.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)

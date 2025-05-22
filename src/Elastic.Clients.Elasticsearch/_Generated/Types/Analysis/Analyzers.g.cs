@@ -343,13 +343,7 @@ public readonly partial struct AnalyzersDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key)
-	{
-		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Fingerprint(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor.Build(action));
 		return this;
@@ -655,13 +649,7 @@ public readonly partial struct AnalyzersDescriptor
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key)
-	{
-		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor.Build(null));
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor>? action)
+	public Elastic.Clients.Elasticsearch.Analysis.AnalyzersDescriptor Pattern(string key, System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor> action)
 	{
 		_items.Add(key, Elastic.Clients.Elasticsearch.Analysis.PatternAnalyzerDescriptor.Build(action));
 		return this;
