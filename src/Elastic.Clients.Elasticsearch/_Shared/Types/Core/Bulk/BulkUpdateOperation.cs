@@ -2,64 +2,63 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading;
 using System.Threading.Tasks;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
-using Elastic.Transport;
 using Elastic.Transport.Extensions;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-public abstract class BulkUpdateOperation : BulkOperation
+public abstract class BulkUpdateOperation :
+	BulkOperation
 {
-	protected internal BulkUpdateOperation() : base() { }
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIfPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("if_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropIfSeqNo = System.Text.Json.JsonEncodedText.Encode("if_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropRequireAlias = System.Text.Json.JsonEncodedText.Encode("require_alias");
+	private static readonly System.Text.Json.JsonEncodedText PropRetryOnConflict = System.Text.Json.JsonEncodedText.Encode("retry_on_conflict");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
 
-	private static byte _newline => (byte)'\n';
+	protected internal BulkUpdateOperation() : base()
+	{
+	}
 
-	[JsonPropertyName("retry_on_conflict")]
 	public int? RetryOnConflict { get; set; }
 
 	protected override string Operation => "update";
 
 	protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
 
-	/// <summary>
-	/// Serialise the operation action line for the NDJSON stream.
-	/// </summary>
-	/// <param name="writer"></param>
-	/// <param name="options"></param>
-	protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
-
 	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings)
 	{
 		BeforeSerialize(settings);
 
-		var requestResponseSerializer = settings.RequestResponseSerializer;
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
 
-		var internalWriter = new Utf8JsonWriter(stream);
+		using (var writer = new Utf8JsonWriter(stream))
+		{
+			SerializeOperationAction(writer, options);
+			writer.Flush();
+		}
 
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(internalWriter, options);
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
-
-		stream.WriteByte(_newline);
-
+		stream.WriteByte(SerializationConstants.Newline);
 		var body = GetBody();
-		settings.RequestResponseSerializer.Serialize(body, stream);
+
+		using (var writer = new Utf8JsonWriter(stream))
+		{
+			body.Serialize(writer, options, settings);
+			writer.Flush();
+		}
+
 		stream.Flush();
 	}
 
@@ -67,81 +66,57 @@ public abstract class BulkUpdateOperation : BulkOperation
 	{
 		BeforeSerialize(settings);
 
-		var internalWriter = new Utf8JsonWriter(stream);
-		SerializeOperationAction(settings, internalWriter);
-		internalWriter.Flush();
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
 
-		stream.WriteByte(_newline);
+		var writer = new Utf8JsonWriter(stream);
+		await using (writer.ConfigureAwait(false))
+		{
+			SerializeOperationAction(writer, options);
+			await writer.FlushAsync().ConfigureAwait(false);
+		}
 
+		stream.WriteByte(SerializationConstants.Newline);
 		var body = GetBody();
-		await settings.RequestResponseSerializer.SerializeAsync(body, stream).ConfigureAwait(false);
+
+		writer = new Utf8JsonWriter(stream);
+		await using (writer.ConfigureAwait(false))
+		{
+			body.Serialize(writer, options, settings);
+			await writer.FlushAsync().ConfigureAwait(false);
+		}
+
 		await stream.FlushAsync().ConfigureAwait(false);
 	}
 
-	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	private void SerializeOperationAction(Utf8JsonWriter writer, JsonSerializerOptions options)
 	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
 		writer.WriteStartObject();
 		writer.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(writer, options);
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, Id, null, null);
+		writer.WriteProperty(options, PropIfPrimaryTerm, IfPrimaryTerm, null, null);
+		writer.WriteProperty(options, PropIfSeqNo, IfSequenceNumber, null, null);
+		writer.WriteProperty(options, PropIndex, Index, null, null);
+		writer.WriteProperty(options, PropRequireAlias, RequireAlias, null, null);
+		writer.WriteProperty(options, PropRetryOnConflict, RetryOnConflict, null, null);
+		writer.WriteProperty(options, PropRouting, Routing, null, null);
+		writer.WriteProperty(options, PropVersion, Version, null, null);
+		writer.WriteProperty(options, PropVersionType, VersionType, null, null);
+		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 
-	protected abstract object GetBody();
+	private protected abstract BulkUpdateBody GetBody();
 }
 
-public abstract class BulkUpdateOperationDescriptorBase<TSource> : BulkOperationDescriptor<BulkUpdateOperationDescriptorBase<TSource>>
+public abstract class BulkUpdateOperationDescriptorBase<TSource> :
+	BulkOperationDescriptor<BulkUpdateOperationDescriptorBase<TSource>>
 {
-	private static byte _newline => (byte)'\n';
-
-	protected override string Operation => "update";
-
-	protected abstract void BeforeSerialize(IElasticsearchClientSettings settings);
-
-	protected abstract void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null);
-
-	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting = SerializationFormatting.None)
+	protected BulkUpdateOperationDescriptorBase(BulkOperation instance) :
+		base(instance)
 	{
-		BeforeSerialize(settings);
-
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-
-		var internalWriter = new Utf8JsonWriter(stream);
-
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(internalWriter, options);
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
-
-		stream.WriteByte(_newline);
-		var body = GetBody();
-		settings.RequestResponseSerializer.Serialize(body, stream, formatting);
-	}
-
-	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
-	{
-		BeforeSerialize(settings);
-
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-
-		var internalWriter = new Utf8JsonWriter(stream);
-
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-
-		requestResponseSerializer.TryGetJsonSerializerOptions(out var options);
-		WriteOperation(internalWriter, options);
-
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
-
-		stream.WriteByte(_newline);
-
-		var body = GetBody();
-
-		await settings.SourceSerializer.SerializeAsync(body, stream, formatting).ConfigureAwait(false);
 	}
 }

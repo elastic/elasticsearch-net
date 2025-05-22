@@ -4,25 +4,33 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(StringAliasConverter<Name>))]
-public sealed class Name : IEquatable<Name>, IUrlParameter
+[JsonConverter(typeof(NameConverter))]
+public sealed class Name :
+	IEquatable<Name>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Name>
+#endif
 {
-	public Name(string name) => Value = name?.Trim();
+	public Name(string name)
+	{
+		if (name is null)
+		{
+			throw new ArgumentNullException(nameof(name));
+		}
+
+		Value = name.Trim();
+	}
 
 	internal string Value { get; }
 
@@ -55,5 +63,64 @@ public sealed class Name : IEquatable<Name>, IUrlParameter
 			result = (result * 397) ^ (Value?.GetHashCode() ?? 0);
 			return result;
 		}
+	}
+
+	#region IParsable
+
+	public static Name Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Name? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Name(s);
+		return true;
+	}
+
+	#endregion IParsable
+}
+
+internal sealed class NameConverter :
+	JsonConverter<Name>
+{
+	public override Name? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		reader.ValidateToken(JsonTokenType.String);
+
+		return reader.GetString()!;
+	}
+
+	public override Name ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert,
+		JsonSerializerOptions options)
+	{
+		reader.ValidateToken(JsonTokenType.PropertyName);
+
+		return reader.GetString()!;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	{
+		if (value?.Value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
+		writer.WriteStringValue(value.Value);
+	}
+
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	{
+		if (value?.Value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
+		writer.WritePropertyName(value.Value);
 	}
 }

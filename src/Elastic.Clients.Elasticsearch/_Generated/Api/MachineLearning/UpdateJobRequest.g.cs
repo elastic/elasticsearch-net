@@ -17,21 +17,179 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class UpdateJobRequestParameters : RequestParameters
+public sealed partial class UpdateJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class UpdateJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyOpen = System.Text.Json.JsonEncodedText.Encode("allow_lazy_open");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundPersistInterval = System.Text.Json.JsonEncodedText.Encode("background_persist_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationFilters = System.Text.Json.JsonEncodedText.Encode("categorization_filters");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomSettings = System.Text.Json.JsonEncodedText.Encode("custom_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropDetectors = System.Text.Json.JsonEncodedText.Encode("detectors");
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPruneWindow = System.Text.Json.JsonEncodedText.Encode("model_prune_window");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
+	private static readonly System.Text.Json.JsonEncodedText PropPerPartitionCategorization = System.Text.Json.JsonEncodedText.Encode("per_partition_categorization");
+	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsRetentionDays = System.Text.Json.JsonEncodedText.Encode("results_retention_days");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowLazyOpen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit?> propAnalysisLimits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propCategorizationFilters = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propCustomSettings = default;
+		LocalJsonValue<long?> propDailyModelSnapshotRetentionAfterDays = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>?> propDetectors = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propGroups = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig?> propModelPlotConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propModelPruneWindow = default;
+		LocalJsonValue<long?> propModelSnapshotRetentionDays = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization?> propPerPartitionCategorization = default;
+		LocalJsonValue<long?> propRenormalizationWindowDays = default;
+		LocalJsonValue<long?> propResultsRetentionDays = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyOpen.TryReadProperty(ref reader, options, PropAllowLazyOpen, null))
+			{
+				continue;
+			}
+
+			if (propAnalysisLimits.TryReadProperty(ref reader, options, PropAnalysisLimits, null))
+			{
+				continue;
+			}
+
+			if (propBackgroundPersistInterval.TryReadProperty(ref reader, options, PropBackgroundPersistInterval, null))
+			{
+				continue;
+			}
+
+			if (propCategorizationFilters.TryReadProperty(ref reader, options, PropCategorizationFilters, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCustomSettings.TryReadProperty(ref reader, options, PropCustomSettings, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propDetectors.TryReadProperty(ref reader, options, PropDetectors, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, null)))
+			{
+				continue;
+			}
+
+			if (propGroups.TryReadProperty(ref reader, options, PropGroups, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propModelPlotConfig.TryReadProperty(ref reader, options, PropModelPlotConfig, null))
+			{
+				continue;
+			}
+
+			if (propModelPruneWindow.TryReadProperty(ref reader, options, PropModelPruneWindow, null))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
+			{
+				continue;
+			}
+
+			if (propPerPartitionCategorization.TryReadProperty(ref reader, options, PropPerPartitionCategorization, null))
+			{
+				continue;
+			}
+
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
+			{
+				continue;
+			}
+
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowLazyOpen = propAllowLazyOpen.Value,
+			AnalysisLimits = propAnalysisLimits.Value,
+			BackgroundPersistInterval = propBackgroundPersistInterval.Value,
+			CategorizationFilters = propCategorizationFilters.Value,
+			CustomSettings = propCustomSettings.Value,
+			DailyModelSnapshotRetentionAfterDays = propDailyModelSnapshotRetentionAfterDays.Value,
+			Description = propDescription.Value,
+			Detectors = propDetectors.Value,
+			Groups = propGroups.Value,
+			ModelPlotConfig = propModelPlotConfig.Value,
+			ModelPruneWindow = propModelPruneWindow.Value,
+			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value,
+			PerPartitionCategorization = propPerPartitionCategorization.Value,
+			RenormalizationWindowDays = propRenormalizationWindowDays.Value,
+			ResultsRetentionDays = propResultsRetentionDays.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen, null, null);
+		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
+		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
+		writer.WriteProperty(options, PropCategorizationFilters, value.CategorizationFilters, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropDetectors, value.Detectors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>(o, v, null));
+		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
+		writer.WriteProperty(options, PropModelPruneWindow, value.ModelPruneWindow, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
+		writer.WriteProperty(options, PropPerPartitionCategorization, value.PerPartitionCategorization, null, null);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,19 +198,42 @@ public sealed partial class UpdateJobRequestParameters : RequestParameters
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestConverter))]
+public sealed partial class UpdateJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UpdateJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public UpdateJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpdateJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningUpdateJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ml.update_job";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -67,9 +248,7 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool? AllowLazyOpen { get; set; }
-	[JsonInclude, JsonPropertyName("analysis_limits")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? AnalysisLimits { get; set; }
 
 	/// <summary>
@@ -86,10 +265,8 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// changes to take effect.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
-	[JsonInclude, JsonPropertyName("categorization_filters")]
-	public ICollection<string>? CategorizationFilters { get; set; }
+	public System.Collections.Generic.ICollection<string>? CategorizationFilters { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -98,8 +275,7 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// custom URLs to machine learning results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("custom_settings")]
-	public IDictionary<string, object>? CustomSettings { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? CustomSettings { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -112,7 +288,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 	/// <summary>
@@ -120,7 +295,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -128,19 +302,15 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("detectors")]
-	public ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? Detectors { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? Detectors { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("groups")]
-	public ICollection<string>? Groups { get; set; }
-	[JsonInclude, JsonPropertyName("model_plot_config")]
+	public System.Collections.Generic.ICollection<string>? Groups { get; set; }
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; set; }
-	[JsonInclude, JsonPropertyName("model_prune_window")]
 	public Elastic.Clients.Elasticsearch.Duration? ModelPruneWindow { get; set; }
 
 	/// <summary>
@@ -151,7 +321,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// timestamp of the most recent snapshot for this job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long? ModelSnapshotRetentionDays { get; set; }
 
 	/// <summary>
@@ -159,7 +328,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("per_partition_categorization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorization { get; set; }
 
 	/// <summary>
@@ -168,7 +336,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// score are applied, as new data is seen.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; set; }
 
 	/// <summary>
@@ -181,7 +348,6 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 	/// value is null, which means all results are retained.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; set; }
 }
 
@@ -191,52 +357,40 @@ public sealed partial class UpdateJobRequest : PlainRequest<UpdateJobRequestPara
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescriptor<UpdateJobRequestDescriptor<TDocument>, UpdateJobRequestParameters>
+public readonly partial struct UpdateJobRequestDescriptor
 {
-	internal UpdateJobRequestDescriptor(Action<UpdateJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Instance { get; init; }
 
-	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_job";
-
-	public UpdateJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(jobId);
 	}
 
-	private bool? AllowLazyOpenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? AnalysisLimitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor AnalysisLimitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> AnalysisLimitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
-	private ICollection<string>? CategorizationFiltersValue { get; set; }
-	private IDictionary<string, object>? CustomSettingsValue { get; set; }
-	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] DetectorsDescriptorActions { get; set; }
-	private ICollection<string>? GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> ModelPlotConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>> ModelPlotConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
-	private long? ModelSnapshotRetentionDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor PerPartitionCategorizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> PerPartitionCategorizationDescriptorAction { get; set; }
-	private long? RenormalizationWindowDaysValue { get; set; }
-	private long? ResultsRetentionDaysValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public UpdateJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -251,34 +405,22 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor AllowLazyOpen(bool? value = true)
 	{
-		AllowLazyOpenValue = allowLazyOpen;
-		return Self;
+		Instance.AllowLazyOpen = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? analysisLimits)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? value)
 	{
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsValue = analysisLimits;
-		return Self;
+		Instance.AnalysisLimits = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor AnalysisLimits(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> action)
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsDescriptor = descriptor;
-		return Self;
-	}
-
-	public UpdateJobRequestDescriptor<TDocument> AnalysisLimits(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> configure)
-	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -295,16 +437,22 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// changes to take effect.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BackgroundPersistIntervalValue = backgroundPersistInterval;
-		return Self;
+		Instance.BackgroundPersistInterval = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> CategorizationFilters(ICollection<string>? categorizationFilters)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
-		CategorizationFiltersValue = categorizationFilters;
-		return Self;
+		Instance.CategorizationFilters = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CategorizationFilters(params string[] values)
+	{
+		Instance.CategorizationFilters = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -314,10 +462,43 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// custom URLs to machine learning results.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		CustomSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.CustomSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings()
+	{
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor AddCustomSetting(string key, object value)
+	{
+		Instance.CustomSettings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.CustomSettings.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -331,10 +512,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? value)
 	{
-		DailyModelSnapshotRetentionAfterDaysValue = dailyModelSnapshotRetentionAfterDays;
-		return Self;
+		Instance.DailyModelSnapshotRetentionAfterDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -342,10 +523,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -353,40 +534,55 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? detectors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? value)
 	{
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsValue = detectors;
-		return Self;
+		Instance.Detectors = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[] values)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptor = descriptor;
-		return Self;
+		Instance.Detectors = [.. values];
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor>[] actions)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor.Build(action));
+		}
+
+		Instance.Detectors = items;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Detectors<T>(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<T>>[] actions)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<T>.Build(action));
+		}
+
+		Instance.Detectors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -394,40 +590,51 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> Groups(ICollection<string>? groups)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? modelPlotConfig)
+	/// <summary>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Groups(params string[] values)
 	{
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigValue = modelPlotConfig;
-		return Self;
+		Instance.Groups = [.. values];
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? value)
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigDescriptor = descriptor;
-		return Self;
+		Instance.ModelPlotConfig = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> ModelPlotConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelPlotConfig()
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = configure;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelPlotConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor>? action)
 	{
-		ModelPruneWindowValue = modelPruneWindow;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelPlotConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<T>>? action)
+	{
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ModelPruneWindow = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,10 +645,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// timestamp of the most recent snapshot for this job.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ModelSnapshotRetentionDays(long? value)
 	{
-		ModelSnapshotRetentionDaysValue = modelSnapshotRetentionDays;
-		return Self;
+		Instance.ModelSnapshotRetentionDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -449,28 +656,32 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationValue = perPartitionCategorization;
-		return Self;
+		Instance.PerPartitionCategorization = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization()
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationDescriptor = descriptor;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = configure;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -479,10 +690,10 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// score are applied, as new data is seen.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor RenormalizationWindowDays(long? value)
 	{
-		RenormalizationWindowDaysValue = renormalizationWindowDays;
-		return Self;
+		Instance.RenormalizationWindowDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -495,161 +706,60 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 	/// value is null, which means all results are retained.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ResultsRetentionDays(long? value)
 	{
-		ResultsRetentionDaysValue = resultsRetentionDays;
-		return Self;
+		Instance.ResultsRetentionDays = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyOpenValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_open");
-			writer.WriteBooleanValue(AllowLazyOpenValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalysisLimitsDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsDescriptor, options);
-		}
-		else if (AnalysisLimitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor(AnalysisLimitsDescriptorAction), options);
-		}
-		else if (AnalysisLimitsValue is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (BackgroundPersistIntervalValue is not null)
-		{
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (CategorizationFiltersValue is not null)
-		{
-			writer.WritePropertyName("categorization_filters");
-			JsonSerializer.Serialize(writer, CategorizationFiltersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (CustomSettingsValue is not null)
-		{
-			writer.WritePropertyName("custom_settings");
-			JsonSerializer.Serialize(writer, CustomSettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DailyModelSnapshotRetentionAfterDaysValue.HasValue)
-		{
-			writer.WritePropertyName("daily_model_snapshot_retention_after_days");
-			writer.WriteNumberValue(DailyModelSnapshotRetentionAfterDaysValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (DetectorsDescriptor is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(DetectorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			foreach (var action in DetectorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (DetectorsValue is not null)
-		{
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
-		}
-
-		if (GroupsValue is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
-
-		if (ModelPlotConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigDescriptor, options);
-		}
-		else if (ModelPlotConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(ModelPlotConfigDescriptorAction), options);
-		}
-		else if (ModelPlotConfigValue is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigValue, options);
-		}
-
-		if (ModelPruneWindowValue is not null)
-		{
-			writer.WritePropertyName("model_prune_window");
-			JsonSerializer.Serialize(writer, ModelPruneWindowValue, options);
-		}
-
-		if (ModelSnapshotRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("model_snapshot_retention_days");
-			writer.WriteNumberValue(ModelSnapshotRetentionDaysValue.Value);
-		}
-
-		if (PerPartitionCategorizationDescriptor is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationDescriptor, options);
-		}
-		else if (PerPartitionCategorizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(PerPartitionCategorizationDescriptorAction), options);
-		}
-		else if (PerPartitionCategorizationValue is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationValue, options);
-		}
-
-		if (RenormalizationWindowDaysValue.HasValue)
-		{
-			writer.WritePropertyName("renormalization_window_days");
-			writer.WriteNumberValue(RenormalizationWindowDaysValue.Value);
-		}
-
-		if (ResultsRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("results_retention_days");
-			writer.WriteNumberValue(ResultsRetentionDaysValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -659,52 +769,40 @@ public sealed partial class UpdateJobRequestDescriptor<TDocument> : RequestDescr
 /// Updates certain properties of an anomaly detection job.
 /// </para>
 /// </summary>
-public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<UpdateJobRequestDescriptor, UpdateJobRequestParameters>
+public readonly partial struct UpdateJobRequestDescriptor<TDocument>
 {
-	internal UpdateJobRequestDescriptor(Action<UpdateJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Instance { get; init; }
 
-	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningUpdateJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.update_job";
-
-	public UpdateJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public UpdateJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(jobId);
 	}
 
-	private bool? AllowLazyOpenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? AnalysisLimitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor AnalysisLimitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> AnalysisLimitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
-	private ICollection<string>? CategorizationFiltersValue { get; set; }
-	private IDictionary<string, object>? CustomSettingsValue { get; set; }
-	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? DetectorsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor DetectorsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> DetectorsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] DetectorsDescriptorActions { get; set; }
-	private ICollection<string>? GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor ModelPlotConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor> ModelPlotConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ModelPruneWindowValue { get; set; }
-	private long? ModelSnapshotRetentionDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? PerPartitionCategorizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor PerPartitionCategorizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> PerPartitionCategorizationDescriptorAction { get; set; }
-	private long? RenormalizationWindowDaysValue { get; set; }
-	private long? ResultsRetentionDaysValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public UpdateJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -719,34 +817,22 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor AllowLazyOpen(bool? allowLazyOpen = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> AllowLazyOpen(bool? value = true)
 	{
-		AllowLazyOpenValue = allowLazyOpen;
-		return Self;
+		Instance.AllowLazyOpen = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? analysisLimits)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimit? value)
 	{
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsValue = analysisLimits;
-		return Self;
+		Instance.AnalysisLimits = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> AnalysisLimits(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> action)
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsDescriptor = descriptor;
-		return Self;
-	}
-
-	public UpdateJobRequestDescriptor AnalysisLimits(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor> configure)
-	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -763,16 +849,22 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// changes to take effect.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BackgroundPersistIntervalValue = backgroundPersistInterval;
-		return Self;
+		Instance.BackgroundPersistInterval = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor CategorizationFilters(ICollection<string>? categorizationFilters)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CategorizationFilters(System.Collections.Generic.ICollection<string>? value)
 	{
-		CategorizationFiltersValue = categorizationFilters;
-		return Self;
+		Instance.CategorizationFilters = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CategorizationFilters(params string[] values)
+	{
+		Instance.CategorizationFilters = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -782,10 +874,43 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// custom URLs to machine learning results.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor CustomSettings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		CustomSettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.CustomSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings()
+	{
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Advanced configuration option. Contains custom meta data about the job.
+	/// For example, it can contain custom URL information as shown in Adding
+	/// custom URLs to machine learning results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> CustomSettings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.CustomSettings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> AddCustomSetting(string key, object value)
+	{
+		Instance.CustomSettings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.CustomSettings.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -799,10 +924,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? value)
 	{
-		DailyModelSnapshotRetentionAfterDaysValue = dailyModelSnapshotRetentionAfterDays;
-		return Self;
+		Instance.DailyModelSnapshotRetentionAfterDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -810,10 +935,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -821,40 +946,38 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// An array of detector update objects.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor Detectors(ICollection<Elastic.Clients.Elasticsearch.MachineLearning.Detector>? detectors)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>? value)
 	{
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsValue = detectors;
-		return Self;
+		Instance.Detectors = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor Detectors(Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(params Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate[] values)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptor = descriptor;
-		return Self;
+		Instance.Detectors = [.. values];
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor Detectors(Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An array of detector update objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Detectors(params System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>>[] actions)
 	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorActions = null;
-		DetectorsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdate>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.MachineLearning.DetectorUpdateDescriptor<TDocument>.Build(action));
+		}
 
-	public UpdateJobRequestDescriptor Detectors(params Action<Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor>[] configure)
-	{
-		DetectorsValue = null;
-		DetectorsDescriptor = null;
-		DetectorsDescriptorAction = null;
-		DetectorsDescriptorActions = configure;
-		return Self;
+		Instance.Detectors = items;
+		return this;
 	}
 
 	/// <summary>
@@ -862,40 +985,45 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor Groups(ICollection<string>? groups)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? modelPlotConfig)
+	/// <summary>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Groups(params string[] values)
 	{
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigValue = modelPlotConfig;
-		return Self;
+		Instance.Groups = [.. values];
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? value)
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigDescriptor = descriptor;
-		return Self;
+		Instance.ModelPlotConfig = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor ModelPlotConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelPlotConfig()
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = configure;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? modelPruneWindow)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelPlotConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>>? action)
 	{
-		ModelPruneWindowValue = modelPruneWindow;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelPruneWindow(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.ModelPruneWindow = value;
+		return this;
 	}
 
 	/// <summary>
@@ -906,10 +1034,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// timestamp of the most recent snapshot for this job.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? value)
 	{
-		ModelSnapshotRetentionDaysValue = modelSnapshotRetentionDays;
-		return Self;
+		Instance.ModelSnapshotRetentionDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -917,28 +1045,32 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// Settings related to how categorization interacts with partition fields.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? perPartitionCategorization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorization? value)
 	{
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationValue = perPartitionCategorization;
-		return Self;
+		Instance.PerPartitionCategorization = value;
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor PerPartitionCategorization(Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization()
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptorAction = null;
-		PerPartitionCategorizationDescriptor = descriptor;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(null);
+		return this;
 	}
 
-	public UpdateJobRequestDescriptor PerPartitionCategorization(Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Settings related to how categorization interacts with partition fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> PerPartitionCategorization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor>? action)
 	{
-		PerPartitionCategorizationValue = null;
-		PerPartitionCategorizationDescriptor = null;
-		PerPartitionCategorizationDescriptorAction = configure;
-		return Self;
+		Instance.PerPartitionCategorization = Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -947,10 +1079,10 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// score are applied, as new data is seen.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor RenormalizationWindowDays(long? renormalizationWindowDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? value)
 	{
-		RenormalizationWindowDaysValue = renormalizationWindowDays;
-		return Self;
+		Instance.RenormalizationWindowDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -963,160 +1095,59 @@ public sealed partial class UpdateJobRequestDescriptor : RequestDescriptor<Updat
 	/// value is null, which means all results are retained.
 	/// </para>
 	/// </summary>
-	public UpdateJobRequestDescriptor ResultsRetentionDays(long? resultsRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ResultsRetentionDays(long? value)
 	{
-		ResultsRetentionDaysValue = resultsRetentionDays;
-		return Self;
+		Instance.ResultsRetentionDays = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyOpenValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_open");
-			writer.WriteBooleanValue(AllowLazyOpenValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalysisLimitsDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsDescriptor, options);
-		}
-		else if (AnalysisLimitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisMemoryLimitDescriptor(AnalysisLimitsDescriptorAction), options);
-		}
-		else if (AnalysisLimitsValue is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (BackgroundPersistIntervalValue is not null)
-		{
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (CategorizationFiltersValue is not null)
-		{
-			writer.WritePropertyName("categorization_filters");
-			JsonSerializer.Serialize(writer, CategorizationFiltersValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (CustomSettingsValue is not null)
-		{
-			writer.WritePropertyName("custom_settings");
-			JsonSerializer.Serialize(writer, CustomSettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DailyModelSnapshotRetentionAfterDaysValue.HasValue)
-		{
-			writer.WritePropertyName("daily_model_snapshot_retention_after_days");
-			writer.WriteNumberValue(DailyModelSnapshotRetentionAfterDaysValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (DetectorsDescriptor is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DetectorsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(DetectorsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DetectorsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("detectors");
-			writer.WriteStartArray();
-			foreach (var action in DetectorsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DetectorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (DetectorsValue is not null)
-		{
-			writer.WritePropertyName("detectors");
-			JsonSerializer.Serialize(writer, DetectorsValue, options);
-		}
-
-		if (GroupsValue is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
-
-		if (ModelPlotConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigDescriptor, options);
-		}
-		else if (ModelPlotConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(ModelPlotConfigDescriptorAction), options);
-		}
-		else if (ModelPlotConfigValue is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigValue, options);
-		}
-
-		if (ModelPruneWindowValue is not null)
-		{
-			writer.WritePropertyName("model_prune_window");
-			JsonSerializer.Serialize(writer, ModelPruneWindowValue, options);
-		}
-
-		if (ModelSnapshotRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("model_snapshot_retention_days");
-			writer.WriteNumberValue(ModelSnapshotRetentionDaysValue.Value);
-		}
-
-		if (PerPartitionCategorizationDescriptor is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationDescriptor, options);
-		}
-		else if (PerPartitionCategorizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.PerPartitionCategorizationDescriptor(PerPartitionCategorizationDescriptorAction), options);
-		}
-		else if (PerPartitionCategorizationValue is not null)
-		{
-			writer.WritePropertyName("per_partition_categorization");
-			JsonSerializer.Serialize(writer, PerPartitionCategorizationValue, options);
-		}
-
-		if (RenormalizationWindowDaysValue.HasValue)
-		{
-			writer.WritePropertyName("renormalization_window_days");
-			writer.WriteNumberValue(RenormalizationWindowDaysValue.Value);
-		}
-
-		if (ResultsRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("results_retention_days");
-			writer.WriteNumberValue(ResultsRetentionDaysValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.UpdateJobRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

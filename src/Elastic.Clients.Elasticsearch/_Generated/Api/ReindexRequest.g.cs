@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ReindexRequestParameters : RequestParameters
+public sealed partial class ReindexRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -42,7 +35,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
-	/// Defaults to no throttle.
+	/// By default, there is no throttle.
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
@@ -56,7 +49,7 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 
 	/// <summary>
 	/// <para>
-	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
@@ -64,14 +57,28 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of slices this task should be divided into.
-	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
@@ -79,7 +86,8 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
@@ -92,17 +100,412 @@ public sealed partial class ReindexRequestParameters : RequestParameters
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 }
 
+internal sealed partial class ReindexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropConflicts = System.Text.Json.JsonEncodedText.Encode("conflicts");
+	private static readonly System.Text.Json.JsonEncodedText PropDest = System.Text.Json.JsonEncodedText.Encode("dest");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxDocs = System.Text.Json.JsonEncodedText.Encode("max_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.ReindexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Conflicts?> propConflicts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Destination> propDest = default;
+		LocalJsonValue<long?> propMaxDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<long?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Reindex.Source> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propConflicts.TryReadProperty(ref reader, options, PropConflicts, null))
+			{
+				continue;
+			}
+
+			if (propDest.TryReadProperty(ref reader, options, PropDest, null))
+			{
+				continue;
+			}
+
+			if (propMaxDocs.TryReadProperty(ref reader, options, PropMaxDocs, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Conflicts = propConflicts.Value,
+			Dest = propDest.Value,
+			MaxDocs = propMaxDocs.Value,
+			Script = propScript.Value,
+			Size = propSize.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropConflicts, value.Conflicts, null, null);
+		writer.WriteProperty(options, PropDest, value.Dest, null, null);
+		writer.WriteProperty(options, PropMaxDocs, value.MaxDocs, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// <strong>Throttling</strong>
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ReindexRequestConverter))]
+public sealed partial class ReindexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ReindexRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest, Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	{
+		Dest = dest;
+		Source = source;
+	}
+#if NET7_0_OR_GREATER
+	public ReindexRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ReindexRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceReindex;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -113,16 +516,14 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Refresh { get => Q<bool?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
-	/// Defaults to no throttle.
+	/// By default, there is no throttle.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 
 	/// <summary>
@@ -130,41 +531,51 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the destination must be an index alias.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RequireAlias { get => Q<bool?>("require_alias"); set => Q("require_alias", value); }
 
 	/// <summary>
 	/// <para>
-	/// Specifies how long a consistent view of the index should be maintained for scrolled search.
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get => Q<Elastic.Clients.Elasticsearch.Duration?>("scroll"); set => Q("scroll", value); }
 
 	/// <summary>
 	/// <para>
 	/// The number of slices this task should be divided into.
-	/// Defaults to 1 slice, meaning the task isn’t sliced into subtasks.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Slices? Slices { get => Q<Elastic.Clients.Elasticsearch.Slices?>("slices"); set => Q("slices", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
 	/// The number of shard copies that must be active before proceeding with the operation.
-	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -172,15 +583,13 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// If <c>true</c>, the request blocks until the operation is complete.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? WaitForCompletion { get => Q<bool?>("wait_for_completion"); set => Q("wait_for_completion", value); }
 
 	/// <summary>
 	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// Indicates whether to continue reindexing even when there are conflicts.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("conflicts")]
 	public Elastic.Clients.Elasticsearch.Conflicts? Conflicts { get; set; }
 
 	/// <summary>
@@ -188,15 +597,22 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("dest")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Reindex.Destination Dest { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_docs")]
 	public long? MaxDocs { get; set; }
 
 	/// <summary>
@@ -204,9 +620,7 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The script to run to update the document source or metadata when reindexing.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("size")]
 	public long? Size { get; set; }
 
 	/// <summary>
@@ -214,63 +628,463 @@ public sealed partial class ReindexRequest : PlainRequest<ReindexRequestParamete
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
-	public Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Reindex.Source Source { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// <strong>Throttling</strong>
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescriptor<ReindexRequestDescriptor<TDocument>, ReindexRequestParameters>
+public readonly partial struct ReindexRequestDescriptor
 {
-	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ReindexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ReindexRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "reindex";
-
-	public ReindexRequestDescriptor<TDocument> Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public ReindexRequestDescriptor<TDocument> RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private long? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> SourceDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.ReindexRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Refresh(bool? value = true)
 	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// By default, there is no throttle.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to continue reindexing even when there are conflicts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
+	{
+		Instance.Conflicts = value;
+		return this;
 	}
 
 	/// <summary>
@@ -278,231 +1092,10 @@ public sealed partial class ReindexRequestDescriptor<TDocument> : RequestDescrip
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination value)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor)
-	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Dest(Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> configure)
-	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The maximum number of documents to reindex.
-	/// </para>
-	/// </summary>
-	public ReindexRequestDescriptor<TDocument> MaxDocs(long? maxDocs)
-	{
-		MaxDocsValue = maxDocs;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The script to run to update the document source or metadata when reindexing.
-	/// </para>
-	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
-	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Size(long? size)
-	{
-		SizeValue = size;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The source you are copying from.
-	/// </para>
-	/// </summary>
-	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
-	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument> descriptor)
-	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor<TDocument> Source(Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> configure)
-	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
-
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
-
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Reindex documents.
-/// Copies documents from a source to a destination. The source can be any existing index, alias, or data stream. The destination must differ from the source. For example, you cannot reindex a data stream into itself.
-/// </para>
-/// </summary>
-public sealed partial class ReindexRequestDescriptor : RequestDescriptor<ReindexRequestDescriptor, ReindexRequestParameters>
-{
-	internal ReindexRequestDescriptor(Action<ReindexRequestDescriptor> configure) => configure.Invoke(this);
-
-	public ReindexRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindex;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "reindex";
-
-	public ReindexRequestDescriptor Refresh(bool? refresh = true) => Qs("refresh", refresh);
-	public ReindexRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-	public ReindexRequestDescriptor RequireAlias(bool? requireAlias = true) => Qs("require_alias", requireAlias);
-	public ReindexRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll) => Qs("scroll", scroll);
-	public ReindexRequestDescriptor Slices(Elastic.Clients.Elasticsearch.Slices? slices) => Qs("slices", slices);
-	public ReindexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ReindexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-	public ReindexRequestDescriptor WaitForCompletion(bool? waitForCompletion = true) => Qs("wait_for_completion", waitForCompletion);
-
-	private Elastic.Clients.Elasticsearch.Conflicts? ConflictsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Destination DestValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor DestDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> DestDescriptorAction { get; set; }
-	private long? MaxDocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private long? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.Source SourceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor SourceDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> SourceDescriptorAction { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Set to proceed to continue reindexing even if there are conflicts.
-	/// </para>
-	/// </summary>
-	public ReindexRequestDescriptor Conflicts(Elastic.Clients.Elasticsearch.Conflicts? conflicts)
-	{
-		ConflictsValue = conflicts;
-		return Self;
+		Instance.Dest = value;
+		return this;
 	}
 
 	/// <summary>
@@ -510,39 +1103,26 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The destination you are copying to.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination dest)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Dest(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> action)
 	{
-		DestDescriptor = null;
-		DestDescriptorAction = null;
-		DestValue = dest;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor Dest(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor)
-	{
-		DestValue = null;
-		DestDescriptorAction = null;
-		DestDescriptor = descriptor;
-		return Self;
-	}
-
-	public ReindexRequestDescriptor Dest(Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> configure)
-	{
-		DestValue = null;
-		DestDescriptor = null;
-		DestDescriptorAction = configure;
-		return Self;
+		Instance.Dest = Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor MaxDocs(long? maxDocs)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor MaxDocs(long? value)
 	{
-		MaxDocsValue = maxDocs;
-		return Self;
+		Instance.MaxDocs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -550,34 +1130,38 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The script to run to update the document source or metadata when reindexing.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Size(long? size)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Size(long? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -585,99 +1169,683 @@ public sealed partial class ReindexRequestDescriptor : RequestDescriptor<Reindex
 	/// The source you are copying from.
 	/// </para>
 	/// </summary>
-	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source source)
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source value)
 	{
-		SourceDescriptor = null;
-		SourceDescriptorAction = null;
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public ReindexRequestDescriptor Source(Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> action)
 	{
-		SourceValue = null;
-		SourceDescriptorAction = null;
-		SourceDescriptor = descriptor;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor.Build(action);
+		return this;
 	}
 
-	public ReindexRequestDescriptor Source(Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Source<T>(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<T>> action)
 	{
-		SourceValue = null;
-		SourceDescriptor = null;
-		SourceDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ReindexRequest Build(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (ConflictsValue is not null)
-		{
-			writer.WritePropertyName("conflicts");
-			JsonSerializer.Serialize(writer, ConflictsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor(new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (DestDescriptor is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestDescriptor, options);
-		}
-		else if (DestDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(DestDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("dest");
-			JsonSerializer.Serialize(writer, DestValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MaxDocsValue.HasValue)
-		{
-			writer.WritePropertyName("max_docs");
-			writer.WriteNumberValue(MaxDocsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (SourceDescriptor is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceDescriptor, options);
-		}
-		else if (SourceDescriptorAction is not null)
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor(SourceDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("source");
-			JsonSerializer.Serialize(writer, SourceValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Reindex documents.
+/// </para>
+/// <para>
+/// Copy documents from a source to a destination.
+/// You can copy all documents to the destination index or reindex a subset of the documents.
+/// The source can be any existing index, alias, or data stream.
+/// The destination must differ from the source.
+/// For example, you cannot reindex a data stream into itself.
+/// </para>
+/// <para>
+/// IMPORTANT: Reindex requires <c>_source</c> to be enabled for all documents in the source.
+/// The destination should be configured as wanted before calling the reindex API.
+/// Reindex does not copy the settings from the source or its associated template.
+/// Mappings, shard counts, and replicas, for example, must be configured ahead of time.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, you must have the following security privileges:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The <c>write</c> index privilege for the destination data stream, index, or index alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// To automatically create a data stream or index with a reindex API request, you must have the <c>auto_configure</c>, <c>create_index</c>, or <c>manage</c> index privilege for the destination data stream, index, or alias.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If reindexing from a remote cluster, the <c>source.remote.user</c> must have the <c>monitor</c> cluster privilege and the <c>read</c> index privilege for the source data stream, index, or alias.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If reindexing from a remote cluster, you must explicitly allow the remote host in the <c>reindex.remote.whitelist</c> setting.
+/// Automatic data stream creation requires a matching index template with data stream enabled.
+/// </para>
+/// <para>
+/// The <c>dest</c> element can be configured like the index API to control optimistic concurrency control.
+/// Omitting <c>version_type</c> or setting it to <c>internal</c> causes Elasticsearch to blindly dump documents into the destination, overwriting any that happen to have the same ID.
+/// </para>
+/// <para>
+/// Setting <c>version_type</c> to <c>external</c> causes Elasticsearch to preserve the <c>version</c> from the source, create any documents that are missing, and update any documents that have an older version in the destination than they do in the source.
+/// </para>
+/// <para>
+/// Setting <c>op_type</c> to <c>create</c> causes the reindex API to create only missing documents in the destination.
+/// All existing documents will cause a version conflict.
+/// </para>
+/// <para>
+/// IMPORTANT: Because data streams are append-only, any reindex request to a destination data stream must have an <c>op_type</c> of <c>create</c>.
+/// A reindex can only add new documents to a destination data stream.
+/// It cannot update existing documents in a destination data stream.
+/// </para>
+/// <para>
+/// By default, version conflicts abort the reindex process.
+/// To continue reindexing if there are conflicts, set the <c>conflicts</c> request body property to <c>proceed</c>.
+/// In this case, the response includes a count of the version conflicts that were encountered.
+/// Note that the handling of other error types is unaffected by the <c>conflicts</c> property.
+/// Additionally, if you opt to count version conflicts, the operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+/// </para>
+/// <para>
+/// NOTE: The reindex API makes no effort to handle ID collisions.
+/// The last document written will "win" but the order isn't usually predictable so it is not a good idea to rely on this behavior.
+/// Instead, make sure that IDs are unique by using a script.
+/// </para>
+/// <para>
+/// <strong>Running reindex asynchronously</strong>
+/// </para>
+/// <para>
+/// If the request contains <c>wait_for_completion=false</c>, Elasticsearch performs some preflight checks, launches the request, and returns a task you can use to cancel or get the status of the task.
+/// Elasticsearch creates a record of this task as a document at <c>_tasks/&lt;task_id></c>.
+/// </para>
+/// <para>
+/// <strong>Reindex from multiple sources</strong>
+/// </para>
+/// <para>
+/// If you have many sources to reindex it is generally better to reindex them one at a time rather than using a glob pattern to pick up multiple sources.
+/// That way you can resume the process if there are any errors by removing the partially completed source and starting over.
+/// It also makes parallelizing the process fairly simple: split the list of sources to reindex and run each list in parallel.
+/// </para>
+/// <para>
+/// For example, you can use a bash script like this:
+/// </para>
+/// <code>
+/// for index in i1 i2 i3 i4 i5; do
+///   curl -HContent-Type:application/json -XPOST localhost:9200/_reindex?pretty -d'{
+///     "source": {
+///       "index": "'$index'"
+///     },
+///     "dest": {
+///       "index": "'$index'-reindexed"
+///     }
+///   }'
+/// done
+/// </code>
+/// <para>
+/// <strong>Throttling</strong>
+/// </para>
+/// <para>
+/// Set <c>requests_per_second</c> to any positive decimal number (<c>1.4</c>, <c>6</c>, <c>1000</c>, for example) to throttle the rate at which reindex issues batches of index operations.
+/// Requests are throttled by padding each batch with a wait time.
+/// To turn off throttling, set <c>requests_per_second</c> to <c>-1</c>.
+/// </para>
+/// <para>
+/// The throttling is done by waiting between batches so that the scroll that reindex uses internally can be given a timeout that takes into account the padding.
+/// The padding time is the difference between the batch size divided by the <c>requests_per_second</c> and the time spent writing.
+/// By default the batch size is <c>1000</c>, so if <c>requests_per_second</c> is set to <c>500</c>:
+/// </para>
+/// <code>
+/// target_time = 1000 / 500 per second = 2 seconds
+/// wait_time = target_time - write_time = 2 seconds - .5 seconds = 1.5 seconds
+/// </code>
+/// <para>
+/// Since the batch is issued as a single bulk request, large batch sizes cause Elasticsearch to create many requests and then wait for a while before starting the next set.
+/// This is "bursty" instead of "smooth".
+/// </para>
+/// <para>
+/// <strong>Slicing</strong>
+/// </para>
+/// <para>
+/// Reindex supports sliced scroll to parallelize the reindexing process.
+/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// You can slice a reindex request manually by providing a slice ID and total number of slices to each request.
+/// You can also let reindex automatically parallelize by using sliced scroll to slice on <c>_id</c>.
+/// The <c>slices</c> parameter specifies the number of slices to use.
+/// </para>
+/// <para>
+/// Adding <c>slices</c> to the reindex request just automates the manual process, creating sub-requests which means it has some quirks:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// You can see these requests in the tasks API. These sub-requests are "child" tasks of the task for the request with slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Fetching the status of the task for the request with <c>slices</c> only contains the status of completed slices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// These sub-requests are individually addressable for things like cancellation and rethrottling.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Rethrottling the request with <c>slices</c> will rethrottle the unfinished sub-request proportionally.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Canceling the request with <c>slices</c> will cancel each sub-request.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Due to the nature of <c>slices</c>, each sub-request won't get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Parameters like <c>requests_per_second</c> and <c>max_docs</c> on a request with <c>slices</c> are distributed proportionally to each sub-request. Combine that with the previous point about distribution being uneven and you should conclude that using <c>max_docs</c> with <c>slices</c> might not result in exactly <c>max_docs</c> documents being reindexed.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Each sub-request gets a slightly different snapshot of the source, though these are all taken at approximately the same time.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// If slicing automatically, setting <c>slices</c> to <c>auto</c> will choose a reasonable number for most indices.
+/// If slicing manually or otherwise tuning automatic slicing, use the following guidelines.
+/// </para>
+/// <para>
+/// Query performance is most efficient when the number of slices is equal to the number of shards in the index.
+/// If that number is large (for example, <c>500</c>), choose a lower number as too many slices will hurt performance.
+/// Setting slices higher than the number of shards generally does not improve efficiency and adds overhead.
+/// </para>
+/// <para>
+/// Indexing performance scales linearly across available resources with the number of slices.
+/// </para>
+/// <para>
+/// Whether query or indexing performance dominates the runtime depends on the documents being reindexed and cluster resources.
+/// </para>
+/// <para>
+/// <strong>Modify documents during reindexing</strong>
+/// </para>
+/// <para>
+/// Like <c>_update_by_query</c>, reindex operations support a script that modifies the document.
+/// Unlike <c>_update_by_query</c>, the script is allowed to modify the document's metadata.
+/// </para>
+/// <para>
+/// Just as in <c>_update_by_query</c>, you can set <c>ctx.op</c> to change the operation that is run on the destination.
+/// For example, set <c>ctx.op</c> to <c>noop</c> if your script decides that the document doesn’t have to be indexed in the destination. This "no operation" will be reported in the <c>noop</c> counter in the response body.
+/// Set <c>ctx.op</c> to <c>delete</c> if your script decides that the document must be deleted from the destination.
+/// The deletion will be reported in the <c>deleted</c> counter in the response body.
+/// Setting <c>ctx.op</c> to anything else will return an error, as will setting any other field in <c>ctx</c>.
+/// </para>
+/// <para>
+/// Think of the possibilities! Just be careful; you are able to change:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// <c>_id</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_index</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_version</c>
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// <c>_routing</c>
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// Setting <c>_version</c> to <c>null</c> or clearing it from the <c>ctx</c> map is just like not sending the version in an indexing request.
+/// It will cause the document to be overwritten in the destination regardless of the version on the target or the version type you use in the reindex API.
+/// </para>
+/// <para>
+/// <strong>Reindex from remote</strong>
+/// </para>
+/// <para>
+/// Reindex supports reindexing from a remote Elasticsearch cluster.
+/// The <c>host</c> parameter must contain a scheme, host, port, and optional path.
+/// The <c>username</c> and <c>password</c> parameters are optional and when they are present the reindex operation will connect to the remote Elasticsearch node using basic authentication.
+/// Be sure to use HTTPS when using basic authentication or the password will be sent in plain text.
+/// There are a range of settings available to configure the behavior of the HTTPS connection.
+/// </para>
+/// <para>
+/// When using Elastic Cloud, it is also possible to authenticate against the remote cluster through the use of a valid API key.
+/// Remote hosts must be explicitly allowed with the <c>reindex.remote.whitelist</c> setting.
+/// It can be set to a comma delimited list of allowed remote host and port combinations.
+/// Scheme is ignored; only the host and port are used.
+/// For example:
+/// </para>
+/// <code>
+/// reindex.remote.whitelist: [otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*"]
+/// </code>
+/// <para>
+/// The list of allowed hosts must be configured on any nodes that will coordinate the reindex.
+/// This feature should work with remote clusters of any version of Elasticsearch.
+/// This should enable you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+/// </para>
+/// <para>
+/// WARNING: Elasticsearch does not support forward compatibility across major versions.
+/// For example, you cannot reindex from a 7.x cluster into a 6.x cluster.
+/// </para>
+/// <para>
+/// To enable queries sent to older versions of Elasticsearch, the <c>query</c> parameter is sent directly to the remote host without validation or modification.
+/// </para>
+/// <para>
+/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+/// </para>
+/// <para>
+/// Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb.
+/// If the remote index includes very large documents you'll need to use a smaller batch size.
+/// It is also possible to set the socket read timeout on the remote connection with the <c>socket_timeout</c> field and the connection timeout with the <c>connect_timeout</c> field.
+/// Both default to 30 seconds.
+/// </para>
+/// <para>
+/// <strong>Configuring SSL parameters</strong>
+/// </para>
+/// <para>
+/// Reindex from remote supports configurable SSL settings.
+/// These must be specified in the <c>elasticsearch.yml</c> file, with the exception of the secure settings, which you add in the Elasticsearch keystore.
+/// It is not possible to configure SSL in the body of the reindex request.
+/// </para>
+/// </summary>
+public readonly partial struct ReindexRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.ReindexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ReindexRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.ReindexRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request refreshes affected shards to make this operation visible to search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Refresh(bool? value = true)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// By default, there is no throttle.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the destination must be an index alias.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequireAlias(bool? value = true)
+	{
+		Instance.RequireAlias = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period of time that a consistent view of the index should be maintained for scrolled search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Scroll(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Scroll = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(Elastic.Clients.Elasticsearch.Slices? value)
+	{
+		Instance.Slices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of slices this task should be divided into.
+	/// It defaults to one slice, which means the task isn't sliced into subtasks.
+	/// </para>
+	/// <para>
+	/// Reindex supports sliced scroll to parallelize the reindexing process.
+	/// This parallelization can improve efficiency and provide a convenient way to break the request down into smaller parts.
+	/// </para>
+	/// <para>
+	/// NOTE: Reindexing from remote clusters does not support manual or automatic slicing.
+	/// </para>
+	/// <para>
+	/// If set to <c>auto</c>, Elasticsearch chooses the number of slices to use.
+	/// This setting will use one slice per shard, up to a certain limit.
+	/// If there are multiple sources, it will choose the number of slices based on the index or backing index with the smallest number of shards.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Slices(System.Func<Elastic.Clients.Elasticsearch.SlicesFactory, Elastic.Clients.Elasticsearch.Slices> action)
+	{
+		Instance.Slices = Elastic.Clients.Elasticsearch.SlicesFactory.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period each indexing waits for automatic index creation, dynamic mapping updates, and waiting for active shards.
+	/// By default, Elasticsearch waits for at least one minute before failing.
+	/// The actual wait time could be longer, particularly when multiple waits occur.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set it to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// The default value is one, which means it waits for each primary shard to be active.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request blocks until the operation is complete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> WaitForCompletion(bool? value = true)
+	{
+		Instance.WaitForCompletion = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to continue reindexing even when there are conflicts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Conflicts(Elastic.Clients.Elasticsearch.Conflicts? value)
+	{
+		Instance.Conflicts = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Dest(Elastic.Clients.Elasticsearch.Core.Reindex.Destination value)
+	{
+		Instance.Dest = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The destination you are copying to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Dest(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> action)
+	{
+		Instance.Dest = Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of documents to reindex.
+	/// By default, all documents are reindexed.
+	/// If it is a value less then or equal to <c>scroll_size</c>, a scroll will not be used to retrieve the results for the operation.
+	/// </para>
+	/// <para>
+	/// If <c>conflicts</c> is set to <c>proceed</c>, the reindex operation could attempt to reindex more documents from the source than <c>max_docs</c> until it has successfully indexed <c>max_docs</c> documents into the target or it has gone through every document in the source query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> MaxDocs(long? value)
+	{
+		Instance.MaxDocs = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.Script = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script()
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The script to run to update the document source or metadata when reindexing.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Size(long? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Source(Elastic.Clients.Elasticsearch.Core.Reindex.Source value)
+	{
+		Instance.Source = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The source you are copying from.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Source(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>> action)
+	{
+		Instance.Source = Elastic.Clients.Elasticsearch.Core.Reindex.SourceDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ReindexRequest Build(System.Action<Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.ReindexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

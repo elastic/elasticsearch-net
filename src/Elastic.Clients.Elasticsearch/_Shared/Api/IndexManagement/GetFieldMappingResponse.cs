@@ -2,24 +2,17 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-// TODO: Move away from shared project
-
-#if !ELASTICSEARCH_SERVERLESS
-
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json.Serialization;
+using System.Diagnostics.CodeAnalysis;
+
 using Elastic.Clients.Elasticsearch.Mapping;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
 public partial class GetFieldMappingResponse
 {
-	[JsonIgnore]
-	public IReadOnlyDictionary<IndexName, TypeFieldMappings> FieldMappings => BackingDictionary;
-
-	public IProperty? GetProperty(IndexName index, Field field)
+	public IProperty? GetProperty(string index, string field)
 	{
 		if (index is null)
 			throw new ArgumentNullException(nameof(index));
@@ -32,13 +25,13 @@ public partial class GetFieldMappingResponse
 		if (mappings is null)
 			return null;
 
-		if (!mappings.TryGetValue(field, out var fieldMapping) || fieldMapping.Mapping is null)
+		if (!mappings.TryGetValue(field, out var fieldMapping))
 			return null;
 
-		return fieldMapping.Mapping.TryGetProperty(PropertyName.FromField(field), out var property) ? property : null;
+		return string.Equals(fieldMapping.Mapping.Key, field, StringComparison.Ordinal) ? fieldMapping.Mapping.Value : null;
 	}
 
-	public bool TryGetProperty(IndexName index, Field field, out IProperty property)
+	public bool TryGetProperty(string index, string field, [NotNullWhen(true)] out IProperty? property)
 	{
 		property = null;
 
@@ -53,46 +46,23 @@ public partial class GetFieldMappingResponse
 		if (mappings is null)
 			return false;
 
-		if (!mappings.TryGetValue(field, out var fieldMapping) || fieldMapping.Mapping is null)
+		if (!mappings.TryGetValue(field, out var fieldMapping))
 			return false;
 
-		if (fieldMapping.Mapping.TryGetProperty(PropertyName.FromField(field), out var matched))
+		if (string.Equals(fieldMapping.Mapping.Key, field, StringComparison.Ordinal))
 		{
-			property = matched;
+			property = fieldMapping.Mapping.Value;
 			return true;
 		}
 
 		return false;
 	}
 
-	public IProperty? PropertyFor<T>(Field field) => PropertyFor<T>(field, null);
-
-	public IProperty? PropertyFor<T>(Field field, IndexName index) =>
-		GetProperty(index ?? Infer.Index<T>(), field);
-
-	public IProperty? PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath)
-		where T : class =>
-			GetProperty(Infer.Index<T>(), Infer.Field(objectPath));
-
-	public IProperty? PropertyFor<T, TValue>(Expression<Func<T, TValue>> objectPath, IndexName index)
-		where T : class =>
-			GetProperty(index, Infer.Field(objectPath));
-
-	public IProperty? PropertyFor<T>(Expression<Func<T, object>> objectPath)
-		where T : class =>
-			GetProperty(Infer.Index<T>(), Infer.Field(objectPath));
-
-	public IProperty? PropertyFor<T>(Expression<Func<T, object>> objectPath, IndexName index)
-		where T : class =>
-			GetProperty(index, Infer.Field(objectPath));
-
-	private IReadOnlyDictionary<Field, FieldMapping> MappingsFor(IndexName index)
+	private IReadOnlyDictionary<string, FieldMapping>? MappingsFor(string index)
 	{
-		if (!FieldMappings.TryGetValue(index, out var indexMapping) || indexMapping.Mappings == null)
+		if (FieldMappings!.TryGetValue(index, out var indexMapping))
 			return null;
 
 		return indexMapping.Mappings;
 	}
 }
-
-#endif

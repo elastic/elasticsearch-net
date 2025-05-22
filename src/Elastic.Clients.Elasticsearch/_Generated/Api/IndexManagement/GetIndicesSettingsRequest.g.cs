@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class GetIndicesSettingsRequestParameters : RequestParameters
+public sealed partial class GetIndicesSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -50,7 +43,7 @@ public sealed partial class GetIndicesSettingsRequestParameters : RequestParamet
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -91,19 +84,45 @@ public sealed partial class GetIndicesSettingsRequestParameters : RequestParamet
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+internal sealed partial class GetIndicesSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get index settings.
-/// Returns setting information for one or more indices. For data streams,
-/// returns setting information for the stream’s backing indices.
+/// Get setting information for one or more indices.
+/// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
 /// </summary>
-public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesSettingsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestConverter))]
+public sealed partial class GetIndicesSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestParameters>
 {
-	public GetIndicesSettingsRequest()
-	{
-	}
-
 	public GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
@@ -115,14 +134,45 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	public GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetIndicesSettingsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetIndicesSettingsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetSettings;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementGetSettings;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "indices.get_settings";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of settings to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -133,7 +183,6 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// starts with foo but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -143,15 +192,13 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
@@ -159,7 +206,6 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -167,7 +213,6 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// If <c>true</c>, return all default settings in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
@@ -176,7 +221,6 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// <c>false</c>, information is retrieved from the master node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -186,110 +230,443 @@ public sealed partial class GetIndicesSettingsRequest : PlainRequest<GetIndicesS
 	/// error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get index settings.
-/// Returns setting information for one or more indices. For data streams,
-/// returns setting information for the stream’s backing indices.
+/// Get setting information for one or more indices.
+/// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
 /// </summary>
-public sealed partial class GetIndicesSettingsRequestDescriptor<TDocument> : RequestDescriptor<GetIndicesSettingsRequestDescriptor<TDocument>, GetIndicesSettingsRequestParameters>
+public readonly partial struct GetIndicesSettingsRequestDescriptor
 {
-	internal GetIndicesSettingsRequestDescriptor(Action<GetIndicesSettingsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest Instance { get; init; }
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices);
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices, name);
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(name);
 	}
 
 	public GetIndicesSettingsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetSettings;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.get_settings";
-
-	public GetIndicesSettingsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public GetIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public GetIndicesSettingsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public GetIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetIndicesSettingsRequestDescriptor<TDocument> IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-	public GetIndicesSettingsRequestDescriptor<TDocument> Local(bool? local = true) => Qs("local", local);
-	public GetIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public GetIndicesSettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? name)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of settings to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index
+	/// alias, or <c>_all</c> value targets only missing or closed indices. This
+	/// behavior applies even if the request targets other open indices. For
+	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
+	/// starts with foo but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor AllowNoIndices(bool? value = true)
 	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor FlatSettings(bool? value = true)
+	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, return all default settings in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only. If
+	/// <c>false</c>, information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Get index settings.
-/// Returns setting information for one or more indices. For data streams,
-/// returns setting information for the stream’s backing indices.
+/// Get setting information for one or more indices.
+/// For data streams, it returns setting information for the stream's backing indices.
 /// </para>
 /// </summary>
-public sealed partial class GetIndicesSettingsRequestDescriptor : RequestDescriptor<GetIndicesSettingsRequestDescriptor, GetIndicesSettingsRequestParameters>
+public readonly partial struct GetIndicesSettingsRequestDescriptor<TDocument>
 {
-	internal GetIndicesSettingsRequestDescriptor(Action<GetIndicesSettingsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest Instance { get; init; }
 
-	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("index", indices).Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices);
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.Names? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(indices, name);
+	}
+
+	public GetIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(name);
 	}
 
 	public GetIndicesSettingsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementGetSettings;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.get_settings";
-
-	public GetIndicesSettingsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public GetIndicesSettingsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public GetIndicesSettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public GetIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public GetIndicesSettingsRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-	public GetIndicesSettingsRequestDescriptor Local(bool? local = true) => Qs("local", local);
-	public GetIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public GetIndicesSettingsRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list or wildcard expression of settings to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index
+	/// alias, or <c>_all</c> value targets only missing or closed indices. This
+	/// behavior applies even if the request targets other open indices. For
+	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
+	/// starts with foo but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> FlatSettings(bool? value = true)
+	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if it targets a missing or closed index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, return all default settings in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only. If
+	/// <c>false</c>, information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.GetIndicesSettingsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

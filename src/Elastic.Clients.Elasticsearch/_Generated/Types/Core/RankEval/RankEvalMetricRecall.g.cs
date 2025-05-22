@@ -17,38 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
+
+internal sealed partial class RankEvalMetricRecallConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
+	private static readonly System.Text.Json.JsonEncodedText PropRelevantRatingThreshold = System.Text.Json.JsonEncodedText.Encode("relevant_rating_threshold");
+
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propK = default;
+		LocalJsonValue<int?> propRelevantRatingThreshold = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			{
+				continue;
+			}
+
+			if (propRelevantRatingThreshold.TryReadProperty(ref reader, options, PropRelevantRatingThreshold, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			K = propK.Value,
+			RelevantRatingThreshold = propRelevantRatingThreshold.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropK, value.K, null, null);
+		writer.WriteProperty(options, PropRelevantRatingThreshold, value.RelevantRatingThreshold, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Recall at K (R@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallConverter))]
 public sealed partial class RankEvalMetricRecall
 {
+#if NET7_0_OR_GREATER
+	public RankEvalMetricRecall()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankEvalMetricRecall()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("k")]
-	public int? k { get; set; }
+	public int? K { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Sets the rating threshold above which documents are considered to be "relevant".
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("relevant_rating_threshold")]
 	public int? RelevantRatingThreshold { get; set; }
 }
 
@@ -56,28 +115,36 @@ public sealed partial class RankEvalMetricRecall
 /// <para>
 /// Recall at K (R@k)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/rest-apis/search-rank-eval#k-recall">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class RankEvalMetricRecallDescriptor : SerializableDescriptor<RankEvalMetricRecallDescriptor>
+public readonly partial struct RankEvalMetricRecallDescriptor
 {
-	internal RankEvalMetricRecallDescriptor(Action<RankEvalMetricRecallDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall Instance { get; init; }
 
-	public RankEvalMetricRecallDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricRecallDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall instance)
 	{
+		Instance = instance;
 	}
 
-	private int? kValue { get; set; }
-	private int? RelevantRatingThresholdValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricRecallDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
 	/// </para>
 	/// </summary>
-	public RankEvalMetricRecallDescriptor k(int? k)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor K(int? value)
 	{
-		kValue = k;
-		return Self;
+		Instance.K = value;
+		return this;
 	}
 
 	/// <summary>
@@ -85,27 +152,22 @@ public sealed partial class RankEvalMetricRecallDescriptor : SerializableDescrip
 	/// Sets the rating threshold above which documents are considered to be "relevant".
 	/// </para>
 	/// </summary>
-	public RankEvalMetricRecallDescriptor RelevantRatingThreshold(int? relevantRatingThreshold)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor RelevantRatingThreshold(int? value)
 	{
-		RelevantRatingThresholdValue = relevantRatingThreshold;
-		return Self;
+		Instance.RelevantRatingThreshold = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (kValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("k");
-			writer.WriteNumberValue(kValue.Value);
+			return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (RelevantRatingThresholdValue.HasValue)
-		{
-			writer.WritePropertyName("relevant_rating_threshold");
-			writer.WriteNumberValue(RelevantRatingThresholdValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecallDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricRecall(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

@@ -17,130 +17,181 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class RandomScoreFunctionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropSeed = System.Text.Json.JsonEncodedText.Encode("seed");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<long, string>?> propSeed = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propSeed.TryReadProperty(ref reader, options, PropSeed, static Elastic.Clients.Elasticsearch.Union<long, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<long, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Seed = propSeed.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropSeed, value.Seed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<long, string>? v) => w.WriteUnionValue<long, string>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionConverter))]
 public sealed partial class RandomScoreFunction
 {
-	[JsonInclude, JsonPropertyName("field")]
+#if NET7_0_OR_GREATER
+	public RandomScoreFunction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RandomScoreFunction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public Elastic.Clients.Elasticsearch.Field? Field { get; set; }
-	[JsonInclude, JsonPropertyName("seed")]
-	public object? Seed { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore(RandomScoreFunction randomScoreFunction) => Elastic.Clients.Elasticsearch.QueryDsl.FunctionScore.RandomScore(randomScoreFunction);
+	public Elastic.Clients.Elasticsearch.Union<long, string>? Seed { get; set; }
 }
 
-public sealed partial class RandomScoreFunctionDescriptor<TDocument> : SerializableDescriptor<RandomScoreFunctionDescriptor<TDocument>>
+public readonly partial struct RandomScoreFunctionDescriptor<TDocument>
 {
-	internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Instance { get; init; }
 
-	public RandomScoreFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private object? SeedValue { get; set; }
-
-	public RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomScoreFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RandomScoreFunctionDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RandomScoreFunctionDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RandomScoreFunctionDescriptor<TDocument> Seed(object? seed)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument> Seed(Elastic.Clients.Elasticsearch.Union<long, string>? value)
 	{
-		SeedValue = seed;
-		return Self;
+		Instance.Seed = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SeedValue is not null)
-		{
-			writer.WritePropertyName("seed");
-			JsonSerializer.Serialize(writer, SeedValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class RandomScoreFunctionDescriptor : SerializableDescriptor<RandomScoreFunctionDescriptor>
+public readonly partial struct RandomScoreFunctionDescriptor
 {
-	internal RandomScoreFunctionDescriptor(Action<RandomScoreFunctionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Instance { get; init; }
 
-	public RandomScoreFunctionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field? FieldValue { get; set; }
-	private object? SeedValue { get; set; }
-
-	public RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? field)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RandomScoreFunctionDescriptor()
 	{
-		FieldValue = field;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public RandomScoreFunctionDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor Field(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RandomScoreFunctionDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public RandomScoreFunctionDescriptor Seed(object? seed)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor Seed(Elastic.Clients.Elasticsearch.Union<long, string>? value)
 	{
-		SeedValue = seed;
-		return Self;
+		Instance.Seed = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (FieldValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("field");
-			JsonSerializer.Serialize(writer, FieldValue, options);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (SeedValue is not null)
-		{
-			writer.WritePropertyName("seed");
-			JsonSerializer.Serialize(writer, SeedValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunctionDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.RandomScoreFunction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

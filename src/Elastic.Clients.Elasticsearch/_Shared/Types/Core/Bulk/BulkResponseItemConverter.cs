@@ -3,68 +3,164 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
+using Elastic.Clients.Elasticsearch.Serialization;
+
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-internal sealed class BulkResponseItemConverter : JsonConverter<IReadOnlyList<ResponseItem>>
+internal sealed class BulkResponseItemConverter : JsonConverter<ResponseItem>
 {
-	public override IReadOnlyList<ResponseItem>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly JsonEncodedText PropError = JsonEncodedText.Encode("error");
+	private static readonly JsonEncodedText PropForcedRefresh = JsonEncodedText.Encode("forced_refresh");
+	private static readonly JsonEncodedText PropGet = JsonEncodedText.Encode("get");
+	private static readonly JsonEncodedText PropId = JsonEncodedText.Encode("_id");
+	private static readonly JsonEncodedText PropIndex = JsonEncodedText.Encode("_index");
+	private static readonly JsonEncodedText PropPrimaryTerm = JsonEncodedText.Encode("_primary_term");
+	private static readonly JsonEncodedText PropResult = JsonEncodedText.Encode("result");
+	private static readonly JsonEncodedText PropSeqNo = JsonEncodedText.Encode("_seq_no");
+	private static readonly JsonEncodedText PropShards = JsonEncodedText.Encode("_shards");
+	private static readonly JsonEncodedText PropStatus = JsonEncodedText.Encode("status");
+	private static readonly JsonEncodedText PropVersion = JsonEncodedText.Encode("_version");
+
+	public override ResponseItem Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartArray)
-			throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.StartArray}.");
+		reader.ValidateToken(JsonTokenType.StartObject);
 
-		var responseItems = new List<ResponseItem>();
+		reader.Read();
 
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+		reader.ValidateToken(JsonTokenType.PropertyName);
+
+		var operation = reader.ReadPropertyName<OperationType>(options);
+		reader.Read();
+
+		reader.ValidateToken(JsonTokenType.StartObject);
+
+		LocalJsonValue<ErrorCause?> propError = default;
+		LocalJsonValue<bool?> propForcedRefresh = default;
+		LocalJsonValue<InlineGet<System.Collections.Generic.IReadOnlyDictionary<string, object>>?> propGet = default;
+		LocalJsonValue<string?> propId = default;
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<long?> propPrimaryTerm = default;
+		LocalJsonValue<string?> propResult = default;
+		LocalJsonValue<long?> propSeqNo = default;
+		LocalJsonValue<ShardStatistics?> propShards = default;
+		LocalJsonValue<int> propStatus = default;
+		LocalJsonValue<long?> propVersion = default;
+
+		while (reader.Read() && reader.TokenType is JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType != JsonTokenType.StartObject)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.StartObject}.");
-
-			reader.Read();
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.PropertyName}.");
-
-			ResponseItem responseItem;
-
-			if (reader.ValueTextEquals("index"))
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
 			{
-				responseItem = JsonSerializer.Deserialize<BulkIndexResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("delete"))
-			{
-				responseItem = JsonSerializer.Deserialize<BulkDeleteResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("create"))
-			{
-				responseItem = JsonSerializer.Deserialize<CreateResponseItem>(ref reader, options);
-			}
-			else if (reader.ValueTextEquals("update"))
-			{
-				responseItem = JsonSerializer.Deserialize<BulkUpdateResponseItem>(ref reader, options);
-			}
-			else
-			{
-				throw new JsonException("Unexpected operation type in bulk response items.");
+				continue;
 			}
 
-			responseItems.Add(responseItem);
+			if (propForcedRefresh.TryReadProperty(ref reader, options, PropForcedRefresh, null))
+			{
+				continue;
+			}
 
-			reader.Read();
+			if (propGet.TryReadProperty(ref reader, options, PropGet, null))
+			{
+				continue;
+			}
 
-			if (reader.TokenType != JsonTokenType.EndObject)
-				throw new JsonException($"Unexpected token in bulk response items. Read {reader.TokenType} but was expecting {JsonTokenType.EndObject}.");
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propPrimaryTerm.TryReadProperty(ref reader, options, PropPrimaryTerm, null))
+			{
+				continue;
+			}
+
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
+			{
+				continue;
+			}
+
+			if (propSeqNo.TryReadProperty(ref reader, options, PropSeqNo, null))
+			{
+				continue;
+			}
+
+			if (propShards.TryReadProperty(ref reader, options, PropShards, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+			}
+
+			throw new JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return responseItems;
+		reader.ValidateToken(JsonTokenType.EndObject);
+
+		reader.Read();
+
+		reader.ValidateToken(JsonTokenType.EndObject);
+
+		ResponseItem result = operation switch
+		{
+			OperationType.Update => new BulkUpdateResponseItem(JsonConstructorSentinel.Instance),
+			OperationType.Index => new BulkIndexResponseItem(JsonConstructorSentinel.Instance),
+			OperationType.Delete => new BulkDeleteResponseItem(JsonConstructorSentinel.Instance),
+			OperationType.Create => new CreateResponseItem(JsonConstructorSentinel.Instance),
+			_ => throw new InvalidOperationException()
+		};
+
+		result.Error = propError.Value;
+		result.ForcedRefresh = propForcedRefresh.Value;
+		result.Get = propGet.Value;
+		result.Id = propId.Value;
+		result.Index = propIndex.Value;
+		result.PrimaryTerm = propPrimaryTerm.Value;
+		result.Result = propResult.Value;
+		result.SeqNo = propSeqNo.Value;
+		result.Shards = propShards.Value;
+		result.Status = propStatus.Value;
+		result.Version = propVersion.Value;
+
+		return result;
 	}
 
-	public override void Write(Utf8JsonWriter writer, IReadOnlyList<ResponseItem> value, JsonSerializerOptions options) => throw new NotImplementedException();
+	public override void Write(Utf8JsonWriter writer, ResponseItem value, JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WritePropertyName(value.Operation);
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropForcedRefresh, value.ForcedRefresh, null, null);
+		writer.WriteProperty(options, PropGet, value.Get, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropPrimaryTerm, value.PrimaryTerm, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteProperty(options, PropSeqNo, value.SeqNo, null, null);
+		writer.WriteProperty(options, PropShards, value.Shards, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
 }

@@ -17,36 +17,70 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class PutScriptRequestParameters : RequestParameters
+public sealed partial class PutScriptRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
+	/// The period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class PutScriptRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.PutScriptRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+
+	public override Elastic.Clients.Elasticsearch.PutScriptRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.StoredScript> propScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.PutScriptRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Script = propScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.PutScriptRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -55,19 +89,46 @@ public sealed partial class PutScriptRequestParameters : RequestParameters
 /// Creates or updates a stored script or search template.
 /// </para>
 /// </summary>
-public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.PutScriptRequestConverter))]
+public sealed partial class PutScriptRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.PutScriptRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
 
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.StoredScript script) : base(r => r.Required("id", id))
+	{
+		Script = script;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutScriptRequest(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context, Elastic.Clients.Elasticsearch.StoredScript script) : base(r => r.Required("id", id).Optional("context", context))
+	{
+		Script = script;
+	}
+#if NET7_0_OR_GREATER
+	public PutScriptRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutScriptRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespacePutScript;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -75,29 +136,52 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a connection to the master node.
-	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// The context in which the script or search template should run.
+	/// To prevent errors, the API immediately compiles the script or template in this context.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Name? Context { get => P<Elastic.Clients.Elasticsearch.Name?>("context"); set => PO("context", value); }
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the stored script or search template.
+	/// It must be unique within the cluster.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for a response.
+	/// The period to wait for a response.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The script or search template, its parameters, and its language.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.StoredScript Script { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.StoredScript Script { get; set; }
 }
 
 /// <summary>
@@ -106,190 +190,158 @@ public sealed partial class PutScriptRequest : PlainRequest<PutScriptRequestPara
 /// Creates or updates a stored script or search template.
 /// </para>
 /// </summary>
-public sealed partial class PutScriptRequestDescriptor<TDocument> : RequestDescriptor<PutScriptRequestDescriptor<TDocument>, PutScriptRequestParameters>
+public readonly partial struct PutScriptRequestDescriptor
 {
-	internal PutScriptRequestDescriptor(Action<PutScriptRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.PutScriptRequest Instance { get; init; }
 
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.PutScriptRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.PutScriptRequest(id);
+#pragma warning restore CS0618
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "put_script";
-
-	public PutScriptRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutScriptRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutScriptRequestDescriptor<TDocument> Context(Elastic.Clients.Elasticsearch.Name? context)
+	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context)
 	{
-		RouteValues.Optional("context", context);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.PutScriptRequest(id, context);
+#pragma warning restore CS0618
 	}
 
-	public PutScriptRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutScriptRequestDescriptor()
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.StoredScript ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.StoredScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.PutScriptRequest instance) => new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.PutScriptRequest(Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The context in which the script or search template should run.
+	/// To prevent errors, the API immediately compiles the script or template in this context.
 	/// </para>
 	/// </summary>
-	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.StoredScript script)
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Context(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Context = value;
+		return this;
 	}
-
-	public PutScriptRequestDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.StoredScriptDescriptor descriptor)
-	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutScriptRequestDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> configure)
-	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.StoredScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Create or update a script or search template.
-/// Creates or updates a stored script or search template.
-/// </para>
-/// </summary>
-public sealed partial class PutScriptRequestDescriptor : RequestDescriptor<PutScriptRequestDescriptor, PutScriptRequestParameters>
-{
-	internal PutScriptRequestDescriptor(Action<PutScriptRequestDescriptor> configure) => configure.Invoke(this);
-
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id, Elastic.Clients.Elasticsearch.Name? context) : base(r => r.Required("id", id).Optional("context", context))
-	{
-	}
-
-	public PutScriptRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespacePutScript;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "put_script";
-
-	public PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutScriptRequestDescriptor Context(Elastic.Clients.Elasticsearch.Name? context)
-	{
-		RouteValues.Optional("context", context);
-		return Self;
-	}
-
-	public PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
-	private Elastic.Clients.Elasticsearch.StoredScript ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.StoredScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> ScriptDescriptorAction { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Contains the script or search template, its parameters, and its language.
+	/// The identifier for the stored script or search template.
+	/// It must be unique within the cluster.
 	/// </para>
 	/// </summary>
-	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScript script)
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	public PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScriptDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	public PutScriptRequestDescriptor Script(Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Timeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The script or search template, its parameters, and its language.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Script(Elastic.Clients.Elasticsearch.StoredScript value)
 	{
-		writer.WriteStartObject();
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.StoredScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
+		Instance.Script = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The script or search template, its parameters, and its language.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.StoredScriptDescriptor> action)
+	{
+		Instance.Script = Elastic.Clients.Elasticsearch.StoredScriptDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.PutScriptRequest Build(System.Action<Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor(new Elastic.Clients.Elasticsearch.PutScriptRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.PutScriptRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

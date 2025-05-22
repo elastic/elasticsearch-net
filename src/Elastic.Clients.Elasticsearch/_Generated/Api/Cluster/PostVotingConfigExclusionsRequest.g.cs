@@ -17,21 +17,21 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class PostVotingConfigExclusionsRequestParameters : RequestParameters
+public sealed partial class PostVotingConfigExclusionsRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
 	/// <summary>
 	/// <para>
 	/// A comma-separated list of the persistent ids of the nodes to exclude
@@ -59,16 +59,82 @@ public sealed partial class PostVotingConfigExclusionsRequestParameters : Reques
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PostVotingConfigExclusionsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Updates the cluster voting config exclusions by node ids or node names.
+/// Update voting configuration exclusions.
+/// Update the cluster voting config exclusions by node IDs or node names.
+/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
+/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
+/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
+/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
+/// </para>
+/// <para>
+/// Clusters should have no voting configuration exclusions in normal operation.
+/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
+/// This API waits for the nodes to be fully removed from the cluster before it returns.
+/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
+/// </para>
+/// <para>
+/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
+/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
+/// In that case, you may safely retry the call.
+/// </para>
+/// <para>
+/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
+/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 /// </para>
 /// </summary>
-public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<PostVotingConfigExclusionsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestConverter))]
+public sealed partial class PostVotingConfigExclusionsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPostVotingConfigExclusions;
+#if NET7_0_OR_GREATER
+	public PostVotingConfigExclusionsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PostVotingConfigExclusionsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterPostVotingConfigExclusions;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -76,11 +142,17 @@ public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<Pos
 
 	/// <summary>
 	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// A comma-separated list of the persistent ids of the nodes to exclude
 	/// from the voting configuration. If specified, you may not also specify node_names.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Ids? NodeIds { get => Q<Elastic.Clients.Elasticsearch.Ids?>("node_ids"); set => Q("node_ids", value); }
 
 	/// <summary>
@@ -89,7 +161,6 @@ public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<Pos
 	/// voting configuration. If specified, you may not also specify node_ids.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Names? NodeNames { get => Q<Elastic.Clients.Elasticsearch.Names?>("node_names"); set => Q("node_names", value); }
 
 	/// <summary>
@@ -100,36 +171,153 @@ public sealed partial class PostVotingConfigExclusionsRequest : PlainRequest<Pos
 	/// is satisfied, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Updates the cluster voting config exclusions by node ids or node names.
+/// Update voting configuration exclusions.
+/// Update the cluster voting config exclusions by node IDs or node names.
+/// By default, if there are more than three master-eligible nodes in the cluster and you remove fewer than half of the master-eligible nodes in the cluster at once, the voting configuration automatically shrinks.
+/// If you want to shrink the voting configuration to contain fewer than three nodes or to remove half or more of the master-eligible nodes in the cluster at once, use this API to remove departing nodes from the voting configuration manually.
+/// The API adds an entry for each specified node to the cluster’s voting configuration exclusions list.
+/// It then waits until the cluster has reconfigured its voting configuration to exclude the specified nodes.
+/// </para>
+/// <para>
+/// Clusters should have no voting configuration exclusions in normal operation.
+/// Once the excluded nodes have stopped, clear the voting configuration exclusions with <c>DELETE /_cluster/voting_config_exclusions</c>.
+/// This API waits for the nodes to be fully removed from the cluster before it returns.
+/// If your cluster has voting configuration exclusions for nodes that you no longer intend to remove, use <c>DELETE /_cluster/voting_config_exclusions?wait_for_removal=false</c> to clear the voting configuration exclusions without waiting for the nodes to leave the cluster.
+/// </para>
+/// <para>
+/// A response to <c>POST /_cluster/voting_config_exclusions</c> with an HTTP status code of 200 OK guarantees that the node has been removed from the voting configuration and will not be reinstated until the voting configuration exclusions are cleared by calling <c>DELETE /_cluster/voting_config_exclusions</c>.
+/// If the call to <c>POST /_cluster/voting_config_exclusions</c> fails or returns a response with an HTTP status code other than 200 OK then the node may not have been removed from the voting configuration.
+/// In that case, you may safely retry the call.
+/// </para>
+/// <para>
+/// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
+/// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
 /// </para>
 /// </summary>
-public sealed partial class PostVotingConfigExclusionsRequestDescriptor : RequestDescriptor<PostVotingConfigExclusionsRequestDescriptor, PostVotingConfigExclusionsRequestParameters>
+public readonly partial struct PostVotingConfigExclusionsRequestDescriptor
 {
-	internal PostVotingConfigExclusionsRequestDescriptor(Action<PostVotingConfigExclusionsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PostVotingConfigExclusionsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public PostVotingConfigExclusionsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterPostVotingConfigExclusions;
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "cluster.post_voting_config_exclusions";
-
-	public PostVotingConfigExclusionsRequestDescriptor NodeIds(Elastic.Clients.Elasticsearch.Ids? nodeIds) => Qs("node_ids", nodeIds);
-	public PostVotingConfigExclusionsRequestDescriptor NodeNames(Elastic.Clients.Elasticsearch.Names? nodeNames) => Qs("node_names", nodeNames);
-	public PostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the persistent ids of the nodes to exclude
+	/// from the voting configuration. If specified, you may not also specify node_names.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor NodeIds(Elastic.Clients.Elasticsearch.Ids? value)
+	{
+		Instance.NodeIds = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of the names of the nodes to exclude from the
+	/// voting configuration. If specified, you may not also specify node_ids.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor NodeNames(Elastic.Clients.Elasticsearch.Names? value)
+	{
+		Instance.NodeNames = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// When adding a voting configuration exclusion, the API waits for the
+	/// specified nodes to be excluded from the voting configuration before
+	/// returning. If the timeout expires before the appropriate condition
+	/// is satisfied, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.PostVotingConfigExclusionsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

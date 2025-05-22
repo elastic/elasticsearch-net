@@ -17,24 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class ScriptConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Script>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropLang = System.Text.Json.JsonEncodedText.Encode("lang");
+	private static readonly System.Text.Json.JsonEncodedText PropOptions = System.Text.Json.JsonEncodedText.Encode("options");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.Script Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.StartObject)
+		{
+			var value = reader.ReadValue<string?>(options, null);
+			return new Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+			{
+				Source = value
+			};
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScriptLanguage?> propLang = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propOptions = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propLang.TryReadProperty(ref reader, options, PropLang, null))
+			{
+				continue;
+			}
+
+			if (propOptions.TryReadProperty(ref reader, options, PropOptions, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Lang = propLang.Value,
+			Options = propOptions.Value,
+			Params = propParams.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Script value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropLang, value.Lang, null, null);
+		writer.WriteProperty(options, PropOptions, value.Options, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScriptConverter))]
 public sealed partial class Script
 {
+#if NET7_0_OR_GREATER
+	public Script()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Script()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The <c>id</c> for a stored script.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -42,10 +138,8 @@ public sealed partial class Script
 	/// Specifies the language the script is written in.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("lang")]
 	public Elastic.Clients.Elasticsearch.ScriptLanguage? Lang { get; set; }
-	[JsonInclude, JsonPropertyName("options")]
-	public IDictionary<string, string>? Options { get; set; }
+	public System.Collections.Generic.IDictionary<string, string>? Options { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,43 +147,44 @@ public sealed partial class Script
 	/// Use parameters instead of hard-coded values to decrease compile time.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The script source.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter(Script script) => Elastic.Clients.Elasticsearch.QueryDsl.IntervalsFilter.Script(script);
 }
 
-public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDescriptor>
+public readonly partial struct ScriptDescriptor
 {
-	internal ScriptDescriptor(Action<ScriptDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Script Instance { get; init; }
 
-	public ScriptDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptDescriptor(Elastic.Clients.Elasticsearch.Script instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptLanguage? LangValue { get; set; }
-	private IDictionary<string, string>? OptionsValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private string? SourceValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScriptDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.ScriptDescriptor(Elastic.Clients.Elasticsearch.Script instance) => new Elastic.Clients.Elasticsearch.ScriptDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The <c>id</c> for a stored script.
 	/// </para>
 	/// </summary>
-	public ScriptDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,16 +192,35 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	/// Specifies the language the script is written in.
 	/// </para>
 	/// </summary>
-	public ScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? lang)
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Lang(Elastic.Clients.Elasticsearch.ScriptLanguage? value)
 	{
-		LangValue = lang;
-		return Self;
+		Instance.Lang = value;
+		return this;
 	}
 
-	public ScriptDescriptor Options(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Options(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		OptionsValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Options = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Options()
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Options(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
+	{
+		Instance.Options = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor AddOption(string key, string value)
+	{
+		Instance.Options ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Options.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -115,10 +229,41 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	/// Use parameters instead of hard-coded values to decrease compile time.
 	/// </para>
 	/// </summary>
-	public ScriptDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies any named parameters that are passed into the script as variables.
+	/// Use parameters instead of hard-coded values to decrease compile time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies any named parameters that are passed into the script as variables.
+	/// Use parameters instead of hard-coded values to decrease compile time.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -126,45 +271,22 @@ public sealed partial class ScriptDescriptor : SerializableDescriptor<ScriptDesc
 	/// The script source.
 	/// </para>
 	/// </summary>
-	public ScriptDescriptor Source(string? source)
+	public Elastic.Clients.Elasticsearch.ScriptDescriptor Source(string? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Script Build(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			return new Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (LangValue is not null)
-		{
-			writer.WritePropertyName("lang");
-			JsonSerializer.Serialize(writer, LangValue, options);
-		}
-
-		if (OptionsValue is not null)
-		{
-			writer.WritePropertyName("options");
-			JsonSerializer.Serialize(writer, OptionsValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.ScriptDescriptor(new Elastic.Clients.Elasticsearch.Script(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

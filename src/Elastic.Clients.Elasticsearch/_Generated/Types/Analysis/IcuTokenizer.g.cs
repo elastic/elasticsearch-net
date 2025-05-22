@@ -17,70 +17,140 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class IcuTokenizer : ITokenizer
+internal sealed partial class IcuTokenizerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer>
 {
-	[JsonInclude, JsonPropertyName("rule_files")]
-	public string RuleFiles { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropRuleFiles = System.Text.Json.JsonEncodedText.Encode("rule_files");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propRuleFiles = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRuleFiles.TryReadProperty(ref reader, options, PropRuleFiles, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RuleFiles = propRuleFiles.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRuleFiles, value.RuleFiles, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerConverter))]
+public sealed partial class IcuTokenizer : Elastic.Clients.Elasticsearch.Analysis.ITokenizer
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTokenizer(string ruleFiles)
+	{
+		RuleFiles = ruleFiles;
+	}
+#if NET7_0_OR_GREATER
+	public IcuTokenizer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IcuTokenizer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IcuTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RuleFiles { get; set; }
+
 	public string Type => "icu_tokenizer";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class IcuTokenizerDescriptor : SerializableDescriptor<IcuTokenizerDescriptor>, IBuildableDescriptor<IcuTokenizer>
+public readonly partial struct IcuTokenizerDescriptor
 {
-	internal IcuTokenizerDescriptor(Action<IcuTokenizerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer Instance { get; init; }
 
-	public IcuTokenizerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer instance)
 	{
+		Instance = instance;
 	}
 
-	private string RuleFilesValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public IcuTokenizerDescriptor RuleFiles(string ruleFiles)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IcuTokenizerDescriptor()
 	{
-		RuleFilesValue = ruleFiles;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public IcuTokenizerDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer instance) => new Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer(Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor RuleFiles(string value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.RuleFiles = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("rule_files");
-		writer.WriteStringValue(RuleFilesValue);
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("icu_tokenizer");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Version = value;
+		return this;
 	}
 
-	IcuTokenizer IBuildableDescriptor<IcuTokenizer>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor> action)
 	{
-		RuleFiles = RuleFilesValue,
-		Version = VersionValue
-	};
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.IcuTokenizerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.IcuTokenizer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

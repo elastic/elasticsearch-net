@@ -17,27 +17,49 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GetUserRequestParameters : RequestParameters
+public sealed partial class GetUserRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for a user, if any.
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
 	/// </para>
 	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
+}
+
+internal sealed partial class GetUserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GetUserRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.GetUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GetUserRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -48,19 +70,31 @@ public sealed partial class GetUserRequestParameters : RequestParameters
 /// Get information about users in the native realm and built-in users.
 /// </para>
 /// </summary>
-public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GetUserRequestConverter))]
+public sealed partial class GetUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>
 {
+	public GetUserRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username) : base(r => r.Optional("username", username))
+	{
+	}
+#if NET7_0_OR_GREATER
 	public GetUserRequest()
 	{
 	}
-
-	public GetUserRequest(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username) : base(r => r.Optional("username", username))
+#endif
+#if !NET7_0_OR_GREATER
+	public GetUserRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetUser;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGetUser;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -68,10 +102,16 @@ public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// If true will return the User Profile ID for a user, if any.
+	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? Username { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>?>("username"); set => PO("username", value); }
+
+	/// <summary>
+	/// <para>
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
+	/// </para>
+	/// </summary>
 	public bool? WithProfileUid { get => Q<bool?>("with_profile_uid"); set => Q("with_profile_uid", value); }
 }
 
@@ -83,35 +123,114 @@ public sealed partial class GetUserRequest : PlainRequest<GetUserRequestParamete
 /// Get information about users in the native realm and built-in users.
 /// </para>
 /// </summary>
-public sealed partial class GetUserRequestDescriptor : RequestDescriptor<GetUserRequestDescriptor, GetUserRequestParameters>
+public readonly partial struct GetUserRequestDescriptor
 {
-	internal GetUserRequestDescriptor(Action<GetUserRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GetUserRequest Instance { get; init; }
 
-	public GetUserRequestDescriptor(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username) : base(r => r.Optional("username", username))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetUserRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetUserRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetUserRequest(username);
 	}
 
 	public GetUserRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGetUser;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GetUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.get_user";
-
-	public GetUserRequestDescriptor WithProfileUid(bool? withProfileUid = true) => Qs("with_profile_uid", withProfileUid);
-
-	public GetUserRequestDescriptor Username(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username)
+	/// <summary>
+	/// <para>
+	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? value)
 	{
-		RouteValues.Optional("username", username);
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An identifier for the user. You can specify multiple usernames as a comma-separated list. If you omit this parameter, the API retrieves information about all users.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Username(params Elastic.Clients.Elasticsearch.Username[] values)
 	{
+		Instance.Username = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Determines whether to retrieve the user profile UID, if it exists, for the users.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor WithProfileUid(bool? value = true)
+	{
+		Instance.WithProfileUid = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GetUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GetUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

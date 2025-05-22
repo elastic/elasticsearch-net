@@ -17,64 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed partial class GetAsyncResponse : ElasticsearchResponse
+internal sealed partial class GetAsyncResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropColumns = System.Text.Json.JsonEncodedText.Encode("columns");
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIsPartial = System.Text.Json.JsonEncodedText.Encode("is_partial");
+	private static readonly System.Text.Json.JsonEncodedText PropIsRunning = System.Text.Json.JsonEncodedText.Encode("is_running");
+
+	public override Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>?> propColumns = default;
+		LocalJsonValue<string?> propCursor = default;
+		LocalJsonValue<string> propId = default;
+		LocalJsonValue<bool> propIsPartial = default;
+		LocalJsonValue<bool> propIsRunning = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propColumns.TryReadProperty(ref reader, options, PropColumns, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCursor.TryReadProperty(ref reader, options, PropCursor, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIsPartial.TryReadProperty(ref reader, options, PropIsPartial, null))
+			{
+				continue;
+			}
+
+			if (propIsRunning.TryReadProperty(ref reader, options, PropIsRunning, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Columns = propColumns.Value,
+			Cursor = propCursor.Value,
+			Id = propId.Value,
+			IsPartial = propIsPartial.Value,
+			IsRunning = propIsRunning.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.GetAsyncResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropColumns, value.Columns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Sql.Column>(o, v, null));
+		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIsPartial, value.IsPartial, null, null);
+		writer.WriteProperty(options, PropIsRunning, value.IsRunning, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.GetAsyncResponseConverter))]
+public partial class GetAsyncResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetAsyncResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetAsyncResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Column headings for the search results. Each object is a column.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("columns")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Sql.Column>? Columns { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Cursor for the next set of paginated results. For CSV, TSV, and
-	/// TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
+	/// The cursor for the next set of paginated results.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Cursor</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cursor")]
-	public string? Cursor { get; init; }
+	public string? Cursor { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Identifier for the search. This value is only returned for async and saved
-	/// synchronous searches. For CSV, TSV, and TXT responses, this value is returned
-	/// in the <c>Async-ID</c> HTTP header.
+	/// Identifier for the search.
+	/// This value is returned only for async and saved synchronous searches.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-ID</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public string Id { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Id { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the response does not contain complete search results. If <c>is_partial</c>
-	/// is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running. If <c>is_partial</c>
-	/// is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or
-	/// timeout. This value is only returned for async and saved synchronous searches.
+	/// If <c>true</c>, the response does not contain complete search results.
+	/// If <c>is_partial</c> is <c>true</c> and <c>is_running</c> is <c>true</c>, the search is still running.
+	/// If <c>is_partial</c> is <c>true</c> but <c>is_running</c> is <c>false</c>, the results are partial due to a failure or timeout.
+	/// This value is returned only for async and saved synchronous searches.
 	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_partial")]
-	public bool IsPartial { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsPartial { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c>, the search is still running. If false, the search has finished.
-	/// This value is only returned for async and saved synchronous searches. For
-	/// CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c>
-	/// HTTP header.
+	/// If <c>true</c>, the search is still running.
+	/// If <c>false</c>, the search has finished.
+	/// This value is returned only for async and saved synchronous searches.
+	/// For CSV, TSV, and TXT responses, this value is returned in the <c>Async-partial</c> HTTP header.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("is_running")]
-	public bool IsRunning { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool IsRunning { get; set; }
 }

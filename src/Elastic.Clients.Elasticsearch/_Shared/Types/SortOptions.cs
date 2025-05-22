@@ -3,130 +3,246 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
-public partial class SortOptions
+public readonly partial struct SortOptionsDescriptor<TDocument>
 {
-	public static SortOptions Field(Field field) => new(field, FieldSort.Empty);
-}
-
-internal sealed class SortOptionsConverter : JsonConverter<SortOptions>
-{
-	// We manually define this converter since we simplify SortCombinations union from the spec as SortOptions instance.
-	// This requires a custom read method to handle deserialization of the potential union JSON as specified.
-
-	public override SortOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public SortOptionsDescriptor<TDocument> Field(Field field)
 	{
-		if (reader.TokenType == JsonTokenType.StartObject)
-		{
-			reader.Read();
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the variant held within this container.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "_doc")
-			{
-				var variant = JsonSerializer.Deserialize<ScoreSort?>(ref reader, options);
-				reader.Read();
-				return new SortOptions(propertyName, variant);
-			}
-
-			if (propertyName == "_score")
-			{
-				var variant = JsonSerializer.Deserialize<ScoreSort?>(ref reader, options);
-				reader.Read();
-				return new SortOptions(propertyName, variant);
-			}
-
-			if (propertyName == "_script")
-			{
-				var variant = JsonSerializer.Deserialize<ScriptSort?>(ref reader, options);
-				reader.Read();
-				return new SortOptions(propertyName, variant);
-			}
-
-			if (propertyName == "_geo_distance")
-			{
-				var variant = JsonSerializer.Deserialize<GeoDistanceSort?>(ref reader, options);
-				reader.Read();
-				return new SortOptions(propertyName, variant);
-			}
-
-			// For field sorts, the property name will be the field name
-			{
-				var variant = JsonSerializer.Deserialize<FieldSort>(ref reader, options);
-				reader.Read();
-				return new SortOptions(propertyName, variant);
-			}
-		}
-
-		else if (reader.TokenType == JsonTokenType.String)
-		{
-			var fieldName = reader.GetString();
-			return SortOptions.Field(fieldName, FieldSort.Empty);
-		}
-
-		throw new JsonException($"Unexpected JSON token '{reader.TokenType}' encountered while deserializing SortOptions.");
+		Instance.Field = new FieldSort(field);
+		return this;
 	}
 
-	public override void Write(Utf8JsonWriter writer, SortOptions value, JsonSerializerOptions options)
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object?>> field)
 	{
-		if (!options.TryGetClientSettings(out var settings))
-			ThrowHelper.ThrowJsonExceptionForMissingSettings();
+		Instance.Field = new FieldSort(field);
+		return this;
+	}
 
-		string? fieldName = null;
+	public SortOptionsDescriptor<TDocument> Field(Field field, Action<FieldSortDescriptor<TDocument>>? action)
+	{
+		Instance.Field = new FieldSort(field);
 
-		if (value.AdditionalPropertyName is IUrlParameter urlParameter)
+		if (action is null)
 		{
-			fieldName = urlParameter.GetString(settings);
+			return this;
 		}
 
-		// Special handling for shortcut on sorting with a basic field sort
-		if (value.Variant.Equals(FieldSort.Empty))
+		var descriptor = new FieldSortDescriptor<TDocument>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object?>> field, Action<FieldSortDescriptor<TDocument>>? action)
+	{
+		Instance.Field = new FieldSort(field);
+
+		if (action is null)
 		{
-			writer.WriteStringValue(fieldName ?? value.VariantName);
-			return;
+			return this;
 		}
 
-		writer.WriteStartObject();
+		var descriptor = new FieldSortDescriptor<TDocument>(Instance.Field);
+		action.Invoke(descriptor);
 
-		writer.WritePropertyName(fieldName ?? value.VariantName);
+		return this;
+	}
 
-		switch (value.VariantName)
+	public SortOptionsDescriptor<TDocument> Field(Field field, SortOrder order)
+	{
+		Instance.Field = new FieldSort(field)
 		{
-			case "_doc":
-				JsonSerializer.Serialize<ScoreSort>(writer, (ScoreSort)value.Variant, options);
-				break;
-			case "_score":
-				JsonSerializer.Serialize<ScoreSort>(writer, (ScoreSort)value.Variant, options);
-				break;
-			case "_script":
-				JsonSerializer.Serialize<ScriptSort>(writer, (ScriptSort)value.Variant, options);
-				break;
-			case "_geo_distance":
-				JsonSerializer.Serialize<GeoDistanceSort>(writer, (GeoDistanceSort)value.Variant, options);
-				break;
-			default:
-				JsonSerializer.Serialize<FieldSort>(writer, (FieldSort)value.Variant, options);
-				break;
+			Order = order
+		};
+
+		return this;
+	}
+
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object?>> field, SortOrder order)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		return this;
+	}
+
+	public SortOptionsDescriptor<TDocument> Field(Field field, SortOrder order, Action<FieldSortDescriptor<TDocument>>? action)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		if (action is null)
+		{
+			return this;
 		}
 
-		writer.WriteEndObject();
+		var descriptor = new FieldSortDescriptor<TDocument>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor<TDocument> Field(Expression<Func<TDocument, object?>> field, SortOrder order, Action<FieldSortDescriptor<TDocument>>? action)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor<TDocument>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+}
+
+public readonly partial struct SortOptionsDescriptor
+{
+	public SortOptionsDescriptor Field(Field field)
+	{
+		Instance.Field = new FieldSort(field);
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Expression<Func<T, object?>> field)
+	{
+		Instance.Field = new FieldSort(field);
+		return this;
+	}
+
+	public SortOptionsDescriptor Field(Field field, Action<FieldSortDescriptor>? action)
+	{
+		Instance.Field = new FieldSort(field);
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Field field, Action<FieldSortDescriptor<T>>? action)
+	{
+		Instance.Field = new FieldSort(field);
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor<T>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Expression<Func<T, object?>> field, Action<FieldSortDescriptor<T>>? action)
+	{
+		Instance.Field = new FieldSort(field);
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor<T>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field(Field field, SortOrder order)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Expression<Func<T, object?>> field, SortOrder order)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field(Field field, SortOrder order, Action<FieldSortDescriptor>? action)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Field field, SortOrder order, Action<FieldSortDescriptor<T>>? action)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor<T>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
+	}
+
+	public SortOptionsDescriptor Field<T>(Expression<Func<T, object?>> field, SortOrder order, Action<FieldSortDescriptor<T>>? action)
+	{
+		Instance.Field = new FieldSort(field)
+		{
+			Order = order
+		};
+
+		if (action is null)
+		{
+			return this;
+		}
+
+		var descriptor = new FieldSortDescriptor<T>(Instance.Field);
+		action.Invoke(descriptor);
+
+		return this;
 	}
 }

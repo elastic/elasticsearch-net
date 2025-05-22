@@ -17,38 +17,285 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class PutJobRequestParameters : RequestParameters
+public sealed partial class PutJobRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+}
+
+internal sealed partial class PutJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowLazyOpen = System.Text.Json.JsonEncodedText.Encode("allow_lazy_open");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisConfig = System.Text.Json.JsonEncodedText.Encode("analysis_config");
+	private static readonly System.Text.Json.JsonEncodedText PropAnalysisLimits = System.Text.Json.JsonEncodedText.Encode("analysis_limits");
+	private static readonly System.Text.Json.JsonEncodedText PropBackgroundPersistInterval = System.Text.Json.JsonEncodedText.Encode("background_persist_interval");
+	private static readonly System.Text.Json.JsonEncodedText PropCustomSettings = System.Text.Json.JsonEncodedText.Encode("custom_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropDailyModelSnapshotRetentionAfterDays = System.Text.Json.JsonEncodedText.Encode("daily_model_snapshot_retention_after_days");
+	private static readonly System.Text.Json.JsonEncodedText PropDataDescription = System.Text.Json.JsonEncodedText.Encode("data_description");
+	private static readonly System.Text.Json.JsonEncodedText PropDatafeedConfig = System.Text.Json.JsonEncodedText.Encode("datafeed_config");
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropGroups = System.Text.Json.JsonEncodedText.Encode("groups");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropModelPlotConfig = System.Text.Json.JsonEncodedText.Encode("model_plot_config");
+	private static readonly System.Text.Json.JsonEncodedText PropModelSnapshotRetentionDays = System.Text.Json.JsonEncodedText.Encode("model_snapshot_retention_days");
+	private static readonly System.Text.Json.JsonEncodedText PropRenormalizationWindowDays = System.Text.Json.JsonEncodedText.Encode("renormalization_window_days");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsIndexName = System.Text.Json.JsonEncodedText.Encode("results_index_name");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsRetentionDays = System.Text.Json.JsonEncodedText.Encode("results_retention_days");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowLazyOpen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig> propAnalysisConfig = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits?> propAnalysisLimits = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propBackgroundPersistInterval = default;
+		LocalJsonValue<object?> propCustomSettings = default;
+		LocalJsonValue<long?> propDailyModelSnapshotRetentionAfterDays = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataDescription> propDataDescription = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig?> propDatafeedConfig = default;
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propGroups = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propJobId = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig?> propModelPlotConfig = default;
+		LocalJsonValue<long?> propModelSnapshotRetentionDays = default;
+		LocalJsonValue<long?> propRenormalizationWindowDays = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName?> propResultsIndexName = default;
+		LocalJsonValue<long?> propResultsRetentionDays = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowLazyOpen.TryReadProperty(ref reader, options, PropAllowLazyOpen, null))
+			{
+				continue;
+			}
+
+			if (propAnalysisConfig.TryReadProperty(ref reader, options, PropAnalysisConfig, null))
+			{
+				continue;
+			}
+
+			if (propAnalysisLimits.TryReadProperty(ref reader, options, PropAnalysisLimits, null))
+			{
+				continue;
+			}
+
+			if (propBackgroundPersistInterval.TryReadProperty(ref reader, options, PropBackgroundPersistInterval, null))
+			{
+				continue;
+			}
+
+			if (propCustomSettings.TryReadProperty(ref reader, options, PropCustomSettings, null))
+			{
+				continue;
+			}
+
+			if (propDailyModelSnapshotRetentionAfterDays.TryReadProperty(ref reader, options, PropDailyModelSnapshotRetentionAfterDays, null))
+			{
+				continue;
+			}
+
+			if (propDataDescription.TryReadProperty(ref reader, options, PropDataDescription, null))
+			{
+				continue;
+			}
+
+			if (propDatafeedConfig.TryReadProperty(ref reader, options, PropDatafeedConfig, null))
+			{
+				continue;
+			}
+
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propGroups.TryReadProperty(ref reader, options, PropGroups, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propModelPlotConfig.TryReadProperty(ref reader, options, PropModelPlotConfig, null))
+			{
+				continue;
+			}
+
+			if (propModelSnapshotRetentionDays.TryReadProperty(ref reader, options, PropModelSnapshotRetentionDays, null))
+			{
+				continue;
+			}
+
+			if (propRenormalizationWindowDays.TryReadProperty(ref reader, options, PropRenormalizationWindowDays, null))
+			{
+				continue;
+			}
+
+			if (propResultsIndexName.TryReadProperty(ref reader, options, PropResultsIndexName, null))
+			{
+				continue;
+			}
+
+			if (propResultsRetentionDays.TryReadProperty(ref reader, options, PropResultsRetentionDays, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowLazyOpen = propAllowLazyOpen.Value,
+			AnalysisConfig = propAnalysisConfig.Value,
+			AnalysisLimits = propAnalysisLimits.Value,
+			BackgroundPersistInterval = propBackgroundPersistInterval.Value,
+			CustomSettings = propCustomSettings.Value,
+			DailyModelSnapshotRetentionAfterDays = propDailyModelSnapshotRetentionAfterDays.Value,
+			DataDescription = propDataDescription.Value,
+			DatafeedConfig = propDatafeedConfig.Value,
+			Description = propDescription.Value,
+			Groups = propGroups.Value,
+			JobId = propJobId.Value,
+			ModelPlotConfig = propModelPlotConfig.Value,
+			ModelSnapshotRetentionDays = propModelSnapshotRetentionDays.Value,
+			RenormalizationWindowDays = propRenormalizationWindowDays.Value,
+			ResultsIndexName = propResultsIndexName.Value,
+			ResultsRetentionDays = propResultsRetentionDays.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowLazyOpen, value.AllowLazyOpen, null, null);
+		writer.WriteProperty(options, PropAnalysisConfig, value.AnalysisConfig, null, null);
+		writer.WriteProperty(options, PropAnalysisLimits, value.AnalysisLimits, null, null);
+		writer.WriteProperty(options, PropBackgroundPersistInterval, value.BackgroundPersistInterval, null, null);
+		writer.WriteProperty(options, PropCustomSettings, value.CustomSettings, null, null);
+		writer.WriteProperty(options, PropDailyModelSnapshotRetentionAfterDays, value.DailyModelSnapshotRetentionAfterDays, null, null);
+		writer.WriteProperty(options, PropDataDescription, value.DataDescription, null, null);
+		writer.WriteProperty(options, PropDatafeedConfig, value.DatafeedConfig, null, null);
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropGroups, value.Groups, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropModelPlotConfig, value.ModelPlotConfig, null, null);
+		writer.WriteProperty(options, PropModelSnapshotRetentionDays, value.ModelSnapshotRetentionDays, null, null);
+		writer.WriteProperty(options, PropRenormalizationWindowDays, value.RenormalizationWindowDays, null, null);
+		writer.WriteProperty(options, PropResultsIndexName, value.ResultsIndexName, null, null);
+		writer.WriteProperty(options, PropResultsRetentionDays, value.ResultsRetentionDays, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Create an anomaly detection job.
+/// </para>
+/// <para>
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestConverter))]
+public sealed partial class PutJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestParameters>
 {
-	public PutJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig analysisConfig, Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription)
+	{
+		AnalysisConfig = analysisConfig;
+		DataDescription = dataDescription;
+	}
+#if NET7_0_OR_GREATER
+	public PutJobRequest()
 	{
 	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningPutJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -56,10 +303,67 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 
 	/// <summary>
 	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
 	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("allow_lazy_open")]
 	public bool? AllowLazyOpen { get; set; }
 
 	/// <summary>
@@ -67,15 +371,17 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis_config")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfig { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analysis_limits")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? AnalysisLimits { get; set; }
 
 	/// <summary>
@@ -83,7 +389,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("background_persist_interval")]
 	public Elastic.Clients.Elasticsearch.Duration? BackgroundPersistInterval { get; set; }
 
 	/// <summary>
@@ -91,7 +396,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option. Contains custom meta data about the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("custom_settings")]
 	public object? CustomSettings { get; set; }
 
 	/// <summary>
@@ -99,7 +403,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("daily_model_snapshot_retention_after_days")]
 	public long? DailyModelSnapshotRetentionAfterDays { get; set; }
 
 	/// <summary>
@@ -107,15 +410,17 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_description")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescription { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("datafeed_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? DatafeedConfig { get; set; }
 
 	/// <summary>
@@ -123,7 +428,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -131,15 +435,20 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("groups")]
-	public ICollection<string>? Groups { get; set; }
+	public System.Collections.Generic.ICollection<string>? Groups { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_plot_config")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfig { get; set; }
 
 	/// <summary>
@@ -147,7 +456,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_snapshot_retention_days")]
 	public long? ModelSnapshotRetentionDays { get; set; }
 
 	/// <summary>
@@ -155,7 +463,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("renormalization_window_days")]
 	public long? RenormalizationWindowDays { get; set; }
 
 	/// <summary>
@@ -163,7 +470,6 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_index_name")]
 	public Elastic.Clients.Elasticsearch.IndexName? ResultsIndexName { get; set; }
 
 	/// <summary>
@@ -171,73 +477,158 @@ public sealed partial class PutJobRequest : PlainRequest<PutJobRequestParameters
 	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_retention_days")]
 	public long? ResultsRetentionDays { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Create an anomaly detection job.
+/// </para>
+/// <para>
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescriptor<PutJobRequestDescriptor<TDocument>, PutJobRequestParameters>
+public readonly partial struct PutJobRequestDescriptor
 {
-	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest Instance { get; init; }
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_job";
-
-	public PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public PutJobRequestDescriptor()
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool? AllowLazyOpenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> AnalysisConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> AnalysisConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? AnalysisLimitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor AnalysisLimitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
-	private object? CustomSettingsValue { get; set; }
-	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> DataDescriptionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>> DataDescriptionDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? DatafeedConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> DatafeedConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>> DatafeedConfigDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> ModelPlotConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>> ModelPlotConfigDescriptorAction { get; set; }
-	private long? ModelSnapshotRetentionDaysValue { get; set; }
-	private long? RenormalizationWindowDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? ResultsIndexNameValue { get; set; }
-	private long? ResultsRetentionDaysValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> AllowLazyOpen(bool? allowLazyOpen = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AllowLazyOpen(bool? value = true)
 	{
-		AllowLazyOpenValue = allowLazyOpen;
-		return Self;
+		Instance.AllowLazyOpen = value;
+		return this;
 	}
 
 	/// <summary>
@@ -245,28 +636,32 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig analysisConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig value)
 	{
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigValue = analysisConfig;
-		return Self;
+		Instance.AnalysisConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> action)
 	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigDescriptor = descriptor;
-		return Self;
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> AnalysisConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<T>> action)
 	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -274,28 +669,32 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? analysisLimits)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? value)
 	{
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsValue = analysisLimits;
-		return Self;
+		Instance.AnalysisLimits = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisLimits()
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsDescriptor = descriptor;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> AnalysisLimits(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor AnalysisLimits(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor>? action)
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -303,10 +702,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BackgroundPersistIntervalValue = backgroundPersistInterval;
-		return Self;
+		Instance.BackgroundPersistInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -314,10 +713,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option. Contains custom meta data about the job.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> CustomSettings(object? customSettings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor CustomSettings(object? value)
 	{
-		CustomSettingsValue = customSettings;
-		return Self;
+		Instance.CustomSettings = value;
+		return this;
 	}
 
 	/// <summary>
@@ -325,10 +724,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? value)
 	{
-		DailyModelSnapshotRetentionAfterDaysValue = dailyModelSnapshotRetentionAfterDays;
-		return Self;
+		Instance.DailyModelSnapshotRetentionAfterDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -336,28 +735,43 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription value)
 	{
-		DataDescriptionDescriptor = null;
-		DataDescriptionDescriptorAction = null;
-		DataDescriptionValue = dataDescription;
-		return Self;
+		Instance.DataDescription = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DataDescription()
 	{
-		DataDescriptionValue = null;
-		DataDescriptionDescriptorAction = null;
-		DataDescriptionDescriptor = descriptor;
-		return Self;
+		Instance.DataDescription = Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> DataDescription(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DataDescription(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor>? action)
 	{
-		DataDescriptionValue = null;
-		DataDescriptionDescriptor = null;
-		DataDescriptionDescriptorAction = configure;
-		return Self;
+		Instance.DataDescription = Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DataDescription<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<T>>? action)
+	{
+		Instance.DataDescription = Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -365,28 +779,43 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? datafeedConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? value)
 	{
-		DatafeedConfigDescriptor = null;
-		DatafeedConfigDescriptorAction = null;
-		DatafeedConfigValue = datafeedConfig;
-		return Self;
+		Instance.DatafeedConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DatafeedConfig()
 	{
-		DatafeedConfigValue = null;
-		DatafeedConfigDescriptorAction = null;
-		DatafeedConfigDescriptor = descriptor;
-		return Self;
+		Instance.DatafeedConfig = Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> DatafeedConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DatafeedConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor>? action)
 	{
-		DatafeedConfigValue = null;
-		DatafeedConfigDescriptor = null;
-		DatafeedConfigDescriptorAction = configure;
-		return Self;
+		Instance.DatafeedConfig = Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor DatafeedConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<T>>? action)
+	{
+		Instance.DatafeedConfig = Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -394,10 +823,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -405,10 +834,32 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> Groups(ICollection<string>? groups)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Groups(System.Collections.Generic.ICollection<string>? value)
 	{
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Groups(params string[] values)
+	{
+		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.JobId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -416,28 +867,43 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? modelPlotConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? value)
 	{
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigValue = modelPlotConfig;
-		return Self;
+		Instance.ModelPlotConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ModelPlotConfig()
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigDescriptor = descriptor;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor<TDocument> ModelPlotConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ModelPlotConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor>? action)
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = configure;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ModelPlotConfig<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<T>>? action)
+	{
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -445,10 +911,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ModelSnapshotRetentionDays(long? value)
 	{
-		ModelSnapshotRetentionDaysValue = modelSnapshotRetentionDays;
-		return Self;
+		Instance.ModelSnapshotRetentionDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -456,10 +922,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? renormalizationWindowDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor RenormalizationWindowDays(long? value)
 	{
-		RenormalizationWindowDaysValue = renormalizationWindowDays;
-		return Self;
+		Instance.RenormalizationWindowDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -467,10 +933,10 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? resultsIndexName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		ResultsIndexNameValue = resultsIndexName;
-		return Self;
+		Instance.ResultsIndexName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -478,222 +944,212 @@ public sealed partial class PutJobRequestDescriptor<TDocument> : RequestDescript
 	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor<TDocument> ResultsRetentionDays(long? resultsRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ResultsRetentionDays(long? value)
 	{
-		ResultsRetentionDaysValue = resultsRetentionDays;
-		return Self;
+		Instance.ResultsRetentionDays = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyOpenValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_open");
-			writer.WriteBooleanValue(AllowLazyOpenValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalysisConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigDescriptor, options);
-		}
-		else if (AnalysisConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>(AnalysisConfigDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (AnalysisLimitsDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsDescriptor, options);
-		}
-		else if (AnalysisLimitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor(AnalysisLimitsDescriptorAction), options);
-		}
-		else if (AnalysisLimitsValue is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (BackgroundPersistIntervalValue is not null)
-		{
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (CustomSettingsValue is not null)
-		{
-			writer.WritePropertyName("custom_settings");
-			JsonSerializer.Serialize(writer, CustomSettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DailyModelSnapshotRetentionAfterDaysValue.HasValue)
-		{
-			writer.WritePropertyName("daily_model_snapshot_retention_after_days");
-			writer.WriteNumberValue(DailyModelSnapshotRetentionAfterDaysValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (DataDescriptionDescriptor is not null)
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, DataDescriptionDescriptor, options);
-		}
-		else if (DataDescriptionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>(DataDescriptionDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, DataDescriptionValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (DatafeedConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, DatafeedConfigDescriptor, options);
-		}
-		else if (DatafeedConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>(DatafeedConfigDescriptorAction), options);
-		}
-		else if (DatafeedConfigValue is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, DatafeedConfigValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (GroupsValue is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
-
-		if (ModelPlotConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigDescriptor, options);
-		}
-		else if (ModelPlotConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(ModelPlotConfigDescriptorAction), options);
-		}
-		else if (ModelPlotConfigValue is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigValue, options);
-		}
-
-		if (ModelSnapshotRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("model_snapshot_retention_days");
-			writer.WriteNumberValue(ModelSnapshotRetentionDaysValue.Value);
-		}
-
-		if (RenormalizationWindowDaysValue.HasValue)
-		{
-			writer.WritePropertyName("renormalization_window_days");
-			writer.WriteNumberValue(RenormalizationWindowDaysValue.Value);
-		}
-
-		if (ResultsIndexNameValue is not null)
-		{
-			writer.WritePropertyName("results_index_name");
-			JsonSerializer.Serialize(writer, ResultsIndexNameValue, options);
-		}
-
-		if (ResultsRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("results_retention_days");
-			writer.WriteNumberValue(ResultsRetentionDaysValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Create an anomaly detection job.
+/// </para>
+/// <para>
 /// If you include a <c>datafeed_config</c>, you must have read index privileges on the source index.
+/// If you include a <c>datafeed_config</c> but do not provide a query, the datafeed uses <c>{"match_all": {"boost": 1}}</c>.
 /// </para>
 /// </summary>
-public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRequestDescriptor, PutJobRequestParameters>
+public readonly partial struct PutJobRequestDescriptor<TDocument>
 {
-	internal PutJobRequestDescriptor(Action<PutJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest Instance { get; init; }
 
-	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningPutJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.put_job";
-
-	public PutJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public PutJobRequestDescriptor()
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private bool? AllowLazyOpenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig AnalysisConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor AnalysisConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> AnalysisConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? AnalysisLimitsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor AnalysisLimitsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor> AnalysisLimitsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? BackgroundPersistIntervalValue { get; set; }
-	private object? CustomSettingsValue { get; set; }
-	private long? DailyModelSnapshotRetentionAfterDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataDescription DataDescriptionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor DataDescriptionDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor> DataDescriptionDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? DatafeedConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor DatafeedConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor> DatafeedConfigDescriptorAction { get; set; }
-	private string? DescriptionValue { get; set; }
-	private ICollection<string>? GroupsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? ModelPlotConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor ModelPlotConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor> ModelPlotConfigDescriptorAction { get; set; }
-	private long? ModelSnapshotRetentionDaysValue { get; set; }
-	private long? RenormalizationWindowDaysValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexName? ResultsIndexNameValue { get; set; }
-	private long? ResultsRetentionDaysValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+	/// <c>_all</c> string or when no indices are specified.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+	/// whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>all</c>: Match any data stream or index, including hidden ones.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>closed</c>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>hidden</c>: Match hidden data streams and hidden indices. Must be combined with <c>open</c>, <c>closed</c>, or both.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>none</c>: Wildcard patterns are not accepted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>open</c>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, concrete, expanded or aliased indices are ignored when frozen.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, unavailable indices (missing or closed) are ignored.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <c>xpack.ml.max_lazy_ml_nodes</c> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor AllowLazyOpen(bool? allowLazyOpen = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AllowLazyOpen(bool? value = true)
 	{
-		AllowLazyOpenValue = allowLazyOpen;
-		return Self;
+		Instance.AllowLazyOpen = value;
+		return this;
 	}
 
 	/// <summary>
@@ -701,28 +1157,21 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig analysisConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig value)
 	{
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigValue = analysisConfig;
-		return Self;
+		Instance.AnalysisConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AnalysisConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>> action)
 	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptorAction = null;
-		AnalysisConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutJobRequestDescriptor AnalysisConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor> configure)
-	{
-		AnalysisConfigValue = null;
-		AnalysisConfigDescriptor = null;
-		AnalysisConfigDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisConfig = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -730,28 +1179,32 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? analysisLimits)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits? value)
 	{
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsValue = analysisLimits;
-		return Self;
+		Instance.AnalysisLimits = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AnalysisLimits()
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptorAction = null;
-		AnalysisLimitsDescriptor = descriptor;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor AnalysisLimits(Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> AnalysisLimits(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor>? action)
 	{
-		AnalysisLimitsValue = null;
-		AnalysisLimitsDescriptor = null;
-		AnalysisLimitsDescriptorAction = configure;
-		return Self;
+		Instance.AnalysisLimits = Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -759,10 +1212,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <c>background_persist_interval</c> value too low.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? backgroundPersistInterval)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		BackgroundPersistIntervalValue = backgroundPersistInterval;
-		return Self;
+		Instance.BackgroundPersistInterval = value;
+		return this;
 	}
 
 	/// <summary>
@@ -770,10 +1223,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option. Contains custom meta data about the job.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor CustomSettings(object? customSettings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> CustomSettings(object? value)
 	{
-		CustomSettingsValue = customSettings;
-		return Self;
+		Instance.CustomSettings = value;
+		return this;
 	}
 
 	/// <summary>
@@ -781,10 +1234,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <c>model_snapshot_retention_days</c>.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? dailyModelSnapshotRetentionAfterDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DailyModelSnapshotRetentionAfterDays(long? value)
 	{
-		DailyModelSnapshotRetentionAfterDaysValue = dailyModelSnapshotRetentionAfterDays;
-		return Self;
+		Instance.DailyModelSnapshotRetentionAfterDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -792,28 +1245,32 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription dataDescription)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription value)
 	{
-		DataDescriptionDescriptor = null;
-		DataDescriptionDescriptorAction = null;
-		DataDescriptionValue = dataDescription;
-		return Self;
+		Instance.DataDescription = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DataDescription()
 	{
-		DataDescriptionValue = null;
-		DataDescriptionDescriptorAction = null;
-		DataDescriptionDescriptor = descriptor;
-		return Self;
+		Instance.DataDescription = Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor DataDescription(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DataDescription(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>>? action)
 	{
-		DataDescriptionValue = null;
-		DataDescriptionDescriptor = null;
-		DataDescriptionDescriptorAction = configure;
-		return Self;
+		Instance.DataDescription = Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -821,28 +1278,32 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? datafeedConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig? value)
 	{
-		DatafeedConfigDescriptor = null;
-		DatafeedConfigDescriptorAction = null;
-		DatafeedConfigValue = datafeedConfig;
-		return Self;
+		Instance.DatafeedConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DatafeedConfig()
 	{
-		DatafeedConfigValue = null;
-		DatafeedConfigDescriptorAction = null;
-		DatafeedConfigDescriptor = descriptor;
-		return Self;
+		Instance.DatafeedConfig = Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor DatafeedConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> DatafeedConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>>? action)
 	{
-		DatafeedConfigValue = null;
-		DatafeedConfigDescriptor = null;
-		DatafeedConfigDescriptorAction = configure;
-		return Self;
+		Instance.DatafeedConfig = Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -850,10 +1311,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// A description of the job.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -861,10 +1322,32 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// A list of job groups. A job can belong to no groups or many.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor Groups(ICollection<string>? groups)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups(System.Collections.Generic.ICollection<string>? value)
 	{
-		GroupsValue = groups;
-		return Self;
+		Instance.Groups = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of job groups. A job can belong to no groups or many.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Groups(params string[] values)
+	{
+		Instance.Groups = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> JobId(Elastic.Clients.Elasticsearch.Id? value)
+	{
+		Instance.JobId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -872,28 +1355,32 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? modelPlotConfig)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig? value)
 	{
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigValue = modelPlotConfig;
-		return Self;
+		Instance.ModelPlotConfig = value;
+		return this;
 	}
 
-	public PutJobRequestDescriptor ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ModelPlotConfig()
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptorAction = null;
-		ModelPlotConfigDescriptor = descriptor;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public PutJobRequestDescriptor ModelPlotConfig(Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ModelPlotConfig(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>>? action)
 	{
-		ModelPlotConfigValue = null;
-		ModelPlotConfigDescriptor = null;
-		ModelPlotConfigDescriptorAction = configure;
-		return Self;
+		Instance.ModelPlotConfig = Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -901,10 +1388,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor ModelSnapshotRetentionDays(long? modelSnapshotRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ModelSnapshotRetentionDays(long? value)
 	{
-		ModelSnapshotRetentionDaysValue = modelSnapshotRetentionDays;
-		return Self;
+		Instance.ModelSnapshotRetentionDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -912,10 +1399,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor RenormalizationWindowDays(long? renormalizationWindowDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> RenormalizationWindowDays(long? value)
 	{
-		RenormalizationWindowDaysValue = renormalizationWindowDays;
-		return Self;
+		Instance.RenormalizationWindowDays = value;
+		return this;
 	}
 
 	/// <summary>
@@ -923,10 +1410,10 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// A text string that affects the name of the machine learning results index. By default, the job generates an index named <c>.ml-anomalies-shared</c>.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? resultsIndexName)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName? value)
 	{
-		ResultsIndexNameValue = resultsIndexName;
-		return Self;
+		Instance.ResultsIndexName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -934,155 +1421,59 @@ public sealed partial class PutJobRequestDescriptor : RequestDescriptor<PutJobRe
 	/// Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
 	/// </para>
 	/// </summary>
-	public PutJobRequestDescriptor ResultsRetentionDays(long? resultsRetentionDays)
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ResultsRetentionDays(long? value)
 	{
-		ResultsRetentionDaysValue = resultsRetentionDays;
-		return Self;
+		Instance.ResultsRetentionDays = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AllowLazyOpenValue.HasValue)
-		{
-			writer.WritePropertyName("allow_lazy_open");
-			writer.WriteBooleanValue(AllowLazyOpenValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (AnalysisConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigDescriptor, options);
-		}
-		else if (AnalysisConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor(AnalysisConfigDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("analysis_config");
-			JsonSerializer.Serialize(writer, AnalysisConfigValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (AnalysisLimitsDescriptor is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsDescriptor, options);
-		}
-		else if (AnalysisLimitsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor(AnalysisLimitsDescriptorAction), options);
-		}
-		else if (AnalysisLimitsValue is not null)
-		{
-			writer.WritePropertyName("analysis_limits");
-			JsonSerializer.Serialize(writer, AnalysisLimitsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (BackgroundPersistIntervalValue is not null)
-		{
-			writer.WritePropertyName("background_persist_interval");
-			JsonSerializer.Serialize(writer, BackgroundPersistIntervalValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (CustomSettingsValue is not null)
-		{
-			writer.WritePropertyName("custom_settings");
-			JsonSerializer.Serialize(writer, CustomSettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (DailyModelSnapshotRetentionAfterDaysValue.HasValue)
-		{
-			writer.WritePropertyName("daily_model_snapshot_retention_after_days");
-			writer.WriteNumberValue(DailyModelSnapshotRetentionAfterDaysValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (DataDescriptionDescriptor is not null)
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, DataDescriptionDescriptor, options);
-		}
-		else if (DataDescriptionDescriptorAction is not null)
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor(DataDescriptionDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("data_description");
-			JsonSerializer.Serialize(writer, DataDescriptionValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (DatafeedConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, DatafeedConfigDescriptor, options);
-		}
-		else if (DatafeedConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor(DatafeedConfigDescriptorAction), options);
-		}
-		else if (DatafeedConfigValue is not null)
-		{
-			writer.WritePropertyName("datafeed_config");
-			JsonSerializer.Serialize(writer, DatafeedConfigValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (GroupsValue is not null)
-		{
-			writer.WritePropertyName("groups");
-			JsonSerializer.Serialize(writer, GroupsValue, options);
-		}
-
-		if (ModelPlotConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigDescriptor, options);
-		}
-		else if (ModelPlotConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(ModelPlotConfigDescriptorAction), options);
-		}
-		else if (ModelPlotConfigValue is not null)
-		{
-			writer.WritePropertyName("model_plot_config");
-			JsonSerializer.Serialize(writer, ModelPlotConfigValue, options);
-		}
-
-		if (ModelSnapshotRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("model_snapshot_retention_days");
-			writer.WriteNumberValue(ModelSnapshotRetentionDaysValue.Value);
-		}
-
-		if (RenormalizationWindowDaysValue.HasValue)
-		{
-			writer.WritePropertyName("renormalization_window_days");
-			writer.WriteNumberValue(RenormalizationWindowDaysValue.Value);
-		}
-
-		if (ResultsIndexNameValue is not null)
-		{
-			writer.WritePropertyName("results_index_name");
-			JsonSerializer.Serialize(writer, ResultsIndexNameValue, options);
-		}
-
-		if (ResultsRetentionDaysValue.HasValue)
-		{
-			writer.WritePropertyName("results_retention_days");
-			writer.WriteNumberValue(ResultsRetentionDaysValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class ModelPlotConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnnotationsEnabled = System.Text.Json.JsonEncodedText.Encode("annotations_enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropTerms = System.Text.Json.JsonEncodedText.Encode("terms");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAnnotationsEnabled = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTerms = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnnotationsEnabled.TryReadProperty(ref reader, options, PropAnnotationsEnabled, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propTerms.TryReadProperty(ref reader, options, PropTerms, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AnnotationsEnabled = propAnnotationsEnabled.Value,
+			Enabled = propEnabled.Value,
+			Terms = propTerms.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnnotationsEnabled, value.AnnotationsEnabled, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropTerms, value.Terms, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigConverter))]
 public sealed partial class ModelPlotConfig
 {
+#if NET7_0_OR_GREATER
+	public ModelPlotConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ModelPlotConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("annotations_enabled")]
 	public bool? AnnotationsEnabled { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class ModelPlotConfig
 	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
 
 	/// <summary>
@@ -50,31 +118,37 @@ public sealed partial class ModelPlotConfig
 	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("terms")]
 	public Elastic.Clients.Elasticsearch.Field? Terms { get; set; }
 }
 
-public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableDescriptor<ModelPlotConfigDescriptor<TDocument>>
+public readonly partial struct ModelPlotConfigDescriptor<TDocument>
 {
-	internal ModelPlotConfigDescriptor(Action<ModelPlotConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Instance { get; init; }
 
-	public ModelPlotConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelPlotConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AnnotationsEnabledValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TermsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelPlotConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor<TDocument> AnnotationsEnabled(bool? annotationsEnabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> AnnotationsEnabled(bool? value = true)
 	{
-		AnnotationsEnabledValue = annotationsEnabled;
-		return Self;
+		Instance.AnnotationsEnabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -82,10 +156,10 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor<TDocument> Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Enabled(bool? value = true)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -93,10 +167,10 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Field? terms)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Terms(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -104,69 +178,54 @@ public sealed partial class ModelPlotConfigDescriptor<TDocument> : SerializableD
 	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor<TDocument> Terms<TValue>(Expression<Func<TDocument, TValue>> terms)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument> Terms(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
-	public ModelPlotConfigDescriptor<TDocument> Terms(Expression<Func<TDocument, object>> terms)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>>? action)
 	{
-		TermsValue = terms;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AnnotationsEnabledValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("annotations_enabled");
-			writer.WriteBooleanValue(AnnotationsEnabledValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<ModelPlotConfigDescriptor>
+public readonly partial struct ModelPlotConfigDescriptor
 {
-	internal ModelPlotConfigDescriptor(Action<ModelPlotConfigDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Instance { get; init; }
 
-	public ModelPlotConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelPlotConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AnnotationsEnabledValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TermsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ModelPlotConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// If true, enables calculation and storage of the model change annotations for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor AnnotationsEnabled(bool? annotationsEnabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor AnnotationsEnabled(bool? value = true)
 	{
-		AnnotationsEnabledValue = annotationsEnabled;
-		return Self;
+		Instance.AnnotationsEnabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -174,10 +233,10 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	/// If true, enables calculation and storage of the model bounds for each entity that is being analyzed.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Enabled(bool? value = true)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
 	/// <summary>
@@ -185,10 +244,10 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor Terms(Elastic.Clients.Elasticsearch.Field? terms)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Terms(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
 	/// <summary>
@@ -196,44 +255,22 @@ public sealed partial class ModelPlotConfigDescriptor : SerializableDescriptor<M
 	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
 	/// </para>
 	/// </summary>
-	public ModelPlotConfigDescriptor Terms<TDocument, TValue>(Expression<Func<TDocument, TValue>> terms)
+	public Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor Terms<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TermsValue = terms;
-		return Self;
+		Instance.Terms = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Limits data collection to this comma separated list of partition or by field values. If terms are not specified or it is an empty string, no filtering is applied. Wildcards are not supported. Only the specified terms can be viewed when using the Single Metric Viewer.
-	/// </para>
-	/// </summary>
-	public ModelPlotConfigDescriptor Terms<TDocument>(Expression<Func<TDocument, object>> terms)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor>? action)
 	{
-		TermsValue = terms;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AnnotationsEnabledValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("annotations_enabled");
-			writer.WriteBooleanValue(AnnotationsEnabledValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (TermsValue is not null)
-		{
-			writer.WritePropertyName("terms");
-			JsonSerializer.Serialize(writer, TermsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

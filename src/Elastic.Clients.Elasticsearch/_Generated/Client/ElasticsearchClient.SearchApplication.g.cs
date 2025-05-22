@@ -18,867 +18,537 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
-public partial class SearchApplicationNamespacedClient : NamespacedClientProxy
+public partial class SearchApplicationNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="SearchApplicationNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected SearchApplicationNamespacedClient() : base()
 	{
 	}
 
-	internal SearchApplicationNamespacedClient(ElasticsearchClient client) : base(client)
+	internal SearchApplicationNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSearchApplicationResponse Delete(DeleteSearchApplicationRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteSearchApplicationRequest, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSearchApplicationResponse> DeleteAsync(DeleteSearchApplicationRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteSearchApplicationRequest, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSearchApplicationResponse Delete(DeleteSearchApplicationRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteSearchApplicationRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteSearchApplicationResponse Delete(Elastic.Clients.Elasticsearch.Name name, Action<DeleteSearchApplicationRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteSearchApplicationRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSearchApplicationResponse> DeleteAsync(DeleteSearchApplicationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSearchApplicationRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a search application.
-	/// Remove a search application and its associated alias. Indices attached to the search application are not removed.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteSearchApplicationResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteSearchApplicationRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteSearchApplicationRequestDescriptor, DeleteSearchApplicationResponse, DeleteSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(DeleteBehavioralAnalyticsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteBehavioralAnalyticsRequest, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(DeleteBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteBehavioralAnalyticsRequest, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(DeleteBehavioralAnalyticsRequestDescriptor descriptor)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.DeleteBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteBehavioralAnalyticsResponse DeleteBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, Action<DeleteBehavioralAnalyticsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(DeleteBehavioralAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete a behavioral analytics collection.
-	/// The associated data stream is also deleted.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteBehavioralAnalyticsResponse> DeleteBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteBehavioralAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteBehavioralAnalyticsRequestDescriptor, DeleteBehavioralAnalyticsResponse, DeleteBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSearchApplicationResponse Get(GetSearchApplicationRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetSearchApplicationRequest, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSearchApplicationResponse> GetAsync(GetSearchApplicationRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetSearchApplicationRequest, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSearchApplicationResponse Get(GetSearchApplicationRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSearchApplicationRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSearchApplicationResponse Get(Elastic.Clients.Elasticsearch.Name name, Action<GetSearchApplicationRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetSearchApplicationRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSearchApplicationResponse> GetAsync(GetSearchApplicationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSearchApplicationRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get search application details.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSearchApplicationResponse> GetAsync(Elastic.Clients.Elasticsearch.Name name, Action<GetSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSearchApplicationRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSearchApplicationRequestDescriptor, GetSearchApplicationResponse, GetSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(GetBehavioralAnalyticsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequest, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(GetBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse GetBehavioralAnalytics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequest, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(GetBehavioralAnalyticsRequestDescriptor descriptor)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name, Action<GetBehavioralAnalyticsRequestDescriptor> configureRequest)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics()
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>? name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.GetBehavioralAnalyticsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBehavioralAnalyticsResponse GetBehavioralAnalytics(Action<GetBehavioralAnalyticsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(GetBehavioralAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Name>? name, Action<GetBehavioralAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get behavioral analytics collections.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBehavioralAnalyticsResponse> GetBehavioralAnalyticsAsync(Action<GetBehavioralAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBehavioralAnalyticsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBehavioralAnalyticsRequestDescriptor, GetBehavioralAnalyticsResponse, GetBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ListRequest, ListResponse, ListRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.ListResponse List(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(Elastic.Clients.Elasticsearch.SearchApplication.ListRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ListRequest, ListResponse, ListRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(ListRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.ListResponse> ListAsync(System.Action<Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ListRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.ListRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.ListRequest, Elastic.Clients.Elasticsearch.SearchApplication.ListResponse, Elastic.Clients.Elasticsearch.SearchApplication.ListRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ListResponse List(Action<ListRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ListRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(ListRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the existing search applications.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/list-search-applications.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ListResponse> ListAsync(Action<ListRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ListRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ListRequestDescriptor, ListResponse, ListRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(PutSearchApplicationRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutSearchApplicationRequest, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(PutSearchApplicationRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse PostBehavioralAnalyticsEvent(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutSearchApplicationRequest, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(PutSearchApplicationRequestDescriptor descriptor)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse> PostBehavioralAnalyticsEventAsync(Elastic.Clients.Elasticsearch.Name collectionName, Elastic.Clients.Elasticsearch.SearchApplication.EventType eventType, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestDescriptor(collectionName, eventType);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequest, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventResponse, Elastic.Clients.Elasticsearch.SearchApplication.PostBehavioralAnalyticsEventRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(PutSearchApplicationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update a search application.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-search-application.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationParameters searchApplication, Elastic.Clients.Elasticsearch.Name name, Action<PutSearchApplicationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutSearchApplicationRequestDescriptor(searchApplication, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutSearchApplicationRequestDescriptor, PutSearchApplicationResponse, PutSearchApplicationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(PutBehavioralAnalyticsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutBehavioralAnalyticsRequest, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(PutBehavioralAnalyticsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse Put(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutBehavioralAnalyticsRequest, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(PutBehavioralAnalyticsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse> PutAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutSearchApplicationRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, Action<PutBehavioralAnalyticsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(PutBehavioralAnalyticsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutBehavioralAnalyticsRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a behavioral analytics collection.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-analytics-collection.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutBehavioralAnalyticsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutBehavioralAnalyticsRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutBehavioralAnalyticsRequestDescriptor, PutBehavioralAnalyticsResponse, PutBehavioralAnalyticsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Run a search application search.
-	/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
-	/// Unspecified template parameters are assigned their default values if applicable.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SearchApplicationSearchResponse<TDocument> Search<TDocument>(SearchApplicationSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SearchApplicationSearchRequest, SearchApplicationSearchResponse<TDocument>, SearchApplicationSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Run a search application search.
-	/// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
-	/// Unspecified template parameters are assigned their default values if applicable.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/search-application-search.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(SearchApplicationSearchRequest request, CancellationToken cancellationToken = default)
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse PutBehavioralAnalytics(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SearchApplicationSearchRequest, SearchApplicationSearchResponse<TDocument>, SearchApplicationSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	[System.Obsolete("Deprecated in '9.0.0'.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse> PutBehavioralAnalyticsAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequest, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsResponse, Elastic.Clients.Elasticsearch.SearchApplication.PutBehavioralAnalyticsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse RenderQuery(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse> RenderQueryAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequest, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryResponse, Elastic.Clients.Elasticsearch.SearchApplication.RenderQueryRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument> Search<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>> SearchAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequest, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchResponse<TDocument>, Elastic.Clients.Elasticsearch.SearchApplication.SearchApplicationSearchRequestParameters>(request, cancellationToken);
 	}
 }

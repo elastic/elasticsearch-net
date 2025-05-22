@@ -4,19 +4,22 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [JsonConverter(typeof(DataStreamNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public sealed class DataStreamName : IEquatable<DataStreamName>, IUrlParameter
+public sealed class DataStreamName :
+	IEquatable<DataStreamName>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<DataStreamName>
+#endif
 {
 	internal DataStreamName(string dataStreamName) => Name = dataStreamName;
 
@@ -57,24 +60,42 @@ public sealed class DataStreamName : IEquatable<DataStreamName>, IUrlParameter
 			return (TypeHashCode * 23) ^ (Name.GetHashCode());
 		}
 	}
+
+	#region IParsable
+
+	public static DataStreamName Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out DataStreamName? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new DataStreamName(s);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
 internal sealed class DataStreamNameConverter : JsonConverter<DataStreamName>
 {
 	public override DataStreamName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.String)
-			throw new JsonException($"Unexpected token '{reader.TokenType}' for DataStreamName");
+		reader.ValidateToken(JsonTokenType.String);
 
 		return reader.GetString();
 	}
 
 	public override void Write(Utf8JsonWriter writer, DataStreamName value, JsonSerializerOptions options)
 	{
-		if (value is null || value.Name is null)
+		if (value?.Name is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
 		writer.WriteStringValue(value.Name);

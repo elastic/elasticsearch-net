@@ -3,16 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 namespace Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
 /// <summary>
 /// The built-in internal serializer that the <see cref="ElasticsearchClient"/> uses to serialize
@@ -22,67 +20,83 @@ public class DefaultSourceSerializer :
 	SystemTextJsonSerializer
 {
 	/// <summary>
-	/// Constructs a new <see cref="DefaultSourceSerializer"/> instance that accepts an <see cref="Action{T}"/> that can
-	/// be provided to customize the default <see cref="JsonSerializerOptions"/>.
+	/// Constructs a new <see cref="DefaultSourceSerializer"/> instance.
 	/// </summary>
-	/// <param name="settings">An <see cref="IElasticsearchClientSettings"/> instance to which this serializers
-	/// <see cref="JsonSerializerOptions"/> will be linked.
-	/// </param>
-	/// <param name="configureOptions">
-	/// An optional <see cref="Action{T}"/> to customize the configuration of the default <see cref="JsonSerializerOptions"/>.
-	/// </param>
+	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer will be linked.</param>
+	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
 	public DefaultSourceSerializer(IElasticsearchClientSettings settings, Action<JsonSerializerOptions>? configureOptions = null) :
-		base(new DefaultSourceSerializerOptionsProvider(configureOptions)) =>
-		LinkSettings(settings);
+		base(new DefaultSourceSerializerOptionsProvider(settings, configureOptions))
+	{
+	}
 
 	/// <summary>
-	/// Links the <see cref="JsonSerializerOptions"/> of this serializer to the given <see cref="IElasticsearchClientSettings"/>.
+	/// Constructs a new <see cref="DefaultSourceSerializer"/> instance.
 	/// </summary>
-	private void LinkSettings(IElasticsearchClientSettings settings)
+	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer will be linked.</param>
+	/// <param name="typeInfoResolver">A custom <see cref="IJsonTypeInfoResolver"/> to use.</param>
+	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
+	public DefaultSourceSerializer(IElasticsearchClientSettings settings, IJsonTypeInfoResolver typeInfoResolver, Action<JsonSerializerOptions>? configureOptions = null) :
+		base(new DefaultSourceSerializerOptionsProvider(settings, typeInfoResolver, configureOptions))
 	{
-		var options = GetJsonSerializerOptions(SerializationFormatting.None);
-		var indentedOptions = GetJsonSerializerOptions(SerializationFormatting.Indented);
-
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(options, out _))
-		{
-			ElasticsearchClient.SettingsTable.Add(options, settings);
-		}
-
-		if (!ElasticsearchClient.SettingsTable.TryGetValue(indentedOptions, out _))
-		{
-			ElasticsearchClient.SettingsTable.Add(indentedOptions, settings);
-		}
 	}
 }
 
 /// <summary>
-/// The options-provider for the built-in <see cref="DefaultSourceSerializer"/>.
+/// The default <see cref="IJsonSerializerOptionsProvider"/> implementation for the built-in <see cref="DefaultSourceSerializer"/>.
 /// </summary>
-public class DefaultSourceSerializerOptionsProvider :
+internal sealed class DefaultSourceSerializerOptionsProvider :
 	TransportSerializerOptionsProvider
 {
 	/// <summary>
-	/// Returns an array of the built-in <see cref="JsonConverter"/>s that are used registered with the source serializer by default.
+	/// Constructs a new <see cref="DefaultSourceSerializerOptionsProvider"/> instance.
 	/// </summary>
-	private static JsonConverter[] DefaultBuiltInConverters =>
+	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer options will be linked.</param>
+	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
+	public DefaultSourceSerializerOptionsProvider(IElasticsearchClientSettings settings, Action<JsonSerializerOptions>? configureOptions = null) :
+		base(
+			CreateDefaultBuiltInConverters(settings),
+			null,
+			options => MutateOptions(options, null, configureOptions)
+		)
+	{
+	}
+
+	/// <summary>
+	/// Constructs a new <see cref="DefaultSourceSerializerOptionsProvider"/> instance.
+	/// </summary>
+	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> instance to which this serializer options will be linked.</param>
+	/// <param name="typeInfoResolver">A custom <see cref="IJsonTypeInfoResolver"/> to use.</param>
+	/// <param name="configureOptions">An optional <see cref="Action{T}"/> to customize the default <see cref="JsonSerializerOptions"/>.</param>
+	public DefaultSourceSerializerOptionsProvider(IElasticsearchClientSettings settings, IJsonTypeInfoResolver typeInfoResolver, Action<JsonSerializerOptions>? configureOptions = null) :
+		base(
+			CreateDefaultBuiltInConverters(settings),
+			null,
+			options => MutateOptions(options, typeInfoResolver ?? throw new ArgumentNullException(nameof(typeInfoResolver)), configureOptions)
+		)
+	{
+	}
+
+	/// <summary>
+	/// Returns an array of the built-in <see cref="JsonConverter"/>s that are registered with the source serializer by default.
+	/// </summary>
+	private static IReadOnlyCollection<JsonConverter> CreateDefaultBuiltInConverters(IElasticsearchClientSettings settings) =>
 	[
+		// For context aware JsonConverter/JsonConverterFactory implementations.
+		new ContextProvider<IElasticsearchClientSettings>(settings),
+
+#pragma warning disable IL3050
 		new JsonStringEnumConverter(),
+#pragma warning restore IL3050
 		new DoubleWithFractionalPortionConverter(),
 		new SingleWithFractionalPortionConverter()
 	];
 
-	public DefaultSourceSerializerOptionsProvider(Action<JsonSerializerOptions>? configureOptions = null) :
-		base(DefaultBuiltInConverters, null, options => MutateOptions(options, configureOptions))
+	private static void MutateOptions(JsonSerializerOptions options, IJsonTypeInfoResolver? typeInfoResolver, Action<JsonSerializerOptions>? configureOptions)
 	{
-	}
+#pragma warning disable IL2026, IL3050
+		options.TypeInfoResolver = typeInfoResolver ?? new DefaultJsonTypeInfoResolver();
+#pragma warning restore IL2026, IL3050
 
-	public DefaultSourceSerializerOptionsProvider(bool registerDefaultConverters = true, Action<JsonSerializerOptions>? configureOptions = null) :
-		base(registerDefaultConverters ? DefaultBuiltInConverters : [], null, options => MutateOptions(options, configureOptions))
-	{
-	}
-
-	private static void MutateOptions(JsonSerializerOptions options, Action<JsonSerializerOptions>? configureOptions)
-	{
 		options.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 		options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 

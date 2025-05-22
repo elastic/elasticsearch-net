@@ -17,47 +17,108 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
+internal sealed partial class SetPriorityActionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propPriority = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Priority = propPriority.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionConverter))]
 public sealed partial class SetPriorityAction
 {
-	[JsonInclude, JsonPropertyName("priority")]
+#if NET7_0_OR_GREATER
+	public SetPriorityAction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SetPriorityAction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public int? Priority { get; set; }
 }
 
-public sealed partial class SetPriorityActionDescriptor : SerializableDescriptor<SetPriorityActionDescriptor>
+public readonly partial struct SetPriorityActionDescriptor
 {
-	internal SetPriorityActionDescriptor(Action<SetPriorityActionDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction Instance { get; init; }
 
-	public SetPriorityActionDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetPriorityActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction instance)
 	{
+		Instance = instance;
 	}
 
-	private int? PriorityValue { get; set; }
-
-	public SetPriorityActionDescriptor Priority(int? priority)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SetPriorityActionDescriptor()
 	{
-		PriorityValue = priority;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor Priority(int? value)
 	{
-		writer.WriteStartObject();
-		if (PriorityValue.HasValue)
+		Instance.Priority = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("priority");
-			writer.WriteNumberValue(PriorityValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

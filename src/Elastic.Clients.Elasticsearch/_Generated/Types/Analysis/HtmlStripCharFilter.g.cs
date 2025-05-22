@@ -17,74 +17,141 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class HtmlStripCharFilter : ICharFilter
+internal sealed partial class HtmlStripCharFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter>
 {
-	[JsonInclude, JsonPropertyName("escaped_tags")]
-	public ICollection<string>? EscapedTags { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropEscapedTags = System.Text.Json.JsonEncodedText.Encode("escaped_tags");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propEscapedTags = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEscapedTags.TryReadProperty(ref reader, options, PropEscapedTags, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EscapedTags = propEscapedTags.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEscapedTags, value.EscapedTags, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterConverter))]
+public sealed partial class HtmlStripCharFilter : Elastic.Clients.Elasticsearch.Analysis.ICharFilter
+{
+#if NET7_0_OR_GREATER
+	public HtmlStripCharFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public HtmlStripCharFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? EscapedTags { get; set; }
+
 	public string Type => "html_strip";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class HtmlStripCharFilterDescriptor : SerializableDescriptor<HtmlStripCharFilterDescriptor>, IBuildableDescriptor<HtmlStripCharFilter>
+public readonly partial struct HtmlStripCharFilterDescriptor
 {
-	internal HtmlStripCharFilterDescriptor(Action<HtmlStripCharFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter Instance { get; init; }
 
-	public HtmlStripCharFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HtmlStripCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? EscapedTagsValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public HtmlStripCharFilterDescriptor EscapedTags(ICollection<string>? escapedTags)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HtmlStripCharFilterDescriptor()
 	{
-		EscapedTagsValue = escapedTags;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public HtmlStripCharFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor EscapedTags(System.Collections.Generic.ICollection<string>? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.EscapedTags = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor EscapedTags(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (EscapedTagsValue is not null)
+		Instance.EscapedTags = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor Version(string? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("escaped_tags");
-			JsonSerializer.Serialize(writer, EscapedTagsValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("html_strip");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.HtmlStripCharFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	HtmlStripCharFilter IBuildableDescriptor<HtmlStripCharFilter>.Build() => new()
-	{
-		EscapedTags = EscapedTagsValue,
-		Version = VersionValue
-	};
 }

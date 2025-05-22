@@ -17,226 +17,330 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-[JsonConverter(typeof(InferenceConfigConverter))]
+internal sealed partial class InferenceConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantClassification))
+			{
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegression))
+			{
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, null, null);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigConverter))]
 public sealed partial class InferenceConfig
 {
-	internal InferenceConfig(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public InferenceConfig()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InferenceConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>("classification"); set => SetVariant("classification", value); }
 
-	public static InferenceConfig Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => new InferenceConfig("classification", classificationInferenceOptions);
-	public static InferenceConfig Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => new InferenceConfig("regression", regressionInferenceOptions);
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>("regression"); set => SetVariant("regression", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions value) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig { Classification = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions value) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig { Regression = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class InferenceConfigConverter : JsonConverter<InferenceConfig>
+public readonly partial struct InferenceConfigDescriptor<TDocument>
 {
-	public override InferenceConfig Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigDescriptor(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "regression")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'InferenceConfig' from the response.");
-		}
-
-		var result = new InferenceConfig(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, InferenceConfig value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
+	{
+		Instance.Classification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification()
+	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
+	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
+	{
+		Instance.Regression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression()
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class InferenceConfigDescriptor<TDocument> : SerializableDescriptor<InferenceConfigDescriptor<TDocument>>
+public readonly partial struct InferenceConfigDescriptor
 {
-	internal InferenceConfigDescriptor(Action<InferenceConfigDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig Instance { get; init; }
 
-	public InferenceConfigDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigDescriptor(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private InferenceConfigDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceConfigDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private InferenceConfigDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig instance) => new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Classification = value;
+		return this;
 	}
 
-	public InferenceConfigDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
-	public InferenceConfigDescriptor<TDocument> Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
-	public InferenceConfigDescriptor<TDocument> Regression(Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<TDocument>> configure) => Set(configure, "regression");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class InferenceConfigDescriptor : SerializableDescriptor<InferenceConfigDescriptor>
-{
-	internal InferenceConfigDescriptor(Action<InferenceConfigDescriptor> configure) => configure.Invoke(this);
-
-	public InferenceConfigDescriptor() : base()
-	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private InferenceConfigDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// Classification configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor>? action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor.Build(action);
+		return this;
 	}
 
-	private InferenceConfigDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Regression = value;
+		return this;
 	}
 
-	public InferenceConfigDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptions classificationInferenceOptions) => Set(classificationInferenceOptions, "classification");
-	public InferenceConfigDescriptor Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.ClassificationInferenceOptionsDescriptor> configure) => Set(configure, "classification");
-	public InferenceConfigDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptions regressionInferenceOptions) => Set(regressionInferenceOptions, "regression");
-	public InferenceConfigDescriptor Regression<TDocument>(Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor> configure) => Set(configure, "regression");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(null);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// Regression configuration for inference.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>>? action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.RegressionInferenceOptionsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfigDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.InferenceConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

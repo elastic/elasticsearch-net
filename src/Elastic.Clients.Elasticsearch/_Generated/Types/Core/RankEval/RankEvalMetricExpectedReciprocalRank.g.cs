@@ -17,67 +17,144 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.RankEval;
 
-/// <summary>
-/// <para>
-/// Expected Reciprocal Rank (ERR)
-/// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
-/// </summary>
-public sealed partial class RankEvalMetricExpectedReciprocalRank
+internal sealed partial class RankEvalMetricExpectedReciprocalRankConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank>
 {
-	/// <summary>
-	/// <para>
-	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("k")]
-	public int? k { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropK = System.Text.Json.JsonEncodedText.Encode("k");
+	private static readonly System.Text.Json.JsonEncodedText PropMaximumRelevance = System.Text.Json.JsonEncodedText.Encode("maximum_relevance");
 
-	/// <summary>
-	/// <para>
-	/// The highest relevance grade used in the user-supplied relevance judgments.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("maximum_relevance")]
-	public int MaximumRelevance { get; set; }
+	public override Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propK = default;
+		LocalJsonValue<int> propMaximumRelevance = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propK.TryReadProperty(ref reader, options, PropK, null))
+			{
+				continue;
+			}
+
+			if (propMaximumRelevance.TryReadProperty(ref reader, options, PropMaximumRelevance, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			K = propK.Value,
+			MaximumRelevance = propMaximumRelevance.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropK, value.K, null, null);
+		writer.WriteProperty(options, PropMaximumRelevance, value.MaximumRelevance, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
 /// Expected Reciprocal Rank (ERR)
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/search-rank-eval.html#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : SerializableDescriptor<RankEvalMetricExpectedReciprocalRankDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankConverter))]
+public sealed partial class RankEvalMetricExpectedReciprocalRank
 {
-	internal RankEvalMetricExpectedReciprocalRankDescriptor(Action<RankEvalMetricExpectedReciprocalRankDescriptor> configure) => configure.Invoke(this);
-
-	public RankEvalMetricExpectedReciprocalRankDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricExpectedReciprocalRank(int maximumRelevance)
+	{
+		MaximumRelevance = maximumRelevance;
+	}
+#if NET7_0_OR_GREATER
+	public RankEvalMetricExpectedReciprocalRank()
 	{
 	}
-
-	private int? kValue { get; set; }
-	private int MaximumRelevanceValue { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankEvalMetricExpectedReciprocalRank()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
 	/// </para>
 	/// </summary>
-	public RankEvalMetricExpectedReciprocalRankDescriptor k(int? k)
+	public int? K { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The highest relevance grade used in the user-supplied relevance judgments.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int MaximumRelevance { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Expected Reciprocal Rank (ERR)
+/// </para>
+/// <para><see href="https://www.elastic.co/docs/api/doc/elasticsearch/v9/operation/operation-rank-eval#_expected_reciprocal_rank_err">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// </summary>
+public readonly partial struct RankEvalMetricExpectedReciprocalRankDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricExpectedReciprocalRankDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank instance)
 	{
-		kValue = k;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankEvalMetricExpectedReciprocalRankDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank instance) => new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Sets the maximum number of documents retrieved per query. This value will act in place of the usual size parameter in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor K(int? value)
+	{
+		Instance.K = value;
+		return this;
 	}
 
 	/// <summary>
@@ -85,23 +162,17 @@ public sealed partial class RankEvalMetricExpectedReciprocalRankDescriptor : Ser
 	/// The highest relevance grade used in the user-supplied relevance judgments.
 	/// </para>
 	/// </summary>
-	public RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int maximumRelevance)
+	public Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor MaximumRelevance(int value)
 	{
-		MaximumRelevanceValue = maximumRelevance;
-		return Self;
+		Instance.MaximumRelevance = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank Build(System.Action<Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (kValue.HasValue)
-		{
-			writer.WritePropertyName("k");
-			writer.WriteNumberValue(kValue.Value);
-		}
-
-		writer.WritePropertyName("maximum_relevance");
-		writer.WriteNumberValue(MaximumRelevanceValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRankDescriptor(new Elastic.Clients.Elasticsearch.Core.RankEval.RankEvalMetricExpectedReciprocalRank(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

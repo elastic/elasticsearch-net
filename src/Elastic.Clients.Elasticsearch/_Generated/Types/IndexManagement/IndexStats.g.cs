@@ -17,156 +17,351 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBulk = System.Text.Json.JsonEncodedText.Encode("bulk");
+	private static readonly System.Text.Json.JsonEncodedText PropCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropFielddata = System.Text.Json.JsonEncodedText.Encode("fielddata");
+	private static readonly System.Text.Json.JsonEncodedText PropFlush = System.Text.Json.JsonEncodedText.Encode("flush");
+	private static readonly System.Text.Json.JsonEncodedText PropGet = System.Text.Json.JsonEncodedText.Encode("get");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexing = System.Text.Json.JsonEncodedText.Encode("indexing");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropMerges = System.Text.Json.JsonEncodedText.Encode("merges");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryCache = System.Text.Json.JsonEncodedText.Encode("query_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropRecovery = System.Text.Json.JsonEncodedText.Encode("recovery");
+	private static readonly System.Text.Json.JsonEncodedText PropRefresh = System.Text.Json.JsonEncodedText.Encode("refresh");
+	private static readonly System.Text.Json.JsonEncodedText PropRequestCache = System.Text.Json.JsonEncodedText.Encode("request_cache");
+	private static readonly System.Text.Json.JsonEncodedText PropSearch = System.Text.Json.JsonEncodedText.Encode("search");
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
+	private static readonly System.Text.Json.JsonEncodedText PropShardStats = System.Text.Json.JsonEncodedText.Encode("shard_stats");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropTranslog = System.Text.Json.JsonEncodedText.Encode("translog");
+	private static readonly System.Text.Json.JsonEncodedText PropWarmer = System.Text.Json.JsonEncodedText.Encode("warmer");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.BulkStats?> propBulk = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.CompletionStats?> propCompletion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.DocStats?> propDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FielddataStats?> propFielddata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FlushStats?> propFlush = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GetStats?> propGet = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexingStats?> propIndexing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats?> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MergesStats?> propMerges = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryCacheStats?> propQueryCache = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.RecoveryStats?> propRecovery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.RefreshStats?> propRefresh = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.RequestCacheStats?> propRequestCache = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchStats?> propSearch = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SegmentsStats?> propSegments = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats?> propShardStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.StoreStats?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.TranslogStats?> propTranslog = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.WarmerStats?> propWarmer = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBulk.TryReadProperty(ref reader, options, PropBulk, null))
+			{
+				continue;
+			}
+
+			if (propCompletion.TryReadProperty(ref reader, options, PropCompletion, null))
+			{
+				continue;
+			}
+
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, null))
+			{
+				continue;
+			}
+
+			if (propFielddata.TryReadProperty(ref reader, options, PropFielddata, null))
+			{
+				continue;
+			}
+
+			if (propFlush.TryReadProperty(ref reader, options, PropFlush, null))
+			{
+				continue;
+			}
+
+			if (propGet.TryReadProperty(ref reader, options, PropGet, null))
+			{
+				continue;
+			}
+
+			if (propIndexing.TryReadProperty(ref reader, options, PropIndexing, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propMerges.TryReadProperty(ref reader, options, PropMerges, null))
+			{
+				continue;
+			}
+
+			if (propQueryCache.TryReadProperty(ref reader, options, PropQueryCache, null))
+			{
+				continue;
+			}
+
+			if (propRecovery.TryReadProperty(ref reader, options, PropRecovery, null))
+			{
+				continue;
+			}
+
+			if (propRefresh.TryReadProperty(ref reader, options, PropRefresh, null))
+			{
+				continue;
+			}
+
+			if (propRequestCache.TryReadProperty(ref reader, options, PropRequestCache, null))
+			{
+				continue;
+			}
+
+			if (propSearch.TryReadProperty(ref reader, options, PropSearch, null))
+			{
+				continue;
+			}
+
+			if (propSegments.TryReadProperty(ref reader, options, PropSegments, null))
+			{
+				continue;
+			}
+
+			if (propShardStats.TryReadProperty(ref reader, options, PropShardStats, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propTranslog.TryReadProperty(ref reader, options, PropTranslog, null))
+			{
+				continue;
+			}
+
+			if (propWarmer.TryReadProperty(ref reader, options, PropWarmer, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Bulk = propBulk.Value,
+			Completion = propCompletion.Value,
+			Docs = propDocs.Value,
+			Fielddata = propFielddata.Value,
+			Flush = propFlush.Value,
+			Get = propGet.Value,
+			Indexing = propIndexing.Value,
+			Indices = propIndices.Value,
+			Merges = propMerges.Value,
+			QueryCache = propQueryCache.Value,
+			Recovery = propRecovery.Value,
+			Refresh = propRefresh.Value,
+			RequestCache = propRequestCache.Value,
+			Search = propSearch.Value,
+			Segments = propSegments.Value,
+			ShardStats = propShardStats.Value,
+			Store = propStore.Value,
+			Translog = propTranslog.Value,
+			Warmer = propWarmer.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBulk, value.Bulk, null, null);
+		writer.WriteProperty(options, PropCompletion, value.Completion, null, null);
+		writer.WriteProperty(options, PropDocs, value.Docs, null, null);
+		writer.WriteProperty(options, PropFielddata, value.Fielddata, null, null);
+		writer.WriteProperty(options, PropFlush, value.Flush, null, null);
+		writer.WriteProperty(options, PropGet, value.Get, null, null);
+		writer.WriteProperty(options, PropIndexing, value.Indexing, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropMerges, value.Merges, null, null);
+		writer.WriteProperty(options, PropQueryCache, value.QueryCache, null, null);
+		writer.WriteProperty(options, PropRecovery, value.Recovery, null, null);
+		writer.WriteProperty(options, PropRefresh, value.Refresh, null, null);
+		writer.WriteProperty(options, PropRequestCache, value.RequestCache, null, null);
+		writer.WriteProperty(options, PropSearch, value.Search, null, null);
+		writer.WriteProperty(options, PropSegments, value.Segments, null, null);
+		writer.WriteProperty(options, PropShardStats, value.ShardStats, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropTranslog, value.Translog, null, null);
+		writer.WriteProperty(options, PropWarmer, value.Warmer, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexStatsConverter))]
 public sealed partial class IndexStats
 {
-	[JsonInclude, JsonPropertyName("bulk")]
-	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; init; }
+#if NET7_0_OR_GREATER
+	public IndexStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public IndexStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.BulkStats? Bulk { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about completions across all shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("completion")]
-	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; init; }
+	public Elastic.Clients.Elasticsearch.CompletionStats? Completion { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about documents across all primary shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; init; }
+	public Elastic.Clients.Elasticsearch.DocStats? Docs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the field data cache across all shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fielddata")]
-	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; init; }
+	public Elastic.Clients.Elasticsearch.FielddataStats? Fielddata { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about flush operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("flush")]
-	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; init; }
+	public Elastic.Clients.Elasticsearch.FlushStats? Flush { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about get operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("get")]
-	public Elastic.Clients.Elasticsearch.GetStats? Get { get; init; }
+	public Elastic.Clients.Elasticsearch.GetStats? Get { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indexing operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indexing")]
-	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexingStats? Indexing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indices operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndicesStats? Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about merge operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("merges")]
-	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; init; }
+	public Elastic.Clients.Elasticsearch.MergesStats? Merges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the query cache across all shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query_cache")]
-	public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache { get; init; }
+	public Elastic.Clients.Elasticsearch.QueryCacheStats? QueryCache { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about recovery operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("recovery")]
-	public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery { get; init; }
+	public Elastic.Clients.Elasticsearch.RecoveryStats? Recovery { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about refresh operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh")]
-	public Elastic.Clients.Elasticsearch.RefreshStats? Refresh { get; init; }
+	public Elastic.Clients.Elasticsearch.RefreshStats? Refresh { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the request cache across all shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("request_cache")]
-	public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache { get; init; }
+	public Elastic.Clients.Elasticsearch.RequestCacheStats? RequestCache { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about search operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search")]
-	public Elastic.Clients.Elasticsearch.SearchStats? Search { get; init; }
+	public Elastic.Clients.Elasticsearch.SearchStats? Search { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about segments across all shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("segments")]
-	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; init; }
-	[JsonInclude, JsonPropertyName("shard_stats")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; init; }
+	public Elastic.Clients.Elasticsearch.SegmentsStats? Segments { get; set; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShardsTotalStats? ShardStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the size of shards assigned to the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("store")]
-	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; init; }
+	public Elastic.Clients.Elasticsearch.StoreStats? Store { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about transaction log operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("translog")]
-	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; init; }
+	public Elastic.Clients.Elasticsearch.TranslogStats? Translog { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about index warming operations for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("warmer")]
-	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; init; }
+	public Elastic.Clients.Elasticsearch.WarmerStats? Warmer { get; set; }
 }

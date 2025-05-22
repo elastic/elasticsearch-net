@@ -17,45 +17,143 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
+
+internal sealed partial class InferenceEndpointConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropChunkingSettings = System.Text.Json.JsonEncodedText.Encode("chunking_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropService = System.Text.Json.JsonEncodedText.Encode("service");
+	private static readonly System.Text.Json.JsonEncodedText PropServiceSettings = System.Text.Json.JsonEncodedText.Encode("service_settings");
+	private static readonly System.Text.Json.JsonEncodedText PropTaskSettings = System.Text.Json.JsonEncodedText.Encode("task_settings");
+
+	public override Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings?> propChunkingSettings = default;
+		LocalJsonValue<string> propService = default;
+		LocalJsonValue<object> propServiceSettings = default;
+		LocalJsonValue<object?> propTaskSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propChunkingSettings.TryReadProperty(ref reader, options, PropChunkingSettings, null))
+			{
+				continue;
+			}
+
+			if (propService.TryReadProperty(ref reader, options, PropService, null))
+			{
+				continue;
+			}
+
+			if (propServiceSettings.TryReadProperty(ref reader, options, PropServiceSettings, null))
+			{
+				continue;
+			}
+
+			if (propTaskSettings.TryReadProperty(ref reader, options, PropTaskSettings, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ChunkingSettings = propChunkingSettings.Value,
+			Service = propService.Value,
+			ServiceSettings = propServiceSettings.Value,
+			TaskSettings = propTaskSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropChunkingSettings, value.ChunkingSettings, null, null);
+		writer.WriteProperty(options, PropService, value.Service, null, null);
+		writer.WriteProperty(options, PropServiceSettings, value.ServiceSettings, null, null);
+		writer.WriteProperty(options, PropTaskSettings, value.TaskSettings, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Configuration options when storing the inference endpoint
 /// </para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.InferenceEndpointConverter))]
 public sealed partial class InferenceEndpoint
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceEndpoint(string service, object serviceSettings)
+	{
+		Service = service;
+		ServiceSettings = serviceSettings;
+	}
+#if NET7_0_OR_GREATER
+	public InferenceEndpoint()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public InferenceEndpoint()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceEndpoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? ChunkingSettings { get; set; }
+
 	/// <summary>
 	/// <para>
 	/// The service type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("service")]
-	public string Service { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Service { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("service_settings")]
-	public object ServiceSettings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	object ServiceSettings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Task settings specific to the service and task type
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("task_settings")]
 	public object? TaskSettings { get; set; }
 }
 
@@ -64,27 +162,67 @@ public sealed partial class InferenceEndpoint
 /// Configuration options when storing the inference endpoint
 /// </para>
 /// </summary>
-public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor<InferenceEndpointDescriptor>
+public readonly partial struct InferenceEndpointDescriptor
 {
-	internal InferenceEndpointDescriptor(Action<InferenceEndpointDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint Instance { get; init; }
 
-	public InferenceEndpointDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceEndpointDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint instance)
 	{
+		Instance = instance;
 	}
 
-	private string ServiceValue { get; set; }
-	private object ServiceSettingsValue { get; set; }
-	private object? TaskSettingsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceEndpointDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint instance) => new Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint(Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettings? value)
+	{
+		Instance.ChunkingSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings()
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Chunking configuration object
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ChunkingSettings(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor>? action)
+	{
+		Instance.ChunkingSettings = Elastic.Clients.Elasticsearch.Inference.InferenceChunkingSettingsDescriptor.Build(action);
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The service type
 	/// </para>
 	/// </summary>
-	public InferenceEndpointDescriptor Service(string service)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor Service(string value)
 	{
-		ServiceValue = service;
-		return Self;
+		Instance.Service = value;
+		return this;
 	}
 
 	/// <summary>
@@ -92,10 +230,10 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	/// Settings specific to the service
 	/// </para>
 	/// </summary>
-	public InferenceEndpointDescriptor ServiceSettings(object serviceSettings)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor ServiceSettings(object value)
 	{
-		ServiceSettingsValue = serviceSettings;
-		return Self;
+		Instance.ServiceSettings = value;
+		return this;
 	}
 
 	/// <summary>
@@ -103,25 +241,17 @@ public sealed partial class InferenceEndpointDescriptor : SerializableDescriptor
 	/// Task settings specific to the service and task type
 	/// </para>
 	/// </summary>
-	public InferenceEndpointDescriptor TaskSettings(object? taskSettings)
+	public Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor TaskSettings(object? value)
 	{
-		TaskSettingsValue = taskSettings;
-		return Self;
+		Instance.TaskSettings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint Build(System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("service");
-		writer.WriteStringValue(ServiceValue);
-		writer.WritePropertyName("service_settings");
-		JsonSerializer.Serialize(writer, ServiceSettingsValue, options);
-		if (TaskSettingsValue is not null)
-		{
-			writer.WritePropertyName("task_settings");
-			JsonSerializer.Serialize(writer, TaskSettingsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceEndpointDescriptor(new Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

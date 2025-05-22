@@ -17,21 +17,53 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class RevertModelSnapshotRequestParameters : RequestParameters
+public sealed partial class RevertModelSnapshotRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class RevertModelSnapshotRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeleteInterveningResults = System.Text.Json.JsonEncodedText.Encode("delete_intervening_results");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDeleteInterveningResults = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeleteInterveningResults.TryReadProperty(ref reader, options, PropDeleteInterveningResults, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DeleteInterveningResults = propDeleteInterveningResults.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeleteInterveningResults, value.DeleteInterveningResults, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,15 +78,27 @@ public sealed partial class RevertModelSnapshotRequestParameters : RequestParame
 /// snapshot after Black Friday or a critical system failure.
 /// </para>
 /// </summary>
-public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertModelSnapshotRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestConverter))]
+public sealed partial class RevertModelSnapshotRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public RevertModelSnapshotRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningRevertModelSnapshot;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningRevertModelSnapshot;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -62,10 +106,33 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
+	/// snapshot means the anomaly detection job starts learning a new model from
+	/// scratch when it is started.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("delete_intervening_results")]
 	public bool? DeleteInterveningResults { get; set; }
 }
 
@@ -81,56 +148,112 @@ public sealed partial class RevertModelSnapshotRequest : PlainRequest<RevertMode
 /// snapshot after Black Friday or a critical system failure.
 /// </para>
 /// </summary>
-public sealed partial class RevertModelSnapshotRequestDescriptor : RequestDescriptor<RevertModelSnapshotRequestDescriptor, RevertModelSnapshotRequestParameters>
+public readonly partial struct RevertModelSnapshotRequestDescriptor
 {
-	internal RevertModelSnapshotRequestDescriptor(Action<RevertModelSnapshotRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Instance { get; init; }
 
-	public RevertModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RevertModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningRevertModelSnapshot;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.revert_model_snapshot";
-
-	public RevertModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public RevertModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(jobId, snapshotId);
 	}
 
-	public RevertModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id snapshotId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RevertModelSnapshotRequestDescriptor()
 	{
-		RouteValues.Required("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private bool? DeleteInterveningResultsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// You can specify <c>empty</c> as the &lt;snapshot_id>. Reverting to the empty
+	/// snapshot means the anomaly detection job starts learning a new model from
+	/// scratch when it is started.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>delete_intervening_results</c> query parameter.
 	/// </para>
 	/// </summary>
-	public RevertModelSnapshotRequestDescriptor DeleteInterveningResults(bool? deleteInterveningResults = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor DeleteInterveningResults(bool? value = true)
 	{
-		DeleteInterveningResultsValue = deleteInterveningResults;
-		return Self;
+		Instance.DeleteInterveningResults = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (DeleteInterveningResultsValue.HasValue)
-		{
-			writer.WritePropertyName("delete_intervening_results");
-			writer.WriteBooleanValue(DeleteInterveningResultsValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.RevertModelSnapshotRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

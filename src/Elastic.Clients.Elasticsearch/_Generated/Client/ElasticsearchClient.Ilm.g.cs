@@ -18,1567 +18,673 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public partial class IndexLifecycleManagementNamespacedClient : NamespacedClientProxy
+public partial class IndexLifecycleManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="IndexLifecycleManagementNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected IndexLifecycleManagementNamespacedClient() : base()
 	{
 	}
 
-	internal IndexLifecycleManagementNamespacedClient(ElasticsearchClient client) : base(client)
+	internal IndexLifecycleManagementNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequest, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequest, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name name, Action<DeleteLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes the specified lifecycle policy definition. You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-delete-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetLifecycleRequest, GetLifecycleResponse, GetLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequest, GetLifecycleResponse, GetLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Name? name, Action<GetLifecycleRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Action<GetLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Name? name, Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves a lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIlmStatusResponse GetStatus(GetIlmStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetIlmStatusRequest, GetIlmStatusResponse, GetIlmStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetIlmStatusResponse> GetStatusAsync(GetIlmStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse GetStatus(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetIlmStatusRequest, GetIlmStatusResponse, GetIlmStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIlmStatusResponse GetStatus(GetIlmStatusRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIlmStatusResponse GetStatus()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse> GetStatusAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetIlmStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetIlmStatusResponse GetStatus(Action<GetIlmStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetIlmStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetIlmStatusResponse> GetStatusAsync(GetIlmStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetIlmStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetIlmStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the current index lifecycle management (ILM) status.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetIlmStatusResponse> GetStatusAsync(Action<GetIlmStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetIlmStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetIlmStatusRequestDescriptor, GetIlmStatusResponse, GetIlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MigrateToDataTiersResponse MigrateToDataTiers(MigrateToDataTiersRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<MigrateToDataTiersRequest, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(MigrateToDataTiersRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse MigrateToDataTiers(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<MigrateToDataTiersRequest, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MigrateToDataTiersResponse MigrateToDataTiers(MigrateToDataTiersRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MigrateToDataTiersResponse MigrateToDataTiers()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse> MigrateToDataTiersAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new MigrateToDataTiersRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MigrateToDataTiersResponse MigrateToDataTiers(Action<MigrateToDataTiersRequestDescriptor> configureRequest)
-	{
-		var descriptor = new MigrateToDataTiersRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(MigrateToDataTiersRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MigrateToDataTiersRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-	/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
-	/// Using node roles enables ILM to automatically move the indices between data tiers.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-migrate-to-data-tiers.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MigrateToDataTiersResponse> MigrateToDataTiersAsync(Action<MigrateToDataTiersRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MigrateToDataTiersRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersResponse, MigrateToDataTiersRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep(MoveToStepRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<MoveToStepRequest, MoveToStepResponse, MoveToStepRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync(MoveToStepRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequest, MoveToStepResponse, MoveToStepRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep<TDocument>(MoveToStepRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep<TDocument>(Action<MoveToStepRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep(MoveToStepRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		var descriptor = new MoveToStepRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual MoveToStepResponse MoveToStep(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor> configureRequest)
-	{
-		var descriptor = new MoveToStepRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(MoveToStepRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync<TDocument>(Action<MoveToStepRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor<TDocument>, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync(MoveToStepRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Manually moves an index into the specified step and executes that step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-move-to-step.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<MoveToStepResponse> MoveToStepAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<MoveToStepRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new MoveToStepRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<MoveToStepRequestDescriptor, MoveToStepResponse, MoveToStepRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutLifecycleRequest, PutLifecycleResponse, PutLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequest, PutLifecycleResponse, PutLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name name, Action<PutLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates a lifecycle policy. If the specified policy exists, the policy is replaced and the policy version is incremented.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-put-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy(RemovePolicyRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<RemovePolicyRequest, RemovePolicyResponse, RemovePolicyRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(RemovePolicyRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequest, RemovePolicyResponse, RemovePolicyRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy<TDocument>(RemovePolicyRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy<TDocument>(Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy(RemovePolicyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RemovePolicyResponse RemovePolicy(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(RemovePolicyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync<TDocument>(Action<RemovePolicyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor<TDocument>, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(RemovePolicyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Removes the assigned lifecycle policy and stops managing the specified index
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-remove-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RemovePolicyResponse> RemovePolicyAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<RemovePolicyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RemovePolicyRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RemovePolicyRequestDescriptor, RemovePolicyResponse, RemovePolicyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry(RetryRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<RetryRequest, RetryResponse, RetryRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync(RetryRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<RetryRequest, RetryResponse, RetryRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry<TDocument>(RetryRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RetryRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RetryRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RetryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry<TDocument>(Action<RetryRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new RetryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor<TDocument>(index);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry(RetryRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		var descriptor = new RetryRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual RetryResponse Retry(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor> configureRequest)
-	{
-		var descriptor = new RetryRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync<TDocument>(RetryRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor<TDocument>(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync<TDocument>(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor<TDocument>(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync<TDocument>(Action<RetryRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor<TDocument>, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync(RetryRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor(index);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retries executing the policy for an index that is in the ERROR step.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-retry-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<RetryResponse> RetryAsync(Elastic.Clients.Elasticsearch.IndexName index, Action<RetryRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new RetryRequestDescriptor(index);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<RetryRequestDescriptor, RetryResponse, RetryRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartIlmResponse Start(StartIlmRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StartIlmRequest, StartIlmResponse, StartIlmRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartIlmResponse> StartAsync(StartIlmRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse Start(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StartIlmRequest, StartIlmResponse, StartIlmRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartIlmResponse Start(StartIlmRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartIlmResponse Start()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse> StartAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartIlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartIlmResponse Start(Action<StartIlmRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StartIlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartIlmResponse> StartAsync(StartIlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartIlmResponse> StartAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartIlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Start the index lifecycle management (ILM) plugin.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartIlmResponse> StartAsync(Action<StartIlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartIlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartIlmRequestDescriptor, StartIlmResponse, StartIlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopIlmResponse Stop(StopIlmRequest request)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StopIlmRequest, StopIlmResponse, StopIlmRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopIlmResponse> StopAsync(StopIlmRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse Stop(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StopIlmRequest, StopIlmResponse, StopIlmRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopIlmResponse Stop(StopIlmRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopIlmResponse Stop()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse> StopAsync(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopIlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopIlmResponse Stop(Action<StopIlmRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StopIlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopIlmResponse> StopAsync(StopIlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopIlmResponse> StopAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopIlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Halts all lifecycle management operations and stops the index lifecycle management (ILM) plugin
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/ilm-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopIlmResponse> StopAsync(Action<StopIlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopIlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopIlmRequestDescriptor, StopIlmResponse, StopIlmRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters>(request, cancellationToken);
 	}
 }

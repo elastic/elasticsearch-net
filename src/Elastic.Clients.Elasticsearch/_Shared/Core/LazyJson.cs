@@ -5,17 +5,9 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// <para>Lazily deserializable JSON.</para>
@@ -56,7 +48,10 @@ internal sealed class LazyJsonConverter : JsonConverter<LazyJson>
 	{
 		InitializeSettings(options);
 
+		// TODO: fixme
+#pragma warning disable IL2026, IL3050
 		using var jsonDoc = JsonSerializer.Deserialize<JsonDocument>(ref reader);
+#pragma warning restore IL2026, IL3050
 		using var stream = _settings.MemoryStreamFactory.Create();
 
 		var writer = new Utf8JsonWriter(stream);

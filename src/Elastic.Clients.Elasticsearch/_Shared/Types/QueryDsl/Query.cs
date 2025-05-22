@@ -3,19 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.QueryDsl;
-#else
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
-#endif
 
 public partial class Query
 {
 	internal bool HoldsOnlyShouldMusts { get; set; }
 
 	public static bool operator false(Query _) => false;
+
 	public static bool operator true(Query _) => false;
 
 	public static Query operator &(Query leftContainer, Query rightContainer) =>
@@ -57,9 +53,43 @@ public partial class Query
 
 	public static Query operator !(Query queryContainer) => queryContainer is null
 			? null
-			: Query.Bool(new BoolQuery { MustNot = new[] { queryContainer } });
+			: new() { Bool = new() { MustNot = [queryContainer] } };
 
 	public static Query operator +(Query queryContainer) => queryContainer is null
 		? null
-		: Query.Bool(new BoolQuery { Filter = new[] { queryContainer } });
+		: new() { Bool = new() { Filter = [queryContainer] } };
+}
+
+public readonly partial struct QueryDescriptor
+{
+	public static bool operator false(QueryDescriptor _) => false;
+
+	public static bool operator true(QueryDescriptor _) => false;
+
+	public static QueryDescriptor operator &(QueryDescriptor leftContainer, QueryDescriptor rightContainer) =>
+		new(leftContainer.Instance & rightContainer.Instance);
+
+	public static QueryDescriptor operator |(QueryDescriptor leftContainer, QueryDescriptor rightContainer) =>
+		new(leftContainer.Instance | rightContainer.Instance);
+
+	public static QueryDescriptor operator !(QueryDescriptor queryContainer) => new(!queryContainer.Instance);
+
+	public static QueryDescriptor operator +(QueryDescriptor queryContainer) => new(+queryContainer.Instance);
+}
+
+public readonly partial struct QueryDescriptor<TDocument>
+{
+	public static bool operator false(QueryDescriptor<TDocument> _) => false;
+
+	public static bool operator true(QueryDescriptor<TDocument> _) => false;
+
+	public static QueryDescriptor<TDocument> operator &(QueryDescriptor<TDocument> leftContainer, QueryDescriptor<TDocument> rightContainer) =>
+		new(leftContainer.Instance & rightContainer.Instance);
+
+	public static QueryDescriptor<TDocument> operator |(QueryDescriptor<TDocument> leftContainer, QueryDescriptor<TDocument> rightContainer) =>
+		new(leftContainer.Instance | rightContainer.Instance);
+
+	public static QueryDescriptor<TDocument> operator !(QueryDescriptor<TDocument> queryContainer) => new(!queryContainer.Instance);
+
+	public static QueryDescriptor<TDocument> operator +(QueryDescriptor<TDocument> queryContainer) => new(+queryContainer.Instance);
 }

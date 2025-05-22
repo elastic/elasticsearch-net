@@ -18,9856 +18,3381 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public partial class SecurityNamespacedClient : NamespacedClientProxy
+public partial class SecurityNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="SecurityNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Security.SecurityNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected SecurityNamespacedClient() : base()
 	{
 	}
 
-	internal SecurityNamespacedClient(ElasticsearchClient client) : base(client)
-	{
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ActivateUserProfileResponse ActivateUserProfile(ActivateUserProfileRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ActivateUserProfileRequest, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(ActivateUserProfileRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ActivateUserProfileRequest, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ActivateUserProfileResponse ActivateUserProfile(ActivateUserProfileRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ActivateUserProfileResponse ActivateUserProfile()
-	{
-		var descriptor = new ActivateUserProfileRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ActivateUserProfileResponse ActivateUserProfile(Action<ActivateUserProfileRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ActivateUserProfileRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(ActivateUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ActivateUserProfileRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Activate a user profile.
-	/// </para>
-	/// <para>
-	/// Create or update a user profile on behalf of another user.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-activate-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ActivateUserProfileResponse> ActivateUserProfileAsync(Action<ActivateUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ActivateUserProfileRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ActivateUserProfileRequestDescriptor, ActivateUserProfileResponse, ActivateUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AuthenticateResponse Authenticate(AuthenticateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<AuthenticateRequest, AuthenticateResponse, AuthenticateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AuthenticateResponse> AuthenticateAsync(AuthenticateRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<AuthenticateRequest, AuthenticateResponse, AuthenticateRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AuthenticateResponse Authenticate(AuthenticateRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AuthenticateResponse Authenticate()
-	{
-		var descriptor = new AuthenticateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual AuthenticateResponse Authenticate(Action<AuthenticateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new AuthenticateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AuthenticateResponse> AuthenticateAsync(AuthenticateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AuthenticateResponse> AuthenticateAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AuthenticateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate a user.
-	/// </para>
-	/// <para>
-	/// Authenticates a user and returns information about the authenticated user.
-	/// Include the user information in a <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">basic auth header</a>.
-	/// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
-	/// If the user cannot be authenticated, this API returns a 401 status code.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<AuthenticateResponse> AuthenticateAsync(Action<AuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new AuthenticateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<AuthenticateRequestDescriptor, AuthenticateResponse, AuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<BulkDeleteRoleRequest, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<BulkDeleteRoleRequest, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkDeleteRoleResponse BulkDeleteRole(BulkDeleteRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkDeleteRoleResponse BulkDeleteRole()
-	{
-		var descriptor = new BulkDeleteRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkDeleteRoleResponse BulkDeleteRole(Action<BulkDeleteRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new BulkDeleteRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(BulkDeleteRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkDeleteRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk delete roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk delete roles API cannot delete roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkDeleteRoleResponse> BulkDeleteRoleAsync(Action<BulkDeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkDeleteRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkDeleteRoleRequestDescriptor, BulkDeleteRoleResponse, BulkDeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<BulkPutRoleRequest, BulkPutRoleResponse, BulkPutRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequest, BulkPutRoleResponse, BulkPutRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole<TDocument>()
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole(BulkPutRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole()
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual BulkPutRoleResponse BulkPutRole(Action<BulkPutRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(BulkPutRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(Action<BulkPutRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor<TDocument>, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(BulkPutRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Bulk create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
-	/// The bulk create or update roles API cannot update roles that are defined in roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-bulk-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<BulkPutRoleResponse> BulkPutRoleAsync(Action<BulkPutRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new BulkPutRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<BulkPutRoleRequestDescriptor, BulkPutRoleResponse, BulkPutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword(ChangePasswordRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ChangePasswordRequest, ChangePasswordResponse, ChangePasswordRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequest, ChangePasswordResponse, ChangePasswordRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword(ChangePasswordRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequest<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username, Action<ChangePasswordRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword()
-	{
-		var descriptor = new ChangePasswordRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ChangePasswordResponse ChangePassword(Action<ChangePasswordRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(ChangePasswordRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, Action<ChangePasswordRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Change passwords.
-	/// </para>
-	/// <para>
-	/// Change the passwords of users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-change-password.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ChangePasswordResponse> ChangePasswordAsync(Action<ChangePasswordRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ChangePasswordRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ChangePasswordRequestDescriptor, ChangePasswordResponse, ChangePasswordRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(ClearApiKeyCacheRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearApiKeyCacheRequest, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(ClearApiKeyCacheRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ClearApiKeyCacheRequest, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(ClearApiKeyCacheRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids)
-	{
-		var descriptor = new ClearApiKeyCacheRequestDescriptor(ids);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, Action<ClearApiKeyCacheRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearApiKeyCacheRequestDescriptor(ids);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(ClearApiKeyCacheRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearApiKeyCacheRequestDescriptor(ids);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the API key cache.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the API key cache.
-	/// The cache is also automatically cleared on state changes of the security index.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-api-key-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, Action<ClearApiKeyCacheRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearApiKeyCacheRequestDescriptor(ids);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearApiKeyCacheRequestDescriptor, ClearApiKeyCacheResponse, ClearApiKeyCacheRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(ClearCachedPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearCachedPrivilegesRequest, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(ClearCachedPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ClearCachedPrivilegesRequest, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(ClearCachedPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application)
-	{
-		var descriptor = new ClearCachedPrivilegesRequestDescriptor(application);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, Action<ClearCachedPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearCachedPrivilegesRequestDescriptor(application);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(ClearCachedPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedPrivilegesRequestDescriptor(application);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the privileges cache.
-	/// </para>
-	/// <para>
-	/// Evict privileges from the native application privilege cache.
-	/// The cache is also automatically cleared for applications that have their privileges updated.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-privilege-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Action<ClearCachedPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedPrivilegesRequestDescriptor(application);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedPrivilegesRequestDescriptor, ClearCachedPrivilegesResponse, ClearCachedPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRealmsResponse ClearCachedRealms(ClearCachedRealmsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearCachedRealmsRequest, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(ClearCachedRealmsRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ClearCachedRealmsRequest, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRealmsResponse ClearCachedRealms(ClearCachedRealmsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms)
-	{
-		var descriptor = new ClearCachedRealmsRequestDescriptor(realms);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, Action<ClearCachedRealmsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearCachedRealmsRequestDescriptor(realms);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(ClearCachedRealmsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedRealmsRequestDescriptor(realms);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the user cache.
-	/// </para>
-	/// <para>
-	/// Evict users from the user cache. You can completely clear the cache or evict specific users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, Action<ClearCachedRealmsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedRealmsRequestDescriptor(realms);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRealmsRequestDescriptor, ClearCachedRealmsResponse, ClearCachedRealmsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRolesResponse ClearCachedRoles(ClearCachedRolesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearCachedRolesRequest, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(ClearCachedRolesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ClearCachedRolesRequest, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRolesResponse ClearCachedRoles(ClearCachedRolesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name)
-	{
-		var descriptor = new ClearCachedRolesRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedRolesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearCachedRolesRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(ClearCachedRolesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedRolesRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear the roles cache.
-	/// </para>
-	/// <para>
-	/// Evict roles from the native role cache.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-role-cache.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedRolesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedRolesRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedRolesRequestDescriptor, ClearCachedRolesResponse, ClearCachedRolesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(ClearCachedServiceTokensRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<ClearCachedServiceTokensRequest, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(ClearCachedServiceTokensRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<ClearCachedServiceTokensRequest, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(ClearCachedServiceTokensRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(string ns, string service, Elastic.Clients.Elasticsearch.Names name)
-	{
-		var descriptor = new ClearCachedServiceTokensRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearCachedServiceTokensResponse ClearCachedServiceTokens(string ns, string service, Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedServiceTokensRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearCachedServiceTokensRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(ClearCachedServiceTokensRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string ns, string service, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedServiceTokensRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Clear service account token caches.
-	/// </para>
-	/// <para>
-	/// Evict a subset of all entries from the service account token caches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-clear-service-token-caches.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string ns, string service, Elastic.Clients.Elasticsearch.Names name, Action<ClearCachedServiceTokensRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearCachedServiceTokensRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensResponse, ClearCachedServiceTokensRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey(CreateApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateApiKeyRequest, CreateApiKeyResponse, CreateApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CreateApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequest, CreateApiKeyResponse, CreateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey<TDocument>(CreateApiKeyRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey<TDocument>()
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey<TDocument>(Action<CreateApiKeyRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey(CreateApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey()
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateApiKeyResponse CreateApiKey(Action<CreateApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(CreateApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(Action<CreateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CreateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key for access without requiring basic authentication.
-	/// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateApiKeyResponse> CreateApiKeyAsync(Action<CreateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateApiKeyRequestDescriptor, CreateApiKeyResponse, CreateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(CreateCrossClusterApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequest, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CreateCrossClusterApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequest, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>(CreateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>()
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>(Action<CreateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(CreateCrossClusterApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey()
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(Action<CreateCrossClusterApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(CreateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(Action<CreateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor<TDocument>, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CreateCrossClusterApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Create an API key of the <c>cross_cluster</c> type for the API key based remote cluster access.
-	/// A <c>cross_cluster</c> API key cannot be used to authenticate through the REST interface.
-	/// </para>
-	/// <para>
-	/// IMPORTANT: To authenticate this request you must use a credential that is not an API key. Even if you use an API key that has the required privilege, the API returns an error.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys are created by the Elasticsearch API key service, which is automatically enabled.
-	/// </para>
-	/// <para>
-	/// NOTE: Unlike REST API keys, a cross-cluster API key does not capture permissions of the authenticated user. The API key’s effective permission is exactly as specified with the <c>access</c> property.
-	/// </para>
-	/// <para>
-	/// A successful request returns a JSON structure that contains the API key, its unique ID, and its name. If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para>
-	/// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
-	/// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(Action<CreateCrossClusterApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateCrossClusterApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateCrossClusterApiKeyRequestDescriptor, CreateCrossClusterApiKeyResponse, CreateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(CreateServiceTokenRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequest, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(CreateServiceTokenRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequest, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(CreateServiceTokenRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name? name)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, Action<CreateServiceTokenRequestDescriptor> configureRequest)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual CreateServiceTokenResponse CreateServiceToken(string ns, string service, Action<CreateServiceTokenRequestDescriptor> configureRequest)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(CreateServiceTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name? name, Action<CreateServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create a service account token.
-	/// </para>
-	/// <para>
-	/// Create a service accounts token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<CreateServiceTokenResponse> CreateServiceTokenAsync(string ns, string service, Action<CreateServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new CreateServiceTokenRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<CreateServiceTokenRequestDescriptor, CreateServiceTokenResponse, CreateServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePrivilegesResponse DeletePrivileges(DeletePrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeletePrivilegesRequest, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(DeletePrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DeletePrivilegesRequest, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePrivilegesResponse DeletePrivileges(DeletePrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
-	{
-		var descriptor = new DeletePrivilegesRequestDescriptor(application, name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<DeletePrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeletePrivilegesRequestDescriptor(application, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(DeletePrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePrivilegesRequestDescriptor(application, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-privilege.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, Action<DeletePrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePrivilegesRequestDescriptor(application, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePrivilegesRequestDescriptor, DeletePrivilegesResponse, DeletePrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleResponse DeleteRole(DeleteRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteRoleRequest, DeleteRoleResponse, DeleteRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DeleteRoleRequest, DeleteRoleResponse, DeleteRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleResponse DeleteRole(DeleteRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new DeleteRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(DeleteRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete roles.
-	/// </para>
-	/// <para>
-	/// Delete roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleRequestDescriptor, DeleteRoleResponse, DeleteRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleMappingResponse DeleteRoleMapping(DeleteRoleMappingRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteRoleMappingRequest, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(DeleteRoleMappingRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DeleteRoleMappingRequest, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleMappingResponse DeleteRoleMapping(DeleteRoleMappingRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new DeleteRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleMappingRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(DeleteRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete role mappings.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<DeleteRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteRoleMappingRequestDescriptor, DeleteRoleMappingResponse, DeleteRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteServiceTokenResponse DeleteServiceToken(DeleteServiceTokenRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteServiceTokenRequest, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(DeleteServiceTokenRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DeleteServiceTokenRequest, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteServiceTokenResponse DeleteServiceToken(DeleteServiceTokenRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteServiceTokenResponse DeleteServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new DeleteServiceTokenRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteServiceTokenResponse DeleteServiceToken(string ns, string service, Elastic.Clients.Elasticsearch.Name name, Action<DeleteServiceTokenRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteServiceTokenRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(DeleteServiceTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteServiceTokenRequestDescriptor(ns, service, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete service account tokens.
-	/// </para>
-	/// <para>
-	/// Delete service account tokens for a service in a specified namespace.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-service-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteServiceTokenResponse> DeleteServiceTokenAsync(string ns, string service, Elastic.Clients.Elasticsearch.Name name, Action<DeleteServiceTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteServiceTokenRequestDescriptor(ns, service, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteServiceTokenRequestDescriptor, DeleteServiceTokenResponse, DeleteServiceTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteUserResponse DeleteUser(DeleteUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DeleteUserRequest, DeleteUserResponse, DeleteUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteUserResponse> DeleteUserAsync(DeleteUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DeleteUserRequest, DeleteUserResponse, DeleteUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteUserResponse DeleteUser(DeleteUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username)
-	{
-		var descriptor = new DeleteUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, Action<DeleteUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteUserResponse> DeleteUserAsync(DeleteUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete users.
-	/// </para>
-	/// <para>
-	/// Delete users from the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-delete-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<DeleteUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteUserRequestDescriptor, DeleteUserResponse, DeleteUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserResponse DisableUser(DisableUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DisableUserRequest, DisableUserResponse, DisableUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserResponse> DisableUserAsync(DisableUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DisableUserRequest, DisableUserResponse, DisableUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserResponse DisableUser(DisableUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username)
-	{
-		var descriptor = new DisableUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, Action<DisableUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DisableUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserResponse> DisableUserAsync(DisableUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DisableUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable users.
-	/// </para>
-	/// <para>
-	/// Disable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-disable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<DisableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DisableUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserRequestDescriptor, DisableUserResponse, DisableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserProfileResponse DisableUserProfile(DisableUserProfileRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<DisableUserProfileRequest, DisableUserProfileResponse, DisableUserProfileRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(DisableUserProfileRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<DisableUserProfileRequest, DisableUserProfileResponse, DisableUserProfileRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserProfileResponse DisableUserProfile(DisableUserProfileRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserProfileResponse DisableUserProfile(string uid)
-	{
-		var descriptor = new DisableUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DisableUserProfileResponse DisableUserProfile(string uid, Action<DisableUserProfileRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DisableUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(DisableUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(string uid, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DisableUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Disable a user profile.
-	/// </para>
-	/// <para>
-	/// Disable user profiles so that they are not visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-disable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DisableUserProfileResponse> DisableUserProfileAsync(string uid, Action<DisableUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DisableUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DisableUserProfileRequestDescriptor, DisableUserProfileResponse, DisableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserResponse EnableUser(EnableUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EnableUserRequest, EnableUserResponse, EnableUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserResponse> EnableUserAsync(EnableUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<EnableUserRequest, EnableUserResponse, EnableUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserResponse EnableUser(EnableUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username)
-	{
-		var descriptor = new EnableUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, Action<EnableUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EnableUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserResponse> EnableUserAsync(EnableUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnableUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable users.
-	/// </para>
-	/// <para>
-	/// Enable users in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-enable-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, Action<EnableUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnableUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserRequestDescriptor, EnableUserResponse, EnableUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserProfileResponse EnableUserProfile(EnableUserProfileRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EnableUserProfileRequest, EnableUserProfileResponse, EnableUserProfileRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(EnableUserProfileRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<EnableUserProfileRequest, EnableUserProfileResponse, EnableUserProfileRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserProfileResponse EnableUserProfile(EnableUserProfileRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserProfileResponse EnableUserProfile(string uid)
-	{
-		var descriptor = new EnableUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnableUserProfileResponse EnableUserProfile(string uid, Action<EnableUserProfileRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EnableUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(EnableUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(string uid, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnableUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enable a user profile.
-	/// </para>
-	/// <para>
-	/// Enable user profiles to make them visible in user profile searches.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-enable-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnableUserProfileResponse> EnableUserProfileAsync(string uid, Action<EnableUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnableUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnableUserProfileRequestDescriptor, EnableUserProfileResponse, EnableUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollKibanaResponse EnrollKibana(EnrollKibanaRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EnrollKibanaRequest, EnrollKibanaResponse, EnrollKibanaRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(EnrollKibanaRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<EnrollKibanaRequest, EnrollKibanaResponse, EnrollKibanaRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollKibanaResponse EnrollKibana(EnrollKibanaRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollKibanaResponse EnrollKibana()
-	{
-		var descriptor = new EnrollKibanaRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollKibanaResponse EnrollKibana(Action<EnrollKibanaRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EnrollKibanaRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(EnrollKibanaRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnrollKibanaRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll Kibana.
-	/// </para>
-	/// <para>
-	/// Enable a Kibana instance to configure itself for communication with a secured Elasticsearch cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-kibana-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollKibanaResponse> EnrollKibanaAsync(Action<EnrollKibanaRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnrollKibanaRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollKibanaRequestDescriptor, EnrollKibanaResponse, EnrollKibanaRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollNodeResponse EnrollNode(EnrollNodeRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<EnrollNodeRequest, EnrollNodeResponse, EnrollNodeRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(EnrollNodeRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<EnrollNodeRequest, EnrollNodeResponse, EnrollNodeRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollNodeResponse EnrollNode(EnrollNodeRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollNodeResponse EnrollNode()
-	{
-		var descriptor = new EnrollNodeRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EnrollNodeResponse EnrollNode(Action<EnrollNodeRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EnrollNodeRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(EnrollNodeRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnrollNodeRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Enroll a node.
-	/// </para>
-	/// <para>
-	/// Enroll a new node to allow it to join an existing cluster with security features enabled.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-node-enrollment.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EnrollNodeResponse> EnrollNodeAsync(Action<EnrollNodeRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EnrollNodeRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EnrollNodeRequestDescriptor, EnrollNodeResponse, EnrollNodeRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetApiKeyResponse GetApiKey(GetApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetApiKeyRequest, GetApiKeyResponse, GetApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(GetApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetApiKeyRequest, GetApiKeyResponse, GetApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetApiKeyResponse GetApiKey(GetApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetApiKeyResponse GetApiKey()
-	{
-		var descriptor = new GetApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetApiKeyResponse GetApiKey(Action<GetApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(GetApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get API key information.
-	/// </para>
-	/// <para>
-	/// Retrieves information for one or more API keys.
-	/// NOTE: If you have only the <c>manage_own_api_key</c> privilege, this API returns only the API keys that you own.
-	/// If you have <c>read_security</c>, <c>manage_api_key</c> or greater privileges (including <c>manage_security</c>), this API returns all API keys regardless of ownership.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetApiKeyResponse> GetApiKeyAsync(Action<GetApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetApiKeyRequestDescriptor, GetApiKeyResponse, GetApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(GetBuiltinPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetBuiltinPrivilegesRequest, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(GetBuiltinPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetBuiltinPrivilegesRequest, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(GetBuiltinPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges()
-	{
-		var descriptor = new GetBuiltinPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBuiltinPrivilegesResponse GetBuiltinPrivileges(Action<GetBuiltinPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetBuiltinPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(GetBuiltinPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBuiltinPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get builtin privileges.
-	/// </para>
-	/// <para>
-	/// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-builtin-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Action<GetBuiltinPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBuiltinPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBuiltinPrivilegesRequestDescriptor, GetBuiltinPrivilegesResponse, GetBuiltinPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges(GetPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetPrivilegesRequest, GetPrivilegesResponse, GetPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(GetPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequest, GetPrivilegesResponse, GetPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges(GetPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor(application, name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, Action<GetPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor(application, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges()
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPrivilegesResponse GetPrivileges(Action<GetPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(GetPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor(application, name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, Action<GetPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor(application, name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPrivilegesResponse> GetPrivilegesAsync(Action<GetPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPrivilegesRequestDescriptor, GetPrivilegesResponse, GetPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole(GetRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetRoleRequest, GetRoleResponse, GetRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(GetRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetRoleRequest, GetRoleResponse, GetRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole(GetRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name)
-	{
-		var descriptor = new GetRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole()
-	{
-		var descriptor = new GetRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleResponse GetRole(Action<GetRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(GetRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get roles.
-	/// </para>
-	/// <para>
-	/// Get roles in the native realm.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleResponse> GetRoleAsync(Action<GetRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleRequestDescriptor, GetRoleResponse, GetRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping(GetRoleMappingRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetRoleMappingRequest, GetRoleMappingResponse, GetRoleMappingRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(GetRoleMappingRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequest, GetRoleMappingResponse, GetRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping(GetRoleMappingRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleMappingRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping()
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRoleMappingResponse GetRoleMapping(Action<GetRoleMappingRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(GetRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, Action<GetRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
-	/// The get role mappings API cannot retrieve role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRoleMappingResponse> GetRoleMappingAsync(Action<GetRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRoleMappingRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRoleMappingRequestDescriptor, GetRoleMappingResponse, GetRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts(GetServiceAccountsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequest, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(GetServiceAccountsRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequest, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts(GetServiceAccountsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts(string? ns, string? service)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts(string? ns, string? service, Action<GetServiceAccountsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts()
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceAccountsResponse GetServiceAccounts(Action<GetServiceAccountsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(GetServiceAccountsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(string? ns, string? service, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(string? ns, string? service, Action<GetServiceAccountsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service accounts.
-	/// </para>
-	/// <para>
-	/// Get a list of service accounts that match the provided path parameters.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-accounts.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceAccountsResponse> GetServiceAccountsAsync(Action<GetServiceAccountsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceAccountsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceAccountsRequestDescriptor, GetServiceAccountsResponse, GetServiceAccountsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceCredentialsResponse GetServiceCredentials(GetServiceCredentialsRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetServiceCredentialsRequest, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(GetServiceCredentialsRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetServiceCredentialsRequest, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceCredentialsResponse GetServiceCredentials(GetServiceCredentialsRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceCredentialsResponse GetServiceCredentials(string ns, Elastic.Clients.Elasticsearch.Name service)
-	{
-		var descriptor = new GetServiceCredentialsRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetServiceCredentialsResponse GetServiceCredentials(string ns, Elastic.Clients.Elasticsearch.Name service, Action<GetServiceCredentialsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetServiceCredentialsRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(GetServiceCredentialsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(string ns, Elastic.Clients.Elasticsearch.Name service, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceCredentialsRequestDescriptor(ns, service);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get service account credentials.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-service-credentials.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetServiceCredentialsResponse> GetServiceCredentialsAsync(string ns, Elastic.Clients.Elasticsearch.Name service, Action<GetServiceCredentialsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetServiceCredentialsRequestDescriptor(ns, service);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetServiceCredentialsRequestDescriptor, GetServiceCredentialsResponse, GetServiceCredentialsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTokenResponse GetToken(GetTokenRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetTokenRequest, GetTokenResponse, GetTokenRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTokenResponse> GetTokenAsync(GetTokenRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetTokenRequest, GetTokenResponse, GetTokenRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTokenResponse GetToken(GetTokenRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTokenResponse GetToken()
-	{
-		var descriptor = new GetTokenRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTokenResponse GetToken(Action<GetTokenRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetTokenRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTokenResponse> GetTokenAsync(GetTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTokenResponse> GetTokenAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTokenRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a token.
-	/// </para>
-	/// <para>
-	/// Create a bearer token for access without requiring basic authentication.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTokenResponse> GetTokenAsync(Action<GetTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTokenRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTokenRequestDescriptor, GetTokenResponse, GetTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser(GetUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetUserRequest, GetUserResponse, GetUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(GetUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetUserRequest, GetUserResponse, GetUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser(GetUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username)
-	{
-		var descriptor = new GetUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, Action<GetUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser()
-	{
-		var descriptor = new GetUserRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserResponse GetUser(Action<GetUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetUserRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(GetUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserRequestDescriptor(username);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Username>? username, Action<GetUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserRequestDescriptor(username);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get users.
-	/// </para>
-	/// <para>
-	/// Get information about users in the native realm and built-in users.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserResponse> GetUserAsync(Action<GetUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserRequestDescriptor, GetUserResponse, GetUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserPrivilegesResponse GetUserPrivileges(GetUserPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetUserPrivilegesRequest, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(GetUserPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetUserPrivilegesRequest, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserPrivilegesResponse GetUserPrivileges(GetUserPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserPrivilegesResponse GetUserPrivileges()
-	{
-		var descriptor = new GetUserPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserPrivilegesResponse GetUserPrivileges(Action<GetUserPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetUserPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(GetUserPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get user privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserPrivilegesResponse> GetUserPrivilegesAsync(Action<GetUserPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserPrivilegesRequestDescriptor, GetUserPrivilegesResponse, GetUserPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserProfileResponse GetUserProfile(GetUserProfileRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GetUserProfileRequest, GetUserProfileResponse, GetUserProfileRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GetUserProfileRequest, GetUserProfileResponse, GetUserProfileRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserProfileResponse GetUserProfile(GetUserProfileRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserProfileResponse GetUserProfile(IReadOnlyCollection<string> uid)
-	{
-		var descriptor = new GetUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetUserProfileResponse GetUserProfile(IReadOnlyCollection<string> uid, Action<GetUserProfileRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(GetUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(IReadOnlyCollection<string> uid, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserProfileRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get a user profile.
-	/// </para>
-	/// <para>
-	/// Get a user's profile using the unique profile ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-get-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetUserProfileResponse> GetUserProfileAsync(IReadOnlyCollection<string> uid, Action<GetUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetUserProfileRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetUserProfileRequestDescriptor, GetUserProfileResponse, GetUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey(GrantApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<GrantApiKeyRequest, GrantApiKeyResponse, GrantApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(GrantApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequest, GrantApiKeyResponse, GrantApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey<TDocument>(GrantApiKeyRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey<TDocument>()
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey<TDocument>(Action<GrantApiKeyRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey(GrantApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey()
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GrantApiKeyResponse GrantApiKey(Action<GrantApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(GrantApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(Action<GrantApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(GrantApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Grant an API key.
-	/// </para>
-	/// <para>
-	/// Create an API key on behalf of another user.
-	/// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-	/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-	/// It is not possible to use this API to create an API key without that user’s credentials.
-	/// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
-	/// In this case, the API key will be created on behalf of the impersonated user.
-	/// </para>
-	/// <para>
-	/// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
-	/// </para>
-	/// <para>
-	/// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
-	/// If applicable, it also returns expiration information for the API key in milliseconds.
-	/// </para>
-	/// <para>
-	/// By default, API keys never expire. You can specify expiration information when you create the API keys.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-grant-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GrantApiKeyResponse> GrantApiKeyAsync(Action<GrantApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GrantApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GrantApiKeyRequestDescriptor, GrantApiKeyResponse, GrantApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges(HasPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<HasPrivilegesRequest, HasPrivilegesResponse, HasPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(HasPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequest, HasPrivilegesResponse, HasPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges(HasPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor(user);
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user, Action<HasPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor(user);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges()
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesResponse HasPrivileges(Action<HasPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(HasPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor(user);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, Action<HasPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor(user);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the specified user has a specified list of privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesResponse> HasPrivilegesAsync(Action<HasPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesRequestDescriptor, HasPrivilegesResponse, HasPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(HasPrivilegesUserProfileRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<HasPrivilegesUserProfileRequest, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(HasPrivilegesUserProfileRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesUserProfileRequest, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(HasPrivilegesUserProfileRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile()
-	{
-		var descriptor = new HasPrivilegesUserProfileRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(Action<HasPrivilegesUserProfileRequestDescriptor> configureRequest)
-	{
-		var descriptor = new HasPrivilegesUserProfileRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(HasPrivilegesUserProfileRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesUserProfileRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Check user profile privileges.
-	/// </para>
-	/// <para>
-	/// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-has-privileges-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(Action<HasPrivilegesUserProfileRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HasPrivilegesUserProfileRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileResponse, HasPrivilegesUserProfileRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateApiKeyResponse InvalidateApiKey(InvalidateApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<InvalidateApiKeyRequest, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(InvalidateApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<InvalidateApiKeyRequest, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateApiKeyResponse InvalidateApiKey(InvalidateApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateApiKeyResponse InvalidateApiKey()
-	{
-		var descriptor = new InvalidateApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateApiKeyResponse InvalidateApiKey(Action<InvalidateApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new InvalidateApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(InvalidateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InvalidateApiKeyRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate API keys.
-	/// </para>
-	/// <para>
-	/// This API invalidates API keys created by the create API key or grant API key APIs.
-	/// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-	/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-	/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
-	/// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
-	/// </para>
-	/// <list type="bullet">
-	/// <item>
-	/// <para>
-	/// Set the parameter <c>owner=true</c>.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
-	/// </para>
-	/// </item>
-	/// <item>
-	/// <para>
-	/// Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the <c>ids</c> field.
-	/// </para>
-	/// </item>
-	/// </list>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateApiKeyResponse> InvalidateApiKeyAsync(Action<InvalidateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InvalidateApiKeyRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyResponse, InvalidateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateTokenResponse InvalidateToken(InvalidateTokenRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<InvalidateTokenRequest, InvalidateTokenResponse, InvalidateTokenRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(InvalidateTokenRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<InvalidateTokenRequest, InvalidateTokenResponse, InvalidateTokenRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateTokenResponse InvalidateToken(InvalidateTokenRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateTokenResponse InvalidateToken()
-	{
-		var descriptor = new InvalidateTokenRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InvalidateTokenResponse InvalidateToken(Action<InvalidateTokenRequestDescriptor> configureRequest)
-	{
-		var descriptor = new InvalidateTokenRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(InvalidateTokenRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InvalidateTokenRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate a token.
-	/// </para>
-	/// <para>
-	/// The access tokens returned by the get token API have a finite period of time for which they are valid.
-	/// After that time period, they can no longer be used.
-	/// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
-	/// </para>
-	/// <para>
-	/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
-	/// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-invalidate-token.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InvalidateTokenResponse> InvalidateTokenAsync(Action<InvalidateTokenRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InvalidateTokenRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InvalidateTokenRequestDescriptor, InvalidateTokenResponse, InvalidateTokenRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPrivilegesResponse PutPrivileges(PutPrivilegesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutPrivilegesRequest, PutPrivilegesResponse, PutPrivilegesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(PutPrivilegesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<PutPrivilegesRequest, PutPrivilegesResponse, PutPrivilegesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPrivilegesResponse PutPrivileges(PutPrivilegesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPrivilegesResponse PutPrivileges()
-	{
-		var descriptor = new PutPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPrivilegesResponse PutPrivileges(Action<PutPrivilegesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(PutPrivilegesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPrivilegesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update application privileges.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-privileges.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPrivilegesResponse> PutPrivilegesAsync(Action<PutPrivilegesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPrivilegesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPrivilegesRequestDescriptor, PutPrivilegesResponse, PutPrivilegesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole(PutRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutRoleRequest, PutRoleResponse, PutRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync(PutRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<PutRoleRequest, PutRoleResponse, PutRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole<TDocument>(PutRoleRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole<TDocument>(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutRoleRequestDescriptor<TDocument>(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new PutRoleRequestDescriptor<TDocument>(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole(PutRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(PutRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleRequestDescriptor<TDocument>(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleRequestDescriptor<TDocument>(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor<TDocument>, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync(PutRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update roles.
-	/// </para>
-	/// <para>
-	/// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
-	/// The create or update roles API cannot update roles that are defined in roles files.
-	/// File-based role management is not available in Elastic Serverless.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleRequestDescriptor, PutRoleResponse, PutRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleMappingResponse PutRoleMapping(PutRoleMappingRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutRoleMappingRequest, PutRoleMappingResponse, PutRoleMappingRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(PutRoleMappingRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<PutRoleMappingRequest, PutRoleMappingResponse, PutRoleMappingRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleMappingResponse PutRoleMapping(PutRoleMappingRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name)
-	{
-		var descriptor = new PutRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleMappingRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(PutRoleMappingRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleMappingRequestDescriptor(name);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update role mappings.
-	/// </para>
-	/// <para>
-	/// Role mappings define which roles are assigned to each user.
-	/// Each mapping has rules that identify users and a list of roles that are granted to those users.
-	/// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files. The create or update role mappings API cannot update role mappings that are defined in role mapping files.
-	/// </para>
-	/// <para>
-	/// This API does not create roles. Rather, it maps users to existing roles.
-	/// Roles can be created by using the create or update roles API or roles files.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-role-mapping.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, Action<PutRoleMappingRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutRoleMappingRequestDescriptor(name);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutRoleMappingRequestDescriptor, PutRoleMappingResponse, PutRoleMappingRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update users.
-	/// </para>
-	/// <para>
-	/// A password is required for adding a new user but is optional when updating an existing user.
-	/// To change a user’s password without updating any other fields, use the change password API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutUserResponse PutUser(PutUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<PutUserRequest, PutUserResponse, PutUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update users.
-	/// </para>
-	/// <para>
-	/// A password is required for adding a new user but is optional when updating an existing user.
-	/// To change a user’s password without updating any other fields, use the change password API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutUserResponse> PutUserAsync(PutUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<PutUserRequest, PutUserResponse, PutUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update users.
-	/// </para>
-	/// <para>
-	/// A password is required for adding a new user but is optional when updating an existing user.
-	/// To change a user’s password without updating any other fields, use the change password API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutUserResponse PutUser(PutUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutUserRequestDescriptor, PutUserResponse, PutUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create or update users.
-	/// </para>
-	/// <para>
-	/// A password is required for adding a new user but is optional when updating an existing user.
-	/// To change a user’s password without updating any other fields, use the change password API.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-put-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutUserResponse> PutUserAsync(PutUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutUserRequestDescriptor, PutUserResponse, PutUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys(QueryApiKeysRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<QueryApiKeysRequest, QueryApiKeysResponse, QueryApiKeysRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(QueryApiKeysRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequest, QueryApiKeysResponse, QueryApiKeysRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>(QueryApiKeysRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>()
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys<TDocument>(Action<QueryApiKeysRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys(QueryApiKeysRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys()
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryApiKeysResponse QueryApiKeys(Action<QueryApiKeysRequestDescriptor> configureRequest)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(QueryApiKeysRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(Action<QueryApiKeysRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor<TDocument>, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(QueryApiKeysRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find API keys with a query.
-	/// </para>
-	/// <para>
-	/// Get a paginated list of API keys and their information. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryApiKeysResponse> QueryApiKeysAsync(Action<QueryApiKeysRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryApiKeysRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryApiKeysRequestDescriptor, QueryApiKeysResponse, QueryApiKeysRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole(QueryRoleRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<QueryRoleRequest, QueryRoleResponse, QueryRoleRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequest, QueryRoleResponse, QueryRoleRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole<TDocument>()
-	{
-		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole(QueryRoleRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole()
-	{
-		var descriptor = new QueryRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryRoleResponse QueryRole(Action<QueryRoleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new QueryRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(QueryRoleRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync<TDocument>(Action<QueryRoleRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryRoleRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor<TDocument>, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync(QueryRoleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryRoleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find roles with a query.
-	/// </para>
-	/// <para>
-	/// Get roles in a paginated manner. You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-role.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryRoleResponse> QueryRoleAsync(Action<QueryRoleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryRoleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryRoleRequestDescriptor, QueryRoleResponse, QueryRoleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser(QueryUserRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<QueryUserRequest, QueryUserResponse, QueryUserRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync(QueryUserRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<QueryUserRequest, QueryUserResponse, QueryUserRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser<TDocument>(QueryUserRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser<TDocument>()
-	{
-		var descriptor = new QueryUserRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser<TDocument>(Action<QueryUserRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new QueryUserRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser(QueryUserRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser()
-	{
-		var descriptor = new QueryUserRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual QueryUserResponse QueryUser(Action<QueryUserRequestDescriptor> configureRequest)
-	{
-		var descriptor = new QueryUserRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(QueryUserRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryUserRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync<TDocument>(Action<QueryUserRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryUserRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor<TDocument>, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync(QueryUserRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryUserRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Find users with a query.
-	/// </para>
-	/// <para>
-	/// Get information for users in a paginated manner.
-	/// You can optionally filter the results with a query.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-query-user.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<QueryUserResponse> QueryUserAsync(Action<QueryUserRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new QueryUserRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<QueryUserRequestDescriptor, QueryUserResponse, QueryUserRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlAuthenticateResponse SamlAuthenticate(SamlAuthenticateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlAuthenticateRequest, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(SamlAuthenticateRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlAuthenticateRequest, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlAuthenticateResponse SamlAuthenticate(SamlAuthenticateRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlAuthenticateResponse SamlAuthenticate()
-	{
-		var descriptor = new SamlAuthenticateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlAuthenticateResponse SamlAuthenticate(Action<SamlAuthenticateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlAuthenticateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(SamlAuthenticateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlAuthenticateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Authenticate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML response message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-authenticate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlAuthenticateResponse> SamlAuthenticateAsync(Action<SamlAuthenticateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlAuthenticateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlAuthenticateRequestDescriptor, SamlAuthenticateResponse, SamlAuthenticateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(SamlCompleteLogoutRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlCompleteLogoutRequest, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(SamlCompleteLogoutRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlCompleteLogoutRequest, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(SamlCompleteLogoutRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlCompleteLogoutResponse SamlCompleteLogout()
-	{
-		var descriptor = new SamlCompleteLogoutRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlCompleteLogoutResponse SamlCompleteLogout(Action<SamlCompleteLogoutRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlCompleteLogoutRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(SamlCompleteLogoutRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlCompleteLogoutRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML completely.
-	/// </para>
-	/// <para>
-	/// Verifies the logout response sent from the SAML IdP.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-complete-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Action<SamlCompleteLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlCompleteLogoutRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlCompleteLogoutRequestDescriptor, SamlCompleteLogoutResponse, SamlCompleteLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlInvalidateResponse SamlInvalidate(SamlInvalidateRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlInvalidateRequest, SamlInvalidateResponse, SamlInvalidateRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(SamlInvalidateRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlInvalidateRequest, SamlInvalidateResponse, SamlInvalidateRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlInvalidateResponse SamlInvalidate(SamlInvalidateRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlInvalidateResponse SamlInvalidate()
-	{
-		var descriptor = new SamlInvalidateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlInvalidateResponse SamlInvalidate(Action<SamlInvalidateRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlInvalidateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(SamlInvalidateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlInvalidateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Invalidate SAML.
-	/// </para>
-	/// <para>
-	/// Submits a SAML LogoutRequest message to Elasticsearch for consumption.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-invalidate.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlInvalidateResponse> SamlInvalidateAsync(Action<SamlInvalidateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlInvalidateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlInvalidateRequestDescriptor, SamlInvalidateResponse, SamlInvalidateRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlLogoutResponse SamlLogout(SamlLogoutRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlLogoutRequest, SamlLogoutResponse, SamlLogoutRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(SamlLogoutRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlLogoutRequest, SamlLogoutResponse, SamlLogoutRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlLogoutResponse SamlLogout(SamlLogoutRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlLogoutResponse SamlLogout()
-	{
-		var descriptor = new SamlLogoutRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlLogoutResponse SamlLogout(Action<SamlLogoutRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlLogoutRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(SamlLogoutRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlLogoutRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Logout of SAML.
-	/// </para>
-	/// <para>
-	/// Submits a request to invalidate an access token and refresh token.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-logout.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlLogoutResponse> SamlLogoutAsync(Action<SamlLogoutRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlLogoutRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlLogoutRequestDescriptor, SamlLogoutResponse, SamlLogoutRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(SamlPrepareAuthenticationRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlPrepareAuthenticationRequest, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(SamlPrepareAuthenticationRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlPrepareAuthenticationRequest, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(SamlPrepareAuthenticationRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication()
-	{
-		var descriptor = new SamlPrepareAuthenticationRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlPrepareAuthenticationResponse SamlPrepareAuthentication(Action<SamlPrepareAuthenticationRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlPrepareAuthenticationRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(SamlPrepareAuthenticationRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlPrepareAuthenticationRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Prepare SAML authentication.
-	/// </para>
-	/// <para>
-	/// Creates a SAML authentication request (<c>&lt;AuthnRequest></c>) as a URL string, based on the configuration of the respective SAML realm in Elasticsearch.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-prepare-authentication.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Action<SamlPrepareAuthenticationRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlPrepareAuthenticationRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlPrepareAuthenticationRequestDescriptor, SamlPrepareAuthenticationResponse, SamlPrepareAuthenticationRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(SamlServiceProviderMetadataRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SamlServiceProviderMetadataRequest, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(SamlServiceProviderMetadataRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SamlServiceProviderMetadataRequest, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(SamlServiceProviderMetadataRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName)
-	{
-		var descriptor = new SamlServiceProviderMetadataRequestDescriptor(realmName);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName, Action<SamlServiceProviderMetadataRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SamlServiceProviderMetadataRequestDescriptor(realmName);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(SamlServiceProviderMetadataRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlServiceProviderMetadataRequestDescriptor(realmName);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create SAML service provider metadata.
-	/// </para>
-	/// <para>
-	/// Generate SAML metadata for a SAML 2.0 Service Provider.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-saml-sp-metadata.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, Action<SamlServiceProviderMetadataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SamlServiceProviderMetadataRequestDescriptor(realmName);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SamlServiceProviderMetadataRequestDescriptor, SamlServiceProviderMetadataResponse, SamlServiceProviderMetadataRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SuggestUserProfilesResponse SuggestUserProfiles(SuggestUserProfilesRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<SuggestUserProfilesRequest, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(SuggestUserProfilesRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<SuggestUserProfilesRequest, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SuggestUserProfilesResponse SuggestUserProfiles(SuggestUserProfilesRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SuggestUserProfilesResponse SuggestUserProfiles()
-	{
-		var descriptor = new SuggestUserProfilesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SuggestUserProfilesResponse SuggestUserProfiles(Action<SuggestUserProfilesRequestDescriptor> configureRequest)
-	{
-		var descriptor = new SuggestUserProfilesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(SuggestUserProfilesRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SuggestUserProfilesRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Suggest a user profile.
-	/// </para>
-	/// <para>
-	/// Get suggestions for user profiles that match specified search criteria.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/security-api-suggest-user-profile.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SuggestUserProfilesResponse> SuggestUserProfilesAsync(Action<SuggestUserProfilesRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new SuggestUserProfilesRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SuggestUserProfilesRequestDescriptor, SuggestUserProfilesResponse, SuggestUserProfilesRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey(UpdateApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequest, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(UpdateApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequest, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(UpdateApiKeyRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey(UpdateApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(UpdateApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor<TDocument>, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(UpdateApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update an API key.
-	/// </para>
-	/// <para>
-	/// Updates attributes of an existing API key.
-	/// Users can only update API keys that they created or that were granted to them.
-	/// Use this API to update API keys created by the create API Key or grant API Key APIs.
-	/// If you need to apply the same update to many API keys, you can use bulk update API Keys to reduce overhead.
-	/// It’s not possible to update expired API keys, or API keys that have been invalidated by invalidate API Key.
-	/// This API supports updates to an API key’s access scope and metadata.
-	/// The access scope of an API key is derived from the <c>role_descriptors</c> you specify in the request, and a snapshot of the owner user’s permissions at the time of the request.
-	/// The snapshot of the owner’s permissions is updated automatically on every call.
-	/// If you don’t specify <c>role_descriptors</c> in the request, a call to this API might still change the API key’s access scope.
-	/// This change can occur if the owner user’s permissions have changed since the API key was created or last modified.
-	/// To update another user’s API key, use the <c>run_as</c> feature to submit a request on behalf of another user.
-	/// IMPORTANT: It’s not possible to use an API key as the authentication credential for this API.
-	/// To update an API key, the owner user’s credentials are required.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<UpdateApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateApiKeyRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateApiKeyRequestDescriptor, UpdateApiKeyResponse, UpdateApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(UpdateCrossClusterApiKeyRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequest, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(UpdateCrossClusterApiKeyRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequest, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(UpdateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(UpdateCrossClusterApiKeyRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor> configureRequest)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(UpdateCrossClusterApiKeyRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor<TDocument>, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(UpdateCrossClusterApiKeyRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update a cross-cluster API key.
-	/// </para>
-	/// <para>
-	/// Update the attributes of an existing cross-cluster API key, which is used for API key based remote cluster access.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-cross-cluster-api-key.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, Action<UpdateCrossClusterApiKeyRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateCrossClusterApiKeyRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateCrossClusterApiKeyRequestDescriptor, UpdateCrossClusterApiKeyResponse, UpdateCrossClusterApiKeyRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(UpdateUserProfileDataRequest request)
-	{
-		request.BeforeRequest();
-		return DoRequest<UpdateUserProfileDataRequest, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(request);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(UpdateUserProfileDataRequest request, CancellationToken cancellationToken = default)
-	{
-		request.BeforeRequest();
-		return DoRequestAsync<UpdateUserProfileDataRequest, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(request, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(UpdateUserProfileDataRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(string uid)
-	{
-		var descriptor = new UpdateUserProfileDataRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual UpdateUserProfileDataResponse UpdateUserProfileData(string uid, Action<UpdateUserProfileDataRequestDescriptor> configureRequest)
-	{
-		var descriptor = new UpdateUserProfileDataRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(UpdateUserProfileDataRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateUserProfileDataRequestDescriptor(uid);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Update user profile data.
-	/// </para>
-	/// <para>
-	/// Update specific data for the user profile that is associated with a unique ID.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-update-user-profile-data.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, Action<UpdateUserProfileDataRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new UpdateUserProfileDataRequestDescriptor(uid);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateUserProfileDataRequestDescriptor, UpdateUserProfileDataResponse, UpdateUserProfileDataRequestParameters>(descriptor, cancellationToken);
+	internal SecurityNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
+	{
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse ActivateUserProfile(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse ActivateUserProfile(System.Action<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse> ActivateUserProfileAsync(Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse> ActivateUserProfileAsync(System.Action<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequest, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileResponse, Elastic.Clients.Elasticsearch.Security.ActivateUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.AuthenticateResponse Authenticate(Elastic.Clients.Elasticsearch.Security.AuthenticateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.AuthenticateResponse Authenticate()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.AuthenticateResponse Authenticate(System.Action<Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(Elastic.Clients.Elasticsearch.Security.AuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.AuthenticateResponse> AuthenticateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.AuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.AuthenticateRequest, Elastic.Clients.Elasticsearch.Security.AuthenticateResponse, Elastic.Clients.Elasticsearch.Security.AuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse BulkDeleteRole(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse BulkDeleteRole(System.Action<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse> BulkDeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse> BulkDeleteRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkDeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse BulkPutRole(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse BulkPutRole(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse BulkPutRole<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync(Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse> BulkPutRoleAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequest, Elastic.Clients.Elasticsearch.Security.BulkPutRoleResponse, Elastic.Clients.Elasticsearch.Security.BulkPutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse BulkUpdateApiKeys(Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse BulkUpdateApiKeys(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse BulkUpdateApiKeys<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse> BulkUpdateApiKeysAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequest, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysResponse, Elastic.Clients.Elasticsearch.Security.BulkUpdateApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse ChangePassword(Elastic.Clients.Elasticsearch.Username? username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse> ChangePasswordAsync(Elastic.Clients.Elasticsearch.Username? username, System.Action<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ChangePasswordRequest, Elastic.Clients.Elasticsearch.Security.ChangePasswordResponse, Elastic.Clients.Elasticsearch.Security.ChangePasswordRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse ClearApiKeyCache(Elastic.Clients.Elasticsearch.Ids ids, System.Action<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse> ClearApiKeyCacheAsync(Elastic.Clients.Elasticsearch.Ids ids, System.Action<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestDescriptor(ids);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequest, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheResponse, Elastic.Clients.Elasticsearch.Security.ClearApiKeyCacheRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse ClearCachedPrivileges(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse> ClearCachedPrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestDescriptor(application);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse ClearCachedRealms(Elastic.Clients.Elasticsearch.Names realms, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse> ClearCachedRealmsAsync(Elastic.Clients.Elasticsearch.Names realms, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestDescriptor(realms);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRealmsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse ClearCachedRoles(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse> ClearCachedRolesAsync(Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedRolesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse ClearCachedServiceTokens(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse ClearCachedServiceTokens(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse ClearCachedServiceTokens(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse> ClearCachedServiceTokensAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensResponse, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse CreateApiKey<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse> CreateApiKeyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse CreateCrossClusterApiKey<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse> CreateCrossClusterApiKeyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.CreateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse CreateServiceToken(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name? name, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse> CreateServiceTokenAsync(string @namespace, string service, System.Action<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.CreateServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse DelegatePki(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse DelegatePki(System.Action<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse> DelegatePkiAsync(Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse> DelegatePkiAsync(System.Action<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DelegatePkiRequest, Elastic.Clients.Elasticsearch.Security.DelegatePkiResponse, Elastic.Clients.Elasticsearch.Security.DelegatePkiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse DeletePrivileges(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse> DeletePrivilegesAsync(Elastic.Clients.Elasticsearch.Name application, Elastic.Clients.Elasticsearch.Names name, System.Action<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestDescriptor(application, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequest, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesResponse, Elastic.Clients.Elasticsearch.Security.DeletePrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse DeleteRole(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse> DeleteRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse DeleteRoleMapping(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse> DeleteRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.DeleteRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse DeleteServiceToken(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse DeleteServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse DeleteServiceToken(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse> DeleteServiceTokenAsync(string @namespace, string service, Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestDescriptor(@namespace, service, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequest, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenResponse, Elastic.Clients.Elasticsearch.Security.DeleteServiceTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Security.DeleteUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DeleteUserResponse DeleteUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Security.DeleteUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DeleteUserResponse> DeleteUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DeleteUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DeleteUserRequest, Elastic.Clients.Elasticsearch.Security.DeleteUserResponse, Elastic.Clients.Elasticsearch.Security.DeleteUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Security.DisableUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserResponse DisableUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Security.DisableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserResponse> DisableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserRequest, Elastic.Clients.Elasticsearch.Security.DisableUserResponse, Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse DisableUserProfile(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse DisableUserProfile(string uid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse DisableUserProfile(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse> DisableUserProfileAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.DisableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.DisableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Security.EnableUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserResponse EnableUser(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Security.EnableUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserResponse> EnableUserAsync(Elastic.Clients.Elasticsearch.Username username, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserRequest, Elastic.Clients.Elasticsearch.Security.EnableUserResponse, Elastic.Clients.Elasticsearch.Security.EnableUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse EnableUserProfile(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse EnableUserProfile(string uid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse EnableUserProfile(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse> EnableUserProfileAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequest, Elastic.Clients.Elasticsearch.Security.EnableUserProfileResponse, Elastic.Clients.Elasticsearch.Security.EnableUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse EnrollKibana(Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse EnrollKibana()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse EnrollKibana(System.Action<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse> EnrollKibanaAsync(System.Action<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequest, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse, Elastic.Clients.Elasticsearch.Security.EnrollKibanaRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse EnrollNode(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse EnrollNode()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse EnrollNode(System.Action<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse> EnrollNodeAsync(System.Action<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest, Elastic.Clients.Elasticsearch.Security.EnrollNodeResponse, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse GetApiKey(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse GetApiKey()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse GetApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse> GetApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GetApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GetApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse GetBuiltinPrivileges(Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse GetBuiltinPrivileges()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse GetBuiltinPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse> GetBuiltinPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetBuiltinPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse GetPrivileges(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse> GetPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? application, Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestDescriptor(application, name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Security.GetRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleResponse GetRole(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Security.GetRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleResponse> GetRoleAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleRequest, Elastic.Clients.Elasticsearch.Security.GetRoleResponse, Elastic.Clients.Elasticsearch.Security.GetRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse GetRoleMapping(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse> GetRoleMappingAsync(Elastic.Clients.Elasticsearch.Names? name, System.Action<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.GetRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.GetRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, string? service)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, string? service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse GetServiceAccounts(string? @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, string? service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, string? service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse> GetServiceAccountsAsync(string? @namespace, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestDescriptor(@namespace);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceAccountsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse GetServiceCredentials(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse GetServiceCredentials(string @namespace, Elastic.Clients.Elasticsearch.Name service)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse GetServiceCredentials(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse> GetServiceCredentialsAsync(string @namespace, Elastic.Clients.Elasticsearch.Name service, System.Action<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestDescriptor(@namespace, service);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequest, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsResponse, Elastic.Clients.Elasticsearch.Security.GetServiceCredentialsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse GetSettings(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse GetSettings()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse GetSettings(System.Action<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse> GetSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequest, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsResponse, Elastic.Clients.Elasticsearch.Security.GetSecuritySettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetTokenResponse GetToken(Elastic.Clients.Elasticsearch.Security.GetTokenRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetTokenResponse GetToken()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetTokenResponse GetToken(System.Action<Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(Elastic.Clients.Elasticsearch.Security.GetTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetTokenResponse> GetTokenAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetTokenRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetTokenRequest, Elastic.Clients.Elasticsearch.Security.GetTokenResponse, Elastic.Clients.Elasticsearch.Security.GetTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(Elastic.Clients.Elasticsearch.Security.GetUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserResponse GetUser(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(Elastic.Clients.Elasticsearch.Security.GetUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserResponse> GetUserAsync(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Username>? username, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserRequestDescriptor(username);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserRequest, Elastic.Clients.Elasticsearch.Security.GetUserResponse, Elastic.Clients.Elasticsearch.Security.GetUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse GetUserPrivileges(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse GetUserPrivileges()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse GetUserPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse> GetUserPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.GetUserPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse GetUserProfile(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse GetUserProfile(System.Collections.Generic.ICollection<string> uid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse GetUserProfile(System.Collections.Generic.ICollection<string> uid, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(System.Collections.Generic.ICollection<string> uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse> GetUserProfileAsync(System.Collections.Generic.ICollection<string> uid, System.Action<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GetUserProfileRequest, Elastic.Clients.Elasticsearch.Security.GetUserProfileResponse, Elastic.Clients.Elasticsearch.Security.GetUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse GrantApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse GrantApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse GrantApiKey<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse> GrantApiKeyAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest, Elastic.Clients.Elasticsearch.Security.GrantApiKeyResponse, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse HasPrivileges(Elastic.Clients.Elasticsearch.Name? user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse> HasPrivilegesAsync(Elastic.Clients.Elasticsearch.Name? user, System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestDescriptor(user);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse HasPrivilegesUserProfile(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse> HasPrivilegesUserProfileAsync(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileResponse, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse InvalidateApiKey(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse InvalidateApiKey()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse InvalidateApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse> InvalidateApiKeyAsync(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse InvalidateToken(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse InvalidateToken()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse InvalidateToken(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse> InvalidateTokenAsync(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest, Elastic.Clients.Elasticsearch.Security.InvalidateTokenResponse, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse OidcAuthenticate(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse OidcAuthenticate(System.Action<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse> OidcAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse> OidcAuthenticateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.OidcAuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse OidcLogout(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse OidcLogout(System.Action<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse> OidcLogoutAsync(Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse> OidcLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcLogoutRequest, Elastic.Clients.Elasticsearch.Security.OidcLogoutResponse, Elastic.Clients.Elasticsearch.Security.OidcLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse OidcPrepareAuthentication(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse OidcPrepareAuthentication()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse OidcPrepareAuthentication(System.Action<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse> OidcPrepareAuthenticationAsync(System.Action<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.OidcPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse PutPrivileges(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse PutPrivileges(System.Action<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse> PutPrivilegesAsync(Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse> PutPrivilegesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequest, Elastic.Clients.Elasticsearch.Security.PutPrivilegesResponse, Elastic.Clients.Elasticsearch.Security.PutPrivilegesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Security.PutRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleResponse PutRole<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Security.PutRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleResponse> PutRoleAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleRequest, Elastic.Clients.Elasticsearch.Security.PutRoleResponse, Elastic.Clients.Elasticsearch.Security.PutRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse PutRoleMapping<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse> PutRoleMappingAsync<TDocument>(Elastic.Clients.Elasticsearch.Name name, System.Action<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestDescriptor<TDocument>(name);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequest, Elastic.Clients.Elasticsearch.Security.PutRoleMappingResponse, Elastic.Clients.Elasticsearch.Security.PutRoleMappingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserResponse PutUser(Elastic.Clients.Elasticsearch.Security.PutUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserResponse PutUser()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.PutUserResponse PutUser(System.Action<Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(Elastic.Clients.Elasticsearch.Security.PutUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.PutUserResponse> PutUserAsync(System.Action<Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.PutUserRequest, Elastic.Clients.Elasticsearch.Security.PutUserResponse, Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse QueryApiKeys<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse> QueryApiKeysAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequest, Elastic.Clients.Elasticsearch.Security.QueryApiKeysResponse, Elastic.Clients.Elasticsearch.Security.QueryApiKeysRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryRoleResponse QueryRole<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(Elastic.Clients.Elasticsearch.Security.QueryRoleRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryRoleResponse> QueryRoleAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryRoleRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryRoleRequest, Elastic.Clients.Elasticsearch.Security.QueryRoleResponse, Elastic.Clients.Elasticsearch.Security.QueryRoleRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser(Elastic.Clients.Elasticsearch.Security.QueryUserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.QueryUserResponse QueryUser<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(Elastic.Clients.Elasticsearch.Security.QueryUserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.QueryUserResponse> QueryUserAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.QueryUserRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.QueryUserRequest, Elastic.Clients.Elasticsearch.Security.QueryUserResponse, Elastic.Clients.Elasticsearch.Security.QueryUserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse SamlAuthenticate(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse SamlAuthenticate(System.Action<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse> SamlAuthenticateAsync(Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse> SamlAuthenticateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequest, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateResponse, Elastic.Clients.Elasticsearch.Security.SamlAuthenticateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse SamlCompleteLogout(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse SamlCompleteLogout(System.Action<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse> SamlCompleteLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlCompleteLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse SamlInvalidate(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse SamlInvalidate(System.Action<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse> SamlInvalidateAsync(Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse> SamlInvalidateAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequest, Elastic.Clients.Elasticsearch.Security.SamlInvalidateResponse, Elastic.Clients.Elasticsearch.Security.SamlInvalidateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse SamlLogout(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse SamlLogout(System.Action<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse> SamlLogoutAsync(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse> SamlLogoutAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest, Elastic.Clients.Elasticsearch.Security.SamlLogoutResponse, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse SamlPrepareAuthentication(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse SamlPrepareAuthentication()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse SamlPrepareAuthentication(System.Action<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse> SamlPrepareAuthenticationAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequest, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationResponse, Elastic.Clients.Elasticsearch.Security.SamlPrepareAuthenticationRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse SamlServiceProviderMetadata(Elastic.Clients.Elasticsearch.Name realmName, System.Action<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse> SamlServiceProviderMetadataAsync(Elastic.Clients.Elasticsearch.Name realmName, System.Action<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestDescriptor(realmName);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequest, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataResponse, Elastic.Clients.Elasticsearch.Security.SamlServiceProviderMetadataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse SuggestUserProfiles(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse SuggestUserProfiles()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse SuggestUserProfiles(System.Action<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse> SuggestUserProfilesAsync(System.Action<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequest, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesResponse, Elastic.Clients.Elasticsearch.Security.SuggestUserProfilesRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse UpdateApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse> UpdateApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse UpdateCrossClusterApiKey<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse> UpdateCrossClusterApiKeyAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequest, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyResponse, Elastic.Clients.Elasticsearch.Security.UpdateCrossClusterApiKeyRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse UpdateSettings<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse> UpdateSettingsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequest, Elastic.Clients.Elasticsearch.Security.UpdateSettingsResponse, Elastic.Clients.Elasticsearch.Security.UpdateSettingsRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse UpdateUserProfileData(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse UpdateUserProfileData(string uid)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse UpdateUserProfileData(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse> UpdateUserProfileDataAsync(string uid, System.Action<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestDescriptor(uid);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequest, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataResponse, Elastic.Clients.Elasticsearch.Security.UpdateUserProfileDataRequestParameters>(request, cancellationToken);
 	}
 }

@@ -6,11 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.MSearch;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.MSearch;
-#endif
 
 public partial class MultiSearchItem<TDocument>
 {
@@ -21,5 +17,5 @@ public partial class MultiSearchItem<TDocument>
 	public IReadOnlyCollection<TDocument> Documents => HitsMetadata.Hits.Select(s => s.Source).ToReadOnlyCollection();
 
 	[JsonIgnore]
-	public long Total => HitsMetadata?.Total?.Item1?.Value ?? HitsMetadata?.Total?.Item2 ?? -1;
+	public long Total => HitsMetadata?.Total?.Value1?.Value ?? HitsMetadata?.Total?.Value2 ?? -1;
 }

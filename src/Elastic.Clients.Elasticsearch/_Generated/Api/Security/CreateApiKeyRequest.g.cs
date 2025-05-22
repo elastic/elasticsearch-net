@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class CreateApiKeyRequestParameters : RequestParameters
+public sealed partial class CreateApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,22 +33,117 @@ public sealed partial class CreateApiKeyRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
+internal sealed partial class CreateApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExpiration = System.Text.Json.JsonEncodedText.Encode("expiration");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleDescriptors = System.Text.Json.JsonEncodedText.Encode("role_descriptors");
+
+	public override Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propExpiration = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>?> propRoleDescriptors = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExpiration.TryReadProperty(ref reader, options, PropExpiration, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propRoleDescriptors.TryReadProperty(ref reader, options, PropRoleDescriptors, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Expiration = propExpiration.Value,
+			Metadata = propMetadata.Value,
+			Name = propName.Value,
+			RoleDescriptors = propRoleDescriptors.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExpiration, value.Expiration, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropRoleDescriptors, value.RoleDescriptors, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create an API key.
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
+/// </para>
 /// </summary>
-public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestConverter))]
+public sealed partial class CreateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateApiKey;
+#if NET7_0_OR_GREATER
+	public CreateApiKeyRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CreateApiKeyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityCreateApiKey;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -66,15 +154,14 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("expiration")]
 	public Elastic.Clients.Elasticsearch.Duration? Expiration { get; set; }
 
 	/// <summary>
@@ -82,24 +169,30 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IDictionary<string, object>? Metadata { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// A name for the API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("role_descriptors")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? RoleDescriptors { get; set; }
 }
 
 /// <summary>
@@ -108,43 +201,62 @@ public sealed partial class CreateApiKeyRequest : PlainRequest<CreateApiKeyReque
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
+/// </para>
 /// </summary>
-public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDescriptor<CreateApiKeyRequestDescriptor<TDocument>, CreateApiKeyRequestParameters>
+public readonly partial struct CreateApiKeyRequestDescriptor
 {
-	internal CreateApiKeyRequestDescriptor(Action<CreateApiKeyRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public CreateApiKeyRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateApiKey;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.create_api_key";
-
-	public CreateApiKeyRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	private Elastic.Clients.Elasticsearch.Duration? ExpirationValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>> RoleDescriptorsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
-		ExpirationValue = expiration;
-		return Self;
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Expiration = value;
+		return this;
 	}
 
 	/// <summary>
@@ -152,62 +264,259 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor<TDocument> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata()
 	{
-		NameValue = name;
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		RoleDescriptorsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>());
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddMetadatum(string key, object value)
 	{
-		writer.WriteStartObject();
-		if (ExpirationValue is not null)
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A name for the API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
+	{
+		Instance.RoleDescriptors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors()
+	{
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor>? action)
+	{
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>>? action)
+	{
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(string key)
+	{
+		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RoleDescriptors(params string[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		foreach (var key in keys)
 		{
-			writer.WritePropertyName("expiration");
-			JsonSerializer.Serialize(writer, ExpirationValue, options);
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
 		}
 
-		if (MetadataValue is not null)
+		Instance.RoleDescriptors = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>? action)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor AddRoleDescriptor<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>>? action)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (RoleDescriptorsValue is not null)
-		{
-			writer.WritePropertyName("role_descriptors");
-			JsonSerializer.Serialize(writer, RoleDescriptorsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -217,43 +526,62 @@ public sealed partial class CreateApiKeyRequestDescriptor<TDocument> : RequestDe
 /// </para>
 /// <para>
 /// Create an API key for access without requiring basic authentication.
+/// </para>
+/// <para>
+/// IMPORTANT: If the credential that is used to authenticate this request is an API key, the derived API key cannot have any privileges.
+/// If you specify privileges, the API returns an error.
+/// </para>
+/// <para>
 /// A successful request returns a JSON structure that contains the API key, its unique id, and its name.
 /// If applicable, it also returns expiration information for the API key in milliseconds.
+/// </para>
+/// <para>
 /// NOTE: By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
+/// <para>
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
+/// To configure or turn off the API key service, refer to API key service setting documentation.
+/// </para>
 /// </summary>
-public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<CreateApiKeyRequestDescriptor, CreateApiKeyRequestParameters>
+public readonly partial struct CreateApiKeyRequestDescriptor<TDocument>
 {
-	internal CreateApiKeyRequestDescriptor(Action<CreateApiKeyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public CreateApiKeyRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityCreateApiKey;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.create_api_key";
-
-	public CreateApiKeyRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	private Elastic.Clients.Elasticsearch.Duration? ExpirationValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor> RoleDescriptorsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Expiration time for the API key. By default, API keys never expire.
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor Expiration(Elastic.Clients.Elasticsearch.Duration? expiration)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
-		ExpirationValue = expiration;
-		return Self;
+		Instance.Refresh = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The expiration time for the API key.
+	/// By default, API keys never expire.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Expiration(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Expiration = value;
+		return this;
 	}
 
 	/// <summary>
@@ -261,61 +589,231 @@ public sealed partial class CreateApiKeyRequestDescriptor : RequestDescriptor<Cr
 	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies the name for this API key.
+	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata()
 	{
-		NameValue = name;
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// An array of role descriptors for this API key. This parameter is optional. When it is not specified or is an empty array, then the API key will have a point in time snapshot of permissions of the authenticated user. If you supply role descriptors then the resultant permissions would be an intersection of API keys permissions and authenticated user’s permissions thereby limiting the access scope for API keys. The structure of role descriptor is the same as the request for create role API. For more details, see create or update roles API.
+	/// Arbitrary metadata that you want to associate with the API key. It supports nested data structure. Within the metadata object, keys beginning with <c>_</c> are reserved for system usage.
 	/// </para>
 	/// </summary>
-	public CreateApiKeyRequestDescriptor RoleDescriptors(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		RoleDescriptorsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor>());
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddMetadatum(string key, object value)
 	{
-		writer.WriteStartObject();
-		if (ExpirationValue is not null)
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A name for the API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>? value)
+	{
+		Instance.RoleDescriptors = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors()
+	{
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>>? action)
+	{
+		Instance.RoleDescriptors = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringRoleDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, Elastic.Clients.Elasticsearch.Security.RoleDescriptor value)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(string key)
+	{
+		Instance.RoleDescriptors = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor> { { key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of role descriptors for this API key.
+	/// When it is not specified or it is an empty array, the API key will have a point in time snapshot of permissions of the authenticated user.
+	/// If you supply role descriptors, the resultant permissions are an intersection of API keys permissions and the authenticated user's permissions thereby limiting the access scope for API keys.
+	/// The structure of role descriptor is the same as the request for the create role API.
+	/// For more details, refer to the create or update roles API.
+	/// </para>
+	/// <para>
+	/// NOTE: Due to the way in which this permission intersection is calculated, it is not possible to create an API key that is a child of another API key, unless the derived key is created without any privileges.
+	/// In this case, you must explicitly specify a role descriptor with no privileges.
+	/// The derived API key can be used for authentication; it will not have authority to call Elasticsearch APIs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RoleDescriptors(params string[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		foreach (var key in keys)
 		{
-			writer.WritePropertyName("expiration");
-			JsonSerializer.Serialize(writer, ExpirationValue, options);
+			items.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
 		}
 
-		if (MetadataValue is not null)
+		Instance.RoleDescriptors = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> AddRoleDescriptor(string key, System.Action<Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>>? action)
+	{
+		Instance.RoleDescriptors ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Security.RoleDescriptor>();
+		Instance.RoleDescriptors.Add(key, Elastic.Clients.Elasticsearch.Security.RoleDescriptorDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (RoleDescriptorsValue is not null)
-		{
-			writer.WritePropertyName("role_descriptors");
-			JsonSerializer.Serialize(writer, RoleDescriptorsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.CreateApiKeyRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

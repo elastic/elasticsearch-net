@@ -17,82 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
+internal sealed partial class ErrorCauseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ErrorCause>
 {
-	public override ErrorCause Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropCausedBy = System.Text.Json.JsonEncodedText.Encode("caused_by");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropRootCause = System.Text.Json.JsonEncodedText.Encode("root_cause");
+	private static readonly System.Text.Json.JsonEncodedText PropStackTrace = System.Text.Json.JsonEncodedText.Encode("stack_trace");
+	private static readonly System.Text.Json.JsonEncodedText PropSuppressed = System.Text.Json.JsonEncodedText.Encode("suppressed");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.ErrorCause Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		Elastic.Clients.Elasticsearch.ErrorCause? causedBy = default;
-		string? reason = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? rootCause = default;
-		string? stackTrace = default;
-		IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? suppressed = default;
-		string type = default;
-		Dictionary<string, object> additionalProperties = null;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propCausedBy = default;
+		System.Collections.Generic.Dictionary<string, object>? propMetadata = default;
+		LocalJsonValue<string?> propReason = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?> propRootCause = default;
+		LocalJsonValue<string?> propStackTrace = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?> propSuppressed = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propCausedBy.TryReadProperty(ref reader, options, PropCausedBy, null))
 			{
-				var property = reader.GetString();
-				if (property == "caused_by")
-				{
-					causedBy = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.ErrorCause?>(ref reader, options);
-					continue;
-				}
+				continue;
+			}
 
-				if (property == "reason")
-				{
-					reason = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
 
-				if (property == "root_cause")
-				{
-					rootCause = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
-					continue;
-				}
+			if (propRootCause.TryReadProperty(ref reader, options, PropRootCause, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
+			{
+				continue;
+			}
 
-				if (property == "stack_trace")
-				{
-					stackTrace = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
+			if (propStackTrace.TryReadProperty(ref reader, options, PropStackTrace, null))
+			{
+				continue;
+			}
 
-				if (property == "suppressed")
-				{
-					suppressed = JsonSerializer.Deserialize<IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>?>(ref reader, options);
-					continue;
-				}
+			if (propSuppressed.TryReadProperty(ref reader, options, PropSuppressed, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, null)))
+			{
+				continue;
+			}
 
-				if (property == "type")
-				{
-					type = JsonSerializer.Deserialize<string>(ref reader, options);
-					continue;
-				}
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
 
-				additionalProperties ??= new Dictionary<string, object>();
-				var additionalValue = JsonSerializer.Deserialize<object>(ref reader, options);
-				additionalProperties.Add(property, additionalValue);
+			propMetadata ??= new System.Collections.Generic.Dictionary<string, object>();
+			reader.ReadProperty(options, out string key, out object value, null, null);
+			propMetadata[key] = value;
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ErrorCause(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CausedBy = propCausedBy.Value,
+			Metadata = propMetadata,
+			Reason = propReason.Value,
+			RootCause = propRootCause.Value,
+			StackTrace = propStackTrace.Value,
+			Suppressed = propSuppressed.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ErrorCause value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCausedBy, value.CausedBy, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropRootCause, value.RootCause, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropStackTrace, value.StackTrace, null, null);
+		writer.WriteProperty(options, PropSuppressed, value.Suppressed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.ErrorCause>(o, v, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		if (value.Metadata is not null)
+		{
+			foreach (var item in value.Metadata)
+			{
+				writer.WriteProperty(options, item.Key, item.Value, null, null);
 			}
 		}
 
-		return new ErrorCause { CausedBy = causedBy, Metadata = additionalProperties, Reason = reason, RootCause = rootCause, StackTrace = stackTrace, Suppressed = suppressed, Type = type };
-	}
-
-	public override void Write(Utf8JsonWriter writer, ErrorCause value, JsonSerializerOptions options)
-	{
-		throw new NotImplementedException("'ErrorCause' is a readonly type, used only on responses and does not support being written to JSON.");
+		writer.WriteEndObject();
 	}
 }
 
@@ -102,38 +119,64 @@ internal sealed partial class ErrorCauseConverter : JsonConverter<ErrorCause>
 /// Additional details are also provided, that depend on the error type.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(ErrorCauseConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ErrorCauseConverter))]
 public sealed partial class ErrorCause
 {
-	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ErrorCause(string type)
+	{
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public ErrorCause()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ErrorCause()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ErrorCause(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.ErrorCause? CausedBy { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Additional details about the error
 	/// </para>
 	/// </summary>
-	public IReadOnlyDictionary<string, object> Metadata { get; init; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Metadata { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// A human-readable explanation of the error, in english
+	/// A human-readable explanation of the error, in English.
 	/// </para>
 	/// </summary>
-	public string? Reason { get; init; }
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; init; }
+	public string? Reason { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? RootCause { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The server stack trace. Present only if the <c>error_trace=true</c> parameter was sent with the request.
 	/// </para>
 	/// </summary>
-	public string? StackTrace { get; init; }
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; init; }
+	public string? StackTrace { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.ErrorCause>? Suppressed { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of error
 	/// </para>
 	/// </summary>
-	public string Type { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }

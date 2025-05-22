@@ -18,1933 +18,749 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public partial class IngestNamespacedClient : NamespacedClientProxy
+public partial class IngestNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="IngestNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Ingest.IngestNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected IngestNamespacedClient() : base()
 	{
 	}
 
-	internal IngestNamespacedClient(ElasticsearchClient client) : base(client)
+	internal IngestNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequest, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequest, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(DeleteGeoipDatabaseRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteGeoipDatabaseResponse DeleteGeoipDatabase(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(DeleteGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor<TDocument>, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(DeleteGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes a geoip database configuration.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteGeoipDatabaseResponse> DeleteGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, Action<DeleteGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteGeoipDatabaseRequestDescriptor, DeleteGeoipDatabaseResponse, DeleteGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeletePipelineRequest, DeletePipelineResponse, DeletePipelineRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse DeleteIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequest, DeletePipelineResponse, DeletePipelineRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse> DeleteIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.DeleteIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline(DeletePipelineRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(DeletePipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor<TDocument>, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(DeletePipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes one or more existing ingest pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<DeletePipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeletePipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeletePipelineRequestDescriptor, DeletePipelineResponse, DeletePipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GeoIpStatsRequest, GeoIpStatsResponse, GeoIpStatsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse DeletePipeline(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GeoIpStatsRequest, GeoIpStatsResponse, GeoIpStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats(GeoIpStatsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse> DeletePipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequest, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineResponse, Elastic.Clients.Elasticsearch.Ingest.DeletePipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GeoIpStatsResponse GeoIpStats(Action<GeoIpStatsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(GeoIpStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Gets download statistics for GeoIP2 databases used with the geoip processor.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/geoip-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GeoIpStatsResponse> GeoIpStatsAsync(Action<GeoIpStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GeoIpStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GeoIpStatsRequestDescriptor, GeoIpStatsResponse, GeoIpStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(GetGeoipDatabaseRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse GeoIpStats(Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequest, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse GeoIpStats()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse GeoIpStats(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse> GeoIpStatsAsync(Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequest, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(GetGeoipDatabaseRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse> GeoIpStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse> GeoIpStatsAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequest, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsResponse, Elastic.Clients.Elasticsearch.Ingest.GeoIpStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>()
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase<TDocument>(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(GetGeoipDatabaseRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase()
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetGeoipDatabaseResponse GetGeoipDatabase(Action<GetGeoipDatabaseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(GetGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync<TDocument>(Action<GetGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor<TDocument>, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(GetGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Action<GetGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetGeoipDatabaseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetGeoipDatabaseRequestDescriptor, GetGeoipDatabaseResponse, GetGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline(GetPipelineRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetPipelineRequest, GetPipelineResponse, GetPipelineRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse GetGeoipDatabase(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequest, GetPipelineResponse, GetPipelineRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse> GetGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline(GetPipelineRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		var descriptor = new GetPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetPipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline()
-	{
-		var descriptor = new GetPipelineRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetPipelineResponse GetPipeline(Action<GetPipelineRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetPipelineRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(GetPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync<TDocument>(Action<GetPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor<TDocument>, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(GetPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more ingest pipelines.
-	/// This API returns a local reference of the pipeline.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetPipelineResponse> GetPipelineAsync(Action<GetPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetPipelineRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetPipelineRequestDescriptor, GetPipelineResponse, GetPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ProcessorGrokRequest, ProcessorGrokResponse, ProcessorGrokRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse GetIpLocationDatabase(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ProcessorGrokRequest, ProcessorGrokResponse, ProcessorGrokRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok(ProcessorGrokRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ProcessorGrokResponse ProcessorGrok(Action<ProcessorGrokRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(ProcessorGrokRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse> GetIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ids? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.GetIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Extracts structured fields out of a single text field within a document.
-	/// You choose which field to extract matched fields from, as well as the grok pattern you expect will match.
-	/// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/grok-processor.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ProcessorGrokResponse> ProcessorGrokAsync(Action<ProcessorGrokRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ProcessorGrokRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ProcessorGrokRequestDescriptor, ProcessorGrokResponse, ProcessorGrokRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequest, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse GetPipeline(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequest, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(PutGeoipDatabaseRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse> GetPipelineAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.GetPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.GetPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(PutGeoipDatabaseRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor<TDocument>, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(PutGeoipDatabaseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information about one or more geoip database configurations.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-geoip-database-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutGeoipDatabaseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutGeoipDatabaseRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutGeoipDatabaseRequestDescriptor, PutGeoipDatabaseResponse, PutGeoipDatabaseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(PutPipelineRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse ProcessorGrok(Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutPipelineRequest, PutPipelineResponse, PutPipelineRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse ProcessorGrok()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse ProcessorGrok(System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse> ProcessorGrokAsync(Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequest, PutPipelineResponse, PutPipelineRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse> ProcessorGrokAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse> ProcessorGrokAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequest, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokResponse, Elastic.Clients.Elasticsearch.Ingest.ProcessorGrokRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(PutPipelineRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(PutPipelineRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPipelineRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor<TDocument>, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(PutPipelineRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates an ingest pipeline.
-	/// Changes made using this API take effect immediately.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/ingest.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, Action<PutPipelineRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutPipelineRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutPipelineRequestDescriptor, PutPipelineResponse, PutPipelineRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(SimulateRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<SimulateRequest, SimulateResponse, SimulateRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse PutGeoipDatabase(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<SimulateRequest, SimulateResponse, SimulateRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate<TDocument>(SimulateRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse> PutGeoipDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutGeoipDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest request)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate<TDocument>()
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Id id)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse PutIpLocationDatabase(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor> action)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(SimulateRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse> PutIpLocationDatabaseAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequest, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseResponse, Elastic.Clients.Elasticsearch.Ingest.PutIpLocationDatabaseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate()
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest request)
 	{
-		var descriptor = new SimulateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual SimulateResponse Simulate(Action<SimulateRequestDescriptor> configureRequest)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id)
 	{
-		var descriptor = new SimulateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(SimulateRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse PutPipeline(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor> action)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse PutPipeline<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>> action)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync<TDocument>(Action<SimulateRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse> PutPipelineAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new SimulateRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor<TDocument>, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(SimulateRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse> PutPipelineAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequest, Elastic.Clients.Elasticsearch.Ingest.PutPipelineResponse, Elastic.Clients.Elasticsearch.Ingest.PutPipelineRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest request)
 	{
-		var descriptor = new SimulateRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action)
 	{
-		var descriptor = new SimulateRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id)
 	{
-		var descriptor = new SimulateRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Executes an ingest pipeline against a set of provided documents.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/simulate-pipeline-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<SimulateResponse> SimulateAsync(Action<SimulateRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action)
 	{
-		var descriptor = new SimulateRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<SimulateRequestDescriptor, SimulateResponse, SimulateRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Ingest.SimulateResponse Simulate<TDocument>(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Ingest.SimulateResponse> SimulateAsync<TDocument>(Elastic.Clients.Elasticsearch.Id? id, System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest, Elastic.Clients.Elasticsearch.Ingest.SimulateResponse, Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>(request, cancellationToken);
 	}
 }

@@ -18,130 +18,181 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TextStructure;
 
-public partial class TextStructureNamespacedClient : NamespacedClientProxy
+public partial class TextStructureNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="TextStructureNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.TextStructure.TextStructureNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected TextStructureNamespacedClient() : base()
 	{
 	}
 
-	internal TextStructureNamespacedClient(ElasticsearchClient client) : base(client)
+	internal TextStructureNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual TestGrokPatternResponse TestGrokPattern(TestGrokPatternRequest request)
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure(Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<TestGrokPatternRequest, TestGrokPatternResponse, TestGrokPatternRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse FindFieldStructure<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<TestGrokPatternRequest, TestGrokPatternResponse, TestGrokPatternRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual TestGrokPatternResponse TestGrokPattern(TestGrokPatternRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual TestGrokPatternResponse TestGrokPattern()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new TestGrokPatternRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual TestGrokPatternResponse TestGrokPattern(Action<TestGrokPatternRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new TestGrokPatternRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(TestGrokPatternRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse> FindFieldStructureAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindFieldStructureRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest request)
 	{
-		var descriptor = new TestGrokPatternRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor, cancellationToken);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Tests a Grok pattern on some text.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/test-grok-pattern.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<TestGrokPatternResponse> TestGrokPatternAsync(Action<TestGrokPatternRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor> action)
 	{
-		var descriptor = new TestGrokPatternRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<TestGrokPatternRequestDescriptor, TestGrokPatternResponse, TestGrokPatternRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse FindMessageStructure<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync(Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse> FindMessageStructureAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequest, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureResponse, Elastic.Clients.Elasticsearch.TextStructure.FindMessageStructureRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse TestGrokPattern(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse TestGrokPattern(System.Action<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse> TestGrokPatternAsync(Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse> TestGrokPatternAsync(System.Action<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequest, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternResponse, Elastic.Clients.Elasticsearch.TextStructure.TestGrokPatternRequestParameters>(request, cancellationToken);
 	}
 }

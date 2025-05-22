@@ -17,33 +17,117 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed partial class TranslateRequestParameters : RequestParameters
+public sealed partial class TranslateRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class TranslateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.TranslateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+
+	public override Elastic.Clients.Elasticsearch.Sql.TranslateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propFetchSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FetchSize = propFetchSize.Value,
+			Filter = propFilter.Value,
+			Query = propQuery.Value,
+			TimeZone = propTimeZone.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.TranslateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
-public sealed partial class TranslateRequest : PlainRequest<TranslateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.TranslateRequestConverter))]
+public sealed partial class TranslateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.TranslateRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlTranslate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslateRequest(string query)
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public TranslateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TranslateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SqlTranslate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -54,284 +138,303 @@ public sealed partial class TranslateRequest : PlainRequest<TranslateRequestPara
 	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
-public sealed partial class TranslateRequestDescriptor<TDocument> : RequestDescriptor<TranslateRequestDescriptor<TDocument>, TranslateRequestParameters>
+public readonly partial struct TranslateRequestDescriptor
 {
-	internal TranslateRequestDescriptor(Action<TranslateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.TranslateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslateRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public TranslateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlTranslate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "sql.translate";
-
-	private int? FetchSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private string QueryValue { get; set; }
-	private string? TimeZoneValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance) => new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor<TDocument> FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TranslateRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The SQL query to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Query(string value)
 	{
-		writer.WriteStartObject();
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+		Instance.Query = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// The ISO-8601 time zone ID for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
+		return this;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.TranslateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor(new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Translates SQL into Elasticsearch queries
+/// Translate SQL into Elasticsearch queries.
+/// Translate an SQL search into a search API request containing Query DSL.
+/// It accepts the same request body parameters as the SQL search API, excluding <c>cursor</c>.
 /// </para>
 /// </summary>
-public sealed partial class TranslateRequestDescriptor : RequestDescriptor<TranslateRequestDescriptor, TranslateRequestParameters>
+public readonly partial struct TranslateRequestDescriptor<TDocument>
 {
-	internal TranslateRequestDescriptor(Action<TranslateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.TranslateRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TranslateRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public TranslateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlTranslate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "sql.translate";
-
-	private int? FetchSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private string QueryValue { get; set; }
-	private string? TimeZoneValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Sql.TranslateRequest instance) => new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public TranslateRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public TranslateRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
-	public TranslateRequestDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Query(string value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The ISO-8601 time zone ID for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> TimeZone(string? value)
 	{
-		writer.WriteStartObject();
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+		Instance.TimeZone = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.TranslateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Sql.TranslateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.TranslateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

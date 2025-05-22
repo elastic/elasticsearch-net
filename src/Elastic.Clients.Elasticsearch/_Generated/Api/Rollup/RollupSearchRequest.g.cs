@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public sealed partial class RollupSearchRequestParameters : RequestParameters
+public sealed partial class RollupSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -47,85 +40,139 @@ public sealed partial class RollupSearchRequestParameters : RequestParameters
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 }
 
-internal sealed partial class RollupSearchRequestConverter : JsonConverter<RollupSearchRequest>
+internal sealed partial class RollupSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest>
 {
-	public override RollupSearchRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new RollupSearchRequest();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<int?> propSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
 			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "query")
-				{
-					variant.Query = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.Query?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "size")
-				{
-					variant.Size = JsonSerializer.Deserialize<int?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			Query = propQuery.Value,
+			Size = propSize.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, RollupSearchRequest value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.Query is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, value.Query, options);
-		}
-
-		if (value.Size.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(value.Size.Value);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
 		writer.WriteEndObject();
 	}
 }
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+/// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 /// </para>
 /// </summary>
-[JsonConverter(typeof(RollupSearchRequestConverter))]
-public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestConverter))]
+public sealed partial class RollupSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public RollupSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
-
+#if NET7_0_OR_GREATER
 	public RollupSearchRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RollupSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupRollupSearch;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.RollupRollupSearch;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -133,10 +180,43 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of data streams and indices used to limit the request.
+	/// This parameter has the following rules:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Multiple non-rollup indices may be specified.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
@@ -144,7 +224,6 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? TypedKeys { get => Q<bool?>("typed_keys"); set => Q("typed_keys", value); }
 
 	/// <summary>
@@ -152,15 +231,13 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggregations")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies a DSL query that is subject to some limitations.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -168,88 +245,239 @@ public sealed partial class RollupSearchRequest : PlainRequest<RollupSearchReque
 	/// Must be zero if set, as rollups work on pre-aggregated data.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+/// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 /// </para>
 /// </summary>
-public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDescriptor<RollupSearchRequestDescriptor<TDocument>, RollupSearchRequestParameters>
+public readonly partial struct RollupSearchRequestDescriptor
 {
-	internal RollupSearchRequestDescriptor(Action<RollupSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Instance { get; init; }
 
-	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public RollupSearchRequestDescriptor() : this(typeof(TDocument))
+	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(indices);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupRollupSearch;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rollup.rollup_search";
-
-	public RollupSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public RollupSearchRequestDescriptor<TDocument> TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public RollupSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public RollupSearchRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams and indices used to limit the request.
+	/// This parameter has the following rules:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Multiple non-rollup indices may be specified.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations()
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
+		return this;
 	}
 
-	public RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
+		return this;
 	}
 
-	public RollupSearchRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a DSL query that is subject to some limitations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a DSL query that is subject to some limitations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a DSL query that is subject to some limitations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -257,121 +485,263 @@ public sealed partial class RollupSearchRequestDescriptor<TDocument> : RequestDe
 	/// Must be zero if set, as rollups work on pre-aggregated data.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Enables searching rolled-up data using the standard Query DSL.
+/// Search rolled-up data.
+/// The rollup search endpoint is needed because, internally, rolled-up documents utilize a different document structure than the original data.
+/// It rewrites standard Query DSL into a format that matches the rollup documents then takes the response and rewrites it back to what a client would expect given the original query.
+/// </para>
+/// <para>
+/// The request body supports a subset of features from the regular search API.
+/// The following functionality is not available:
+/// </para>
+/// <para>
+/// <c>size</c>: Because rollups work on pre-aggregated data, no search hits can be returned and so size must be set to zero or omitted entirely.
+/// <c>highlighter</c>, <c>suggestors</c>, <c>post_filter</c>, <c>profile</c>, <c>explain</c>: These are similarly disallowed.
+/// </para>
+/// <para>
+/// <strong>Searching both historical rollup and non-rollup data</strong>
+/// </para>
+/// <para>
+/// The rollup search API has the capability to search across both "live" non-rollup data and the aggregated rollup data.
+/// This is done by simply adding the live indices to the URI. For example:
+/// </para>
+/// <code>
+/// GET sensor-1,sensor_rollup/_rollup_search
+/// {
+///   "size": 0,
+///   "aggregations": {
+///      "max_temperature": {
+///       "max": {
+///         "field": "temperature"
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The rollup search endpoint does two things when the search runs:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The original request is sent to the non-rollup index unaltered.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A rewritten version of the original request is sent to the rollup index.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// When the two responses are received, the endpoint rewrites the rollup response and merges the two together.
+/// During the merging process, if there is any overlap in buckets between the two responses, the buckets from the non-rollup index are used.
 /// </para>
 /// </summary>
-public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<RollupSearchRequestDescriptor, RollupSearchRequestParameters>
+public readonly partial struct RollupSearchRequestDescriptor<TDocument>
 {
-	internal RollupSearchRequestDescriptor(Action<RollupSearchRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Instance { get; init; }
 
-	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupRollupSearch;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "rollup.rollup_search";
-
-	public RollupSearchRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-	public RollupSearchRequestDescriptor TypedKeys(bool? typedKeys = true) => Qs("typed_keys", typedKeys);
-
-	public RollupSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public RollupSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(indices);
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
+	public RollupSearchRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of data streams and indices used to limit the request.
+	/// This parameter has the following rules:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// At least one data stream, index, or wildcard expression must be specified. This target can include a rollup or non-rollup index. For data streams, the stream's backing indices can only serve as non-rollup indices. Omitting the parameter or using <c>_all</c> are not permitted.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Multiple non-rollup indices may be specified.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Only one rollup index may be specified. If more than one are supplied, an exception occurs.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Wildcard expressions (<c>*</c>) may be used. If they match more than one rollup index, an exception occurs. However, you can use an expression to match multiple non-rollup indices or data streams.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether hits.total should be rendered as an integer or an object in the rest search response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> RestTotalHitsAsInt(bool? value = true)
+	{
+		Instance.RestTotalHitsAsInt = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specify whether aggregation and suggester names should be prefixed by their respective types in the response
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> TypedKeys(bool? value = true)
+	{
+		Instance.TypedKeys = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Specifies a DSL query.
+	/// Specifies aggregations.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations()
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
+		return this;
 	}
 
-	public RollupSearchRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
+		return this;
 	}
 
-	public RollupSearchRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a DSL query that is subject to some limitations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
+	{
+		Instance.Query = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies a DSL query that is subject to some limitations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
+	{
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -379,43 +749,59 @@ public sealed partial class RollupSearchRequestDescriptor : RequestDescriptor<Ro
 	/// Must be zero if set, as rollups work on pre-aggregated data.
 	/// </para>
 	/// </summary>
-	public RollupSearchRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.RollupSearchRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

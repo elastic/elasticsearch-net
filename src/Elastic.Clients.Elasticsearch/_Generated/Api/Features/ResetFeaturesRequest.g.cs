@@ -17,61 +17,221 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
-public sealed partial class ResetFeaturesRequestParameters : RequestParameters
+public sealed partial class ResetFeaturesRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class ResetFeaturesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Resets the internal state of features, usually by deleting system indices
+/// Reset the features.
+/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+/// </para>
+/// <para>
+/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+/// </para>
+/// <para>
+/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+/// This deletes all state information stored in system indices.
+/// </para>
+/// <para>
+/// The response code is HTTP 200 if the state is successfully reset for all features.
+/// It is HTTP 500 if the reset operation failed for any feature.
+/// </para>
+/// <para>
+/// Note that select features might provide a way to reset particular system indices.
+/// Using this API resets all features, both those that are built-in and implemented as plugins.
+/// </para>
+/// <para>
+/// To list the features that will be affected, use the get features API.
+/// </para>
+/// <para>
+/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 /// </para>
 /// </summary>
-public sealed partial class ResetFeaturesRequest : PlainRequest<ResetFeaturesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestConverter))]
+public sealed partial class ResetFeaturesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesResetFeatures;
+#if NET7_0_OR_GREATER
+	public ResetFeaturesRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ResetFeaturesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.FeaturesResetFeatures;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "features.reset_features";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Resets the internal state of features, usually by deleting system indices
+/// Reset the features.
+/// Clear all of the state information stored in system indices by Elasticsearch features, including the security and machine learning indices.
+/// </para>
+/// <para>
+/// WARNING: Intended for development and testing use only. Do not reset features on a production cluster.
+/// </para>
+/// <para>
+/// Return a cluster to the same state as a new installation by resetting the feature state for all Elasticsearch features.
+/// This deletes all state information stored in system indices.
+/// </para>
+/// <para>
+/// The response code is HTTP 200 if the state is successfully reset for all features.
+/// It is HTTP 500 if the reset operation failed for any feature.
+/// </para>
+/// <para>
+/// Note that select features might provide a way to reset particular system indices.
+/// Using this API resets all features, both those that are built-in and implemented as plugins.
+/// </para>
+/// <para>
+/// To list the features that will be affected, use the get features API.
+/// </para>
+/// <para>
+/// IMPORTANT: The features installed on the node you submit this request to are the features that will be reset. Run on the master node if you have any doubts about which plugins are installed on individual nodes.
 /// </para>
 /// </summary>
-public sealed partial class ResetFeaturesRequestDescriptor : RequestDescriptor<ResetFeaturesRequestDescriptor, ResetFeaturesRequestParameters>
+public readonly partial struct ResetFeaturesRequestDescriptor
 {
-	internal ResetFeaturesRequestDescriptor(Action<ResetFeaturesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ResetFeaturesRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesResetFeatures;
+	public static explicit operator Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest instance) => new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "features.reset_features";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest Build(System.Action<Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor(new Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.ResetFeaturesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ReloadSearchAnalyzersRequestParameters : RequestParameters
+public sealed partial class ReloadSearchAnalyzersRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -44,7 +37,7 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : RequestPara
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -52,22 +45,86 @@ public sealed partial class ReloadSearchAnalyzersRequestParameters : RequestPara
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	public string? Resource { get => Q<string?>("resource"); set => Q("resource", value); }
+}
+
+internal sealed partial class ReloadSearchAnalyzersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Reloads an index's search analyzers and their resources.
+/// Reload search analyzers.
+/// Reload an index's search analyzers and their resources.
+/// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
+/// </para>
+/// <para>
+/// IMPORTANT: After reloading the search analyzers you should clear the request cache to make sure it doesn't contain responses derived from the previous versions of the analyzer.
+/// </para>
+/// <para>
+/// You can use the reload search analyzers API to pick up changes to synonym files used in the <c>synonym_graph</c> or <c>synonym</c> token filter of a search analyzer.
+/// To be eligible, the token filter must have an <c>updateable</c> flag of <c>true</c> and only be used in search analyzers.
+/// </para>
+/// <para>
+/// NOTE: This API does not perform a reload for each shard of an index.
+/// Instead, it performs a reload for each node containing index shards.
+/// As a result, the total shard count returned by the API can differ from the number of index shards.
+/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
+/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 /// </para>
 /// </summary>
-public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSearchAnalyzersRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestConverter))]
+public sealed partial class ReloadSearchAnalyzersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ReloadSearchAnalyzersRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -75,10 +132,20 @@ public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSe
 
 	/// <summary>
 	/// <para>
+	/// A comma-separated list of index names to reload analyzers for
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -86,90 +153,342 @@ public sealed partial class ReloadSearchAnalyzersRequest : PlainRequest<ReloadSe
 	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	public string? Resource { get => Q<string?>("resource"); set => Q("resource", value); }
 }
 
 /// <summary>
 /// <para>
-/// Reloads an index's search analyzers and their resources.
+/// Reload search analyzers.
+/// Reload an index's search analyzers and their resources.
+/// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
+/// </para>
+/// <para>
+/// IMPORTANT: After reloading the search analyzers you should clear the request cache to make sure it doesn't contain responses derived from the previous versions of the analyzer.
+/// </para>
+/// <para>
+/// You can use the reload search analyzers API to pick up changes to synonym files used in the <c>synonym_graph</c> or <c>synonym</c> token filter of a search analyzer.
+/// To be eligible, the token filter must have an <c>updateable</c> flag of <c>true</c> and only be used in search analyzers.
+/// </para>
+/// <para>
+/// NOTE: This API does not perform a reload for each shard of an index.
+/// Instead, it performs a reload for each node containing index shards.
+/// As a result, the total shard count returned by the API can differ from the number of index shards.
+/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
+/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 /// </para>
 /// </summary>
-public sealed partial class ReloadSearchAnalyzersRequestDescriptor<TDocument> : RequestDescriptor<ReloadSearchAnalyzersRequestDescriptor<TDocument>, ReloadSearchAnalyzersRequestParameters>
+public readonly partial struct ReloadSearchAnalyzersRequestDescriptor
 {
-	internal ReloadSearchAnalyzersRequestDescriptor(Action<ReloadSearchAnalyzersRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Instance { get; init; }
 
-	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public ReloadSearchAnalyzersRequestDescriptor() : this(typeof(TDocument))
+	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(indices);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.reload_search_analyzers";
-
-	public ReloadSearchAnalyzersRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ReloadSearchAnalyzersRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public ReloadSearchAnalyzersRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public ReloadSearchAnalyzersRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ReloadSearchAnalyzersRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to reload analyzers for
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor Resource(string? value)
+	{
+		Instance.Resource = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Reloads an index's search analyzers and their resources.
+/// Reload search analyzers.
+/// Reload an index's search analyzers and their resources.
+/// For data streams, the API reloads search analyzers and resources for the stream's backing indices.
+/// </para>
+/// <para>
+/// IMPORTANT: After reloading the search analyzers you should clear the request cache to make sure it doesn't contain responses derived from the previous versions of the analyzer.
+/// </para>
+/// <para>
+/// You can use the reload search analyzers API to pick up changes to synonym files used in the <c>synonym_graph</c> or <c>synonym</c> token filter of a search analyzer.
+/// To be eligible, the token filter must have an <c>updateable</c> flag of <c>true</c> and only be used in search analyzers.
+/// </para>
+/// <para>
+/// NOTE: This API does not perform a reload for each shard of an index.
+/// Instead, it performs a reload for each node containing index shards.
+/// As a result, the total shard count returned by the API can differ from the number of index shards.
+/// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
+/// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
 /// </para>
 /// </summary>
-public sealed partial class ReloadSearchAnalyzersRequestDescriptor : RequestDescriptor<ReloadSearchAnalyzersRequestDescriptor, ReloadSearchAnalyzersRequestParameters>
+public readonly partial struct ReloadSearchAnalyzersRequestDescriptor<TDocument>
 {
-	internal ReloadSearchAnalyzersRequestDescriptor(Action<ReloadSearchAnalyzersRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Instance { get; init; }
 
-	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementReloadSearchAnalyzers;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.reload_search_analyzers";
-
-	public ReloadSearchAnalyzersRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ReloadSearchAnalyzersRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public ReloadSearchAnalyzersRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public ReloadSearchAnalyzersRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public ReloadSearchAnalyzersRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(indices);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public ReloadSearchAnalyzersRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of index names to reload analyzers for
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes <c>_all</c> string or when no indices have been specified)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to expand wildcard expression to concrete indices that are open, closed or both.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether specified concrete indices should be ignored when unavailable (missing or closed)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Changed resource to reload analyzers from if applicable
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> Resource(string? value)
+	{
+		Instance.Resource = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadSearchAnalyzersRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

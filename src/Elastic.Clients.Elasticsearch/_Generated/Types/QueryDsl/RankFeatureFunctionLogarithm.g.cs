@@ -17,53 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-public sealed partial class RankFeatureFunctionLogarithm
+internal sealed partial class RankFeatureFunctionLogarithmConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm>
 {
-	/// <summary>
-	/// <para>
-	/// Configurable scaling factor.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("scaling_factor")]
-	public float ScalingFactor { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropScalingFactor = System.Text.Json.JsonEncodedText.Encode("scaling_factor");
 
-public sealed partial class RankFeatureFunctionLogarithmDescriptor : SerializableDescriptor<RankFeatureFunctionLogarithmDescriptor>
-{
-	internal RankFeatureFunctionLogarithmDescriptor(Action<RankFeatureFunctionLogarithmDescriptor> configure) => configure.Invoke(this);
-
-	public RankFeatureFunctionLogarithmDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float> propScalingFactor = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScalingFactor.TryReadProperty(ref reader, options, PropScalingFactor, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ScalingFactor = propScalingFactor.Value
+		};
 	}
 
-	private float ScalingFactorValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Configurable scaling factor.
-	/// </para>
-	/// </summary>
-	public RankFeatureFunctionLogarithmDescriptor ScalingFactor(float scalingFactor)
-	{
-		ScalingFactorValue = scalingFactor;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("scaling_factor");
-		writer.WriteNumberValue(ScalingFactorValue);
+		writer.WriteProperty(options, PropScalingFactor, value.ScalingFactor, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmConverter))]
+public sealed partial class RankFeatureFunctionLogarithm
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionLogarithm(float scalingFactor)
+	{
+		ScalingFactor = scalingFactor;
+	}
+#if NET7_0_OR_GREATER
+	public RankFeatureFunctionLogarithm()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RankFeatureFunctionLogarithm()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configurable scaling factor.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	float ScalingFactor { get; set; }
+}
+
+public readonly partial struct RankFeatureFunctionLogarithmDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionLogarithmDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionLogarithmDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Configurable scaling factor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor ScalingFactor(float value)
+	{
+		Instance.ScalingFactor = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithmDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionLogarithm(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

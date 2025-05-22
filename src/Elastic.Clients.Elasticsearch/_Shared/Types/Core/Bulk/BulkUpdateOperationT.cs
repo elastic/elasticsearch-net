@@ -3,23 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core.Search;
-#else
+
 using Elastic.Clients.Elasticsearch.Core.Search;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdateOperation
+public sealed class BulkUpdateOperation<TDocument, TPartialDocument> :
+	BulkUpdateOperation
 {
 	public BulkUpdateOperation(Id id) => Id = id;
 
@@ -40,31 +31,18 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 
 	protected override Type ClrType => typeof(TDocument);
 
-	[JsonPropertyName("pipeline")]
-	public string? Pipeline { get; set; }
-
-	[JsonPropertyName("dynamic_templates")]
-	public Dictionary<string, string>? DynamicTemplates { get; set; }
-
-	[JsonIgnore]
 	public TPartialDocument Doc { get; set; }
 
-	[JsonIgnore]
 	public TDocument IdFrom { get; set; }
 
-	[JsonIgnore]
 	public Script Script { get; set; }
 
-	[JsonIgnore]
 	public bool? ScriptedUpsert { get; set; }
 
-	[JsonIgnore]
 	public bool? DocAsUpsert { get; set; }
 
-	[JsonIgnore]
 	public TDocument Upsert { get; set; }
 
-	[JsonIgnore]
 	public Union<bool, SourceFilter> Source { get; set; }
 
 	protected override string Operation => "update";
@@ -83,9 +61,8 @@ public sealed class BulkUpdateOperation<TDocument, TPartialDocument> : BulkUpdat
 		}
 	}
 
-	protected override void WriteOperation(Utf8JsonWriter writer, JsonSerializerOptions options = null) => JsonSerializer.Serialize(writer, this, options);
-
-	protected override object GetBody() => new BulkUpdateBody<TDocument, TPartialDocument> {
+	private protected override BulkUpdateBody GetBody() => new BulkUpdateBody<TDocument, TPartialDocument>
+	{
 		PartialUpdate = Doc,
 		Script = Script,
 		Upsert = Upsert,

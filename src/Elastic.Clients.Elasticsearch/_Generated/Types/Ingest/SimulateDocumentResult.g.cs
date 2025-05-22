@@ -17,22 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class SimulateDocumentResultConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDoc = System.Text.Json.JsonEncodedText.Encode("doc");
+	private static readonly System.Text.Json.JsonEncodedText PropError = System.Text.Json.JsonEncodedText.Encode("error");
+	private static readonly System.Text.Json.JsonEncodedText PropProcessorResults = System.Text.Json.JsonEncodedText.Encode("processor_results");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation?> propDoc = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ErrorCause?> propError = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>?> propProcessorResults = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDoc.TryReadProperty(ref reader, options, PropDoc, null))
+			{
+				continue;
+			}
+
+			if (propError.TryReadProperty(ref reader, options, PropError, null))
+			{
+				continue;
+			}
+
+			if (propProcessorResults.TryReadProperty(ref reader, options, PropProcessorResults, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>(o, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Doc = propDoc.Value,
+			Error = propError.Value,
+			ProcessorResults = propProcessorResults.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResult value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDoc, value.Doc, null, null);
+		writer.WriteProperty(options, PropError, value.Error, null, null);
+		writer.WriteProperty(options, PropProcessorResults, value.ProcessorResults, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.SimulateDocumentResultConverter))]
 public sealed partial class SimulateDocumentResult
 {
-	[JsonInclude, JsonPropertyName("doc")]
-	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; init; }
-	[JsonInclude, JsonPropertyName("error")]
-	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; init; }
-	[JsonInclude, JsonPropertyName("processor_results")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineSimulation>? ProcessorResults { get; init; }
+#if NET7_0_OR_GREATER
+	public SimulateDocumentResult()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SimulateDocumentResult()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SimulateDocumentResult(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.DocumentSimulation? Doc { get; set; }
+	public Elastic.Clients.Elasticsearch.ErrorCause? Error { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Ingest.PipelineProcessorResult>? ProcessorResults { get; set; }
 }

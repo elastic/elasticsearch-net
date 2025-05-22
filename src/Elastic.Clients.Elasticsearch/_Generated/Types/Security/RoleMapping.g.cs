@@ -17,26 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
+internal sealed partial class RoleMappingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.RoleMapping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropRoleTemplates = System.Text.Json.JsonEncodedText.Encode("role_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropRules = System.Text.Json.JsonEncodedText.Encode("rules");
+
+	public override Elastic.Clients.Elasticsearch.Security.RoleMapping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool> propEnabled = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>> propMetadata = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<string>?> propRoles = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>?> propRoleTemplates = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.RoleMappingRule> propRules = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IReadOnlyDictionary<string, object> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.IReadOnlyCollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRoleTemplates.TryReadProperty(ref reader, options, PropRoleTemplates, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleTemplate>(o, null)))
+			{
+				continue;
+			}
+
+			if (propRules.TryReadProperty(ref reader, options, PropRules, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.RoleMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Enabled = propEnabled.Value,
+			Metadata = propMetadata.Value,
+			Roles = propRoles.Value,
+			RoleTemplates = propRoleTemplates.Value,
+			Rules = propRules.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.RoleMapping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object> v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropRoleTemplates, value.RoleTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RoleTemplate>(o, v, null));
+		writer.WriteProperty(options, PropRules, value.Rules, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RoleMappingConverter))]
 public sealed partial class RoleMapping
 {
-	[JsonInclude, JsonPropertyName("enabled")]
-	public bool Enabled { get; init; }
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IReadOnlyDictionary<string, object> Metadata { get; init; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public IReadOnlyCollection<string>? Roles { get; init; }
-	[JsonInclude, JsonPropertyName("role_templates")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; init; }
-	[JsonInclude, JsonPropertyName("rules")]
-	public Elastic.Clients.Elasticsearch.Security.RoleMappingRule Rules { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RoleMapping(bool enabled, System.Collections.Generic.IReadOnlyDictionary<string, object> metadata, Elastic.Clients.Elasticsearch.Security.RoleMappingRule rules)
+	{
+		Enabled = enabled;
+		Metadata = metadata;
+		Rules = rules;
+	}
+#if NET7_0_OR_GREATER
+	public RoleMapping()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public RoleMapping()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RoleMapping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	bool Enabled { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, object> Metadata { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<string>? Roles { get; set; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Security.RoleTemplate>? RoleTemplates { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.RoleMappingRule Rules { get; set; }
 }

@@ -8,11 +8,7 @@ using System.Reflection;
 using System.Globalization;
 using System.Linq.Expressions;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal class FieldResolver
 {

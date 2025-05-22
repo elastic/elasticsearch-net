@@ -4,21 +4,24 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Represents the name of an index, which may be inferred from a <see cref="Type"/>.
 /// </summary>
 [JsonConverter(typeof(IndexNameConverter))]
 [DebuggerDisplay("{DebugDisplay,nq}")]
-public class IndexName : IEquatable<IndexName>, IUrlParameter
+public class IndexName :
+	IEquatable<IndexName>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<IndexName>
+#endif
 {
 	private const char ClusterSeparator = ':';
 
@@ -138,4 +141,24 @@ public class IndexName : IEquatable<IndexName>, IUrlParameter
 
 		return Type is not null && other?.Type is not null && Type == other.Type;
 	}
+
+	#region IParsable
+
+	public static IndexName Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out IndexName? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = Parse(s);
+		return true;
+	}
+
+	#endregion IParsable
 }

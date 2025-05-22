@@ -17,21 +17,170 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class SearchMvtRequestParameters : RequestParameters
+public sealed partial class SearchMvtRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SearchMvtRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchMvtRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAggs = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropBuffer = System.Text.Json.JsonEncodedText.Encode("buffer");
+	private static readonly System.Text.Json.JsonEncodedText PropExactBounds = System.Text.Json.JsonEncodedText.Encode("exact_bounds");
+	private static readonly System.Text.Json.JsonEncodedText PropExtent = System.Text.Json.JsonEncodedText.Encode("extent");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropGridAgg = System.Text.Json.JsonEncodedText.Encode("grid_agg");
+	private static readonly System.Text.Json.JsonEncodedText PropGridPrecision = System.Text.Json.JsonEncodedText.Encode("grid_precision");
+	private static readonly System.Text.Json.JsonEncodedText PropGridType = System.Text.Json.JsonEncodedText.Encode("grid_type");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSort = System.Text.Json.JsonEncodedText.Encode("sort");
+	private static readonly System.Text.Json.JsonEncodedText PropTrackTotalHits = System.Text.Json.JsonEncodedText.Encode("track_total_hits");
+	private static readonly System.Text.Json.JsonEncodedText PropWithLabels = System.Text.Json.JsonEncodedText.Encode("with_labels");
+
+	public override Elastic.Clients.Elasticsearch.SearchMvtRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggs = default;
+		LocalJsonValue<int?> propBuffer = default;
+		LocalJsonValue<bool?> propExactBounds = default;
+		LocalJsonValue<int?> propExtent = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType?> propGridAgg = default;
+		LocalJsonValue<int?> propGridPrecision = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType?> propGridType = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propQuery = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>?> propSort = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.TrackHits?> propTrackTotalHits = default;
+		LocalJsonValue<bool?> propWithLabels = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggs.TryReadProperty(ref reader, options, PropAggs, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propBuffer.TryReadProperty(ref reader, options, PropBuffer, null))
+			{
+				continue;
+			}
+
+			if (propExactBounds.TryReadProperty(ref reader, options, PropExactBounds, null))
+			{
+				continue;
+			}
+
+			if (propExtent.TryReadProperty(ref reader, options, PropExtent, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propGridAgg.TryReadProperty(ref reader, options, PropGridAgg, null))
+			{
+				continue;
+			}
+
+			if (propGridPrecision.TryReadProperty(ref reader, options, PropGridPrecision, null))
+			{
+				continue;
+			}
+
+			if (propGridType.TryReadProperty(ref reader, options, PropGridType, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSort.TryReadProperty(ref reader, options, PropSort, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTrackTotalHits.TryReadProperty(ref reader, options, PropTrackTotalHits, null))
+			{
+				continue;
+			}
+
+			if (propWithLabels.TryReadProperty(ref reader, options, PropWithLabels, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggs = propAggs.Value,
+			Buffer = propBuffer.Value,
+			ExactBounds = propExactBounds.Value,
+			Extent = propExtent.Value,
+			Fields = propFields.Value,
+			GridAgg = propGridAgg.Value,
+			GridPrecision = propGridPrecision.Value,
+			GridType = propGridType.Value,
+			Query = propQuery.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
+			Size = propSize.Value,
+			Sort = propSort.Value,
+			TrackTotalHits = propTrackTotalHits.Value,
+			WithLabels = propWithLabels.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchMvtRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAggs, value.Aggs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropBuffer, value.Buffer, null, null);
+		writer.WriteProperty(options, PropExactBounds, value.ExactBounds, null, null);
+		writer.WriteProperty(options, PropExtent, value.Extent, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropGridAgg, value.GridAgg, null, null);
+		writer.WriteProperty(options, PropGridPrecision, value.GridPrecision, null, null);
+		writer.WriteProperty(options, PropGridType, value.GridType, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSort, value.Sort, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.SortOptions>(o, v, null));
+		writer.WriteProperty(options, PropTrackTotalHits, value.TrackTotalHits, null, null);
+		writer.WriteProperty(options, PropWithLabels, value.WithLabels, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,17 +189,216 @@ public sealed partial class SearchMvtRequestParameters : RequestParameters
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
-public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchMvtRequestConverter))]
+public sealed partial class SearchMvtRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchMvtRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SearchMvtRequest(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", indices).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public SearchMvtRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchMvtRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchMvt;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceSearchMvt;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -58,117 +406,200 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 
 	/// <summary>
 	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get => P<Elastic.Clients.Elasticsearch.Field>("field"); set => PR("field", value); }
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, or aliases to search
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// X coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int X { get => P<int>("x"); set => PR("x", value); }
+
+	/// <summary>
+	/// <para>
+	/// Y coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Y { get => P<int>("y"); set => PR("y", value); }
+
+	/// <summary>
+	/// <para>
+	/// Zoom level for the vector tile to search
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int Zoom { get => P<int>("zoom"); set => PR("zoom", value); }
+
+	/// <summary>
+	/// <para>
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aggs")]
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggs { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("buffer")]
 	public int? Buffer { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exact_bounds")]
 	public bool? ExactBounds { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("extent")]
 	public int? Extent { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_agg")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAgg { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_precision")]
 	public int? GridPrecision { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grid_type")]
 	public Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridType { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Query { get; set; }
 
 	/// <summary>
@@ -177,37 +608,32 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("sort")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.SortOptions))]
-	public ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? Sort { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("track_total_hits")]
 	public Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHits { get; set; }
 
 	/// <summary>
@@ -215,8 +641,33 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
+	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("with_labels")]
 	public bool? WithLabels { get; set; }
 }
 
@@ -226,235 +677,756 @@ public sealed partial class SearchMvtRequest : PlainRequest<SearchMvtRequestPara
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
-public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescriptor<SearchMvtRequestDescriptor<TDocument>, SearchMvtRequestParameters>
+public readonly partial struct SearchMvtRequestDescriptor
 {
-	internal SearchMvtRequestDescriptor(Action<SearchMvtRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchMvtRequest Instance { get; init; }
 
-	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", indices).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.SearchMvtRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : this(typeof(TDocument), field, zoom, x, y)
+	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchMvtRequest(indices, field, zoom, x, y);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchMvt;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_mvt";
-
-	public SearchMvtRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public SearchMvtRequestDescriptor()
 	{
-		RouteValues.Required("field", field);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.SearchMvtRequest instance) => new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> x(int x)
+	/// <summary>
+	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		RouteValues.Required("x", x);
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> y(int y)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, or aliases to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		RouteValues.Required("y", y);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> Zoom(int zoom)
+	/// <summary>
+	/// <para>
+	/// X coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor X(int value)
 	{
-		RouteValues.Required("zoom", zoom);
-		return Self;
+		Instance.X = value;
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggsValue { get; set; }
-	private int? BufferValue { get; set; }
-	private bool? ExactBoundsValue { get; set; }
-	private int? ExtentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAggValue { get; set; }
-	private int? GridPrecisionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> QueryDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-	private bool? WithLabelsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// Y coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Y(int value)
+	{
+		Instance.Y = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zoom level for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Zoom(int value)
+	{
+		Instance.Zoom = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggs = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// It supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>avg</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>boxplot</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cardinality</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>extended stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs()
+	{
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// It supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>avg</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>boxplot</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cardinality</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>extended stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
+	{
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// It supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>avg</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>boxplot</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cardinality</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>extended stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Aggs<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
+	{
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddAgg(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggs ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggs.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddAgg(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> action)
+	{
+		Instance.Aggs ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggs.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddAgg<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>> action)
+	{
+		Instance.Aggs ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggs.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Buffer(int? buffer)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Buffer(int? value)
 	{
-		BufferValue = buffer;
-		return Self;
+		Instance.Buffer = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> ExactBounds(bool? exactBounds = true)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ExactBounds(bool? value = true)
 	{
-		ExactBoundsValue = exactBounds;
-		return Self;
+		Instance.ExactBounds = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Extent(int? extent)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Extent(int? value)
 	{
-		ExtentValue = extent;
-		return Self;
+		Instance.Extent = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
+	/// This parameter does not support fields with array values. Fields with array
+	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		GridAggValue = gridAgg;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> GridPrecision(int? gridPrecision)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? value)
 	{
-		GridPrecisionValue = gridPrecision;
-		return Self;
+		Instance.GridAgg = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridPrecision(int? value)
+	{
+		Instance.GridPrecision = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? gridType)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
-		GridTypeValue = gridType;
-		return Self;
+		Instance.GridType = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The query DSL used to filter documents for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor<TDocument> Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The query DSL used to filter documents for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Query<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -463,78 +1435,190 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings()
 	{
-		SizeValue = size;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor<TDocument> Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument> descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor<TDocument> Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor<TDocument> Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
+	/// from longest to shortest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
+	/// from longest to shortest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
+	/// from longest to shortest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Sort<T>(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<T>.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
-		TrackTotalHitsValue = trackTotalHits;
-		return Self;
+		Instance.TrackTotalHits = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
+	/// not include the total number of hits matching the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	{
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -542,134 +1626,87 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
+	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor<TDocument> WithLabels(bool? withLabels = true)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor WithLabels(bool? value = true)
 	{
-		WithLabelsValue = withLabels;
-		return Self;
+		Instance.WithLabels = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchMvtRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AggsValue is not null)
-		{
-			writer.WritePropertyName("aggs");
-			JsonSerializer.Serialize(writer, AggsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (BufferValue.HasValue)
-		{
-			writer.WritePropertyName("buffer");
-			writer.WriteNumberValue(BufferValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExactBoundsValue.HasValue)
-		{
-			writer.WritePropertyName("exact_bounds");
-			writer.WriteBooleanValue(ExactBoundsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ExtentValue.HasValue)
-		{
-			writer.WritePropertyName("extent");
-			writer.WriteNumberValue(ExtentValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (GridAggValue is not null)
-		{
-			writer.WritePropertyName("grid_agg");
-			JsonSerializer.Serialize(writer, GridAggValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (GridPrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("grid_precision");
-			writer.WriteNumberValue(GridPrecisionValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (GridTypeValue is not null)
-		{
-			writer.WritePropertyName("grid_type");
-			JsonSerializer.Serialize(writer, GridTypeValue, options);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (TrackTotalHitsValue is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
-		}
-
-		if (WithLabelsValue.HasValue)
-		{
-			writer.WritePropertyName("with_labels");
-			writer.WriteBooleanValue(WithLabelsValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -679,231 +1716,659 @@ public sealed partial class SearchMvtRequestDescriptor<TDocument> : RequestDescr
 /// </para>
 /// <para>
 /// Search a vector tile for geospatial values.
+/// Before using this API, you should be familiar with the Mapbox vector tile specification.
+/// The API returns results as a binary mapbox vector tile.
+/// </para>
+/// <para>
+/// Internally, Elasticsearch translates a vector tile search API request into a search containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>geo_bounding_box</c> query on the <c>&lt;field></c>. The query uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A <c>geotile_grid</c> or <c>geohex_grid</c> aggregation on the <c>&lt;field></c>. The <c>grid_agg</c> parameter determines the aggregation type. The aggregation uses the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile as a bounding box.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Optionally, a <c>geo_bounds</c> aggregation on the <c>&lt;field></c>. The search only includes this aggregation if the <c>exact_bounds</c> parameter is <c>true</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If the optional parameter <c>with_labels</c> is <c>true</c>, the internal search will include a dynamic runtime field that calls the <c>getLabelPosition</c> function of the geometry doc value. This enables the generation of new point features containing suggested geometry labels, so that, for example, multi-polygons will have only one label.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, Elasticsearch may translate a vector tile search API request with a <c>grid_agg</c> argument of <c>geotile</c> and an <c>exact_bounds</c> argument of <c>true</c> into the following search
+/// </para>
+/// <code>
+/// GET my-index/_search
+/// {
+///   "size": 10000,
+///   "query": {
+///     "geo_bounding_box": {
+///       "my-geo-field": {
+///         "top_left": {
+///           "lat": -40.979898069620134,
+///           "lon": -45
+///         },
+///         "bottom_right": {
+///           "lat": -66.51326044311186,
+///           "lon": 0
+///         }
+///       }
+///     }
+///   },
+///   "aggregations": {
+///     "grid": {
+///       "geotile_grid": {
+///         "field": "my-geo-field",
+///         "precision": 11,
+///         "size": 65536,
+///         "bounds": {
+///           "top_left": {
+///             "lat": -40.979898069620134,
+///             "lon": -45
+///           },
+///           "bottom_right": {
+///             "lat": -66.51326044311186,
+///             "lon": 0
+///           }
+///         }
+///       }
+///     },
+///     "bounds": {
+///       "geo_bounds": {
+///         "field": "my-geo-field",
+///         "wrap_longitude": false
+///       }
+///     }
+///   }
+/// }
+/// </code>
+/// <para>
+/// The API returns results as a binary Mapbox vector tile.
+/// Mapbox vector tiles are encoded as Google Protobufs (PBF). By default, the tile contains three layers:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A <c>hits</c> layer containing a feature for each <c>&lt;field></c> value matching the <c>geo_bounding_box</c> query.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// An <c>aggs</c> layer containing a feature for each cell of the <c>geotile_grid</c> or <c>geohex_grid</c>. The layer only contains features for cells with matching data.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A meta layer containing:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A feature containing a bounding box. By default, this is the bounding box of the tile.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Value ranges for any sub-aggregations on the <c>geotile_grid</c> or <c>geohex_grid</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Metadata for the search.
+/// </para>
+/// </item>
+/// </list>
+/// </item>
+/// </list>
+/// <para>
+/// The API only returns features that can display at its zoom level.
+/// For example, if a polygon feature has no area at its zoom level, the API omits it.
+/// The API returns errors as UTF-8 encoded JSON.
+/// </para>
+/// <para>
+/// IMPORTANT: You can specify several options for this API as either a query parameter or request body parameter.
+/// If you specify both parameters, the query parameter takes precedence.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geotile</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geotile</c>, you can use cells in the <c>aggs</c> layer as tiles for lower zoom levels.
+/// <c>grid_precision</c> represents the additional zoom levels available through these cells. The final precision is computed by as follows: <c>&lt;zoom> + grid_precision</c>.
+/// For example, if <c>&lt;zoom></c> is 7 and <c>grid_precision</c> is 8, then the <c>geotile_grid</c> aggregation will use a precision of 15.
+/// The maximum final precision is 29.
+/// The <c>grid_precision</c> also determines the number of cells for the grid as follows: <c>(2^grid_precision) x (2^grid_precision)</c>.
+/// For example, a value of 8 divides the tile into a grid of 256 x 256 cells.
+/// The <c>aggs</c> layer only contains features for cells with matching data.
+/// </para>
+/// <para>
+/// <strong>Grid precision for geohex</strong>
+/// </para>
+/// <para>
+/// For a <c>grid_agg</c> of <c>geohex</c>, Elasticsearch uses <c>&lt;zoom></c> and <c>grid_precision</c> to calculate a final precision as follows: <c>&lt;zoom> + grid_precision</c>.
+/// </para>
+/// <para>
+/// This precision determines the H3 resolution of the hexagonal cells produced by the <c>geohex</c> aggregation.
+/// The following table maps the H3 resolution for each precision.
+/// For example, if <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 3, the precision is 6.
+/// At a precision of 6, hexagonal cells have an H3 resolution of 2.
+/// If <c>&lt;zoom></c> is 3 and <c>grid_precision</c> is 4, the precision is 7.
+/// At a precision of 7, hexagonal cells have an H3 resolution of 3.
+/// </para>
+/// <para>
+/// | Precision | Unique tile bins | H3 resolution | Unique hex bins |	Ratio |
+/// | --------- | ---------------- | ------------- | ----------------| ----- |
+/// | 1  | 4                  | 0  | 122             | 30.5           |
+/// | 2  | 16                 | 0  | 122             | 7.625          |
+/// | 3  | 64                 | 1  | 842             | 13.15625       |
+/// | 4  | 256                | 1  | 842             | 3.2890625      |
+/// | 5  | 1024               | 2  | 5882            | 5.744140625    |
+/// | 6  | 4096               | 2  | 5882            | 1.436035156    |
+/// | 7  | 16384              | 3  | 41162           | 2.512329102    |
+/// | 8  | 65536              | 3  | 41162           | 0.6280822754   |
+/// | 9  | 262144             | 4  | 288122          | 1.099098206    |
+/// | 10 | 1048576            | 4  | 288122          | 0.2747745514   |
+/// | 11 | 4194304            | 5  | 2016842         | 0.4808526039   |
+/// | 12 | 16777216           | 6  | 14117882        | 0.8414913416   |
+/// | 13 | 67108864           | 6  | 14117882        | 0.2103728354   |
+/// | 14 | 268435456          | 7  | 98825162        | 0.3681524172   |
+/// | 15 | 1073741824         | 8  | 691776122       | 0.644266719    |
+/// | 16 | 4294967296         | 8  | 691776122       | 0.1610666797   |
+/// | 17 | 17179869184        | 9  | 4842432842      | 0.2818666889   |
+/// | 18 | 68719476736        | 10 | 33897029882     | 0.4932667053   |
+/// | 19 | 274877906944       | 11 | 237279209162    | 0.8632167343   |
+/// | 20 | 1099511627776      | 11 | 237279209162    | 0.2158041836   |
+/// | 21 | 4398046511104      | 12 | 1660954464122   | 0.3776573213   |
+/// | 22 | 17592186044416     | 13 | 11626681248842  | 0.6609003122   |
+/// | 23 | 70368744177664     | 13 | 11626681248842  | 0.165225078    |
+/// | 24 | 281474976710656    | 14 | 81386768741882  | 0.2891438866   |
+/// | 25 | 1125899906842620   | 15 | 569707381193162 | 0.5060018015   |
+/// | 26 | 4503599627370500   | 15 | 569707381193162 | 0.1265004504   |
+/// | 27 | 18014398509482000  | 15 | 569707381193162 | 0.03162511259  |
+/// | 28 | 72057594037927900  | 15 | 569707381193162 | 0.007906278149 |
+/// | 29 | 288230376151712000 | 15 | 569707381193162 | 0.001976569537 |
+/// </para>
+/// <para>
+/// Hexagonal cells don't align perfectly on a vector tile.
+/// Some cells may intersect more than one vector tile.
+/// To compute the H3 resolution for each precision, Elasticsearch compares the average density of hexagonal bins at each resolution with the average density of tile bins at each zoom level.
+/// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 /// </para>
 /// </summary>
-public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<SearchMvtRequestDescriptor, SearchMvtRequestParameters>
+public readonly partial struct SearchMvtRequestDescriptor<TDocument>
 {
-	internal SearchMvtRequestDescriptor(Action<SearchMvtRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchMvtRequest Instance { get; init; }
 
-	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y) : base(r => r.Required("index", indices).Required("field", field).Required("zoom", zoom).Required("x", x).Required("y", y))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.SearchMvtRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceSearchMvt;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "search_mvt";
-
-	public SearchMvtRequestDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public SearchMvtRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices, Elastic.Clients.Elasticsearch.Field field, int zoom, int x, int y)
 	{
-		RouteValues.Required("field", field);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.SearchMvtRequest(indices, field, zoom, x, y);
 	}
 
-	public SearchMvtRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public SearchMvtRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public SearchMvtRequestDescriptor x(int x)
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.SearchMvtRequest instance) => new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		RouteValues.Required("x", x);
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor y(int y)
+	/// <summary>
+	/// <para>
+	/// Field containing geospatial data to return
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		RouteValues.Required("y", y);
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor Zoom(int zoom)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, or aliases to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		RouteValues.Required("zoom", zoom);
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggsValue { get; set; }
-	private int? BufferValue { get; set; }
-	private bool? ExactBoundsValue { get; set; }
-	private int? ExtentValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? GridAggValue { get; set; }
-	private int? GridPrecisionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? GridTypeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor QueryDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> QueryDescriptorAction { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.SortOptions>? SortValue { get; set; }
-	private Elastic.Clients.Elasticsearch.SortOptionsDescriptor SortDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> SortDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] SortDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.TrackHits? TrackTotalHitsValue { get; set; }
-	private bool? WithLabelsValue { get; set; }
+	/// <summary>
+	/// <para>
+	/// X coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> X(int value)
+	{
+		Instance.X = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Y coordinate for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Y(int value)
+	{
+		Instance.Y = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Zoom level for the vector tile to search
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Zoom(int value)
+	{
+		Instance.Zoom = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Sub-aggregations for the geotile_grid.
 	/// </para>
 	/// <para>
-	/// Supports the following aggregation types:
+	/// It supports the following aggregation types:
 	/// </para>
 	/// <list type="bullet">
 	/// <item>
 	/// <para>
-	/// avg
+	/// <c>avg</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// cardinality
+	/// <c>boxplot</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// max
+	/// <c>cardinality</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// min
+	/// <c>extended stats</c>
 	/// </para>
 	/// </item>
 	/// <item>
 	/// <para>
-	/// sum
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
 	/// </para>
 	/// </item>
 	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Aggs(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
-		return Self;
+		Instance.Aggs = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a clipping buffer outside the tile. This allows renderers
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// It supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>avg</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>boxplot</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cardinality</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>extended stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs()
+	{
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sub-aggregations for the geotile_grid.
+	/// </para>
+	/// <para>
+	/// It supports the following aggregation types:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>avg</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>boxplot</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>cardinality</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>extended stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>max</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>median absolute deviation</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>min</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>percentile-rank</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>stats</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>sum</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>value count</c>
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The aggregation names can't start with <c>_mvt_</c>. The <c>_mvt_</c> prefix is reserved for internal aggregations.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Aggs(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
+	{
+		Instance.Aggs = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddAgg(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggs ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggs.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddAgg(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggs ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggs.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
 	/// to avoid outline artifacts from geometries that extend past the extent of the tile.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Buffer(int? buffer)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Buffer(int? value)
 	{
-		BufferValue = buffer;
-		return Self;
+		Instance.Buffer = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If false, the meta layer’s feature is the bounding box of the tile.
-	/// If true, the meta layer’s feature is a bounding box resulting from a
-	/// geo_bounds aggregation. The aggregation runs on &lt;field> values that intersect
-	/// the &lt;zoom>/&lt;x>/&lt;y> tile with wrap_longitude set to false. The resulting
+	/// If <c>false</c>, the meta layer's feature is the bounding box of the tile.
+	/// If <c>true</c>, the meta layer's feature is a bounding box resulting from a
+	/// <c>geo_bounds</c> aggregation. The aggregation runs on &lt;field> values that intersect
+	/// the <c>&lt;zoom>/&lt;x>/&lt;y></c> tile with <c>wrap_longitude</c> set to <c>false</c>. The resulting
 	/// bounding box may be larger than the vector tile.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor ExactBounds(bool? exactBounds = true)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ExactBounds(bool? value = true)
 	{
-		ExactBoundsValue = exactBounds;
-		return Self;
+		Instance.ExactBounds = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
+	/// The size, in pixels, of a side of the tile. Vector tiles are square with equal sides.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Extent(int? extent)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Extent(int? value)
 	{
-		ExtentValue = extent;
-		return Self;
+		Instance.Extent = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Fields to return in the <c>hits</c> layer. Supports wildcards (<c>*</c>).
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
 	/// This parameter does not support fields with array values. Fields with array
 	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Fields(Elastic.Clients.Elasticsearch.Fields? fields)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Aggregation used to create a grid for the <c>field</c>.
+	/// The fields to return in the <c>hits</c> layer.
+	/// It supports wildcards (<c>*</c>).
+	/// This parameter does not support fields with array values. Fields with array
+	/// values may return inconsistent results.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? gridAgg)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		GridAggValue = gridAgg;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Additional zoom levels available through the aggs layer. For example, if &lt;zoom> is 7
-	/// and grid_precision is 8, you can zoom in up to level 15. Accepts 0-8. If 0, results
-	/// don’t include the aggs layer.
+	/// The aggregation used to create a grid for the <c>field</c>.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor GridPrecision(int? gridPrecision)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridAgg(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridAggregationType? value)
 	{
-		GridPrecisionValue = gridPrecision;
-		return Self;
+		Instance.GridAgg = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Additional zoom levels available through the aggs layer. For example, if <c>&lt;zoom></c> is <c>7</c>
+	/// and <c>grid_precision</c> is <c>8</c>, you can zoom in up to level 15. Accepts 0-8. If 0, results
+	/// don't include the aggs layer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridPrecision(int? value)
+	{
+		Instance.GridPrecision = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// Determines the geometry type for features in the aggs layer. In the aggs layer,
-	/// each feature represents a geotile_grid cell. If 'grid' each feature is a Polygon
-	/// of the cells bounding box. If 'point' each feature is a Point that is the centroid
+	/// each feature represents a <c>geotile_grid</c> cell. If <c>grid, each feature is a polygon of the cells bounding box. If </c>point`, each feature is a Point that is the centroid
 	/// of the cell.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? gridType)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> GridType(Elastic.Clients.Elasticsearch.Core.SearchMvt.GridType? value)
 	{
-		GridTypeValue = gridType;
-		return Self;
+		Instance.GridType = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Query DSL used to filter documents for the search.
+	/// The query DSL used to filter documents for the search.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? query)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Query(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		QueryDescriptor = null;
-		QueryDescriptorAction = null;
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public SearchMvtRequestDescriptor Query(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The query DSL used to filter documents for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Query(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		QueryValue = null;
-		QueryDescriptorAction = null;
-		QueryDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor Query(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		QueryValue = null;
-		QueryDescriptor = null;
-		QueryDescriptorAction = configure;
-		return Self;
+		Instance.Query = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -912,78 +2377,145 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Maximum number of features to return in the hits layer. Accepts 0-10000.
-	/// If 0, results don’t include the hits layer.
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		SizeValue = size;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Sorts features in the hits layer. By default, the API calculates a bounding
-	/// box for each feature. It sorts features based on this box’s diagonal length,
+	/// Defines one or more runtime fields in the search request. These fields take
+	/// precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of features to return in the hits layer. Accepts 0-10000.
+	/// If 0, results don't include the hits layer.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
 	/// from longest to shortest.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor Sort(ICollection<Elastic.Clients.Elasticsearch.SortOptions>? sort)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.SortOptions>? value)
 	{
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortValue = sort;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor Sort(Elastic.Clients.Elasticsearch.SortOptionsDescriptor descriptor)
-	{
-		SortValue = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = null;
-		SortDescriptor = descriptor;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor Sort(Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor> configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorActions = null;
-		SortDescriptorAction = configure;
-		return Self;
-	}
-
-	public SearchMvtRequestDescriptor Sort(params Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor>[] configure)
-	{
-		SortValue = null;
-		SortDescriptor = null;
-		SortDescriptorAction = null;
-		SortDescriptorActions = configure;
-		return Self;
+		Instance.Sort = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
+	/// from longest to shortest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(params Elastic.Clients.Elasticsearch.SortOptions[] values)
+	{
+		Instance.Sort = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sort the features in the hits layer. By default, the API calculates a bounding
+	/// box for each feature. It sorts features based on this box's diagonal length,
+	/// from longest to shortest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Sort(params System.Action<Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.SortOptions>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.SortOptionsDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Sort = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
 	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
 	/// not include the total number of hits matching the query.
 	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? trackTotalHits)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(Elastic.Clients.Elasticsearch.Core.Search.TrackHits? value)
 	{
-		TrackTotalHitsValue = trackTotalHits;
-		return Self;
+		Instance.TrackTotalHits = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of hits matching the query to count accurately. If <c>true</c>, the exact number
+	/// of hits is returned at the cost of some performance. If <c>false</c>, the response does
+	/// not include the total number of hits matching the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> TrackTotalHits(System.Func<Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory, Elastic.Clients.Elasticsearch.Core.Search.TrackHits> action)
+	{
+		Instance.TrackTotalHits = Elastic.Clients.Elasticsearch.Core.Search.TrackHitsFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -991,133 +2523,86 @@ public sealed partial class SearchMvtRequestDescriptor : RequestDescriptor<Searc
 	/// If <c>true</c>, the hits and aggs layers will contain additional point features representing
 	/// suggested label positions for the original features.
 	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// <c>Point</c> and <c>MultiPoint</c> features will have one of the points selected.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>Polygon</c> and <c>MultiPolygon</c> features will have a single point generated, either the centroid, if it is within the polygon, or another point within the polygon selected from the sorted triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// <c>LineString</c> features will likewise provide a roughly central point selected from the triangle-tree.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// The aggregation results will provide one central point for each aggregation bucket.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// All attributes from the original features will also be copied to the new label features.
+	/// In addition, the new features will be distinguishable using the tag <c>_mvt_label_position</c>.
+	/// </para>
 	/// </summary>
-	public SearchMvtRequestDescriptor WithLabels(bool? withLabels = true)
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> WithLabels(bool? value = true)
 	{
-		WithLabelsValue = withLabels;
-		return Self;
+		Instance.WithLabels = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchMvtRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AggsValue is not null)
-		{
-			writer.WritePropertyName("aggs");
-			JsonSerializer.Serialize(writer, AggsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.SearchMvtRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (BufferValue.HasValue)
-		{
-			writer.WritePropertyName("buffer");
-			writer.WriteNumberValue(BufferValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (ExactBoundsValue.HasValue)
-		{
-			writer.WritePropertyName("exact_bounds");
-			writer.WriteBooleanValue(ExactBoundsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (ExtentValue.HasValue)
-		{
-			writer.WritePropertyName("extent");
-			writer.WriteNumberValue(ExtentValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (GridAggValue is not null)
-		{
-			writer.WritePropertyName("grid_agg");
-			JsonSerializer.Serialize(writer, GridAggValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (GridPrecisionValue.HasValue)
-		{
-			writer.WritePropertyName("grid_precision");
-			writer.WriteNumberValue(GridPrecisionValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (GridTypeValue is not null)
-		{
-			writer.WritePropertyName("grid_type");
-			JsonSerializer.Serialize(writer, GridTypeValue, options);
-		}
-
-		if (QueryDescriptor is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryDescriptor, options);
-		}
-		else if (QueryDescriptorAction is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(QueryDescriptorAction), options);
-		}
-		else if (QueryValue is not null)
-		{
-			writer.WritePropertyName("query");
-			JsonSerializer.Serialize(writer, QueryValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SortDescriptor is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, SortDescriptor, options);
-		}
-		else if (SortDescriptorAction is not null)
-		{
-			writer.WritePropertyName("sort");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(SortDescriptorAction), options);
-		}
-		else if (SortDescriptorActions is not null)
-		{
-			writer.WritePropertyName("sort");
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in SortDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.SortOptionsDescriptor(action), options);
-			}
-
-			if (SortDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (SortValue is not null)
-		{
-			writer.WritePropertyName("sort");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.SortOptions>(SortValue, writer, options);
-		}
-
-		if (TrackTotalHitsValue is not null)
-		{
-			writer.WritePropertyName("track_total_hits");
-			JsonSerializer.Serialize(writer, TrackTotalHitsValue, options);
-		}
-
-		if (WithLabelsValue.HasValue)
-		{
-			writer.WritePropertyName("with_labels");
-			writer.WriteBooleanValue(WithLabelsValue.Value);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.SearchMvtRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

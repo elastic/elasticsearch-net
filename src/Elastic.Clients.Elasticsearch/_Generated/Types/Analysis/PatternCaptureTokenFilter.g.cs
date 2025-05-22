@@ -17,86 +17,188 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class PatternCaptureTokenFilter : ITokenFilter
+internal sealed partial class PatternCaptureTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("patterns")]
-	public ICollection<string> Patterns { get; set; }
-	[JsonInclude, JsonPropertyName("preserve_original")]
+	private static readonly System.Text.Json.JsonEncodedText PropPatterns = System.Text.Json.JsonEncodedText.Encode("patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropPreserveOriginal = System.Text.Json.JsonEncodedText.Encode("preserve_original");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propPatterns = default;
+		LocalJsonValue<bool?> propPreserveOriginal = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPatterns.TryReadProperty(ref reader, options, PropPatterns, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPreserveOriginal.TryReadProperty(ref reader, options, PropPreserveOriginal, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Patterns = propPatterns.Value,
+			PreserveOriginal = propPreserveOriginal.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPatterns, value.Patterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropPreserveOriginal, value.PreserveOriginal, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterConverter))]
+public sealed partial class PatternCaptureTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternCaptureTokenFilter(System.Collections.Generic.ICollection<string> patterns)
+	{
+		Patterns = patterns;
+	}
+#if NET7_0_OR_GREATER
+	public PatternCaptureTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PatternCaptureTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Patterns { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
 	public bool? PreserveOriginal { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_capture";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class PatternCaptureTokenFilterDescriptor : SerializableDescriptor<PatternCaptureTokenFilterDescriptor>, IBuildableDescriptor<PatternCaptureTokenFilter>
+public readonly partial struct PatternCaptureTokenFilterDescriptor
 {
-	internal PatternCaptureTokenFilterDescriptor(Action<PatternCaptureTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter Instance { get; init; }
 
-	public PatternCaptureTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternCaptureTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string> PatternsValue { get; set; }
-	private bool? PreserveOriginalValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public PatternCaptureTokenFilterDescriptor Patterns(ICollection<string> patterns)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternCaptureTokenFilterDescriptor()
 	{
-		PatternsValue = patterns;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserveOriginal = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(System.Collections.Generic.ICollection<string> value)
 	{
-		PreserveOriginalValue = preserveOriginal;
-		return Self;
+		Instance.Patterns = value;
+		return this;
 	}
 
-	public PatternCaptureTokenFilterDescriptor Version(string? version)
+	/// <summary>
+	/// <para>
+	/// A list of regular expressions to match.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Patterns(params string[] values)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Patterns = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If set to <c>true</c> (the default) it will emit the original token.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? value = true)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("patterns");
-		JsonSerializer.Serialize(writer, PatternsValue, options);
-		if (PreserveOriginalValue.HasValue)
-		{
-			writer.WritePropertyName("preserve_original");
-			writer.WriteBooleanValue(PreserveOriginalValue.Value);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("pattern_capture");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.PreserveOriginal = value;
+		return this;
 	}
 
-	PatternCaptureTokenFilter IBuildableDescriptor<PatternCaptureTokenFilter>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor Version(string? value)
 	{
-		Patterns = PatternsValue,
-		PreserveOriginal = PreserveOriginalValue,
-		Version = VersionValue
-	};
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PatternCaptureTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

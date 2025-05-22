@@ -17,18 +17,86 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class HistogramGroupingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropInterval = System.Text.Json.JsonEncodedText.Encode("interval");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propFields = default;
+		LocalJsonValue<long> propInterval = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propInterval.TryReadProperty(ref reader, options, PropInterval, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Fields = propFields.Value,
+			Interval = propInterval.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropInterval, value.Interval, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingConverter))]
 public sealed partial class HistogramGrouping
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramGrouping(Elastic.Clients.Elasticsearch.Fields fields, long interval)
+	{
+		Fields = fields;
+		Interval = interval;
+	}
+#if NET7_0_OR_GREATER
+	public HistogramGrouping()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HistogramGrouping()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The set of fields that you wish to build histograms for.
@@ -36,9 +104,11 @@ public sealed partial class HistogramGrouping
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields Fields { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -47,20 +117,31 @@ public sealed partial class HistogramGrouping
 	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("interval")]
-	public long Interval { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Interval { get; set; }
 }
 
-public sealed partial class HistogramGroupingDescriptor<TDocument> : SerializableDescriptor<HistogramGroupingDescriptor<TDocument>>
+public readonly partial struct HistogramGroupingDescriptor<TDocument>
 {
-	internal HistogramGroupingDescriptor(Action<HistogramGroupingDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Instance { get; init; }
 
-	public HistogramGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private long IntervalValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -69,10 +150,23 @@ public sealed partial class HistogramGroupingDescriptor<TDocument> : Serializabl
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	public HistogramGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of fields that you wish to build histograms for.
+	/// All fields specified must be some kind of numeric.
+	/// Order does not matter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Fields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -82,33 +176,39 @@ public sealed partial class HistogramGroupingDescriptor<TDocument> : Serializabl
 	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
 	/// </para>
 	/// </summary>
-	public HistogramGroupingDescriptor<TDocument> Interval(long interval)
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument> Interval(long value)
 	{
-		IntervalValue = interval;
-		return Self;
+		Instance.Interval = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		writer.WritePropertyName("interval");
-		writer.WriteNumberValue(IntervalValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class HistogramGroupingDescriptor : SerializableDescriptor<HistogramGroupingDescriptor>
+public readonly partial struct HistogramGroupingDescriptor
 {
-	internal HistogramGroupingDescriptor(Action<HistogramGroupingDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Instance { get; init; }
 
-	public HistogramGroupingDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Fields FieldsValue { get; set; }
-	private long IntervalValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HistogramGroupingDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping instance) => new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -117,10 +217,23 @@ public sealed partial class HistogramGroupingDescriptor : SerializableDescriptor
 	/// Order does not matter.
 	/// </para>
 	/// </summary>
-	public HistogramGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields fields)
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Fields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The set of fields that you wish to build histograms for.
+	/// All fields specified must be some kind of numeric.
+	/// Order does not matter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Fields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.Fields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -130,19 +243,17 @@ public sealed partial class HistogramGroupingDescriptor : SerializableDescriptor
 	/// Note that only one interval can be specified in the histogram group, meaning that all fields being grouped via the histogram must share the same interval.
 	/// </para>
 	/// </summary>
-	public HistogramGroupingDescriptor Interval(long interval)
+	public Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor Interval(long value)
 	{
-		IntervalValue = interval;
-		return Self;
+		Instance.Interval = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("fields");
-		JsonSerializer.Serialize(writer, FieldsValue, options);
-		writer.WritePropertyName("interval");
-		writer.WriteNumberValue(IntervalValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.HistogramGroupingDescriptor(new Elastic.Clients.Elasticsearch.Rollup.HistogramGrouping(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

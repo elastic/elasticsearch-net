@@ -17,32 +17,119 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationClassificationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropActualField = System.Text.Json.JsonEncodedText.Encode("actual_field");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
+	private static readonly System.Text.Json.JsonEncodedText PropPredictedField = System.Text.Json.JsonEncodedText.Encode("predicted_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTopClassesField = System.Text.Json.JsonEncodedText.Encode("top_classes_field");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propActualField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics?> propMetrics = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPredictedField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTopClassesField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propActualField.TryReadProperty(ref reader, options, PropActualField, null))
+			{
+				continue;
+			}
+
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, null))
+			{
+				continue;
+			}
+
+			if (propPredictedField.TryReadProperty(ref reader, options, PropPredictedField, null))
+			{
+				continue;
+			}
+
+			if (propTopClassesField.TryReadProperty(ref reader, options, PropTopClassesField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ActualField = propActualField.Value,
+			Metrics = propMetrics.Value,
+			PredictedField = propPredictedField.Value,
+			TopClassesField = propTopClassesField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropActualField, value.ActualField, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, null);
+		writer.WriteProperty(options, PropPredictedField, value.PredictedField, null, null);
+		writer.WriteProperty(options, PropTopClassesField, value.TopClassesField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationConverter))]
 public sealed partial class DataframeEvaluationClassification
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Field actualField)
+	{
+		ActualField = actualField;
+	}
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationClassification()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DataframeEvaluationClassification()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("actual_field")]
-	public Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field ActualField { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metrics")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? Metrics { get; set; }
 
 	/// <summary>
@@ -50,7 +137,6 @@ public sealed partial class DataframeEvaluationClassification
 	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("predicted_field")]
 	public Elastic.Clients.Elasticsearch.Field? PredictedField { get; set; }
 
 	/// <summary>
@@ -58,47 +144,37 @@ public sealed partial class DataframeEvaluationClassification
 	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("top_classes_field")]
 	public Elastic.Clients.Elasticsearch.Field? TopClassesField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation(DataframeEvaluationClassification dataframeEvaluationClassification) => Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluation.Classification(dataframeEvaluationClassification);
 }
 
-public sealed partial class DataframeEvaluationClassificationDescriptor<TDocument> : SerializableDescriptor<DataframeEvaluationClassificationDescriptor<TDocument>>
+public readonly partial struct DataframeEvaluationClassificationDescriptor<TDocument>
 {
-	internal DataframeEvaluationClassificationDescriptor(Action<DataframeEvaluationClassificationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Instance { get; init; }
 
-	public DataframeEvaluationClassificationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PredictedFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TopClassesFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Elastic.Clients.Elasticsearch.Field value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField<TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,10 +182,10 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> ActualField(Expression<Func<TDocument, object>> actualField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> ActualField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.ActualField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -117,179 +193,10 @@ public sealed partial class DataframeEvaluationClassificationDescriptor<TDocumen
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? value)
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
-	}
-
-	public DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor descriptor)
-	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationClassificationDescriptor<TDocument> Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field? predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField<TValue>(Expression<Func<TDocument, TValue>> predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Expression<Func<TDocument, object>> predictedField)
-	{
-		PredictedFieldValue = predictedField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Elastic.Clients.Elasticsearch.Field? topClassesField)
-	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField<TValue>(Expression<Func<TDocument, TValue>> topClassesField)
-	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Expression<Func<TDocument, object>> topClassesField)
-	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
-
-		if (PredictedFieldValue is not null)
-		{
-			writer.WritePropertyName("predicted_field");
-			JsonSerializer.Serialize(writer, PredictedFieldValue, options);
-		}
-
-		if (TopClassesFieldValue is not null)
-		{
-			writer.WritePropertyName("top_classes_field");
-			JsonSerializer.Serialize(writer, TopClassesFieldValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DataframeEvaluationClassificationDescriptor : SerializableDescriptor<DataframeEvaluationClassificationDescriptor>
-{
-	internal DataframeEvaluationClassificationDescriptor(Action<DataframeEvaluationClassificationDescriptor> configure) => configure.Invoke(this);
-
-	public DataframeEvaluationClassificationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Field ActualFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? MetricsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor MetricsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor> MetricsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PredictedFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TopClassesFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor ActualField(Elastic.Clients.Elasticsearch.Field actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor ActualField<TDocument, TValue>(Expression<Func<TDocument, TValue>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor ActualField<TDocument>(Expression<Func<TDocument, object>> actualField)
-	{
-		ActualFieldValue = actualField;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
 	/// <summary>
@@ -297,28 +204,21 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// Specifies the metrics that are used for the evaluation.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? metrics)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics()
 	{
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = null;
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationClassificationDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor>? action)
 	{
-		MetricsValue = null;
-		MetricsDescriptorAction = null;
-		MetricsDescriptor = descriptor;
-		return Self;
-	}
-
-	public DataframeEvaluationClassificationDescriptor Metrics(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor> configure)
-	{
-		MetricsValue = null;
-		MetricsDescriptor = null;
-		MetricsDescriptorAction = configure;
-		return Self;
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -326,10 +226,10 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field? predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -337,10 +237,115 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor PredictedField<TDocument, TValue>(Expression<Func<TDocument, TValue>> predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> PredictedField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(Elastic.Clients.Elasticsearch.Field? value)
+	{
+		Instance.TopClassesField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument> TopClassesField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
+	{
+		Instance.TopClassesField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct DataframeEvaluationClassificationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationClassificationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor ActualField(Elastic.Clients.Elasticsearch.Field value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field of the index which contains the ground truth. The data type of this field can be boolean or integer. If the data type is integer, the value has to be either 0 (false) or 1 (true).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor ActualField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.ActualField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetrics? value)
+	{
+		Instance.Metrics = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics()
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the metrics that are used for the evaluation.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor Metrics(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor>? action)
+	{
+		Instance.Metrics = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -348,10 +353,21 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor PredictedField<TDocument>(Expression<Func<TDocument, object>> predictedField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor PredictedField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PredictedFieldValue = predictedField;
-		return Self;
+		Instance.PredictedField = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The field in the index which contains the predicted value, in other words the results of the classification analysis.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor PredictedField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
+	{
+		Instance.PredictedField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -359,10 +375,10 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor TopClassesField(Elastic.Clients.Elasticsearch.Field? topClassesField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor TopClassesField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
+		Instance.TopClassesField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -370,56 +386,17 @@ public sealed partial class DataframeEvaluationClassificationDescriptor : Serial
 	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationClassificationDescriptor TopClassesField<TDocument, TValue>(Expression<Func<TDocument, TValue>> topClassesField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor TopClassesField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
+		Instance.TopClassesField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// The field of the index which is an array of documents of the form { "class_name": XXX, "class_probability": YYY }. This field must be defined as nested in the mappings.
-	/// </para>
-	/// </summary>
-	public DataframeEvaluationClassificationDescriptor TopClassesField<TDocument>(Expression<Func<TDocument, object>> topClassesField)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor> action)
 	{
-		TopClassesFieldValue = topClassesField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("actual_field");
-		JsonSerializer.Serialize(writer, ActualFieldValue, options);
-		if (MetricsDescriptor is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsDescriptor, options);
-		}
-		else if (MetricsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationMetricsDescriptor(MetricsDescriptorAction), options);
-		}
-		else if (MetricsValue is not null)
-		{
-			writer.WritePropertyName("metrics");
-			JsonSerializer.Serialize(writer, MetricsValue, options);
-		}
-
-		if (PredictedFieldValue is not null)
-		{
-			writer.WritePropertyName("predicted_field");
-			JsonSerializer.Serialize(writer, PredictedFieldValue, options);
-		}
-
-		if (TopClassesFieldValue is not null)
-		{
-			writer.WritePropertyName("top_classes_field");
-			JsonSerializer.Serialize(writer, TopClassesFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassificationDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationClassification(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

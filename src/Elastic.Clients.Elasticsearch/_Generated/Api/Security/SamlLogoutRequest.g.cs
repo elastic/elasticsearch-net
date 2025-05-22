@@ -17,21 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class SamlLogoutRequestParameters : RequestParameters
+public sealed partial class SamlLogoutRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class SamlLogoutRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+
+	public override Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propRefreshToken = default;
+		LocalJsonValue<string> propToken = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
+			{
+				continue;
+			}
+
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RefreshToken = propRefreshToken.Value,
+			Token = propToken.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,12 +82,43 @@ public sealed partial class SamlLogoutRequestParameters : RequestParameters
 /// <para>
 /// Submits a request to invalidate an access token and refresh token.
 /// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
+/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
+/// </para>
 /// </summary>
-public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestConverter))]
+public sealed partial class SamlLogoutRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlLogout;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlLogoutRequest(string token)
+	{
+		Token = token;
+	}
+#if NET7_0_OR_GREATER
+	public SamlLogoutRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SamlLogoutRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamlLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecuritySamlLogout;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -58,17 +130,19 @@ public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestPa
 	/// Alternatively, the most recent refresh token that was received after refreshing the original access token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("refresh_token")]
 	public string? RefreshToken { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a refresh_token.
+	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("token")]
-	public string Token { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Token { get; set; }
 }
 
 /// <summary>
@@ -78,25 +152,32 @@ public sealed partial class SamlLogoutRequest : PlainRequest<SamlLogoutRequestPa
 /// <para>
 /// Submits a request to invalidate an access token and refresh token.
 /// </para>
+/// <para>
+/// NOTE: This API is intended for use by custom web applications other than Kibana.
+/// If you are using Kibana, refer to the documentation for configuring SAML single-sign-on on the Elastic Stack.
+/// </para>
+/// <para>
+/// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
+/// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
+/// </para>
 /// </summary>
-public sealed partial class SamlLogoutRequestDescriptor : RequestDescriptor<SamlLogoutRequestDescriptor, SamlLogoutRequestParameters>
+public readonly partial struct SamlLogoutRequestDescriptor
 {
-	internal SamlLogoutRequestDescriptor(Action<SamlLogoutRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamlLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public SamlLogoutRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecuritySamlLogout;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.saml_logout";
-
-	private string? RefreshTokenValue { get; set; }
-	private string TokenValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest instance) => new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest(Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -104,35 +185,71 @@ public sealed partial class SamlLogoutRequestDescriptor : RequestDescriptor<Saml
 	/// Alternatively, the most recent refresh token that was received after refreshing the original access token.
 	/// </para>
 	/// </summary>
-	public SamlLogoutRequestDescriptor RefreshToken(string? refreshToken)
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor RefreshToken(string? value)
 	{
-		RefreshTokenValue = refreshToken;
-		return Self;
+		Instance.RefreshToken = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// The access token that was returned as a response to calling the SAML authenticate API.
-	/// Alternatively, the most recent token that was received after refreshing the original one by using a refresh_token.
+	/// Alternatively, the most recent token that was received after refreshing the original one by using a <c>refresh_token</c>.
 	/// </para>
 	/// </summary>
-	public SamlLogoutRequestDescriptor Token(string token)
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor Token(string value)
 	{
-		TokenValue = token;
-		return Self;
+		Instance.Token = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(RefreshTokenValue))
-		{
-			writer.WritePropertyName("refresh_token");
-			writer.WriteStringValue(RefreshTokenValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.SamlLogoutRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WritePropertyName("token");
-		writer.WriteStringValue(TokenValue);
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.SamlLogoutRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

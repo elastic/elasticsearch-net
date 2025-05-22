@@ -17,90 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class FingerprintTokenFilter : ITokenFilter
+internal sealed partial class FingerprintTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("max_output_size")]
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutputSize = System.Text.Json.JsonEncodedText.Encode("max_output_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxOutputSize = default;
+		LocalJsonValue<string?> propSeparator = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
+			{
+				continue;
+			}
+
+			if (propSeparator.TryReadProperty(ref reader, options, PropSeparator, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxOutputSize = propMaxOutputSize.Value,
+			Separator = propSeparator.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterConverter))]
+public sealed partial class FingerprintTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public FingerprintTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FingerprintTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
+	/// </para>
+	/// </summary>
 	public int? MaxOutputSize { get; set; }
-	[JsonInclude, JsonPropertyName("separator")]
+
+	/// <summary>
+	/// <para>
+	/// Character to use to concatenate the token stream input. Defaults to a space.
+	/// </para>
+	/// </summary>
 	public string? Separator { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class FingerprintTokenFilterDescriptor : SerializableDescriptor<FingerprintTokenFilterDescriptor>, IBuildableDescriptor<FingerprintTokenFilter>
+public readonly partial struct FingerprintTokenFilterDescriptor
 {
-	internal FingerprintTokenFilterDescriptor(Action<FingerprintTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter Instance { get; init; }
 
-	public FingerprintTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private int? MaxOutputSizeValue { get; set; }
-	private string? SeparatorValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public FingerprintTokenFilterDescriptor MaxOutputSize(int? maxOutputSize)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintTokenFilterDescriptor()
 	{
-		MaxOutputSizeValue = maxOutputSize;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FingerprintTokenFilterDescriptor Separator(string? separator)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Maximum character length, including whitespace, of the output token. Defaults to <c>255</c>. Concatenated tokens longer than this will result in no token output.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor MaxOutputSize(int? value)
 	{
-		SeparatorValue = separator;
-		return Self;
+		Instance.MaxOutputSize = value;
+		return this;
 	}
 
-	public FingerprintTokenFilterDescriptor Version(string? version)
+	/// <summary>
+	/// <para>
+	/// Character to use to concatenate the token stream input. Defaults to a space.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor Separator(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Separator = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (MaxOutputSizeValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("max_output_size");
-			writer.WriteNumberValue(MaxOutputSizeValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(SeparatorValue))
-		{
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(SeparatorValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("fingerprint");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.FingerprintTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	FingerprintTokenFilter IBuildableDescriptor<FingerprintTokenFilter>.Build() => new()
-	{
-		MaxOutputSize = MaxOutputSizeValue,
-		Separator = SeparatorValue,
-		Version = VersionValue
-	};
 }

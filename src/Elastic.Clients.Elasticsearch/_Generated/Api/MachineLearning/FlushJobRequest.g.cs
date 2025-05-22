@@ -17,21 +17,89 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class FlushJobRequestParameters : RequestParameters
+public sealed partial class FlushJobRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class FlushJobRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAdvanceTime = System.Text.Json.JsonEncodedText.Encode("advance_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCalcInterim = System.Text.Json.JsonEncodedText.Encode("calc_interim");
+	private static readonly System.Text.Json.JsonEncodedText PropEnd = System.Text.Json.JsonEncodedText.Encode("end");
+	private static readonly System.Text.Json.JsonEncodedText PropSkipTime = System.Text.Json.JsonEncodedText.Encode("skip_time");
+	private static readonly System.Text.Json.JsonEncodedText PropStart = System.Text.Json.JsonEncodedText.Encode("start");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.DateTimeOffset?> propAdvanceTime = default;
+		LocalJsonValue<bool?> propCalcInterim = default;
+		LocalJsonValue<System.DateTimeOffset?> propEnd = default;
+		LocalJsonValue<System.DateTimeOffset?> propSkipTime = default;
+		LocalJsonValue<System.DateTimeOffset?> propStart = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAdvanceTime.TryReadProperty(ref reader, options, PropAdvanceTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propCalcInterim.TryReadProperty(ref reader, options, PropCalcInterim, null))
+			{
+				continue;
+			}
+
+			if (propEnd.TryReadProperty(ref reader, options, PropEnd, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propSkipTime.TryReadProperty(ref reader, options, PropSkipTime, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propStart.TryReadProperty(ref reader, options, PropStart, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AdvanceTime = propAdvanceTime.Value,
+			CalcInterim = propCalcInterim.Value,
+			End = propEnd.Value,
+			SkipTime = propSkipTime.Value,
+			Start = propStart.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdvanceTime, value.AdvanceTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropCalcInterim, value.CalcInterim, null, null);
+		writer.WriteProperty(options, PropEnd, value.End, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropSkipTime, value.SkipTime, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropStart, value.Start, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -47,15 +115,27 @@ public sealed partial class FlushJobRequestParameters : RequestParameters
 /// analyzing further data.
 /// </para>
 /// </summary>
-public sealed partial class FlushJobRequest : PlainRequest<FlushJobRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestConverter))]
+public sealed partial class FlushJobRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public FlushJobRequest(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public FlushJobRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FlushJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningFlushJob;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningFlushJob;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -63,18 +143,27 @@ public sealed partial class FlushJobRequest : PlainRequest<FlushJobRequestParame
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Refer to the description for the <c>advance_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("advance_time")]
-	public DateTimeOffset? AdvanceTime { get; set; }
+	public System.DateTimeOffset? AdvanceTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>calc_interim</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("calc_interim")]
 	public bool? CalcInterim { get; set; }
 
 	/// <summary>
@@ -82,24 +171,21 @@ public sealed partial class FlushJobRequest : PlainRequest<FlushJobRequestParame
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("end")]
-	public DateTimeOffset? End { get; set; }
+	public System.DateTimeOffset? End { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>skip_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("skip_time")]
-	public DateTimeOffset? SkipTime { get; set; }
+	public System.DateTimeOffset? SkipTime { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("start")]
-	public DateTimeOffset? Start { get; set; }
+	public System.DateTimeOffset? Start { get; set; }
 }
 
 /// <summary>
@@ -115,43 +201,50 @@ public sealed partial class FlushJobRequest : PlainRequest<FlushJobRequestParame
 /// analyzing further data.
 /// </para>
 /// </summary>
-public sealed partial class FlushJobRequestDescriptor : RequestDescriptor<FlushJobRequestDescriptor, FlushJobRequestParameters>
+public readonly partial struct FlushJobRequestDescriptor
 {
-	internal FlushJobRequestDescriptor(Action<FlushJobRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Instance { get; init; }
 
-	public FlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId) : base(r => r.Required("job_id", jobId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningFlushJob;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ml.flush_job";
-
-	public FlushJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public FlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(jobId);
 	}
 
-	private DateTimeOffset? AdvanceTimeValue { get; set; }
-	private bool? CalcInterimValue { get; set; }
-	private DateTimeOffset? EndValue { get; set; }
-	private DateTimeOffset? SkipTimeValue { get; set; }
-	private DateTimeOffset? StartValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public FlushJobRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.JobId = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Refer to the description for the <c>advance_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public FlushJobRequestDescriptor AdvanceTime(DateTimeOffset? advanceTime)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor AdvanceTime(System.DateTimeOffset? value)
 	{
-		AdvanceTimeValue = advanceTime;
-		return Self;
+		Instance.AdvanceTime = value;
+		return this;
 	}
 
 	/// <summary>
@@ -159,10 +252,10 @@ public sealed partial class FlushJobRequestDescriptor : RequestDescriptor<FlushJ
 	/// Refer to the description for the <c>calc_interim</c> query parameter.
 	/// </para>
 	/// </summary>
-	public FlushJobRequestDescriptor CalcInterim(bool? calcInterim = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor CalcInterim(bool? value = true)
 	{
-		CalcInterimValue = calcInterim;
-		return Self;
+		Instance.CalcInterim = value;
+		return this;
 	}
 
 	/// <summary>
@@ -170,10 +263,10 @@ public sealed partial class FlushJobRequestDescriptor : RequestDescriptor<FlushJ
 	/// Refer to the description for the <c>end</c> query parameter.
 	/// </para>
 	/// </summary>
-	public FlushJobRequestDescriptor End(DateTimeOffset? end)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor End(System.DateTimeOffset? value)
 	{
-		EndValue = end;
-		return Self;
+		Instance.End = value;
+		return this;
 	}
 
 	/// <summary>
@@ -181,10 +274,10 @@ public sealed partial class FlushJobRequestDescriptor : RequestDescriptor<FlushJ
 	/// Refer to the description for the <c>skip_time</c> query parameter.
 	/// </para>
 	/// </summary>
-	public FlushJobRequestDescriptor SkipTime(DateTimeOffset? skipTime)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor SkipTime(System.DateTimeOffset? value)
 	{
-		SkipTimeValue = skipTime;
-		return Self;
+		Instance.SkipTime = value;
+		return this;
 	}
 
 	/// <summary>
@@ -192,45 +285,59 @@ public sealed partial class FlushJobRequestDescriptor : RequestDescriptor<FlushJ
 	/// Refer to the description for the <c>start</c> query parameter.
 	/// </para>
 	/// </summary>
-	public FlushJobRequestDescriptor Start(DateTimeOffset? start)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Start(System.DateTimeOffset? value)
 	{
-		StartValue = start;
-		return Self;
+		Instance.Start = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AdvanceTimeValue is not null)
-		{
-			writer.WritePropertyName("advance_time");
-			JsonSerializer.Serialize(writer, AdvanceTimeValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (CalcInterimValue.HasValue)
-		{
-			writer.WritePropertyName("calc_interim");
-			writer.WriteBooleanValue(CalcInterimValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (EndValue is not null)
-		{
-			writer.WritePropertyName("end");
-			JsonSerializer.Serialize(writer, EndValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (SkipTimeValue is not null)
-		{
-			writer.WritePropertyName("skip_time");
-			JsonSerializer.Serialize(writer, SkipTimeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (StartValue is not null)
-		{
-			writer.WritePropertyName("start");
-			JsonSerializer.Serialize(writer, StartValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.FlushJobRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

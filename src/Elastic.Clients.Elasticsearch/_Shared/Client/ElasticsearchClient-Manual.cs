@@ -6,22 +6,18 @@ using System;
 using System.Threading.Tasks;
 using System.Threading;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public partial class ElasticsearchClient
 {
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
 	public virtual UpdateResponse<TDocument> Update<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, IndexName index, Id id)
 	{
 		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 		descriptor.Upsert(document);
 		descriptor.Doc(partialDocument);
-		descriptor.BeforeRequest();
-		return DoRequest<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor);
+		var request = descriptor.Instance;
+		request.BeforeRequest();
+		return DoRequest<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(request);
 	}
 
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, IndexName index, Id id, CancellationToken cancellationToken = default)
@@ -29,8 +25,9 @@ public partial class ElasticsearchClient
 		var descriptor = new UpdateRequestDescriptor<TDocument, TPartialDocument>(index, id);
 		descriptor.Upsert(document);
 		descriptor.Doc(partialDocument);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
+		var request = descriptor.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual Task<UpdateResponse<TDocument>> UpdateAsync<TDocument, TPartialDocument>(TDocument document, TPartialDocument partialDocument, Action<UpdateRequestDescriptor<TDocument, TPartialDocument>> configureRequest, CancellationToken cancellationToken = default)
@@ -39,7 +36,8 @@ public partial class ElasticsearchClient
 		descriptor.Upsert(document);
 		descriptor.Doc(partialDocument);
 		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<UpdateRequestDescriptor<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(descriptor, cancellationToken);
+		var request = descriptor.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<UpdateRequest<TDocument, TPartialDocument>, UpdateResponse<TDocument>, UpdateRequestParameters>(request, cancellationToken);
 	}
 }

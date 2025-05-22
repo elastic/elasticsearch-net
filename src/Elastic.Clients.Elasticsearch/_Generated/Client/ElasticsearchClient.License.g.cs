@@ -18,790 +18,345 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public partial class LicenseManagementNamespacedClient : NamespacedClientProxy
+public partial class LicenseManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="LicenseManagementNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.LicenseManagement.LicenseManagementNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected LicenseManagementNamespacedClient() : base()
 	{
 	}
 
-	internal LicenseManagementNamespacedClient(ElasticsearchClient client) : base(client)
+	internal LicenseManagementNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete(DeleteLicenseRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse Delete(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteLicenseRequest, DeleteLicenseResponse, DeleteLicenseRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(DeleteLicenseRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse Delete()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse Delete(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteLicenseRequest, DeleteLicenseResponse, DeleteLicenseRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete(DeleteLicenseRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse> DeleteAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.DeleteLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLicenseResponse Delete(Action<DeleteLicenseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(DeleteLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes licensing information for the cluster
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLicenseResponse> DeleteAsync(Action<DeleteLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLicenseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLicenseRequestDescriptor, DeleteLicenseResponse, DeleteLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get(GetLicenseRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse Get(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetLicenseRequest, GetLicenseResponse, GetLicenseRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse Get()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse Get(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetLicenseRequest, GetLicenseResponse, GetLicenseRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get(GetLicenseRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse> GetAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLicenseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetLicenseRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLicenseResponse Get(Action<GetLicenseRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetLicenseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(GetLicenseRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLicenseRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get license information.
-	/// Returns information about your Elastic license, including its type, its status, when it was issued, and when it expires.
-	/// For more information about the different types of licenses, refer to <a href="https://www.elastic.co/subscriptions">Elastic Stack subscriptions</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLicenseResponse> GetAsync(Action<GetLicenseRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLicenseRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLicenseRequestDescriptor, GetLicenseResponse, GetLicenseRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse GetBasicStatus(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetBasicStatusRequest, GetBasicStatusResponse, GetBasicStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(GetBasicStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse GetBasicStatus()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse GetBasicStatus(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetBasicStatusRequest, GetBasicStatusResponse, GetBasicStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus(GetBasicStatusRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse> GetBasicStatusAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetBasicStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetBasicStatusResponse GetBasicStatus(Action<GetBasicStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(GetBasicStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the basic license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-basic-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetBasicStatusResponse> GetBasicStatusAsync(Action<GetBasicStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetBasicStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetBasicStatusRequestDescriptor, GetBasicStatusResponse, GetBasicStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse GetTrialStatus(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetTrialStatusRequest, GetTrialStatusResponse, GetTrialStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(GetTrialStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse GetTrialStatus()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse GetTrialStatus(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetTrialStatusRequest, GetTrialStatusResponse, GetTrialStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus(GetTrialStatusRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse> GetTrialStatusAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusResponse, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetTrialStatusResponse GetTrialStatus(Action<GetTrialStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(GetTrialStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves information about the status of the trial license.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-trial-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetTrialStatusResponse> GetTrialStatusAsync(Action<GetTrialStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetTrialStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetTrialStatusRequestDescriptor, GetTrialStatusResponse, GetTrialStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post(PostRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse Post(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PostRequest, PostResponse, PostRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostResponse> PostAsync(PostRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse Post()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse Post(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PostRequest, PostResponse, PostRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post(PostRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse> PostAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostResponse Post(Action<PostRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PostRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostResponse> PostAsync(PostRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostResponse> PostAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Updates the license for the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/update-license.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostResponse> PostAsync(Action<PostRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostRequestDescriptor, PostResponse, PostRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse PostStartBasic(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PostStartBasicRequest, PostStartBasicResponse, PostStartBasicRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse PostStartBasic()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse PostStartBasic(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PostStartBasicRequest, PostStartBasicResponse, PostStartBasicRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic(PostStartBasicRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse> PostStartBasicAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostStartBasicRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartBasicRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartBasicResponse PostStartBasic(Action<PostStartBasicRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PostStartBasicRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(PostStartBasicRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostStartBasicRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start basic API enables you to initiate an indefinite basic license, which gives access to all the basic features. If the basic license does not support all of the features that are available with your current license, however, you are notified in the response. You must then re-submit the API request with the acknowledge parameter set to true.
-	/// To check the status of your basic license, use the following API: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-basic-status.html">Get basic status</a>.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-basic.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartBasicResponse> PostStartBasicAsync(Action<PostStartBasicRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostStartBasicRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartBasicRequestDescriptor, PostStartBasicResponse, PostStartBasicRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequest request)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse PostStartTrial(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PostStartTrialRequest, PostStartTrialResponse, PostStartTrialRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse PostStartTrial()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse PostStartTrial(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PostStartTrialRequest, PostStartTrialResponse, PostStartTrialRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial(PostStartTrialRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse> PostStartTrialAsync(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PostStartTrialRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PostStartTrialResponse PostStartTrial(Action<PostStartTrialRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PostStartTrialRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(PostStartTrialRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostStartTrialRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// The start trial API enables you to start a 30-day trial, which gives access to all subscription features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/start-trial.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PostStartTrialResponse> PostStartTrialAsync(Action<PostStartTrialRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PostStartTrialRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PostStartTrialRequestDescriptor, PostStartTrialResponse, PostStartTrialRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequest, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialResponse, Elastic.Clients.Elasticsearch.LicenseManagement.PostStartTrialRequestParameters>(request, cancellationToken);
 	}
 }

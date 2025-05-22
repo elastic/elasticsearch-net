@@ -17,37 +17,97 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class MappingLimitSettingsDimensionFieldsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLimit = System.Text.Json.JsonEncodedText.Encode("limit");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLimit.TryReadProperty(ref reader, options, PropLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Limit = propLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLimit, value.Limit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsConverter))]
 public sealed partial class MappingLimitSettingsDimensionFields
 {
+#if NET7_0_OR_GREATER
+	public MappingLimitSettingsDimensionFields()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MappingLimitSettingsDimensionFields()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// [preview] This functionality is in technical preview and may be changed or removed in a future release.
 	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("limit")]
 	public long? Limit { get; set; }
 }
 
-public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : SerializableDescriptor<MappingLimitSettingsDimensionFieldsDescriptor>
+public readonly partial struct MappingLimitSettingsDimensionFieldsDescriptor
 {
-	internal MappingLimitSettingsDimensionFieldsDescriptor(Action<MappingLimitSettingsDimensionFieldsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields Instance { get; init; }
 
-	public MappingLimitSettingsDimensionFieldsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsDimensionFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields instance)
 	{
+		Instance = instance;
 	}
 
-	private long? LimitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsDimensionFieldsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -55,21 +115,22 @@ public sealed partial class MappingLimitSettingsDimensionFieldsDescriptor : Seri
 	/// Elastic will work to fix any issues, but features in technical preview are not subject to the support SLA of official GA features.
 	/// </para>
 	/// </summary>
-	public MappingLimitSettingsDimensionFieldsDescriptor Limit(long? limit)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor Limit(long? value)
 	{
-		LimitValue = limit;
-		return Self;
+		Instance.Limit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (LimitValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("limit");
-			writer.WriteNumberValue(LimitValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

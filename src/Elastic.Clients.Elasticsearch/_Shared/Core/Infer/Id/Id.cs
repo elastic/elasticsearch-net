@@ -4,20 +4,23 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IdConverter))]
-public class Id : IEquatable<Id>, IUrlParameter
+public class Id :
+	IEquatable<Id>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Id>
+#endif
 {
 	public Id(string id)
 	{
@@ -37,10 +40,10 @@ public class Id : IEquatable<Id>, IUrlParameter
 		Document = document;
 	}
 
-	internal object Document { get; }
+	internal object? Document { get; }
 	internal long? LongValue { get; }
-	internal string StringOrLongValue => StringValue ?? LongValue?.ToString(CultureInfo.InvariantCulture);
-	internal string StringValue { get; }
+	internal string? StringOrLongValue => StringValue ?? LongValue?.ToString(CultureInfo.InvariantCulture);
+	internal string? StringValue { get; }
 	internal int Tag { get; }
 
 	private string DebugDisplay => StringOrLongValue ?? "Id from instance typeof: " + Document?.GetType().Name;
@@ -85,12 +88,16 @@ public class Id : IEquatable<Id>, IUrlParameter
 		{
 			case Id r:
 				return Equals(r);
+
 			case string s:
 				return Equals(s);
+
 			case int l:
 				return Equals(l);
+
 			case long l:
 				return Equals(l);
+
 			case Guid g:
 				return Equals(g);
 		}
@@ -112,4 +119,24 @@ public class Id : IEquatable<Id>, IUrlParameter
 	public static bool operator ==(Id left, Id right) => Equals(left, right);
 
 	public static bool operator !=(Id left, Id right) => !Equals(left, right);
+
+	#region IParsable
+
+	public static Id Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Id? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Id(s);
+		return true;
+	}
+
+	#endregion IParsable
 }

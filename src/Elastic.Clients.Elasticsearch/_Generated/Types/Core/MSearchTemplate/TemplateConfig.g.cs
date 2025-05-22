@@ -17,34 +17,120 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.MSearchTemplate;
 
+internal sealed partial class TemplateConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropExplain = System.Text.Json.JsonEncodedText.Encode("explain");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropProfile = System.Text.Json.JsonEncodedText.Encode("profile");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propExplain = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<bool?> propProfile = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propExplain.TryReadProperty(ref reader, options, PropExplain, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propProfile.TryReadProperty(ref reader, options, PropProfile, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Explain = propExplain.Value,
+			Id = propId.Value,
+			Params = propParams.Value,
+			Profile = propProfile.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropExplain, value.Explain, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropProfile, value.Profile, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.MSearchTemplate.TemplateConfigConverter))]
 public sealed partial class TemplateConfig
 {
+#if NET7_0_OR_GREATER
+	public TemplateConfig()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TemplateConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TemplateConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns detailed information about score calculation as part of each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("explain")]
-	public bool? Explain { get; init; }
+	public bool? Explain { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// ID of the search template to use. If no source is specified,
+	/// The ID of the search template to use. If no <c>source</c> is specified,
 	/// this parameter is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("id")]
-	public Elastic.Clients.Elasticsearch.Id? Id { get; init; }
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,24 +139,21 @@ public sealed partial class TemplateConfig
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IReadOnlyDictionary<string, object>? Params { get; init; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, the query execution is profiled.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("profile")]
-	public bool? Profile { get; init; }
+	public bool? Profile { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An inline search template. Supports the same parameters as the search API's
-	/// request body. Also supports Mustache variables. If no id is specified, this
+	/// request body. It also supports Mustache variables. If no <c>id</c> is specified, this
 	/// parameter is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
-	public string? Source { get; init; }
+	public string? Source { get; set; }
 }

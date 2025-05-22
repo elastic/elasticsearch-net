@@ -17,48 +17,76 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// Text embedding inference options
-/// </para>
-/// </summary>
-public sealed partial class TextEmbeddingInferenceOptions
+internal sealed partial class TextEmbeddingInferenceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions>
 {
-	/// <summary>
-	/// <para>
-	/// The number of dimensions in the embedding output
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("embedding_size")]
-	public int? EmbeddingSize { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropEmbeddingSize = System.Text.Json.JsonEncodedText.Encode("embedding_size");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+	private static readonly System.Text.Json.JsonEncodedText PropVocabulary = System.Text.Json.JsonEncodedText.Encode("vocabulary");
 
-	/// <summary>
-	/// <para>
-	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
-	public string? ResultsField { get; set; }
+	public override Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propEmbeddingSize = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig?> propTokenization = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary> propVocabulary = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEmbeddingSize.TryReadProperty(ref reader, options, PropEmbeddingSize, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// The tokenization options
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate(TextEmbeddingInferenceOptions textEmbeddingInferenceOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigCreate.TextEmbedding(textEmbeddingInferenceOptions);
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (propVocabulary.TryReadProperty(ref reader, options, PropVocabulary, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EmbeddingSize = propEmbeddingSize.Value,
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value,
+			Vocabulary = propVocabulary.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEmbeddingSize, value.EmbeddingSize, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteProperty(options, PropVocabulary, value.Vocabulary, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -66,29 +94,91 @@ public sealed partial class TextEmbeddingInferenceOptions
 /// Text embedding inference options
 /// </para>
 /// </summary>
-public sealed partial class TextEmbeddingInferenceOptionsDescriptor : SerializableDescriptor<TextEmbeddingInferenceOptionsDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsConverter))]
+public sealed partial class TextEmbeddingInferenceOptions
 {
-	internal TextEmbeddingInferenceOptionsDescriptor(Action<TextEmbeddingInferenceOptionsDescriptor> configure) => configure.Invoke(this);
-
-	public TextEmbeddingInferenceOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary vocabulary)
+	{
+		Vocabulary = vocabulary;
+	}
+#if NET7_0_OR_GREATER
+	public TextEmbeddingInferenceOptions()
 	{
 	}
-
-	private int? EmbeddingSizeValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> TokenizationDescriptorAction { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public TextEmbeddingInferenceOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The number of dimensions in the embedding output
 	/// </para>
 	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor EmbeddingSize(int? embeddingSize)
+	public int? EmbeddingSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
+	/// </para>
+	/// </summary>
+	public string? ResultsField { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? Tokenization { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary Vocabulary { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Text embedding inference options
+/// </para>
+/// </summary>
+public readonly partial struct TextEmbeddingInferenceOptionsDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbeddingInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions instance)
 	{
-		EmbeddingSizeValue = embeddingSize;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TextEmbeddingInferenceOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The number of dimensions in the embedding output
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor EmbeddingSize(int? value)
+	{
+		Instance.EmbeddingSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -96,10 +186,10 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -107,61 +197,40 @@ public sealed partial class TextEmbeddingInferenceOptionsDescriptor : Serializab
 	/// The tokenization options
 	/// </para>
 	/// </summary>
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor.Build(action);
+		return this;
 	}
 
-	public TextEmbeddingInferenceOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Vocabulary(Elastic.Clients.Elasticsearch.MachineLearning.Vocabulary value)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
+		Instance.Vocabulary = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor Vocabulary(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (EmbeddingSizeValue.HasValue)
-		{
-			writer.WritePropertyName("embedding_size");
-			writer.WriteNumberValue(EmbeddingSizeValue.Value);
-		}
+		Instance.Vocabulary = Elastic.Clients.Elasticsearch.MachineLearning.VocabularyDescriptor.Build(action);
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfigDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.TextEmbeddingInferenceOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

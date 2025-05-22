@@ -8,11 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 public static class Infer
 {
@@ -44,11 +40,7 @@ public static class Infer
 
 	public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
-#if ELASTICSEARCH_SERVERLESS
-	public static Id Id<T>(T document) where T : class => Elasticsearch.Serverless.Id.From(document);
-#else
 	public static Id Id<T>(T document) where T : class => Elasticsearch.Id.From(document);
-#endif
 
 	public static Fields Fields<T>(params Expression<Func<T, object?>>[] fields) where T : class =>
 		new(fields.Select(f => new Field(f)));
@@ -61,19 +53,18 @@ public static class Infer
 	///     Create a strongly typed string field name representation of the path to a property
 	///     <para>e.g. p => p.Array.First().SubProperty.Field will return 'array.subProperty.field'</para>
 	/// </summary>
-	public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null,
-		string format = null)
-		 => new(path, boost, format);
+	public static Field Field<T, TValue>(Expression<Func<T, TValue>> path, double? boost = null)
+		 => new(path, boost);
 
 	/// <inheritdoc cref="Field{T, TValue}" />
-	public static Field Field<T>(Expression<Func<T, object?>> path, double? boost = null, string format = null)
-		 => new(path, boost, format);
+	public static Field Field<T>(Expression<Func<T, object?>> path, double? boost = null)
+		 => new(path, boost);
 
-	public static Field Field(string field, double? boost = null, string format = null) =>
-		new(field, boost, format);
+	public static Field Field(string field, double? boost = null) =>
+		new(field, boost);
 
-	public static Field Field(PropertyInfo property, double? boost = null, string format = null) =>
-		new(property, boost, format);
+	public static Field Field(PropertyInfo property, double? boost = null) =>
+		new(property, boost);
 
 	public static PropertyName Property(string property) => property;
 

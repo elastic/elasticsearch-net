@@ -17,24 +17,124 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class ShardsSegmentConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumCommittedSegments = System.Text.Json.JsonEncodedText.Encode("num_committed_segments");
+	private static readonly System.Text.Json.JsonEncodedText PropNumSearchSegments = System.Text.Json.JsonEncodedText.Encode("num_search_segments");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropSegments = System.Text.Json.JsonEncodedText.Encode("segments");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int> propNumCommittedSegments = default;
+		LocalJsonValue<int> propNumSearchSegments = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting> propRouting = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment>> propSegments = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumCommittedSegments.TryReadProperty(ref reader, options, PropNumCommittedSegments, null))
+			{
+				continue;
+			}
+
+			if (propNumSearchSegments.TryReadProperty(ref reader, options, PropNumSearchSegments, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propSegments.TryReadProperty(ref reader, options, PropSegments, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumCommittedSegments = propNumCommittedSegments.Value,
+			NumSearchSegments = propNumSearchSegments.Value,
+			Routing = propRouting.Value,
+			Segments = propSegments.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegment value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumCommittedSegments, value.NumCommittedSegments, null, null);
+		writer.WriteProperty(options, PropNumSearchSegments, value.NumSearchSegments, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropSegments, value.Segments, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardsSegmentConverter))]
 public sealed partial class ShardsSegment
 {
-	[JsonInclude, JsonPropertyName("num_committed_segments")]
-	public int NumCommittedSegments { get; init; }
-	[JsonInclude, JsonPropertyName("num_search_segments")]
-	public int NumSearchSegments { get; init; }
-	[JsonInclude, JsonPropertyName("routing")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting Routing { get; init; }
-	[JsonInclude, JsonPropertyName("segments")]
-	public IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> Segments { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShardsSegment(int numCommittedSegments, int numSearchSegments, Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting routing, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> segments)
+	{
+		NumCommittedSegments = numCommittedSegments;
+		NumSearchSegments = numSearchSegments;
+		Routing = routing;
+		Segments = segments;
+	}
+#if NET7_0_OR_GREATER
+	public ShardsSegment()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ShardsSegment()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShardsSegment(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NumCommittedSegments { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int NumSearchSegments { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.ShardSegmentRouting Routing { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.IndexManagement.Segment> Segments { get; set; }
 }

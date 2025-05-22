@@ -4,23 +4,16 @@
 
 #nullable enable
 
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Core;
-#else
 using Elastic.Clients.Elasticsearch.Core;
-#endif
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
-#else
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-#endif
 
 /// <summary>
 /// <para>Buckets path can be expressed in different ways, and an aggregation may accept some or all of these<br/>forms depending on its type. Please refer to each aggregation's documentation to know what buckets<br/>path forms they accept.</para>
@@ -105,15 +98,17 @@ public sealed partial class BucketsPath : IComplexUnion<BucketsPath.Kind>
 
 internal sealed class BucketsPathConverter : JsonConverter<BucketsPath>
 {
-	public override BucketsPath? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
-		(reader.TokenType) switch
+	public override BucketsPath? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		return (reader.TokenType) switch
 		{
 			JsonTokenType.Null => null,
-			JsonTokenType.String => BucketsPath.Single(JsonSerializer.Deserialize<string>(ref reader, options)!),
-			JsonTokenType.StartArray => BucketsPath.Array(JsonSerializer.Deserialize<string[]>(ref reader, options)!),
-			JsonTokenType.StartObject => BucketsPath.Dictionary(JsonSerializer.Deserialize<Dictionary<string, string>>(ref reader, options)!),
+			JsonTokenType.String => BucketsPath.Single(reader.ReadValue<string>(options)!),
+			JsonTokenType.StartArray => BucketsPath.Array(reader.ReadCollectionValue<string>(options, null)!.ToArray()),
+			JsonTokenType.StartObject => BucketsPath.Dictionary(reader.ReadDictionaryValue<string, string>(options, null, null)!),
 			_ => throw new JsonException($"Unexpected token '{reader.TokenType}'.")
 		};
+	}
 
 	public override void Write(Utf8JsonWriter writer, BucketsPath value, JsonSerializerOptions options)
 	{
@@ -124,11 +119,11 @@ internal sealed class BucketsPathConverter : JsonConverter<BucketsPath>
 				break;
 
 			case BucketsPath.Kind.Array:
-				JsonSerializer.Serialize(writer, (string[])value._value, options);
+				writer.WriteCollectionValue(options, (string[])value._value, null);
 				break;
 
 			case BucketsPath.Kind.Dictionary:
-				JsonSerializer.Serialize(writer, (Dictionary<string, string>)value._value, options);
+				writer.WriteDictionaryValue(options, (Dictionary<string, string>)value._value, null, null);
 				break;
 
 			default:

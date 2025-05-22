@@ -17,49 +17,178 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
+internal sealed partial class FollowerIndexParametersConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_read_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestSize = System.Text.Json.JsonEncodedText.Encode("max_read_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRetryDelay = System.Text.Json.JsonEncodedText.Encode("max_retry_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferCount = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferSize = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_write_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestSize = System.Text.Json.JsonEncodedText.Encode("max_write_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropReadPollTimeout = System.Text.Json.JsonEncodedText.Encode("read_poll_timeout");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propMaxOutstandingReadRequests = default;
+		LocalJsonValue<int?> propMaxOutstandingWriteRequests = default;
+		LocalJsonValue<int?> propMaxReadRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxReadRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMaxRetryDelay = default;
+		LocalJsonValue<int?> propMaxWriteBufferCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteBufferSize = default;
+		LocalJsonValue<int?> propMaxWriteRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propReadPollTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxOutstandingReadRequests.TryReadProperty(ref reader, options, PropMaxOutstandingReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxOutstandingWriteRequests.TryReadProperty(ref reader, options, PropMaxOutstandingWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestOperationCount.TryReadProperty(ref reader, options, PropMaxReadRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestSize.TryReadProperty(ref reader, options, PropMaxReadRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxRetryDelay.TryReadProperty(ref reader, options, PropMaxRetryDelay, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferCount.TryReadProperty(ref reader, options, PropMaxWriteBufferCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferSize.TryReadProperty(ref reader, options, PropMaxWriteBufferSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestOperationCount.TryReadProperty(ref reader, options, PropMaxWriteRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestSize.TryReadProperty(ref reader, options, PropMaxWriteRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propReadPollTimeout.TryReadProperty(ref reader, options, PropReadPollTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxOutstandingReadRequests = propMaxOutstandingReadRequests.Value,
+			MaxOutstandingWriteRequests = propMaxOutstandingWriteRequests.Value,
+			MaxReadRequestOperationCount = propMaxReadRequestOperationCount.Value,
+			MaxReadRequestSize = propMaxReadRequestSize.Value,
+			MaxRetryDelay = propMaxRetryDelay.Value,
+			MaxWriteBufferCount = propMaxWriteBufferCount.Value,
+			MaxWriteBufferSize = propMaxWriteBufferSize.Value,
+			MaxWriteRequestOperationCount = propMaxWriteRequestOperationCount.Value,
+			MaxWriteRequestSize = propMaxWriteRequestSize.Value,
+			ReadPollTimeout = propReadPollTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParameters value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxOutstandingReadRequests, value.MaxOutstandingReadRequests, null, null);
+		writer.WriteProperty(options, PropMaxOutstandingWriteRequests, value.MaxOutstandingWriteRequests, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestOperationCount, value.MaxReadRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestSize, value.MaxReadRequestSize, null, null);
+		writer.WriteProperty(options, PropMaxRetryDelay, value.MaxRetryDelay, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferCount, value.MaxWriteBufferCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferSize, value.MaxWriteBufferSize, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestOperationCount, value.MaxWriteRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestSize, value.MaxWriteRequestSize, null, null);
+		writer.WriteProperty(options, PropReadPollTimeout, value.ReadPollTimeout, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.FollowerIndexParametersConverter))]
 public sealed partial class FollowerIndexParameters
 {
+#if NET7_0_OR_GREATER
+	public FollowerIndexParameters()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FollowerIndexParameters()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FollowerIndexParameters(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
-	public long? MaxOutstandingReadRequests { get; init; }
+	public long? MaxOutstandingReadRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of outstanding write requests on the follower.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
-	public int? MaxOutstandingWriteRequests { get; init; }
+	public int? MaxOutstandingWriteRequests { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of operations to pull per read from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_read_request_operation_count")]
-	public int? MaxReadRequestOperationCount { get; init; }
+	public int? MaxReadRequestOperationCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_read_request_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -67,8 +196,7 @@ public sealed partial class FollowerIndexParameters
 	/// retrying.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_retry_delay")]
-	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -76,8 +204,7 @@ public sealed partial class FollowerIndexParameters
 	/// deferred until the number of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_buffer_count")]
-	public int? MaxWriteBufferCount { get; init; }
+	public int? MaxWriteBufferCount { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,24 +212,21 @@ public sealed partial class FollowerIndexParameters
 	/// be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_buffer_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_request_operation_count")]
-	public int? MaxWriteRequestOperationCount { get; init; }
+	public int? MaxWriteRequestOperationCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_request_size")]
-	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; init; }
+	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -111,6 +235,5 @@ public sealed partial class FollowerIndexParameters
 	/// Then the follower will immediately attempt to read from the leader again.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_poll_timeout")]
-	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; init; }
+	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 }

@@ -17,85 +17,189 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchableSnapshots;
 
-public sealed partial class CacheStatsRequestParameters : RequestParameters
+public sealed partial class CacheStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Retrieve node-level cache statistics about searchable snapshots.
-/// </para>
-/// </summary>
-public sealed partial class CacheStatsRequest : PlainRequest<CacheStatsRequestParameters>
+internal sealed partial class CacheStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest>
 {
-	public CacheStatsRequest()
+	public override Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
 	}
 
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
+/// <summary>
+/// <para>
+/// Get cache statistics.
+/// Get statistics about the shared cache for partially mounted indices.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestConverter))]
+public sealed partial class CacheStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestParameters>
+{
 	public CacheStatsRequest(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public CacheStatsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public CacheStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CacheStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchableSnapshotsCacheStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SearchableSnapshotsCacheStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "searchable_snapshots.cache_stats";
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>
+	/// The names of the nodes in the cluster to target.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.NodeIds? NodeId { get => P<Elastic.Clients.Elasticsearch.NodeIds?>("node_id"); set => PO("node_id", value); }
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Retrieve node-level cache statistics about searchable snapshots.
+/// Get cache statistics.
+/// Get statistics about the shared cache for partially mounted indices.
 /// </para>
 /// </summary>
-public sealed partial class CacheStatsRequestDescriptor : RequestDescriptor<CacheStatsRequestDescriptor, CacheStatsRequestParameters>
+public readonly partial struct CacheStatsRequestDescriptor
 {
-	internal CacheStatsRequestDescriptor(Action<CacheStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest Instance { get; init; }
 
-	public CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId) : base(r => r.Optional("node_id", nodeId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(nodeId);
 	}
 
 	public CacheStatsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SearchableSnapshotsCacheStats;
+	public static explicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest instance) => new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "searchable_snapshots.cache_stats";
-
-	public CacheStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public CacheStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	/// <summary>
+	/// <para>
+	/// The names of the nodes in the cluster to target.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor NodeId(Elastic.Clients.Elasticsearch.NodeIds? value)
 	{
-		RouteValues.Optional("node_id", nodeId);
-		return Self;
+		Instance.NodeId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.SearchableSnapshots.CacheStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,25 +17,182 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class CsvProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.CsvProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropEmptyValue = System.Text.Json.JsonEncodedText.Encode("empty_value");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropQuote = System.Text.Json.JsonEncodedText.Encode("quote");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetFields = System.Text.Json.JsonEncodedText.Encode("target_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropTrim = System.Text.Json.JsonEncodedText.Encode("trim");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<object?> propEmptyValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propQuote = default;
+		LocalJsonValue<string?> propSeparator = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields> propTargetFields = default;
+		LocalJsonValue<bool?> propTrim = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propEmptyValue.TryReadProperty(ref reader, options, PropEmptyValue, null))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propQuote.TryReadProperty(ref reader, options, PropQuote, null))
+			{
+				continue;
+			}
+
+			if (propSeparator.TryReadProperty(ref reader, options, PropSeparator, null))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetFields.TryReadProperty(ref reader, options, PropTargetFields, static Elastic.Clients.Elasticsearch.Fields (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propTrim.TryReadProperty(ref reader, options, PropTrim, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			EmptyValue = propEmptyValue.Value,
+			Field = propField.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			OnFailure = propOnFailure.Value,
+			Quote = propQuote.Value,
+			Separator = propSeparator.Value,
+			Tag = propTag.Value,
+			TargetFields = propTargetFields.Value,
+			Trim = propTrim.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.CsvProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropEmptyValue, value.EmptyValue, null, null);
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropQuote, value.Quote, null, null);
+		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetFields, value.TargetFields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropTrim, value.Trim, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.CsvProcessorConverter))]
 public sealed partial class CsvProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CsvProcessor(Elastic.Clients.Elasticsearch.Field field, Elastic.Clients.Elasticsearch.Fields targetFields)
+	{
+		Field = field;
+		TargetFields = targetFields;
+	}
+#if NET7_0_OR_GREATER
+	public CsvProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CsvProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -45,7 +202,6 @@ public sealed partial class CsvProcessor
 	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("empty_value")]
 	public object? EmptyValue { get; set; }
 
 	/// <summary>
@@ -53,23 +209,24 @@ public sealed partial class CsvProcessor
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
 
 	/// <summary>
@@ -77,7 +234,6 @@ public sealed partial class CsvProcessor
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_missing")]
 	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
@@ -85,15 +241,13 @@ public sealed partial class CsvProcessor
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Quote used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("quote")]
 	public string? Quote { get; set; }
 
 	/// <summary>
@@ -101,7 +255,6 @@ public sealed partial class CsvProcessor
 	/// Separator used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("separator")]
 	public string? Separator { get; set; }
 
 	/// <summary>
@@ -110,7 +263,6 @@ public sealed partial class CsvProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -118,44 +270,38 @@ public sealed partial class CsvProcessor
 	/// The array of fields to assign extracted values to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_fields")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
-	public Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Fields TargetFields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Trim whitespaces in unquoted fields.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("trim")]
 	public bool? Trim { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(CsvProcessor csvProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Csv(csvProcessor);
 }
 
-public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDescriptor<CsvProcessorDescriptor<TDocument>>
+public readonly partial struct CsvProcessorDescriptor<TDocument>
 {
-	internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Instance { get; init; }
 
-	public CsvProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CsvProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private object? EmptyValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? QuoteValue { get; set; }
-	private string? SeparatorValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields TargetFieldsValue { get; set; }
-	private bool? TrimValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CsvProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -163,10 +309,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -176,10 +322,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> EmptyValue(object? emptyValue)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> EmptyValue(object? value)
 	{
-		EmptyValueValue = emptyValue;
-		return Self;
+		Instance.EmptyValue = value;
+		return this;
 	}
 
 	/// <summary>
@@ -187,10 +333,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -198,21 +344,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -220,10 +355,32 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -231,10 +388,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -242,10 +399,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -253,40 +410,38 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public CsvProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public CsvProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public CsvProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -294,10 +449,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Quote used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Quote(string? quote)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Quote(string? value)
 	{
-		QuoteValue = quote;
-		return Self;
+		Instance.Quote = value;
+		return this;
 	}
 
 	/// <summary>
@@ -305,10 +460,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Separator used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Separator(string? separator)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Separator(string? value)
 	{
-		SeparatorValue = separator;
-		return Self;
+		Instance.Separator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -317,10 +472,10 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -328,10 +483,21 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// The array of fields to assign extracted values to.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> TargetFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		TargetFieldsValue = targetFields;
-		return Self;
+		Instance.TargetFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The array of fields to assign extracted values to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> TargetFields(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
+	{
+		Instance.TargetFields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -339,131 +505,39 @@ public sealed partial class CsvProcessorDescriptor<TDocument> : SerializableDesc
 	/// Trim whitespaces in unquoted fields.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor<TDocument> Trim(bool? trim = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument> Trim(bool? value = true)
 	{
-		TrimValue = trim;
-		return Self;
+		Instance.Trim = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (EmptyValueValue is not null)
-		{
-			writer.WritePropertyName("empty_value");
-			JsonSerializer.Serialize(writer, EmptyValueValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QuoteValue))
-		{
-			writer.WritePropertyName("quote");
-			writer.WriteStringValue(QuoteValue);
-		}
-
-		if (!string.IsNullOrEmpty(SeparatorValue))
-		{
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(SeparatorValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WritePropertyName("target_fields");
-		JsonSerializer.Serialize(writer, TargetFieldsValue, options);
-		if (TrimValue.HasValue)
-		{
-			writer.WritePropertyName("trim");
-			writer.WriteBooleanValue(TrimValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvProcessorDescriptor>
+public readonly partial struct CsvProcessorDescriptor
 {
-	internal CsvProcessorDescriptor(Action<CsvProcessorDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Instance { get; init; }
 
-	public CsvProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CsvProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private object? EmptyValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private bool? IgnoreMissingValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? QuoteValue { get; set; }
-	private string? SeparatorValue { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields TargetFieldsValue { get; set; }
-	private bool? TrimValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CsvProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -471,10 +545,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -484,10 +558,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// An empty field is one with no value (2 consecutive separators) or empty quotes (<c>""</c>).
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor EmptyValue(object? emptyValue)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor EmptyValue(object? value)
 	{
-		EmptyValueValue = emptyValue;
-		return Self;
+		Instance.EmptyValue = value;
+		return this;
 	}
 
 	/// <summary>
@@ -495,10 +569,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -506,21 +580,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// The field to extract data from.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to extract data from.
-	/// </para>
-	/// </summary>
-	public CsvProcessorDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -528,10 +591,32 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -539,10 +624,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
 	}
 
 	/// <summary>
@@ -550,10 +635,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// If <c>true</c> and <c>field</c> does not exist, the processor quietly exits without modifying the document.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor IgnoreMissing(bool? ignoreMissing = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor IgnoreMissing(bool? value = true)
 	{
-		IgnoreMissingValue = ignoreMissing;
-		return Self;
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -561,40 +646,55 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public CsvProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public CsvProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
-	public CsvProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -602,10 +702,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Quote used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Quote(string? quote)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Quote(string? value)
 	{
-		QuoteValue = quote;
-		return Self;
+		Instance.Quote = value;
+		return this;
 	}
 
 	/// <summary>
@@ -613,10 +713,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Separator used in CSV, has to be single character string.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Separator(string? separator)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Separator(string? value)
 	{
-		SeparatorValue = separator;
-		return Self;
+		Instance.Separator = value;
+		return this;
 	}
 
 	/// <summary>
@@ -625,10 +725,10 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -636,10 +736,21 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// The array of fields to assign extracted values to.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Fields targetFields)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor TargetFields(Elastic.Clients.Elasticsearch.Fields value)
 	{
-		TargetFieldsValue = targetFields;
-		return Self;
+		Instance.TargetFields = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The array of fields to assign extracted values to.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor TargetFields<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
+	{
+		Instance.TargetFields = value;
+		return this;
 	}
 
 	/// <summary>
@@ -647,104 +758,17 @@ public sealed partial class CsvProcessorDescriptor : SerializableDescriptor<CsvP
 	/// Trim whitespaces in unquoted fields.
 	/// </para>
 	/// </summary>
-	public CsvProcessorDescriptor Trim(bool? trim = true)
+	public Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor Trim(bool? value = true)
 	{
-		TrimValue = trim;
-		return Self;
+		Instance.Trim = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.CsvProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (EmptyValueValue is not null)
-		{
-			writer.WritePropertyName("empty_value");
-			JsonSerializer.Serialize(writer, EmptyValueValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (IgnoreMissingValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_missing");
-			writer.WriteBooleanValue(IgnoreMissingValue.Value);
-		}
-
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QuoteValue))
-		{
-			writer.WritePropertyName("quote");
-			writer.WriteStringValue(QuoteValue);
-		}
-
-		if (!string.IsNullOrEmpty(SeparatorValue))
-		{
-			writer.WritePropertyName("separator");
-			writer.WriteStringValue(SeparatorValue);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		writer.WritePropertyName("target_fields");
-		JsonSerializer.Serialize(writer, TargetFieldsValue, options);
-		if (TrimValue.HasValue)
-		{
-			writer.WritePropertyName("trim");
-			writer.WriteBooleanValue(TrimValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.CsvProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.CsvProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

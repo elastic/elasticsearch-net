@@ -2,69 +2,43 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-using System;
-using System.IO;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
-using Elastic.Clients.Elasticsearch.Serialization;
-#endif
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
-
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
-public class BulkDeleteOperationDescriptor : BulkOperationDescriptor<BulkDeleteOperationDescriptor>
+public class BulkDeleteOperationDescriptor :
+	BulkOperationDescriptor<BulkDeleteOperationDescriptor>
 {
-	public BulkDeleteOperationDescriptor() { }
+	private new BulkDeleteOperation Instance => (BulkDeleteOperation)base.Instance;
 
-	public BulkDeleteOperationDescriptor(Id id) => Id(id);
-
-	protected override string Operation => "delete";
-
-	protected override Type ClrType => null;
-
-	protected override object GetBody() => null;
-
-	protected override void Serialize(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting)
+	public BulkDeleteOperationDescriptor() :
+		base(new BulkDeleteOperation(null!))
 	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		var internalWriter = new Utf8JsonWriter(stream);
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
-		internalWriter.WriteEndObject();
-		internalWriter.Flush();
 	}
 
-	protected override async Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings, SerializationFormatting formatting, CancellationToken cancellationToken = default)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		var internalWriter = new Utf8JsonWriter(stream);
-		internalWriter.WriteStartObject();
-		internalWriter.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, internalWriter, settings.MemoryStreamFactory, formatting);
-		internalWriter.WriteEndObject();
-		await internalWriter.FlushAsync(cancellationToken).ConfigureAwait(false);
-	}
-
-	protected override void SerializeInternal(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public BulkDeleteOperationDescriptor(Id id) :
+		base(new BulkDeleteOperation(id))
 	{
 	}
 }
 
-public sealed class BulkDeleteOperationDescriptor<TDocument> : BulkDeleteOperationDescriptor
+public sealed class BulkDeleteOperationDescriptor<TDocument> :
+	BulkOperationDescriptor<BulkDeleteOperationDescriptor>
 {
-	public BulkDeleteOperationDescriptor(TDocument documentToDelete) : base (new Id(documentToDelete))
+	private new BulkDeleteOperation<TDocument> Instance => (BulkDeleteOperation<TDocument>)base.Instance;
+
+	public BulkDeleteOperationDescriptor() :
+		base(new BulkDeleteOperation<TDocument>(null!))
 	{
-		RoutingValue = new Routing(documentToDelete);
-		IndexNameValue = IndexName.From<TDocument>();
+	}
+
+	public BulkDeleteOperationDescriptor(Id id) :
+		base(new BulkDeleteOperation<TDocument>(id))
+	{
+	}
+
+	public BulkDeleteOperationDescriptor(TDocument documentToDelete) :
+		this(new Id(documentToDelete))
+	{
+		Instance.Routing = new Routing(documentToDelete);
+		Instance.Index = IndexName.From<TDocument>();
 	}
 }

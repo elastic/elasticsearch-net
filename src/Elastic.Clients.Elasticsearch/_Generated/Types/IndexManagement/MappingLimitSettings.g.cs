@@ -17,39 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
+
+internal sealed partial class MappingLimitSettingsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+	private static readonly System.Text.Json.JsonEncodedText PropDepth = System.Text.Json.JsonEncodedText.Encode("depth");
+	private static readonly System.Text.Json.JsonEncodedText PropDimensionFields = System.Text.Json.JsonEncodedText.Encode("dimension_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldNameLength = System.Text.Json.JsonEncodedText.Encode("field_name_length");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropNestedFields = System.Text.Json.JsonEncodedText.Encode("nested_fields");
+	private static readonly System.Text.Json.JsonEncodedText PropNestedObjects = System.Text.Json.JsonEncodedText.Encode("nested_objects");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalFields = System.Text.Json.JsonEncodedText.Encode("total_fields");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propCoerce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth?> propDepth = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields?> propDimensionFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength?> propFieldNameLength = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<bool, string>?> propIgnoreMalformed = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields?> propNestedFields = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects?> propNestedObjects = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields?> propSource = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields?> propTotalFields = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, null))
+			{
+				continue;
+			}
+
+			if (propDepth.TryReadProperty(ref reader, options, PropDepth, null))
+			{
+				continue;
+			}
+
+			if (propDimensionFields.TryReadProperty(ref reader, options, PropDimensionFields, null))
+			{
+				continue;
+			}
+
+			if (propFieldNameLength.TryReadProperty(ref reader, options, PropFieldNameLength, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, static Elastic.Clients.Elasticsearch.Union<bool, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<bool, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.True | Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.False, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propNestedFields.TryReadProperty(ref reader, options, PropNestedFields, null))
+			{
+				continue;
+			}
+
+			if (propNestedObjects.TryReadProperty(ref reader, options, PropNestedObjects, null))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (propTotalFields.TryReadProperty(ref reader, options, PropTotalFields, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Coerce = propCoerce.Value,
+			Depth = propDepth.Value,
+			DimensionFields = propDimensionFields.Value,
+			FieldNameLength = propFieldNameLength.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
+			NestedFields = propNestedFields.Value,
+			NestedObjects = propNestedObjects.Value,
+			Source = propSource.Value,
+			TotalFields = propTotalFields.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCoerce, value.Coerce, null, null);
+		writer.WriteProperty(options, PropDepth, value.Depth, null, null);
+		writer.WriteProperty(options, PropDimensionFields, value.DimensionFields, null, null);
+		writer.WriteProperty(options, PropFieldNameLength, value.FieldNameLength, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<bool, string>? v) => w.WriteUnionValue<bool, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNestedFields, value.NestedFields, null, null);
+		writer.WriteProperty(options, PropNestedObjects, value.NestedObjects, null, null);
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteProperty(options, PropTotalFields, value.TotalFields, null, null);
+		writer.WriteEndObject();
+	}
+}
 
 /// <summary>
 /// <para>
 /// Mapping Limit Settings
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsConverter))]
 public sealed partial class MappingLimitSettings
 {
-	[JsonInclude, JsonPropertyName("coerce")]
+#if NET7_0_OR_GREATER
+	public MappingLimitSettings()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MappingLimitSettings()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public bool? Coerce { get; set; }
-	[JsonInclude, JsonPropertyName("depth")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? Depth { get; set; }
-	[JsonInclude, JsonPropertyName("dimension_fields")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? DimensionFields { get; set; }
-	[JsonInclude, JsonPropertyName("field_name_length")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLength { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
-	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("nested_fields")]
+	public Elastic.Clients.Elasticsearch.Union<bool, string>? IgnoreMalformed { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFields { get; set; }
-	[JsonInclude, JsonPropertyName("nested_objects")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjects { get; set; }
-	[JsonInclude, JsonPropertyName("total_fields")]
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields? Source { get; set; }
 	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFields { get; set; }
 }
 
@@ -57,304 +174,169 @@ public sealed partial class MappingLimitSettings
 /// <para>
 /// Mapping Limit Settings
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/mapping-settings-limit.html">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/elasticsearch/index-settings/mapping-limit">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class MappingLimitSettingsDescriptor : SerializableDescriptor<MappingLimitSettingsDescriptor>
+public readonly partial struct MappingLimitSettingsDescriptor
 {
-	internal MappingLimitSettingsDescriptor(Action<MappingLimitSettingsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Instance { get; init; }
 
-	public MappingLimitSettingsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? DepthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor DepthDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor> DepthDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? DimensionFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor DimensionFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor> DimensionFieldsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? FieldNameLengthValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor FieldNameLengthDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor> FieldNameLengthDescriptorAction { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? NestedFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor NestedFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor> NestedFieldsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? NestedObjectsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor NestedObjectsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor> NestedObjectsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? TotalFieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor TotalFieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor> TotalFieldsDescriptorAction { get; set; }
-
-	public MappingLimitSettingsDescriptor Coerce(bool? coerce = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MappingLimitSettingsDescriptor()
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public MappingLimitSettingsDescriptor Depth(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? depth)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings instance) => new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Coerce(bool? value = true)
 	{
-		DepthDescriptor = null;
-		DepthDescriptorAction = null;
-		DepthValue = depth;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor Depth(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Depth(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepth? value)
 	{
-		DepthValue = null;
-		DepthDescriptorAction = null;
-		DepthDescriptor = descriptor;
-		return Self;
+		Instance.Depth = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor Depth(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Depth()
 	{
-		DepthValue = null;
-		DepthDescriptor = null;
-		DepthDescriptorAction = configure;
-		return Self;
+		Instance.Depth = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor.Build(null);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor DimensionFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? dimensionFields)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Depth(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor>? action)
 	{
-		DimensionFieldsDescriptor = null;
-		DimensionFieldsDescriptorAction = null;
-		DimensionFieldsValue = dimensionFields;
-		return Self;
+		Instance.Depth = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor.Build(action);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor DimensionFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor DimensionFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFields? value)
 	{
-		DimensionFieldsValue = null;
-		DimensionFieldsDescriptorAction = null;
-		DimensionFieldsDescriptor = descriptor;
-		return Self;
+		Instance.DimensionFields = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor DimensionFields(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor DimensionFields()
 	{
-		DimensionFieldsValue = null;
-		DimensionFieldsDescriptor = null;
-		DimensionFieldsDescriptorAction = configure;
-		return Self;
+		Instance.DimensionFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor FieldNameLength(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? fieldNameLength)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor DimensionFields(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor>? action)
 	{
-		FieldNameLengthDescriptor = null;
-		FieldNameLengthDescriptorAction = null;
-		FieldNameLengthValue = fieldNameLength;
-		return Self;
+		Instance.DimensionFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor.Build(action);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor FieldNameLength(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor FieldNameLength(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLength? value)
 	{
-		FieldNameLengthValue = null;
-		FieldNameLengthDescriptorAction = null;
-		FieldNameLengthDescriptor = descriptor;
-		return Self;
+		Instance.FieldNameLength = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor FieldNameLength(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor FieldNameLength()
 	{
-		FieldNameLengthValue = null;
-		FieldNameLengthDescriptor = null;
-		FieldNameLengthDescriptorAction = configure;
-		return Self;
+		Instance.FieldNameLength = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor.Build(null);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor FieldNameLength(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor>? action)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.FieldNameLength = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor.Build(action);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? nestedFields)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor IgnoreMalformed(Elastic.Clients.Elasticsearch.Union<bool, string>? value)
 	{
-		NestedFieldsDescriptor = null;
-		NestedFieldsDescriptorAction = null;
-		NestedFieldsValue = nestedFields;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFields? value)
 	{
-		NestedFieldsValue = null;
-		NestedFieldsDescriptorAction = null;
-		NestedFieldsDescriptor = descriptor;
-		return Self;
+		Instance.NestedFields = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedFields(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedFields()
 	{
-		NestedFieldsValue = null;
-		NestedFieldsDescriptor = null;
-		NestedFieldsDescriptorAction = configure;
-		return Self;
+		Instance.NestedFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor.Build(null);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedObjects(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? nestedObjects)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedFields(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor>? action)
 	{
-		NestedObjectsDescriptor = null;
-		NestedObjectsDescriptorAction = null;
-		NestedObjectsValue = nestedObjects;
-		return Self;
+		Instance.NestedFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor.Build(action);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedObjects(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedObjects(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjects? value)
 	{
-		NestedObjectsValue = null;
-		NestedObjectsDescriptorAction = null;
-		NestedObjectsDescriptor = descriptor;
-		return Self;
+		Instance.NestedObjects = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor NestedObjects(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedObjects()
 	{
-		NestedObjectsValue = null;
-		NestedObjectsDescriptor = null;
-		NestedObjectsDescriptorAction = configure;
-		return Self;
+		Instance.NestedObjects = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor.Build(null);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor TotalFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? totalFields)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor NestedObjects(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor>? action)
 	{
-		TotalFieldsDescriptor = null;
-		TotalFieldsDescriptorAction = null;
-		TotalFieldsValue = totalFields;
-		return Self;
+		Instance.NestedObjects = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor.Build(action);
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor TotalFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Source(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFields? value)
 	{
-		TotalFieldsValue = null;
-		TotalFieldsDescriptorAction = null;
-		TotalFieldsDescriptor = descriptor;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	public MappingLimitSettingsDescriptor TotalFields(Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor Source(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor> action)
 	{
-		TotalFieldsValue = null;
-		TotalFieldsDescriptor = null;
-		TotalFieldsDescriptorAction = configure;
-		return Self;
+		Instance.Source = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsSourceFieldsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor TotalFields(Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFields? value)
 	{
-		writer.WriteStartObject();
-		if (CoerceValue.HasValue)
+		Instance.TotalFields = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor TotalFields()
+	{
+		Instance.TotalFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor TotalFields(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor>? action)
+	{
+		Instance.TotalFields = Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (DepthDescriptor is not null)
-		{
-			writer.WritePropertyName("depth");
-			JsonSerializer.Serialize(writer, DepthDescriptor, options);
-		}
-		else if (DepthDescriptorAction is not null)
-		{
-			writer.WritePropertyName("depth");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDepthDescriptor(DepthDescriptorAction), options);
-		}
-		else if (DepthValue is not null)
-		{
-			writer.WritePropertyName("depth");
-			JsonSerializer.Serialize(writer, DepthValue, options);
-		}
-
-		if (DimensionFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("dimension_fields");
-			JsonSerializer.Serialize(writer, DimensionFieldsDescriptor, options);
-		}
-		else if (DimensionFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("dimension_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDimensionFieldsDescriptor(DimensionFieldsDescriptorAction), options);
-		}
-		else if (DimensionFieldsValue is not null)
-		{
-			writer.WritePropertyName("dimension_fields");
-			JsonSerializer.Serialize(writer, DimensionFieldsValue, options);
-		}
-
-		if (FieldNameLengthDescriptor is not null)
-		{
-			writer.WritePropertyName("field_name_length");
-			JsonSerializer.Serialize(writer, FieldNameLengthDescriptor, options);
-		}
-		else if (FieldNameLengthDescriptorAction is not null)
-		{
-			writer.WritePropertyName("field_name_length");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsFieldNameLengthDescriptor(FieldNameLengthDescriptorAction), options);
-		}
-		else if (FieldNameLengthValue is not null)
-		{
-			writer.WritePropertyName("field_name_length");
-			JsonSerializer.Serialize(writer, FieldNameLengthValue, options);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (NestedFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("nested_fields");
-			JsonSerializer.Serialize(writer, NestedFieldsDescriptor, options);
-		}
-		else if (NestedFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedFieldsDescriptor(NestedFieldsDescriptorAction), options);
-		}
-		else if (NestedFieldsValue is not null)
-		{
-			writer.WritePropertyName("nested_fields");
-			JsonSerializer.Serialize(writer, NestedFieldsValue, options);
-		}
-
-		if (NestedObjectsDescriptor is not null)
-		{
-			writer.WritePropertyName("nested_objects");
-			JsonSerializer.Serialize(writer, NestedObjectsDescriptor, options);
-		}
-		else if (NestedObjectsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("nested_objects");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsNestedObjectsDescriptor(NestedObjectsDescriptorAction), options);
-		}
-		else if (NestedObjectsValue is not null)
-		{
-			writer.WritePropertyName("nested_objects");
-			JsonSerializer.Serialize(writer, NestedObjectsValue, options);
-		}
-
-		if (TotalFieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("total_fields");
-			JsonSerializer.Serialize(writer, TotalFieldsDescriptor, options);
-		}
-		else if (TotalFieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("total_fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsTotalFieldsDescriptor(TotalFieldsDescriptorAction), options);
-		}
-		else if (TotalFieldsValue is not null)
-		{
-			writer.WritePropertyName("total_fields");
-			JsonSerializer.Serialize(writer, TotalFieldsValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettingsDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.MappingLimitSettings(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

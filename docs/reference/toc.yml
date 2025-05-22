@@ -1,0 +1,34 @@
+toc:
+  - file: index.md
+  - file: getting-started.md
+  - file: installation.md
+  - file: connecting.md
+  - file: configuration.md
+    children:
+      - file: _options_on_elasticsearchclientsettings.md
+  - file: client-concepts.md
+    children:
+      - file: serialization.md
+        children:
+          - file: source-serialization.md
+  - file: using-net-client.md
+    children:
+      - file: aggregations.md
+      - file: esql.md
+      - file: examples.md
+      - file: mappings.md
+      - file: query.md
+      - file: recommendations.md
+      - file: transport.md
+      - file: migration-guide.md
+  - file: troubleshoot/index.md
+    children:
+      - file: troubleshoot/logging.md
+        children:
+          - file: troubleshoot/logging-with-onrequestcompleted.md
+          - file: troubleshoot/logging-with-fiddler.md
+      - file: troubleshoot/debugging.md
+        children:
+          - file: troubleshoot/audit-trail.md
+          - file: troubleshoot/debug-information.md
+          - file: troubleshoot/debug-mode.md

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class CreateIndexRequestParameters : RequestParameters
+public sealed partial class CreateIndexRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -57,21 +50,124 @@ public sealed partial class CreateIndexRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+internal sealed partial class CreateIndexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TypeMapping?> propMappings = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings?> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMappings.TryReadProperty(ref reader, options, PropMappings, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aliases = propAliases.Value,
+			Mappings = propMappings.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropMappings, value.Mappings, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
-public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestConverter))]
+public sealed partial class CreateIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public CreateIndexRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CreateIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementCreate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -79,11 +175,59 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 
 	/// <summary>
 	/// <para>
+	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -92,7 +236,6 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -101,7 +244,6 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -109,8 +251,7 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -134,7 +275,6 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// </item>
 	/// </list>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mappings")]
 	public Elastic.Clients.Elasticsearch.Mapping.TypeMapping? Mappings { get; set; }
 
 	/// <summary>
@@ -142,63 +282,256 @@ public sealed partial class CreateIndexRequest : PlainRequest<CreateIndexRequest
 	/// Configuration options for the index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
 	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? Settings { get; set; }
 }
 
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
-public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDescriptor<CreateIndexRequestDescriptor<TDocument>, CreateIndexRequestParameters>
+public readonly partial struct CreateIndexRequestDescriptor
 {
-	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest Instance { get; init; }
 
-	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public CreateIndexRequestDescriptor() : this(typeof(TDocument))
+	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(index);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.create";
-
-	public CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public CreateIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public CreateIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public CreateIndexRequestDescriptor()
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> MappingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> MappingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public CreateIndexRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>());
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases()
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<T>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.Name key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.Name key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.Name[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.Name key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.Name key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor AddAlias<T>(Elastic.Clients.Elasticsearch.Name key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -223,28 +556,94 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	/// </item>
 	/// </list>
 	/// </summary>
-	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = null;
-		MappingsValue = mappings;
-		return Self;
+		Instance.Mappings = value;
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Mappings()
 	{
-		MappingsValue = null;
-		MappingsDescriptorAction = null;
-		MappingsDescriptor = descriptor;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(null);
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor>? action)
 	{
-		MappingsValue = null;
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = configure;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Mappings<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>>? action)
+	{
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -252,124 +651,324 @@ public sealed partial class CreateIndexRequestDescriptor<TDocument> : RequestDes
 	/// Configuration options for the index.
 	/// </para>
 	/// </summary>
-	public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
-		}
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
+		return this;
+	}
 
-		if (MappingsDescriptor is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-		}
-		else if (MappingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>(MappingsDescriptorAction), options);
-		}
-		else if (MappingsValue is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Create an index.
-/// Creates a new index.
+/// You can use the create index API to add a new index to an Elasticsearch cluster.
+/// When creating an index, you can specify the following:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Settings for the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Mappings for fields in the index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Index aliases
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// <strong>Wait for active shards</strong>
+/// </para>
+/// <para>
+/// By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out.
+/// The index creation response will indicate what happened.
+/// For example, <c>acknowledged</c> indicates whether the index was successfully created in the cluster, <c>while shards_acknowledged</c> indicates whether the requisite number of shard copies were started for each shard in the index before timing out.
+/// Note that it is still possible for either <c>acknowledged</c> or <c>shards_acknowledged</c> to be <c>false</c>, but for the index creation to be successful.
+/// These values simply indicate whether the operation completed before the timeout.
+/// If <c>acknowledged</c> is false, the request timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon.
+/// If <c>shards_acknowledged</c> is false, then the request timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (that is to say, <c>acknowledged</c> is <c>true</c>).
+/// </para>
+/// <para>
+/// You can change the default of only waiting for the primary shards to start through the index setting <c>index.write.wait_for_active_shards</c>.
+/// Note that changing this setting will also affect the <c>wait_for_active_shards</c> value on all subsequent write operations.
 /// </para>
 /// </summary>
-public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<CreateIndexRequestDescriptor, CreateIndexRequestParameters>
+public readonly partial struct CreateIndexRequestDescriptor<TDocument>
 {
-	internal CreateIndexRequestDescriptor(Action<CreateIndexRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest Instance { get; init; }
 
-	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementCreate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.create";
-
-	public CreateIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public CreateIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public CreateIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public CreateIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public CreateIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(index);
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMapping? MappingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor MappingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> MappingsDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
+	public CreateIndexRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(typeof(TDocument));
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the index you wish to create.
+	/// Index names must meet the following criteria:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Lowercase only
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot include <c>\</c>, <c>/</c>, <c>*</c>, <c>?</c>, <c>"</c>, <c>&lt;</c>, <c>></c>, <c>|</c>, <c> </c> (space character), <c>,</c>, or <c>#</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Indices prior to 7.0 could contain a colon (<c>:</c>), but that has been deprecated and will not be supported in later versions
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot start with <c>-</c>, <c>_</c>, or <c>+</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be <c>.</c> or <c>..</c>
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Cannot be longer than 255 bytes (note thtat it is bytes, so multi-byte characters will reach the limit faster)
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Names starting with <c>.</c> are deprecated, except for hidden indices and internal indices managed by plugins
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Aliases for the index.
 	/// </para>
 	/// </summary>
-	public CreateIndexRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>());
-		return Self;
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases()
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfNameAlias<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.Name key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.Name key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Aliases for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.Name[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.Name key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.Name key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Name, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -394,28 +993,66 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	/// </item>
 	/// </list>
 	/// </summary>
-	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? mappings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMapping? value)
 	{
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = null;
-		MappingsValue = mappings;
-		return Self;
+		Instance.Mappings = value;
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor Mappings(Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Mappings()
 	{
-		MappingsValue = null;
-		MappingsDescriptorAction = null;
-		MappingsDescriptor = descriptor;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor Mappings(Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Mapping for fields in the index. If specified, this mapping can include:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Field names
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Field data types
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Mapping parameters
+	/// </para>
+	/// </item>
+	/// </list>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Mappings(System.Action<Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>>? action)
 	{
-		MappingsValue = null;
-		MappingsDescriptor = null;
-		MappingsDescriptorAction = configure;
-		return Self;
+		Instance.Mappings = Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -423,71 +1060,81 @@ public sealed partial class CreateIndexRequestDescriptor : RequestDescriptor<Cre
 	/// Configuration options for the index.
 	/// </para>
 	/// </summary>
-	public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings? value)
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Settings()
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public CreateIndexRequestDescriptor Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MappingsDescriptor is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsDescriptor, options);
-		}
-		else if (MappingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor(MappingsDescriptorAction), options);
-		}
-		else if (MappingsValue is not null)
-		{
-			writer.WritePropertyName("mappings");
-			JsonSerializer.Serialize(writer, MappingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (SettingsDescriptor is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsDescriptor, options);
-		}
-		else if (SettingsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor(SettingsDescriptorAction), options);
-		}
-		else if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.CreateIndexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

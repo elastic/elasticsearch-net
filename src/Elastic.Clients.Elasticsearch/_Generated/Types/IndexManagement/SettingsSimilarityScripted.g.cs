@@ -17,182 +17,164 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityScripted : ISettingsSimilarity
+internal sealed partial class SettingsSimilarityScriptedConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted>
 {
-	[JsonInclude, JsonPropertyName("script")]
-	public Elastic.Clients.Elasticsearch.Script Script { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropWeightScript = System.Text.Json.JsonEncodedText.Encode("weight_script");
 
-	[JsonInclude, JsonPropertyName("type")]
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script> propScript = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propWeightScript = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propWeightScript.TryReadProperty(ref reader, options, PropWeightScript, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Script = propScript.Value,
+			WeightScript = propWeightScript.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropWeightScript, value.WeightScript, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedConverter))]
+public sealed partial class SettingsSimilarityScripted : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.Script script)
+	{
+		Script = script;
+	}
+#if NET7_0_OR_GREATER
+	public SettingsSimilarityScripted()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SettingsSimilarityScripted()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Script Script { get; set; }
+
 	public string Type => "scripted";
 
-	[JsonInclude, JsonPropertyName("weight_script")]
 	public Elastic.Clients.Elasticsearch.Script? WeightScript { get; set; }
 }
 
-public sealed partial class SettingsSimilarityScriptedDescriptor : SerializableDescriptor<SettingsSimilarityScriptedDescriptor>, IBuildableDescriptor<SettingsSimilarityScripted>
+public readonly partial struct SettingsSimilarityScriptedDescriptor
 {
-	internal SettingsSimilarityScriptedDescriptor(Action<SettingsSimilarityScriptedDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted Instance { get; init; }
 
-	public SettingsSimilarityScriptedDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityScriptedDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? WeightScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor WeightScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> WeightScriptDescriptorAction { get; set; }
-
-	public SettingsSimilarityScriptedDescriptor Script(Elastic.Clients.Elasticsearch.Script script)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityScriptedDescriptor()
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SettingsSimilarityScriptedDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor Script(Elastic.Clients.Elasticsearch.Script value)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public SettingsSimilarityScriptedDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor Script()
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public SettingsSimilarityScriptedDescriptor WeightScript(Elastic.Clients.Elasticsearch.Script? weightScript)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		WeightScriptDescriptor = null;
-		WeightScriptDescriptorAction = null;
-		WeightScriptValue = weightScript;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public SettingsSimilarityScriptedDescriptor WeightScript(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor WeightScript(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		WeightScriptValue = null;
-		WeightScriptDescriptorAction = null;
-		WeightScriptDescriptor = descriptor;
-		return Self;
+		Instance.WeightScript = value;
+		return this;
 	}
 
-	public SettingsSimilarityScriptedDescriptor WeightScript(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor WeightScript()
 	{
-		WeightScriptValue = null;
-		WeightScriptDescriptor = null;
-		WeightScriptDescriptorAction = configure;
-		return Self;
+		Instance.WeightScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor WeightScript(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("scripted");
-		if (WeightScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("weight_script");
-			JsonSerializer.Serialize(writer, WeightScriptDescriptor, options);
-		}
-		else if (WeightScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("weight_script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(WeightScriptDescriptorAction), options);
-		}
-		else if (WeightScriptValue is not null)
-		{
-			writer.WritePropertyName("weight_script");
-			JsonSerializer.Serialize(writer, WeightScriptValue, options);
-		}
-
-		writer.WriteEndObject();
+		Instance.WeightScript = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script BuildScript()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor> action)
 	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScriptedDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityScripted(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	private Elastic.Clients.Elasticsearch.Script? BuildWeightScript()
-	{
-		if (WeightScriptValue is not null)
-		{
-			return WeightScriptValue;
-		}
-
-		if ((object)WeightScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (WeightScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(WeightScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
-	}
-
-	SettingsSimilarityScripted IBuildableDescriptor<SettingsSimilarityScripted>.Build() => new()
-	{
-		Script = BuildScript(),
-		WeightScript = BuildWeightScript()
-	};
 }

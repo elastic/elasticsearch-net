@@ -17,290 +17,456 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class MoveToStepRequestParameters : RequestParameters
+public sealed partial class MoveToStepRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class MoveToStepRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentStep = System.Text.Json.JsonEncodedText.Encode("current_step");
+	private static readonly System.Text.Json.JsonEncodedText PropNextStep = System.Text.Json.JsonEncodedText.Encode("next_step");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey> propCurrentStep = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey> propNextStep = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrentStep.TryReadProperty(ref reader, options, PropCurrentStep, null))
+			{
+				continue;
+			}
+
+			if (propNextStep.TryReadProperty(ref reader, options, PropNextStep, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CurrentStep = propCurrentStep.Value,
+			NextStep = propNextStep.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrentStep, value.CurrentStep, null, null);
+		writer.WriteProperty(options, PropNextStep, value.NextStep, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Manually moves an index into the specified step and executes that step.
+/// Move to a lifecycle step.
+/// Manually move an index into a specific step in the lifecycle policy and run that step.
+/// </para>
+/// <para>
+/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+/// </para>
+/// <para>
+/// You must specify both the current step and the step to be executed in the body of the request.
+/// The request will fail if the current step does not match the step currently running for the index
+/// This is to prevent the index from being moved from an unexpected step into the next step.
+/// </para>
+/// <para>
+/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+/// Only actions specified in the ILM policy are considered valid.
+/// An index cannot move to a step that is not part of its policy.
 /// </para>
 /// </summary>
-public sealed partial class MoveToStepRequest : PlainRequest<MoveToStepRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestConverter))]
+public sealed partial class MoveToStepRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public MoveToStepRequest(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMoveToStep;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MoveToStepRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep) : base(r => r.Required("index", index))
+	{
+		CurrentStep = currentStep;
+		NextStep = nextStep;
+	}
+#if NET7_0_OR_GREATER
+	public MoveToStepRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexLifecycleManagementMoveToStep;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "ilm.move_to_step";
 
-	[JsonInclude, JsonPropertyName("current_step")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
-	[JsonInclude, JsonPropertyName("next_step")]
-	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
+	/// <summary>
+	/// <para>
+	/// The name of the index whose lifecycle step is to change
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStep { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStep { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Manually moves an index into the specified step and executes that step.
+/// Move to a lifecycle step.
+/// Manually move an index into a specific step in the lifecycle policy and run that step.
+/// </para>
+/// <para>
+/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+/// </para>
+/// <para>
+/// You must specify both the current step and the step to be executed in the body of the request.
+/// The request will fail if the current step does not match the step currently running for the index
+/// This is to prevent the index from being moved from an unexpected step into the next step.
+/// </para>
+/// <para>
+/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+/// Only actions specified in the ILM policy are considered valid.
+/// An index cannot move to a step that is not part of its policy.
 /// </para>
 /// </summary>
-public sealed partial class MoveToStepRequestDescriptor<TDocument> : RequestDescriptor<MoveToStepRequestDescriptor<TDocument>, MoveToStepRequestParameters>
+public readonly partial struct MoveToStepRequestDescriptor
 {
-	internal MoveToStepRequestDescriptor(Action<MoveToStepRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Instance { get; init; }
 
-	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public MoveToStepRequestDescriptor() : this(typeof(TDocument))
+	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(index);
+#pragma warning restore CS0618
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMoveToStep;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ilm.move_to_step";
-
-	public MoveToStepRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public MoveToStepRequestDescriptor()
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor CurrentStepDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor descriptor) => descriptor.Instance;
 
-	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
+	/// <summary>
+	/// <para>
+	/// The name of the index whose lifecycle step is to change
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		CurrentStepDescriptor = null;
-		CurrentStepDescriptorAction = null;
-		CurrentStepValue = currentStep;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey value)
 	{
-		CurrentStepValue = null;
-		CurrentStepDescriptorAction = null;
-		CurrentStepDescriptor = descriptor;
-		return Self;
+		Instance.CurrentStep = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> CurrentStep(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor CurrentStep(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> action)
 	{
-		CurrentStepValue = null;
-		CurrentStepDescriptor = null;
-		CurrentStepDescriptorAction = configure;
-		return Self;
+		Instance.CurrentStep = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.Build(action);
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey value)
 	{
-		NextStepDescriptor = null;
-		NextStepDescriptorAction = null;
-		NextStepValue = nextStep;
-		return Self;
+		Instance.NextStep = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor NextStep(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> action)
 	{
-		NextStepValue = null;
-		NextStepDescriptorAction = null;
-		NextStepDescriptor = descriptor;
-		return Self;
+		Instance.NextStep = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.Build(action);
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor<TDocument> NextStep(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> configure)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor> action)
 	{
-		NextStepValue = null;
-		NextStepDescriptor = null;
-		NextStepDescriptorAction = configure;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (CurrentStepDescriptor is not null)
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, CurrentStepDescriptor, options);
-		}
-		else if (CurrentStepDescriptorAction is not null)
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(CurrentStepDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, CurrentStepValue, options);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (NextStepDescriptor is not null)
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, NextStepDescriptor, options);
-		}
-		else if (NextStepDescriptorAction is not null)
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(NextStepDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, NextStepValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Manually moves an index into the specified step and executes that step.
+/// Move to a lifecycle step.
+/// Manually move an index into a specific step in the lifecycle policy and run that step.
+/// </para>
+/// <para>
+/// WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+/// </para>
+/// <para>
+/// You must specify both the current step and the step to be executed in the body of the request.
+/// The request will fail if the current step does not match the step currently running for the index
+/// This is to prevent the index from being moved from an unexpected step into the next step.
+/// </para>
+/// <para>
+/// When specifying the target (<c>next_step</c>) to which the index will be moved, either the name or both the action and name fields are optional.
+/// If only the phase is specified, the index will move to the first step of the first action in the target phase.
+/// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+/// Only actions specified in the ILM policy are considered valid.
+/// An index cannot move to a step that is not part of its policy.
 /// </para>
 /// </summary>
-public sealed partial class MoveToStepRequestDescriptor : RequestDescriptor<MoveToStepRequestDescriptor, MoveToStepRequestParameters>
+public readonly partial struct MoveToStepRequestDescriptor<TDocument>
 {
-	internal MoveToStepRequestDescriptor(Action<MoveToStepRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Instance { get; init; }
 
-	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index) : base(r => r.Required("index", index))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMoveToStep;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ilm.move_to_step";
-
-	public MoveToStepRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public MoveToStepRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(index);
+#pragma warning restore CS0618
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey CurrentStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor CurrentStepDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> CurrentStepDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey NextStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor NextStepDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> NextStepDescriptorAction { get; set; }
-
-	public MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey currentStep)
+	public MoveToStepRequestDescriptor()
 	{
-		CurrentStepDescriptor = null;
-		CurrentStepDescriptorAction = null;
-		CurrentStepValue = currentStep;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(typeof(TDocument));
+#pragma warning restore CS0618
 	}
 
-	public MoveToStepRequestDescriptor CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the index whose lifecycle step is to change
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		CurrentStepValue = null;
-		CurrentStepDescriptorAction = null;
-		CurrentStepDescriptor = descriptor;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor CurrentStep(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> CurrentStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey value)
 	{
-		CurrentStepValue = null;
-		CurrentStepDescriptor = null;
-		CurrentStepDescriptorAction = configure;
-		return Self;
+		Instance.CurrentStep = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey nextStep)
+	/// <summary>
+	/// <para>
+	/// The step that the index is expected to be in.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> CurrentStep(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> action)
 	{
-		NextStepDescriptor = null;
-		NextStepDescriptorAction = null;
-		NextStepValue = nextStep;
-		return Self;
+		Instance.CurrentStep = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.Build(action);
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> NextStep(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey value)
 	{
-		NextStepValue = null;
-		NextStepDescriptorAction = null;
-		NextStepDescriptor = descriptor;
-		return Self;
+		Instance.NextStep = value;
+		return this;
 	}
 
-	public MoveToStepRequestDescriptor NextStep(Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The step that you want to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> NextStep(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> action)
 	{
-		NextStepValue = null;
-		NextStepDescriptor = null;
-		NextStepDescriptorAction = configure;
-		return Self;
+		Instance.NextStep = Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (CurrentStepDescriptor is not null)
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, CurrentStepDescriptor, options);
-		}
-		else if (CurrentStepDescriptorAction is not null)
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(CurrentStepDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("current_step");
-			JsonSerializer.Serialize(writer, CurrentStepValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (NextStepDescriptor is not null)
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, NextStepDescriptor, options);
-		}
-		else if (NextStepDescriptorAction is not null)
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(NextStepDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("next_step");
-			JsonSerializer.Serialize(writer, NextStepValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

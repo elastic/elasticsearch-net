@@ -6,18 +6,11 @@ using System;
 using System.IO;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 /// <summary>
 /// Provides the base class from which the classes that represent bulk operations are derived.
@@ -25,9 +18,12 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// <remarks>
 /// This is an abstract class.
 /// </remarks>
-public abstract class BulkOperation : IBulkOperation, IStreamSerializable
+public abstract class BulkOperation :
+	IBulkOperation,
+	IStreamSerializable
 {
-	internal BulkOperation() { }
+	internal BulkOperation()
+	{ }
 
 	/// <summary>
 	/// The document ID.
@@ -106,11 +102,11 @@ public abstract class BulkOperation : IBulkOperation, IStreamSerializable
 	/// <param name="settings">The <see cref="IElasticsearchClientSettings"/> for the current client instance.</param>
 	protected abstract Task SerializeAsync(Stream stream, IElasticsearchClientSettings settings);
 
-	void IBulkOperation.PrepareIndex(IndexName bulkRequestIndex)
+	void IBulkOperation.PrepareIndex(IndexName? bulkRequestIndex)
 	{
 		Index ??= bulkRequestIndex ?? ClrType;
 
-		if (bulkRequestIndex is not null && Index.Equals(bulkRequestIndex))
+		if (bulkRequestIndex is not null && (Index?.Equals(bulkRequestIndex) ?? false))
 			Index = null;
 	}
 

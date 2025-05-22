@@ -17,73 +17,166 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class StepKey
+internal sealed partial class StepKeyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey>
 {
-	[JsonInclude, JsonPropertyName("action")]
-	public string? Action { get; set; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; set; }
-	[JsonInclude, JsonPropertyName("phase")]
-	public string Phase { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropAction = System.Text.Json.JsonEncodedText.Encode("action");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropPhase = System.Text.Json.JsonEncodedText.Encode("phase");
 
-public sealed partial class StepKeyDescriptor : SerializableDescriptor<StepKeyDescriptor>
-{
-	internal StepKeyDescriptor(Action<StepKeyDescriptor> configure) => configure.Invoke(this);
-
-	public StepKeyDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAction = default;
+		LocalJsonValue<string?> propName = default;
+		LocalJsonValue<string> propPhase = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAction.TryReadProperty(ref reader, options, PropAction, null))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propPhase.TryReadProperty(ref reader, options, PropPhase, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Action = propAction.Value,
+			Name = propName.Value,
+			Phase = propPhase.Value
+		};
 	}
 
-	private string? ActionValue { get; set; }
-	private string? NameValue { get; set; }
-	private string PhaseValue { get; set; }
-
-	public StepKeyDescriptor Action(string? action)
-	{
-		ActionValue = action;
-		return Self;
-	}
-
-	public StepKeyDescriptor Name(string? name)
-	{
-		NameValue = name;
-		return Self;
-	}
-
-	public StepKeyDescriptor Phase(string phase)
-	{
-		PhaseValue = phase;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ActionValue))
-		{
-			writer.WritePropertyName("action");
-			writer.WriteStringValue(ActionValue);
-		}
-
-		if (!string.IsNullOrEmpty(NameValue))
-		{
-			writer.WritePropertyName("name");
-			writer.WriteStringValue(NameValue);
-		}
-
-		writer.WritePropertyName("phase");
-		writer.WriteStringValue(PhaseValue);
+		writer.WriteProperty(options, PropAction, value.Action, null, null);
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropPhase, value.Phase, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyConverter))]
+public sealed partial class StepKey
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StepKey(string phase)
+	{
+		Phase = phase;
+	}
+#if NET7_0_OR_GREATER
+	public StepKey()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StepKey()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StepKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The optional action to which the index will be moved.
+	/// </para>
+	/// </summary>
+	public string? Action { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The optional step name to which the index will be moved.
+	/// </para>
+	/// </summary>
+	public string? Name { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Phase { get; set; }
+}
+
+public readonly partial struct StepKeyDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StepKeyDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StepKeyDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The optional action to which the index will be moved.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor Action(string? value)
+	{
+		Instance.Action = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The optional step name to which the index will be moved.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor Name(string? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor Phase(string value)
+	{
+		Instance.Phase = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

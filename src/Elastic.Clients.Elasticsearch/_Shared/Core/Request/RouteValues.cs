@@ -6,11 +6,7 @@ using System;
 using System.Collections.Generic;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 internal sealed class ResolvedRouteValues : Dictionary<string, string>
 {
@@ -50,14 +46,14 @@ public sealed class RouteValues : Dictionary<string, object>
 		switch (routeValue)
 		{
 			case null when !required:
-				{
-					if (!ContainsKey(name))
-						return this;
-					Remove(name);
-					if (IsId(name))
-						ContainsId = false; // invalidate cache
+			{
+				if (!ContainsKey(name))
 					return this;
-				}
+				Remove(name);
+				if (IsId(name))
+					ContainsId = false; // invalidate cache
+				return this;
+			}
 
 			case null:
 				throw new ArgumentNullException(name, $"{name} is required to build a URL to this API.");

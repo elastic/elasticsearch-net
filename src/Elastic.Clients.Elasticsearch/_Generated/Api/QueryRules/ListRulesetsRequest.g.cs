@@ -17,46 +17,86 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryRules;
 
-public sealed partial class ListRulesetsRequestParameters : RequestParameters
+public sealed partial class ListRulesetsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// The offset from the first result to fetch.
 	/// </para>
 	/// </summary>
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of results to get
+	/// The maximum number of results to retrieve.
 	/// </para>
 	/// </summary>
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
+internal sealed partial class ListRulesetsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Returns summarized information about existing query rulesets.
+/// Get all query rulesets.
+/// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>
-public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestConverter))]
+public sealed partial class ListRulesetsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesListRulesets;
+#if NET7_0_OR_GREATER
+	public ListRulesetsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ListRulesetsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ListRulesetsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.QueryRulesListRulesets;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -64,46 +104,117 @@ public sealed partial class ListRulesetsRequest : PlainRequest<ListRulesetsReque
 
 	/// <summary>
 	/// <para>
-	/// Starting offset (default: 0)
+	/// The offset from the first result to fetch.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
 	/// <para>
-	/// specifies a max number of results to get
+	/// The maximum number of results to retrieve.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 }
 
 /// <summary>
 /// <para>
-/// Returns summarized information about existing query rulesets.
+/// Get all query rulesets.
+/// Get summarized information about the query rulesets.
 /// </para>
 /// </summary>
-public sealed partial class ListRulesetsRequestDescriptor : RequestDescriptor<ListRulesetsRequestDescriptor, ListRulesetsRequestParameters>
+public readonly partial struct ListRulesetsRequestDescriptor
 {
-	internal ListRulesetsRequestDescriptor(Action<ListRulesetsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ListRulesetsRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ListRulesetsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.QueryRulesListRulesets;
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest instance) => new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "query_rules.list_rulesets";
-
-	public ListRulesetsRequestDescriptor From(int? from) => Qs("from", from);
-	public ListRulesetsRequestDescriptor Size(int? size) => Qs("size", size);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The offset from the first result to fetch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor From(int? value)
 	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum number of results to retrieve.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest Build(System.Action<Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor(new Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryRules.ListRulesetsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

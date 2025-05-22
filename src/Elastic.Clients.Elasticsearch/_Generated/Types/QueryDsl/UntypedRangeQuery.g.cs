@@ -17,191 +17,169 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
-internal sealed partial class UntypedRangeQueryConverter : JsonConverter<UntypedRangeQuery>
+internal sealed partial class UntypedRangeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery>
 {
-	public override UntypedRangeQuery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
+	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
+	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
+	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
+	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte");
+	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
 		reader.Read();
-		var fieldName = reader.GetString();
+		propField.ReadPropertyName(ref reader, options, null);
 		reader.Read();
-		var variant = new UntypedRangeQuery(fieldName);
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propBoost = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<object?> propFrom = default;
+		LocalJsonValue<object?> propGt = default;
+		LocalJsonValue<object?> propGte = default;
+		LocalJsonValue<object?> propLt = default;
+		LocalJsonValue<object?> propLte = default;
+		LocalJsonValue<string?> propQueryName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		LocalJsonValue<object?> propTo = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
 			{
-				var property = reader.GetString();
-				if (property == "boost")
-				{
-					variant.Boost = JsonSerializer.Deserialize<float?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "format")
-				{
-					variant.Format = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "from")
-				{
-					variant.From = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gt")
-				{
-					variant.Gt = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "gte")
-				{
-					variant.Gte = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lt")
-				{
-					variant.Lt = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "lte")
-				{
-					variant.Lte = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "_name")
-				{
-					variant.QueryName = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "relation")
-				{
-					variant.Relation = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "time_zone")
-				{
-					variant.TimeZone = JsonSerializer.Deserialize<string?>(ref reader, options);
-					continue;
-				}
-
-				if (property == "to")
-				{
-					variant.To = JsonSerializer.Deserialize<object?>(ref reader, options);
-					continue;
-				}
+				continue;
 			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
+			{
+				continue;
+			}
+
+			if (propGt.TryReadProperty(ref reader, options, PropGt, null))
+			{
+				continue;
+			}
+
+			if (propGte.TryReadProperty(ref reader, options, PropGte, null))
+			{
+				continue;
+			}
+
+			if (propLt.TryReadProperty(ref reader, options, PropLt, null))
+			{
+				continue;
+			}
+
+			if (propLte.TryReadProperty(ref reader, options, PropLte, null))
+			{
+				continue;
+			}
+
+			if (propQueryName.TryReadProperty(ref reader, options, PropQueryName, null))
+			{
+				continue;
+			}
+
+			if (propRelation.TryReadProperty(ref reader, options, PropRelation, null))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
 		reader.Read();
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Field = propField.Value,
+			Format = propFormat.Value,
+			From = propFrom.Value,
+			Gt = propGt.Value,
+			Gte = propGte.Value,
+			Lt = propLt.Value,
+			Lte = propLte.Value,
+			QueryName = propQueryName.Value,
+			Relation = propRelation.Value,
+			TimeZone = propTimeZone.Value,
+			To = propTo.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, UntypedRangeQuery value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery value, System.Text.Json.JsonSerializerOptions options)
 	{
-		if (value.Field is null)
-			throw new JsonException("Unable to serialize UntypedRangeQuery because the `Field` property is not set. Field name queries must include a valid field name.");
-		if (!options.TryGetClientSettings(out var settings))
-			throw new JsonException("Unable to retrieve client settings required to infer field.");
 		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(value.Field));
+		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
-		if (value.Boost.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(value.Boost.Value);
-		}
-
-		if (!string.IsNullOrEmpty(value.Format))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(value.Format);
-		}
-
-		if (value.From is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, value.From, options);
-		}
-
-		if (value.Gt is not null)
-		{
-			writer.WritePropertyName("gt");
-			JsonSerializer.Serialize(writer, value.Gt, options);
-		}
-
-		if (value.Gte is not null)
-		{
-			writer.WritePropertyName("gte");
-			JsonSerializer.Serialize(writer, value.Gte, options);
-		}
-
-		if (value.Lt is not null)
-		{
-			writer.WritePropertyName("lt");
-			JsonSerializer.Serialize(writer, value.Lt, options);
-		}
-
-		if (value.Lte is not null)
-		{
-			writer.WritePropertyName("lte");
-			JsonSerializer.Serialize(writer, value.Lte, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.QueryName))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(value.QueryName);
-		}
-
-		if (value.Relation is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, value.Relation, options);
-		}
-
-		if (!string.IsNullOrEmpty(value.TimeZone))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(value.TimeZone);
-		}
-
-		if (value.To is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, value.To, options);
-		}
-
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropFrom, value.From, null, null);
+		writer.WriteProperty(options, PropGt, value.Gt, null, null);
+		writer.WriteProperty(options, PropGte, value.Gte, null, null);
+		writer.WriteProperty(options, PropLt, value.Lt, null, null);
+		writer.WriteProperty(options, PropLte, value.Lte, null, null);
+		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
+		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteProperty(options, PropTo, value.To, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(UntypedRangeQueryConverter))]
-public sealed partial class UntypedRangeQuery
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryConverter))]
+public sealed partial class UntypedRangeQuery : Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public UntypedRangeQuery(Elastic.Clients.Elasticsearch.Field field)
 	{
-		if (field is null)
-			throw new ArgumentNullException(nameof(field));
 		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public UntypedRangeQuery()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
 	/// <summary>
@@ -213,7 +191,11 @@ public sealed partial class UntypedRangeQuery
 	/// </para>
 	/// </summary>
 	public float? Boost { get; set; }
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -266,28 +248,28 @@ public sealed partial class UntypedRangeQuery
 	/// </summary>
 	public string? TimeZone { get; set; }
 	public object? To { get; set; }
+
+	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "untyped";
 }
 
-public sealed partial class UntypedRangeQueryDescriptor<TDocument> : SerializableDescriptor<UntypedRangeQueryDescriptor<TDocument>>
+public readonly partial struct UntypedRangeQueryDescriptor<TDocument>
 {
-	internal UntypedRangeQueryDescriptor(Action<UntypedRangeQueryDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Instance { get; init; }
 
-	public UntypedRangeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private object? FromValue { get; set; }
-	private object? GtValue { get; set; }
-	private object? GteValue { get; set; }
-	private object? LtValue { get; set; }
-	private object? LteValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private object? ToValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedRangeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -297,28 +279,22 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public UntypedRangeQueryDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -326,16 +302,16 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Date format used to convert <c>date</c> values in the query.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> From(object? from)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> From(object? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -343,10 +319,10 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Gt(object? gt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Gt(object? value)
 	{
-		GtValue = gt;
-		return Self;
+		Instance.Gt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -354,10 +330,10 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Gte(object? gte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Gte(object? value)
 	{
-		GteValue = gte;
-		return Self;
+		Instance.Gte = value;
+		return this;
 	}
 
 	/// <summary>
@@ -365,10 +341,10 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Lt(object? lt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Lt(object? value)
 	{
-		LtValue = lt;
-		return Self;
+		Instance.Lt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -376,16 +352,16 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Lte(object? lte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Lte(object? value)
 	{
-		LteValue = lte;
-		return Self;
+		Instance.Lte = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -393,10 +369,10 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Indicates how the range query matches values for <c>range</c> fields.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
-		RelationValue = relation;
-		return Self;
+		Instance.Relation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -404,116 +380,45 @@ public sealed partial class UntypedRangeQueryDescriptor<TDocument> : Serializabl
 	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor<TDocument> To(object? to)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument> To(object? value)
 	{
-		ToValue = to;
-		return Self;
+		Instance.To = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
-		}
-
-		if (GtValue is not null)
-		{
-			writer.WritePropertyName("gt");
-			JsonSerializer.Serialize(writer, GtValue, options);
-		}
-
-		if (GteValue is not null)
-		{
-			writer.WritePropertyName("gte");
-			JsonSerializer.Serialize(writer, GteValue, options);
-		}
-
-		if (LtValue is not null)
-		{
-			writer.WritePropertyName("lt");
-			JsonSerializer.Serialize(writer, LtValue, options);
-		}
-
-		if (LteValue is not null)
-		{
-			writer.WritePropertyName("lte");
-			JsonSerializer.Serialize(writer, LteValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RelationValue is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor<UntypedRangeQueryDescriptor>
+public readonly partial struct UntypedRangeQueryDescriptor
 {
-	internal UntypedRangeQueryDescriptor(Action<UntypedRangeQueryDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Instance { get; init; }
 
-	public UntypedRangeQueryDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance)
 	{
+		Instance = instance;
 	}
 
-	private float? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private string? FormatValue { get; set; }
-	private object? FromValue { get; set; }
-	private object? GtValue { get; set; }
-	private object? GteValue { get; set; }
-	private object? LtValue { get; set; }
-	private object? LteValue { get; set; }
-	private string? QueryNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? RelationValue { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private object? ToValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UntypedRangeQueryDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery instance) => new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -523,28 +428,22 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// A value greater than 1.0 increases the relevance score.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Boost(float? boost)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Boost(float? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	public UntypedRangeQueryDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -552,16 +451,16 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Date format used to convert <c>date</c> values in the query.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Format(string? value)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor From(object? from)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor From(object? value)
 	{
-		FromValue = from;
-		return Self;
+		Instance.From = value;
+		return this;
 	}
 
 	/// <summary>
@@ -569,10 +468,10 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Greater than.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Gt(object? gt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Gt(object? value)
 	{
-		GtValue = gt;
-		return Self;
+		Instance.Gt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -580,10 +479,10 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Greater than or equal to.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Gte(object? gte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Gte(object? value)
 	{
-		GteValue = gte;
-		return Self;
+		Instance.Gte = value;
+		return this;
 	}
 
 	/// <summary>
@@ -591,10 +490,10 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Less than.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Lt(object? lt)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Lt(object? value)
 	{
-		LtValue = lt;
-		return Self;
+		Instance.Lt = value;
+		return this;
 	}
 
 	/// <summary>
@@ -602,16 +501,16 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Less than or equal to.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Lte(object? lte)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Lte(object? value)
 	{
-		LteValue = lte;
-		return Self;
+		Instance.Lte = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor QueryName(string? queryName)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor QueryName(string? value)
 	{
-		QueryNameValue = queryName;
-		return Self;
+		Instance.QueryName = value;
+		return this;
 	}
 
 	/// <summary>
@@ -619,10 +518,10 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Indicates how the range query matches values for <c>range</c> fields.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? relation)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
-		RelationValue = relation;
-		return Self;
+		Instance.Relation = value;
+		return this;
 	}
 
 	/// <summary>
@@ -630,92 +529,23 @@ public sealed partial class UntypedRangeQueryDescriptor : SerializableDescriptor
 	/// Coordinated Universal Time (UTC) offset or IANA time zone used to convert <c>date</c> values in the query to UTC.
 	/// </para>
 	/// </summary>
-	public UntypedRangeQueryDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor TimeZone(string? value)
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.TimeZone = value;
+		return this;
 	}
 
-	public UntypedRangeQueryDescriptor To(object? to)
+	public Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor To(object? value)
 	{
-		ToValue = to;
-		return Self;
+		Instance.To = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor> action)
 	{
-		if (FieldValue is null)
-			throw new JsonException("Unable to serialize field name query descriptor with a null field. Ensure you use a suitable descriptor constructor or call the Field method, passing a non-null value for the field argument.");
-		writer.WriteStartObject();
-		writer.WritePropertyName(settings.Inferrer.Field(FieldValue));
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (FromValue is not null)
-		{
-			writer.WritePropertyName("from");
-			JsonSerializer.Serialize(writer, FromValue, options);
-		}
-
-		if (GtValue is not null)
-		{
-			writer.WritePropertyName("gt");
-			JsonSerializer.Serialize(writer, GtValue, options);
-		}
-
-		if (GteValue is not null)
-		{
-			writer.WritePropertyName("gte");
-			JsonSerializer.Serialize(writer, GteValue, options);
-		}
-
-		if (LtValue is not null)
-		{
-			writer.WritePropertyName("lt");
-			JsonSerializer.Serialize(writer, LtValue, options);
-		}
-
-		if (LteValue is not null)
-		{
-			writer.WritePropertyName("lte");
-			JsonSerializer.Serialize(writer, LteValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryNameValue))
-		{
-			writer.WritePropertyName("_name");
-			writer.WriteStringValue(QueryNameValue);
-		}
-
-		if (RelationValue is not null)
-		{
-			writer.WritePropertyName("relation");
-			JsonSerializer.Serialize(writer, RelationValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (ToValue is not null)
-		{
-			writer.WritePropertyName("to");
-			JsonSerializer.Serialize(writer, ToValue, options);
-		}
-
-		writer.WriteEndObject();
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQueryDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.UntypedRangeQuery(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

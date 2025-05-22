@@ -17,25 +17,125 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropContext = System.Text.Json.JsonEncodedText.Encode("context");
+	private static readonly System.Text.Json.JsonEncodedText PropNeighbours = System.Text.Json.JsonEncodedText.Encode("neighbours");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropPrefix = System.Text.Json.JsonEncodedText.Encode("prefix");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var readerSnapshot = reader;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.Context> propContext = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>?> propNeighbours = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.GeohashPrecision?> propPrecision = default;
+		LocalJsonValue<bool?> propPrefix = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propContext.TryReadProperty(ref reader, options, PropContext, null))
+			{
+				continue;
+			}
+
+			if (propNeighbours.TryReadProperty(ref reader, options, PropNeighbours, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, null)))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, null))
+			{
+				continue;
+			}
+
+			if (propPrefix.TryReadProperty(ref reader, options, PropPrefix, null))
+			{
+				continue;
+			}
+
+			try
+			{
+				reader = readerSnapshot;
+				var result = reader.ReadValue<Elastic.Clients.Elasticsearch.Core.Search.Context>(options, null);
+				return new Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+				{
+					Context = result
+				};
+			}
+			catch (System.Text.Json.JsonException)
+			{
+				throw;
+			}
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Boost = propBoost.Value,
+			Context = propContext.Value,
+			Neighbours = propNeighbours.Value,
+			Precision = propPrecision.Value,
+			Prefix = propPrefix.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.CompletionContext value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropContext, value.Context, null, null);
+		writer.WriteProperty(options, PropNeighbours, value.Neighbours, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.GeohashPrecision>(o, v, null));
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, null);
+		writer.WriteProperty(options, PropPrefix, value.Prefix, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextConverter))]
 public sealed partial class CompletionContext
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionContext(Elastic.Clients.Elasticsearch.Core.Search.Context context)
+	{
+		Context = context;
+	}
+#if NET7_0_OR_GREATER
+	public CompletionContext()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CompletionContext()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The factor by which the score of the suggestion should be boosted.
 	/// The score is computed by multiplying the boost with the suggestion weight.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
 
 	/// <summary>
@@ -43,8 +143,11 @@ public sealed partial class CompletionContext
 	/// The value of the category to filter/boost on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("context")]
-	public Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Core.Search.Context Context { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -53,8 +156,7 @@ public sealed partial class CompletionContext
 	/// Defaults to generating neighbors for index time precision level.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("neighbours")]
-	public ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? Neighbours { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? Neighbours { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -63,7 +165,6 @@ public sealed partial class CompletionContext
 	/// Defaults to index time precision level.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("precision")]
 	public Elastic.Clients.Elasticsearch.GeohashPrecision? Precision { get; set; }
 
 	/// <summary>
@@ -71,23 +172,27 @@ public sealed partial class CompletionContext
 	/// Whether the category value should be treated as a prefix or not.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("prefix")]
 	public bool? Prefix { get; set; }
 }
 
-public sealed partial class CompletionContextDescriptor : SerializableDescriptor<CompletionContextDescriptor>
+public readonly partial struct CompletionContextDescriptor
 {
-	internal CompletionContextDescriptor(Action<CompletionContextDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionContext Instance { get; init; }
 
-	public CompletionContextDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionContextDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionContext instance)
 	{
+		Instance = instance;
 	}
 
-	private double? BoostValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.Context ContextValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? NeighboursValue { get; set; }
-	private Elastic.Clients.Elasticsearch.GeohashPrecision? PrecisionValue { get; set; }
-	private bool? PrefixValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionContextDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionContext instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -95,10 +200,10 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	/// The score is computed by multiplying the boost with the suggestion weight.
 	/// </para>
 	/// </summary>
-	public CompletionContextDescriptor Boost(double? boost)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Boost(double? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
 	/// <summary>
@@ -106,10 +211,21 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	/// The value of the category to filter/boost on.
 	/// </para>
 	/// </summary>
-	public CompletionContextDescriptor Context(Elastic.Clients.Elasticsearch.Core.Search.Context context)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Context(Elastic.Clients.Elasticsearch.Core.Search.Context value)
 	{
-		ContextValue = context;
-		return Self;
+		Instance.Context = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The value of the category to filter/boost on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Context(System.Func<Elastic.Clients.Elasticsearch.Core.Search.ContextFactory, Elastic.Clients.Elasticsearch.Core.Search.Context> action)
+	{
+		Instance.Context = Elastic.Clients.Elasticsearch.Core.Search.ContextFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -119,10 +235,42 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	/// Defaults to generating neighbors for index time precision level.
 	/// </para>
 	/// </summary>
-	public CompletionContextDescriptor Neighbours(ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? neighbours)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.GeohashPrecision>? value)
 	{
-		NeighboursValue = neighbours;
-		return Self;
+		Instance.Neighbours = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of precision values at which neighboring geohashes should be taken into account.
+	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
+	/// Defaults to generating neighbors for index time precision level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(params Elastic.Clients.Elasticsearch.GeohashPrecision[] values)
+	{
+		Instance.Neighbours = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of precision values at which neighboring geohashes should be taken into account.
+	/// Precision value can be a distance value (<c>5m</c>, <c>10km</c>, etc.) or a raw geohash precision (<c>1</c>..<c>12</c>).
+	/// Defaults to generating neighbors for index time precision level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Neighbours(params System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.GeohashPrecision>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action));
+		}
+
+		Instance.Neighbours = items;
+		return this;
 	}
 
 	/// <summary>
@@ -132,10 +280,23 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	/// Defaults to index time precision level.
 	/// </para>
 	/// </summary>
-	public CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? precision)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Precision(Elastic.Clients.Elasticsearch.GeohashPrecision? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The precision of the geohash to encode the query geo point.
+	/// Can be specified as a distance value (<c>5m</c>, <c>10km</c>, etc.), or as a raw geohash precision (<c>1</c>..<c>12</c>).
+	/// Defaults to index time precision level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Precision(System.Func<Elastic.Clients.Elasticsearch.GeohashPrecisionFactory, Elastic.Clients.Elasticsearch.GeohashPrecision> action)
+	{
+		Instance.Precision = Elastic.Clients.Elasticsearch.GeohashPrecisionFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -143,41 +304,17 @@ public sealed partial class CompletionContextDescriptor : SerializableDescriptor
 	/// Whether the category value should be treated as a prefix or not.
 	/// </para>
 	/// </summary>
-	public CompletionContextDescriptor Prefix(bool? prefix = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor Prefix(bool? value = true)
 	{
-		PrefixValue = prefix;
-		return Self;
+		Instance.Prefix = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.CompletionContext Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		writer.WritePropertyName("context");
-		JsonSerializer.Serialize(writer, ContextValue, options);
-		if (NeighboursValue is not null)
-		{
-			writer.WritePropertyName("neighbours");
-			JsonSerializer.Serialize(writer, NeighboursValue, options);
-		}
-
-		if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		if (PrefixValue.HasValue)
-		{
-			writer.WritePropertyName("prefix");
-			writer.WriteBooleanValue(PrefixValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.CompletionContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

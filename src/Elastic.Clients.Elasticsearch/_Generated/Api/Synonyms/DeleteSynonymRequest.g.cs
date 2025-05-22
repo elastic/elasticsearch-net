@@ -17,103 +17,219 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public sealed partial class DeleteSynonymRequestParameters : RequestParameters
+public sealed partial class DeleteSynonymRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DeleteSynonymRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Deletes a synonym set
+/// Delete a synonym set.
+/// </para>
+/// <para>
+/// You can only delete a synonyms set that is not in use by any index analyzer.
+/// </para>
+/// <para>
+/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
+/// These synonym filters can be used as part of search analyzers.
+/// </para>
+/// <para>
+/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+/// </para>
+/// <para>
+/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
+/// A delete request in this case will return a 400 response code.
+/// </para>
+/// <para>
+/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+/// Once finished, you can delete the index.
+/// When the synonyms set is not used in analyzers, you will be able to delete it.
 /// </para>
 /// </summary>
-public sealed partial class DeleteSynonymRequest : PlainRequest<DeleteSynonymRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestConverter))]
+public sealed partial class DeleteSynonymRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DeleteSynonymRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsDeleteSynonym;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SynonymsDeleteSynonym;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "synonyms.delete_synonym";
+
+	/// <summary>
+	/// <para>
+	/// The synonyms set identifier to delete.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
 }
 
 /// <summary>
 /// <para>
-/// Deletes a synonym set
+/// Delete a synonym set.
 /// </para>
-/// </summary>
-public sealed partial class DeleteSynonymRequestDescriptor<TDocument> : RequestDescriptor<DeleteSynonymRequestDescriptor<TDocument>, DeleteSynonymRequestParameters>
-{
-	internal DeleteSynonymRequestDescriptor(Action<DeleteSynonymRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsDeleteSynonym;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "synonyms.delete_synonym";
-
-	public DeleteSynonymRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-	}
-}
-
-/// <summary>
 /// <para>
-/// Deletes a synonym set
+/// You can only delete a synonyms set that is not in use by any index analyzer.
+/// </para>
+/// <para>
+/// Synonyms sets can be used in synonym graph token filters and synonym token filters.
+/// These synonym filters can be used as part of search analyzers.
+/// </para>
+/// <para>
+/// Analyzers need to be loaded when an index is restored (such as when a node starts, or the index becomes open).
+/// Even if the analyzer is not used on any field mapping, it still needs to be loaded on the index recovery phase.
+/// </para>
+/// <para>
+/// If any analyzers cannot be loaded, the index becomes unavailable and the cluster status becomes red or yellow as index shards are not available.
+/// To prevent that, synonyms sets that are used in analyzers can't be deleted.
+/// A delete request in this case will return a 400 response code.
+/// </para>
+/// <para>
+/// To remove a synonyms set, you must first remove all indices that contain analyzers using it.
+/// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
+/// Once finished, you can delete the index.
+/// When the synonyms set is not used in analyzers, you will be able to delete it.
 /// </para>
 /// </summary>
-public sealed partial class DeleteSynonymRequestDescriptor : RequestDescriptor<DeleteSynonymRequestDescriptor, DeleteSynonymRequestParameters>
+public readonly partial struct DeleteSynonymRequestDescriptor
 {
-	internal DeleteSynonymRequestDescriptor(Action<DeleteSynonymRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest Instance { get; init; }
 
-	public DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SynonymsDeleteSynonym;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "synonyms.delete_synonym";
-
-	public DeleteSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DeleteSynonymRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest instance) => new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The synonyms set identifier to delete.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest Build(System.Action<Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor(new Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Synonyms.DeleteSynonymRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

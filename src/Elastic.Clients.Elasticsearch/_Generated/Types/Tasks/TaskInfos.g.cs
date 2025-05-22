@@ -17,26 +17,58 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Tasks;
 
-public sealed partial class TaskInfos : Union<IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
+internal sealed partial class TaskInfosConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Tasks.TaskInfos>
 {
-	public TaskInfos(IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> Flat) : base(Flat)
+	public override Elastic.Clients.Elasticsearch.Tasks.TaskInfos Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Tasks.TaskInfos(reader.ReadValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>>(options, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>(o, null)!)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Tasks.TaskInfos(reader.ReadValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>(options, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>(o, null, null)!)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Tasks.TaskInfos)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Tasks.TaskInfos value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>(o, v, null));
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>(o, v, null, null));
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Tasks.TaskInfosConverter))]
+public sealed partial class TaskInfos : Elastic.Clients.Elasticsearch.Union<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo>, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo>>
+{
+	public TaskInfos(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Tasks.TaskInfo> value) : base(value)
 	{
 	}
 
-	public TaskInfos(IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> Grouped) : base(Grouped)
+	public TaskInfos(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> value) : base(value)
 	{
 	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.TaskInfos(Elastic.Clients.Elasticsearch.Tasks.TaskInfo[] value) => new Elastic.Clients.Elasticsearch.Tasks.TaskInfos(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Tasks.TaskInfos(System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Tasks.ParentTaskInfo> value) => new Elastic.Clients.Elasticsearch.Tasks.TaskInfos(value);
 }

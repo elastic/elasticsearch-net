@@ -17,20 +17,159 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
+internal sealed partial class IndexTemplateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowAutoCreate = System.Text.Json.JsonEncodedText.Encode("allow_auto_create");
+	private static readonly System.Text.Json.JsonEncodedText PropComposedOf = System.Text.Json.JsonEncodedText.Encode("composed_of");
+	private static readonly System.Text.Json.JsonEncodedText PropDataStream = System.Text.Json.JsonEncodedText.Encode("data_stream");
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissingComponentTemplates = System.Text.Json.JsonEncodedText.Encode("ignore_missing_component_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPatterns = System.Text.Json.JsonEncodedText.Encode("index_patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropPriority = System.Text.Json.JsonEncodedText.Encode("priority");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowAutoCreate = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name>> propComposedOf = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration?> propDataStream = default;
+		LocalJsonValue<bool?> propDeprecated = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Names?> propIgnoreMissingComponentTemplates = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Names> propIndexPatterns = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<long?> propPriority = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary?> propTemplate = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowAutoCreate.TryReadProperty(ref reader, options, PropAllowAutoCreate, null))
+			{
+				continue;
+			}
+
+			if (propComposedOf.TryReadProperty(ref reader, options, PropComposedOf, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propDataStream.TryReadProperty(ref reader, options, PropDataStream, null))
+			{
+				continue;
+			}
+
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissingComponentTemplates.TryReadProperty(ref reader, options, PropIgnoreMissingComponentTemplates, null))
+			{
+				continue;
+			}
+
+			if (propIndexPatterns.TryReadProperty(ref reader, options, PropIndexPatterns, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPriority.TryReadProperty(ref reader, options, PropPriority, null))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowAutoCreate = propAllowAutoCreate.Value,
+			ComposedOf = propComposedOf.Value,
+			DataStream = propDataStream.Value,
+			Deprecated = propDeprecated.Value,
+			IgnoreMissingComponentTemplates = propIgnoreMissingComponentTemplates.Value,
+			IndexPatterns = propIndexPatterns.Value,
+			Meta = propMeta.Value,
+			Priority = propPriority.Value,
+			Template = propTemplate.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowAutoCreate, value.AllowAutoCreate, null, null);
+		writer.WriteProperty(options, PropComposedOf, value.ComposedOf, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Name>(o, v, null));
+		writer.WriteProperty(options, PropDataStream, value.DataStream, null, null);
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropIgnoreMissingComponentTemplates, value.IgnoreMissingComponentTemplates, null, null);
+		writer.WriteProperty(options, PropIndexPatterns, value.IndexPatterns, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPriority, value.Priority, null, null);
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateConverter))]
 public sealed partial class IndexTemplate
 {
-	[JsonInclude, JsonPropertyName("allow_auto_create")]
-	public bool? AllowAutoCreate { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplate(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> composedOf, Elastic.Clients.Elasticsearch.Names indexPatterns)
+	{
+		ComposedOf = composedOf;
+		IndexPatterns = indexPatterns;
+	}
+#if NET7_0_OR_GREATER
+	public IndexTemplate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public IndexTemplate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? AllowAutoCreate { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -38,8 +177,11 @@ public sealed partial class IndexTemplate
 	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("composed_of")]
-	public IReadOnlyCollection<string> ComposedOf { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> ComposedOf { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -48,8 +190,23 @@ public sealed partial class IndexTemplate
 	/// Data streams require a matching index template with a <c>data_stream</c> object.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("data_stream")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? DataStream { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? DataStream { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Marks this index template as deprecated.
+	/// When creating or updating a non-deprecated index template that uses deprecated components,
+	/// Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	public bool? Deprecated { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A list of component template names that are allowed to be absent.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Names? IgnoreMissingComponentTemplates { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -75,9 +232,11 @@ public sealed partial class IndexTemplate
 	/// Name of the index template.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_patterns")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public IReadOnlyCollection<string> IndexPatterns { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names IndexPatterns { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -85,8 +244,7 @@ public sealed partial class IndexTemplate
 	/// This map is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -96,8 +254,7 @@ public sealed partial class IndexTemplate
 	/// This number is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("priority")]
-	public long? Priority { get; init; }
+	public long? Priority { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -105,8 +262,7 @@ public sealed partial class IndexTemplate
 	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary? Template { get; init; }
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary? Template { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -114,6 +270,491 @@ public sealed partial class IndexTemplate
 	/// This number is not automatically generated by Elasticsearch.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version")]
-	public long? Version { get; init; }
+	public long? Version { get; set; }
+}
+
+public readonly partial struct IndexTemplateDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> AllowAutoCreate(bool? value = true)
+	{
+		Instance.AllowAutoCreate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> value)
+	{
+		Instance.ComposedOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
+	{
+		Instance.ComposedOf = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> DataStream(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? value)
+	{
+		Instance.DataStream = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> DataStream()
+	{
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor>? action)
+	{
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Marks this index template as deprecated.
+	/// When creating or updating a non-deprecated index template that uses deprecated components,
+	/// Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Deprecated(bool? value = true)
+	{
+		Instance.Deprecated = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of component template names that are allowed to be absent.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> IgnoreMissingComponentTemplates(Elastic.Clients.Elasticsearch.Names? value)
+	{
+		Instance.IgnoreMissingComponentTemplates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> IndexPatterns(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.IndexPatterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Priority to determine index template precedence when a new data stream or index is created.
+	/// The index template with the highest priority is chosen.
+	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Priority(long? value)
+	{
+		Instance.Priority = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary? value)
+	{
+		Instance.Template = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Template()
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Version number used to manage index templates externally.
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct IndexTemplateDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public IndexTemplateDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate instance) => new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor AllowAutoCreate(bool? value = true)
+	{
+		Instance.AllowAutoCreate = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor ComposedOf(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Name> value)
+	{
+		Instance.ComposedOf = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An ordered list of component template names.
+	/// Component templates are merged in the order specified, meaning that the last component template specified has the highest precedence.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor ComposedOf(params Elastic.Clients.Elasticsearch.Name[] values)
+	{
+		Instance.ComposedOf = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor DataStream(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfiguration? value)
+	{
+		Instance.DataStream = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor DataStream()
+	{
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If this object is included, the template is used to create data streams and their backing indices.
+	/// Supports an empty object.
+	/// Data streams require a matching index template with a <c>data_stream</c> object.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor DataStream(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor>? action)
+	{
+		Instance.DataStream = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDataStreamConfigurationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Marks this index template as deprecated.
+	/// When creating or updating a non-deprecated index template that uses deprecated components,
+	/// Elasticsearch will emit a deprecation warning.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Deprecated(bool? value = true)
+	{
+		Instance.Deprecated = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of component template names that are allowed to be absent.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor IgnoreMissingComponentTemplates(Elastic.Clients.Elasticsearch.Names? value)
+	{
+		Instance.IgnoreMissingComponentTemplates = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the index template.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor IndexPatterns(Elastic.Clients.Elasticsearch.Names value)
+	{
+		Instance.IndexPatterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Optional user metadata about the index template. May have any contents.
+	/// This map is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Priority to determine index template precedence when a new data stream or index is created.
+	/// The index template with the highest priority is chosen.
+	/// If no priority is specified the template is treated as though it is of priority 0 (lowest priority).
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Priority(long? value)
+	{
+		Instance.Priority = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Template(Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummary? value)
+	{
+		Instance.Template = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Template()
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Template to be applied.
+	/// It may optionally include an <c>aliases</c>, <c>mappings</c>, or <c>settings</c> configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<T>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateSummaryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Version number used to manage index templates externally.
+	/// This number is not automatically generated by Elasticsearch.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplateDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.IndexTemplate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

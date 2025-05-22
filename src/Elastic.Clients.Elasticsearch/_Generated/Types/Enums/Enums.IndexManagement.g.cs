@@ -17,697 +17,1261 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-[JsonConverter(typeof(FeatureConverter))]
+internal sealed partial class FeatureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.Feature>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText MemberMappings = System.Text.Json.JsonEncodedText.Encode("mappings");
+	private static readonly System.Text.Json.JsonEncodedText MemberSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Feature Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAliases))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Aliases;
+		}
+
+		if (reader.ValueTextEquals(MemberMappings))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Mappings;
+		}
+
+		if (reader.ValueTextEquals(MemberSettings))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Settings;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAliases.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Aliases;
+		}
+
+		if (string.Equals(value, MemberMappings.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Mappings;
+		}
+
+		if (string.Equals(value, MemberSettings.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.Feature.Settings;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.Feature)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Feature value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Aliases:
+				writer.WriteStringValue(MemberAliases);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Mappings:
+				writer.WriteStringValue(MemberMappings);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.Feature.Settings:
+				writer.WriteStringValue(MemberSettings);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.Feature)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.Feature ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.Feature value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ModeEnumConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberUpgrade = System.Text.Json.JsonEncodedText.Encode("upgrade");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberUpgrade))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum.Upgrade;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberUpgrade.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum.Upgrade;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum.Upgrade:
+				writer.WriteStringValue(MemberUpgrade);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ModeEnum value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ShardStoreAllocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimary = System.Text.Json.JsonEncodedText.Encode("primary");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplica = System.Text.Json.JsonEncodedText.Encode("replica");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnused = System.Text.Json.JsonEncodedText.Encode("unused");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberPrimary))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Primary;
+		}
+
+		if (reader.ValueTextEquals(MemberReplica))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Replica;
+		}
+
+		if (reader.ValueTextEquals(MemberUnused))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Unused;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberPrimary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Primary;
+		}
+
+		if (string.Equals(value, MemberReplica.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Replica;
+		}
+
+		if (string.Equals(value, MemberUnused.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Unused;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Primary:
+				writer.WriteStringValue(MemberPrimary);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Replica:
+				writer.WriteStringValue(MemberReplica);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation.Unused:
+				writer.WriteStringValue(MemberUnused);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ShardStoreStatusConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberGreen = System.Text.Json.JsonEncodedText.Encode("green");
+	private static readonly System.Text.Json.JsonEncodedText MemberRed = System.Text.Json.JsonEncodedText.Encode("red");
+	private static readonly System.Text.Json.JsonEncodedText MemberYellow = System.Text.Json.JsonEncodedText.Encode("yellow");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All;
+		}
+
+		if (reader.ValueTextEquals(MemberGreen))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green;
+		}
+
+		if (reader.ValueTextEquals(MemberRed))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red;
+		}
+
+		if (reader.ValueTextEquals(MemberYellow))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All;
+		}
+
+		if (string.Equals(value, MemberGreen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green;
+		}
+
+		if (string.Equals(value, MemberRed.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red;
+		}
+
+		if (string.Equals(value, MemberYellow.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.All:
+				writer.WriteStringValue(MemberAll);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Green:
+				writer.WriteStringValue(MemberGreen);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Red:
+				writer.WriteStringValue(MemberRed);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus.Yellow:
+				writer.WriteStringValue(MemberYellow);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatus value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IndexMetadataStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberClose = System.Text.Json.JsonEncodedText.Encode("close");
+	private static readonly System.Text.Json.JsonEncodedText MemberOpen = System.Text.Json.JsonEncodedText.Encode("open");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberClose))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close;
+		}
+
+		if (reader.ValueTextEquals(MemberOpen))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberClose.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close;
+		}
+
+		if (string.Equals(value, MemberOpen.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Close:
+				writer.WriteStringValue(MemberClose);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState.Open:
+				writer.WriteStringValue(MemberOpen);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ShardRoutingStateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberInitializing = System.Text.Json.JsonEncodedText.Encode("INITIALIZING");
+	private static readonly System.Text.Json.JsonEncodedText MemberRelocating = System.Text.Json.JsonEncodedText.Encode("RELOCATING");
+	private static readonly System.Text.Json.JsonEncodedText MemberStarted = System.Text.Json.JsonEncodedText.Encode("STARTED");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnassigned = System.Text.Json.JsonEncodedText.Encode("UNASSIGNED");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberInitializing))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing;
+		}
+
+		if (reader.ValueTextEquals(MemberRelocating))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating;
+		}
+
+		if (reader.ValueTextEquals(MemberStarted))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started;
+		}
+
+		if (reader.ValueTextEquals(MemberUnassigned))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberInitializing.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing;
+		}
+
+		if (string.Equals(value, MemberRelocating.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating;
+		}
+
+		if (string.Equals(value, MemberStarted.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started;
+		}
+
+		if (string.Equals(value, MemberUnassigned.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Initializing:
+				writer.WriteStringValue(MemberInitializing);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Relocating:
+				writer.WriteStringValue(MemberRelocating);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Started:
+				writer.WriteStringValue(MemberStarted);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState.Unassigned:
+				writer.WriteStringValue(MemberUnassigned);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingState value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IndexCheckOnStartupConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChecksum = System.Text.Json.JsonEncodedText.Encode("checksum");
+	private static readonly System.Text.Json.JsonEncodedText MemberFalse = System.Text.Json.JsonEncodedText.Encode("false");
+	private static readonly System.Text.Json.JsonEncodedText MemberTrue = System.Text.Json.JsonEncodedText.Encode("true");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChecksum))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
+		}
+
+		if (reader.ValueTextEquals(MemberFalse))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False;
+		}
+
+		if (reader.ValueTextEquals(MemberTrue))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
+		}
+
+		if (reader.TokenType is not System.Text.Json.JsonTokenType.String)
+		{
+			throw new System.Text.Json.JsonException($"Unknown member of type '{reader.TokenType}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup)}'.");
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChecksum.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum;
+		}
+
+		if (string.Equals(value, MemberFalse.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False;
+		}
+
+		if (string.Equals(value, MemberTrue.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.Checksum:
+				writer.WriteStringValue(MemberChecksum);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.False:
+				writer.WriteRawValue(MemberFalse.EncodedUtf8Bytes);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup.True:
+				writer.WriteRawValue(MemberTrue.EncodedUtf8Bytes);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartup value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ManagedByConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDatastream = System.Text.Json.JsonEncodedText.Encode("Data stream lifecycle");
+	private static readonly System.Text.Json.JsonEncodedText MemberIlm = System.Text.Json.JsonEncodedText.Encode("Index Lifecycle Management");
+	private static readonly System.Text.Json.JsonEncodedText MemberUnmanaged = System.Text.Json.JsonEncodedText.Encode("Unmanaged");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDatastream))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream;
+		}
+
+		if (reader.ValueTextEquals(MemberIlm))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
+		}
+
+		if (reader.ValueTextEquals(MemberUnmanaged))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDatastream.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream;
+		}
+
+		if (string.Equals(value, MemberIlm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm;
+		}
+
+		if (string.Equals(value, MemberUnmanaged.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Datastream:
+				writer.WriteStringValue(MemberDatastream);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Ilm:
+				writer.WriteStringValue(MemberIlm);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy.Unmanaged:
+				writer.WriteStringValue(MemberUnmanaged);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ManagedBy value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TranslogDurabilityConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAsync = System.Text.Json.JsonEncodedText.Encode("async");
+	private static readonly System.Text.Json.JsonEncodedText MemberAsync1 = System.Text.Json.JsonEncodedText.Encode("ASYNC");
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest = System.Text.Json.JsonEncodedText.Encode("request");
+	private static readonly System.Text.Json.JsonEncodedText MemberRequest1 = System.Text.Json.JsonEncodedText.Encode("REQUEST");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAsync) || reader.ValueTextEquals(MemberAsync1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async;
+		}
+
+		if (reader.ValueTextEquals(MemberRequest) || reader.ValueTextEquals(MemberRequest1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAsync.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAsync1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async;
+		}
+
+		if (string.Equals(value, MemberRequest.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberRequest1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Async:
+				writer.WriteStringValue(MemberAsync);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability.Request:
+				writer.WriteStringValue(MemberRequest);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurability value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class StorageTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.StorageType>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.StorageType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.StorageType(reader.ReadValue<string?>(options, null));
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.StorageType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Value, null);
+	}
+}
+
+internal sealed partial class IndexRoutingAllocationOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberNewPrimaries = System.Text.Json.JsonEncodedText.Encode("new_primaries");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All;
+		}
+
+		if (reader.ValueTextEquals(MemberNewPrimaries))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimaries))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All;
+		}
+
+		if (string.Equals(value, MemberNewPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None;
+		}
+
+		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.All:
+				writer.WriteStringValue(MemberAll);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.NewPrimaries:
+				writer.WriteStringValue(MemberNewPrimaries);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions.Primaries:
+				writer.WriteStringValue(MemberPrimaries);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class IndexRoutingRebalanceOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("none");
+	private static readonly System.Text.Json.JsonEncodedText MemberPrimaries = System.Text.Json.JsonEncodedText.Encode("primaries");
+	private static readonly System.Text.Json.JsonEncodedText MemberReplicas = System.Text.Json.JsonEncodedText.Encode("replicas");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAll))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
+		}
+
+		if (reader.ValueTextEquals(MemberPrimaries))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries;
+		}
+
+		if (reader.ValueTextEquals(MemberReplicas))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAll.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None;
+		}
+
+		if (string.Equals(value, MemberPrimaries.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries;
+		}
+
+		if (string.Equals(value, MemberReplicas.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.All:
+				writer.WriteStringValue(MemberAll);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Primaries:
+				writer.WriteStringValue(MemberPrimaries);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions.Replicas:
+				writer.WriteStringValue(MemberReplicas);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SegmentSortOrderConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberAsc = System.Text.Json.JsonEncodedText.Encode("asc");
+	private static readonly System.Text.Json.JsonEncodedText MemberAsc1 = System.Text.Json.JsonEncodedText.Encode("ASC");
+	private static readonly System.Text.Json.JsonEncodedText MemberDesc = System.Text.Json.JsonEncodedText.Encode("desc");
+	private static readonly System.Text.Json.JsonEncodedText MemberDesc1 = System.Text.Json.JsonEncodedText.Encode("DESC");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberAsc) || reader.ValueTextEquals(MemberAsc1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Asc;
+		}
+
+		if (reader.ValueTextEquals(MemberDesc) || reader.ValueTextEquals(MemberDesc1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Desc;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberAsc.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberAsc1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Asc;
+		}
+
+		if (string.Equals(value, MemberDesc.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberDesc1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Desc;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Asc:
+				writer.WriteStringValue(MemberAsc);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder.Desc:
+				writer.WriteStringValue(MemberDesc);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrder value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SegmentSortModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberMax = System.Text.Json.JsonEncodedText.Encode("max");
+	private static readonly System.Text.Json.JsonEncodedText MemberMax1 = System.Text.Json.JsonEncodedText.Encode("MAX");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin = System.Text.Json.JsonEncodedText.Encode("min");
+	private static readonly System.Text.Json.JsonEncodedText MemberMin1 = System.Text.Json.JsonEncodedText.Encode("MIN");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberMax) || reader.ValueTextEquals(MemberMax1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max;
+		}
+
+		if (reader.ValueTextEquals(MemberMin) || reader.ValueTextEquals(MemberMin1))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberMax.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMax1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max;
+		}
+
+		if (string.Equals(value, MemberMin.Value, System.StringComparison.OrdinalIgnoreCase) || string.Equals(value, MemberMin1.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Max:
+				writer.WriteStringValue(MemberMax);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode.Min:
+				writer.WriteStringValue(MemberMin);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SegmentSortMissingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberFirst = System.Text.Json.JsonEncodedText.Encode("_first");
+	private static readonly System.Text.Json.JsonEncodedText MemberLast = System.Text.Json.JsonEncodedText.Encode("_last");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberFirst))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First;
+		}
+
+		if (reader.ValueTextEquals(MemberLast))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberFirst.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First;
+		}
+
+		if (string.Equals(value, MemberLast.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.First:
+				writer.WriteStringValue(MemberFirst);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing.Last:
+				writer.WriteStringValue(MemberLast);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissing value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class SourceModeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SourceMode>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
+	private static readonly System.Text.Json.JsonEncodedText MemberStored = System.Text.Json.JsonEncodedText.Encode("stored");
+	private static readonly System.Text.Json.JsonEncodedText MemberSynthetic = System.Text.Json.JsonEncodedText.Encode("synthetic");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SourceMode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberDisabled))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Disabled;
+		}
+
+		if (reader.ValueTextEquals(MemberStored))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Stored;
+		}
+
+		if (reader.ValueTextEquals(MemberSynthetic))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Synthetic;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Disabled;
+		}
+
+		if (string.Equals(value, MemberStored.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Stored;
+		}
+
+		if (string.Equals(value, MemberSynthetic.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Synthetic;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SourceMode)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SourceMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Disabled:
+				writer.WriteStringValue(MemberDisabled);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Stored:
+				writer.WriteStringValue(MemberStored);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.SourceMode.Synthetic:
+				writer.WriteStringValue(MemberSynthetic);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.SourceMode)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SourceMode ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SourceMode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class NumericFielddataFormatConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberArray = System.Text.Json.JsonEncodedText.Encode("array");
+	private static readonly System.Text.Json.JsonEncodedText MemberDisabled = System.Text.Json.JsonEncodedText.Encode("disabled");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberArray))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Array;
+		}
+
+		if (reader.ValueTextEquals(MemberDisabled))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Disabled;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberArray.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Array;
+		}
+
+		if (string.Equals(value, MemberDisabled.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Disabled;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Array:
+				writer.WriteStringValue(MemberArray);
+				break;
+			case Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat.Disabled:
+				writer.WriteStringValue(MemberDisabled);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormat value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.FeatureConverter))]
 public enum Feature
 {
-	[EnumMember(Value = "settings")]
-	Settings,
-	[EnumMember(Value = "mappings")]
+	[System.Runtime.Serialization.EnumMember(Value = "aliases")]
+	Aliases,
+	[System.Runtime.Serialization.EnumMember(Value = "mappings")]
 	Mappings,
-	[EnumMember(Value = "aliases")]
-	Aliases
+	[System.Runtime.Serialization.EnumMember(Value = "settings")]
+	Settings
 }
 
-internal sealed class FeatureConverter : JsonConverter<Feature>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ModeEnumConverter))]
+public enum ModeEnum
 {
-	public override Feature Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "settings":
-				return Feature.Settings;
-			case "mappings":
-				return Feature.Mappings;
-			case "aliases":
-				return Feature.Aliases;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, Feature value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case Feature.Settings:
-				writer.WriteStringValue("settings");
-				return;
-			case Feature.Mappings:
-				writer.WriteStringValue("mappings");
-				return;
-			case Feature.Aliases:
-				writer.WriteStringValue("aliases");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "upgrade")]
+	Upgrade
 }
 
-[JsonConverter(typeof(IndexCheckOnStartupConverter))]
-public enum IndexCheckOnStartup
-{
-	[EnumMember(Value = "true")]
-	True,
-	[EnumMember(Value = "false")]
-	False,
-	[EnumMember(Value = "checksum")]
-	Checksum
-}
-
-internal sealed class IndexCheckOnStartupConverter : JsonConverter<IndexCheckOnStartup>
-{
-	public override IndexCheckOnStartup Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "true":
-				return IndexCheckOnStartup.True;
-			case "false":
-				return IndexCheckOnStartup.False;
-			case "checksum":
-				return IndexCheckOnStartup.Checksum;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndexCheckOnStartup value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndexCheckOnStartup.True:
-				writer.WriteStringValue("true");
-				return;
-			case IndexCheckOnStartup.False:
-				writer.WriteStringValue("false");
-				return;
-			case IndexCheckOnStartup.Checksum:
-				writer.WriteStringValue("checksum");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(IndexMetadataStateConverter))]
-public enum IndexMetadataState
-{
-	[EnumMember(Value = "open")]
-	Open,
-	[EnumMember(Value = "close")]
-	Close
-}
-
-internal sealed class IndexMetadataStateConverter : JsonConverter<IndexMetadataState>
-{
-	public override IndexMetadataState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "open":
-				return IndexMetadataState.Open;
-			case "close":
-				return IndexMetadataState.Close;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndexMetadataState value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndexMetadataState.Open:
-				writer.WriteStringValue("open");
-				return;
-			case IndexMetadataState.Close:
-				writer.WriteStringValue("close");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(IndexRoutingAllocationOptionsConverter))]
-public enum IndexRoutingAllocationOptions
-{
-	[EnumMember(Value = "primaries")]
-	Primaries,
-	[EnumMember(Value = "none")]
-	None,
-	[EnumMember(Value = "new_primaries")]
-	NewPrimaries,
-	[EnumMember(Value = "all")]
-	All
-}
-
-internal sealed class IndexRoutingAllocationOptionsConverter : JsonConverter<IndexRoutingAllocationOptions>
-{
-	public override IndexRoutingAllocationOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "primaries":
-				return IndexRoutingAllocationOptions.Primaries;
-			case "none":
-				return IndexRoutingAllocationOptions.None;
-			case "new_primaries":
-				return IndexRoutingAllocationOptions.NewPrimaries;
-			case "all":
-				return IndexRoutingAllocationOptions.All;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndexRoutingAllocationOptions value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndexRoutingAllocationOptions.Primaries:
-				writer.WriteStringValue("primaries");
-				return;
-			case IndexRoutingAllocationOptions.None:
-				writer.WriteStringValue("none");
-				return;
-			case IndexRoutingAllocationOptions.NewPrimaries:
-				writer.WriteStringValue("new_primaries");
-				return;
-			case IndexRoutingAllocationOptions.All:
-				writer.WriteStringValue("all");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(IndexRoutingRebalanceOptionsConverter))]
-public enum IndexRoutingRebalanceOptions
-{
-	[EnumMember(Value = "replicas")]
-	Replicas,
-	[EnumMember(Value = "primaries")]
-	Primaries,
-	[EnumMember(Value = "none")]
-	None,
-	[EnumMember(Value = "all")]
-	All
-}
-
-internal sealed class IndexRoutingRebalanceOptionsConverter : JsonConverter<IndexRoutingRebalanceOptions>
-{
-	public override IndexRoutingRebalanceOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "replicas":
-				return IndexRoutingRebalanceOptions.Replicas;
-			case "primaries":
-				return IndexRoutingRebalanceOptions.Primaries;
-			case "none":
-				return IndexRoutingRebalanceOptions.None;
-			case "all":
-				return IndexRoutingRebalanceOptions.All;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, IndexRoutingRebalanceOptions value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case IndexRoutingRebalanceOptions.Replicas:
-				writer.WriteStringValue("replicas");
-				return;
-			case IndexRoutingRebalanceOptions.Primaries:
-				writer.WriteStringValue("primaries");
-				return;
-			case IndexRoutingRebalanceOptions.None:
-				writer.WriteStringValue("none");
-				return;
-			case IndexRoutingRebalanceOptions.All:
-				writer.WriteStringValue("all");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(ManagedByConverter))]
-public enum ManagedBy
-{
-	[EnumMember(Value = "Unmanaged")]
-	Unmanaged,
-	[EnumMember(Value = "Index Lifecycle Management")]
-	Ilm,
-	[EnumMember(Value = "Data stream lifecycle")]
-	Datastream
-}
-
-internal sealed class ManagedByConverter : JsonConverter<ManagedBy>
-{
-	public override ManagedBy Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "Unmanaged":
-				return ManagedBy.Unmanaged;
-			case "Index Lifecycle Management":
-				return ManagedBy.Ilm;
-			case "Data stream lifecycle":
-				return ManagedBy.Datastream;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ManagedBy value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ManagedBy.Unmanaged:
-				writer.WriteStringValue("Unmanaged");
-				return;
-			case ManagedBy.Ilm:
-				writer.WriteStringValue("Index Lifecycle Management");
-				return;
-			case ManagedBy.Datastream:
-				writer.WriteStringValue("Data stream lifecycle");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(NumericFielddataFormatConverter))]
-public enum NumericFielddataFormat
-{
-	[EnumMember(Value = "disabled")]
-	Disabled,
-	[EnumMember(Value = "array")]
-	Array
-}
-
-internal sealed class NumericFielddataFormatConverter : JsonConverter<NumericFielddataFormat>
-{
-	public override NumericFielddataFormat Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "disabled":
-				return NumericFielddataFormat.Disabled;
-			case "array":
-				return NumericFielddataFormat.Array;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, NumericFielddataFormat value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case NumericFielddataFormat.Disabled:
-				writer.WriteStringValue("disabled");
-				return;
-			case NumericFielddataFormat.Array:
-				writer.WriteStringValue("array");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SegmentSortMissingConverter))]
-public enum SegmentSortMissing
-{
-	[EnumMember(Value = "_last")]
-	Last,
-	[EnumMember(Value = "_first")]
-	First
-}
-
-internal sealed class SegmentSortMissingConverter : JsonConverter<SegmentSortMissing>
-{
-	public override SegmentSortMissing Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "_last":
-				return SegmentSortMissing.Last;
-			case "_first":
-				return SegmentSortMissing.First;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SegmentSortMissing value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SegmentSortMissing.Last:
-				writer.WriteStringValue("_last");
-				return;
-			case SegmentSortMissing.First:
-				writer.WriteStringValue("_first");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SegmentSortModeConverter))]
-public enum SegmentSortMode
-{
-	[EnumMember(Value = "min")]
-	Min,
-	[EnumMember(Value = "max")]
-	Max
-}
-
-internal sealed class SegmentSortModeConverter : JsonConverter<SegmentSortMode>
-{
-	public override SegmentSortMode Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "min":
-			case "MIN":
-				return SegmentSortMode.Min;
-			case "max":
-			case "MAX":
-				return SegmentSortMode.Max;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SegmentSortMode value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SegmentSortMode.Min:
-				writer.WriteStringValue("min");
-				return;
-			case SegmentSortMode.Max:
-				writer.WriteStringValue("max");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(SegmentSortOrderConverter))]
-public enum SegmentSortOrder
-{
-	[EnumMember(Value = "desc")]
-	Desc,
-	[EnumMember(Value = "asc")]
-	Asc
-}
-
-internal sealed class SegmentSortOrderConverter : JsonConverter<SegmentSortOrder>
-{
-	public override SegmentSortOrder Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "desc":
-			case "DESC":
-				return SegmentSortOrder.Desc;
-			case "asc":
-			case "ASC":
-				return SegmentSortOrder.Asc;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, SegmentSortOrder value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case SegmentSortOrder.Desc:
-				writer.WriteStringValue("desc");
-				return;
-			case SegmentSortOrder.Asc:
-				writer.WriteStringValue("asc");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(ShardRoutingStateConverter))]
-public enum ShardRoutingState
-{
-	[EnumMember(Value = "UNASSIGNED")]
-	Unassigned,
-	[EnumMember(Value = "STARTED")]
-	Started,
-	[EnumMember(Value = "RELOCATING")]
-	Relocating,
-	[EnumMember(Value = "INITIALIZING")]
-	Initializing
-}
-
-internal sealed class ShardRoutingStateConverter : JsonConverter<ShardRoutingState>
-{
-	public override ShardRoutingState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "UNASSIGNED":
-				return ShardRoutingState.Unassigned;
-			case "STARTED":
-				return ShardRoutingState.Started;
-			case "RELOCATING":
-				return ShardRoutingState.Relocating;
-			case "INITIALIZING":
-				return ShardRoutingState.Initializing;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ShardRoutingState value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ShardRoutingState.Unassigned:
-				writer.WriteStringValue("UNASSIGNED");
-				return;
-			case ShardRoutingState.Started:
-				writer.WriteStringValue("STARTED");
-				return;
-			case ShardRoutingState.Relocating:
-				writer.WriteStringValue("RELOCATING");
-				return;
-			case ShardRoutingState.Initializing:
-				writer.WriteStringValue("INITIALIZING");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(ShardStoreAllocationConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreAllocationConverter))]
 public enum ShardStoreAllocation
 {
-	[EnumMember(Value = "unused")]
-	Unused,
-	[EnumMember(Value = "replica")]
+	[System.Runtime.Serialization.EnumMember(Value = "primary")]
+	Primary,
+	[System.Runtime.Serialization.EnumMember(Value = "replica")]
 	Replica,
-	[EnumMember(Value = "primary")]
-	Primary
+	[System.Runtime.Serialization.EnumMember(Value = "unused")]
+	Unused
 }
 
-internal sealed class ShardStoreAllocationConverter : JsonConverter<ShardStoreAllocation>
-{
-	public override ShardStoreAllocation Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "unused":
-				return ShardStoreAllocation.Unused;
-			case "replica":
-				return ShardStoreAllocation.Replica;
-			case "primary":
-				return ShardStoreAllocation.Primary;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ShardStoreAllocation value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ShardStoreAllocation.Unused:
-				writer.WriteStringValue("unused");
-				return;
-			case ShardStoreAllocation.Replica:
-				writer.WriteStringValue("replica");
-				return;
-			case ShardStoreAllocation.Primary:
-				writer.WriteStringValue("primary");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
-}
-
-[JsonConverter(typeof(ShardStoreStatusConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardStoreStatusConverter))]
 public enum ShardStoreStatus
 {
-	/// <summary>
-	/// <para>
-	/// One or more replica shards are unassigned.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "yellow")]
-	Yellow,
-	/// <summary>
-	/// <para>
-	/// The primary shard is unassigned.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "red")]
-	Red,
-	/// <summary>
-	/// <para>
-	/// The primary shard and all replica shards are assigned.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "green")]
-	Green,
 	/// <summary>
 	/// <para>
 	/// Return all shards, regardless of health status.
 	/// </para>
 	/// </summary>
-	[EnumMember(Value = "all")]
-	All
+	[System.Runtime.Serialization.EnumMember(Value = "all")]
+	All,
+	/// <summary>
+	/// <para>
+	/// The primary shard and all replica shards are assigned.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "green")]
+	Green,
+	/// <summary>
+	/// <para>
+	/// The primary shard is unassigned.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "red")]
+	Red,
+	/// <summary>
+	/// <para>
+	/// One or more replica shards are unassigned.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "yellow")]
+	Yellow
 }
 
-internal sealed class ShardStoreStatusConverter : JsonConverter<ShardStoreStatus>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexMetadataStateConverter))]
+public enum IndexMetadataState
 {
-	public override ShardStoreStatus Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "yellow":
-				return ShardStoreStatus.Yellow;
-			case "red":
-				return ShardStoreStatus.Red;
-			case "green":
-				return ShardStoreStatus.Green;
-			case "all":
-				return ShardStoreStatus.All;
-		}
-
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
-
-	public override void Write(Utf8JsonWriter writer, ShardStoreStatus value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case ShardStoreStatus.Yellow:
-				writer.WriteStringValue("yellow");
-				return;
-			case ShardStoreStatus.Red:
-				writer.WriteStringValue("red");
-				return;
-			case ShardStoreStatus.Green:
-				writer.WriteStringValue("green");
-				return;
-			case ShardStoreStatus.All:
-				writer.WriteStringValue("all");
-				return;
-		}
-
-		writer.WriteNullValue();
-	}
+	[System.Runtime.Serialization.EnumMember(Value = "close")]
+	Close,
+	[System.Runtime.Serialization.EnumMember(Value = "open")]
+	Open
 }
 
-[JsonConverter(typeof(EnumStructConverter<StorageType>))]
-public readonly partial struct StorageType : IEnumStruct<StorageType>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShardRoutingStateConverter))]
+public enum ShardRoutingState
+{
+	[System.Runtime.Serialization.EnumMember(Value = "INITIALIZING")]
+	Initializing,
+	[System.Runtime.Serialization.EnumMember(Value = "RELOCATING")]
+	Relocating,
+	[System.Runtime.Serialization.EnumMember(Value = "STARTED")]
+	Started,
+	[System.Runtime.Serialization.EnumMember(Value = "UNASSIGNED")]
+	Unassigned
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexCheckOnStartupConverter))]
+public enum IndexCheckOnStartup
+{
+	[System.Runtime.Serialization.EnumMember(Value = "checksum")]
+	Checksum,
+	[System.Runtime.Serialization.EnumMember(Value = "false")]
+	False,
+	[System.Runtime.Serialization.EnumMember(Value = "true")]
+	True
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ManagedByConverter))]
+public enum ManagedBy
+{
+	[System.Runtime.Serialization.EnumMember(Value = "Data stream lifecycle")]
+	Datastream,
+	[System.Runtime.Serialization.EnumMember(Value = "Index Lifecycle Management")]
+	Ilm,
+	[System.Runtime.Serialization.EnumMember(Value = "Unmanaged")]
+	Unmanaged
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.TranslogDurabilityConverter))]
+public enum TranslogDurability
+{
+	/// <summary>
+	/// <para>
+	/// fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes
+	/// since the last automatic commit will be discarded.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "async")]
+	Async,
+	/// <summary>
+	/// <para>
+	/// (default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
+	/// will already have been committed to disk.
+	/// </para>
+	/// </summary>
+	[System.Runtime.Serialization.EnumMember(Value = "request")]
+	Request
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.StorageTypeConverter))]
+public readonly partial struct StorageType : Elastic.Clients.Elasticsearch.Serialization.IEnumStruct<Elastic.Clients.Elasticsearch.IndexManagement.StorageType>
 {
 	public StorageType(string value) => Value = value;
-
+#if NET7_0_OR_GREATER
+	static StorageType IEnumStruct<StorageType>.Create(string value) => value;
+#else
 	StorageType IEnumStruct<StorageType>.Create(string value) => value;
-
+#endif
 	public readonly string Value { get; }
 
 	/// <summary>
 	/// <para>
-	/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple
-	/// threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java
-	/// implementation and disables some optimizations for heap memory usage.
+	/// Default file system implementation. This will pick the best implementation depending on the operating environment, which
+	/// is currently hybridfs on all supported systems but is subject to change.
 	/// </para>
 	/// </summary>
-	public static StorageType Niofs { get; } = new StorageType("niofs");
-
-	/// <summary>
-	/// <para>
-	/// The MMap FS type stores the shard index on the file system (maps to Lucene MMapDirectory) by mapping a file into
-	/// memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size
-	/// of the file being mapped. Before using this class, be sure you have allowed plenty of virtual address space.
-	/// </para>
-	/// </summary>
-	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
+	public static StorageType Fs { get; } = new StorageType("fs");
 
 	/// <summary>
 	/// <para>
@@ -721,15 +1285,25 @@ public readonly partial struct StorageType : IEnumStruct<StorageType>
 
 	/// <summary>
 	/// <para>
-	/// Default file system implementation. This will pick the best implementation depending on the operating environment, which
-	/// is currently hybridfs on all supported systems but is subject to change.
+	/// The MMap FS type stores the shard index on the file system (maps to Lucene MMapDirectory) by mapping a file into
+	/// memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size
+	/// of the file being mapped. Before using this class, be sure you have allowed plenty of virtual address space.
 	/// </para>
 	/// </summary>
-	public static StorageType Fs { get; } = new StorageType("fs");
+	public static StorageType Mmapfs { get; } = new StorageType("mmapfs");
+
+	/// <summary>
+	/// <para>
+	/// The NIO FS type stores the shard index on the file system (maps to Lucene NIOFSDirectory) using NIO. It allows multiple
+	/// threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java
+	/// implementation and disables some optimizations for heap memory usage.
+	/// </para>
+	/// </summary>
+	public static StorageType Niofs { get; } = new StorageType("niofs");
 
 	public override string ToString() => Value ?? string.Empty;
 
-	public static implicit operator string(StorageType storageType) => storageType.Value;
+	public static implicit operator string(StorageType @enum) => @enum.Value;
 	public static implicit operator StorageType(string value) => new(value);
 
 	public override int GetHashCode() => Value.GetHashCode();
@@ -740,58 +1314,75 @@ public readonly partial struct StorageType : IEnumStruct<StorageType>
 	public static bool operator !=(StorageType a, StorageType b) => !(a == b);
 }
 
-[JsonConverter(typeof(TranslogDurabilityConverter))]
-public enum TranslogDurability
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingAllocationOptionsConverter))]
+public enum IndexRoutingAllocationOptions
 {
-	/// <summary>
-	/// <para>
-	/// (default) fsync and commit after every request. In the event of hardware failure, all acknowledged writes
-	/// will already have been committed to disk.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "request")]
-	Request,
-	/// <summary>
-	/// <para>
-	/// fsync and commit in the background every sync_interval. In the event of a failure, all acknowledged writes
-	/// since the last automatic commit will be discarded.
-	/// </para>
-	/// </summary>
-	[EnumMember(Value = "async")]
-	Async
+	[System.Runtime.Serialization.EnumMember(Value = "all")]
+	All,
+	[System.Runtime.Serialization.EnumMember(Value = "new_primaries")]
+	NewPrimaries,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "primaries")]
+	Primaries
 }
 
-internal sealed class TranslogDurabilityConverter : JsonConverter<TranslogDurability>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.IndexRoutingRebalanceOptionsConverter))]
+public enum IndexRoutingRebalanceOptions
 {
-	public override TranslogDurability Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		var enumString = reader.GetString();
-		switch (enumString)
-		{
-			case "request":
-			case "REQUEST":
-				return TranslogDurability.Request;
-			case "async":
-			case "ASYNC":
-				return TranslogDurability.Async;
-		}
+	[System.Runtime.Serialization.EnumMember(Value = "all")]
+	All,
+	[System.Runtime.Serialization.EnumMember(Value = "none")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "primaries")]
+	Primaries,
+	[System.Runtime.Serialization.EnumMember(Value = "replicas")]
+	Replicas
+}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
-	}
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortOrderConverter))]
+public enum SegmentSortOrder
+{
+	[System.Runtime.Serialization.EnumMember(Value = "asc")]
+	Asc,
+	[System.Runtime.Serialization.EnumMember(Value = "desc")]
+	Desc
+}
 
-	public override void Write(Utf8JsonWriter writer, TranslogDurability value, JsonSerializerOptions options)
-	{
-		switch (value)
-		{
-			case TranslogDurability.Request:
-				writer.WriteStringValue("request");
-				return;
-			case TranslogDurability.Async:
-				writer.WriteStringValue("async");
-				return;
-		}
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortModeConverter))]
+public enum SegmentSortMode
+{
+	[System.Runtime.Serialization.EnumMember(Value = "max")]
+	Max,
+	[System.Runtime.Serialization.EnumMember(Value = "min")]
+	Min
+}
 
-		writer.WriteNullValue();
-	}
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SegmentSortMissingConverter))]
+public enum SegmentSortMissing
+{
+	[System.Runtime.Serialization.EnumMember(Value = "_first")]
+	First,
+	[System.Runtime.Serialization.EnumMember(Value = "_last")]
+	Last
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SourceModeConverter))]
+public enum SourceMode
+{
+	[System.Runtime.Serialization.EnumMember(Value = "disabled")]
+	Disabled,
+	[System.Runtime.Serialization.EnumMember(Value = "stored")]
+	Stored,
+	[System.Runtime.Serialization.EnumMember(Value = "synthetic")]
+	Synthetic
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.NumericFielddataFormatConverter))]
+public enum NumericFielddataFormat
+{
+	[System.Runtime.Serialization.EnumMember(Value = "array")]
+	Array,
+	[System.Runtime.Serialization.EnumMember(Value = "disabled")]
+	Disabled
 }

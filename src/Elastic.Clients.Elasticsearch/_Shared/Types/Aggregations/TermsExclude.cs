@@ -7,12 +7,11 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using Elastic.Clients.Elasticsearch.Serialization;
+
 #nullable enable
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Aggregations;
-#else
+
 namespace Elastic.Clients.Elasticsearch.Aggregations;
-#endif
 
 /// <summary>
 /// Filters which terms to exclude from the response.
@@ -59,44 +58,27 @@ public sealed class TermsExclude
 
 internal sealed class TermsExcludeConverter : JsonConverter<TermsExclude>
 {
-	public override TermsExclude? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override TermsExclude Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.Null)
+		return reader.TokenType switch
 		{
-			reader.Read();
-			return null;
-		}
-
-		TermsExclude termsExclude;
-
-		switch (reader.TokenType)
-		{
-			case JsonTokenType.StartArray:
-				var terms = JsonSerializer.Deserialize<string[]>(ref reader, options) ?? Array.Empty<string>();
-				termsExclude = new TermsExclude(terms);
-				break;
-			case JsonTokenType.String:
-				var regex = reader.GetString();
-				termsExclude = new TermsExclude(regex!);
-				break;
-			default:
-				throw new JsonException($"Unexpected token {reader.TokenType} when deserializing {nameof(TermsExclude)}");
-		}
-
-		return termsExclude;
+			JsonTokenType.StartArray => new TermsExclude(reader.ReadCollectionValue<string>(options, null)!),
+			JsonTokenType.String => new TermsExclude(reader.ReadValue<string>(options)!),
+			_ => throw new JsonException(
+				$"Unexpected token {reader.TokenType} when deserializing {nameof(TermsExclude)}")
+		};
 	}
 
 	public override void Write(Utf8JsonWriter writer, TermsExclude value, JsonSerializerOptions options)
 	{
 		if (value is null)
 		{
-			writer.WriteNullValue();
-			return;
+			throw new ArgumentNullException(nameof(value));
 		}
 
 		if (value.Values is not null)
 		{
-			JsonSerializer.Serialize(writer, value.Values, options);
+			writer.WriteCollectionValue(options, value.Values, null);
 			return;
 		}
 

@@ -11,11 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Collections;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 internal class FieldExpressionVisitor : ExpressionVisitor
 {

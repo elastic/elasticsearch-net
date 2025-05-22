@@ -17,69 +17,1768 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-[JsonConverter(typeof(TaskTypeConverter))]
-public enum TaskType
+internal sealed partial class TaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskType>
 {
-	[EnumMember(Value = "text_embedding")]
-	TextEmbedding,
-	[EnumMember(Value = "sparse_embedding")]
-	SparseEmbedding,
-	[EnumMember(Value = "rerank")]
-	Rerank,
-	[EnumMember(Value = "completion")]
-	Completion
-}
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
 
-internal sealed class TaskTypeConverter : JsonConverter<TaskType>
-{
-	public override TaskType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Elastic.Clients.Elasticsearch.Inference.TaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-		var enumString = reader.GetString();
-		switch (enumString)
+		if (reader.ValueTextEquals(MemberChatCompletion))
 		{
-			case "text_embedding":
-				return TaskType.TextEmbedding;
-			case "sparse_embedding":
-				return TaskType.SparseEmbedding;
-			case "rerank":
-				return TaskType.Rerank;
-			case "completion":
-				return TaskType.Completion;
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.ChatCompletion;
 		}
 
-		ThrowHelper.ThrowJsonException();
-		return default;
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.SparseEmbedding;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.SparseEmbedding;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskType)}'.");
 	}
 
-	public override void Write(Utf8JsonWriter writer, TaskType value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskType value, System.Text.Json.JsonSerializerOptions options)
 	{
 		switch (value)
 		{
-			case TaskType.TextEmbedding:
-				writer.WriteStringValue("text_embedding");
-				return;
-			case TaskType.SparseEmbedding:
-				writer.WriteStringValue("sparse_embedding");
-				return;
-			case TaskType.Rerank:
-				writer.WriteStringValue("rerank");
-				return;
-			case TaskType.Completion:
-				writer.WriteStringValue("completion");
-				return;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.SparseEmbedding:
+				writer.WriteStringValue(MemberSparseEmbedding);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class AlibabaCloudTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberSpaceEmbedding = System.Text.Json.JsonEncodedText.Encode("space_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Completion;
 		}
 
-		writer.WriteNullValue();
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberSpaceEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberSpaceEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType)}'.");
 	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.SpaceEmbedding:
+				writer.WriteStringValue(MemberSpaceEmbedding);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class AmazonBedrockTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class AnthropicTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+
+	public override Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.Completion;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.Completion;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class AzureAiStudioTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class AzureOpenAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CohereTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ElasticsearchTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.SparseEmbedding;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.SparseEmbedding;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.SparseEmbedding:
+				writer.WriteStringValue(MemberSparseEmbedding);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class ElserTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.ElserTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.ElserTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElserTaskType.SparseEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.ElserTaskType.SparseEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.ElserTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElserTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.ElserTaskType.SparseEmbedding:
+				writer.WriteStringValue(MemberSparseEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.ElserTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.ElserTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.ElserTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class GoogleAiStudioTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class GoogleVertexAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class HuggingFaceTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class JinaAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.JinaAITaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAITaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class MistralTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.MistralTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.MistralTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.MistralTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.MistralTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.MistralTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.MistralTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.MistralTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.MistralTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class OpenAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.OpenAITaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberChatCompletion = System.Text.Json.JsonEncodedText.Encode("chat_completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.OpenAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberChatCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.ChatCompletion;
+		}
+
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberChatCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.ChatCompletion;
+		}
+
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.Completion;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.OpenAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.ChatCompletion:
+				writer.WriteStringValue(MemberChatCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.OpenAITaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.OpenAITaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.OpenAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class VoyageAITaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
+	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
+	private static readonly System.Text.Json.JsonEncodedText MemberInt8 = System.Text.Json.JsonEncodedText.Encode("int8");
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberByte))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte;
+		}
+
+		if (reader.ValueTextEquals(MemberFloat))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Float;
+		}
+
+		if (reader.ValueTextEquals(MemberInt8))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Int8;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberByte.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte;
+		}
+
+		if (string.Equals(value, MemberFloat.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Float;
+		}
+
+		if (string.Equals(value, MemberInt8.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Int8;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte:
+				writer.WriteStringValue(MemberByte);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Float:
+				writer.WriteStringValue(MemberFloat);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Int8:
+				writer.WriteStringValue(MemberInt8);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CohereSimilarityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine");
+	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product");
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCosine))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.Cosine;
+		}
+
+		if (reader.ValueTextEquals(MemberDotProduct))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.DotProduct;
+		}
+
+		if (reader.ValueTextEquals(MemberL2Norm))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.L2Norm;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCosine.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.Cosine;
+		}
+
+		if (string.Equals(value, MemberDotProduct.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.DotProduct;
+		}
+
+		if (string.Equals(value, MemberL2Norm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.L2Norm;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.Cosine:
+				writer.WriteStringValue(MemberCosine);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.DotProduct:
+				writer.WriteStringValue(MemberDotProduct);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType.L2Norm:
+				writer.WriteStringValue(MemberL2Norm);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereSimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CohereInputTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereInputType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText MemberClustering = System.Text.Json.JsonEncodedText.Encode("clustering");
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereInputType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberClassification))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Classification;
+		}
+
+		if (reader.ValueTextEquals(MemberClustering))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Clustering;
+		}
+
+		if (reader.ValueTextEquals(MemberIngest))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Ingest;
+		}
+
+		if (reader.ValueTextEquals(MemberSearch))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Search;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberClassification.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Classification;
+		}
+
+		if (string.Equals(value, MemberClustering.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Clustering;
+		}
+
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Ingest;
+		}
+
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereInputType.Search;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereInputType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereInputType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Classification:
+				writer.WriteStringValue(MemberClassification);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Clustering:
+				writer.WriteStringValue(MemberClustering);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Ingest:
+				writer.WriteStringValue(MemberIngest);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereInputType.Search:
+				writer.WriteStringValue(MemberSearch);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereInputType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereInputType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereInputType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class CohereTruncateTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereTruncateType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberEnd = System.Text.Json.JsonEncodedText.Encode("END");
+	private static readonly System.Text.Json.JsonEncodedText MemberNone = System.Text.Json.JsonEncodedText.Encode("NONE");
+	private static readonly System.Text.Json.JsonEncodedText MemberStart = System.Text.Json.JsonEncodedText.Encode("START");
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereTruncateType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberEnd))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.End;
+		}
+
+		if (reader.ValueTextEquals(MemberNone))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.None;
+		}
+
+		if (reader.ValueTextEquals(MemberStart))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.Start;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberEnd.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.End;
+		}
+
+		if (string.Equals(value, MemberNone.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.None;
+		}
+
+		if (string.Equals(value, MemberStart.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.Start;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTruncateType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.End:
+				writer.WriteStringValue(MemberEnd);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.None:
+				writer.WriteStringValue(MemberNone);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereTruncateType.Start:
+				writer.WriteStringValue(MemberStart);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.CohereTruncateType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.CohereTruncateType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.CohereTruncateType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class JinaAISimilarityTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCosine = System.Text.Json.JsonEncodedText.Encode("cosine");
+	private static readonly System.Text.Json.JsonEncodedText MemberDotProduct = System.Text.Json.JsonEncodedText.Encode("dot_product");
+	private static readonly System.Text.Json.JsonEncodedText MemberL2Norm = System.Text.Json.JsonEncodedText.Encode("l2_norm");
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCosine))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.Cosine;
+		}
+
+		if (reader.ValueTextEquals(MemberDotProduct))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.DotProduct;
+		}
+
+		if (reader.ValueTextEquals(MemberL2Norm))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.L2Norm;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCosine.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.Cosine;
+		}
+
+		if (string.Equals(value, MemberDotProduct.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.DotProduct;
+		}
+
+		if (string.Equals(value, MemberL2Norm.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.L2Norm;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.Cosine:
+				writer.WriteStringValue(MemberCosine);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.DotProduct:
+				writer.WriteStringValue(MemberDotProduct);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType.L2Norm:
+				writer.WriteStringValue(MemberL2Norm);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityType value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+internal sealed partial class JinaAITextEmbeddingTaskConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText MemberClustering = System.Text.Json.JsonEncodedText.Encode("clustering");
+	private static readonly System.Text.Json.JsonEncodedText MemberIngest = System.Text.Json.JsonEncodedText.Encode("ingest");
+	private static readonly System.Text.Json.JsonEncodedText MemberSearch = System.Text.Json.JsonEncodedText.Encode("search");
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberClassification))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Classification;
+		}
+
+		if (reader.ValueTextEquals(MemberClustering))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Clustering;
+		}
+
+		if (reader.ValueTextEquals(MemberIngest))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Ingest;
+		}
+
+		if (reader.ValueTextEquals(MemberSearch))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Search;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberClassification.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Classification;
+		}
+
+		if (string.Equals(value, MemberClustering.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Clustering;
+		}
+
+		if (string.Equals(value, MemberIngest.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Ingest;
+		}
+
+		if (string.Equals(value, MemberSearch.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Search;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Classification:
+				writer.WriteStringValue(MemberClassification);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Clustering:
+				writer.WriteStringValue(MemberClustering);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Ingest:
+				writer.WriteStringValue(MemberIngest);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask.Search:
+				writer.WriteStringValue(MemberSearch);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTask value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeConverter))]
+public enum TaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskTypeConverter))]
+public enum AlibabaCloudTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "space_embedding")]
+	SpaceEmbedding,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskTypeConverter))]
+public enum AmazonBedrockTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskTypeConverter))]
+public enum AnthropicTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskTypeConverter))]
+public enum AzureAiStudioTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskTypeConverter))]
+public enum AzureOpenAITaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereTaskTypeConverter))]
+public enum CohereTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskTypeConverter))]
+public enum ElasticsearchTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.ElserTaskTypeConverter))]
+public enum ElserTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskTypeConverter))]
+public enum GoogleAiStudioTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskTypeConverter))]
+public enum GoogleVertexAITaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskTypeConverter))]
+public enum HuggingFaceTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.JinaAITaskTypeConverter))]
+public enum JinaAITaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.MistralTaskTypeConverter))]
+public enum MistralTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.OpenAITaskTypeConverter))]
+public enum OpenAITaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "chat_completion")]
+	ChatCompletion,
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskTypeConverter))]
+public enum VoyageAITaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskTypeConverter))]
+public enum WatsonxTaskType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAiConverter))]
+public enum TaskTypeJinaAi
+{
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingTypeConverter))]
+public enum CohereEmbeddingType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "byte")]
+	Byte,
+	[System.Runtime.Serialization.EnumMember(Value = "float")]
+	Float,
+	[System.Runtime.Serialization.EnumMember(Value = "int8")]
+	Int8
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereSimilarityTypeConverter))]
+public enum CohereSimilarityType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "cosine")]
+	Cosine,
+	[System.Runtime.Serialization.EnumMember(Value = "dot_product")]
+	DotProduct,
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereInputTypeConverter))]
+public enum CohereInputType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "classification")]
+	Classification,
+	[System.Runtime.Serialization.EnumMember(Value = "clustering")]
+	Clustering,
+	[System.Runtime.Serialization.EnumMember(Value = "ingest")]
+	Ingest,
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereTruncateTypeConverter))]
+public enum CohereTruncateType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "END")]
+	End,
+	[System.Runtime.Serialization.EnumMember(Value = "NONE")]
+	None,
+	[System.Runtime.Serialization.EnumMember(Value = "START")]
+	Start
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.JinaAISimilarityTypeConverter))]
+public enum JinaAISimilarityType
+{
+	[System.Runtime.Serialization.EnumMember(Value = "cosine")]
+	Cosine,
+	[System.Runtime.Serialization.EnumMember(Value = "dot_product")]
+	DotProduct,
+	[System.Runtime.Serialization.EnumMember(Value = "l2_norm")]
+	L2Norm
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.JinaAITextEmbeddingTaskConverter))]
+public enum JinaAITextEmbeddingTask
+{
+	[System.Runtime.Serialization.EnumMember(Value = "classification")]
+	Classification,
+	[System.Runtime.Serialization.EnumMember(Value = "clustering")]
+	Clustering,
+	[System.Runtime.Serialization.EnumMember(Value = "ingest")]
+	Ingest,
+	[System.Runtime.Serialization.EnumMember(Value = "search")]
+	Search
 }

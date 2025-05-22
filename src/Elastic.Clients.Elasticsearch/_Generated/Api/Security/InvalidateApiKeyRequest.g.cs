@@ -17,21 +17,98 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class InvalidateApiKeyRequestParameters : RequestParameters
+public sealed partial class InvalidateApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class InvalidateApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropIds = System.Text.Json.JsonEncodedText.Encode("ids");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropOwner = System.Text.Json.JsonEncodedText.Encode("owner");
+	private static readonly System.Text.Json.JsonEncodedText PropRealmName = System.Text.Json.JsonEncodedText.Encode("realm_name");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>?> propIds = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propName = default;
+		LocalJsonValue<bool?> propOwner = default;
+		LocalJsonValue<string?> propRealmName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propIds.TryReadProperty(ref reader, options, PropIds, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, null)))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propOwner.TryReadProperty(ref reader, options, PropOwner, null))
+			{
+				continue;
+			}
+
+			if (propRealmName.TryReadProperty(ref reader, options, PropRealmName, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Id = propId.Value,
+			Ids = propIds.Value,
+			Name = propName.Value,
+			Owner = propOwner.Value,
+			RealmName = propRealmName.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropIds, value.Ids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Id>(o, v, null));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropOwner, value.Owner, null, null);
+		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,8 +118,12 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// <para>
 /// This API invalidates API keys created by the create API key or grant API key APIs.
 /// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
+/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
+/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
+/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
 /// </para>
 /// <list type="bullet">
@@ -53,7 +134,7 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// </item>
 /// <item>
 /// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
+/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
 /// </para>
 /// </item>
 /// <item>
@@ -63,17 +144,33 @@ public sealed partial class InvalidateApiKeyRequestParameters : RequestParameter
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApiKeyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestConverter))]
+public sealed partial class InvalidateApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateApiKey;
+#if NET7_0_OR_GREATER
+	public InvalidateApiKeyRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InvalidateApiKeyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityInvalidateApiKey;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.invalidate_api_key";
 
-	[JsonInclude, JsonPropertyName("id")]
 	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
@@ -82,8 +179,7 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ids")]
-	public ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? Ids { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -91,16 +187,17 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 	/// This parameter cannot be used with any of <c>ids</c>, <c>realm_name</c> or <c>username</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("name")]
 	public Elastic.Clients.Elasticsearch.Name? Name { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Can be used to query API keys owned by the currently authenticated user.
+	/// Query API keys owned by the currently authenticated user.
 	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
 	/// </para>
+	/// <para>
+	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
+	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("owner")]
 	public bool? Owner { get; set; }
 
 	/// <summary>
@@ -109,16 +206,14 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("realm_name")]
 	public string? RealmName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
+	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
@@ -129,8 +224,12 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// <para>
 /// This API invalidates API keys created by the create API key or grant API key APIs.
 /// Invalidated API keys fail authentication, but they can still be viewed using the get API key information and query API key information APIs, for at least the configured retention period, until they are automatically deleted.
-/// The <c>manage_api_key</c> privilege allows deleting any API keys.
-/// The <c>manage_own_api_key</c> only allows deleting API keys that are owned by the user.
+/// </para>
+/// <para>
+/// To use this API, you must have at least the <c>manage_security</c>, <c>manage_api_key</c>, or <c>manage_own_api_key</c> cluster privileges.
+/// The <c>manage_security</c> privilege allows deleting any API key, including both REST and cross cluster API keys.
+/// The <c>manage_api_key</c> privilege allows deleting any REST API key, but not cross cluster API keys.
+/// The <c>manage_own_api_key</c> only allows deleting REST API keys that are owned by the user.
 /// In addition, with the <c>manage_own_api_key</c> privilege, an invalidation request must be issued in one of the three formats:
 /// </para>
 /// <list type="bullet">
@@ -141,7 +240,7 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// </item>
 /// <item>
 /// <para>
-/// Or, set both <c>username</c> and <c>realm_name</c> to match the user’s identity.
+/// Or, set both <c>username</c> and <c>realm_name</c> to match the user's identity.
 /// </para>
 /// </item>
 /// <item>
@@ -151,33 +250,28 @@ public sealed partial class InvalidateApiKeyRequest : PlainRequest<InvalidateApi
 /// </item>
 /// </list>
 /// </summary>
-public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescriptor<InvalidateApiKeyRequestDescriptor, InvalidateApiKeyRequestParameters>
+public readonly partial struct InvalidateApiKeyRequestDescriptor
 {
-	internal InvalidateApiKeyRequestDescriptor(Action<InvalidateApiKeyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InvalidateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public InvalidateApiKeyRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateApiKey;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.invalidate_api_key";
-
-	private Elastic.Clients.Elasticsearch.Id? IdValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Id>? IdsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Name? NameValue { get; set; }
-	private bool? OwnerValue { get; set; }
-	private string? RealmNameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
-
-	public InvalidateApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		IdValue = id;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -186,10 +280,22 @@ public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescripto
 	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
 	/// </para>
 	/// </summary>
-	public InvalidateApiKeyRequestDescriptor Ids(ICollection<Elastic.Clients.Elasticsearch.Id>? ids)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Id>? value)
 	{
-		IdsValue = ids;
-		return Self;
+		Instance.Ids = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of API key ids.
+	/// This parameter cannot be used with any of <c>name</c>, <c>realm_name</c>, or <c>username</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Ids(params Elastic.Clients.Elasticsearch.Id[] values)
+	{
+		Instance.Ids = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -198,22 +304,25 @@ public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescripto
 	/// This parameter cannot be used with any of <c>ids</c>, <c>realm_name</c> or <c>username</c>.
 	/// </para>
 	/// </summary>
-	public InvalidateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		NameValue = name;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Can be used to query API keys owned by the currently authenticated user.
+	/// Query API keys owned by the currently authenticated user.
 	/// The <c>realm_name</c> or <c>username</c> parameters cannot be specified when this parameter is set to <c>true</c> as they are assumed to be the currently authenticated ones.
 	/// </para>
+	/// <para>
+	/// NOTE: At least one of <c>ids</c>, <c>name</c>, <c>username</c>, and <c>realm_name</c> must be specified if <c>owner</c> is <c>false</c>.
+	/// </para>
 	/// </summary>
-	public InvalidateApiKeyRequestDescriptor Owner(bool? owner = true)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Owner(bool? value = true)
 	{
-		OwnerValue = owner;
-		return Self;
+		Instance.Owner = value;
+		return this;
 	}
 
 	/// <summary>
@@ -222,63 +331,76 @@ public sealed partial class InvalidateApiKeyRequestDescriptor : RequestDescripto
 	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public InvalidateApiKeyRequestDescriptor RealmName(string? realmName)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor RealmName(string? value)
 	{
-		RealmNameValue = realmName;
-		return Self;
+		Instance.RealmName = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// The username of a user.
-	/// This parameter cannot be used with either <c>ids</c> or <c>name</c>, or when <c>owner</c> flag is set to <c>true</c>.
+	/// This parameter cannot be used with either <c>ids</c> or <c>name</c> or when <c>owner</c> flag is set to <c>true</c>.
 	/// </para>
 	/// </summary>
-	public InvalidateApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (IdValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("id");
-			JsonSerializer.Serialize(writer, IdValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (IdsValue is not null)
-		{
-			writer.WritePropertyName("ids");
-			JsonSerializer.Serialize(writer, IdsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (NameValue is not null)
-		{
-			writer.WritePropertyName("name");
-			JsonSerializer.Serialize(writer, NameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (OwnerValue.HasValue)
-		{
-			writer.WritePropertyName("owner");
-			writer.WriteBooleanValue(OwnerValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(RealmNameValue))
-		{
-			writer.WritePropertyName("realm_name");
-			writer.WriteStringValue(RealmNameValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateApiKeyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

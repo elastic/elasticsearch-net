@@ -17,75 +17,155 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class LatLonGeoLocation
+internal sealed partial class LatLonGeoLocationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LatLonGeoLocation>
 {
-	/// <summary>
-	/// <para>
-	/// Latitude
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("lat")]
-	public double Lat { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropLat = System.Text.Json.JsonEncodedText.Encode("lat");
+	private static readonly System.Text.Json.JsonEncodedText PropLon = System.Text.Json.JsonEncodedText.Encode("lon");
 
-	/// <summary>
-	/// <para>
-	/// Longitude
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("lon")]
-	public double Lon { get; set; }
-}
-
-public sealed partial class LatLonGeoLocationDescriptor : SerializableDescriptor<LatLonGeoLocationDescriptor>
-{
-	internal LatLonGeoLocationDescriptor(Action<LatLonGeoLocationDescriptor> configure) => configure.Invoke(this);
-
-	public LatLonGeoLocationDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.LatLonGeoLocation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double> propLat = default;
+		LocalJsonValue<double> propLon = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLat.TryReadProperty(ref reader, options, PropLat, null))
+			{
+				continue;
+			}
+
+			if (propLon.TryReadProperty(ref reader, options, PropLon, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Lat = propLat.Value,
+			Lon = propLon.Value
+		};
 	}
 
-	private double LatValue { get; set; }
-	private double LonValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Latitude
-	/// </para>
-	/// </summary>
-	public LatLonGeoLocationDescriptor Lat(double lat)
-	{
-		LatValue = lat;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Longitude
-	/// </para>
-	/// </summary>
-	public LatLonGeoLocationDescriptor Lon(double lon)
-	{
-		LonValue = lon;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LatLonGeoLocation value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("lat");
-		writer.WriteNumberValue(LatValue);
-		writer.WritePropertyName("lon");
-		writer.WriteNumberValue(LonValue);
+		writer.WriteProperty(options, PropLat, value.Lat, null, null);
+		writer.WriteProperty(options, PropLon, value.Lon, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LatLonGeoLocationConverter))]
+public sealed partial class LatLonGeoLocation
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatLonGeoLocation(double lat, double lon)
+	{
+		Lat = lat;
+		Lon = lon;
+	}
+#if NET7_0_OR_GREATER
+	public LatLonGeoLocation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public LatLonGeoLocation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Latitude
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Lat { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Longitude
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double Lon { get; set; }
+}
+
+public readonly partial struct LatLonGeoLocationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.LatLonGeoLocation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatLonGeoLocationDescriptor(Elastic.Clients.Elasticsearch.LatLonGeoLocation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public LatLonGeoLocationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor(Elastic.Clients.Elasticsearch.LatLonGeoLocation instance) => new Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Latitude
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor Lat(double value)
+	{
+		Instance.Lat = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Longitude
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor Lon(double value)
+	{
+		Instance.Lon = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.LatLonGeoLocation Build(System.Action<Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.LatLonGeoLocationDescriptor(new Elastic.Clients.Elasticsearch.LatLonGeoLocation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

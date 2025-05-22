@@ -17,39 +17,235 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed partial class QueryRequestParameters : RequestParameters
+public sealed partial class QueryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Format for the response.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 }
 
+internal sealed partial class QueryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.QueryRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
+	private static readonly System.Text.Json.JsonEncodedText PropCatalog = System.Text.Json.JsonEncodedText.Encode("catalog");
+	private static readonly System.Text.Json.JsonEncodedText PropColumnar = System.Text.Json.JsonEncodedText.Encode("columnar");
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldMultiValueLeniency = System.Text.Json.JsonEncodedText.Encode("field_multi_value_leniency");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUsingFrozen = System.Text.Json.JsonEncodedText.Encode("index_using_frozen");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
+	private static readonly System.Text.Json.JsonEncodedText PropPageTimeout = System.Text.Json.JsonEncodedText.Encode("page_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRequestTimeout = System.Text.Json.JsonEncodedText.Encode("request_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeZone = System.Text.Json.JsonEncodedText.Encode("time_zone");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+
+	public override Elastic.Clients.Elasticsearch.Sql.QueryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowPartialSearchResults = default;
+		LocalJsonValue<string?> propCatalog = default;
+		LocalJsonValue<bool?> propColumnar = default;
+		LocalJsonValue<string?> propCursor = default;
+		LocalJsonValue<int?> propFetchSize = default;
+		LocalJsonValue<bool?> propFieldMultiValueLeniency = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.Query?> propFilter = default;
+		LocalJsonValue<bool?> propIndexUsingFrozen = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<bool?> propKeepOnCompletion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propPageTimeout = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<string?> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propRequestTimeout = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<string?> propTimeZone = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
+			{
+				continue;
+			}
+
+			if (propCatalog.TryReadProperty(ref reader, options, PropCatalog, null))
+			{
+				continue;
+			}
+
+			if (propColumnar.TryReadProperty(ref reader, options, PropColumnar, null))
+			{
+				continue;
+			}
+
+			if (propCursor.TryReadProperty(ref reader, options, PropCursor, null))
+			{
+				continue;
+			}
+
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			{
+				continue;
+			}
+
+			if (propFieldMultiValueLeniency.TryReadProperty(ref reader, options, PropFieldMultiValueLeniency, null))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, null))
+			{
+				continue;
+			}
+
+			if (propIndexUsingFrozen.TryReadProperty(ref reader, options, PropIndexUsingFrozen, null))
+			{
+				continue;
+			}
+
+			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
+			{
+				continue;
+			}
+
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
+			{
+				continue;
+			}
+
+			if (propPageTimeout.TryReadProperty(ref reader, options, PropPageTimeout, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propRequestTimeout.TryReadProperty(ref reader, options, PropRequestTimeout, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propTimeZone.TryReadProperty(ref reader, options, PropTimeZone, null))
+			{
+				continue;
+			}
+
+			if (propWaitForCompletionTimeout.TryReadProperty(ref reader, options, PropWaitForCompletionTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowPartialSearchResults = propAllowPartialSearchResults.Value,
+			Catalog = propCatalog.Value,
+			Columnar = propColumnar.Value,
+			Cursor = propCursor.Value,
+			FetchSize = propFetchSize.Value,
+			FieldMultiValueLeniency = propFieldMultiValueLeniency.Value,
+			Filter = propFilter.Value,
+			IndexUsingFrozen = propIndexUsingFrozen.Value,
+			KeepAlive = propKeepAlive.Value,
+			KeepOnCompletion = propKeepOnCompletion.Value,
+			PageTimeout = propPageTimeout.Value,
+			Params = propParams.Value,
+			Query = propQuery.Value,
+			RequestTimeout = propRequestTimeout.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
+			TimeZone = propTimeZone.Value,
+			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.QueryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
+		writer.WriteProperty(options, PropCatalog, value.Catalog, null, null);
+		writer.WriteProperty(options, PropColumnar, value.Columnar, null, null);
+		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFieldMultiValueLeniency, value.FieldMultiValueLeniency, null, null);
+		writer.WriteProperty(options, PropFilter, value.Filter, null, null);
+		writer.WriteProperty(options, PropIndexUsingFrozen, value.IndexUsingFrozen, null, null);
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
+		writer.WriteProperty(options, PropPageTimeout, value.PageTimeout, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropRequestTimeout, value.RequestTimeout, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropTimeZone, value.TimeZone, null, null);
+		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
-public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.QueryRequestConverter))]
+public sealed partial class QueryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.QueryRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
+#if NET7_0_OR_GREATER
+	public QueryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public QueryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SqlQuery;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -57,108 +253,111 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 
 	/// <summary>
 	/// <para>
-	/// Format for the response.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Sql.SqlFormat? Format { get => Q<Elastic.Clients.Elasticsearch.Sql.SqlFormat?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("catalog")]
+	public bool? AllowPartialSearchResults { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
+	/// </para>
+	/// </summary>
 	public string? Catalog { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("columnar")]
 	public bool? Columnar { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cursor")]
 	public string? Cursor { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_multi_value_leniency")]
 	public bool? FieldMultiValueLeniency { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
 	public Elastic.Clients.Elasticsearch.QueryDsl.Query? Filter { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index_using_frozen")]
 	public bool? IndexUsingFrozen { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("keep_alive")]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("page_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? PageTimeout { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The SQL query to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
 	public string? Query { get; set; }
 
 	/// <summary>
@@ -166,227 +365,274 @@ public sealed partial class QueryRequest : PlainRequest<QueryRequestParameters>
 	/// The timeout before the request fails.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("request_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? RequestTimeout { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// The ISO-8601 time zone ID for the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("time_zone")]
 	public string? TimeZone { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
-public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescriptor<QueryRequestDescriptor<TDocument>, QueryRequestParameters>
+public readonly partial struct QueryRequestDescriptor
 {
-	internal QueryRequestDescriptor(Action<QueryRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.QueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "sql.query";
-
-	public QueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
-
-	private string? CatalogValue { get; set; }
-	private bool? ColumnarValue { get; set; }
-	private string? CursorValue { get; set; }
-	private int? FetchSizeValue { get; set; }
-	private bool? FieldMultiValueLeniencyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private bool? IndexUsingFrozenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-	private bool? KeepOnCompletionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private string? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance) => new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Catalog(string? catalog)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? value)
 	{
-		CatalogValue = catalog;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AllowPartialSearchResults(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.AllowPartialSearchResults = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Catalog(string? value)
+	{
+		Instance.Catalog = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Columnar(bool? value = true)
+	{
+		Instance.Columnar = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Cursor(string? cursor)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Cursor(string? value)
 	{
-		CursorValue = cursor;
-		return Self;
+		Instance.Cursor = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FieldMultiValueLeniency(bool? value = true)
 	{
-		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
-		return Self;
+		Instance.FieldMultiValueLeniency = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? indexUsingFrozen = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> action)
 	{
-		IndexUsingFrozenValue = indexUsingFrozen;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Filter<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>> action)
 	{
-		KeepAliveValue = keepAlive;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor IndexUsingFrozen(bool? value = true)
 	{
-		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
+		Instance.IndexUsingFrozen = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		PageTimeoutValue = pageTimeout;
-		return Self;
+		Instance.KeepAlive = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor KeepOnCompletion(bool? value = true)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.KeepOnCompletion = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> Query(string? query)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.PageTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The values for parameters in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The values for parameters in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The values for parameters in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The SQL query to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Query(string? value)
+	{
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -394,351 +640,412 @@ public sealed partial class QueryRequestDescriptor<TDocument> : RequestDescripto
 	/// The timeout before the request fails.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		RequestTimeoutValue = requestTimeout;
-		return Self;
+		Instance.RequestTimeout = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings()
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
 	{
-		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CatalogValue))
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ISO-8601 time zone ID for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.QueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("catalog");
-			writer.WriteStringValue(CatalogValue);
+			return new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor(new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(CursorValue))
-		{
-			writer.WritePropertyName("cursor");
-			writer.WriteStringValue(CursorValue);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FieldMultiValueLeniencyValue.HasValue)
-		{
-			writer.WritePropertyName("field_multi_value_leniency");
-			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndexUsingFrozenValue.HasValue)
-		{
-			writer.WritePropertyName("index_using_frozen");
-			writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (KeepAliveValue is not null)
-		{
-			writer.WritePropertyName("keep_alive");
-			JsonSerializer.Serialize(writer, KeepAliveValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (KeepOnCompletionValue.HasValue)
-		{
-			writer.WritePropertyName("keep_on_completion");
-			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (PageTimeoutValue is not null)
-		{
-			writer.WritePropertyName("page_timeout");
-			JsonSerializer.Serialize(writer, PageTimeoutValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryValue))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-		}
-
-		if (RequestTimeoutValue is not null)
-		{
-			writer.WritePropertyName("request_timeout");
-			JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (WaitForCompletionTimeoutValue is not null)
-		{
-			writer.WritePropertyName("wait_for_completion_timeout");
-			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Executes a SQL request
+/// Get SQL search results.
+/// Run an SQL request.
 /// </para>
 /// </summary>
-public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequestDescriptor, QueryRequestParameters>
+public readonly partial struct QueryRequestDescriptor<TDocument>
 {
-	internal QueryRequestDescriptor(Action<QueryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.QueryRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public QueryRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public QueryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlQuery;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "sql.query";
-
-	public QueryRequestDescriptor Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? format) => Qs("format", format);
-
-	private string? CatalogValue { get; set; }
-	private bool? ColumnarValue { get; set; }
-	private string? CursorValue { get; set; }
-	private int? FetchSizeValue { get; set; }
-	private bool? FieldMultiValueLeniencyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.Query? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private bool? IndexUsingFrozenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-	private bool? KeepOnCompletionValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? PageTimeoutValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private string? QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? RequestTimeoutValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
-	private string? TimeZoneValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Sql.QueryRequest instance) => new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Default catalog (cluster) for queries. If unspecified, the queries execute on the data in the local cluster only.
+	/// The format for the response.
+	/// You can also specify a format using the <c>Accept</c> HTTP header.
+	/// If you specify both this parameter and the <c>Accept</c> HTTP header, this parameter takes precedence.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Catalog(string? catalog)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Format(Elastic.Clients.Elasticsearch.Sql.SqlFormat? value)
 	{
-		CatalogValue = catalog;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, the results in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// If <c>true</c>, the response has partial results when there are shard request timeouts or shard failures.
+	/// If <c>false</c>, the API returns an error with no partial results.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Columnar(bool? columnar = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
 	{
-		ColumnarValue = columnar;
-		return Self;
+		Instance.AllowPartialSearchResults = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Cursor used to retrieve a set of paginated results.
+	/// The default catalog (cluster) for queries.
+	/// If unspecified, the queries execute on the data in the local cluster only.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Catalog(string? value)
+	{
+		Instance.Catalog = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the results are in a columnar fashion: one row represents all the values of a certain column from the current page of results.
+	/// The API supports this parameter only for CBOR, JSON, SMILE, and YAML responses.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Columnar(bool? value = true)
+	{
+		Instance.Columnar = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The cursor used to retrieve a set of paginated results.
 	/// If you specify a cursor, the API only uses the <c>columnar</c> and <c>time_zone</c> request body parameters.
 	/// It ignores other request body parameters.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Cursor(string? cursor)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Cursor(string? value)
 	{
-		CursorValue = cursor;
-		return Self;
+		Instance.Cursor = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The maximum number of rows (or entries) to return in one response
+	/// The maximum number of rows (or entries) to return in one response.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Throw an exception when encountering multiple values for a field (default) or be lenient and return the first value from the list (without any guarantees of what that will be - typically the first in natural ascending order).
+	/// If <c>false</c>, the API returns an exception when encountering multiple values for a field.
+	/// If <c>true</c>, the API is lenient and returns the first value from the array with no guarantee of consistent results.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor FieldMultiValueLeniency(bool? fieldMultiValueLeniency = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FieldMultiValueLeniency(bool? value = true)
 	{
-		FieldMultiValueLeniencyValue = fieldMultiValueLeniency;
-		return Self;
+		Instance.FieldMultiValueLeniency = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Elasticsearch query DSL for additional filtering.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? filter)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterValue = filter;
-		return Self;
-	}
-
-	public QueryRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
-	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptor = descriptor;
-		return Self;
-	}
-
-	public QueryRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
-	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, the search can run on frozen indices. Defaults to false.
+	/// The Elasticsearch query DSL for additional filtering.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor IndexUsingFrozen(bool? indexUsingFrozen = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Filter(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> action)
 	{
-		IndexUsingFrozenValue = indexUsingFrozen;
-		return Self;
+		Instance.Filter = Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Retention period for an async or saved synchronous search.
+	/// If <c>true</c>, the search can run on frozen indices.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> IndexUsingFrozen(bool? value = true)
 	{
-		KeepAliveValue = keepAlive;
-		return Self;
+		Instance.IndexUsingFrozen = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// If true, Elasticsearch stores synchronous searches if you also specify the wait_for_completion_timeout parameter. If false, Elasticsearch only stores async searches that don’t finish before the wait_for_completion_timeout.
+	/// The retention period for an async or saved synchronous search.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
+		Instance.KeepAlive = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The timeout before a pagination request fails.
+	/// If <c>true</c>, Elasticsearch stores synchronous searches if you also specify the <c>wait_for_completion_timeout</c> parameter.
+	/// If <c>false</c>, Elasticsearch only stores async searches that don't finish before the <c>wait_for_completion_timeout</c>.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor PageTimeout(Elastic.Clients.Elasticsearch.Duration? pageTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
 	{
-		PageTimeoutValue = pageTimeout;
-		return Self;
+		Instance.KeepOnCompletion = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Values for parameters in the query.
+	/// The minimum retention period for the scroll cursor.
+	/// After this time period, a pagination request might fail because the scroll cursor is no longer available.
+	/// Subsequent scroll requests prolong the lifetime of the scroll cursor by the duration of <c>page_timeout</c> in the scroll request.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> PageTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.PageTimeout = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// SQL query to run.
+	/// The values for parameters in the query.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor Query(string? query)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Params = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The values for parameters in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params()
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The values for parameters in the query.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The SQL query to run.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Query(string? value)
+	{
+		Instance.Query = value;
+		return this;
 	}
 
 	/// <summary>
@@ -746,155 +1053,155 @@ public sealed partial class QueryRequestDescriptor : RequestDescriptor<QueryRequ
 	/// The timeout before the request fails.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor RequestTimeout(Elastic.Clients.Elasticsearch.Duration? requestTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RequestTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		RequestTimeoutValue = requestTimeout;
-		return Self;
+		Instance.RequestTimeout = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Defines one or more runtime fields in the search request. These fields take
-	/// precedence over mapped fields with the same name.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// ISO-8601 time zone ID for the search.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor TimeZone(string? timeZone)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings()
 	{
-		TimeZoneValue = timeZone;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout, meaning the request waits for complete search results. If the search doesn’t finish within this period, the search becomes async.
+	/// One or more runtime fields for the search request.
+	/// These fields take precedence over mapped fields with the same name.
 	/// </para>
 	/// </summary>
-	public QueryRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
 	{
-		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-		return Self;
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(CatalogValue))
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ISO-8601 time zone ID for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> TimeZone(string? value)
+	{
+		Instance.TimeZone = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// If the search doesn't finish within this period, the search becomes async.
+	/// </para>
+	/// <para>
+	/// To save a synchronous search, you must specify this parameter and the <c>keep_on_completion</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.QueryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("catalog");
-			writer.WriteStringValue(CatalogValue);
+			return new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ColumnarValue.HasValue)
-		{
-			writer.WritePropertyName("columnar");
-			writer.WriteBooleanValue(ColumnarValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Sql.QueryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(CursorValue))
-		{
-			writer.WritePropertyName("cursor");
-			writer.WriteStringValue(CursorValue);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FieldMultiValueLeniencyValue.HasValue)
-		{
-			writer.WritePropertyName("field_multi_value_leniency");
-			writer.WriteBooleanValue(FieldMultiValueLeniencyValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (IndexUsingFrozenValue.HasValue)
-		{
-			writer.WritePropertyName("index_using_frozen");
-			writer.WriteBooleanValue(IndexUsingFrozenValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (KeepAliveValue is not null)
-		{
-			writer.WritePropertyName("keep_alive");
-			JsonSerializer.Serialize(writer, KeepAliveValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (KeepOnCompletionValue.HasValue)
-		{
-			writer.WritePropertyName("keep_on_completion");
-			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (PageTimeoutValue is not null)
-		{
-			writer.WritePropertyName("page_timeout");
-			JsonSerializer.Serialize(writer, PageTimeoutValue, options);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(QueryValue))
-		{
-			writer.WritePropertyName("query");
-			writer.WriteStringValue(QueryValue);
-		}
-
-		if (RequestTimeoutValue is not null)
-		{
-			writer.WritePropertyName("request_timeout");
-			JsonSerializer.Serialize(writer, RequestTimeoutValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TimeZoneValue))
-		{
-			writer.WritePropertyName("time_zone");
-			writer.WriteStringValue(TimeZoneValue);
-		}
-
-		if (WaitForCompletionTimeoutValue is not null)
-		{
-			writer.WritePropertyName("wait_for_completion_timeout");
-			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Sql.QueryRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

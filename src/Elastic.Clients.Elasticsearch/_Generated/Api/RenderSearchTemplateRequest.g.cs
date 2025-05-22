@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class RenderSearchTemplateRequestParameters : RequestParameters
+public sealed partial class RenderSearchTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class RenderSearchTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFile = System.Text.Json.JsonEncodedText.Encode("file");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("id");
+	private static readonly System.Text.Json.JsonEncodedText PropParams = System.Text.Json.JsonEncodedText.Encode("params");
+	private static readonly System.Text.Json.JsonEncodedText PropSource = System.Text.Json.JsonEncodedText.Encode("source");
+
+	public override Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFile = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id?> propId = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propParams = default;
+		LocalJsonValue<string?> propSource = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFile.TryReadProperty(ref reader, options, PropFile, null))
+			{
+				continue;
+			}
+
+			if (propId.TryReadProperty(ref reader, options, PropId, null))
+			{
+				continue;
+			}
+
+			if (propParams.TryReadProperty(ref reader, options, PropParams, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSource.TryReadProperty(ref reader, options, PropSource, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			File = propFile.Value,
+			Id = propId.Value,
+			Params = propParams.Value,
+			Source = propSource.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFile, value.File, null, null);
+		writer.WriteProperty(options, PropId, value.Id, null, null);
+		writer.WriteProperty(options, PropParams, value.Params, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropSource, value.Source, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -42,26 +101,43 @@ public sealed partial class RenderSearchTemplateRequestParameters : RequestParam
 /// Render a search template as a search request body.
 /// </para>
 /// </summary>
-public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSearchTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestConverter))]
+public sealed partial class RenderSearchTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestParameters>
 {
+#if NET7_0_OR_GREATER
 	public RenderSearchTemplateRequest()
 	{
 	}
-
-	public RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+#endif
+#if !NET7_0_OR_GREATER
+	public RenderSearchTemplateRequest()
 	{
 	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRenderSearchTemplate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceRenderSearchTemplate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "render_search_template";
 
-	[JsonInclude, JsonPropertyName("file")]
 	public string? File { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
+	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -70,18 +146,16 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("params")]
-	public IDictionary<string, object>? Params { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Params { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
+	/// It supports the same parameters as the search API's request body.
 	/// These parameters also support Mustache variables.
 	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("source")]
 	public string? Source { get; set; }
 }
 
@@ -93,40 +167,41 @@ public sealed partial class RenderSearchTemplateRequest : PlainRequest<RenderSea
 /// Render a search template as a search request body.
 /// </para>
 /// </summary>
-public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : RequestDescriptor<RenderSearchTemplateRequestDescriptor<TDocument>, RenderSearchTemplateRequestParameters>
+public readonly partial struct RenderSearchTemplateRequestDescriptor
 {
-	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest Instance { get; init; }
 
-	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest instance)
 	{
+		Instance = instance;
 	}
 
 	public RenderSearchTemplateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRenderSearchTemplate;
+	public static explicit operator Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest instance) => new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "render_search_template";
-
-	public RenderSearchTemplateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor File(string? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.File = value;
+		return this;
 	}
 
-	private string? FileValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private string? SourceValue { get; set; }
-
-	public RenderSearchTemplateRequestDescriptor<TDocument> File(string? file)
+	/// <summary>
+	/// <para>
+	/// The ID of the search template to render.
+	/// If no <c>source</c> is specified, this or the <c>&lt;template-id></c> request path parameter is required.
+	/// If you specify both this parameter and the <c>&lt;template-id></c> parameter, the API uses only <c>&lt;template-id></c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		FileValue = file;
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
 	/// <summary>
@@ -136,93 +211,10 @@ public sealed partial class RenderSearchTemplateRequestDescriptor<TDocument> : R
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	public RenderSearchTemplateRequestDescriptor<TDocument> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
-	/// These parameters also support Mustache variables.
-	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
-	/// </para>
-	/// </summary>
-	public RenderSearchTemplateRequestDescriptor<TDocument> Source(string? source)
-	{
-		SourceValue = source;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FileValue))
-		{
-			writer.WritePropertyName("file");
-			writer.WriteStringValue(FileValue);
-		}
-
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Render a search template.
-/// </para>
-/// <para>
-/// Render a search template as a search request body.
-/// </para>
-/// </summary>
-public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescriptor<RenderSearchTemplateRequestDescriptor, RenderSearchTemplateRequestParameters>
-{
-	internal RenderSearchTemplateRequestDescriptor(Action<RenderSearchTemplateRequestDescriptor> configure) => configure.Invoke(this);
-
-	public RenderSearchTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
-	{
-	}
-
-	public RenderSearchTemplateRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceRenderSearchTemplate;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "render_search_template";
-
-	public RenderSearchTemplateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
-	}
-
-	private string? FileValue { get; set; }
-	private IDictionary<string, object>? ParamsValue { get; set; }
-	private string? SourceValue { get; set; }
-
-	public RenderSearchTemplateRequestDescriptor File(string? file)
-	{
-		FileValue = file;
-		return Self;
+		Instance.Params = value;
+		return this;
 	}
 
 	/// <summary>
@@ -232,47 +224,98 @@ public sealed partial class RenderSearchTemplateRequestDescriptor : RequestDescr
 	/// The value is the variable value.
 	/// </para>
 	/// </summary>
-	public RenderSearchTemplateRequestDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params()
 	{
-		ParamsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Key-value pairs used to replace Mustache variables in the template.
+	/// The key is the variable name.
+	/// The value is the variable value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Params(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Params = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor AddParam(string key, object value)
+	{
+		Instance.Params ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Params.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
 	/// An inline search template.
-	/// Supports the same parameters as the search API's request body.
+	/// It supports the same parameters as the search API's request body.
 	/// These parameters also support Mustache variables.
 	/// If no <c>id</c> or <c>&lt;templated-id></c> is specified, this parameter is required.
 	/// </para>
 	/// </summary>
-	public RenderSearchTemplateRequestDescriptor Source(string? source)
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Source(string? value)
 	{
-		SourceValue = source;
-		return Self;
+		Instance.Source = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FileValue))
+		if (action is null)
 		{
-			writer.WritePropertyName("file");
-			writer.WriteStringValue(FileValue);
+			return new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (ParamsValue is not null)
-		{
-			writer.WritePropertyName("params");
-			JsonSerializer.Serialize(writer, ParamsValue, options);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.RenderSearchTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(SourceValue))
-		{
-			writer.WritePropertyName("source");
-			writer.WriteStringValue(SourceValue);
-		}
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.RenderSearchTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

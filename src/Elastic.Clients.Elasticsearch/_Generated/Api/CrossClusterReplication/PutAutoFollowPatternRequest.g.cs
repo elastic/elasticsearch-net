@@ -17,37 +17,227 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.CrossClusterReplication;
 
-public sealed partial class PutAutoFollowPatternRequestParameters : RequestParameters
+public sealed partial class PutAutoFollowPatternRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class PutAutoFollowPatternRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFollowIndexPattern = System.Text.Json.JsonEncodedText.Encode("follow_index_pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexExclusionPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_exclusion_patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropLeaderIndexPatterns = System.Text.Json.JsonEncodedText.Encode("leader_index_patterns");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingReadRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_read_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutstandingWriteRequests = System.Text.Json.JsonEncodedText.Encode("max_outstanding_write_requests");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_read_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxReadRequestSize = System.Text.Json.JsonEncodedText.Encode("max_read_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxRetryDelay = System.Text.Json.JsonEncodedText.Encode("max_retry_delay");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferCount = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteBufferSize = System.Text.Json.JsonEncodedText.Encode("max_write_buffer_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestOperationCount = System.Text.Json.JsonEncodedText.Encode("max_write_request_operation_count");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxWriteRequestSize = System.Text.Json.JsonEncodedText.Encode("max_write_request_size");
+	private static readonly System.Text.Json.JsonEncodedText PropReadPollTimeout = System.Text.Json.JsonEncodedText.Encode("read_poll_timeout");
+	private static readonly System.Text.Json.JsonEncodedText PropRemoteCluster = System.Text.Json.JsonEncodedText.Encode("remote_cluster");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFollowIndexPattern = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propLeaderIndexExclusionPatterns = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propLeaderIndexPatterns = default;
+		LocalJsonValue<int?> propMaxOutstandingReadRequests = default;
+		LocalJsonValue<int?> propMaxOutstandingWriteRequests = default;
+		LocalJsonValue<int?> propMaxReadRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxReadRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propMaxRetryDelay = default;
+		LocalJsonValue<int?> propMaxWriteBufferCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteBufferSize = default;
+		LocalJsonValue<int?> propMaxWriteRequestOperationCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propMaxWriteRequestSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propReadPollTimeout = default;
+		LocalJsonValue<string> propRemoteCluster = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFollowIndexPattern.TryReadProperty(ref reader, options, PropFollowIndexPattern, null))
+			{
+				continue;
+			}
+
+			if (propLeaderIndexExclusionPatterns.TryReadProperty(ref reader, options, PropLeaderIndexExclusionPatterns, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propLeaderIndexPatterns.TryReadProperty(ref reader, options, PropLeaderIndexPatterns, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propMaxOutstandingReadRequests.TryReadProperty(ref reader, options, PropMaxOutstandingReadRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxOutstandingWriteRequests.TryReadProperty(ref reader, options, PropMaxOutstandingWriteRequests, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestOperationCount.TryReadProperty(ref reader, options, PropMaxReadRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxReadRequestSize.TryReadProperty(ref reader, options, PropMaxReadRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxRetryDelay.TryReadProperty(ref reader, options, PropMaxRetryDelay, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferCount.TryReadProperty(ref reader, options, PropMaxWriteBufferCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteBufferSize.TryReadProperty(ref reader, options, PropMaxWriteBufferSize, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestOperationCount.TryReadProperty(ref reader, options, PropMaxWriteRequestOperationCount, null))
+			{
+				continue;
+			}
+
+			if (propMaxWriteRequestSize.TryReadProperty(ref reader, options, PropMaxWriteRequestSize, null))
+			{
+				continue;
+			}
+
+			if (propReadPollTimeout.TryReadProperty(ref reader, options, PropReadPollTimeout, null))
+			{
+				continue;
+			}
+
+			if (propRemoteCluster.TryReadProperty(ref reader, options, PropRemoteCluster, null))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FollowIndexPattern = propFollowIndexPattern.Value,
+			LeaderIndexExclusionPatterns = propLeaderIndexExclusionPatterns.Value,
+			LeaderIndexPatterns = propLeaderIndexPatterns.Value,
+			MaxOutstandingReadRequests = propMaxOutstandingReadRequests.Value,
+			MaxOutstandingWriteRequests = propMaxOutstandingWriteRequests.Value,
+			MaxReadRequestOperationCount = propMaxReadRequestOperationCount.Value,
+			MaxReadRequestSize = propMaxReadRequestSize.Value,
+			MaxRetryDelay = propMaxRetryDelay.Value,
+			MaxWriteBufferCount = propMaxWriteBufferCount.Value,
+			MaxWriteBufferSize = propMaxWriteBufferSize.Value,
+			MaxWriteRequestOperationCount = propMaxWriteRequestOperationCount.Value,
+			MaxWriteRequestSize = propMaxWriteRequestSize.Value,
+			ReadPollTimeout = propReadPollTimeout.Value,
+			RemoteCluster = propRemoteCluster.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFollowIndexPattern, value.FollowIndexPattern, null, null);
+		writer.WriteProperty(options, PropLeaderIndexExclusionPatterns, value.LeaderIndexExclusionPatterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropLeaderIndexPatterns, value.LeaderIndexPatterns, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropMaxOutstandingReadRequests, value.MaxOutstandingReadRequests, null, null);
+		writer.WriteProperty(options, PropMaxOutstandingWriteRequests, value.MaxOutstandingWriteRequests, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestOperationCount, value.MaxReadRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxReadRequestSize, value.MaxReadRequestSize, null, null);
+		writer.WriteProperty(options, PropMaxRetryDelay, value.MaxRetryDelay, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferCount, value.MaxWriteBufferCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteBufferSize, value.MaxWriteBufferSize, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestOperationCount, value.MaxWriteRequestOperationCount, null, null);
+		writer.WriteProperty(options, PropMaxWriteRequestSize, value.MaxWriteRequestSize, null, null);
+		writer.WriteProperty(options, PropReadPollTimeout, value.ReadPollTimeout, null, null);
+		writer.WriteProperty(options, PropRemoteCluster, value.RemoteCluster, null, null);
+		writer.WriteProperty(options, PropSettings, value.Settings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+/// Create or update auto-follow patterns.
+/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
+/// </para>
+/// <para>
+/// This API can also be used to update auto-follow patterns.
+/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
 /// </para>
 /// </summary>
-public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFollowPatternRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestConverter))]
+public sealed partial class PutAutoFollowPatternRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPutAutoFollowPattern;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Name name, string remoteCluster) : base(r => r.Required("name", name))
+	{
+		RemoteCluster = remoteCluster;
+	}
+#if NET7_0_OR_GREATER
+	public PutAutoFollowPatternRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.CrossClusterReplicationPutAutoFollowPattern;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -55,10 +245,27 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 
 	/// <summary>
 	/// <para>
+	/// The name of the collection of auto-follow patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get => P<Elastic.Clients.Elasticsearch.Name>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+
+	/// <summary>
+	/// <para>
 	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("follow_index_pattern")]
 	public string? FollowIndexPattern { get; set; }
 
 	/// <summary>
@@ -66,23 +273,20 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("leader_index_exclusion_patterns")]
-	public ICollection<string>? LeaderIndexExclusionPatterns { get; set; }
+	public System.Collections.Generic.ICollection<string>? LeaderIndexExclusionPatterns { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("leader_index_patterns")]
-	public ICollection<string>? LeaderIndexPatterns { get; set; }
+	public System.Collections.Generic.ICollection<string>? LeaderIndexPatterns { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_outstanding_read_requests")]
 	public int? MaxOutstandingReadRequests { get; set; }
 
 	/// <summary>
@@ -90,7 +294,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_outstanding_write_requests")]
 	public int? MaxOutstandingWriteRequests { get; set; }
 
 	/// <summary>
@@ -98,7 +301,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum number of operations to pull per read from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_read_request_operation_count")]
 	public int? MaxReadRequestOperationCount { get; set; }
 
 	/// <summary>
@@ -106,7 +308,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_read_request_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSize { get; set; }
 
 	/// <summary>
@@ -114,7 +315,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_retry_delay")]
 	public Elastic.Clients.Elasticsearch.Duration? MaxRetryDelay { get; set; }
 
 	/// <summary>
@@ -122,7 +322,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_buffer_count")]
 	public int? MaxWriteBufferCount { get; set; }
 
 	/// <summary>
@@ -130,7 +329,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_buffer_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSize { get; set; }
 
 	/// <summary>
@@ -138,7 +336,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum number of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_request_operation_count")]
 	public int? MaxWriteRequestOperationCount { get; set; }
 
 	/// <summary>
@@ -146,7 +343,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_write_request_size")]
 	public Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSize { get; set; }
 
 	/// <summary>
@@ -154,7 +350,6 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("read_poll_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? ReadPollTimeout { get; set; }
 
 	/// <summary>
@@ -162,70 +357,89 @@ public sealed partial class PutAutoFollowPatternRequest : PlainRequest<PutAutoFo
 	/// The remote cluster containing the leader indices to match against.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("remote_cluster")]
-	public string RemoteCluster { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string RemoteCluster { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
-	public IDictionary<string, object>? Settings { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Creates a new named collection of auto-follow patterns against a specified remote cluster. Newly created indices on the remote cluster matching any of the specified patterns will be automatically configured as follower indices.
+/// Create or update auto-follow patterns.
+/// Create a collection of cross-cluster replication auto-follow patterns for a remote cluster.
+/// Newly created indices on the remote cluster that match any of the patterns are automatically configured as follower indices.
+/// Indices on the remote cluster that were created before the auto-follow pattern was created will not be auto-followed even if they match the pattern.
+/// </para>
+/// <para>
+/// This API can also be used to update auto-follow patterns.
+/// NOTE: Follower indices that were configured automatically before updating an auto-follow pattern will remain unchanged even if they do not match against the new patterns.
 /// </para>
 /// </summary>
-public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescriptor<PutAutoFollowPatternRequestDescriptor, PutAutoFollowPatternRequestParameters>
+public readonly partial struct PutAutoFollowPatternRequestDescriptor
 {
-	internal PutAutoFollowPatternRequestDescriptor(Action<PutAutoFollowPatternRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest Instance { get; init; }
 
-	public PutAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.CrossClusterReplicationPutAutoFollowPattern;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ccr.put_auto_follow_pattern";
-
-	public PutAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	public PutAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.Name name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest(name);
+#pragma warning restore CS0618
 	}
 
-	private string? FollowIndexPatternValue { get; set; }
-	private ICollection<string>? LeaderIndexExclusionPatternsValue { get; set; }
-	private ICollection<string>? LeaderIndexPatternsValue { get; set; }
-	private int? MaxOutstandingReadRequestsValue { get; set; }
-	private int? MaxOutstandingWriteRequestsValue { get; set; }
-	private int? MaxReadRequestOperationCountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxReadRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? MaxRetryDelayValue { get; set; }
-	private int? MaxWriteBufferCountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxWriteBufferSizeValue { get; set; }
-	private int? MaxWriteRequestOperationCountValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ByteSize? MaxWriteRequestSizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? ReadPollTimeoutValue { get; set; }
-	private string RemoteClusterValue { get; set; }
-	private IDictionary<string, object>? SettingsValue { get; set; }
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutAutoFollowPatternRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest instance) => new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the collection of auto-follow patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// The name of follower index. The template {{leader_index}} can be used to derive the name of the follower index from the name of the leader index. When following a data stream, use {{leader_index}}; CCR does not support changes to the names of a follower data stream’s backing indices.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor FollowIndexPattern(string? followIndexPattern)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor FollowIndexPattern(string? value)
 	{
-		FollowIndexPatternValue = followIndexPattern;
-		return Self;
+		Instance.FollowIndexPattern = value;
+		return this;
 	}
 
 	/// <summary>
@@ -233,10 +447,21 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(ICollection<string>? leaderIndexExclusionPatterns)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
-		LeaderIndexExclusionPatternsValue = leaderIndexExclusionPatterns;
-		return Self;
+		Instance.LeaderIndexExclusionPatterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of simple index patterns that can be used to exclude indices from being auto-followed. Indices in the remote cluster whose names are matching one or more leader_index_patterns and one or more leader_index_exclusion_patterns won’t be followed.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexExclusionPatterns(params string[] values)
+	{
+		Instance.LeaderIndexExclusionPatterns = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -244,10 +469,21 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(ICollection<string>? leaderIndexPatterns)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(System.Collections.Generic.ICollection<string>? value)
 	{
-		LeaderIndexPatternsValue = leaderIndexPatterns;
-		return Self;
+		Instance.LeaderIndexPatterns = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// An array of simple index patterns to match against indices in the remote cluster specified by the remote_cluster field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor LeaderIndexPatterns(params string[] values)
+	{
+		Instance.LeaderIndexPatterns = [.. values];
+		return this;
 	}
 
 	/// <summary>
@@ -255,10 +491,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxOutstandingReadRequests(int? maxOutstandingReadRequests)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxOutstandingReadRequests(int? value)
 	{
-		MaxOutstandingReadRequestsValue = maxOutstandingReadRequests;
-		return Self;
+		Instance.MaxOutstandingReadRequests = value;
+		return this;
 	}
 
 	/// <summary>
@@ -266,10 +502,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum number of outstanding reads requests from the remote cluster.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxOutstandingWriteRequests(int? maxOutstandingWriteRequests)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxOutstandingWriteRequests(int? value)
 	{
-		MaxOutstandingWriteRequestsValue = maxOutstandingWriteRequests;
-		return Self;
+		Instance.MaxOutstandingWriteRequests = value;
+		return this;
 	}
 
 	/// <summary>
@@ -277,10 +513,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum number of operations to pull per read from the remote cluster.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxReadRequestOperationCount(int? maxReadRequestOperationCount)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestOperationCount(int? value)
 	{
-		MaxReadRequestOperationCountValue = maxReadRequestOperationCount;
-		return Self;
+		Instance.MaxReadRequestOperationCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -288,10 +524,21 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? maxReadRequestSize)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		MaxReadRequestSizeValue = maxReadRequestSize;
-		return Self;
+		Instance.MaxReadRequestSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum size in bytes of per read of a batch of operations pulled from the remote cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxReadRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxReadRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -299,10 +546,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum time to wait before retrying an operation that failed exceptionally. An exponential backoff strategy is employed when retrying.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? maxRetryDelay)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxRetryDelay(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		MaxRetryDelayValue = maxRetryDelay;
-		return Self;
+		Instance.MaxRetryDelay = value;
+		return this;
 	}
 
 	/// <summary>
@@ -310,10 +557,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum number of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the number of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxWriteBufferCount(int? maxWriteBufferCount)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferCount(int? value)
 	{
-		MaxWriteBufferCountValue = maxWriteBufferCount;
-		return Self;
+		Instance.MaxWriteBufferCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -321,10 +568,21 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? maxWriteBufferSize)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		MaxWriteBufferSizeValue = maxWriteBufferSize;
-		return Self;
+		Instance.MaxWriteBufferSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations that can be queued for writing. When this limit is reached, reads from the remote cluster will be deferred until the total bytes of queued operations goes below the limit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteBufferSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteBufferSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -332,10 +590,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum number of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxWriteRequestOperationCount(int? maxWriteRequestOperationCount)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestOperationCount(int? value)
 	{
-		MaxWriteRequestOperationCountValue = maxWriteRequestOperationCount;
-		return Self;
+		Instance.MaxWriteRequestOperationCount = value;
+		return this;
 	}
 
 	/// <summary>
@@ -343,10 +601,21 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum total bytes of operations per bulk write request executed on the follower.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? maxWriteRequestSize)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		MaxWriteRequestSizeValue = maxWriteRequestSize;
-		return Self;
+		Instance.MaxWriteRequestSize = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum total bytes of operations per bulk write request executed on the follower.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor MaxWriteRequestSize(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
+	{
+		Instance.MaxWriteRequestSize = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -354,10 +623,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The maximum time to wait for new operations on the remote cluster when the follower index is synchronized with the leader index. When the timeout has elapsed, the poll for operations will return to the follower so that it can update some statistics. Then the follower will immediately attempt to read from the leader again.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? readPollTimeout)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor ReadPollTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ReadPollTimeoutValue = readPollTimeout;
-		return Self;
+		Instance.ReadPollTimeout = value;
+		return this;
 	}
 
 	/// <summary>
@@ -365,10 +634,10 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// The remote cluster containing the leader indices to match against.
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor RemoteCluster(string remoteCluster)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor RemoteCluster(string value)
 	{
-		RemoteClusterValue = remoteCluster;
-		return Self;
+		Instance.RemoteCluster = value;
+		return this;
 	}
 
 	/// <summary>
@@ -376,101 +645,88 @@ public sealed partial class PutAutoFollowPatternRequestDescriptor : RequestDescr
 	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
 	/// </para>
 	/// </summary>
-	public PutAutoFollowPatternRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FollowIndexPatternValue))
-		{
-			writer.WritePropertyName("follow_index_pattern");
-			writer.WriteStringValue(FollowIndexPatternValue);
-		}
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
 
-		if (LeaderIndexExclusionPatternsValue is not null)
-		{
-			writer.WritePropertyName("leader_index_exclusion_patterns");
-			JsonSerializer.Serialize(writer, LeaderIndexExclusionPatternsValue, options);
-		}
+	/// <summary>
+	/// <para>
+	/// Settings to override from the leader index. Note that certain settings can not be overrode (e.g., index.number_of_shards).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
 
-		if (LeaderIndexPatternsValue is not null)
-		{
-			writer.WritePropertyName("leader_index_patterns");
-			JsonSerializer.Serialize(writer, LeaderIndexPatternsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor AddSetting(string key, object value)
+	{
+		Instance.Settings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Settings.Add(key, value);
+		return this;
+	}
 
-		if (MaxOutstandingReadRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_read_requests");
-			writer.WriteNumberValue(MaxOutstandingReadRequestsValue.Value);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest Build(System.Action<Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor(new Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (MaxOutstandingWriteRequestsValue.HasValue)
-		{
-			writer.WritePropertyName("max_outstanding_write_requests");
-			writer.WriteNumberValue(MaxOutstandingWriteRequestsValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MaxReadRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_read_request_operation_count");
-			writer.WriteNumberValue(MaxReadRequestOperationCountValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (MaxReadRequestSizeValue is not null)
-		{
-			writer.WritePropertyName("max_read_request_size");
-			JsonSerializer.Serialize(writer, MaxReadRequestSizeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (MaxRetryDelayValue is not null)
-		{
-			writer.WritePropertyName("max_retry_delay");
-			JsonSerializer.Serialize(writer, MaxRetryDelayValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (MaxWriteBufferCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_buffer_count");
-			writer.WriteNumberValue(MaxWriteBufferCountValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (MaxWriteBufferSizeValue is not null)
-		{
-			writer.WritePropertyName("max_write_buffer_size");
-			JsonSerializer.Serialize(writer, MaxWriteBufferSizeValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		if (MaxWriteRequestOperationCountValue.HasValue)
-		{
-			writer.WritePropertyName("max_write_request_operation_count");
-			writer.WriteNumberValue(MaxWriteRequestOperationCountValue.Value);
-		}
-
-		if (MaxWriteRequestSizeValue is not null)
-		{
-			writer.WritePropertyName("max_write_request_size");
-			JsonSerializer.Serialize(writer, MaxWriteRequestSizeValue, options);
-		}
-
-		if (ReadPollTimeoutValue is not null)
-		{
-			writer.WritePropertyName("read_poll_timeout");
-			JsonSerializer.Serialize(writer, ReadPollTimeoutValue, options);
-		}
-
-		writer.WritePropertyName("remote_cluster");
-		writer.WriteStringValue(RemoteClusterValue);
-		if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.CrossClusterReplication.PutAutoFollowPatternRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

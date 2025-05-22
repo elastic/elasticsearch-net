@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetTrainedModelsRequestParameters : RequestParameters
+public sealed partial class GetTrainedModelsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -106,7 +99,36 @@ public sealed partial class GetTrainedModelsRequestParameters : RequestParameter
 	/// tags are returned.
 	/// </para>
 	/// </summary>
-	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
+	public System.Collections.Generic.ICollection<string>? Tags { get => Q<System.Collections.Generic.ICollection<string>?>("tags"); set => Q("tags", value); }
+}
+
+internal sealed partial class GetTrainedModelsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -114,19 +136,31 @@ public sealed partial class GetTrainedModelsRequestParameters : RequestParameter
 /// Get trained model configuration info.
 /// </para>
 /// </summary>
-public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedModelsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestConverter))]
+public sealed partial class GetTrainedModelsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestParameters>
 {
-	public GetTrainedModelsRequest()
-	{
-	}
-
 	public GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetTrainedModelsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetTrainedModelsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetTrainedModels;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetTrainedModels;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -134,6 +168,18 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 
 	/// <summary>
 	/// <para>
+	/// The unique identifier of the trained model or a model alias.
+	/// </para>
+	/// <para>
+	/// You can get information for multiple trained models in a single API
+	/// request by using a comma-separated list of model IDs or a wildcard
+	/// expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ids? ModelId { get => P<Elastic.Clients.Elasticsearch.Ids?>("model_id"); set => PO("model_id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Specifies what to do when the request:
 	/// </para>
 	/// <list type="bullet">
@@ -158,7 +204,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// subset of results when there are partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 
 	/// <summary>
@@ -167,7 +212,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// JSON map (true) or in a custom compressed format (false).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DecompressDefinition { get => Q<bool?>("decompress_definition"); set => Q("decompress_definition", value); }
 
 	/// <summary>
@@ -177,7 +221,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// be retrieved and then added to another cluster.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? ExcludeGenerated { get => Q<bool?>("exclude_generated"); set => Q("exclude_generated", value); }
 
 	/// <summary>
@@ -185,7 +228,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// Skips the specified number of models.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? From { get => Q<int?>("from"); set => Q("from", value); }
 
 	/// <summary>
@@ -194,7 +236,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// body.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.MachineLearning.Include? Include { get => Q<Elastic.Clients.Elasticsearch.MachineLearning.Include?>("include"); set => Q("include", value); }
 
 	/// <summary>
@@ -202,7 +243,6 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// Specifies the maximum number of models to obtain.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public int? Size { get => Q<int?>("size"); set => Q("size", value); }
 
 	/// <summary>
@@ -212,8 +252,7 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 	/// tags are returned.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<string>? Tags { get => Q<ICollection<string>?>("tags"); set => Q("tags", value); }
+	public System.Collections.Generic.ICollection<string>? Tags { get => Q<System.Collections.Generic.ICollection<string>?>("tags"); set => Q("tags", value); }
 }
 
 /// <summary>
@@ -221,41 +260,214 @@ public sealed partial class GetTrainedModelsRequest : PlainRequest<GetTrainedMod
 /// Get trained model configuration info.
 /// </para>
 /// </summary>
-public sealed partial class GetTrainedModelsRequestDescriptor : RequestDescriptor<GetTrainedModelsRequestDescriptor, GetTrainedModelsRequestParameters>
+public readonly partial struct GetTrainedModelsRequestDescriptor
 {
-	internal GetTrainedModelsRequestDescriptor(Action<GetTrainedModelsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest Instance { get; init; }
 
-	public GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? modelId) : base(r => r.Optional("model_id", modelId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.Ids? modelId)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(modelId);
 	}
 
 	public GetTrainedModelsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetTrainedModels;
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_trained_models";
-
-	public GetTrainedModelsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-	public GetTrainedModelsRequestDescriptor DecompressDefinition(bool? decompressDefinition = true) => Qs("decompress_definition", decompressDefinition);
-	public GetTrainedModelsRequestDescriptor ExcludeGenerated(bool? excludeGenerated = true) => Qs("exclude_generated", excludeGenerated);
-	public GetTrainedModelsRequestDescriptor From(int? from) => Qs("from", from);
-	public GetTrainedModelsRequestDescriptor Include(Elastic.Clients.Elasticsearch.MachineLearning.Include? include) => Qs("include", include);
-	public GetTrainedModelsRequestDescriptor Size(int? size) => Qs("size", size);
-	public GetTrainedModelsRequestDescriptor Tags(ICollection<string>? tags) => Qs("tags", tags);
-
-	public GetTrainedModelsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Ids? modelId)
+	/// <summary>
+	/// <para>
+	/// The unique identifier of the trained model or a model alias.
+	/// </para>
+	/// <para>
+	/// You can get information for multiple trained models in a single API
+	/// request by using a comma-separated list of model IDs or a wildcard
+	/// expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor ModelId(Elastic.Clients.Elasticsearch.Ids? value)
 	{
-		RouteValues.Optional("model_id", modelId);
-		return Self;
+		Instance.ModelId = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no models that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// If true, it returns an empty array when there are no matches and the
+	/// subset of results when there are partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor AllowNoMatch(bool? value = true)
 	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the included model definition should be returned as a
+	/// JSON map (true) or in a custom compressed format (false).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor DecompressDefinition(bool? value = true)
+	{
+		Instance.DecompressDefinition = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates if certain fields should be removed from the configuration on
+	/// retrieval. This allows the configuration to be in an acceptable format to
+	/// be retrieved and then added to another cluster.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor ExcludeGenerated(bool? value = true)
+	{
+		Instance.ExcludeGenerated = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Skips the specified number of models.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor From(int? value)
+	{
+		Instance.From = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma delimited string of optional fields to include in the response
+	/// body.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Include(Elastic.Clients.Elasticsearch.MachineLearning.Include? value)
+	{
+		Instance.Include = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies the maximum number of models to obtain.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Size(int? value)
+	{
+		Instance.Size = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma delimited string of tags. A trained model can have many tags, or
+	/// none. When supplied, only trained models that contain all the supplied
+	/// tags are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Tags(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Tags = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A comma delimited string of tags. A trained model can have many tags, or
+	/// none. When supplied, only trained models that contain all the supplied
+	/// tags are returned.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Tags(params string[] values)
+	{
+		Instance.Tags = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetTrainedModelsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

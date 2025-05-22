@@ -12,12 +12,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
-#else
-
 namespace Elastic.Clients.Elasticsearch.Esql;
-#endif
 
 public partial class EsqlNamespacedClient
 {
@@ -32,8 +27,9 @@ public partial class EsqlNamespacedClient
 	{
 		var descriptor = new EsqlQueryRequestDescriptor<TDocument>();
 		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor<TDocument>, StreamResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		var request = descriptor.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
 	/// <summary>
@@ -47,8 +43,9 @@ public partial class EsqlNamespacedClient
 	{
 		var descriptor = new EsqlQueryRequestDescriptor();
 		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EsqlQueryRequestDescriptor, StreamResponse, EsqlQueryRequestParameters>(descriptor, cancellationToken);
+		var request = descriptor.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<EsqlQueryRequest, StreamResponse, EsqlQueryRequestParameters>(request, cancellationToken);
 	}
 
 	public virtual async Task<IEnumerable<TDocument>> QueryAsObjectsAsync<TDocument>(
@@ -74,7 +71,10 @@ public partial class EsqlNamespacedClient
 	{
 		// TODO: Improve performance
 
+		// TODO: fixme
+#pragma warning disable IL2026, IL3050
 		using var doc = JsonSerializer.Deserialize<JsonDocument>(response.Data) ?? throw new JsonException();
+#pragma warning restore IL2026, IL3050
 
 		if (!doc.RootElement.TryGetProperty("columns"u8, out var columns) || (columns.ValueKind is not JsonValueKind.Array))
 			throw new JsonException("");

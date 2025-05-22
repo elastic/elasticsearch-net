@@ -18,1034 +18,471 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
-public partial class SnapshotLifecycleManagementNamespacedClient : NamespacedClientProxy
+public partial class SnapshotLifecycleManagementNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="SnapshotLifecycleManagementNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleManagementNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected SnapshotLifecycleManagementNamespacedClient() : base()
 	{
 	}
 
-	internal SnapshotLifecycleManagementNamespacedClient(ElasticsearchClient client) : base(client)
+	internal SnapshotLifecycleManagementNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequest, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequest, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(DeleteLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.DeleteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteLifecycleResponse DeleteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, Action<DeleteLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(DeleteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an existing snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-delete-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteLifecycleResponse> DeleteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, Action<DeleteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteLifecycleRequestDescriptor, DeleteLifecycleResponse, DeleteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExecuteLifecycleRequest, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(ExecuteLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExecuteLifecycleRequest, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(ExecuteLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteLifecycleResponse ExecuteLifecycle(Elastic.Clients.Elasticsearch.Name policyId, Action<ExecuteLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(ExecuteLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Immediately creates a snapshot according to the lifecycle policy, without waiting for the scheduled time.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-lifecycle.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteLifecycleResponse> ExecuteLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, Action<ExecuteLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExecuteLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteLifecycleRequestDescriptor, ExecuteLifecycleResponse, ExecuteLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ExecuteRetentionRequest, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(ExecuteRetentionRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse ExecuteRetention(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ExecuteRetentionRequest, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention(ExecuteRetentionRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse> ExecuteRetentionAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.ExecuteRetentionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ExecuteRetentionResponse ExecuteRetention(Action<ExecuteRetentionRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(ExecuteRetentionRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes any snapshots that are expired according to the policy's retention rules.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-execute-retention.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ExecuteRetentionResponse> ExecuteRetentionAsync(Action<ExecuteRetentionRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ExecuteRetentionRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ExecuteRetentionRequestDescriptor, ExecuteRetentionResponse, ExecuteRetentionRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetLifecycleRequest, GetLifecycleResponse, GetLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequest, GetLifecycleResponse, GetLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(GetLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Elastic.Clients.Elasticsearch.Names? policyId, Action<GetLifecycleRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetLifecycleResponse GetLifecycle(Action<GetLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(GetLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Elastic.Clients.Elasticsearch.Names? policyId, Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves one or more snapshot lifecycle policy definitions and information about the latest snapshot attempts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetLifecycleResponse> GetLifecycleAsync(Action<GetLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetLifecycleRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetLifecycleRequestDescriptor, GetLifecycleResponse, GetLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats(GetStatsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetStatsRequest, GetStatsResponse, GetStatsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(GetStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse GetStats(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetStatsRequest, GetStatsResponse, GetStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats(GetStatsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse> GetStatsAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetStatsResponse GetStats(Action<GetStatsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(GetStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns global and policy-level statistics about actions taken by snapshot lifecycle management.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/slm-api-get-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetStatsResponse> GetStatsAsync(Action<GetStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetStatsRequestDescriptor, GetStatsResponse, GetStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetSlmStatusRequest, GetSlmStatusResponse, GetSlmStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(GetSlmStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse GetStatus(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetSlmStatusRequest, GetSlmStatusResponse, GetSlmStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus(GetSlmStatusRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse> GetStatusAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.GetSlmStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetSlmStatusResponse GetStatus(Action<GetSlmStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(GetSlmStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Retrieves the status of snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-get-status.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetSlmStatusResponse> GetStatusAsync(Action<GetSlmStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetSlmStatusRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetSlmStatusRequestDescriptor, GetSlmStatusResponse, GetSlmStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutLifecycleRequest, PutLifecycleResponse, PutLifecycleRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequest, PutLifecycleResponse, PutLifecycleRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(PutLifecycleRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestDescriptor(policyId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.PutLifecycleRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutLifecycleResponse PutLifecycle(Elastic.Clients.Elasticsearch.Name policyId, Action<PutLifecycleRequestDescriptor> configureRequest)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(PutLifecycleRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Creates or updates a snapshot lifecycle policy.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-put-policy.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutLifecycleResponse> PutLifecycleAsync(Elastic.Clients.Elasticsearch.Name policyId, Action<PutLifecycleRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new PutLifecycleRequestDescriptor(policyId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutLifecycleRequestDescriptor, PutLifecycleResponse, PutLifecycleRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start(StartSlmRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StartSlmRequest, StartSlmResponse, StartSlmRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(StartSlmRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse Start(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StartSlmRequest, StartSlmResponse, StartSlmRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start(StartSlmRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse> StartAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StartSlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StartSlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StartSlmResponse Start(Action<StartSlmRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StartSlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(StartSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartSlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns on snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-start.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StartSlmResponse> StartAsync(Action<StartSlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StartSlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StartSlmRequestDescriptor, StartSlmResponse, StartSlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop(StopSlmRequest request)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<StopSlmRequest, StopSlmResponse, StopSlmRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(StopSlmRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse Stop(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<StopSlmRequest, StopSlmResponse, StopSlmRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop(StopSlmRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse> StopAsync(System.Action<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new StopSlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual StopSlmResponse Stop(Action<StopSlmRequestDescriptor> configureRequest)
-	{
-		var descriptor = new StopSlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(StopSlmRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopSlmRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Turns off snapshot lifecycle management (SLM).
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/slm-api-stop.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<StopSlmResponse> StopAsync(Action<StopSlmRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new StopSlmRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<StopSlmRequestDescriptor, StopSlmResponse, StopSlmRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequest, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmResponse, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.StopSlmRequestParameters>(request, cancellationToken);
 	}
 }

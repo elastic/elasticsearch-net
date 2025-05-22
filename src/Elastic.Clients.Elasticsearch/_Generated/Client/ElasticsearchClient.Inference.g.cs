@@ -18,672 +18,1473 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Inference;
 
-public partial class InferenceNamespacedClient : NamespacedClientProxy
+public partial class InferenceNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="InferenceNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Inference.InferenceNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected InferenceNamespacedClient() : base()
 	{
 	}
 
-	internal InferenceNamespacedClient(ElasticsearchClient client) : base(client)
+	internal InferenceNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<DeleteInferenceRequest, DeleteInferenceResponse, DeleteInferenceRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse ChatCompletionUnified(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequest, DeleteInferenceResponse, DeleteInferenceRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(DeleteInferenceRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse> ChatCompletionUnifiedAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequest, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedResponse, Elastic.Clients.Elasticsearch.Inference.ChatCompletionUnifiedRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(DeleteInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Delete an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/delete-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<DeleteInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new DeleteInferenceRequestDescriptor(inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<DeleteInferenceRequestDescriptor, DeleteInferenceResponse, DeleteInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get(GetInferenceRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Inference.CompletionResponse Completion(Elastic.Clients.Elasticsearch.Inference.CompletionRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetInferenceRequest, GetInferenceResponse, GetInferenceRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.CompletionResponse Completion(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.CompletionResponse Completion(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.CompletionResponse> CompletionAsync(Elastic.Clients.Elasticsearch.Inference.CompletionRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequest, GetInferenceResponse, GetInferenceRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get(GetInferenceRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.CompletionResponse> CompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.CompletionResponse> CompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.CompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.CompletionRequest, Elastic.Clients.Elasticsearch.Inference.CompletionResponse, Elastic.Clients.Elasticsearch.Inference.CompletionRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get()
-	{
-		var descriptor = new GetInferenceRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetInferenceResponse Get(Action<GetInferenceRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetInferenceRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(GetInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetInferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetInferenceRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Get an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/get-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetInferenceResponse> GetAsync(Action<GetInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetInferenceRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetInferenceRequestDescriptor, GetInferenceResponse, GetInferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(InferenceRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<InferenceRequest, InferenceResponse, InferenceRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse Delete(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<InferenceRequest, InferenceResponse, InferenceRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(InferenceRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new InferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new InferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new InferenceRequestDescriptor(inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequest, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceResponse, Elastic.Clients.Elasticsearch.Inference.DeleteInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest)
-	{
-		var descriptor = new InferenceRequestDescriptor(inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(InferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InferenceRequestDescriptor(taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InferenceRequestDescriptor(taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InferenceRequestDescriptor(inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Perform inference on the service
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/post-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, Action<InferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new InferenceRequestDescriptor(inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<InferenceRequestDescriptor, InferenceResponse, InferenceRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(PutInferenceRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<PutInferenceRequest, PutInferenceResponse, PutInferenceRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Id? inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Id? inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse Get(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequest, PutInferenceResponse, PutInferenceRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(PutInferenceRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Id? inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Id? inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(PutInferenceRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse> GetAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id? inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.GetInferenceRequest, Elastic.Clients.Elasticsearch.Inference.GetInferenceResponse, Elastic.Clients.Elasticsearch.Inference.GetInferenceRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.InferenceRequest request)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, taskType, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceResponse Inference(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor> action)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Create an inference endpoint
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/put-inference-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.InferenceEndpoint inferenceConfig, Elastic.Clients.Elasticsearch.Id inferenceId, Action<PutInferenceRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
 	{
-		var descriptor = new PutInferenceRequestDescriptor(inferenceConfig, inferenceId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<PutInferenceRequestDescriptor, PutInferenceResponse, PutInferenceRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.InferenceResponse Inference(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.InferenceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.InferenceResponse> InferenceAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.InferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.InferenceRequest, Elastic.Clients.Elasticsearch.Inference.InferenceResponse, Elastic.Clients.Elasticsearch.Inference.InferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse Put(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse> PutAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutInferenceRequest, Elastic.Clients.Elasticsearch.Inference.PutInferenceResponse, Elastic.Clients.Elasticsearch.Inference.PutInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse PutAlibabacloud(Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse PutAlibabacloud(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse PutAlibabacloud(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse> PutAlibabacloudAsync(Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse> PutAlibabacloudAsync(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse> PutAlibabacloudAsync(Elastic.Clients.Elasticsearch.Inference.AlibabaCloudTaskType taskType, Elastic.Clients.Elasticsearch.Id alibabacloudInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestDescriptor(taskType, alibabacloudInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequest, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudResponse, Elastic.Clients.Elasticsearch.Inference.PutAlibabacloudRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse PutAmazonbedrock(Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse PutAmazonbedrock(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse PutAmazonbedrock(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse> PutAmazonbedrockAsync(Elastic.Clients.Elasticsearch.Inference.AmazonBedrockTaskType taskType, Elastic.Clients.Elasticsearch.Id amazonbedrockInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestDescriptor(taskType, amazonbedrockInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequest, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockResponse, Elastic.Clients.Elasticsearch.Inference.PutAmazonbedrockRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse PutAnthropic(Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse PutAnthropic(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse PutAnthropic(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse> PutAnthropicAsync(Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse> PutAnthropicAsync(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse> PutAnthropicAsync(Elastic.Clients.Elasticsearch.Inference.AnthropicTaskType taskType, Elastic.Clients.Elasticsearch.Id anthropicInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestDescriptor(taskType, anthropicInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequest, Elastic.Clients.Elasticsearch.Inference.PutAnthropicResponse, Elastic.Clients.Elasticsearch.Inference.PutAnthropicRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse PutAzureaistudio(Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse PutAzureaistudio(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse PutAzureaistudio(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse> PutAzureaistudioAsync(Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse> PutAzureaistudioAsync(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse> PutAzureaistudioAsync(Elastic.Clients.Elasticsearch.Inference.AzureAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id azureaistudioInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestDescriptor(taskType, azureaistudioInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse PutAzureopenai(Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse PutAzureopenai(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse PutAzureopenai(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse> PutAzureopenaiAsync(Elastic.Clients.Elasticsearch.Inference.AzureOpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id azureopenaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestDescriptor(taskType, azureopenaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutAzureopenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutCohereResponse PutCohere(Elastic.Clients.Elasticsearch.Inference.PutCohereRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutCohereResponse PutCohere(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutCohereResponse PutCohere(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutCohereResponse> PutCohereAsync(Elastic.Clients.Elasticsearch.Inference.PutCohereRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutCohereResponse> PutCohereAsync(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutCohereResponse> PutCohereAsync(Elastic.Clients.Elasticsearch.Inference.CohereTaskType taskType, Elastic.Clients.Elasticsearch.Id cohereInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutCohereRequestDescriptor(taskType, cohereInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutCohereRequest, Elastic.Clients.Elasticsearch.Inference.PutCohereResponse, Elastic.Clients.Elasticsearch.Inference.PutCohereRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse PutElasticsearch(Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse PutElasticsearch(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse PutElasticsearch(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse> PutElasticsearchAsync(Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse> PutElasticsearchAsync(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse> PutElasticsearchAsync(Elastic.Clients.Elasticsearch.Inference.ElasticsearchTaskType taskType, Elastic.Clients.Elasticsearch.Id elasticsearchInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestDescriptor(taskType, elasticsearchInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequest, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchResponse, Elastic.Clients.Elasticsearch.Inference.PutElasticsearchRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElserResponse PutElser(Elastic.Clients.Elasticsearch.Inference.PutElserRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.16.0'. The elser service is deprecated and will be removed in a future release. Use the Elasticsearch inference integration instead, with model_id included in the service_settings.")]
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElserResponse PutElser(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(taskType, elserInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request);
+	}
+
+	[System.Obsolete("Deprecated in '8.16.0'. The elser service is deprecated and will be removed in a future release. Use the Elasticsearch inference integration instead, with model_id included in the service_settings.")]
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutElserResponse PutElser(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(taskType, elserInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElserResponse> PutElserAsync(Elastic.Clients.Elasticsearch.Inference.PutElserRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request, cancellationToken);
+	}
+
+	[System.Obsolete("Deprecated in '8.16.0'. The elser service is deprecated and will be removed in a future release. Use the Elasticsearch inference integration instead, with model_id included in the service_settings.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElserResponse> PutElserAsync(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(taskType, elserInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request, cancellationToken);
+	}
+
+	[System.Obsolete("Deprecated in '8.16.0'. The elser service is deprecated and will be removed in a future release. Use the Elasticsearch inference integration instead, with model_id included in the service_settings.")]
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutElserResponse> PutElserAsync(Elastic.Clients.Elasticsearch.Inference.ElserTaskType taskType, Elastic.Clients.Elasticsearch.Id elserInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutElserRequestDescriptor(taskType, elserInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutElserRequest, Elastic.Clients.Elasticsearch.Inference.PutElserResponse, Elastic.Clients.Elasticsearch.Inference.PutElserRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse PutGoogleaistudio(Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse PutGoogleaistudio(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse PutGoogleaistudio(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse> PutGoogleaistudioAsync(Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse> PutGoogleaistudioAsync(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse> PutGoogleaistudioAsync(Elastic.Clients.Elasticsearch.Inference.GoogleAiStudioTaskType taskType, Elastic.Clients.Elasticsearch.Id googleaistudioInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestDescriptor(taskType, googleaistudioInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequest, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioResponse, Elastic.Clients.Elasticsearch.Inference.PutGoogleaistudioRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse PutGooglevertexai(Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse PutGooglevertexai(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse PutGooglevertexai(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse> PutGooglevertexaiAsync(Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse> PutGooglevertexaiAsync(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse> PutGooglevertexaiAsync(Elastic.Clients.Elasticsearch.Inference.GoogleVertexAITaskType taskType, Elastic.Clients.Elasticsearch.Id googlevertexaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestDescriptor(taskType, googlevertexaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequest, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiResponse, Elastic.Clients.Elasticsearch.Inference.PutGooglevertexaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse PutHuggingFace(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse> PutHuggingFaceAsync(Elastic.Clients.Elasticsearch.Inference.HuggingFaceTaskType taskType, Elastic.Clients.Elasticsearch.Id huggingfaceInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestDescriptor(taskType, huggingfaceInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequest, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceResponse, Elastic.Clients.Elasticsearch.Inference.PutHuggingFaceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse PutJinaai(Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse PutJinaai(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse PutJinaai(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse> PutJinaaiAsync(Elastic.Clients.Elasticsearch.Inference.JinaAITaskType taskType, Elastic.Clients.Elasticsearch.Id jinaaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestDescriptor(taskType, jinaaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequest, Elastic.Clients.Elasticsearch.Inference.PutJinaaiResponse, Elastic.Clients.Elasticsearch.Inference.PutJinaaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutMistralResponse PutMistral(Elastic.Clients.Elasticsearch.Inference.PutMistralRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutMistralResponse PutMistral(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutMistralResponse PutMistral(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutMistralResponse> PutMistralAsync(Elastic.Clients.Elasticsearch.Inference.PutMistralRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutMistralResponse> PutMistralAsync(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutMistralResponse> PutMistralAsync(Elastic.Clients.Elasticsearch.Inference.MistralTaskType taskType, Elastic.Clients.Elasticsearch.Id mistralInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutMistralRequestDescriptor(taskType, mistralInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutMistralRequest, Elastic.Clients.Elasticsearch.Inference.PutMistralResponse, Elastic.Clients.Elasticsearch.Inference.PutMistralRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse PutOpenai(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse> PutOpenaiAsync(Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse> PutOpenaiAsync(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse> PutOpenaiAsync(Elastic.Clients.Elasticsearch.Inference.OpenAITaskType taskType, Elastic.Clients.Elasticsearch.Id openaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestDescriptor(taskType, openaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequest, Elastic.Clients.Elasticsearch.Inference.PutOpenaiResponse, Elastic.Clients.Elasticsearch.Inference.PutOpenaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse PutVoyageai(Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse PutVoyageai(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor(taskType, voyageaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse PutVoyageai(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor(taskType, voyageaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse> PutVoyageaiAsync(Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse> PutVoyageaiAsync(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor(taskType, voyageaiInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse> PutVoyageaiAsync(Elastic.Clients.Elasticsearch.Inference.VoyageAITaskType taskType, Elastic.Clients.Elasticsearch.Id voyageaiInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestDescriptor(taskType, voyageaiInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequest, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiResponse, Elastic.Clients.Elasticsearch.Inference.PutVoyageaiRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse PutWatsonx(Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse PutWatsonx(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse PutWatsonx(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse> PutWatsonxAsync(Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse> PutWatsonxAsync(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse> PutWatsonxAsync(Elastic.Clients.Elasticsearch.Inference.WatsonxTaskType taskType, Elastic.Clients.Elasticsearch.Id watsonxInferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestDescriptor(taskType, watsonxInferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequest, Elastic.Clients.Elasticsearch.Inference.PutWatsonxResponse, Elastic.Clients.Elasticsearch.Inference.PutWatsonxRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.RerankResponse Rerank(Elastic.Clients.Elasticsearch.Inference.RerankRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.RerankResponse Rerank(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.RerankResponse Rerank(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.RerankResponse> RerankAsync(Elastic.Clients.Elasticsearch.Inference.RerankRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.RerankResponse> RerankAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.RerankResponse> RerankAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.RerankRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.RerankRequest, Elastic.Clients.Elasticsearch.Inference.RerankResponse, Elastic.Clients.Elasticsearch.Inference.RerankRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse SparseEmbedding(Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse SparseEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse SparseEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse> SparseEmbeddingAsync(Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse> SparseEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse> SparseEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.SparseEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse StreamCompletion(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse> StreamCompletionAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequest, Elastic.Clients.Elasticsearch.Inference.StreamCompletionResponse, Elastic.Clients.Elasticsearch.Inference.StreamCompletionRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse TextEmbedding(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse> TextEmbeddingAsync(Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse> TextEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse> TextEmbeddingAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequest, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingResponse, Elastic.Clients.Elasticsearch.Inference.TextEmbeddingRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest request)
+	{
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse Update(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest request, System.Threading.CancellationToken cancellationToken = default)
+	{
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(taskType, inferenceId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request, cancellationToken);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse> UpdateAsync(Elastic.Clients.Elasticsearch.Inference.TaskType? taskType, Elastic.Clients.Elasticsearch.Id inferenceId, System.Action<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestDescriptor(taskType, inferenceId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequest, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceResponse, Elastic.Clients.Elasticsearch.Inference.UpdateInferenceRequestParameters>(request, cancellationToken);
 	}
 }

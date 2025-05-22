@@ -1,4 +1,4 @@
-ARG DOTNET_VERSION=8.0.400
+ARG DOTNET_VERSION=9.0.100
 FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_VERSION} AS elasticsearch-net-build
 
 ENV NUGET_SCRATCH="/tmp/NuGetScratch"

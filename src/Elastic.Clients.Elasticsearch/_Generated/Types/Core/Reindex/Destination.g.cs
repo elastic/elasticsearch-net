@@ -17,33 +17,131 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Reindex;
 
+internal sealed partial class DestinationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Reindex.Destination>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropOpType = System.Text.Json.JsonEncodedText.Encode("op_type");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
+	public override Elastic.Clients.Elasticsearch.Core.Reindex.Destination Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexName> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.OpType?> propOpType = default;
+		LocalJsonValue<string?> propPipeline = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Routing?> propRouting = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.VersionType?> propVersionType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propOpType.TryReadProperty(ref reader, options, PropOpType, null))
+			{
+				continue;
+			}
+
+			if (propPipeline.TryReadProperty(ref reader, options, PropPipeline, null))
+			{
+				continue;
+			}
+
+			if (propRouting.TryReadProperty(ref reader, options, PropRouting, null))
+			{
+				continue;
+			}
+
+			if (propVersionType.TryReadProperty(ref reader, options, PropVersionType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Reindex.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			OpType = propOpType.Value,
+			Pipeline = propPipeline.Value,
+			Routing = propRouting.Value,
+			VersionType = propVersionType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Reindex.Destination value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropOpType, value.OpType, null, null);
+		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
+		writer.WriteProperty(options, PropRouting, value.Routing, null, null);
+		writer.WriteProperty(options, PropVersionType, value.VersionType, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationConverter))]
 public sealed partial class Destination
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Destination(Elastic.Clients.Elasticsearch.IndexName index)
+	{
+		Index = index;
+	}
+#if NET7_0_OR_GREATER
+	public Destination()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Destination()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The name of the data stream, index, or index alias you are copying to.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("index")]
-	public Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Set to <c>create</c> to only index documents that do not already exist.
-	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("op_type")]
 	public Elastic.Clients.Elasticsearch.OpType? OpType { get; set; }
 
 	/// <summary>
@@ -51,16 +149,16 @@ public sealed partial class Destination
 	/// The name of the pipeline to use.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pipeline")]
 	public string? Pipeline { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// By default, a document's routing is preserved unless it’s changed by the script.
-	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// By default, a document's routing is preserved unless it's changed by the script.
+	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
+	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
+	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("routing")]
 	public Elastic.Clients.Elasticsearch.Routing? Routing { get; set; }
 
 	/// <summary>
@@ -68,45 +166,51 @@ public sealed partial class Destination
 	/// The versioning to use for the indexing operation.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("version_type")]
 	public Elastic.Clients.Elasticsearch.VersionType? VersionType { get; set; }
 }
 
-public sealed partial class DestinationDescriptor : SerializableDescriptor<DestinationDescriptor>
+public readonly partial struct DestinationDescriptor
 {
-	internal DestinationDescriptor(Action<DestinationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Reindex.Destination Instance { get; init; }
 
-	public DestinationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DestinationDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.Destination instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexName IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.OpType? OpTypeValue { get; set; }
-	private string? PipelineValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Routing? RoutingValue { get; set; }
-	private Elastic.Clients.Elasticsearch.VersionType? VersionTypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DestinationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Reindex.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(Elastic.Clients.Elasticsearch.Core.Reindex.Destination instance) => new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Reindex.Destination(Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The name of the data stream, index, or index alias you are copying to.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Set to <c>create</c> to only index documents that do not already exist.
-	/// Important: To reindex to a data stream destination, this argument must be <c>create</c>.
+	/// If it is <c>create</c>, the operation will only index documents that do not already exist (also known as "put if absent").
+	/// </para>
+	/// <para>
+	/// IMPORTANT: To reindex to a data stream destination, this argument must be <c>create</c>.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor OpType(Elastic.Clients.Elasticsearch.OpType? opType)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor OpType(Elastic.Clients.Elasticsearch.OpType? value)
 	{
-		OpTypeValue = opType;
-		return Self;
+		Instance.OpType = value;
+		return this;
 	}
 
 	/// <summary>
@@ -114,22 +218,24 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	/// The name of the pipeline to use.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor Pipeline(string? pipeline)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Pipeline(string? value)
 	{
-		PipelineValue = pipeline;
-		return Self;
+		Instance.Pipeline = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// By default, a document's routing is preserved unless it’s changed by the script.
-	/// Set to <c>discard</c> to set routing to <c>null</c>,  or <c>=value</c> to route using the specified <c>value</c>.
+	/// By default, a document's routing is preserved unless it's changed by the script.
+	/// If it is <c>keep</c>, the routing on the bulk request sent for each match is set to the routing on the match.
+	/// If it is <c>discard</c>, the routing on the bulk request sent for each match is set to <c>null</c>.
+	/// If it is <c>=value</c>, the routing on the bulk request sent for each match is set to all value specified after the equals sign (<c>=</c>).
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? routing)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor Routing(Elastic.Clients.Elasticsearch.Routing? value)
 	{
-		RoutingValue = routing;
-		return Self;
+		Instance.Routing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -137,41 +243,17 @@ public sealed partial class DestinationDescriptor : SerializableDescriptor<Desti
 	/// The versioning to use for the indexing operation.
 	/// </para>
 	/// </summary>
-	public DestinationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? versionType)
+	public Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor VersionType(Elastic.Clients.Elasticsearch.VersionType? value)
 	{
-		VersionTypeValue = versionType;
-		return Self;
+		Instance.VersionType = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Reindex.Destination Build(System.Action<Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("index");
-		JsonSerializer.Serialize(writer, IndexValue, options);
-		if (OpTypeValue is not null)
-		{
-			writer.WritePropertyName("op_type");
-			JsonSerializer.Serialize(writer, OpTypeValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(PipelineValue))
-		{
-			writer.WritePropertyName("pipeline");
-			writer.WriteStringValue(PipelineValue);
-		}
-
-		if (RoutingValue is not null)
-		{
-			writer.WritePropertyName("routing");
-			JsonSerializer.Serialize(writer, RoutingValue, options);
-		}
-
-		if (VersionTypeValue is not null)
-		{
-			writer.WritePropertyName("version_type");
-			JsonSerializer.Serialize(writer, VersionTypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Reindex.DestinationDescriptor(new Elastic.Clients.Elasticsearch.Core.Reindex.Destination(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

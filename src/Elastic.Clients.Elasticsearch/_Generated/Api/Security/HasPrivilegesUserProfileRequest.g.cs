@@ -17,21 +17,62 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class HasPrivilegesUserProfileRequestParameters : RequestParameters
+public sealed partial class HasPrivilegesUserProfileRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class HasPrivilegesUserProfileRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPrivileges = System.Text.Json.JsonEncodedText.Encode("privileges");
+	private static readonly System.Text.Json.JsonEncodedText PropUids = System.Text.Json.JsonEncodedText.Encode("uids");
+
+	public override Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.PrivilegesCheck> propPrivileges = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propUids = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPrivileges.TryReadProperty(ref reader, options, PropPrivileges, null))
+			{
+				continue;
+			}
+
+			if (propUids.TryReadProperty(ref reader, options, PropUids, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Privileges = propPrivileges.Value,
+			Uids = propUids.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPrivileges, value.Privileges, null, null);
+		writer.WriteProperty(options, PropUids, value.Uids, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,27 +82,66 @@ public sealed partial class HasPrivilegesUserProfileRequestParameters : RequestP
 /// <para>
 /// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 /// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
 /// </summary>
-public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPrivilegesUserProfileRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestConverter))]
+public sealed partial class HasPrivilegesUserProfileRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityHasPrivilegesUserProfile;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck privileges, System.Collections.Generic.ICollection<string> uids)
+	{
+		Privileges = privileges;
+		Uids = uids;
+	}
+#if NET7_0_OR_GREATER
+	public HasPrivilegesUserProfileRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public HasPrivilegesUserProfileRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityHasPrivilegesUserProfile;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.has_privileges_user_profile";
 
-	[JsonInclude, JsonPropertyName("privileges")]
-	public Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.PrivilegesCheck Privileges { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("uids")]
-	public ICollection<string> Uids { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Uids { get; set; }
 }
 
 /// <summary>
@@ -71,50 +151,60 @@ public sealed partial class HasPrivilegesUserProfileRequest : PlainRequest<HasPr
 /// <para>
 /// Determine whether the users associated with the specified user profile IDs have all the requested privileges.
 /// </para>
+/// <para>
+/// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
+/// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+/// </para>
 /// </summary>
-public sealed partial class HasPrivilegesUserProfileRequestDescriptor : RequestDescriptor<HasPrivilegesUserProfileRequestDescriptor, HasPrivilegesUserProfileRequestParameters>
+public readonly partial struct HasPrivilegesUserProfileRequestDescriptor
 {
-	internal HasPrivilegesUserProfileRequestDescriptor(Action<HasPrivilegesUserProfileRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public HasPrivilegesUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public HasPrivilegesUserProfileRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityHasPrivilegesUserProfile;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest instance) => new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.has_privileges_user_profile";
-
-	private Elastic.Clients.Elasticsearch.Security.PrivilegesCheck PrivilegesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor PrivilegesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor> PrivilegesDescriptorAction { get; set; }
-	private ICollection<string> UidsValue { get; set; }
-
-	public HasPrivilegesUserProfileRequestDescriptor Privileges(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck privileges)
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges(Elastic.Clients.Elasticsearch.Security.PrivilegesCheck value)
 	{
-		PrivilegesDescriptor = null;
-		PrivilegesDescriptorAction = null;
-		PrivilegesValue = privileges;
-		return Self;
+		Instance.Privileges = value;
+		return this;
 	}
 
-	public HasPrivilegesUserProfileRequestDescriptor Privileges(Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges()
 	{
-		PrivilegesValue = null;
-		PrivilegesDescriptorAction = null;
-		PrivilegesDescriptor = descriptor;
-		return Self;
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor.Build(null);
+		return this;
 	}
 
-	public HasPrivilegesUserProfileRequestDescriptor Privileges(Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// An object containing all the privileges to be checked.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Privileges(System.Action<Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor>? action)
 	{
-		PrivilegesValue = null;
-		PrivilegesDescriptor = null;
-		PrivilegesDescriptorAction = configure;
-		return Self;
+		Instance.Privileges = Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -122,33 +212,70 @@ public sealed partial class HasPrivilegesUserProfileRequestDescriptor : RequestD
 	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
 	/// </para>
 	/// </summary>
-	public HasPrivilegesUserProfileRequestDescriptor Uids(ICollection<string> uids)
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(System.Collections.Generic.ICollection<string> value)
 	{
-		UidsValue = uids;
-		return Self;
+		Instance.Uids = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// A list of profile IDs. The privileges are checked for associated users of the profiles.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Uids(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (PrivilegesDescriptor is not null)
-		{
-			writer.WritePropertyName("privileges");
-			JsonSerializer.Serialize(writer, PrivilegesDescriptor, options);
-		}
-		else if (PrivilegesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("privileges");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.PrivilegesCheckDescriptor(PrivilegesDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("privileges");
-			JsonSerializer.Serialize(writer, PrivilegesValue, options);
-		}
+		Instance.Uids = [.. values];
+		return this;
+	}
 
-		writer.WritePropertyName("uids");
-		JsonSerializer.Serialize(writer, UidsValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.HasPrivilegesUserProfileRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

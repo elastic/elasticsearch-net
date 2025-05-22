@@ -17,74 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class TruncateTokenFilter : ITokenFilter
+internal sealed partial class TruncateTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("length")]
+	private static readonly System.Text.Json.JsonEncodedText PropLength = System.Text.Json.JsonEncodedText.Encode("length");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propLength = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLength.TryReadProperty(ref reader, options, PropLength, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Length = propLength.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLength, value.Length, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterConverter))]
+public sealed partial class TruncateTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public TruncateTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TruncateTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TruncateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
+	/// </para>
+	/// </summary>
 	public int? Length { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "truncate";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class TruncateTokenFilterDescriptor : SerializableDescriptor<TruncateTokenFilterDescriptor>, IBuildableDescriptor<TruncateTokenFilter>
+public readonly partial struct TruncateTokenFilterDescriptor
 {
-	internal TruncateTokenFilterDescriptor(Action<TruncateTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter Instance { get; init; }
 
-	public TruncateTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TruncateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private int? LengthValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public TruncateTokenFilterDescriptor Length(int? length)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TruncateTokenFilterDescriptor()
 	{
-		LengthValue = length;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public TruncateTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Character limit for each token. Tokens exceeding this limit are truncated. Defaults to <c>10</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor Length(int? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Length = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (LengthValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("length");
-			writer.WriteNumberValue(LengthValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("truncate");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.TruncateTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	TruncateTokenFilter IBuildableDescriptor<TruncateTokenFilter>.Build() => new()
-	{
-		Length = LengthValue,
-		Version = VersionValue
-	};
 }

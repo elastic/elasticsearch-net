@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ShrinkIndexRequestParameters : RequestParameters
+public sealed partial class ShrinkIndexRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -57,20 +50,164 @@ public sealed partial class ShrinkIndexRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 }
 
+internal sealed partial class ShrinkIndexRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAliases = System.Text.Json.JsonEncodedText.Encode("aliases");
+	private static readonly System.Text.Json.JsonEncodedText PropSettings = System.Text.Json.JsonEncodedText.Encode("settings");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>?> propAliases = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propSettings = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAliases.TryReadProperty(ref reader, options, PropAliases, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSettings.TryReadProperty(ref reader, options, PropSettings, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aliases = propAliases.Value,
+			Settings = propSettings.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAliases, value.Aliases, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>(o, v, null, null));
+		writer.WriteProperty(options, PropSettings, value.Settings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
 /// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
-public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestConverter))]
+public sealed partial class ShrinkIndexRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ShrinkIndexRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ShrinkIndexRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShrinkIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementShrink;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -78,11 +215,32 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 
 	/// <summary>
 	/// <para>
+	/// Name of the source index to shrink.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Target { get => P<Elastic.Clients.Elasticsearch.IndexName>("target"); set => PR("target", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a connection to the master node.
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -91,7 +249,6 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 
 	/// <summary>
@@ -100,7 +257,6 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.WaitForActiveShards? WaitForActiveShards { get => Q<Elastic.Clients.Elasticsearch.WaitForActiveShards?>("wait_for_active_shards"); set => Q("wait_for_active_shards", value); }
 
 	/// <summary>
@@ -109,57 +265,186 @@ public sealed partial class ShrinkIndexRequest : PlainRequest<ShrinkIndexRequest
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("aliases")]
-	public IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? Aliases { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("settings")]
-	public IDictionary<string, object>? Settings { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Settings { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
 /// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
-public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDescriptor<ShrinkIndexRequestDescriptor<TDocument>, ShrinkIndexRequestParameters>
+public readonly partial struct ShrinkIndexRequestDescriptor
 {
-	internal ShrinkIndexRequestDescriptor(Action<ShrinkIndexRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest Instance { get; init; }
 
-	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.shrink";
-
-	public ShrinkIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public ShrinkIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ShrinkIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public ShrinkIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
+	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(index, target);
 	}
 
-	public ShrinkIndexRequestDescriptor<TDocument> Target(Elastic.Clients.Elasticsearch.IndexName target)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ShrinkIndexRequestDescriptor()
 	{
-		RouteValues.Required("target", target);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>> AliasesValue { get; set; }
-	private IDictionary<string, object>? SettingsValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the source index to shrink.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Target(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Target = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
@@ -167,81 +452,11 @@ public sealed partial class ShrinkIndexRequestDescriptor<TDocument> : RequestDes
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public ShrinkIndexRequestDescriptor<TDocument> Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>());
-		return Self;
+		Instance.Aliases = value;
+		return this;
 	}
-
-	/// <summary>
-	/// <para>
-	/// Configuration options for the target index.
-	/// </para>
-	/// </summary>
-	public ShrinkIndexRequestDescriptor<TDocument> Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-	{
-		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
-		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
-		}
-
-		if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-/// <summary>
-/// <para>
-/// Shrinks an existing index into a new index with fewer primary shards.
-/// </para>
-/// </summary>
-public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<ShrinkIndexRequestDescriptor, ShrinkIndexRequestParameters>
-{
-	internal ShrinkIndexRequestDescriptor(Action<ShrinkIndexRequestDescriptor> configure) => configure.Invoke(this);
-
-	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target) : base(r => r.Required("index", index).Required("target", target))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementShrink;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.shrink";
-
-	public ShrinkIndexRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public ShrinkIndexRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-	public ShrinkIndexRequestDescriptor WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? waitForActiveShards) => Qs("wait_for_active_shards", waitForActiveShards);
-
-	public ShrinkIndexRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		RouteValues.Required("index", index);
-		return Self;
-	}
-
-	public ShrinkIndexRequestDescriptor Target(Elastic.Clients.Elasticsearch.IndexName target)
-	{
-		RouteValues.Required("target", target);
-		return Self;
-	}
-
-	private IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor> AliasesValue { get; set; }
-	private IDictionary<string, object>? SettingsValue { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -249,10 +464,92 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 	/// Index alias names support date math.
 	/// </para>
 	/// </summary>
-	public ShrinkIndexRequestDescriptor Aliases(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases()
 	{
-		AliasesValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>());
-		return Self;
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
+		{
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		}
+
+		Instance.Aliases = items;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor AddAlias(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor AddAlias<T>(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -260,27 +557,437 @@ public sealed partial class ShrinkIndexRequestDescriptor : RequestDescriptor<Shr
 	/// Configuration options for the target index.
 	/// </para>
 	/// </summary>
-	public ShrinkIndexRequestDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		SettingsValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Settings = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Configuration options for the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings()
 	{
-		writer.WriteStartObject();
-		if (AliasesValue is not null)
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration options for the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor AddSetting(string key, object value)
+	{
+		Instance.Settings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Settings.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
+	}
+}
+
+/// <summary>
+/// <para>
+/// Shrink an index.
+/// Shrink an index into a new index with fewer primary shards.
+/// </para>
+/// <para>
+/// Before you can shrink an index:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The index must be read-only.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A copy of every shard in the index must reside on the same node.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must have a green health status.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// To make shard allocation easier, we recommend you also remove the index's replica shards.
+/// You can later re-add replica shards as part of the shrink operation.
+/// </para>
+/// <para>
+/// The requested number of primary shards in the target index must be a factor of the number of shards in the source index.
+/// For example an index with 8 primary shards can be shrunk into 4, 2 or 1 primary shards or an index with 15 primary shards can be shrunk into 5, 3 or 1.
+/// If the number of shards in the index is a prime number it can only be shrunk into a single primary shard
+/// Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+/// </para>
+/// <para>
+/// The current write index on a data stream cannot be shrunk. In order to shrink the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be shrunk.
+/// </para>
+/// <para>
+/// A shrink operation:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Creates a new target index with the same definition as the source index, but with a smaller number of primary shards.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Hard-links segments from the source index into the target index. If the file system does not support hard-linking, then all segments are copied into the new index, which is a much more time consuming process. Also if using multiple data paths, shards on different data paths require a full copy of segment files if they are not on the same disk since hardlinks do not work across disks.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Recovers the target index as though it were a closed index which had just been re-opened. Recovers shards to the <c>.routing.allocation.initial_recovery._id</c> index setting.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// IMPORTANT: Indices can only be shrunk if they satisfy the following requirements:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// The target index must not exist.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index must not contain more than 2,147,483,519 documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index.
+/// </para>
+/// </item>
+/// </list>
+/// </summary>
+public readonly partial struct ShrinkIndexRequestDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest instance)
+	{
+		Instance = instance;
+	}
+
+	public ShrinkIndexRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName target)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(index, target);
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ShrinkIndexRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the source index to shrink.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the target index to create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Target(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Target = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The number of shard copies that must be active before proceeding with the operation.
+	/// Set to <c>all</c> or any positive integer up to the total number of shards in the index (<c>number_of_replicas+1</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> WaitForActiveShards(Elastic.Clients.Elasticsearch.WaitForActiveShards? value)
+	{
+		Instance.WaitForActiveShards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>? value)
+	{
+		Instance.Aliases = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases()
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>>? action)
+	{
+		Instance.Aliases = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfIndexNameAlias<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key, Elastic.Clients.Elasticsearch.IndexManagement.Alias value)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias> { { key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null) } };
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The key is the alias name.
+	/// Index alias names support date math.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Aliases(params Elastic.Clients.Elasticsearch.IndexName[] keys)
+	{
+		var items = new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		foreach (var key in keys)
 		{
-			writer.WritePropertyName("aliases");
-			JsonSerializer.Serialize(writer, AliasesValue, options);
+			items.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
 		}
 
-		if (SettingsValue is not null)
-		{
-			writer.WritePropertyName("settings");
-			JsonSerializer.Serialize(writer, SettingsValue, options);
-		}
+		Instance.Aliases = items;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(null));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> AddAlias(Elastic.Clients.Elasticsearch.IndexName key, System.Action<Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>>? action)
+	{
+		Instance.Aliases ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.IndexName, Elastic.Clients.Elasticsearch.IndexManagement.Alias>();
+		Instance.Aliases.Add(key, Elastic.Clients.Elasticsearch.IndexManagement.AliasDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration options for the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration options for the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Configuration options for the target index.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> AddSetting(string key, object value)
+	{
+		Instance.Settings ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Settings.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ShrinkIndexRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

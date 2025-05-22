@@ -17,21 +17,98 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class GrantApiKeyRequestParameters : RequestParameters
+public sealed partial class GrantApiKeyRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GrantApiKeyRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAccessToken = System.Text.Json.JsonEncodedText.Encode("access_token");
+	private static readonly System.Text.Json.JsonEncodedText PropApiKey = System.Text.Json.JsonEncodedText.Encode("api_key");
+	private static readonly System.Text.Json.JsonEncodedText PropGrantType = System.Text.Json.JsonEncodedText.Encode("grant_type");
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText PropRunAs = System.Text.Json.JsonEncodedText.Encode("run_as");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAccessToken = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.GrantApiKey> propApiKey = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType> propGrantType = default;
+		LocalJsonValue<string?> propPassword = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propRunAs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAccessToken.TryReadProperty(ref reader, options, PropAccessToken, null))
+			{
+				continue;
+			}
+
+			if (propApiKey.TryReadProperty(ref reader, options, PropApiKey, null))
+			{
+				continue;
+			}
+
+			if (propGrantType.TryReadProperty(ref reader, options, PropGrantType, null))
+			{
+				continue;
+			}
+
+			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
+			{
+				continue;
+			}
+
+			if (propRunAs.TryReadProperty(ref reader, options, PropRunAs, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AccessToken = propAccessToken.Value,
+			ApiKey = propApiKey.Value,
+			GrantType = propGrantType.Value,
+			Password = propPassword.Value,
+			RunAs = propRunAs.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAccessToken, value.AccessToken, null, null);
+		writer.WriteProperty(options, PropApiKey, value.ApiKey, null, null);
+		writer.WriteProperty(options, PropGrantType, value.GrantType, null, null);
+		writer.WriteProperty(options, PropPassword, value.Password, null, null);
+		writer.WriteProperty(options, PropRunAs, value.RunAs, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,13 +118,34 @@ public sealed partial class GrantApiKeyRequestParameters : RequestParameters
 /// <para>
 /// Create an API key on behalf of another user.
 /// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user’s credentials.
+/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
+/// It is not possible to use this API to create an API key without that user's credentials.
+/// The supported user authentication credential types are:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// username and password
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Elasticsearch access tokens
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JWTs
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
 /// In this case, the API key will be created on behalf of the impersonated user.
 /// </para>
 /// <para>
 /// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 /// </para>
 /// <para>
 /// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
@@ -57,11 +155,35 @@ public sealed partial class GrantApiKeyRequestParameters : RequestParameters
 /// By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
 /// </summary>
-public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestConverter))]
+public sealed partial class GrantApiKeyRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGrantApiKey;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKey apiKey, Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType grantType)
+	{
+		ApiKey = apiKey;
+		GrantType = grantType;
+	}
+#if NET7_0_OR_GREATER
+	public GrantApiKeyRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public GrantApiKeyRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityGrantApiKey;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -69,37 +191,42 @@ public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequest
 
 	/// <summary>
 	/// <para>
-	/// The user’s access token.
+	/// The user's access token.
 	/// If you specify the <c>access_token</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("access_token")]
 	public string? AccessToken { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Defines the API key.
+	/// The API key.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("api_key")]
-	public Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKey { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKey { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("grant_type")]
-	public Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantType { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantType { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// The user’s password. If you specify the <c>password</c> grant type, this parameter is required.
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("password")]
 	public string? Password { get; set; }
 
 	/// <summary>
@@ -107,7 +234,6 @@ public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequest
 	/// The name of the user to be impersonated.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("run_as")]
 	public Elastic.Clients.Elasticsearch.Username? RunAs { get; set; }
 
 	/// <summary>
@@ -117,7 +243,6 @@ public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequest
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("username")]
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
@@ -128,13 +253,34 @@ public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequest
 /// <para>
 /// Create an API key on behalf of another user.
 /// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user’s credentials.
+/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
+/// It is not possible to use this API to create an API key without that user's credentials.
+/// The supported user authentication credential types are:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// username and password
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Elasticsearch access tokens
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JWTs
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
 /// In this case, the API key will be created on behalf of the impersonated user.
 /// </para>
 /// <para>
 /// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 /// </para>
 /// <para>
 /// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
@@ -144,71 +290,68 @@ public sealed partial class GrantApiKeyRequest : PlainRequest<GrantApiKeyRequest
 /// By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
 /// </summary>
-public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDescriptor<GrantApiKeyRequestDescriptor<TDocument>, GrantApiKeyRequestParameters>
+public readonly partial struct GrantApiKeyRequestDescriptor
 {
-	internal GrantApiKeyRequestDescriptor(Action<GrantApiKeyRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GrantApiKeyRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGrantApiKey;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.grant_api_key";
-
-	private string? AccessTokenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKeyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> ApiKeyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>> ApiKeyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantTypeValue { get; set; }
-	private string? PasswordValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? RunAsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// The user’s access token.
+	/// The user's access token.
 	/// If you specify the <c>access_token</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> AccessToken(string? accessToken)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor AccessToken(string? value)
 	{
-		AccessTokenValue = accessToken;
-		return Self;
+		Instance.AccessToken = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Defines the API key.
+	/// The API key.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey apiKey)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey value)
 	{
-		ApiKeyDescriptor = null;
-		ApiKeyDescriptorAction = null;
-		ApiKeyValue = apiKey;
-		return Self;
+		Instance.ApiKey = value;
+		return this;
 	}
 
-	public GrantApiKeyRequestDescriptor<TDocument> ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor> action)
 	{
-		ApiKeyValue = null;
-		ApiKeyDescriptorAction = null;
-		ApiKeyDescriptor = descriptor;
-		return Self;
+		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor.Build(action);
+		return this;
 	}
 
-	public GrantApiKeyRequestDescriptor<TDocument> ApiKey(Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ApiKey<T>(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<T>> action)
 	{
-		ApiKeyValue = null;
-		ApiKeyDescriptor = null;
-		ApiKeyDescriptorAction = configure;
-		return Self;
+		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<T>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -216,22 +359,23 @@ public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDes
 	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType grantType)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
-		GrantTypeValue = grantType;
-		return Self;
+		Instance.GrantType = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The user’s password. If you specify the <c>password</c> grant type, this parameter is required.
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> Password(string? password)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Password(string? value)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Password = value;
+		return this;
 	}
 
 	/// <summary>
@@ -239,10 +383,10 @@ public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDes
 	/// The name of the user to be impersonated.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> RunAs(Elastic.Clients.Elasticsearch.Username? runAs)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		RunAsValue = runAs;
-		return Self;
+		Instance.RunAs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -252,58 +396,60 @@ public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDes
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor<TDocument> Username(Elastic.Clients.Elasticsearch.Username? username)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AccessTokenValue))
-		{
-			writer.WritePropertyName("access_token");
-			writer.WriteStringValue(AccessTokenValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ApiKeyDescriptor is not null)
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, ApiKeyDescriptor, options);
-		}
-		else if (ApiKeyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>(ApiKeyDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, ApiKeyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("grant_type");
-		JsonSerializer.Serialize(writer, GrantTypeValue, options);
-		if (!string.IsNullOrEmpty(PasswordValue))
-		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RunAsValue is not null)
-		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, RunAsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
@@ -314,13 +460,34 @@ public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDes
 /// <para>
 /// Create an API key on behalf of another user.
 /// This API is similar to the create API keys API, however it creates the API key for a user that is different than the user that runs the API.
-/// The caller must have authentication credentials (either an access token, or a username and password) for the user on whose behalf the API key will be created.
-/// It is not possible to use this API to create an API key without that user’s credentials.
+/// The caller must have authentication credentials for the user on whose behalf the API key will be created.
+/// It is not possible to use this API to create an API key without that user's credentials.
+/// The supported user authentication credential types are:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// username and password
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Elasticsearch access tokens
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// JWTs
+/// </para>
+/// </item>
+/// </list>
+/// <para>
 /// The user, for whom the authentication credentials is provided, can optionally "run as" (impersonate) another user.
 /// In this case, the API key will be created on behalf of the impersonated user.
 /// </para>
 /// <para>
 /// This API is intended be used by applications that need to create and manage API keys for end users, but cannot guarantee that those users have permission to create API keys on their own behalf.
+/// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 /// </para>
 /// <para>
 /// A successful grant API key API call returns a JSON structure that contains the API key, its unique id, and its name.
@@ -330,71 +497,57 @@ public sealed partial class GrantApiKeyRequestDescriptor<TDocument> : RequestDes
 /// By default, API keys never expire. You can specify expiration information when you create the API keys.
 /// </para>
 /// </summary>
-public sealed partial class GrantApiKeyRequestDescriptor : RequestDescriptor<GrantApiKeyRequestDescriptor, GrantApiKeyRequestParameters>
+public readonly partial struct GrantApiKeyRequestDescriptor<TDocument>
 {
-	internal GrantApiKeyRequestDescriptor(Action<GrantApiKeyRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GrantApiKeyRequestDescriptor(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GrantApiKeyRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityGrantApiKey;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.grant_api_key";
-
-	private string? AccessTokenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GrantApiKey ApiKeyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor ApiKeyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor> ApiKeyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType GrantTypeValue { get; set; }
-	private string? PasswordValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? RunAsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest instance) => new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// The user’s access token.
+	/// The user's access token.
 	/// If you specify the <c>access_token</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor AccessToken(string? accessToken)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> AccessToken(string? value)
 	{
-		AccessTokenValue = accessToken;
-		return Self;
+		Instance.AccessToken = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Defines the API key.
+	/// The API key.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey apiKey)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKey value)
 	{
-		ApiKeyDescriptor = null;
-		ApiKeyDescriptorAction = null;
-		ApiKeyValue = apiKey;
-		return Self;
+		Instance.ApiKey = value;
+		return this;
 	}
 
-	public GrantApiKeyRequestDescriptor ApiKey(Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The API key.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ApiKey(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>> action)
 	{
-		ApiKeyValue = null;
-		ApiKeyDescriptorAction = null;
-		ApiKeyDescriptor = descriptor;
-		return Self;
-	}
-
-	public GrantApiKeyRequestDescriptor ApiKey(Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor> configure)
-	{
-		ApiKeyValue = null;
-		ApiKeyDescriptor = null;
-		ApiKeyDescriptorAction = configure;
-		return Self;
+		Instance.ApiKey = Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -402,22 +555,23 @@ public sealed partial class GrantApiKeyRequestDescriptor : RequestDescriptor<Gra
 	/// The type of grant. Supported grant types are: <c>access_token</c>, <c>password</c>.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType grantType)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> GrantType(Elastic.Clients.Elasticsearch.Security.ApiKeyGrantType value)
 	{
-		GrantTypeValue = grantType;
-		return Self;
+		Instance.GrantType = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// The user’s password. If you specify the <c>password</c> grant type, this parameter is required.
+	/// The user's password.
+	/// If you specify the <c>password</c> grant type, this parameter is required.
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor Password(string? password)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Password(string? value)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Password = value;
+		return this;
 	}
 
 	/// <summary>
@@ -425,10 +579,10 @@ public sealed partial class GrantApiKeyRequestDescriptor : RequestDescriptor<Gra
 	/// The name of the user to be impersonated.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor RunAs(Elastic.Clients.Elasticsearch.Username? runAs)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> RunAs(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		RunAsValue = runAs;
-		return Self;
+		Instance.RunAs = value;
+		return this;
 	}
 
 	/// <summary>
@@ -438,57 +592,59 @@ public sealed partial class GrantApiKeyRequestDescriptor : RequestDescriptor<Gra
 	/// It is not valid with other grant types.
 	/// </para>
 	/// </summary>
-	public GrantApiKeyRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AccessTokenValue))
-		{
-			writer.WritePropertyName("access_token");
-			writer.WriteStringValue(AccessTokenValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (ApiKeyDescriptor is not null)
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, ApiKeyDescriptor, options);
-		}
-		else if (ApiKeyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Security.GrantApiKeyDescriptor(ApiKeyDescriptorAction), options);
-		}
-		else
-		{
-			writer.WritePropertyName("api_key");
-			JsonSerializer.Serialize(writer, ApiKeyValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WritePropertyName("grant_type");
-		JsonSerializer.Serialize(writer, GrantTypeValue, options);
-		if (!string.IsNullOrEmpty(PasswordValue))
-		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (RunAsValue is not null)
-		{
-			writer.WritePropertyName("run_as");
-			JsonSerializer.Serialize(writer, RunAsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.GrantApiKeyRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

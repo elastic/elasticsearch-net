@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public sealed partial class EqlGetRequestParameters : RequestParameters
+public sealed partial class EqlGetRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -49,20 +42,62 @@ public sealed partial class EqlGetRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
+internal sealed partial class EqlGetRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Eql.EqlGetRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Eql.EqlGetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Eql.EqlGetRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// Get async EQL search results.
+/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 /// </para>
 /// </summary>
-public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.EqlGetRequestConverter))]
+public sealed partial class EqlGetRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EqlGetRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public EqlGetRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EqlGetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EqlGet;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -70,11 +105,21 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 
 	/// <summary>
 	/// <para>
+	/// Identifier for the search.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period for which the search and its results are stored on the cluster.
 	/// Defaults to the keep_alive value set by the search’s EQL search API request.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
@@ -83,76 +128,121 @@ public sealed partial class EqlGetRequest : PlainRequest<EqlGetRequestParameters
 	/// Defaults to no timeout, meaning the request waits for complete search results.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
+/// Get async EQL search results.
+/// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
 /// </para>
 /// </summary>
-public sealed partial class EqlGetRequestDescriptor<TDocument> : RequestDescriptor<EqlGetRequestDescriptor<TDocument>, EqlGetRequestParameters>
+public readonly partial struct EqlGetRequestDescriptor
 {
-	internal EqlGetRequestDescriptor(Action<EqlGetRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Eql.EqlGetRequest Instance { get; init; }
 
-	public EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "eql.get";
-
-	public EqlGetRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public EqlGetRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public EqlGetRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
+	public EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public EqlGetRequestDescriptor()
 	{
-	}
-}
-
-/// <summary>
-/// <para>
-/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-/// </para>
-/// </summary>
-public sealed partial class EqlGetRequestDescriptor : RequestDescriptor<EqlGetRequestDescriptor, EqlGetRequestParameters>
-{
-	internal EqlGetRequestDescriptor(Action<EqlGetRequestDescriptor> configure) => configure.Invoke(this);
-
-	public EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlGet;
+	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlGetRequest(Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "eql.get";
-
-	public EqlGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public EqlGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public EqlGetRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	/// <summary>
+	/// <para>
+	/// Identifier for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period for which the search and its results are stored on the cluster.
+	/// Defaults to the keep_alive value set by the search’s EQL search API request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Timeout duration to wait for the request to finish.
+	/// Defaults to no timeout, meaning the request waits for complete search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Eql.EqlGetRequest Build(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(new Elastic.Clients.Elasticsearch.Eql.EqlGetRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,18 +17,46 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
+
+internal sealed partial class FieldDateMathConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath>
+{
+	public override Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(reader.ReadValue<Elastic.Clients.Elasticsearch.DateMath>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(reader.ReadValue<double>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
 
 /// <summary>
 /// <para>
@@ -36,13 +64,37 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// according to the target field's precision.
 /// </para>
 /// </summary>
-public sealed partial class FieldDateMath : Union<string, double>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathConverter))]
+public sealed partial class FieldDateMath : Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.DateMath, double>
 {
-	public FieldDateMath(string Expr) : base(Expr)
+	public FieldDateMath(Elastic.Clients.Elasticsearch.DateMath value) : base(value)
 	{
 	}
 
-	public FieldDateMath(double Value) : base(Value)
+	public FieldDateMath(double value) : base(value)
 	{
+	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(Elastic.Clients.Elasticsearch.DateMath value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(double value) => new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
+}
+
+public readonly partial struct FieldDateMathFactory
+{
+	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Expr(Elastic.Clients.Elasticsearch.DateMath value)
+	{
+		return new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Value(double value)
+	{
+		return new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath(value);
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath Build(System.Func<Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory, Elastic.Clients.Elasticsearch.Aggregations.FieldDateMath> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.FieldDateMathFactory();
+		return action.Invoke(builder);
 	}
 }

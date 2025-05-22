@@ -17,54 +17,91 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
-public sealed partial class GetRepositoryRequestParameters : RequestParameters
+public sealed partial class GetRepositoryRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
 	/// </para>
 	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
-/// <summary>
-/// <para>
-/// Returns information about a repository.
-/// </para>
-/// </summary>
-public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryRequestParameters>
+internal sealed partial class GetRepositoryRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest>
 {
-	public GetRepositoryRequest()
+	public override Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
 	}
 
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
+/// <summary>
+/// <para>
+/// Get snapshot repository information.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestConverter))]
+public sealed partial class GetRepositoryRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestParameters>
+{
 	public GetRepositoryRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("repository", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetRepositoryRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetRepositoryRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotGetRepository;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SnapshotGetRepository;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -72,56 +109,153 @@ public sealed partial class GetRepositoryRequest : PlainRequest<GetRepositoryReq
 
 	/// <summary>
 	/// <para>
-	/// Return local information, do not retrieve the state from master node (default: false)
+	/// A comma-separated list of snapshot repository names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported including combining wildcards with exclude patterns starting with <c>-</c>.
+	/// </para>
+	/// <para>
+	/// To get information about all snapshot repositories registered in the cluster, omit this parameter or use <c>*</c> or <c>_all</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("repository"); set => PO("repository", value); }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
+	/// </para>
+	/// </summary>
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
 	/// <para>
-	/// Explicit operation timeout for connection to master node
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Returns information about a repository.
+/// Get snapshot repository information.
 /// </para>
 /// </summary>
-public sealed partial class GetRepositoryRequestDescriptor : RequestDescriptor<GetRepositoryRequestDescriptor, GetRepositoryRequestParameters>
+public readonly partial struct GetRepositoryRequestDescriptor
 {
-	internal GetRepositoryRequestDescriptor(Action<GetRepositoryRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest Instance { get; init; }
 
-	public GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("repository", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(name);
 	}
 
 	public GetRepositoryRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SnapshotGetRepository;
+	public static explicit operator Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest instance) => new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "snapshot.get_repository";
-
-	public GetRepositoryRequestDescriptor Local(bool? local = true) => Qs("local", local);
-	public GetRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? name)
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of snapshot repository names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported including combining wildcards with exclude patterns starting with <c>-</c>.
+	/// </para>
+	/// <para>
+	/// To get information about all snapshot repositories registered in the cluster, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
 	{
-		RouteValues.Optional("repository", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request gets information from the local node only.
+	/// If <c>false</c>, the request gets information from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Local(bool? value = true)
 	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for the master node.
+	/// If the master node is not available before the timeout expires, the request fails and returns an error.
+	/// To indicate that the request should never timeout, set it to <c>-1</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest Build(System.Action<Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor(new Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Snapshot.GetRepositoryRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

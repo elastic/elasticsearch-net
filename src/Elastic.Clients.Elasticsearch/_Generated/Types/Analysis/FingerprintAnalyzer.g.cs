@@ -17,127 +17,239 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class FingerprintAnalyzer : IAnalyzer
+internal sealed partial class FingerprintAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("max_output_size")]
-	public int MaxOutputSize { get; set; }
-	[JsonInclude, JsonPropertyName("preserve_original")]
-	public bool PreserveOriginal { get; set; }
-	[JsonInclude, JsonPropertyName("separator")]
-	public string Separator { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
+	private static readonly System.Text.Json.JsonEncodedText PropMaxOutputSize = System.Text.Json.JsonEncodedText.Encode("max_output_size");
+	private static readonly System.Text.Json.JsonEncodedText PropSeparator = System.Text.Json.JsonEncodedText.Encode("separator");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propMaxOutputSize = default;
+		LocalJsonValue<string?> propSeparator = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMaxOutputSize.TryReadProperty(ref reader, options, PropMaxOutputSize, null))
+			{
+				continue;
+			}
+
+			if (propSeparator.TryReadProperty(ref reader, options, PropSeparator, null))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			MaxOutputSize = propMaxOutputSize.Value,
+			Separator = propSeparator.Value,
+			Stopwords = propStopwords.Value,
+			StopwordsPath = propStopwordsPath.Value,
+#pragma warning disable CS0618
+			Version = propVersion.Value
+#pragma warning restore CS0618
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMaxOutputSize, value.MaxOutputSize, null, null);
+		writer.WriteProperty(options, PropSeparator, value.Separator, null, null);
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+#pragma warning disable CS0618
+		writer.WriteProperty(options, PropVersion, value.Version, null, null)
+#pragma warning restore CS0618
+		;
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerConverter))]
+public sealed partial class FingerprintAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+#if NET7_0_OR_GREATER
+	public FingerprintAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FingerprintAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum token size to emit. Tokens larger than this size will be discarded.
+	/// Defaults to <c>255</c>
+	/// </para>
+	/// </summary>
+	public int? MaxOutputSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The character to use to concatenate the terms.
+	/// Defaults to a space.
+	/// </para>
+	/// </summary>
+	public string? Separator { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The path to a file containing stop words.
+	/// </para>
+	/// </summary>
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "fingerprint";
 
-	[JsonInclude, JsonPropertyName("version")]
+	[System.Obsolete("Deprecated in '7.14.0'.")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class FingerprintAnalyzerDescriptor : SerializableDescriptor<FingerprintAnalyzerDescriptor>, IBuildableDescriptor<FingerprintAnalyzer>
+public readonly partial struct FingerprintAnalyzerDescriptor
 {
-	internal FingerprintAnalyzerDescriptor(Action<FingerprintAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Instance { get; init; }
 
-	public FingerprintAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private int MaxOutputSizeValue { get; set; }
-	private bool PreserveOriginalValue { get; set; }
-	private string SeparatorValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
-	private string? StopwordsPathValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public FingerprintAnalyzerDescriptor MaxOutputSize(int maxOutputSize)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FingerprintAnalyzerDescriptor()
 	{
-		MaxOutputSizeValue = maxOutputSize;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public FingerprintAnalyzerDescriptor PreserveOriginal(bool preserveOriginal = true)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The maximum token size to emit. Tokens larger than this size will be discarded.
+	/// Defaults to <c>255</c>
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor MaxOutputSize(int? value)
 	{
-		PreserveOriginalValue = preserveOriginal;
-		return Self;
+		Instance.MaxOutputSize = value;
+		return this;
 	}
 
-	public FingerprintAnalyzerDescriptor Separator(string separator)
+	/// <summary>
+	/// <para>
+	/// The character to use to concatenate the terms.
+	/// Defaults to a space.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Separator(string? value)
 	{
-		SeparatorValue = separator;
-		return Self;
+		Instance.Separator = value;
+		return this;
 	}
 
-	public FingerprintAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	/// <summary>
+	/// <para>
+	/// A pre-defined stop words list like <c>_english_</c> or an array containing a list of stop words.
+	/// Defaults to <c>_none_</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
-		StopwordsValue = stopwords;
-		return Self;
+		Instance.Stopwords = value;
+		return this;
 	}
 
-	public FingerprintAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	/// <summary>
+	/// <para>
+	/// The path to a file containing stop words.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor StopwordsPath(string? value)
 	{
-		StopwordsPathValue = stopwordsPath;
-		return Self;
+		Instance.StopwordsPath = value;
+		return this;
 	}
 
-	public FingerprintAnalyzerDescriptor Version(string? version)
+	[System.Obsolete("Deprecated in '7.14.0'.")]
+	public Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor Version(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("max_output_size");
-		writer.WriteNumberValue(MaxOutputSizeValue);
-		writer.WritePropertyName("preserve_original");
-		writer.WriteBooleanValue(PreserveOriginalValue);
-		writer.WritePropertyName("separator");
-		writer.WriteStringValue(SeparatorValue);
-		if (StopwordsValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(StopwordsPathValue))
-		{
-			writer.WritePropertyName("stopwords_path");
-			writer.WriteStringValue(StopwordsPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("fingerprint");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.FingerprintAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	FingerprintAnalyzer IBuildableDescriptor<FingerprintAnalyzer>.Build() => new()
-	{
-		MaxOutputSize = MaxOutputSizeValue,
-		PreserveOriginal = PreserveOriginalValue,
-		Separator = SeparatorValue,
-		Stopwords = StopwordsValue,
-		StopwordsPath = StopwordsPathValue,
-		Version = VersionValue
-	};
 }

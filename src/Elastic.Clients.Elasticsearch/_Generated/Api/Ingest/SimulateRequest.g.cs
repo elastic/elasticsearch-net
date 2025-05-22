@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
-public sealed partial class SimulateRequestParameters : RequestParameters
+public sealed partial class SimulateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,24 +33,103 @@ public sealed partial class SimulateRequestParameters : RequestParameters
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 }
 
-/// <summary>
-/// <para>
-/// Executes an ingest pipeline against a set of provided documents.
-/// </para>
-/// </summary>
-public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParameters>
+internal sealed partial class SimulateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.SimulateRequest>
 {
-	public SimulateRequest()
+	private static readonly System.Text.Json.JsonEncodedText PropDocs = System.Text.Json.JsonEncodedText.Encode("docs");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document>> propDocs = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.Pipeline?> propPipeline = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDocs.TryReadProperty(ref reader, options, PropDocs, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propPipeline.TryReadProperty(ref reader, options, PropPipeline, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Docs = propDocs.Value,
+			Pipeline = propPipeline.Value
+		};
 	}
 
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.SimulateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDocs, value.Docs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Document>(o, v, null));
+		writer.WriteProperty(options, PropPipeline, value.Pipeline, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+/// <summary>
+/// <para>
+/// Simulate a pipeline.
+/// </para>
+/// <para>
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
+/// </para>
+/// </summary>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.SimulateRequestConverter))]
+public sealed partial class SimulateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestParameters>
+{
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public SimulateRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimulateRequest(Elastic.Clients.Elasticsearch.Id? id, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs) : base(r => r.Optional("id", id))
+	{
+		Docs = docs;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimulateRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
+	{
+		Docs = docs;
+	}
+#if NET7_0_OR_GREATER
+	public SimulateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SimulateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IngestSimulate;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -65,10 +137,17 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 
 	/// <summary>
 	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Verbose { get => Q<bool?>("verbose"); set => Q("verbose", value); }
 
 	/// <summary>
@@ -76,350 +155,403 @@ public sealed partial class SimulateRequest : PlainRequest<SimulateRequestParame
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("docs")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> Docs { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pipeline")]
 	public Elastic.Clients.Elasticsearch.Ingest.Pipeline? Pipeline { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Executes an ingest pipeline against a set of provided documents.
+/// Simulate a pipeline.
+/// </para>
+/// <para>
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
 /// </summary>
-public sealed partial class SimulateRequestDescriptor<TDocument> : RequestDescriptor<SimulateRequestDescriptor<TDocument>, SimulateRequestParameters>
+public readonly partial struct SimulateRequestDescriptor
 {
-	internal SimulateRequestDescriptor(Action<SimulateRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Instance { get; init; }
 
-	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(id);
+#pragma warning restore CS0618
 	}
 
 	public SimulateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.simulate";
-
-	public SimulateRequestDescriptor<TDocument> Verbose(bool? verbose = true) => Qs("verbose", verbose);
-
-	public SimulateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> PipelineDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>> PipelineDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor<TDocument> Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor<TDocument> Docs(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor)
-	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor<TDocument> Docs(Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor<TDocument> Docs(params Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? value)
 	{
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = null;
-		PipelineValue = pipeline;
-		return Self;
+		Instance.Pipeline = value;
+		return this;
 	}
 
-	public SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline()
 	{
-		PipelineValue = null;
-		PipelineDescriptorAction = null;
-		PipelineDescriptor = descriptor;
-		return Self;
+		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(null);
+		return this;
 	}
 
-	public SimulateRequestDescriptor<TDocument> Pipeline(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor>? action)
 	{
-		PipelineValue = null;
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = configure;
-		return Self;
+		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pipeline<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>>? action)
 	{
-		writer.WriteStartObject();
-		if (DocsDescriptor is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(action), options);
-			}
+		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<T>.Build(action);
+		return this;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
-		}
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor(new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (PipelineDescriptor is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
-		}
-		else if (PipelineDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>(PipelineDescriptorAction), options);
-		}
-		else if (PipelineValue is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Executes an ingest pipeline against a set of provided documents.
+/// Simulate a pipeline.
+/// </para>
+/// <para>
+/// Run an ingest pipeline against a set of provided documents.
+/// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
 /// </para>
 /// </summary>
-public sealed partial class SimulateRequestDescriptor : RequestDescriptor<SimulateRequestDescriptor, SimulateRequestParameters>
+public readonly partial struct SimulateRequestDescriptor<TDocument>
 {
-	internal SimulateRequestDescriptor(Action<SimulateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Instance { get; init; }
 
-	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public SimulateRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(id);
+#pragma warning restore CS0618
 	}
 
 	public SimulateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IngestSimulate;
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.SimulateRequest instance) => new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ingest.simulate";
-
-	public SimulateRequestDescriptor Verbose(bool? verbose = true) => Qs("verbose", verbose);
-
-	public SimulateRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify a <c>pipeline</c> in the request body, this parameter is required.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> DocsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor DocsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> DocsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] DocsDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.Pipeline? PipelineValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor PipelineDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> PipelineDescriptorAction { get; set; }
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the response includes output data for each processor in the executed pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Verbose(bool? value = true)
+	{
+		Instance.Verbose = value;
+		return this;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Sample documents to test in the pipeline.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor Docs(ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> docs)
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Document> value)
 	{
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsValue = docs;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor Docs(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor descriptor)
-	{
-		DocsValue = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = null;
-		DocsDescriptor = descriptor;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor Docs(Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor> configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorActions = null;
-		DocsDescriptorAction = configure;
-		return Self;
-	}
-
-	public SimulateRequestDescriptor Docs(params Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] configure)
-	{
-		DocsValue = null;
-		DocsDescriptor = null;
-		DocsDescriptorAction = null;
-		DocsDescriptorActions = configure;
-		return Self;
+		Instance.Docs = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Pipeline to test.
-	/// If you don’t specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(params Elastic.Clients.Elasticsearch.Ingest.Document[] values)
+	{
+		Instance.Docs = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Sample documents to test in the pipeline.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Docs(params System.Action<Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Document>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor.Build(action));
+		}
+
+		Instance.Docs = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
 	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
 	/// </para>
 	/// </summary>
-	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? pipeline)
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline(Elastic.Clients.Elasticsearch.Ingest.Pipeline? value)
 	{
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = null;
-		PipelineValue = pipeline;
-		return Self;
+		Instance.Pipeline = value;
+		return this;
 	}
 
-	public SimulateRequestDescriptor Pipeline(Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline()
 	{
-		PipelineValue = null;
-		PipelineDescriptorAction = null;
-		PipelineDescriptor = descriptor;
-		return Self;
+		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(null);
+		return this;
 	}
 
-	public SimulateRequestDescriptor Pipeline(Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The pipeline to test.
+	/// If you don't specify the <c>pipeline</c> request path parameter, this parameter is required.
+	/// If you specify both this and the request path parameter, the API only uses the request path parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pipeline(System.Action<Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>>? action)
 	{
-		PipelineValue = null;
-		PipelineDescriptor = null;
-		PipelineDescriptorAction = configure;
-		return Self;
+		Instance.Pipeline = Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.SimulateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (DocsDescriptor is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, DocsDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(DocsDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (DocsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var action in DocsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.DocumentDescriptor(action), options);
-			}
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.SimulateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-			writer.WriteEndArray();
-		}
-		else
-		{
-			writer.WritePropertyName("docs");
-			JsonSerializer.Serialize(writer, DocsValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (PipelineDescriptor is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineDescriptor, options);
-		}
-		else if (PipelineDescriptorAction is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.PipelineDescriptor(PipelineDescriptorAction), options);
-		}
-		else if (PipelineValue is not null)
-		{
-			writer.WritePropertyName("pipeline");
-			JsonSerializer.Serialize(writer, PipelineValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.SimulateRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

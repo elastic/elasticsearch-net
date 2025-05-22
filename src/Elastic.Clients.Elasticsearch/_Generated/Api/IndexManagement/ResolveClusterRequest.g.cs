@@ -17,26 +17,21 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class ResolveClusterRequestParameters : RequestParameters
+public sealed partial class ResolveClusterRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
 	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
@@ -47,41 +42,196 @@ public sealed partial class ResolveClusterRequestParameters : RequestParameters
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
+	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if it targets a missing or closed index. Defaults to false.
+	/// If false, the request returns an error if it targets a missing or closed index.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for remote clusters to respond.
+	/// If a remote cluster does not respond within this timeout period, the API response
+	/// will show the cluster as not connected and include an error message that the
+	/// request timed out.
+	/// </para>
+	/// <para>
+	/// The default timeout is unset and the query can take
+	/// as long as the networking layer is configured to wait for remote clusters that are
+	/// not responding (typically 30 seconds).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
+}
+
+internal sealed partial class ResolveClusterRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Resolves the specified index expressions to return information about each cluster, including
-/// the local cluster, if included.
-/// Multiple patterns and remote clusters are supported.
+/// Resolve the cluster.
+/// </para>
+/// <para>
+/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+/// </para>
+/// <para>
+/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+/// </para>
+/// <para>
+/// You use the same index expression with this endpoint as you would for cross-cluster search.
+/// Index and cluster exclusions are also supported with this endpoint.
+/// </para>
+/// <para>
+/// For each cluster in the index expression, information is returned about:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cluster version information, including the Elasticsearch server version.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+/// </para>
+/// Note on backwards compatibility
+/// <para>
+/// The ability to query without an index expression was added in version 8.18, so when
+/// querying remote clusters older than that, the local cluster will send the index
+/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+/// to that index expression even though you didn't request it. If it causes a problem, you can
+/// instead include an index expression like <c>*:*</c> to bypass the issue.
+/// </para>
+/// Advantages of using this endpoint before a cross-cluster search
+/// <para>
+/// You may want to exclude a cluster or index from a search when:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A remote cluster is an older version that does not support the feature you want to use in your search.
+/// </para>
+/// </item>
+/// </list>
+/// Test availability of remote clusters
+/// <para>
+/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+/// The remote cluster may be available, while the local cluster is not currently connected to it.
+/// </para>
+/// <para>
+/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+/// The <c>connected</c> field in the response will indicate whether it was successful.
+/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
 /// </para>
 /// </summary>
-public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestConverter))]
+public sealed partial class ResolveClusterRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestParameters>
 {
-	public ResolveClusterRequest(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+	public ResolveClusterRequest(Elastic.Clients.Elasticsearch.Names? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ResolveClusterRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ResolveClusterRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ResolveClusterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementResolveCluster;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementResolveCluster;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -89,12 +239,24 @@ public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterR
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if any wildcard expression, index alias, or _all value targets only missing
-	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
-	/// targeting foo*,bar* returns an error if an index starts with foo but no index starts with bar.
+	/// A comma-separated list of names or index patterns for the indices, aliases, and data streams to resolve.
+	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
+	/// Index and cluster exclusions (e.g., <c>-cluster1:*</c>) are also supported.
+	/// If no index expression is specified, information about all remote clusters configured on the local cluster
+	/// is returned without doing any index matching
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public Elastic.Clients.Elasticsearch.Names? Name { get => P<Elastic.Clients.Elasticsearch.Names?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
+	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -103,63 +265,325 @@ public sealed partial class ResolveClusterRequest : PlainRequest<ResolveClusterR
 	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
 	/// Supports comma-separated values, such as <c>open,hidden</c>.
 	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
-	/// If true, concrete, expanded or aliased indices are ignored when frozen. Defaults to false.
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	[System.Obsolete("Deprecated in '7.16.0'.")]
 	public bool? IgnoreThrottled { get => Q<bool?>("ignore_throttled"); set => Q("ignore_throttled", value); }
 
 	/// <summary>
 	/// <para>
-	/// If false, the request returns an error if it targets a missing or closed index. Defaults to false.
+	/// If false, the request returns an error if it targets a missing or closed index.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for remote clusters to respond.
+	/// If a remote cluster does not respond within this timeout period, the API response
+	/// will show the cluster as not connected and include an error message that the
+	/// request timed out.
+	/// </para>
+	/// <para>
+	/// The default timeout is unset and the query can take
+	/// as long as the networking layer is configured to wait for remote clusters that are
+	/// not responding (typically 30 seconds).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Resolves the specified index expressions to return information about each cluster, including
-/// the local cluster, if included.
-/// Multiple patterns and remote clusters are supported.
+/// Resolve the cluster.
+/// </para>
+/// <para>
+/// Resolve the specified index expressions to return information about each cluster, including the local "querying" cluster, if included.
+/// If no index expression is provided, the API will return information about all the remote clusters that are configured on the querying cluster.
+/// </para>
+/// <para>
+/// This endpoint is useful before doing a cross-cluster search in order to determine which remote clusters should be included in a search.
+/// </para>
+/// <para>
+/// You use the same index expression with this endpoint as you would for cross-cluster search.
+/// Index and cluster exclusions are also supported with this endpoint.
+/// </para>
+/// <para>
+/// For each cluster in the index expression, information is returned about:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// Whether the querying ("local") cluster is currently connected to each remote cluster specified in the index expression. Note that this endpoint actively attempts to contact the remote clusters, unlike the <c>remote/info</c> endpoint.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether each remote cluster is configured with <c>skip_unavailable</c> as <c>true</c> or <c>false</c>.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether there are any indices, aliases, or data streams on that cluster that match the index expression.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Whether the search is likely to have errors returned when you do the cross-cluster search (including any authorization errors if you do not have permission to query the index).
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Cluster version information, including the Elasticsearch server version.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// For example, <c>GET /_resolve/cluster/my-index-*,cluster*:my-index-*</c> returns information about the local cluster and all remotely configured clusters that start with the alias <c>cluster*</c>.
+/// Each cluster returns information about whether it has any indices, aliases or data streams that match <c>my-index-*</c>.
+/// </para>
+/// Note on backwards compatibility
+/// <para>
+/// The ability to query without an index expression was added in version 8.18, so when
+/// querying remote clusters older than that, the local cluster will send the index
+/// expression <c>dummy*</c> to those remote clusters. Thus, if an errors occur, you may see a reference
+/// to that index expression even though you didn't request it. If it causes a problem, you can
+/// instead include an index expression like <c>*:*</c> to bypass the issue.
+/// </para>
+/// Advantages of using this endpoint before a cross-cluster search
+/// <para>
+/// You may want to exclude a cluster or index from a search when:
+/// </para>
+/// <list type="bullet">
+/// <item>
+/// <para>
+/// A remote cluster is not currently connected and is configured with <c>skip_unavailable=false</c>. Running a cross-cluster search under those conditions will cause the entire search to fail.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A cluster has no matching indices, aliases or data streams for the index expression (or your user does not have permissions to search them). For example, suppose your index expression is <c>logs*,remote1:logs*</c> and the remote1 cluster has no indices, aliases or data streams that match <c>logs*</c>. In that case, that cluster will return no results from that cluster if you include it in a cross-cluster search.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// The index expression (combined with any query parameters you specify) will likely cause an exception to be thrown when you do the search. In these cases, the "error" field in the <c>_resolve/cluster</c> response will be present. (This is also where security/permission errors will be shown.)
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// A remote cluster is an older version that does not support the feature you want to use in your search.
+/// </para>
+/// </item>
+/// </list>
+/// Test availability of remote clusters
+/// <para>
+/// The <c>remote/info</c> endpoint is commonly used to test whether the "local" cluster (the cluster being queried) is connected to its remote clusters, but it does not necessarily reflect whether the remote cluster is available or not.
+/// The remote cluster may be available, while the local cluster is not currently connected to it.
+/// </para>
+/// <para>
+/// You can use the <c>_resolve/cluster</c> API to attempt to reconnect to remote clusters.
+/// For example with <c>GET _resolve/cluster</c> or <c>GET _resolve/cluster/*:*</c>.
+/// The <c>connected</c> field in the response will indicate whether it was successful.
+/// If a connection was (re-)established, this will also cause the <c>remote/info</c> endpoint to now indicate a connected status.
 /// </para>
 /// </summary>
-public sealed partial class ResolveClusterRequestDescriptor : RequestDescriptor<ResolveClusterRequestDescriptor, ResolveClusterRequestParameters>
+public readonly partial struct ResolveClusterRequestDescriptor
 {
-	internal ResolveClusterRequestDescriptor(Action<ResolveClusterRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest Instance { get; init; }
 
-	public ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementResolveCluster;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "indices.resolve_cluster";
-
-	public ResolveClusterRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public ResolveClusterRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public ResolveClusterRequestDescriptor IgnoreThrottled(bool? ignoreThrottled = true) => Qs("ignore_throttled", ignoreThrottled);
-	public ResolveClusterRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public ResolveClusterRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	public ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.Names? name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(name);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public ResolveClusterRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of names or index patterns for the indices, aliases, and data streams to resolve.
+	/// Resources on remote clusters can be specified using the <c>&lt;cluster></c>:<c>&lt;name></c> syntax.
+	/// Index and cluster exclusions (e.g., <c>-cluster1:*</c>) are also supported.
+	/// If no index expression is specified, information about all remote clusters configured on the local cluster
+	/// is returned without doing any index matching
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names? value)
+	{
+		Instance.Name = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if any wildcard expression, index alias, or <c>_all</c> value targets only missing
+	/// or closed indices. This behavior applies even if the request targets other open indices. For example, a request
+	/// targeting <c>foo*,bar*</c> returns an error if an index starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match.
+	/// If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>open</c>, <c>closed</c>, <c>hidden</c>, <c>none</c>.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	[System.Obsolete("Deprecated in '7.16.0'.")]
+	/// <summary>
+	/// <para>
+	/// If true, concrete, expanded, or aliased indices are ignored when frozen.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor IgnoreThrottled(bool? value = true)
+	{
+		Instance.IgnoreThrottled = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If false, the request returns an error if it targets a missing or closed index.
+	/// NOTE: This option is only supported when specifying an index expression. You will get an error if you specify index
+	/// options to the <c>_resolve/cluster</c> API endpoint that takes no index expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The maximum time to wait for remote clusters to respond.
+	/// If a remote cluster does not respond within this timeout period, the API response
+	/// will show the cluster as not connected and include an error message that the
+	/// request timed out.
+	/// </para>
+	/// <para>
+	/// The default timeout is unset and the query can take
+	/// as long as the networking layer is configured to wait for remote clusters that are
+	/// not responding (typically 30 seconds).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.ResolveClusterRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

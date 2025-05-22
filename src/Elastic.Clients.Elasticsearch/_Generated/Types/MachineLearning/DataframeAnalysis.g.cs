@@ -17,241 +17,383 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-[JsonConverter(typeof(DataframeAnalysisConverter))]
+internal sealed partial class DataframeAnalysisConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis>
+{
+	private static readonly System.Text.Json.JsonEncodedText VariantClassification = System.Text.Json.JsonEncodedText.Encode("classification");
+	private static readonly System.Text.Json.JsonEncodedText VariantOutlierDetection = System.Text.Json.JsonEncodedText.Encode("outlier_detection");
+	private static readonly System.Text.Json.JsonEncodedText VariantRegression = System.Text.Json.JsonEncodedText.Encode("regression");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		string? variantType = null;
+		object? variant = null;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (reader.ValueTextEquals(VariantClassification))
+			{
+				variantType = VariantClassification.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantOutlierDetection))
+			{
+				variantType = VariantOutlierDetection.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>(options, null);
+				continue;
+			}
+
+			if (reader.ValueTextEquals(VariantRegression))
+			{
+				variantType = VariantRegression.Value;
+				reader.Read();
+				variant = reader.ReadValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>(options, null);
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			VariantType = variantType,
+			Variant = variant
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		switch (value.VariantType)
+		{
+			case null:
+				break;
+			case "classification":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification)value.Variant, null, null);
+				break;
+			case "outlier_detection":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection)value.Variant, null, null);
+				break;
+			case "regression":
+				writer.WriteProperty(options, value.VariantType, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression)value.Variant, null, null);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Variant '{value.VariantType}' is not supported for type '{nameof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis)}'.");
+		}
+
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisConverter))]
 public sealed partial class DataframeAnalysis
 {
-	internal DataframeAnalysis(string variantName, object variant)
+	internal string? VariantType { get; set; }
+	internal object? Variant { get; set; }
+#if NET7_0_OR_GREATER
+	public DataframeAnalysis()
 	{
-		if (variantName is null)
-			throw new ArgumentNullException(nameof(variantName));
-		if (variant is null)
-			throw new ArgumentNullException(nameof(variant));
-		if (string.IsNullOrWhiteSpace(variantName))
-			throw new ArgumentException("Variant name must not be empty or whitespace.");
-		VariantName = variantName;
-		Variant = variant;
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeAnalysis()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
 	}
 
-	internal object Variant { get; }
-	internal string VariantName { get; }
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? Classification { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification>("classification"); set => SetVariant("classification", value); }
 
-	public static DataframeAnalysis Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification dataframeAnalysisClassification) => new DataframeAnalysis("classification", dataframeAnalysisClassification);
-	public static DataframeAnalysis OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => new DataframeAnalysis("outlier_detection", dataframeAnalysisOutlierDetection);
-	public static DataframeAnalysis Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression dataframeAnalysisRegression) => new DataframeAnalysis("regression", dataframeAnalysisRegression);
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? OutlierDetection { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>("outlier_detection"); set => SetVariant("outlier_detection", value); }
 
-	public bool TryGet<T>([NotNullWhen(true)] out T? result) where T : class
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? Regression { get => GetVariant<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>("regression"); set => SetVariant("regression", value); }
+
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis { Classification = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis { OutlierDetection = value };
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression value) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis { Regression = value };
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private T? GetVariant<T>(string type)
 	{
-		result = default;
-		if (Variant is T variant)
+		if (string.Equals(VariantType, type, System.StringComparison.Ordinal) && Variant is T result)
 		{
-			result = variant;
-			return true;
+			return result;
 		}
 
-		return false;
+		return default;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	private void SetVariant<T>(string type, T? value)
+	{
+		VariantType = type;
+		Variant = value;
 	}
 }
 
-internal sealed partial class DataframeAnalysisConverter : JsonConverter<DataframeAnalysis>
+public readonly partial struct DataframeAnalysisDescriptor<TDocument>
 {
-	public override DataframeAnalysis Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance)
 	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-		{
-			throw new JsonException("Expected start token.");
-		}
-
-		object? variantValue = default;
-		string? variantNameValue = default;
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token.");
-			}
-
-			if (reader.TokenType != JsonTokenType.PropertyName)
-			{
-				throw new JsonException("Expected a property name token representing the name of an Elasticsearch field.");
-			}
-
-			var propertyName = reader.GetString();
-			reader.Read();
-			if (propertyName == "classification")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "outlier_detection")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			if (propertyName == "regression")
-			{
-				variantValue = JsonSerializer.Deserialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression?>(ref reader, options);
-				variantNameValue = propertyName;
-				continue;
-			}
-
-			throw new JsonException($"Unknown property name '{propertyName}' received while deserializing the 'DataframeAnalysis' from the response.");
-		}
-
-		var result = new DataframeAnalysis(variantNameValue, variantValue);
-		return result;
+		Instance = instance;
 	}
 
-	public override void Write(Utf8JsonWriter writer, DataframeAnalysis value, JsonSerializerOptions options)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisDescriptor()
 	{
-		writer.WriteStartObject();
-		if (value.VariantName is not null && value.Variant is not null)
-		{
-			writer.WritePropertyName(value.VariantName);
-			switch (value.VariantName)
-			{
-				case "classification":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification)value.Variant, options);
-					break;
-				case "outlier_detection":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection)value.Variant, options);
-					break;
-				case "regression":
-					JsonSerializer.Serialize<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression>(writer, (Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression)value.Variant, options);
-					break;
-			}
-		}
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
 
-		writer.WriteEndObject();
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? value)
+	{
+		Instance.Classification = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<TDocument>> action)
+	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? value)
+	{
+		Instance.OutlierDetection = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection()
+	{
+		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor>? action)
+	{
+		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? value)
+	{
+		Instance.Regression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument> Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>> action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class DataframeAnalysisDescriptor<TDocument> : SerializableDescriptor<DataframeAnalysisDescriptor<TDocument>>
+public readonly partial struct DataframeAnalysisDescriptor
 {
-	internal DataframeAnalysisDescriptor(Action<DataframeAnalysisDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Instance { get; init; }
 
-	public DataframeAnalysisDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance)
 	{
+		Instance = instance;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private DataframeAnalysisDescriptor<TDocument> Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeAnalysisDescriptor()
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	private DataframeAnalysisDescriptor<TDocument> Set(object variant, string variantName)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.Classification = value;
+		return this;
 	}
 
-	public DataframeAnalysisDescriptor<TDocument> Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification dataframeAnalysisClassification) => Set(dataframeAnalysisClassification, "classification");
-	public DataframeAnalysisDescriptor<TDocument> Classification(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<TDocument>> configure) => Set(configure, "classification");
-	public DataframeAnalysisDescriptor<TDocument> OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => Set(dataframeAnalysisOutlierDetection, "outlier_detection");
-	public DataframeAnalysisDescriptor<TDocument> OutlierDetection(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor> configure) => Set(configure, "outlier_detection");
-	public DataframeAnalysisDescriptor<TDocument> Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression dataframeAnalysisRegression) => Set(dataframeAnalysisRegression, "regression");
-	public DataframeAnalysisDescriptor<TDocument> Regression(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<TDocument>> configure) => Set(configure, "regression");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
-
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class DataframeAnalysisDescriptor : SerializableDescriptor<DataframeAnalysisDescriptor>
-{
-	internal DataframeAnalysisDescriptor(Action<DataframeAnalysisDescriptor> configure) => configure.Invoke(this);
-
-	public DataframeAnalysisDescriptor() : base()
-	{
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor.Build(action);
+		return this;
 	}
 
-	private bool ContainsVariant { get; set; }
-	private string ContainedVariantName { get; set; }
-	private object Variant { get; set; }
-	private Descriptor Descriptor { get; set; }
-
-	private DataframeAnalysisDescriptor Set<T>(Action<T> descriptorAction, string variantName) where T : Descriptor
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform classification.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Classification<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<T>> action)
 	{
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		var descriptor = (T)Activator.CreateInstance(typeof(T), true);
-		descriptorAction?.Invoke(descriptor);
-		Descriptor = descriptor;
-		return Self;
+		Instance.Classification = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor<T>.Build(action);
+		return this;
 	}
 
-	private DataframeAnalysisDescriptor Set(object variant, string variantName)
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection? value)
 	{
-		Variant = variant;
-		ContainedVariantName = variantName;
-		ContainsVariant = true;
-		return Self;
+		Instance.OutlierDetection = value;
+		return this;
 	}
 
-	public DataframeAnalysisDescriptor Classification(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassification dataframeAnalysisClassification) => Set(dataframeAnalysisClassification, "classification");
-	public DataframeAnalysisDescriptor Classification<TDocument>(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisClassificationDescriptor> configure) => Set(configure, "classification");
-	public DataframeAnalysisDescriptor OutlierDetection(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetection dataframeAnalysisOutlierDetection) => Set(dataframeAnalysisOutlierDetection, "outlier_detection");
-	public DataframeAnalysisDescriptor OutlierDetection(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor> configure) => Set(configure, "outlier_detection");
-	public DataframeAnalysisDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression dataframeAnalysisRegression) => Set(dataframeAnalysisRegression, "regression");
-	public DataframeAnalysisDescriptor Regression<TDocument>(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor> configure) => Set(configure, "regression");
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection()
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(ContainedVariantName))
-		{
-			writer.WritePropertyName(ContainedVariantName);
-			if (Variant is not null)
-			{
-				JsonSerializer.Serialize(writer, Variant, Variant.GetType(), options);
-				writer.WriteEndObject();
-				return;
-			}
+		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(null);
+		return this;
+	}
 
-			JsonSerializer.Serialize(writer, Descriptor, Descriptor.GetType(), options);
-		}
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform outlier detection. NOTE: Advanced parameters are for fine-tuning classification analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor OutlierDetection(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor>? action)
+	{
+		Instance.OutlierDetection = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisOutlierDetectionDescriptor.Build(action);
+		return this;
+	}
 
-		writer.WriteEndObject();
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression(Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegression? value)
+	{
+		Instance.Regression = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor> action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The configuration information necessary to perform regression. NOTE: Advanced parameters are for fine-tuning regression analysis. They are set automatically by hyperparameter optimization to give the minimum validation error. It is highly recommended to use the default values unless you fully understand the function of these parameters.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor Regression<T>(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<T>> action)
+	{
+		Instance.Regression = Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisRegressionDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysisDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeAnalysis(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

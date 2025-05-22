@@ -6,25 +6,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
 [JsonConverter(typeof(IndicesJsonConverter))]
-public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<Indices>
+public sealed class Indices :
+	IUrlParameter,
+	IEnumerable<IndexName>,
+	IEquatable<Indices>
+#if NET7_0_OR_GREATER
+	, IParsable<Indices>
+#endif
 {
 	private static readonly HashSet<IndexName> AllIndexList = new() { AllValue };
 
@@ -33,6 +33,11 @@ public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<
 
 	private readonly HashSet<IndexName>? _indices;
 	private readonly bool _isAllIndices;
+
+	internal Indices()
+	{
+		_indices = [];
+	}
 
 	internal Indices(IndexName indexName)
 	{
@@ -196,55 +201,58 @@ public sealed class Indices : IUrlParameter, IEnumerable<IndexName>, IEquatable<
 	IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 	public IEnumerator<IndexName> GetEnumerator() => IndexNames.GetEnumerator();
+
+	#region IParsable
+
+	public static Indices Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Indices? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		if (s.IsNullOrEmptyCommaSeparatedList(out var list))
+		{
+			result = new Indices();
+			return true;
+		}
+
+		var names = new List<IndexName>();
+		foreach (var item in list)
+		{
+			if (!IndexName.TryParse(item, provider, out var name))
+			{
+				result = null;
+				return false;
+			}
+
+			names.Add(name);
+		}
+
+		result = new Indices(names);
+		return true;
+	}
+
+	#endregion IParsable
 }
 
-internal sealed class IndicesJsonConverter : JsonConverter<Indices>
+internal sealed class IndicesJsonConverter :
+	JsonConverter<Indices>
 {
-	private IElasticsearchClientSettings _settings;
-
-	public override Indices? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	public override Indices Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		if (reader.TokenType == JsonTokenType.String)
-		{
-			Indices indices = reader.GetString();
-			return indices;
-		}
-		else if (reader.TokenType == JsonTokenType.StartArray)
-		{
-			var indices = new List<string>();
-			while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-			{
-				var index = reader.GetString();
-				indices.Add(index);
-			}
-			return new Indices(indices);
-		}
+		var indices = reader.ReadSingleOrManyCollectionValue<IndexName>(options, null)!;
 
-		reader.Read();
-		return null;
+		return new Indices(indices);
 	}
 
 	public override void Write(Utf8JsonWriter writer, Indices value, JsonSerializerOptions options)
 	{
-		InitializeSettings(options);
-
-		if (value == null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
-		writer.WriteStringValue(((IUrlParameter)value).GetString(_settings));
-	}
-
-	private void InitializeSettings(JsonSerializerOptions options)
-	{
-		if (_settings is null)
-		{
-			if (!options.TryGetClientSettings(out var settings))
-				ThrowHelper.ThrowJsonExceptionForMissingSettings();
-
-			_settings = settings;
-		}
+		writer.WriteSingleOrManyCollectionValue(options, value.IndexNames, null);
 	}
 }

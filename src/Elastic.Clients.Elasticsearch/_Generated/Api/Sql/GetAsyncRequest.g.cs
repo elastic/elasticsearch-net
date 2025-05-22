@@ -17,67 +17,107 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed partial class GetAsyncRequestParameters : RequestParameters
+public sealed partial class GetAsyncRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// Separator for CSV results. The API only supports this parameter for CSV responses.
+	/// The separator for CSV results.
+	/// The API supports this parameter only for CSV responses.
 	/// </para>
 	/// </summary>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
 	/// <para>
-	/// Format for the response. You must specify a format using this parameter or the
-	/// Accept HTTP header. If you specify both, the API uses this parameter.
+	/// The format for the response.
+	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+	/// If you specify both, the API uses this parameter.
 	/// </para>
 	/// </summary>
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
-	/// Retention period for the search and its results. Defaults
-	/// to the <c>keep_alive</c> period for the original SQL search.
+	/// The retention period for the search and its results.
+	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout,
-	/// meaning the request waits for complete search results.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
+internal sealed partial class GetAsyncRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// Get async SQL search results.
+/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
+/// </para>
+/// <para>
+/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 /// </para>
 /// </summary>
-public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestConverter))]
+public sealed partial class GetAsyncRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetAsyncRequest(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetAsyncRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetAsyncRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SqlGetAsync;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -85,110 +125,189 @@ public sealed partial class GetAsyncRequest : PlainRequest<GetAsyncRequestParame
 
 	/// <summary>
 	/// <para>
-	/// Separator for CSV results. The API only supports this parameter for CSV responses.
+	/// The identifier for the search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id Id { get => P<Elastic.Clients.Elasticsearch.Id>("id"); set => PR("id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The separator for CSV results.
+	/// The API supports this parameter only for CSV responses.
+	/// </para>
+	/// </summary>
 	public string? Delimiter { get => Q<string?>("delimiter"); set => Q("delimiter", value); }
 
 	/// <summary>
 	/// <para>
-	/// Format for the response. You must specify a format using this parameter or the
-	/// Accept HTTP header. If you specify both, the API uses this parameter.
+	/// The format for the response.
+	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+	/// If you specify both, the API uses this parameter.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public string? Format { get => Q<string?>("format"); set => Q("format", value); }
 
 	/// <summary>
 	/// <para>
-	/// Retention period for the search and its results. Defaults
-	/// to the <c>keep_alive</c> period for the original SQL search.
+	/// The retention period for the search and its results.
+	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get => Q<Elastic.Clients.Elasticsearch.Duration?>("keep_alive"); set => Q("keep_alive", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to wait for complete results. Defaults to no timeout,
-	/// meaning the request waits for complete search results.
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("wait_for_completion_timeout"); set => Q("wait_for_completion_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// Get async SQL search results.
+/// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 /// </para>
-/// </summary>
-public sealed partial class GetAsyncRequestDescriptor<TDocument> : RequestDescriptor<GetAsyncRequestDescriptor<TDocument>, GetAsyncRequestParameters>
-{
-	internal GetAsyncRequestDescriptor(Action<GetAsyncRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "sql.get_async";
-
-	public GetAsyncRequestDescriptor<TDocument> Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public GetAsyncRequestDescriptor<TDocument> Format(string? format) => Qs("format", format);
-	public GetAsyncRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public GetAsyncRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public GetAsyncRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id id)
-	{
-		RouteValues.Required("id", id);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-	}
-}
-
-/// <summary>
 /// <para>
-/// Returns the current status and available results for an async SQL search or stored synchronous SQL search
+/// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
 /// </para>
 /// </summary>
-public sealed partial class GetAsyncRequestDescriptor : RequestDescriptor<GetAsyncRequestDescriptor, GetAsyncRequestParameters>
+public readonly partial struct GetAsyncRequestDescriptor
 {
-	internal GetAsyncRequestDescriptor(Action<GetAsyncRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest Instance { get; init; }
 
-	public GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id) : base(r => r.Required("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlGetAsync;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "sql.get_async";
-
-	public GetAsyncRequestDescriptor Delimiter(string? delimiter) => Qs("delimiter", delimiter);
-	public GetAsyncRequestDescriptor Format(string? format) => Qs("format", format);
-	public GetAsyncRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive) => Qs("keep_alive", keepAlive);
-	public GetAsyncRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout) => Qs("wait_for_completion_timeout", waitForCompletionTimeout);
-
-	public GetAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id id)
+	public GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Id id)
 	{
-		RouteValues.Required("id", id);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest(id);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetAsyncRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest instance) => new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest(Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The identifier for the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.Id = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The separator for CSV results.
+	/// The API supports this parameter only for CSV responses.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Delimiter(string? value)
+	{
+		Instance.Delimiter = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The format for the response.
+	/// You must specify a format using this parameter or the <c>Accept</c> HTTP header.
+	/// If you specify both, the API uses this parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Format(string? value)
+	{
+		Instance.Format = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The retention period for the search and its results.
+	/// It defaults to the <c>keep_alive</c> period for the original SQL search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.KeepAlive = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for complete results.
+	/// It defaults to no timeout, meaning the request waits for complete search results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.WaitForCompletionTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor(new Elastic.Clients.Elasticsearch.Sql.GetAsyncRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.GetAsyncRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

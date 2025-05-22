@@ -4,23 +4,23 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
+
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [DebuggerDisplay("{DebugDisplay,nq}")]
-[JsonConverter(typeof(StringAliasConverter<Username>))]
-public class Username : IEquatable<Username>, IUrlParameter
+[JsonConverter(typeof(UsernameConverter))]
+public class Username :
+	IEquatable<Username>,
+	IUrlParameter
+#if NET7_0_OR_GREATER
+	, IParsable<Username>
+#endif
 {
 	public Username(string name) => Value = name?.Trim();
 
@@ -55,5 +55,64 @@ public class Username : IEquatable<Username>, IUrlParameter
 			result = (result * 397) ^ (Value?.GetHashCode() ?? 0);
 			return result;
 		}
+	}
+
+	#region IParsable
+
+	public static Username Parse(string s, IFormatProvider? provider) =>
+		TryParse(s, provider, out var result) ? result : throw new FormatException();
+
+	public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider,
+		[NotNullWhen(true)] out Username? result)
+	{
+		if (s is null)
+		{
+			result = null;
+			return false;
+		}
+
+		result = new Username(s);
+		return true;
+	}
+
+	#endregion IParsable
+}
+
+internal sealed class UsernameConverter :
+	JsonConverter<Name>
+{
+	public override Name? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+	{
+		reader.ValidateToken(JsonTokenType.String);
+
+		return reader.GetString()!;
+	}
+
+	public override Name ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert,
+		JsonSerializerOptions options)
+	{
+		reader.ValidateToken(JsonTokenType.PropertyName);
+
+		return reader.GetString()!;
+	}
+
+	public override void Write(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	{
+		if (value?.Value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
+		writer.WriteStringValue(value.Value);
+	}
+
+	public override void WriteAsPropertyName(Utf8JsonWriter writer, Name value, JsonSerializerOptions options)
+	{
+		if (value?.Value is null)
+		{
+			throw new ArgumentNullException(nameof(value));
+		}
+
+		writer.WritePropertyName(value.Value);
 	}
 }

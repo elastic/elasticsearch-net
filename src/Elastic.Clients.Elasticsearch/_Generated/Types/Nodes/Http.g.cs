@@ -17,34 +17,128 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class HttpConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Http>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropClients = System.Text.Json.JsonEncodedText.Encode("clients");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentOpen = System.Text.Json.JsonEncodedText.Encode("current_open");
+	private static readonly System.Text.Json.JsonEncodedText PropRoutes = System.Text.Json.JsonEncodedText.Encode("routes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalOpened = System.Text.Json.JsonEncodedText.Encode("total_opened");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Http Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>?> propClients = default;
+		LocalJsonValue<int?> propCurrentOpen = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>> propRoutes = default;
+		LocalJsonValue<long?> propTotalOpened = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propClients.TryReadProperty(ref reader, options, PropClients, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Nodes.Client>(o, null)))
+			{
+				continue;
+			}
+
+			if (propCurrentOpen.TryReadProperty(ref reader, options, PropCurrentOpen, null))
+			{
+				continue;
+			}
+
+			if (propRoutes.TryReadProperty(ref reader, options, PropRoutes, static System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, null, null)!))
+			{
+				continue;
+			}
+
+			if (propTotalOpened.TryReadProperty(ref reader, options, PropTotalOpened, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Http(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Clients = propClients.Value,
+			CurrentOpen = propCurrentOpen.Value,
+			Routes = propRoutes.Value,
+			TotalOpened = propTotalOpened.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Http value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropClients, value.Clients, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Nodes.Client>(o, v, null));
+		writer.WriteProperty(options, PropCurrentOpen, value.CurrentOpen, null, null);
+		writer.WriteProperty(options, PropRoutes, value.Routes, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute>(o, v, null, null));
+		writer.WriteProperty(options, PropTotalOpened, value.TotalOpened, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.HttpConverter))]
 public sealed partial class Http
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Http(System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> routes)
+	{
+		Routes = routes;
+	}
+#if NET7_0_OR_GREATER
+	public Http()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Http()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Http(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Information on current and recently-closed HTTP client connections.
 	/// Clients that have been closed longer than the <c>http.client_stats.closed_channels.max_age</c> setting will not be represented here.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("clients")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? Clients { get; init; }
+	public System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Nodes.Client>? Clients { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Current number of open HTTP connections for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("current_open")]
-	public int? CurrentOpen { get; init; }
+	public int? CurrentOpen { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Detailed HTTP stats broken down by route
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyDictionary<string, Elastic.Clients.Elasticsearch.Nodes.HttpRoute> Routes { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -59,6 +153,5 @@ public sealed partial class Http
 	/// Total number of HTTP connections opened for the node.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_opened")]
-	public long? TotalOpened { get; init; }
+	public long? TotalOpened { get; set; }
 }

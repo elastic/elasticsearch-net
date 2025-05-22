@@ -17,154 +17,280 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class ShingleTokenFilter : ITokenFilter
+internal sealed partial class ShingleTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("filler_token")]
+	private static readonly System.Text.Json.JsonEncodedText PropFillerToken = System.Text.Json.JsonEncodedText.Encode("filler_token");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxShingleSize = System.Text.Json.JsonEncodedText.Encode("max_shingle_size");
+	private static readonly System.Text.Json.JsonEncodedText PropMinShingleSize = System.Text.Json.JsonEncodedText.Encode("min_shingle_size");
+	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigrams = System.Text.Json.JsonEncodedText.Encode("output_unigrams");
+	private static readonly System.Text.Json.JsonEncodedText PropOutputUnigramsIfNoShingles = System.Text.Json.JsonEncodedText.Encode("output_unigrams_if_no_shingles");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenSeparator = System.Text.Json.JsonEncodedText.Encode("token_separator");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propFillerToken = default;
+		LocalJsonValue<int?> propMaxShingleSize = default;
+		LocalJsonValue<int?> propMinShingleSize = default;
+		LocalJsonValue<bool?> propOutputUnigrams = default;
+		LocalJsonValue<bool?> propOutputUnigramsIfNoShingles = default;
+		LocalJsonValue<string?> propTokenSeparator = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFillerToken.TryReadProperty(ref reader, options, PropFillerToken, null))
+			{
+				continue;
+			}
+
+			if (propMaxShingleSize.TryReadProperty(ref reader, options, PropMaxShingleSize, null))
+			{
+				continue;
+			}
+
+			if (propMinShingleSize.TryReadProperty(ref reader, options, PropMinShingleSize, null))
+			{
+				continue;
+			}
+
+			if (propOutputUnigrams.TryReadProperty(ref reader, options, PropOutputUnigrams, null))
+			{
+				continue;
+			}
+
+			if (propOutputUnigramsIfNoShingles.TryReadProperty(ref reader, options, PropOutputUnigramsIfNoShingles, null))
+			{
+				continue;
+			}
+
+			if (propTokenSeparator.TryReadProperty(ref reader, options, PropTokenSeparator, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FillerToken = propFillerToken.Value,
+			MaxShingleSize = propMaxShingleSize.Value,
+			MinShingleSize = propMinShingleSize.Value,
+			OutputUnigrams = propOutputUnigrams.Value,
+			OutputUnigramsIfNoShingles = propOutputUnigramsIfNoShingles.Value,
+			TokenSeparator = propTokenSeparator.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFillerToken, value.FillerToken, null, null);
+		writer.WriteProperty(options, PropMaxShingleSize, value.MaxShingleSize, null, null);
+		writer.WriteProperty(options, PropMinShingleSize, value.MinShingleSize, null, null);
+		writer.WriteProperty(options, PropOutputUnigrams, value.OutputUnigrams, null, null);
+		writer.WriteProperty(options, PropOutputUnigramsIfNoShingles, value.OutputUnigramsIfNoShingles, null, null);
+		writer.WriteProperty(options, PropTokenSeparator, value.TokenSeparator, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterConverter))]
+public sealed partial class ShingleTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public ShingleTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ShingleTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ShingleTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
+	/// </para>
+	/// </summary>
 	public string? FillerToken { get; set; }
-	[JsonInclude, JsonPropertyName("max_shingle_size")]
-	public object? MaxShingleSize { get; set; }
-	[JsonInclude, JsonPropertyName("min_shingle_size")]
-	public object? MinShingleSize { get; set; }
-	[JsonInclude, JsonPropertyName("output_unigrams")]
+
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public int? MaxShingleSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public int? MinShingleSize { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? OutputUnigrams { get; set; }
-	[JsonInclude, JsonPropertyName("output_unigrams_if_no_shingles")]
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? OutputUnigramsIfNoShingles { get; set; }
-	[JsonInclude, JsonPropertyName("token_separator")]
+
+	/// <summary>
+	/// <para>
+	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
+	/// </para>
+	/// </summary>
 	public string? TokenSeparator { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "shingle";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class ShingleTokenFilterDescriptor : SerializableDescriptor<ShingleTokenFilterDescriptor>, IBuildableDescriptor<ShingleTokenFilter>
+public readonly partial struct ShingleTokenFilterDescriptor
 {
-	internal ShingleTokenFilterDescriptor(Action<ShingleTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter Instance { get; init; }
 
-	public ShingleTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShingleTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private string? FillerTokenValue { get; set; }
-	private object? MaxShingleSizeValue { get; set; }
-	private object? MinShingleSizeValue { get; set; }
-	private bool? OutputUnigramsValue { get; set; }
-	private bool? OutputUnigramsIfNoShinglesValue { get; set; }
-	private string? TokenSeparatorValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public ShingleTokenFilterDescriptor FillerToken(string? fillerToken)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ShingleTokenFilterDescriptor()
 	{
-		FillerTokenValue = fillerToken;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ShingleTokenFilterDescriptor MaxShingleSize(object? maxShingleSize)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// String used in shingles as a replacement for empty positions that do not contain a token. This filler token is only used in shingles, not original unigrams. Defaults to an underscore (<c>_</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor FillerToken(string? value)
 	{
-		MaxShingleSizeValue = maxShingleSize;
-		return Self;
+		Instance.FillerToken = value;
+		return this;
 	}
 
-	public ShingleTokenFilterDescriptor MinShingleSize(object? minShingleSize)
+	/// <summary>
+	/// <para>
+	/// Maximum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor MaxShingleSize(int? value)
 	{
-		MinShingleSizeValue = minShingleSize;
-		return Self;
+		Instance.MaxShingleSize = value;
+		return this;
 	}
 
-	public ShingleTokenFilterDescriptor OutputUnigrams(bool? outputUnigrams = true)
+	/// <summary>
+	/// <para>
+	/// Minimum number of tokens to concatenate when creating shingles. Defaults to <c>2</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor MinShingleSize(int? value)
 	{
-		OutputUnigramsValue = outputUnigrams;
-		return Self;
+		Instance.MinShingleSize = value;
+		return this;
 	}
 
-	public ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? outputUnigramsIfNoShingles = true)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens. If <c>false</c>, the output only includes shingles; the original input tokens are removed. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor OutputUnigrams(bool? value = true)
 	{
-		OutputUnigramsIfNoShinglesValue = outputUnigramsIfNoShingles;
-		return Self;
+		Instance.OutputUnigrams = value;
+		return this;
 	}
 
-	public ShingleTokenFilterDescriptor TokenSeparator(string? tokenSeparator)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the output includes the original input tokens only if no shingles are produced; if shingles are produced, the output only includes shingles. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? value = true)
 	{
-		TokenSeparatorValue = tokenSeparator;
-		return Self;
+		Instance.OutputUnigramsIfNoShingles = value;
+		return this;
 	}
 
-	public ShingleTokenFilterDescriptor Version(string? version)
+	/// <summary>
+	/// <para>
+	/// Separator used to concatenate adjacent tokens to form a shingle. Defaults to a space (<c>" "</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor TokenSeparator(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.TokenSeparator = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(FillerTokenValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("filler_token");
-			writer.WriteStringValue(FillerTokenValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxShingleSizeValue is not null)
-		{
-			writer.WritePropertyName("max_shingle_size");
-			JsonSerializer.Serialize(writer, MaxShingleSizeValue, options);
-		}
-
-		if (MinShingleSizeValue is not null)
-		{
-			writer.WritePropertyName("min_shingle_size");
-			JsonSerializer.Serialize(writer, MinShingleSizeValue, options);
-		}
-
-		if (OutputUnigramsValue.HasValue)
-		{
-			writer.WritePropertyName("output_unigrams");
-			writer.WriteBooleanValue(OutputUnigramsValue.Value);
-		}
-
-		if (OutputUnigramsIfNoShinglesValue.HasValue)
-		{
-			writer.WritePropertyName("output_unigrams_if_no_shingles");
-			writer.WriteBooleanValue(OutputUnigramsIfNoShinglesValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(TokenSeparatorValue))
-		{
-			writer.WritePropertyName("token_separator");
-			writer.WriteStringValue(TokenSeparatorValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("shingle");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.ShingleTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	ShingleTokenFilter IBuildableDescriptor<ShingleTokenFilter>.Build() => new()
-	{
-		FillerToken = FillerTokenValue,
-		MaxShingleSize = MaxShingleSizeValue,
-		MinShingleSize = MinShingleSizeValue,
-		OutputUnigrams = OutputUnigramsValue,
-		OutputUnigramsIfNoShingles = OutputUnigramsIfNoShinglesValue,
-		TokenSeparator = TokenSeparatorValue,
-		Version = VersionValue
-	};
 }

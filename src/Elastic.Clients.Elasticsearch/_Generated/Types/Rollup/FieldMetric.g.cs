@@ -17,66 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
+internal sealed partial class FieldMetricConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.FieldMetric>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropMetrics = System.Text.Json.JsonEncodedText.Encode("metrics");
+
+	public override Elastic.Clients.Elasticsearch.Rollup.FieldMetric Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric>> propMetrics = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propMetrics.TryReadProperty(ref reader, options, PropMetrics, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Rollup.Metric>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Field = propField.Value,
+			Metrics = propMetrics.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.FieldMetric value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropMetrics, value.Metrics, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Rollup.Metric>(o, v, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.FieldMetricConverter))]
 public sealed partial class FieldMetric
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMetric(Elastic.Clients.Elasticsearch.Field field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> metrics)
+	{
+		Field = field;
+		Metrics = metrics;
+	}
+#if NET7_0_OR_GREATER
+	public FieldMetric()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public FieldMetric()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// An array of metrics to collect for the field. At least one metric must be configured.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("metrics")]
-	public ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> Metrics { get; set; }
 }
 
-public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescriptor<FieldMetricDescriptor<TDocument>>
+public readonly partial struct FieldMetricDescriptor<TDocument>
 {
-	internal FieldMetricDescriptor(Action<FieldMetricDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.FieldMetric Instance { get; init; }
 
-	public FieldMetricDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMetricDescriptor(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> MetricsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMetricDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance) => new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
-	public FieldMetricDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -84,10 +155,10 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -95,54 +166,60 @@ public sealed partial class FieldMetricDescriptor<TDocument> : SerializableDescr
 	/// An array of metrics to collect for the field. At least one metric must be configured.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor<TDocument> Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> metrics)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> value)
 	{
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An array of metrics to collect for the field. At least one metric must be configured.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument> Metrics(params Elastic.Clients.Elasticsearch.Rollup.Metric[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("metrics");
-		JsonSerializer.Serialize(writer, MetricsValue, options);
-		writer.WriteEndObject();
+		Instance.Metrics = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.FieldMetric Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class FieldMetricDescriptor : SerializableDescriptor<FieldMetricDescriptor>
+public readonly partial struct FieldMetricDescriptor
 {
-	internal FieldMetricDescriptor(Action<FieldMetricDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.FieldMetric Instance { get; init; }
 
-	public FieldMetricDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMetricDescriptor(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> MetricsValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FieldMetricDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(Elastic.Clients.Elasticsearch.Rollup.FieldMetric instance) => new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to collect metrics for. This must be a numeric of some kind.
-	/// </para>
-	/// </summary>
-	public FieldMetricDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -150,10 +227,10 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	/// The field to collect metrics for. This must be a numeric of some kind.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -161,19 +238,28 @@ public sealed partial class FieldMetricDescriptor : SerializableDescriptor<Field
 	/// An array of metrics to collect for the field. At least one metric must be configured.
 	/// </para>
 	/// </summary>
-	public FieldMetricDescriptor Metrics(ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> metrics)
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Rollup.Metric> value)
 	{
-		MetricsValue = metrics;
-		return Self;
+		Instance.Metrics = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// An array of metrics to collect for the field. At least one metric must be configured.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor Metrics(params Elastic.Clients.Elasticsearch.Rollup.Metric[] values)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		writer.WritePropertyName("metrics");
-		JsonSerializer.Serialize(writer, MetricsValue, options);
-		writer.WriteEndObject();
+		Instance.Metrics = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.FieldMetric Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.FieldMetricDescriptor(new Elastic.Clients.Elasticsearch.Rollup.FieldMetric(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

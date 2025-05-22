@@ -17,60 +17,183 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class MemoryStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.MemoryStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAdjustedTotalInBytes = System.Text.Json.JsonEncodedText.Encode("adjusted_total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeInBytes = System.Text.Json.JsonEncodedText.Encode("free_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropResident = System.Text.Json.JsonEncodedText.Encode("resident");
+	private static readonly System.Text.Json.JsonEncodedText PropResidentInBytes = System.Text.Json.JsonEncodedText.Encode("resident_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropShare = System.Text.Json.JsonEncodedText.Encode("share");
+	private static readonly System.Text.Json.JsonEncodedText PropShareInBytes = System.Text.Json.JsonEncodedText.Encode("share_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalInBytes = System.Text.Json.JsonEncodedText.Encode("total_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtual = System.Text.Json.JsonEncodedText.Encode("total_virtual");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalVirtualInBytes = System.Text.Json.JsonEncodedText.Encode("total_virtual_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsedInBytes = System.Text.Json.JsonEncodedText.Encode("used_in_bytes");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.MemoryStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propAdjustedTotalInBytes = default;
+		LocalJsonValue<long?> propFreeInBytes = default;
+		LocalJsonValue<string?> propResident = default;
+		LocalJsonValue<long?> propResidentInBytes = default;
+		LocalJsonValue<string?> propShare = default;
+		LocalJsonValue<long?> propShareInBytes = default;
+		LocalJsonValue<long?> propTotalInBytes = default;
+		LocalJsonValue<string?> propTotalVirtual = default;
+		LocalJsonValue<long?> propTotalVirtualInBytes = default;
+		LocalJsonValue<long?> propUsedInBytes = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAdjustedTotalInBytes.TryReadProperty(ref reader, options, PropAdjustedTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (propFreeInBytes.TryReadProperty(ref reader, options, PropFreeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propResident.TryReadProperty(ref reader, options, PropResident, null))
+			{
+				continue;
+			}
+
+			if (propResidentInBytes.TryReadProperty(ref reader, options, PropResidentInBytes, null))
+			{
+				continue;
+			}
+
+			if (propShare.TryReadProperty(ref reader, options, PropShare, null))
+			{
+				continue;
+			}
+
+			if (propShareInBytes.TryReadProperty(ref reader, options, PropShareInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalInBytes.TryReadProperty(ref reader, options, PropTotalInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalVirtual.TryReadProperty(ref reader, options, PropTotalVirtual, null))
+			{
+				continue;
+			}
+
+			if (propTotalVirtualInBytes.TryReadProperty(ref reader, options, PropTotalVirtualInBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsedInBytes.TryReadProperty(ref reader, options, PropUsedInBytes, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.MemoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AdjustedTotalInBytes = propAdjustedTotalInBytes.Value,
+			FreeInBytes = propFreeInBytes.Value,
+			Resident = propResident.Value,
+			ResidentInBytes = propResidentInBytes.Value,
+			Share = propShare.Value,
+			ShareInBytes = propShareInBytes.Value,
+			TotalInBytes = propTotalInBytes.Value,
+			TotalVirtual = propTotalVirtual.Value,
+			TotalVirtualInBytes = propTotalVirtualInBytes.Value,
+			UsedInBytes = propUsedInBytes.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.MemoryStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAdjustedTotalInBytes, value.AdjustedTotalInBytes, null, null);
+		writer.WriteProperty(options, PropFreeInBytes, value.FreeInBytes, null, null);
+		writer.WriteProperty(options, PropResident, value.Resident, null, null);
+		writer.WriteProperty(options, PropResidentInBytes, value.ResidentInBytes, null, null);
+		writer.WriteProperty(options, PropShare, value.Share, null, null);
+		writer.WriteProperty(options, PropShareInBytes, value.ShareInBytes, null, null);
+		writer.WriteProperty(options, PropTotalInBytes, value.TotalInBytes, null, null);
+		writer.WriteProperty(options, PropTotalVirtual, value.TotalVirtual, null, null);
+		writer.WriteProperty(options, PropTotalVirtualInBytes, value.TotalVirtualInBytes, null, null);
+		writer.WriteProperty(options, PropUsedInBytes, value.UsedInBytes, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.MemoryStatsConverter))]
 public sealed partial class MemoryStats
 {
+#if NET7_0_OR_GREATER
+	public MemoryStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MemoryStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MemoryStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// If the amount of physical memory has been overridden using the <c>es</c>.<c>total_memory_bytes</c> system property then this reports the overridden value in bytes.
 	/// Otherwise it reports the same value as <c>total_in_bytes</c>.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("adjusted_total_in_bytes")]
-	public long? AdjustedTotalInBytes { get; init; }
+	public long? AdjustedTotalInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of free physical memory in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("free_in_bytes")]
-	public long? FreeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("resident")]
-	public string? Resident { get; init; }
-	[JsonInclude, JsonPropertyName("resident_in_bytes")]
-	public long? ResidentInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("share")]
-	public string? Share { get; init; }
-	[JsonInclude, JsonPropertyName("share_in_bytes")]
-	public long? ShareInBytes { get; init; }
+	public long? FreeInBytes { get; set; }
+	public string? Resident { get; set; }
+	public long? ResidentInBytes { get; set; }
+	public string? Share { get; set; }
+	public long? ShareInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Total amount of physical memory in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_in_bytes")]
-	public long? TotalInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total_virtual")]
-	public string? TotalVirtual { get; init; }
-	[JsonInclude, JsonPropertyName("total_virtual_in_bytes")]
-	public long? TotalVirtualInBytes { get; init; }
+	public long? TotalInBytes { get; set; }
+	public string? TotalVirtual { get; set; }
+	public long? TotalVirtualInBytes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Amount of used physical memory in bytes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("used_in_bytes")]
-	public long? UsedInBytes { get; init; }
+	public long? UsedInBytes { get; set; }
 }

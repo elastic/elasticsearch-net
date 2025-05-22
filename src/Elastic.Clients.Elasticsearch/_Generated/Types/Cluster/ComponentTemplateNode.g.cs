@@ -17,22 +17,281 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class ComponentTemplateNodeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDeprecated = System.Text.Json.JsonEncodedText.Encode("deprecated");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("_meta");
+	private static readonly System.Text.Json.JsonEncodedText PropTemplate = System.Text.Json.JsonEncodedText.Encode("template");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propDeprecated = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary> propTemplate = default;
+		LocalJsonValue<long?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDeprecated.TryReadProperty(ref reader, options, PropDeprecated, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propTemplate.TryReadProperty(ref reader, options, PropTemplate, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Deprecated = propDeprecated.Value,
+			Meta = propMeta.Value,
+			Template = propTemplate.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDeprecated, value.Deprecated, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropTemplate, value.Template, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeConverter))]
 public sealed partial class ComponentTemplateNode
 {
-	[JsonInclude, JsonPropertyName("_meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("template")]
-	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public long? Version { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary template)
+	{
+		Template = template;
+	}
+#if NET7_0_OR_GREATER
+	public ComponentTemplateNode()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ComponentTemplateNode()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public bool? Deprecated { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Meta { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary Template { get; set; }
+	public long? Version { get; set; }
+}
+
+public readonly partial struct ComponentTemplateNodeDescriptor<TDocument>
+{
+	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ComponentTemplateNodeDescriptor(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ComponentTemplateNodeDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Deprecated(bool? value = true)
+	{
+		Instance.Deprecated = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary value)
+	{
+		Instance.Template = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Template()
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Template(System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument> Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct ComponentTemplateNodeDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ComponentTemplateNodeDescriptor(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ComponentTemplateNodeDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode instance) => new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Deprecated(bool? value = true)
+	{
+		Instance.Deprecated = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Meta(System.Collections.Generic.IDictionary<string, object>? value)
+	{
+		Instance.Meta = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Meta()
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor AddMeta(string key, object value)
+	{
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Meta.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Template(Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummary value)
+	{
+		Instance.Template = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Template()
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Template(System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Template<T>(System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<T>>? action)
+	{
+		Instance.Template = Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateSummaryDescriptor<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor Version(long? value)
+	{
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNodeDescriptor(new Elastic.Clients.Elasticsearch.Cluster.ComponentTemplateNode(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

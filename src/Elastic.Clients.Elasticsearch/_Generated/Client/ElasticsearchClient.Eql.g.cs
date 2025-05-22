@@ -18,680 +18,241 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public partial class EqlNamespacedClient : NamespacedClientProxy
+public partial class EqlNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="EqlNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Eql.EqlNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected EqlNamespacedClient() : base()
 	{
 	}
 
-	internal EqlNamespacedClient(ElasticsearchClient client) : base(client)
+	internal EqlNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete(EqlDeleteRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlDeleteRequest, EqlDeleteResponse, EqlDeleteRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync(EqlDeleteRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequest, EqlDeleteResponse, EqlDeleteRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete<TDocument>(EqlDeleteRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequest, Elastic.Clients.Elasticsearch.Eql.EqlDeleteResponse, Elastic.Clients.Elasticsearch.Eql.EqlDeleteRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete(EqlDeleteRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlDeleteResponse Delete(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor> configureRequest)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(EqlDeleteRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor<TDocument>, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync(EqlDeleteRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Deletes an async EQL search or a stored synchronous EQL search.
-	/// The API also deletes results for the search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlDeleteResponse> DeleteAsync(Elastic.Clients.Elasticsearch.Id id, Action<EqlDeleteRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlDeleteRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlDeleteRequestDescriptor, EqlDeleteResponse, EqlDeleteRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlGetResponse<TEvent> Get<TEvent>(EqlGetRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlGetRequest, EqlGetResponse<TEvent>, EqlGetRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlGetRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlGetRequest, EqlGetResponse<TEvent>, EqlGetRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlGetResponse<TEvent> Get<TEvent>(EqlGetRequestDescriptor<TEvent> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlGetRequestDescriptor<TEvent>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlGetRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlGetRequest, Elastic.Clients.Elasticsearch.Eql.EqlGetResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlGetRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlGetResponse<TEvent> Get<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetRequestDescriptor<TEvent>> configureRequest)
-	{
-		var descriptor = new EqlGetRequestDescriptor<TEvent>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(EqlGetRequestDescriptor<TEvent> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlGetRequestDescriptor<TEvent>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status and available results for an async EQL search or a stored synchronous EQL search.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlGetResponse<TEvent>> GetAsync<TEvent>(Elastic.Clients.Elasticsearch.Id id, Action<EqlGetRequestDescriptor<TEvent>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlGetRequestDescriptor<TEvent>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlGetRequestDescriptor<TEvent>, EqlGetResponse<TEvent>, EqlGetRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus(GetEqlStatusRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetEqlStatusRequest, GetEqlStatusResponse, GetEqlStatusRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequest, GetEqlStatusResponse, GetEqlStatusRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus<TDocument>(GetEqlStatusRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, System.Action<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestDescriptor(id);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequest, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusResponse, Elastic.Clients.Elasticsearch.Eql.GetEqlStatusRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor<TDocument>> configureRequest)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus(GetEqlStatusRequestDescriptor descriptor)
-	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetEqlStatusResponse GetStatus(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(GetEqlStatusRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync<TDocument>(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor<TDocument>(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor<TDocument>, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync(GetEqlStatusRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor(id);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns the current status for an async EQL search or a stored synchronous EQL search without returning results.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/get-async-eql-status-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetEqlStatusResponse> GetStatusAsync(Elastic.Clients.Elasticsearch.Id id, Action<GetEqlStatusRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetEqlStatusRequestDescriptor(id);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetEqlStatusRequestDescriptor, GetEqlStatusResponse, GetEqlStatusRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent> Search<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequest, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(EqlSearchRequestDescriptor<TEvent> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TEvent>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>> SearchAsync<TDocument, TEvent>(Elastic.Clients.Elasticsearch.Indices indices, System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>();
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual EqlSearchResponse<TEvent> Search<TEvent>(Action<EqlSearchRequestDescriptor<TEvent>> configureRequest)
-	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(EqlSearchRequestDescriptor<TEvent> descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Elastic.Clients.Elasticsearch.Indices indices, Action<EqlSearchRequestDescriptor<TEvent>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>(indices);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns results matching a query expressed in Event Query Language (EQL)
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/eql-search-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<EqlSearchResponse<TEvent>> SearchAsync<TEvent>(Action<EqlSearchRequestDescriptor<TEvent>> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new EqlSearchRequestDescriptor<TEvent>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<EqlSearchRequestDescriptor<TEvent>, EqlSearchResponse<TEvent>, EqlSearchRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(indices);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest, Elastic.Clients.Elasticsearch.Eql.EqlSearchResponse<TEvent>, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>(request, cancellationToken);
 	}
 }

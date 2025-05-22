@@ -8,11 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// A time representation for use within <see cref="DateMath" /> expressions.
@@ -83,8 +79,9 @@ public class DateMathTime : IComparable<DateMathTime>, IEquatable<DateMathTime>
 		{
 			"M" => DateMathTimeUnit.Month,
 			"m" => DateMathTimeUnit.Minute,
-			_ => intervalValue.ToEnum<DateMathTimeUnit>().GetValueOrDefault(),
+			_ => EnumValue<DateMathTimeUnit>.TryParse(intervalValue, out var result) ? result : default
 		};
+
 		SetWholeFactorIntervalAndSeconds(fraction, interval, rounding);
 	}
 

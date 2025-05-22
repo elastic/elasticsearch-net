@@ -17,43 +17,137 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class Restriction
+internal sealed partial class RestrictionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.Restriction>
 {
-	[JsonInclude, JsonPropertyName("workflows")]
-	public ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
-}
+	private static readonly System.Text.Json.JsonEncodedText PropWorkflows = System.Text.Json.JsonEncodedText.Encode("workflows");
 
-public sealed partial class RestrictionDescriptor : SerializableDescriptor<RestrictionDescriptor>
-{
-	internal RestrictionDescriptor(Action<RestrictionDescriptor> configure) => configure.Invoke(this);
-
-	public RestrictionDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Security.Restriction Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow>> propWorkflows = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propWorkflows.TryReadProperty(ref reader, options, PropWorkflows, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow>(o, null)!))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.Restriction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Workflows = propWorkflows.Value
+		};
 	}
 
-	private ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> WorkflowsValue { get; set; }
-
-	public RestrictionDescriptor Workflows(ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> workflows)
-	{
-		WorkflowsValue = workflows;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.Restriction value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		writer.WritePropertyName("workflows");
-		JsonSerializer.Serialize(writer, WorkflowsValue, options);
+		writer.WriteProperty(options, PropWorkflows, value.Workflows, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow>(o, v, null));
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.RestrictionConverter))]
+public sealed partial class Restriction
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public Restriction(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> workflows)
+	{
+		Workflows = workflows;
+	}
+#if NET7_0_OR_GREATER
+	public Restriction()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public Restriction()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Restriction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of workflows to which the API key is restricted.
+	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> Workflows { get; set; }
+}
+
+public readonly partial struct RestrictionDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Security.Restriction Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RestrictionDescriptor(Elastic.Clients.Elasticsearch.Security.Restriction instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RestrictionDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.Restriction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(Elastic.Clients.Elasticsearch.Security.Restriction instance) => new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.Restriction(Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A list of workflows to which the API key is restricted.
+	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow> value)
+	{
+		Instance.Workflows = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A list of workflows to which the API key is restricted.
+	/// NOTE: In order to use a role restriction, an API key must be created with a single role descriptor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor Workflows(params Elastic.Clients.Elasticsearch.Security.RestrictionWorkflow[] values)
+	{
+		Instance.Workflows = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.Restriction Build(System.Action<Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.RestrictionDescriptor(new Elastic.Clients.Elasticsearch.Security.Restriction(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

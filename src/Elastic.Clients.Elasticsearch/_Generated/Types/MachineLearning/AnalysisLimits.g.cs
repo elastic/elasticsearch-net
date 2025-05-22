@@ -17,24 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class AnalysisLimitsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCategorizationExamplesLimit = System.Text.Json.JsonEncodedText.Encode("categorization_examples_limit");
+	private static readonly System.Text.Json.JsonEncodedText PropModelMemoryLimit = System.Text.Json.JsonEncodedText.Encode("model_memory_limit");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCategorizationExamplesLimit = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ByteSize?> propModelMemoryLimit = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCategorizationExamplesLimit.TryReadProperty(ref reader, options, PropCategorizationExamplesLimit, null))
+			{
+				continue;
+			}
+
+			if (propModelMemoryLimit.TryReadProperty(ref reader, options, PropModelMemoryLimit, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CategorizationExamplesLimit = propCategorizationExamplesLimit.Value,
+			ModelMemoryLimit = propModelMemoryLimit.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCategorizationExamplesLimit, value.CategorizationExamplesLimit, null, null);
+		writer.WriteProperty(options, PropModelMemoryLimit, value.ModelMemoryLimit, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsConverter))]
 public sealed partial class AnalysisLimits
 {
+#if NET7_0_OR_GREATER
+	public AnalysisLimits()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public AnalysisLimits()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The maximum number of examples stored per category in memory and in the results data store. If you increase this value, more examples are available, however it requires that you have more storage available. If you set this value to 0, no examples are stored. NOTE: The <c>categorization_examples_limit</c> applies only to analysis that uses categorization.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("categorization_examples_limit")]
 	public long? CategorizationExamplesLimit { get; set; }
 
 	/// <summary>
@@ -42,30 +102,37 @@ public sealed partial class AnalysisLimits
 	/// The approximate maximum amount of memory resources that are required for analytical processing. Once this limit is approached, data pruning becomes more aggressive. Upon exceeding this limit, new entities are not modeled. If the <c>xpack.ml.max_model_memory_limit</c> setting has a value greater than 0 and less than 1024mb, that value is used instead of the default. The default value is relatively small to ensure that high resource usage is a conscious decision. If you have jobs that are expected to analyze high cardinality fields, you will likely need to use a higher value. If you specify a number instead of a string, the units are assumed to be MiB. Specifying a string is recommended for clarity. If you specify a byte size unit of <c>b</c> or <c>kb</c> and the number does not equate to a discrete number of megabytes, it is rounded down to the closest MiB. The minimum valid value is 1 MiB. If you specify a value less than 1 MiB, an error occurs. If you specify a value for the <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to create jobs that have <c>model_memory_limit</c> values greater than that setting value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_memory_limit")]
-	public string? ModelMemoryLimit { get; set; }
+	public Elastic.Clients.Elasticsearch.ByteSize? ModelMemoryLimit { get; set; }
 }
 
-public sealed partial class AnalysisLimitsDescriptor : SerializableDescriptor<AnalysisLimitsDescriptor>
+public readonly partial struct AnalysisLimitsDescriptor
 {
-	internal AnalysisLimitsDescriptor(Action<AnalysisLimitsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits Instance { get; init; }
 
-	public AnalysisLimitsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisLimitsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits instance)
 	{
+		Instance = instance;
 	}
 
-	private long? CategorizationExamplesLimitValue { get; set; }
-	private string? ModelMemoryLimitValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalysisLimitsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits instance) => new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// The maximum number of examples stored per category in memory and in the results data store. If you increase this value, more examples are available, however it requires that you have more storage available. If you set this value to 0, no examples are stored. NOTE: The <c>categorization_examples_limit</c> applies only to analysis that uses categorization.
 	/// </para>
 	/// </summary>
-	public AnalysisLimitsDescriptor CategorizationExamplesLimit(long? categorizationExamplesLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor CategorizationExamplesLimit(long? value)
 	{
-		CategorizationExamplesLimitValue = categorizationExamplesLimit;
-		return Self;
+		Instance.CategorizationExamplesLimit = value;
+		return this;
 	}
 
 	/// <summary>
@@ -73,27 +140,33 @@ public sealed partial class AnalysisLimitsDescriptor : SerializableDescriptor<An
 	/// The approximate maximum amount of memory resources that are required for analytical processing. Once this limit is approached, data pruning becomes more aggressive. Upon exceeding this limit, new entities are not modeled. If the <c>xpack.ml.max_model_memory_limit</c> setting has a value greater than 0 and less than 1024mb, that value is used instead of the default. The default value is relatively small to ensure that high resource usage is a conscious decision. If you have jobs that are expected to analyze high cardinality fields, you will likely need to use a higher value. If you specify a number instead of a string, the units are assumed to be MiB. Specifying a string is recommended for clarity. If you specify a byte size unit of <c>b</c> or <c>kb</c> and the number does not equate to a discrete number of megabytes, it is rounded down to the closest MiB. The minimum valid value is 1 MiB. If you specify a value less than 1 MiB, an error occurs. If you specify a value for the <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to create jobs that have <c>model_memory_limit</c> values greater than that setting value.
 	/// </para>
 	/// </summary>
-	public AnalysisLimitsDescriptor ModelMemoryLimit(string? modelMemoryLimit)
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor ModelMemoryLimit(Elastic.Clients.Elasticsearch.ByteSize? value)
 	{
-		ModelMemoryLimitValue = modelMemoryLimit;
-		return Self;
+		Instance.ModelMemoryLimit = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The approximate maximum amount of memory resources that are required for analytical processing. Once this limit is approached, data pruning becomes more aggressive. Upon exceeding this limit, new entities are not modeled. If the <c>xpack.ml.max_model_memory_limit</c> setting has a value greater than 0 and less than 1024mb, that value is used instead of the default. The default value is relatively small to ensure that high resource usage is a conscious decision. If you have jobs that are expected to analyze high cardinality fields, you will likely need to use a higher value. If you specify a number instead of a string, the units are assumed to be MiB. Specifying a string is recommended for clarity. If you specify a byte size unit of <c>b</c> or <c>kb</c> and the number does not equate to a discrete number of megabytes, it is rounded down to the closest MiB. The minimum valid value is 1 MiB. If you specify a value less than 1 MiB, an error occurs. If you specify a value for the <c>xpack.ml.max_model_memory_limit</c> setting, an error occurs when you try to create jobs that have <c>model_memory_limit</c> values greater than that setting value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor ModelMemoryLimit(System.Func<Elastic.Clients.Elasticsearch.ByteSizeFactory, Elastic.Clients.Elasticsearch.ByteSize> action)
 	{
-		writer.WriteStartObject();
-		if (CategorizationExamplesLimitValue.HasValue)
+		Instance.ModelMemoryLimit = Elastic.Clients.Elasticsearch.ByteSizeFactory.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("categorization_examples_limit");
-			writer.WriteNumberValue(CategorizationExamplesLimitValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(ModelMemoryLimitValue))
-		{
-			writer.WritePropertyName("model_memory_limit");
-			writer.WriteStringValue(ModelMemoryLimitValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

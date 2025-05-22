@@ -17,25 +17,136 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class CompletionSuggesterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropContexts = System.Text.Json.JsonEncodedText.Encode("contexts");
+	private static readonly System.Text.Json.JsonEncodedText PropField = System.Text.Json.JsonEncodedText.Encode("field");
+	private static readonly System.Text.Json.JsonEncodedText PropFuzzy = System.Text.Json.JsonEncodedText.Encode("fuzzy");
+	private static readonly System.Text.Json.JsonEncodedText PropRegex = System.Text.Json.JsonEncodedText.Encode("regex");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropSkipDuplicates = System.Text.Json.JsonEncodedText.Encode("skip_duplicates");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>?> propContexts = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field> propField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness?> propFuzzy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Core.Search.RegexOptions?> propRegex = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<bool?> propSkipDuplicates = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propContexts.TryReadProperty(ref reader, options, PropContexts, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>(o, null, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propField.TryReadProperty(ref reader, options, PropField, null))
+			{
+				continue;
+			}
+
+			if (propFuzzy.TryReadProperty(ref reader, options, PropFuzzy, null))
+			{
+				continue;
+			}
+
+			if (propRegex.TryReadProperty(ref reader, options, PropRegex, null))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propSkipDuplicates.TryReadProperty(ref reader, options, PropSkipDuplicates, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Contexts = propContexts.Value,
+			Field = propField.Value,
+			Fuzzy = propFuzzy.Value,
+			Regex = propRegex.Value,
+			Size = propSize.Value,
+			SkipDuplicates = propSkipDuplicates.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropContexts, value.Contexts, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>(o, v, null)));
+		writer.WriteProperty(options, PropField, value.Field, null, null);
+		writer.WriteProperty(options, PropFuzzy, value.Fuzzy, null, null);
+		writer.WriteProperty(options, PropRegex, value.Regex, null, null);
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropSkipDuplicates, value.SkipDuplicates, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterConverter))]
 public sealed partial class CompletionSuggester
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggester(Elastic.Clients.Elasticsearch.Field field)
+	{
+		Field = field;
+	}
+#if NET7_0_OR_GREATER
+	public CompletionSuggester()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public CompletionSuggester()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The analyzer to analyze the suggest text with.
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("analyzer")]
 	public string? Analyzer { get; set; }
 
 	/// <summary>
@@ -43,8 +154,7 @@ public sealed partial class CompletionSuggester
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("contexts")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? Contexts { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? Contexts { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -52,15 +162,17 @@ public sealed partial class CompletionSuggester
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field")]
-	public Elastic.Clients.Elasticsearch.Field Field { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Field Field { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fuzzy")]
 	public Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? Fuzzy { get; set; }
 
 	/// <summary>
@@ -68,7 +180,6 @@ public sealed partial class CompletionSuggester
 	/// A regex query that expresses a prefix as a regular expression.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("regex")]
 	public Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? Regex { get; set; }
 
 	/// <summary>
@@ -76,7 +187,6 @@ public sealed partial class CompletionSuggester
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -84,31 +194,27 @@ public sealed partial class CompletionSuggester
 	/// Whether duplicate suggestions should be filtered out.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("skip_duplicates")]
 	public bool? SkipDuplicates { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester(CompletionSuggester completionSuggester) => Elastic.Clients.Elasticsearch.Core.Search.FieldSuggester.Completion(completionSuggester);
 }
 
-public sealed partial class CompletionSuggesterDescriptor<TDocument> : SerializableDescriptor<CompletionSuggesterDescriptor<TDocument>>
+public readonly partial struct CompletionSuggesterDescriptor<TDocument>
 {
-	internal CompletionSuggesterDescriptor(Action<CompletionSuggesterDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Instance { get; init; }
 
-	public CompletionSuggesterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? ContextsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor RegexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
-	private bool? SkipDuplicatesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggesterDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -116,10 +222,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -127,10 +233,86 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? value)
 	{
-		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>());
-		return Self;
+		Instance.Contexts = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts()
+	{
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>>? action)
+	{
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(Elastic.Clients.Elasticsearch.Field key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> value)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> value)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(Elastic.Clients.Elasticsearch.Field key, params Elastic.Clients.Elasticsearch.Core.Search.CompletionContext[] values)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, [.. values]);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, params Elastic.Clients.Elasticsearch.Core.Search.CompletionContext[] values)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, [.. values]);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(Elastic.Clients.Elasticsearch.Field key, params System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor.Build(action));
+		}
+
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, items);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> AddContext(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, params System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor.Build(action));
+		}
+
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, items);
+		return this;
 	}
 
 	/// <summary>
@@ -139,10 +321,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -151,22 +333,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Field<TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Field(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -174,28 +344,32 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? value)
 	{
-		FuzzyDescriptor = null;
-		FuzzyDescriptorAction = null;
-		FuzzyValue = fuzzy;
-		return Self;
+		Instance.Fuzzy = value;
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy()
 	{
-		FuzzyValue = null;
-		FuzzyDescriptorAction = null;
-		FuzzyDescriptor = descriptor;
-		return Self;
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(null);
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Fuzzy(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Fuzzy(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor>? action)
 	{
-		FuzzyValue = null;
-		FuzzyDescriptor = null;
-		FuzzyDescriptorAction = configure;
-		return Self;
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -203,28 +377,32 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// A regex query that expresses a prefix as a regular expression.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? value)
 	{
-		RegexDescriptor = null;
-		RegexDescriptorAction = null;
-		RegexValue = regex;
-		return Self;
+		Instance.Regex = value;
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex()
 	{
-		RegexValue = null;
-		RegexDescriptorAction = null;
-		RegexDescriptor = descriptor;
-		return Self;
+		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor<TDocument> Regex(Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Regex(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor>? action)
 	{
-		RegexValue = null;
-		RegexDescriptor = null;
-		RegexDescriptorAction = configure;
-		return Self;
+		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -232,10 +410,10 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -243,96 +421,39 @@ public sealed partial class CompletionSuggesterDescriptor<TDocument> : Serializa
 	/// Whether duplicate suggestions should be filtered out.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor<TDocument> SkipDuplicates(bool? skipDuplicates = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument> SkipDuplicates(bool? value = true)
 	{
-		SkipDuplicatesValue = skipDuplicates;
-		return Self;
+		Instance.SkipDuplicates = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (ContextsValue is not null)
-		{
-			writer.WritePropertyName("contexts");
-			JsonSerializer.Serialize(writer, ContextsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FuzzyDescriptor is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, FuzzyDescriptor, options);
-		}
-		else if (FuzzyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
-		}
-		else if (FuzzyValue is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, FuzzyValue, options);
-		}
-
-		if (RegexDescriptor is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, RegexDescriptor, options);
-		}
-		else if (RegexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(RegexDescriptorAction), options);
-		}
-		else if (RegexValue is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, RegexValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SkipDuplicatesValue.HasValue)
-		{
-			writer.WritePropertyName("skip_duplicates");
-			writer.WriteBooleanValue(SkipDuplicatesValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class CompletionSuggesterDescriptor : SerializableDescriptor<CompletionSuggesterDescriptor>
+public readonly partial struct CompletionSuggesterDescriptor
 {
-	internal CompletionSuggesterDescriptor(Action<CompletionSuggesterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Instance { get; init; }
 
-	public CompletionSuggesterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>? ContextsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field FieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? FuzzyValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor FuzzyDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> FuzzyDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? RegexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor RegexDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> RegexDescriptorAction { get; set; }
-	private int? SizeValue { get; set; }
-	private bool? SkipDuplicatesValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public CompletionSuggesterDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester instance) => new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -340,10 +461,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// Defaults to the search analyzer of the suggest field.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Analyzer(string? analyzer)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Analyzer(string? value)
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
 	/// <summary>
@@ -351,10 +472,97 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Contexts(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>> selector)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>? value)
 	{
-		ContextsValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, Union<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext, ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>>());
-		return Self;
+		Instance.Contexts = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts()
+	{
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext>? action)
+	{
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A value, geo point object, or a geo hash string to filter or boost the suggestion on.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Contexts<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>>? action)
+	{
+		Instance.Contexts = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldCollectionOfCompletionContext<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext(Elastic.Clients.Elasticsearch.Field key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> value)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext> value)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext(Elastic.Clients.Elasticsearch.Field key, params Elastic.Clients.Elasticsearch.Core.Search.CompletionContext[] values)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, [.. values]);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, params Elastic.Clients.Elasticsearch.Core.Search.CompletionContext[] values)
+	{
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, [.. values]);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext(Elastic.Clients.Elasticsearch.Field key, params System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor.Build(action));
+		}
+
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, items);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor AddContext<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, params System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Core.Search.CompletionContextDescriptor.Build(action));
+		}
+
+		Instance.Contexts ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Core.Search.CompletionContext>>();
+		Instance.Contexts.Add(key, items);
+		return this;
 	}
 
 	/// <summary>
@@ -363,10 +571,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field field)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Field(Elastic.Clients.Elasticsearch.Field value)
 	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -375,22 +583,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// Needs to be set globally or per suggestion.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Field<TDocument, TValue>(Expression<Func<TDocument, TValue>> field)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		FieldValue = field;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The field to fetch the candidate suggestions from.
-	/// Needs to be set globally or per suggestion.
-	/// </para>
-	/// </summary>
-	public CompletionSuggesterDescriptor Field<TDocument>(Expression<Func<TDocument, object>> field)
-	{
-		FieldValue = field;
-		return Self;
+		Instance.Field = value;
+		return this;
 	}
 
 	/// <summary>
@@ -398,28 +594,32 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? fuzzy)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzziness? value)
 	{
-		FuzzyDescriptor = null;
-		FuzzyDescriptorAction = null;
-		FuzzyValue = fuzzy;
-		return Self;
+		Instance.Fuzzy = value;
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor Fuzzy(Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy()
 	{
-		FuzzyValue = null;
-		FuzzyDescriptorAction = null;
-		FuzzyDescriptor = descriptor;
-		return Self;
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(null);
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor Fuzzy(Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Enables fuzziness, meaning you can have a typo in your search and still get results back.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Fuzzy(System.Action<Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor>? action)
 	{
-		FuzzyValue = null;
-		FuzzyDescriptor = null;
-		FuzzyDescriptorAction = configure;
-		return Self;
+		Instance.Fuzzy = Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -427,28 +627,32 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// A regex query that expresses a prefix as a regular expression.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? regex)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptions? value)
 	{
-		RegexDescriptor = null;
-		RegexDescriptorAction = null;
-		RegexValue = regex;
-		return Self;
+		Instance.Regex = value;
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor Regex(Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex()
 	{
-		RegexValue = null;
-		RegexDescriptorAction = null;
-		RegexDescriptor = descriptor;
-		return Self;
+		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public CompletionSuggesterDescriptor Regex(Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// A regex query that expresses a prefix as a regular expression.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Regex(System.Action<Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor>? action)
 	{
-		RegexValue = null;
-		RegexDescriptor = null;
-		RegexDescriptorAction = configure;
-		return Self;
+		Instance.Regex = Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -456,10 +660,10 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// The maximum corrections to be returned per suggest text token.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -467,73 +671,17 @@ public sealed partial class CompletionSuggesterDescriptor : SerializableDescript
 	/// Whether duplicate suggestions should be filtered out.
 	/// </para>
 	/// </summary>
-	public CompletionSuggesterDescriptor SkipDuplicates(bool? skipDuplicates = true)
+	public Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor SkipDuplicates(bool? value = true)
 	{
-		SkipDuplicatesValue = skipDuplicates;
-		return Self;
+		Instance.SkipDuplicates = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester Build(System.Action<Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (ContextsValue is not null)
-		{
-			writer.WritePropertyName("contexts");
-			JsonSerializer.Serialize(writer, ContextsValue, options);
-		}
-
-		writer.WritePropertyName("field");
-		JsonSerializer.Serialize(writer, FieldValue, options);
-		if (FuzzyDescriptor is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, FuzzyDescriptor, options);
-		}
-		else if (FuzzyDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.SuggestFuzzinessDescriptor(FuzzyDescriptorAction), options);
-		}
-		else if (FuzzyValue is not null)
-		{
-			writer.WritePropertyName("fuzzy");
-			JsonSerializer.Serialize(writer, FuzzyValue, options);
-		}
-
-		if (RegexDescriptor is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, RegexDescriptor, options);
-		}
-		else if (RegexDescriptorAction is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Core.Search.RegexOptionsDescriptor(RegexDescriptorAction), options);
-		}
-		else if (RegexValue is not null)
-		{
-			writer.WritePropertyName("regex");
-			JsonSerializer.Serialize(writer, RegexValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (SkipDuplicatesValue.HasValue)
-		{
-			writer.WritePropertyName("skip_duplicates");
-			writer.WriteBooleanValue(SkipDuplicatesValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggesterDescriptor(new Elastic.Clients.Elasticsearch.Core.Search.CompletionSuggester(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

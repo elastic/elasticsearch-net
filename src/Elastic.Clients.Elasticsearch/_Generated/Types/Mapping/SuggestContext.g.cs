@@ -17,168 +17,230 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
+internal sealed partial class SuggestContextConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.SuggestContext>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecision = System.Text.Json.JsonEncodedText.Encode("precision");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.SuggestContext Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name> propName = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<int, string>?> propPrecision = default;
+		LocalJsonValue<string> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propPrecision.TryReadProperty(ref reader, options, PropPrecision, static Elastic.Clients.Elasticsearch.Union<int, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<int, string>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.Number, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String), null, null)))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Name = propName.Value,
+			Path = propPath.Value,
+			Precision = propPrecision.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.SuggestContext value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropPrecision, value.Precision, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<int, string>? v) => w.WriteUnionValue<int, string>(o, v, null, null));
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.SuggestContextConverter))]
 public sealed partial class SuggestContext
 {
-	[JsonInclude, JsonPropertyName("name")]
-	public Elastic.Clients.Elasticsearch.Name Name { get; set; }
-	[JsonInclude, JsonPropertyName("path")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestContext(Elastic.Clients.Elasticsearch.Name name, string type)
+	{
+		Name = name;
+		Type = type;
+	}
+#if NET7_0_OR_GREATER
+	public SuggestContext()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SuggestContext()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Name Name { get; set; }
 	public Elastic.Clients.Elasticsearch.Field? Path { get; set; }
-	[JsonInclude, JsonPropertyName("precision")]
-	public object? Precision { get; set; }
-	[JsonInclude, JsonPropertyName("type")]
-	public string Type { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<int, string>? Precision { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Type { get; set; }
 }
 
-public sealed partial class SuggestContextDescriptor<TDocument> : SerializableDescriptor<SuggestContextDescriptor<TDocument>>
+public readonly partial struct SuggestContextDescriptor<TDocument>
 {
-	internal SuggestContextDescriptor(Action<SuggestContextDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.SuggestContext Instance { get; init; }
 
-	public SuggestContextDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestContextDescriptor(Elastic.Clients.Elasticsearch.Mapping.SuggestContext instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-	private object? PrecisionValue { get; set; }
-	private string TypeValue { get; set; }
-
-	public SuggestContextDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name name)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestContextDescriptor()
 	{
-		NameValue = name;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SuggestContextDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? path)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.SuggestContext instance) => new Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> Name(Elastic.Clients.Elasticsearch.Name value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor<TDocument> Path<TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor<TDocument> Path(Expression<Func<TDocument, object>> path)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> Path(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor<TDocument> Precision(object? precision)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> Precision(Elastic.Clients.Elasticsearch.Union<int, string>? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor<TDocument> Type(string type)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument> Type(string value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.SuggestContext Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument>> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue(TypeValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class SuggestContextDescriptor : SerializableDescriptor<SuggestContextDescriptor>
+public readonly partial struct SuggestContextDescriptor
 {
-	internal SuggestContextDescriptor(Action<SuggestContextDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.SuggestContext Instance { get; init; }
 
-	public SuggestContextDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestContextDescriptor(Elastic.Clients.Elasticsearch.Mapping.SuggestContext instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Name NameValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? PathValue { get; set; }
-	private object? PrecisionValue { get; set; }
-	private string TypeValue { get; set; }
-
-	public SuggestContextDescriptor Name(Elastic.Clients.Elasticsearch.Name name)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SuggestContextDescriptor()
 	{
-		NameValue = name;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public SuggestContextDescriptor Path(Elastic.Clients.Elasticsearch.Field? path)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor(Elastic.Clients.Elasticsearch.Mapping.SuggestContext instance) => new Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor Name(Elastic.Clients.Elasticsearch.Name value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor Path<TDocument, TValue>(Expression<Func<TDocument, TValue>> path)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor Path(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor Path<TDocument>(Expression<Func<TDocument, object>> path)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor Path<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		PathValue = path;
-		return Self;
+		Instance.Path = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor Precision(object? precision)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor Precision(Elastic.Clients.Elasticsearch.Union<int, string>? value)
 	{
-		PrecisionValue = precision;
-		return Self;
+		Instance.Precision = value;
+		return this;
 	}
 
-	public SuggestContextDescriptor Type(string type)
+	public Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor Type(string value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.SuggestContext Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("name");
-		JsonSerializer.Serialize(writer, NameValue, options);
-		if (PathValue is not null)
-		{
-			writer.WritePropertyName("path");
-			JsonSerializer.Serialize(writer, PathValue, options);
-		}
-
-		if (PrecisionValue is not null)
-		{
-			writer.WritePropertyName("precision");
-			JsonSerializer.Serialize(writer, PrecisionValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue(TypeValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.SuggestContextDescriptor(new Elastic.Clients.Elasticsearch.Mapping.SuggestContext(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

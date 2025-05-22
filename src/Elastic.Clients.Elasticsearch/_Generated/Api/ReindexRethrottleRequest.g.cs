@@ -17,27 +17,50 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ReindexRethrottleRequestParameters : RequestParameters
+public sealed partial class ReindexRethrottleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
 	/// The throttle for this request in sub-requests per second.
+	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
 	/// </para>
 	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
+}
+
+internal sealed partial class ReindexRethrottleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ReindexRethrottleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.ReindexRethrottleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ReindexRethrottleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -46,17 +69,38 @@ public sealed partial class ReindexRethrottleRequestParameters : RequestParamete
 /// </para>
 /// <para>
 /// Change the number of requests per second for a particular reindex operation.
+/// For example:
+/// </para>
+/// <code>
+/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
+/// </code>
+/// <para>
+/// Rethrottling that speeds up the query takes effect immediately.
+/// Rethrottling that slows down the query will take effect after completing the current batch.
+/// This behavior prevents scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethrottleRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ReindexRethrottleRequestConverter))]
+public sealed partial class ReindexRethrottleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ReindexRethrottleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ReindexRethrottleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindexRethrottle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceReindexRethrottle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -64,10 +108,21 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 
 	/// <summary>
 	/// <para>
-	/// The throttle for this request in sub-requests per second.
+	/// The task identifier, which can be found by using the tasks API.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id TaskId { get => P<Elastic.Clients.Elasticsearch.Id>("task_id"); set => PR("task_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
+	/// </para>
+	/// </summary>
 	public float? RequestsPerSecond { get => Q<float?>("requests_per_second"); set => Q("requests_per_second", value); }
 }
 
@@ -77,33 +132,111 @@ public sealed partial class ReindexRethrottleRequest : PlainRequest<ReindexRethr
 /// </para>
 /// <para>
 /// Change the number of requests per second for a particular reindex operation.
+/// For example:
+/// </para>
+/// <code>
+/// POST _reindex/r1A2WoRbTwKZ516z6NEs5A:36619/_rethrottle?requests_per_second=-1
+/// </code>
+/// <para>
+/// Rethrottling that speeds up the query takes effect immediately.
+/// Rethrottling that slows down the query will take effect after completing the current batch.
+/// This behavior prevents scroll timeouts.
 /// </para>
 /// </summary>
-public sealed partial class ReindexRethrottleRequestDescriptor : RequestDescriptor<ReindexRethrottleRequestDescriptor, ReindexRethrottleRequestParameters>
+public readonly partial struct ReindexRethrottleRequestDescriptor
 {
-	internal ReindexRethrottleRequestDescriptor(Action<ReindexRethrottleRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ReindexRethrottleRequest Instance { get; init; }
 
-	public ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId) : base(r => r.Required("task_id", taskId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRethrottleRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceReindexRethrottle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "reindex_rethrottle";
-
-	public ReindexRethrottleRequestDescriptor RequestsPerSecond(float? requestsPerSecond) => Qs("requests_per_second", requestsPerSecond);
-
-	public ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id taskId)
+	public ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.Id taskId)
 	{
-		RouteValues.Required("task_id", taskId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(taskId);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ReindexRethrottleRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(Elastic.Clients.Elasticsearch.ReindexRethrottleRequest instance) => new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The task identifier, which can be found by using the tasks API.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor TaskId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.TaskId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The throttle for this request in sub-requests per second.
+	/// It can be either <c>-1</c> to turn off throttling or any decimal number like <c>1.7</c> or <c>12</c> to throttle to that level.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor RequestsPerSecond(float? value)
+	{
+		Instance.RequestsPerSecond = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ReindexRethrottleRequest Build(System.Action<Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor(new Elastic.Clients.Elasticsearch.ReindexRethrottleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ReindexRethrottleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

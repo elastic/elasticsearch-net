@@ -17,59 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class ChildrenAggregation
+internal sealed partial class ChildrenAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation>
 {
-	/// <summary>
-	/// <para>
-	/// The child type that should be selected.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
-	public string? Type { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(ChildrenAggregation childrenAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Children(childrenAggregation);
-}
-
-public sealed partial class ChildrenAggregationDescriptor : SerializableDescriptor<ChildrenAggregationDescriptor>
-{
-	internal ChildrenAggregationDescriptor(Action<ChildrenAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public ChildrenAggregationDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private string? TypeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// The child type that should be selected.
-	/// </para>
-	/// </summary>
-	public ChildrenAggregationDescriptor Type(string? type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(TypeValue))
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("type");
-			writer.WriteStringValue(TypeValue);
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropType, value.Type, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationConverter))]
+public sealed partial class ChildrenAggregation
+{
+#if NET7_0_OR_GREATER
+	public ChildrenAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ChildrenAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ChildrenAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The child type that should be selected.
+	/// </para>
+	/// </summary>
+	public string? Type { get; set; }
+}
+
+public readonly partial struct ChildrenAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChildrenAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ChildrenAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation(Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The child type that should be selected.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor Type(string? value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.ChildrenAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

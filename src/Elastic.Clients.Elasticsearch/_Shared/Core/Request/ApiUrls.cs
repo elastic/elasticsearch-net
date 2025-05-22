@@ -6,11 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Requests;
-#else
 namespace Elastic.Clients.Elasticsearch.Requests;
-#endif
 
 /// <summary>
 ///     Each Request type holds a static instance of this class which creates cached builders for each

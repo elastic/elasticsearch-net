@@ -17,63 +17,194 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DatafeedTimingStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAverageSearchTimePerBucketMs = System.Text.Json.JsonEncodedText.Encode("average_search_time_per_bucket_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropBucketCount = System.Text.Json.JsonEncodedText.Encode("bucket_count");
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageCalculationContext = System.Text.Json.JsonEncodedText.Encode("exponential_average_calculation_context");
+	private static readonly System.Text.Json.JsonEncodedText PropExponentialAverageSearchTimePerHourMs = System.Text.Json.JsonEncodedText.Encode("exponential_average_search_time_per_hour_ms");
+	private static readonly System.Text.Json.JsonEncodedText PropJobId = System.Text.Json.JsonEncodedText.Encode("job_id");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchCount = System.Text.Json.JsonEncodedText.Encode("search_count");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSearchTimeMs = System.Text.Json.JsonEncodedText.Encode("total_search_time_ms");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.TimeSpan?> propAverageSearchTimePerBucketMs = default;
+		LocalJsonValue<long> propBucketCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext?> propExponentialAverageCalculationContext = default;
+		LocalJsonValue<System.TimeSpan> propExponentialAverageSearchTimePerHourMs = default;
+		LocalJsonValue<string> propJobId = default;
+		LocalJsonValue<long> propSearchCount = default;
+		LocalJsonValue<System.TimeSpan> propTotalSearchTimeMs = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAverageSearchTimePerBucketMs.TryReadProperty(ref reader, options, PropAverageSearchTimePerBucketMs, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propBucketCount.TryReadProperty(ref reader, options, PropBucketCount, null))
+			{
+				continue;
+			}
+
+			if (propExponentialAverageCalculationContext.TryReadProperty(ref reader, options, PropExponentialAverageCalculationContext, null))
+			{
+				continue;
+			}
+
+			if (propExponentialAverageSearchTimePerHourMs.TryReadProperty(ref reader, options, PropExponentialAverageSearchTimePerHourMs, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propJobId.TryReadProperty(ref reader, options, PropJobId, null))
+			{
+				continue;
+			}
+
+			if (propSearchCount.TryReadProperty(ref reader, options, PropSearchCount, null))
+			{
+				continue;
+			}
+
+			if (propTotalSearchTimeMs.TryReadProperty(ref reader, options, PropTotalSearchTimeMs, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AverageSearchTimePerBucketMs = propAverageSearchTimePerBucketMs.Value,
+			BucketCount = propBucketCount.Value,
+			ExponentialAverageCalculationContext = propExponentialAverageCalculationContext.Value,
+			ExponentialAverageSearchTimePerHourMs = propExponentialAverageSearchTimePerHourMs.Value,
+			JobId = propJobId.Value,
+			SearchCount = propSearchCount.Value,
+			TotalSearchTimeMs = propTotalSearchTimeMs.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAverageSearchTimePerBucketMs, value.AverageSearchTimePerBucketMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropBucketCount, value.BucketCount, null, null);
+		writer.WriteProperty(options, PropExponentialAverageCalculationContext, value.ExponentialAverageCalculationContext, null, null);
+		writer.WriteProperty(options, PropExponentialAverageSearchTimePerHourMs, value.ExponentialAverageSearchTimePerHourMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropJobId, value.JobId, null, null);
+		writer.WriteProperty(options, PropSearchCount, value.SearchCount, null, null);
+		writer.WriteProperty(options, PropTotalSearchTimeMs, value.TotalSearchTimeMs, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedTimingStatsConverter))]
 public sealed partial class DatafeedTimingStats
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DatafeedTimingStats(long bucketCount, System.TimeSpan exponentialAverageSearchTimePerHourMs, string jobId, long searchCount, System.TimeSpan totalSearchTimeMs)
+	{
+		BucketCount = bucketCount;
+		ExponentialAverageSearchTimePerHourMs = exponentialAverageSearchTimePerHourMs;
+		JobId = jobId;
+		SearchCount = searchCount;
+		TotalSearchTimeMs = totalSearchTimeMs;
+	}
+#if NET7_0_OR_GREATER
+	public DatafeedTimingStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DatafeedTimingStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DatafeedTimingStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// The average search time per bucket, in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("average_search_time_per_bucket_ms")]
-	public double? AverageSearchTimePerBucketMs { get; init; }
+	public System.TimeSpan? AverageSearchTimePerBucketMs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of buckets processed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("bucket_count")]
-	public long BucketCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long BucketCount { get; set; }
+	public Elastic.Clients.Elasticsearch.MachineLearning.ExponentialAverageCalculationContext? ExponentialAverageCalculationContext { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The exponential average search time per hour, in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("exponential_average_search_time_per_hour_ms")]
-	public double ExponentialAverageSearchTimePerHourMs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan ExponentialAverageSearchTimePerHourMs { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Identifier for the anomaly detection job.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("job_id")]
-	public string JobId { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string JobId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The number of searches run by the datafeed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("search_count")]
-	public long SearchCount { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long SearchCount { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The total time the datafeed spent searching, in milliseconds.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("total_search_time_ms")]
-	public double TotalSearchTimeMs { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalSearchTimeMs { get; set; }
 }

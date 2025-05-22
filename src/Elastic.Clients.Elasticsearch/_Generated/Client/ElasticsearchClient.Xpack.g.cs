@@ -18,236 +18,115 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Xpack;
 
-public partial class XpackNamespacedClient : NamespacedClientProxy
+public partial class XpackNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="XpackNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Xpack.XpackNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected XpackNamespacedClient() : base()
 	{
 	}
 
-	internal XpackNamespacedClient(ElasticsearchClient client) : base(client)
+	internal XpackNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackInfoResponse Info(XpackInfoRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<XpackInfoRequest, XpackInfoResponse, XpackInfoRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse Info(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<XpackInfoRequest, XpackInfoResponse, XpackInfoRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackInfoResponse Info(XpackInfoRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackInfoResponse Info()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse> InfoAsync(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new XpackInfoRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequest, Elastic.Clients.Elasticsearch.Xpack.XpackInfoResponse, Elastic.Clients.Elasticsearch.Xpack.XpackInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackInfoResponse Info(Action<XpackInfoRequestDescriptor> configureRequest)
-	{
-		var descriptor = new XpackInfoRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(XpackInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new XpackInfoRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Provides general information about the installed X-Pack features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/info-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackInfoResponse> InfoAsync(Action<XpackInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new XpackInfoRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackInfoRequestDescriptor, XpackInfoResponse, XpackInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackUsageResponse Usage(XpackUsageRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<XpackUsageRequest, XpackUsageResponse, XpackUsageRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse Usage(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<XpackUsageRequest, XpackUsageResponse, XpackUsageRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackUsageResponse Usage(XpackUsageRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackUsageResponse Usage()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse> UsageAsync(System.Action<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new XpackUsageRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual XpackUsageResponse Usage(Action<XpackUsageRequestDescriptor> configureRequest)
-	{
-		var descriptor = new XpackUsageRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(XpackUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new XpackUsageRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API provides information about which features are currently enabled and available under the current license and some usage statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/usage-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<XpackUsageResponse> UsageAsync(Action<XpackUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new XpackUsageRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<XpackUsageRequestDescriptor, XpackUsageResponse, XpackUsageRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequest, Elastic.Clients.Elasticsearch.Xpack.XpackUsageResponse, Elastic.Clients.Elasticsearch.Xpack.XpackUsageRequestParameters>(request, cancellationToken);
 	}
 }

@@ -17,74 +17,145 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class UniqueTokenFilter : ITokenFilter
+internal sealed partial class UniqueTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("only_on_same_position")]
+	private static readonly System.Text.Json.JsonEncodedText PropOnlyOnSamePosition = System.Text.Json.JsonEncodedText.Encode("only_on_same_position");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propOnlyOnSamePosition = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propOnlyOnSamePosition.TryReadProperty(ref reader, options, PropOnlyOnSamePosition, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			OnlyOnSamePosition = propOnlyOnSamePosition.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropOnlyOnSamePosition, value.OnlyOnSamePosition, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterConverter))]
+public sealed partial class UniqueTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public UniqueTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public UniqueTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UniqueTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
 	public bool? OnlyOnSamePosition { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "unique";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class UniqueTokenFilterDescriptor : SerializableDescriptor<UniqueTokenFilterDescriptor>, IBuildableDescriptor<UniqueTokenFilter>
+public readonly partial struct UniqueTokenFilterDescriptor
 {
-	internal UniqueTokenFilterDescriptor(Action<UniqueTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter Instance { get; init; }
 
-	public UniqueTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UniqueTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? OnlyOnSamePositionValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? onlyOnSamePosition = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UniqueTokenFilterDescriptor()
 	{
-		OnlyOnSamePositionValue = onlyOnSamePosition;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public UniqueTokenFilterDescriptor Version(string? version)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, only remove duplicate tokens in the same position. Defaults to <c>false</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? value = true)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.OnlyOnSamePosition = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (OnlyOnSamePositionValue.HasValue)
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("only_on_same_position");
-			writer.WriteBooleanValue(OnlyOnSamePositionValue.Value);
+			return new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("unique");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.UniqueTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	UniqueTokenFilter IBuildableDescriptor<UniqueTokenFilter>.Build() => new()
-	{
-		OnlyOnSamePosition = OnlyOnSamePositionValue,
-		Version = VersionValue
-	};
 }

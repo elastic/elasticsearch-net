@@ -9,17 +9,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Elastic.Transport.Extensions;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 /// <summary>
 /// Represents a bulk operation to create a document.
@@ -27,6 +19,17 @@ namespace Elastic.Clients.Elasticsearch.Core.Bulk;
 /// <typeparam name="T">The type representing the document being created.</typeparam>
 public sealed class BulkCreateOperation<T> : BulkOperation
 {
+	private static readonly System.Text.Json.JsonEncodedText PropDynamicTemplates = System.Text.Json.JsonEncodedText.Encode("dynamic_templates");
+	private static readonly System.Text.Json.JsonEncodedText PropId = System.Text.Json.JsonEncodedText.Encode("_id");
+	private static readonly System.Text.Json.JsonEncodedText PropIfPrimaryTerm = System.Text.Json.JsonEncodedText.Encode("if_primary_term");
+	private static readonly System.Text.Json.JsonEncodedText PropIfSeqNo = System.Text.Json.JsonEncodedText.Encode("if_seq_no");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("_index");
+	private static readonly System.Text.Json.JsonEncodedText PropPipeline = System.Text.Json.JsonEncodedText.Encode("pipeline");
+	private static readonly System.Text.Json.JsonEncodedText PropRequireAlias = System.Text.Json.JsonEncodedText.Encode("require_alias");
+	private static readonly System.Text.Json.JsonEncodedText PropRouting = System.Text.Json.JsonEncodedText.Encode("routing");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+	private static readonly System.Text.Json.JsonEncodedText PropVersionType = System.Text.Json.JsonEncodedText.Encode("version_type");
+
 	/// <summary>
 	/// Creates an instance of <see cref="BulkCreateOperation{T}"/> with the provided <typeparamref name="T"/> document serialized
 	/// as source data.
@@ -58,7 +61,7 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 	/// defined in the template. And if a field is already defined in the mapping, then this parameter won’t be used.
 	/// </summary>
 	[JsonPropertyName("dynamic_templates")]
-	public Dictionary<string, string>? DynamicTemplates { get; set; }
+	public IDictionary<string, string>? DynamicTemplates { get; set; }
 
 	/// <inheritdoc />
 	protected override string Operation => "create";
@@ -96,6 +99,30 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 		}
 	}
 
+	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
+	{
+		if (!settings.RequestResponseSerializer.TryGetJsonSerializerOptions(out var options))
+		{
+			throw new InvalidOperationException("unreachable");
+		}
+
+		writer.WriteStartObject();
+		writer.WritePropertyName(Operation);
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDynamicTemplates, DynamicTemplates, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropId, Id, null, null);
+		writer.WriteProperty(options, PropIfPrimaryTerm, IfPrimaryTerm, null, null);
+		writer.WriteProperty(options, PropIfSeqNo, IfSequenceNumber, null, null);
+		writer.WriteProperty(options, PropIndex, Index, null, null);
+		writer.WriteProperty(options, PropPipeline, Pipeline, null, null);
+		writer.WriteProperty(options, PropRequireAlias, RequireAlias, null, null);
+		writer.WriteProperty(options, PropRouting, Routing, null, null);
+		writer.WriteProperty(options, PropVersion, Version, null, null);
+		writer.WriteProperty(options, PropVersionType, VersionType, null, null);
+		writer.WriteEndObject();
+		writer.WriteEndObject();
+	}
+
 	private void SetValues(IElasticsearchClientSettings settings)
 	{
 		// This allocates but avoids serialising "routing":null etc. into the operation action
@@ -123,14 +150,5 @@ public sealed class BulkCreateOperation<T> : BulkOperation
 			if (!string.IsNullOrEmpty(id.GetString(settings)))
 				Id = id;
 		}
-	}
-
-	private void SerializeOperationAction(IElasticsearchClientSettings settings, Utf8JsonWriter writer)
-	{
-		var requestResponseSerializer = settings.RequestResponseSerializer;
-		writer.WriteStartObject();
-		writer.WritePropertyName(Operation);
-		requestResponseSerializer.Serialize(this, writer, settings.MemoryStreamFactory);
-		writer.WriteEndObject();
 	}
 }

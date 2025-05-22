@@ -2,26 +2,11 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
-#else
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-#endif
 
 public partial class GetAsyncSearchRequest
 {
-	// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
+	// Any request may contain aggregations so we force `typed_keys` in order to successfully
+	// deserialize them.
 	internal override void BeforeRequest() => TypedKeys = true;
-}
-
-public sealed partial class GetAsyncSearchRequestDescriptor<TDocument>
-{
-	// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
-	internal override void BeforeRequest() => TypedKeys(true);
-}
-
-public sealed partial class GetAsyncSearchRequestDescriptor
-{
-	// Any request may contain aggregations so we force typed_keys in order to successfully deserialise them.
-	internal override void BeforeRequest() => TypedKeys(true);
 }

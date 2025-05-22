@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class GetComponentTemplateRequestParameters : RequestParameters
+public sealed partial class GetComponentTemplateRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -63,25 +56,66 @@ public sealed partial class GetComponentTemplateRequestParameters : RequestParam
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
+internal sealed partial class GetComponentTemplateRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get component templates.
-/// Retrieves information about component templates.
+/// Get information about component templates.
 /// </para>
 /// </summary>
-public sealed partial class GetComponentTemplateRequest : PlainRequest<GetComponentTemplateRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestConverter))]
+public sealed partial class GetComponentTemplateRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestParameters>
 {
-	public GetComponentTemplateRequest()
-	{
-	}
-
 	public GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetComponentTemplateRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetComponentTemplateRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterGetComponentTemplate;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterGetComponentTemplate;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -89,10 +123,17 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 
 	/// <summary>
 	/// <para>
+	/// Comma-separated list of component template names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Name? Name { get => P<Elastic.Clients.Elasticsearch.Name?>("name"); set => PO("name", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
@@ -100,7 +141,6 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 	/// Return all default configurations for the component template (default: false)
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IncludeDefaults { get => Q<bool?>("include_defaults"); set => Q("include_defaults", value); }
 
 	/// <summary>
@@ -109,7 +149,6 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 	/// If <c>false</c>, information is retrieved from the master node.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? Local { get => Q<bool?>("local"); set => Q("local", value); }
 
 	/// <summary>
@@ -118,48 +157,148 @@ public sealed partial class GetComponentTemplateRequest : PlainRequest<GetCompon
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
 /// Get component templates.
-/// Retrieves information about component templates.
+/// Get information about component templates.
 /// </para>
 /// </summary>
-public sealed partial class GetComponentTemplateRequestDescriptor : RequestDescriptor<GetComponentTemplateRequestDescriptor, GetComponentTemplateRequestParameters>
+public readonly partial struct GetComponentTemplateRequestDescriptor
 {
-	internal GetComponentTemplateRequestDescriptor(Action<GetComponentTemplateRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest Instance { get; init; }
 
-	public GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name) : base(r => r.Optional("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Name? name)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(name);
 	}
 
 	public GetComponentTemplateRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterGetComponentTemplate;
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "cluster.get_component_template";
-
-	public GetComponentTemplateRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public GetComponentTemplateRequestDescriptor IncludeDefaults(bool? includeDefaults = true) => Qs("include_defaults", includeDefaults);
-	public GetComponentTemplateRequestDescriptor Local(bool? local = true) => Qs("local", local);
-	public GetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-
-	public GetComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? name)
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of component template names used to limit the request.
+	/// Wildcard (<c>*</c>) expressions are supported.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Name(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		RouteValues.Optional("name", name);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor FlatSettings(bool? value = true)
 	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Return all default configurations for the component template (default: false)
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor IncludeDefaults(bool? value = true)
+	{
+		Instance.IncludeDefaults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, the request retrieves information from the local node only.
+	/// If <c>false</c>, information is retrieved from the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Local(bool? value = true)
+	{
+		Instance.Local = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.GetComponentTemplateRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

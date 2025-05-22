@@ -17,36 +17,208 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement;
 
+internal sealed partial class SnapshotLifecycleConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropInProgress = System.Text.Json.JsonEncodedText.Encode("in_progress");
+	private static readonly System.Text.Json.JsonEncodedText PropLastFailure = System.Text.Json.JsonEncodedText.Encode("last_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropLastSuccess = System.Text.Json.JsonEncodedText.Encode("last_success");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDate = System.Text.Json.JsonEncodedText.Encode("modified_date");
+	private static readonly System.Text.Json.JsonEncodedText PropModifiedDateMillis = System.Text.Json.JsonEncodedText.Encode("modified_date_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropNextExecution = System.Text.Json.JsonEncodedText.Encode("next_execution");
+	private static readonly System.Text.Json.JsonEncodedText PropNextExecutionMillis = System.Text.Json.JsonEncodedText.Encode("next_execution_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropPolicy = System.Text.Json.JsonEncodedText.Encode("policy");
+	private static readonly System.Text.Json.JsonEncodedText PropStats = System.Text.Json.JsonEncodedText.Encode("stats");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress?> propInProgress = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation?> propLastFailure = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation?> propLastSuccess = default;
+		LocalJsonValue<System.DateTimeOffset?> propModifiedDate = default;
+		LocalJsonValue<System.DateTimeOffset> propModifiedDateMillis = default;
+		LocalJsonValue<System.DateTimeOffset?> propNextExecution = default;
+		LocalJsonValue<System.DateTimeOffset> propNextExecutionMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy> propPolicy = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics> propStats = default;
+		LocalJsonValue<long> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propInProgress.TryReadProperty(ref reader, options, PropInProgress, null))
+			{
+				continue;
+			}
+
+			if (propLastFailure.TryReadProperty(ref reader, options, PropLastFailure, null))
+			{
+				continue;
+			}
+
+			if (propLastSuccess.TryReadProperty(ref reader, options, PropLastSuccess, null))
+			{
+				continue;
+			}
+
+			if (propModifiedDate.TryReadProperty(ref reader, options, PropModifiedDate, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propModifiedDateMillis.TryReadProperty(ref reader, options, PropModifiedDateMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propNextExecution.TryReadProperty(ref reader, options, PropNextExecution, static System.DateTimeOffset? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker))))
+			{
+				continue;
+			}
+
+			if (propNextExecutionMillis.TryReadProperty(ref reader, options, PropNextExecutionMillis, static System.DateTimeOffset (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.DateTimeOffset>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propPolicy.TryReadProperty(ref reader, options, PropPolicy, null))
+			{
+				continue;
+			}
+
+			if (propStats.TryReadProperty(ref reader, options, PropStats, null))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			InProgress = propInProgress.Value,
+			LastFailure = propLastFailure.Value,
+			LastSuccess = propLastSuccess.Value,
+			ModifiedDate = propModifiedDate.Value,
+			ModifiedDateMillis = propModifiedDateMillis.Value,
+			NextExecution = propNextExecution.Value,
+			NextExecutionMillis = propNextExecutionMillis.Value,
+			Policy = propPolicy.Value,
+			Stats = propStats.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycle value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropInProgress, value.InProgress, null, null);
+		writer.WriteProperty(options, PropLastFailure, value.LastFailure, null, null);
+		writer.WriteProperty(options, PropLastSuccess, value.LastSuccess, null, null);
+		writer.WriteProperty(options, PropModifiedDate, value.ModifiedDate, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropModifiedDateMillis, value.ModifiedDateMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropNextExecution, value.NextExecution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset? v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMarker)));
+		writer.WriteProperty(options, PropNextExecutionMillis, value.NextExecutionMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.DateTimeOffset v) => w.WriteValueEx<System.DateTimeOffset>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.DateTimeMillisMarker)));
+		writer.WriteProperty(options, PropPolicy, value.Policy, null, null);
+		writer.WriteProperty(options, PropStats, value.Stats, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SnapshotLifecycleConverter))]
 public sealed partial class SnapshotLifecycle
 {
-	[JsonInclude, JsonPropertyName("in_progress")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress? InProgress { get; init; }
-	[JsonInclude, JsonPropertyName("last_failure")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastFailure { get; init; }
-	[JsonInclude, JsonPropertyName("last_success")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastSuccess { get; init; }
-	[JsonInclude, JsonPropertyName("modified_date")]
-	public DateTimeOffset? ModifiedDate { get; init; }
-	[JsonInclude, JsonPropertyName("modified_date_millis")]
-	public long ModifiedDateMillis { get; init; }
-	[JsonInclude, JsonPropertyName("next_execution")]
-	public DateTimeOffset? NextExecution { get; init; }
-	[JsonInclude, JsonPropertyName("next_execution_millis")]
-	public long NextExecutionMillis { get; init; }
-	[JsonInclude, JsonPropertyName("policy")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; init; }
-	[JsonInclude, JsonPropertyName("stats")]
-	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; init; }
-	[JsonInclude, JsonPropertyName("version")]
-	public long Version { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotLifecycle(System.DateTimeOffset modifiedDateMillis, System.DateTimeOffset nextExecutionMillis, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy policy, Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics stats, long version)
+	{
+		ModifiedDateMillis = modifiedDateMillis;
+		NextExecutionMillis = nextExecutionMillis;
+		Policy = policy;
+		Stats = stats;
+		Version = version;
+	}
+#if NET7_0_OR_GREATER
+	public SnapshotLifecycle()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnapshotLifecycle()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotLifecycle(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.InProgress? InProgress { get; set; }
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastFailure { get; set; }
+	public Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Invocation? LastSuccess { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The last time the policy was modified.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? ModifiedDate { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset ModifiedDateMillis { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The next time the policy will run.
+	/// </para>
+	/// </summary>
+	public System.DateTimeOffset? NextExecution { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.DateTimeOffset NextExecutionMillis { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.SlmPolicy Policy { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SnapshotLifecycleManagement.Statistics Stats { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The version of the snapshot policy.
+	/// Only the latest version is stored and incremented when the policy is updated.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Version { get; set; }
 }

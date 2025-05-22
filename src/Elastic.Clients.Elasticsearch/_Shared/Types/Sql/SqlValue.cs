@@ -5,12 +5,9 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Elastic.Clients.Elasticsearch.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Sql;
-#else
 namespace Elastic.Clients.Elasticsearch.Sql;
-#endif
 
 [JsonConverter(typeof(SqlValueConverter))]
 public readonly struct SqlValue
@@ -32,7 +29,7 @@ internal sealed class SqlValueConverter : JsonConverter<SqlValue>
 			return default;
 		}
 
-		var lazyDoc = JsonSerializer.Deserialize<LazyJson>(ref reader, options);
+		var lazyDoc = reader.ReadValue<LazyJson>(options);
 		return new SqlValue(lazyDoc);
 	}
 

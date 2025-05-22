@@ -17,52 +17,364 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Mapping;
 
-public sealed partial class DynamicProperty : IProperty
+internal sealed partial class DynamicPropertyConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Mapping.DynamicProperty>
 {
-	[JsonInclude, JsonPropertyName("analyzer")]
+	private static readonly System.Text.Json.JsonEncodedText PropAnalyzer = System.Text.Json.JsonEncodedText.Encode("analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
+	private static readonly System.Text.Json.JsonEncodedText PropCoerce = System.Text.Json.JsonEncodedText.Encode("coerce");
+	private static readonly System.Text.Json.JsonEncodedText PropCopyTo = System.Text.Json.JsonEncodedText.Encode("copy_to");
+	private static readonly System.Text.Json.JsonEncodedText PropDocValues = System.Text.Json.JsonEncodedText.Encode("doc_values");
+	private static readonly System.Text.Json.JsonEncodedText PropDynamic = System.Text.Json.JsonEncodedText.Encode("dynamic");
+	private static readonly System.Text.Json.JsonEncodedText PropEagerGlobalOrdinals = System.Text.Json.JsonEncodedText.Encode("eager_global_ordinals");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFormat = System.Text.Json.JsonEncodedText.Encode("format");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreAbove = System.Text.Json.JsonEncodedText.Encode("ignore_above");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMalformed = System.Text.Json.JsonEncodedText.Encode("ignore_malformed");
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexOptions = System.Text.Json.JsonEncodedText.Encode("index_options");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPhrases = System.Text.Json.JsonEncodedText.Encode("index_phrases");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexPrefixes = System.Text.Json.JsonEncodedText.Encode("index_prefixes");
+	private static readonly System.Text.Json.JsonEncodedText PropLocale = System.Text.Json.JsonEncodedText.Encode("locale");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropNorms = System.Text.Json.JsonEncodedText.Encode("norms");
+	private static readonly System.Text.Json.JsonEncodedText PropNullValue = System.Text.Json.JsonEncodedText.Encode("null_value");
+	private static readonly System.Text.Json.JsonEncodedText PropOnScriptError = System.Text.Json.JsonEncodedText.Encode("on_script_error");
+	private static readonly System.Text.Json.JsonEncodedText PropPositionIncrementGap = System.Text.Json.JsonEncodedText.Encode("position_increment_gap");
+	private static readonly System.Text.Json.JsonEncodedText PropPrecisionStep = System.Text.Json.JsonEncodedText.Encode("precision_step");
+	private static readonly System.Text.Json.JsonEncodedText PropProperties = System.Text.Json.JsonEncodedText.Encode("properties");
+	private static readonly System.Text.Json.JsonEncodedText PropScript = System.Text.Json.JsonEncodedText.Encode("script");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropSearchQuoteAnalyzer = System.Text.Json.JsonEncodedText.Encode("search_quote_analyzer");
+	private static readonly System.Text.Json.JsonEncodedText PropStore = System.Text.Json.JsonEncodedText.Encode("store");
+	private static readonly System.Text.Json.JsonEncodedText PropSyntheticSourceKeep = System.Text.Json.JsonEncodedText.Encode("synthetic_source_keep");
+	private static readonly System.Text.Json.JsonEncodedText PropTermVector = System.Text.Json.JsonEncodedText.Encode("term_vector");
+	private static readonly System.Text.Json.JsonEncodedText PropTimeSeriesMetric = System.Text.Json.JsonEncodedText.Encode("time_series_metric");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propAnalyzer = default;
+		LocalJsonValue<double?> propBoost = default;
+		LocalJsonValue<bool?> propCoerce = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Fields?> propCopyTo = default;
+		LocalJsonValue<bool?> propDocValues = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.DynamicMapping?> propDynamic = default;
+		LocalJsonValue<bool?> propEagerGlobalOrdinals = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propFields = default;
+		LocalJsonValue<string?> propFormat = default;
+		LocalJsonValue<int?> propIgnoreAbove = default;
+		LocalJsonValue<bool?> propIgnoreMalformed = default;
+		LocalJsonValue<bool?> propIndex = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.IndexOptions?> propIndexOptions = default;
+		LocalJsonValue<bool?> propIndexPhrases = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> propIndexPrefixes = default;
+		LocalJsonValue<string?> propLocale = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, string>?> propMeta = default;
+		LocalJsonValue<bool?> propNorms = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.FieldValue?> propNullValue = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.OnScriptError?> propOnScriptError = default;
+		LocalJsonValue<int?> propPositionIncrementGap = default;
+		LocalJsonValue<int?> propPrecisionStep = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.Properties?> propProperties = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propScript = default;
+		LocalJsonValue<string?> propSearchAnalyzer = default;
+		LocalJsonValue<string?> propSearchQuoteAnalyzer = default;
+		LocalJsonValue<bool?> propStore = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum?> propSyntheticSourceKeep = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TermVectorOption?> propTermVector = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType?> propTimeSeriesMetric = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAnalyzer.TryReadProperty(ref reader, options, PropAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
+			{
+				continue;
+			}
+
+			if (propCoerce.TryReadProperty(ref reader, options, PropCoerce, null))
+			{
+				continue;
+			}
+
+			if (propCopyTo.TryReadProperty(ref reader, options, PropCopyTo, static Elastic.Clients.Elasticsearch.Fields? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker))))
+			{
+				continue;
+			}
+
+			if (propDocValues.TryReadProperty(ref reader, options, PropDocValues, null))
+			{
+				continue;
+			}
+
+			if (propDynamic.TryReadProperty(ref reader, options, PropDynamic, null))
+			{
+				continue;
+			}
+
+			if (propEagerGlobalOrdinals.TryReadProperty(ref reader, options, PropEagerGlobalOrdinals, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, null))
+			{
+				continue;
+			}
+
+			if (propFormat.TryReadProperty(ref reader, options, PropFormat, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreAbove.TryReadProperty(ref reader, options, PropIgnoreAbove, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMalformed.TryReadProperty(ref reader, options, PropIgnoreMalformed, null))
+			{
+				continue;
+			}
+
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexOptions.TryReadProperty(ref reader, options, PropIndexOptions, null))
+			{
+				continue;
+			}
+
+			if (propIndexPhrases.TryReadProperty(ref reader, options, PropIndexPhrases, null))
+			{
+				continue;
+			}
+
+			if (propIndexPrefixes.TryReadProperty(ref reader, options, PropIndexPrefixes, null))
+			{
+				continue;
+			}
+
+			if (propLocale.TryReadProperty(ref reader, options, PropLocale, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IDictionary<string, string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, string>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propNorms.TryReadProperty(ref reader, options, PropNorms, null))
+			{
+				continue;
+			}
+
+			if (propNullValue.TryReadProperty(ref reader, options, PropNullValue, null))
+			{
+				continue;
+			}
+
+			if (propOnScriptError.TryReadProperty(ref reader, options, PropOnScriptError, null))
+			{
+				continue;
+			}
+
+			if (propPositionIncrementGap.TryReadProperty(ref reader, options, PropPositionIncrementGap, null))
+			{
+				continue;
+			}
+
+			if (propPrecisionStep.TryReadProperty(ref reader, options, PropPrecisionStep, null))
+			{
+				continue;
+			}
+
+			if (propProperties.TryReadProperty(ref reader, options, PropProperties, null))
+			{
+				continue;
+			}
+
+			if (propScript.TryReadProperty(ref reader, options, PropScript, null))
+			{
+				continue;
+			}
+
+			if (propSearchAnalyzer.TryReadProperty(ref reader, options, PropSearchAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propSearchQuoteAnalyzer.TryReadProperty(ref reader, options, PropSearchQuoteAnalyzer, null))
+			{
+				continue;
+			}
+
+			if (propStore.TryReadProperty(ref reader, options, PropStore, null))
+			{
+				continue;
+			}
+
+			if (propSyntheticSourceKeep.TryReadProperty(ref reader, options, PropSyntheticSourceKeep, null))
+			{
+				continue;
+			}
+
+			if (propTermVector.TryReadProperty(ref reader, options, PropTermVector, null))
+			{
+				continue;
+			}
+
+			if (propTimeSeriesMetric.TryReadProperty(ref reader, options, PropTimeSeriesMetric, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Analyzer = propAnalyzer.Value,
+			Boost = propBoost.Value,
+			Coerce = propCoerce.Value,
+			CopyTo = propCopyTo.Value,
+			DocValues = propDocValues.Value,
+			Dynamic = propDynamic.Value,
+			EagerGlobalOrdinals = propEagerGlobalOrdinals.Value,
+			Enabled = propEnabled.Value,
+			Fields = propFields.Value,
+			Format = propFormat.Value,
+			IgnoreAbove = propIgnoreAbove.Value,
+			IgnoreMalformed = propIgnoreMalformed.Value,
+			Index = propIndex.Value,
+			IndexOptions = propIndexOptions.Value,
+			IndexPhrases = propIndexPhrases.Value,
+			IndexPrefixes = propIndexPrefixes.Value,
+			Locale = propLocale.Value,
+			Meta = propMeta.Value,
+			Norms = propNorms.Value,
+			NullValue = propNullValue.Value,
+			OnScriptError = propOnScriptError.Value,
+			PositionIncrementGap = propPositionIncrementGap.Value,
+			PrecisionStep = propPrecisionStep.Value,
+			Properties = propProperties.Value,
+			Script = propScript.Value,
+			SearchAnalyzer = propSearchAnalyzer.Value,
+			SearchQuoteAnalyzer = propSearchQuoteAnalyzer.Value,
+			Store = propStore.Value,
+			SyntheticSourceKeep = propSyntheticSourceKeep.Value,
+			TermVector = propTermVector.Value,
+			TimeSeriesMetric = propTimeSeriesMetric.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Mapping.DynamicProperty value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAnalyzer, value.Analyzer, null, null);
+		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
+		writer.WriteProperty(options, PropCoerce, value.Coerce, null, null);
+		writer.WriteProperty(options, PropCopyTo, value.CopyTo, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Fields? v) => w.WriteValueEx<Elastic.Clients.Elasticsearch.Fields?>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.SingleOrManyFieldsMarker)));
+		writer.WriteProperty(options, PropDocValues, value.DocValues, null, null);
+		writer.WriteProperty(options, PropDynamic, value.Dynamic, null, null);
+		writer.WriteProperty(options, PropEagerGlobalOrdinals, value.EagerGlobalOrdinals, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, null);
+		writer.WriteProperty(options, PropFormat, value.Format, null, null);
+		writer.WriteProperty(options, PropIgnoreAbove, value.IgnoreAbove, null, null);
+		writer.WriteProperty(options, PropIgnoreMalformed, value.IgnoreMalformed, null, null);
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexOptions, value.IndexOptions, null, null);
+		writer.WriteProperty(options, PropIndexPhrases, value.IndexPhrases, null, null);
+		writer.WriteProperty(options, PropIndexPrefixes, value.IndexPrefixes, null, null);
+		writer.WriteProperty(options, PropLocale, value.Locale, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, string>? v) => w.WriteDictionaryValue<string, string>(o, v, null, null));
+		writer.WriteProperty(options, PropNorms, value.Norms, null, null);
+		writer.WriteProperty(options, PropNullValue, value.NullValue, null, null);
+		writer.WriteProperty(options, PropOnScriptError, value.OnScriptError, null, null);
+		writer.WriteProperty(options, PropPositionIncrementGap, value.PositionIncrementGap, null, null);
+		writer.WriteProperty(options, PropPrecisionStep, value.PrecisionStep, null, null);
+		writer.WriteProperty(options, PropProperties, value.Properties, null, null);
+		writer.WriteProperty(options, PropScript, value.Script, null, null);
+		writer.WriteProperty(options, PropSearchAnalyzer, value.SearchAnalyzer, null, null);
+		writer.WriteProperty(options, PropSearchQuoteAnalyzer, value.SearchQuoteAnalyzer, null, null);
+		writer.WriteProperty(options, PropStore, value.Store, null, null);
+		writer.WriteProperty(options, PropSyntheticSourceKeep, value.SyntheticSourceKeep, null, null);
+		writer.WriteProperty(options, PropTermVector, value.TermVector, null, null);
+		writer.WriteProperty(options, PropTimeSeriesMetric, value.TimeSeriesMetric, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyConverter))]
+public sealed partial class DynamicProperty : Elastic.Clients.Elasticsearch.Mapping.IProperty
+{
+#if NET7_0_OR_GREATER
+	public DynamicProperty()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DynamicProperty()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public string? Analyzer { get; set; }
-	[JsonInclude, JsonPropertyName("boost")]
 	public double? Boost { get; set; }
-	[JsonInclude, JsonPropertyName("coerce")]
 	public bool? Coerce { get; set; }
-	[JsonInclude, JsonPropertyName("copy_to")]
-	[JsonConverter(typeof(SingleOrManyFieldsConverter))]
 	public Elastic.Clients.Elasticsearch.Fields? CopyTo { get; set; }
-	[JsonInclude, JsonPropertyName("doc_values")]
 	public bool? DocValues { get; set; }
-	[JsonInclude, JsonPropertyName("dynamic")]
 	public Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? Dynamic { get; set; }
-	[JsonInclude, JsonPropertyName("eager_global_ordinals")]
 	public bool? EagerGlobalOrdinals { get; set; }
-	[JsonInclude, JsonPropertyName("enabled")]
 	public bool? Enabled { get; set; }
-	[JsonInclude, JsonPropertyName("fields")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Fields { get; set; }
-	[JsonInclude, JsonPropertyName("format")]
 	public string? Format { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_above")]
 	public int? IgnoreAbove { get; set; }
-	[JsonInclude, JsonPropertyName("ignore_malformed")]
 	public bool? IgnoreMalformed { get; set; }
-	[JsonInclude, JsonPropertyName("index")]
 	public bool? Index { get; set; }
-	[JsonInclude, JsonPropertyName("index_options")]
 	public Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptions { get; set; }
-	[JsonInclude, JsonPropertyName("index_phrases")]
 	public bool? IndexPhrases { get; set; }
-	[JsonInclude, JsonPropertyName("index_prefixes")]
 	public Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixes { get; set; }
-	[JsonInclude, JsonPropertyName("locale")]
 	public string? Locale { get; set; }
 
 	/// <summary>
@@ -70,212 +382,167 @@ public sealed partial class DynamicProperty : IProperty
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("meta")]
-	public IDictionary<string, string>? Meta { get; set; }
-	[JsonInclude, JsonPropertyName("norms")]
+	public System.Collections.Generic.IDictionary<string, string>? Meta { get; set; }
 	public bool? Norms { get; set; }
-	[JsonInclude, JsonPropertyName("null_value")]
 	public Elastic.Clients.Elasticsearch.FieldValue? NullValue { get; set; }
-	[JsonInclude, JsonPropertyName("on_script_error")]
 	public Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptError { get; set; }
-	[JsonInclude, JsonPropertyName("position_increment_gap")]
 	public int? PositionIncrementGap { get; set; }
-	[JsonInclude, JsonPropertyName("precision_step")]
 	public int? PrecisionStep { get; set; }
-	[JsonInclude, JsonPropertyName("properties")]
 	public Elastic.Clients.Elasticsearch.Mapping.Properties? Properties { get; set; }
-	[JsonInclude, JsonPropertyName("script")]
 	public Elastic.Clients.Elasticsearch.Script? Script { get; set; }
-	[JsonInclude, JsonPropertyName("search_analyzer")]
 	public string? SearchAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("search_quote_analyzer")]
 	public string? SearchQuoteAnalyzer { get; set; }
-	[JsonInclude, JsonPropertyName("store")]
 	public bool? Store { get; set; }
-	[JsonInclude, JsonPropertyName("term_vector")]
+	public Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? SyntheticSourceKeep { get; set; }
 	public Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVector { get; set; }
-	[JsonInclude, JsonPropertyName("time_series_metric")]
 	public Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetric { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "{dynamic_type}";
 }
 
-public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableDescriptor<DynamicPropertyDescriptor<TDocument>>, IBuildableDescriptor<DynamicProperty>
+public readonly partial struct DynamicPropertyDescriptor<TDocument>
 {
-	internal DynamicPropertyDescriptor(Action<DynamicPropertyDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Instance { get; init; }
 
-	public DynamicPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private double? BoostValue { get; set; }
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private bool? EagerGlobalOrdinalsValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private string? FormatValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private bool? IndexPhrasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-	private string? LocaleValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? NormsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-	private int? PositionIncrementGapValue { get; set; }
-	private int? PrecisionStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SearchAnalyzerValue { get; set; }
-	private string? SearchQuoteAnalyzerValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-	public DynamicPropertyDescriptor<TDocument> Analyzer(string? analyzer)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicPropertyDescriptor()
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Boost(double? boost)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Analyzer(string? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Coerce(bool? coerce = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Boost(double? value)
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> CopyTo(params System.Linq.Expressions.Expression<System.Func<TDocument, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> DocValues(bool? value = true)
 	{
-		EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> EagerGlobalOrdinals(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.EagerGlobalOrdinals = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Enabled(bool? value = true)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Format(string? format)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Format(string? value)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IgnoreAbove(int? value)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IgnoreMalformed(bool? value = true)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Index(bool? value = true)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IndexPhrases(bool? indexPhrases = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
 	{
-		IndexPhrasesValue = indexPhrases;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? indexPrefixes)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IndexPhrases(bool? value = true)
 	{
-		IndexPrefixesDescriptor = null;
-		IndexPrefixesDescriptorAction = null;
-		IndexPrefixesValue = indexPrefixes;
-		return Self;
+		Instance.IndexPhrases = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? value)
 	{
-		IndexPrefixesValue = null;
-		IndexPrefixesDescriptorAction = null;
-		IndexPrefixesDescriptor = descriptor;
-		return Self;
+		Instance.IndexPrefixes = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> IndexPrefixes(Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IndexPrefixes()
 	{
-		IndexPrefixesValue = null;
-		IndexPrefixesDescriptor = null;
-		IndexPrefixesDescriptorAction = configure;
-		return Self;
+		Instance.IndexPrefixes = Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.Build(null);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> IndexPrefixes(System.Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor>? action)
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.IndexPrefixes = Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Locale(string? value)
+	{
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -283,582 +550,300 @@ public sealed partial class DynamicPropertyDescriptor<TDocument> : SerializableD
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public DynamicPropertyDescriptor<TDocument> Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Norms(bool? norms = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta()
 	{
-		NormsValue = norms;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> NullValue(Elastic.Clients.Elasticsearch.FieldValue? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> AddMeta(string key, string value)
 	{
-		OnScriptErrorValue = onScriptError;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> PositionIncrementGap(int? positionIncrementGap)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Norms(bool? value = true)
 	{
-		PositionIncrementGapValue = positionIncrementGap;
-		return Self;
+		Instance.Norms = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> PrecisionStep(int? precisionStep)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> NullValue(Elastic.Clients.Elasticsearch.FieldValue? value)
 	{
-		PrecisionStepValue = precisionStep;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.OnScriptError = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> PositionIncrementGap(int? value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PositionIncrementGap = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Properties(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> PrecisionStep(int? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PrecisionStep = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> SearchAnalyzer(string? searchAnalyzer)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Script()
 	{
-		SearchAnalyzerValue = searchAnalyzer;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> SearchQuoteAnalyzer(string? searchQuoteAnalyzer)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		SearchQuoteAnalyzerValue = searchQuoteAnalyzer;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> SearchAnalyzer(string? value)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.SearchAnalyzer = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> SearchQuoteAnalyzer(string? value)
 	{
-		TermVectorValue = termVector;
-		return Self;
+		Instance.SearchQuoteAnalyzer = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> Store(bool? value = true)
 	{
-		TimeSeriesMetricValue = timeSeriesMetric;
-		return Self;
+		Instance.Store = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (EagerGlobalOrdinalsValue.HasValue)
-		{
-			writer.WritePropertyName("eager_global_ordinals");
-			writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
-		}
-
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (IndexPhrasesValue.HasValue)
-		{
-			writer.WritePropertyName("index_phrases");
-			writer.WriteBooleanValue(IndexPhrasesValue.Value);
-		}
-
-		if (IndexPrefixesDescriptor is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, IndexPrefixesDescriptor, options);
-		}
-		else if (IndexPrefixesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
-		}
-		else if (IndexPrefixesValue is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, IndexPrefixesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NormsValue.HasValue)
-		{
-			writer.WritePropertyName("norms");
-			writer.WriteBooleanValue(NormsValue.Value);
-		}
-
-		if (NullValueValue is not null)
-		{
-			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
-		}
-
-		if (OnScriptErrorValue is not null)
-		{
-			writer.WritePropertyName("on_script_error");
-			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
-		}
-
-		if (PositionIncrementGapValue.HasValue)
-		{
-			writer.WritePropertyName("position_increment_gap");
-			writer.WriteNumberValue(PositionIncrementGapValue.Value);
-		}
-
-		if (PrecisionStepValue.HasValue)
-		{
-			writer.WritePropertyName("precision_step");
-			writer.WriteNumberValue(PrecisionStepValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SearchAnalyzerValue))
-		{
-			writer.WritePropertyName("search_analyzer");
-			writer.WriteStringValue(SearchAnalyzerValue);
-		}
-
-		if (!string.IsNullOrEmpty(SearchQuoteAnalyzerValue))
-		{
-			writer.WritePropertyName("search_quote_analyzer");
-			writer.WriteStringValue(SearchQuoteAnalyzerValue);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (TermVectorValue is not null)
-		{
-			writer.WritePropertyName("term_vector");
-			JsonSerializer.Serialize(writer, TermVectorValue, options);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("{dynamic_type}");
-		writer.WriteEndObject();
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? value)
 	{
-		if (IndexPrefixesValue is not null)
-		{
-			return IndexPrefixesValue;
-		}
-
-		if ((object)IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (IndexPrefixesDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		Instance.TermVector = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument> TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		Instance.TimeSeriesMetric = value;
+		return this;
 	}
 
-	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>>? action)
 	{
-		Analyzer = AnalyzerValue,
-		Boost = BoostValue,
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
-		Enabled = EnabledValue,
-		Fields = FieldsValue,
-		Format = FormatValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		IndexPhrases = IndexPhrasesValue,
-		IndexPrefixes = BuildIndexPrefixes(),
-		Locale = LocaleValue,
-		Meta = MetaValue,
-		Norms = NormsValue,
-		NullValue = NullValueValue,
-		OnScriptError = OnScriptErrorValue,
-		PositionIncrementGap = PositionIncrementGapValue,
-		PrecisionStep = PrecisionStepValue,
-		Properties = PropertiesValue,
-		Script = BuildScript(),
-		SearchAnalyzer = SearchAnalyzerValue,
-		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
-		Store = StoreValue,
-		TermVector = TermVectorValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
-	};
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }
 
-public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<DynamicPropertyDescriptor>, IBuildableDescriptor<DynamicProperty>
+public readonly partial struct DynamicPropertyDescriptor
 {
-	internal DynamicPropertyDescriptor(Action<DynamicPropertyDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Instance { get; init; }
 
-	public DynamicPropertyDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty instance)
 	{
+		Instance = instance;
 	}
 
-	private string? AnalyzerValue { get; set; }
-	private double? BoostValue { get; set; }
-	private bool? CoerceValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Fields? CopyToValue { get; set; }
-	private bool? DocValuesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? DynamicValue { get; set; }
-	private bool? EagerGlobalOrdinalsValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? FieldsValue { get; set; }
-	private string? FormatValue { get; set; }
-	private int? IgnoreAboveValue { get; set; }
-	private bool? IgnoreMalformedValue { get; set; }
-	private bool? IndexValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.IndexOptions? IndexOptionsValue { get; set; }
-	private bool? IndexPhrasesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? IndexPrefixesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor IndexPrefixesDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> IndexPrefixesDescriptorAction { get; set; }
-	private string? LocaleValue { get; set; }
-	private IDictionary<string, string>? MetaValue { get; set; }
-	private bool? NormsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.FieldValue? NullValueValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.OnScriptError? OnScriptErrorValue { get; set; }
-	private int? PositionIncrementGapValue { get; set; }
-	private int? PrecisionStepValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.Properties? PropertiesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Script? ScriptValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScriptDescriptor ScriptDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> ScriptDescriptorAction { get; set; }
-	private string? SearchAnalyzerValue { get; set; }
-	private string? SearchQuoteAnalyzerValue { get; set; }
-	private bool? StoreValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? TermVectorValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? TimeSeriesMetricValue { get; set; }
-
-	public DynamicPropertyDescriptor Analyzer(string? analyzer)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DynamicPropertyDescriptor()
 	{
-		AnalyzerValue = analyzer;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DynamicPropertyDescriptor Boost(double? boost)
+	public static explicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor(Elastic.Clients.Elasticsearch.Mapping.DynamicProperty instance) => new Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Analyzer(string? value)
 	{
-		BoostValue = boost;
-		return Self;
+		Instance.Analyzer = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Coerce(bool? coerce = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Boost(double? value)
 	{
-		CoerceValue = coerce;
-		return Self;
+		Instance.Boost = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? copyTo)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Coerce(bool? value = true)
 	{
-		CopyToValue = copyTo;
-		return Self;
+		Instance.Coerce = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor DocValues(bool? docValues = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor CopyTo(Elastic.Clients.Elasticsearch.Fields? value)
 	{
-		DocValuesValue = docValues;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? dynamic)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor CopyTo<T>(params System.Linq.Expressions.Expression<System.Func<T, object?>>[] value)
 	{
-		DynamicValue = dynamic;
-		return Self;
+		Instance.CopyTo = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor EagerGlobalOrdinals(bool? eagerGlobalOrdinals = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor DocValues(bool? value = true)
 	{
-		EagerGlobalOrdinalsValue = eagerGlobalOrdinals;
-		return Self;
+		Instance.DocValues = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Enabled(bool? enabled = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Dynamic(Elastic.Clients.Elasticsearch.Mapping.DynamicMapping? value)
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance.Dynamic = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? fields)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor EagerGlobalOrdinals(bool? value = true)
 	{
-		FieldsValue = fields;
-		return Self;
+		Instance.EagerGlobalOrdinals = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Fields<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Enabled(bool? value = true)
 	{
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Fields<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Fields(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		FieldsValue = descriptor.PromisedValue;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Format(string? format)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Fields(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		FormatValue = format;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IgnoreAbove(int? ignoreAbove)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Fields<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		IgnoreAboveValue = ignoreAbove;
-		return Self;
+		Instance.Fields = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IgnoreMalformed(bool? ignoreMalformed = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Format(string? value)
 	{
-		IgnoreMalformedValue = ignoreMalformed;
-		return Self;
+		Instance.Format = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Index(bool? index = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IgnoreAbove(int? value)
 	{
-		IndexValue = index;
-		return Self;
+		Instance.IgnoreAbove = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? indexOptions)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IgnoreMalformed(bool? value = true)
 	{
-		IndexOptionsValue = indexOptions;
-		return Self;
+		Instance.IgnoreMalformed = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IndexPhrases(bool? indexPhrases = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Index(bool? value = true)
 	{
-		IndexPhrasesValue = indexPhrases;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? indexPrefixes)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IndexOptions(Elastic.Clients.Elasticsearch.Mapping.IndexOptions? value)
 	{
-		IndexPrefixesDescriptor = null;
-		IndexPrefixesDescriptorAction = null;
-		IndexPrefixesValue = indexPrefixes;
-		return Self;
+		Instance.IndexOptions = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IndexPhrases(bool? value = true)
 	{
-		IndexPrefixesValue = null;
-		IndexPrefixesDescriptorAction = null;
-		IndexPrefixesDescriptor = descriptor;
-		return Self;
+		Instance.IndexPhrases = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor IndexPrefixes(Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IndexPrefixes(Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? value)
 	{
-		IndexPrefixesValue = null;
-		IndexPrefixesDescriptor = null;
-		IndexPrefixesDescriptorAction = configure;
-		return Self;
+		Instance.IndexPrefixes = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Locale(string? locale)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IndexPrefixes()
 	{
-		LocaleValue = locale;
-		return Self;
+		Instance.IndexPrefixes = Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor IndexPrefixes(System.Action<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor>? action)
+	{
+		Instance.IndexPrefixes = Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Locale(string? value)
+	{
+		Instance.Locale = value;
+		return this;
 	}
 
 	/// <summary>
@@ -866,403 +851,153 @@ public sealed partial class DynamicPropertyDescriptor : SerializableDescriptor<D
 	/// Metadata about the field.
 	/// </para>
 	/// </summary>
-	public DynamicPropertyDescriptor Meta(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> selector)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta(System.Collections.Generic.IDictionary<string, string>? value)
 	{
-		MetaValue = selector?.Invoke(new FluentDictionary<string, string>());
-		return Self;
+		Instance.Meta = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Norms(bool? norms = true)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta()
 	{
-		NormsValue = norms;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(null);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor NullValue(Elastic.Clients.Elasticsearch.FieldValue? nullValue)
+	/// <summary>
+	/// <para>
+	/// Metadata about the field.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Meta(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString>? action)
 	{
-		NullValueValue = nullValue;
-		return Self;
+		Instance.Meta = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringString.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? onScriptError)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor AddMeta(string key, string value)
 	{
-		OnScriptErrorValue = onScriptError;
-		return Self;
+		Instance.Meta ??= new System.Collections.Generic.Dictionary<string, string>();
+		Instance.Meta.Add(key, value);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor PositionIncrementGap(int? positionIncrementGap)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Norms(bool? value = true)
 	{
-		PositionIncrementGapValue = positionIncrementGap;
-		return Self;
+		Instance.Norms = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor PrecisionStep(int? precisionStep)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor NullValue(Elastic.Clients.Elasticsearch.FieldValue? value)
 	{
-		PrecisionStepValue = precisionStep;
-		return Self;
+		Instance.NullValue = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? properties)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor OnScriptError(Elastic.Clients.Elasticsearch.Mapping.OnScriptError? value)
 	{
-		PropertiesValue = properties;
-		return Self;
+		Instance.OnScriptError = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Properties<TDocument>(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument> descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor PositionIncrementGap(int? value)
 	{
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PositionIncrementGap = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Properties<TDocument>(Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor PrecisionStep(int? value)
 	{
-		var descriptor = new Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<TDocument>();
-		configure?.Invoke(descriptor);
-		PropertiesValue = descriptor.PromisedValue;
-		return Self;
+		Instance.PrecisionStep = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? script)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Properties(Elastic.Clients.Elasticsearch.Mapping.Properties? value)
 	{
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = null;
-		ScriptValue = script;
-		return Self;
+		Instance.Properties = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.ScriptDescriptor descriptor)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Properties(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptorAction = null;
-		ScriptDescriptor = descriptor;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Script(Action<Elastic.Clients.Elasticsearch.ScriptDescriptor> configure)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Properties<T>(System.Action<Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>> action)
 	{
-		ScriptValue = null;
-		ScriptDescriptor = null;
-		ScriptDescriptorAction = configure;
-		return Self;
+		Instance.Properties = Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor<T>.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor SearchAnalyzer(string? searchAnalyzer)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Script(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		SearchAnalyzerValue = searchAnalyzer;
-		return Self;
+		Instance.Script = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor SearchQuoteAnalyzer(string? searchQuoteAnalyzer)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Script()
 	{
-		SearchQuoteAnalyzerValue = searchQuoteAnalyzer;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor Store(bool? store = true)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Script(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
 	{
-		StoreValue = store;
-		return Self;
+		Instance.Script = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
-	public DynamicPropertyDescriptor TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? termVector)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor SearchAnalyzer(string? value)
 	{
-		TermVectorValue = termVector;
-		return Self;
+		Instance.SearchAnalyzer = value;
+		return this;
 	}
 
-	public DynamicPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? timeSeriesMetric)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor SearchQuoteAnalyzer(string? value)
 	{
-		TimeSeriesMetricValue = timeSeriesMetric;
-		return Self;
+		Instance.SearchQuoteAnalyzer = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor Store(bool? value = true)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(AnalyzerValue))
-		{
-			writer.WritePropertyName("analyzer");
-			writer.WriteStringValue(AnalyzerValue);
-		}
-
-		if (BoostValue.HasValue)
-		{
-			writer.WritePropertyName("boost");
-			writer.WriteNumberValue(BoostValue.Value);
-		}
-
-		if (CoerceValue.HasValue)
-		{
-			writer.WritePropertyName("coerce");
-			writer.WriteBooleanValue(CoerceValue.Value);
-		}
-
-		if (CopyToValue is not null)
-		{
-			writer.WritePropertyName("copy_to");
-			JsonSerializer.Serialize(writer, CopyToValue, options);
-		}
-
-		if (DocValuesValue.HasValue)
-		{
-			writer.WritePropertyName("doc_values");
-			writer.WriteBooleanValue(DocValuesValue.Value);
-		}
-
-		if (DynamicValue is not null)
-		{
-			writer.WritePropertyName("dynamic");
-			JsonSerializer.Serialize(writer, DynamicValue, options);
-		}
-
-		if (EagerGlobalOrdinalsValue.HasValue)
-		{
-			writer.WritePropertyName("eager_global_ordinals");
-			writer.WriteBooleanValue(EagerGlobalOrdinalsValue.Value);
-		}
-
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
-
-		if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(FormatValue))
-		{
-			writer.WritePropertyName("format");
-			writer.WriteStringValue(FormatValue);
-		}
-
-		if (IgnoreAboveValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_above");
-			writer.WriteNumberValue(IgnoreAboveValue.Value);
-		}
-
-		if (IgnoreMalformedValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_malformed");
-			writer.WriteBooleanValue(IgnoreMalformedValue.Value);
-		}
-
-		if (IndexValue.HasValue)
-		{
-			writer.WritePropertyName("index");
-			writer.WriteBooleanValue(IndexValue.Value);
-		}
-
-		if (IndexOptionsValue is not null)
-		{
-			writer.WritePropertyName("index_options");
-			JsonSerializer.Serialize(writer, IndexOptionsValue, options);
-		}
-
-		if (IndexPhrasesValue.HasValue)
-		{
-			writer.WritePropertyName("index_phrases");
-			writer.WriteBooleanValue(IndexPhrasesValue.Value);
-		}
-
-		if (IndexPrefixesDescriptor is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, IndexPrefixesDescriptor, options);
-		}
-		else if (IndexPrefixesDescriptorAction is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction), options);
-		}
-		else if (IndexPrefixesValue is not null)
-		{
-			writer.WritePropertyName("index_prefixes");
-			JsonSerializer.Serialize(writer, IndexPrefixesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(LocaleValue))
-		{
-			writer.WritePropertyName("locale");
-			writer.WriteStringValue(LocaleValue);
-		}
-
-		if (MetaValue is not null)
-		{
-			writer.WritePropertyName("meta");
-			JsonSerializer.Serialize(writer, MetaValue, options);
-		}
-
-		if (NormsValue.HasValue)
-		{
-			writer.WritePropertyName("norms");
-			writer.WriteBooleanValue(NormsValue.Value);
-		}
-
-		if (NullValueValue is not null)
-		{
-			writer.WritePropertyName("null_value");
-			JsonSerializer.Serialize(writer, NullValueValue, options);
-		}
-
-		if (OnScriptErrorValue is not null)
-		{
-			writer.WritePropertyName("on_script_error");
-			JsonSerializer.Serialize(writer, OnScriptErrorValue, options);
-		}
-
-		if (PositionIncrementGapValue.HasValue)
-		{
-			writer.WritePropertyName("position_increment_gap");
-			writer.WriteNumberValue(PositionIncrementGapValue.Value);
-		}
-
-		if (PrecisionStepValue.HasValue)
-		{
-			writer.WritePropertyName("precision_step");
-			writer.WriteNumberValue(PrecisionStepValue.Value);
-		}
-
-		if (PropertiesValue is not null)
-		{
-			writer.WritePropertyName("properties");
-			JsonSerializer.Serialize(writer, PropertiesValue, options);
-		}
-
-		if (ScriptDescriptor is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptDescriptor, options);
-		}
-		else if (ScriptDescriptorAction is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction), options);
-		}
-		else if (ScriptValue is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, ScriptValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(SearchAnalyzerValue))
-		{
-			writer.WritePropertyName("search_analyzer");
-			writer.WriteStringValue(SearchAnalyzerValue);
-		}
-
-		if (!string.IsNullOrEmpty(SearchQuoteAnalyzerValue))
-		{
-			writer.WritePropertyName("search_quote_analyzer");
-			writer.WriteStringValue(SearchQuoteAnalyzerValue);
-		}
-
-		if (StoreValue.HasValue)
-		{
-			writer.WritePropertyName("store");
-			writer.WriteBooleanValue(StoreValue.Value);
-		}
-
-		if (TermVectorValue is not null)
-		{
-			writer.WritePropertyName("term_vector");
-			JsonSerializer.Serialize(writer, TermVectorValue, options);
-		}
-
-		if (TimeSeriesMetricValue is not null)
-		{
-			writer.WritePropertyName("time_series_metric");
-			JsonSerializer.Serialize(writer, TimeSeriesMetricValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("{dynamic_type}");
-		writer.WriteEndObject();
+		Instance.Store = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes? BuildIndexPrefixes()
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor SyntheticSourceKeep(Elastic.Clients.Elasticsearch.Mapping.SyntheticSourceKeepEnum? value)
 	{
-		if (IndexPrefixesValue is not null)
-		{
-			return IndexPrefixesValue;
-		}
-
-		if ((object)IndexPrefixesDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (IndexPrefixesDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixesDescriptor(IndexPrefixesDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Mapping.TextIndexPrefixes?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		Instance.SyntheticSourceKeep = value;
+		return this;
 	}
 
-	private Elastic.Clients.Elasticsearch.Script? BuildScript()
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor TermVector(Elastic.Clients.Elasticsearch.Mapping.TermVectorOption? value)
 	{
-		if (ScriptValue is not null)
-		{
-			return ScriptValue;
-		}
-
-		if ((object)ScriptDescriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildable)
-		{
-			return buildable.Build();
-		}
-
-		if (ScriptDescriptorAction is not null)
-		{
-			var descriptor = new Elastic.Clients.Elasticsearch.ScriptDescriptor(ScriptDescriptorAction);
-			if ((object)descriptor is IBuildableDescriptor<Elastic.Clients.Elasticsearch.Script?> buildableFromAction)
-			{
-				return buildableFromAction.Build();
-			}
-		}
-
-		return null;
+		Instance.TermVector = value;
+		return this;
 	}
 
-	DynamicProperty IBuildableDescriptor<DynamicProperty>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor TimeSeriesMetric(Elastic.Clients.Elasticsearch.Mapping.TimeSeriesMetricType? value)
 	{
-		Analyzer = AnalyzerValue,
-		Boost = BoostValue,
-		Coerce = CoerceValue,
-		CopyTo = CopyToValue,
-		DocValues = DocValuesValue,
-		Dynamic = DynamicValue,
-		EagerGlobalOrdinals = EagerGlobalOrdinalsValue,
-		Enabled = EnabledValue,
-		Fields = FieldsValue,
-		Format = FormatValue,
-		IgnoreAbove = IgnoreAboveValue,
-		IgnoreMalformed = IgnoreMalformedValue,
-		Index = IndexValue,
-		IndexOptions = IndexOptionsValue,
-		IndexPhrases = IndexPhrasesValue,
-		IndexPrefixes = BuildIndexPrefixes(),
-		Locale = LocaleValue,
-		Meta = MetaValue,
-		Norms = NormsValue,
-		NullValue = NullValueValue,
-		OnScriptError = OnScriptErrorValue,
-		PositionIncrementGap = PositionIncrementGapValue,
-		PrecisionStep = PrecisionStepValue,
-		Properties = PropertiesValue,
-		Script = BuildScript(),
-		SearchAnalyzer = SearchAnalyzerValue,
-		SearchQuoteAnalyzer = SearchQuoteAnalyzerValue,
-		Store = StoreValue,
-		TermVector = TermVectorValue,
-		TimeSeriesMetric = TimeSeriesMetricValue
-	};
+		Instance.TimeSeriesMetric = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Mapping.DynamicProperty Build(System.Action<Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Mapping.DynamicPropertyDescriptor(new Elastic.Clients.Elasticsearch.Mapping.DynamicProperty(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

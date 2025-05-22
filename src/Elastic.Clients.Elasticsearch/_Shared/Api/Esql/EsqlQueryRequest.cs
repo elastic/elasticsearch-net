@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 using Elastic.Transport;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Esql;
-#else
 namespace Elastic.Clients.Elasticsearch.Esql;
-#endif
 
 internal sealed class EsqlResponseBuilder : TypedResponseBuilder<EsqlQueryResponse>
 {
-	protected override EsqlQueryResponse? Build(ApiCallDetails apiCallDetails, RequestData requestData,
+	protected override EsqlQueryResponse? Build(ApiCallDetails apiCallDetails, BoundConfiguration boundConfiguration,
 		Stream responseStream,
 		string contentType, long contentLength)
 	{
@@ -38,7 +34,7 @@ internal sealed class EsqlResponseBuilder : TypedResponseBuilder<EsqlQueryRespon
 		}
 	}
 
-	protected override async Task<EsqlQueryResponse?> BuildAsync(ApiCallDetails apiCallDetails, RequestData requestData,
+	protected override async Task<EsqlQueryResponse?> BuildAsync(ApiCallDetails apiCallDetails, BoundConfiguration boundConfiguration,
 		Stream responseStream,
 		string contentType, long contentLength, CancellationToken cancellationToken = default)
 	{

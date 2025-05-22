@@ -17,24 +17,102 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class DataframeEvaluationRegressionMetricsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropHuber = System.Text.Json.JsonEncodedText.Encode("huber");
+	private static readonly System.Text.Json.JsonEncodedText PropMse = System.Text.Json.JsonEncodedText.Encode("mse");
+	private static readonly System.Text.Json.JsonEncodedText PropMsle = System.Text.Json.JsonEncodedText.Encode("msle");
+	private static readonly System.Text.Json.JsonEncodedText PropRSquared = System.Text.Json.JsonEncodedText.Encode("r_squared");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber?> propHuber = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMse = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle?> propMsle = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propRSquared = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHuber.TryReadProperty(ref reader, options, PropHuber, null))
+			{
+				continue;
+			}
+
+			if (propMse.TryReadProperty(ref reader, options, PropMse, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMsle.TryReadProperty(ref reader, options, PropMsle, null))
+			{
+				continue;
+			}
+
+			if (propRSquared.TryReadProperty(ref reader, options, PropRSquared, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Huber = propHuber.Value,
+			Mse = propMse.Value,
+			Msle = propMsle.Value,
+			RSquared = propRSquared.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHuber, value.Huber, null, null);
+		writer.WriteProperty(options, PropMse, value.Mse, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMsle, value.Msle, null, null);
+		writer.WriteProperty(options, PropRSquared, value.RSquared, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsConverter))]
 public sealed partial class DataframeEvaluationRegressionMetrics
 {
+#if NET7_0_OR_GREATER
+	public DataframeEvaluationRegressionMetrics()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DataframeEvaluationRegressionMetrics()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Pseudo Huber loss function.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("huber")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? Huber { get; set; }
 
 	/// <summary>
@@ -42,15 +120,13 @@ public sealed partial class DataframeEvaluationRegressionMetrics
 	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("mse")]
-	public IDictionary<string, object>? Mse { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? Mse { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("msle")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? Msle { get; set; }
 
 	/// <summary>
@@ -58,54 +134,59 @@ public sealed partial class DataframeEvaluationRegressionMetrics
 	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("r_squared")]
-	public IDictionary<string, object>? RSquared { get; set; }
+	public System.Collections.Generic.IDictionary<string, object>? RSquared { get; set; }
 }
 
-public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : SerializableDescriptor<DataframeEvaluationRegressionMetricsDescriptor>
+public readonly partial struct DataframeEvaluationRegressionMetricsDescriptor
 {
-	internal DataframeEvaluationRegressionMetricsDescriptor(Action<DataframeEvaluationRegressionMetricsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics Instance { get; init; }
 
-	public DataframeEvaluationRegressionMetricsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? HuberValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor HuberDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor> HuberDescriptorAction { get; set; }
-	private IDictionary<string, object>? MseValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? MsleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor MsleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor> MsleDescriptorAction { get; set; }
-	private IDictionary<string, object>? RSquaredValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DataframeEvaluationRegressionMetricsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics instance) => new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Pseudo Huber loss function.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionMetricsDescriptor Huber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? huber)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuber? value)
 	{
-		HuberDescriptor = null;
-		HuberDescriptorAction = null;
-		HuberValue = huber;
-		return Self;
+		Instance.Huber = value;
+		return this;
 	}
 
-	public DataframeEvaluationRegressionMetricsDescriptor Huber(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Pseudo Huber loss function.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber()
 	{
-		HuberValue = null;
-		HuberDescriptorAction = null;
-		HuberDescriptor = descriptor;
-		return Self;
+		Instance.Huber = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationRegressionMetricsDescriptor Huber(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Pseudo Huber loss function.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Huber(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor>? action)
 	{
-		HuberValue = null;
-		HuberDescriptor = null;
-		HuberDescriptorAction = configure;
-		return Self;
+		Instance.Huber = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -113,10 +194,39 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionMetricsDescriptor Mse(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		MseValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Mse = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse()
+	{
+		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Average squared difference between the predicted values and the actual (ground truth) value. For more information, read this wiki article.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Mse(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.Mse = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor AddMse(string key, object value)
+	{
+		Instance.Mse ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Mse.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -124,28 +234,32 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionMetricsDescriptor Msle(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? msle)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsle? value)
 	{
-		MsleDescriptor = null;
-		MsleDescriptorAction = null;
-		MsleValue = msle;
-		return Self;
+		Instance.Msle = value;
+		return this;
 	}
 
-	public DataframeEvaluationRegressionMetricsDescriptor Msle(Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle()
 	{
-		MsleValue = null;
-		MsleDescriptorAction = null;
-		MsleDescriptor = descriptor;
-		return Self;
+		Instance.Msle = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor.Build(null);
+		return this;
 	}
 
-	public DataframeEvaluationRegressionMetricsDescriptor Msle(Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Average squared difference between the logarithm of the predicted values and the logarithm of the actual (ground truth) value.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor Msle(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor>? action)
 	{
-		MsleValue = null;
-		MsleDescriptor = null;
-		MsleDescriptorAction = configure;
-		return Self;
+		Instance.Msle = Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -153,59 +267,51 @@ public sealed partial class DataframeEvaluationRegressionMetricsDescriptor : Ser
 	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
 	/// </para>
 	/// </summary>
-	public DataframeEvaluationRegressionMetricsDescriptor RSquared(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		RSquaredValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.RSquared = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared()
 	{
-		writer.WriteStartObject();
-		if (HuberDescriptor is not null)
+		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Proportion of the variance in the dependent variable that is predictable from the independent variables.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor RSquared(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
+	{
+		Instance.RSquared = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor AddRSquared(string key, object value)
+	{
+		Instance.RSquared ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.RSquared.Add(key, value);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("huber");
-			JsonSerializer.Serialize(writer, HuberDescriptor, options);
-		}
-		else if (HuberDescriptorAction is not null)
-		{
-			writer.WritePropertyName("huber");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsHuberDescriptor(HuberDescriptorAction), options);
-		}
-		else if (HuberValue is not null)
-		{
-			writer.WritePropertyName("huber");
-			JsonSerializer.Serialize(writer, HuberValue, options);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MseValue is not null)
-		{
-			writer.WritePropertyName("mse");
-			JsonSerializer.Serialize(writer, MseValue, options);
-		}
-
-		if (MsleDescriptor is not null)
-		{
-			writer.WritePropertyName("msle");
-			JsonSerializer.Serialize(writer, MsleDescriptor, options);
-		}
-		else if (MsleDescriptorAction is not null)
-		{
-			writer.WritePropertyName("msle");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsMsleDescriptor(MsleDescriptorAction), options);
-		}
-		else if (MsleValue is not null)
-		{
-			writer.WritePropertyName("msle");
-			JsonSerializer.Serialize(writer, MsleValue, options);
-		}
-
-		if (RSquaredValue is not null)
-		{
-			writer.WritePropertyName("r_squared");
-			JsonSerializer.Serialize(writer, RSquaredValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetricsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.DataframeEvaluationRegressionMetrics(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

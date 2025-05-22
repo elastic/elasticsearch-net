@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-public sealed partial class UpgradeTransformsRequestParameters : RequestParameters
+public sealed partial class UpgradeTransformsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -48,21 +41,79 @@ public sealed partial class UpgradeTransformsRequestParameters : RequestParamete
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class UpgradeTransformsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Upgrades all transforms.
-/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It
-/// also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not
-/// affect the source and destination indices. The upgrade also does not affect the roles that transforms use when
-/// Elasticsearch security features are enabled; the role used to read source data and write to the destination index
-/// remains unchanged.
+/// Upgrade all transforms.
+/// </para>
+/// <para>
+/// Transforms are compatible across minor versions and between supported major versions.
+/// However, over time, the format of transform configuration information may change.
+/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
+/// It also cleans up the internal data structures that store the transform state and checkpoints.
+/// The upgrade does not affect the source and destination indices.
+/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
+/// </para>
+/// <para>
+/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
+/// Resolve the issue then re-run the process again.
+/// A summary is returned when the upgrade is finished.
+/// </para>
+/// <para>
+/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
+/// You may want to perform a recent cluster backup prior to the upgrade.
 /// </para>
 /// </summary>
-public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTransformsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestConverter))]
+public sealed partial class UpgradeTransformsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpgradeTransforms;
+#if NET7_0_OR_GREATER
+	public UpgradeTransformsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public UpgradeTransformsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.TransformManagementUpgradeTransforms;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
@@ -73,7 +124,6 @@ public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTrans
 	/// When true, the request checks for updates but does not run them.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
 
 	/// <summary>
@@ -82,40 +132,124 @@ public sealed partial class UpgradeTransformsRequest : PlainRequest<UpgradeTrans
 	/// returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Upgrades all transforms.
-/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version. It
-/// also cleans up the internal data structures that store the transform state and checkpoints. The upgrade does not
-/// affect the source and destination indices. The upgrade also does not affect the roles that transforms use when
-/// Elasticsearch security features are enabled; the role used to read source data and write to the destination index
-/// remains unchanged.
+/// Upgrade all transforms.
+/// </para>
+/// <para>
+/// Transforms are compatible across minor versions and between supported major versions.
+/// However, over time, the format of transform configuration information may change.
+/// This API identifies transforms that have a legacy configuration format and upgrades them to the latest version.
+/// It also cleans up the internal data structures that store the transform state and checkpoints.
+/// The upgrade does not affect the source and destination indices.
+/// The upgrade also does not affect the roles that transforms use when Elasticsearch security features are enabled; the role used to read source data and write to the destination index remains unchanged.
+/// </para>
+/// <para>
+/// If a transform upgrade step fails, the upgrade stops and an error is returned about the underlying issue.
+/// Resolve the issue then re-run the process again.
+/// A summary is returned when the upgrade is finished.
+/// </para>
+/// <para>
+/// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
+/// You may want to perform a recent cluster backup prior to the upgrade.
 /// </para>
 /// </summary>
-public sealed partial class UpgradeTransformsRequestDescriptor : RequestDescriptor<UpgradeTransformsRequestDescriptor, UpgradeTransformsRequestParameters>
+public readonly partial struct UpgradeTransformsRequestDescriptor
 {
-	internal UpgradeTransformsRequestDescriptor(Action<UpgradeTransformsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public UpgradeTransformsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public UpgradeTransformsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.TransformManagementUpgradeTransforms;
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest instance) => new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "transform.upgrade_transforms";
-
-	public UpgradeTransformsRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-	public UpgradeTransformsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// When true, the request checks for updates but does not run them.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor DryRun(bool? value = true)
 	{
+		Instance.DryRun = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the timeout expires, the request fails and
+	/// returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.UpgradeTransformsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

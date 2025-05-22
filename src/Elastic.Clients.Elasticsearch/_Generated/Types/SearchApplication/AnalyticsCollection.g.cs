@@ -17,23 +17,84 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.SearchApplication;
 
+internal sealed partial class AnalyticsCollectionConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEventDataStream = System.Text.Json.JsonEncodedText.Encode("event_data_stream");
+
+	public override Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream> propEventDataStream = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEventDataStream.TryReadProperty(ref reader, options, PropEventDataStream, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			EventDataStream = propEventDataStream.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollection value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEventDataStream, value.EventDataStream, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.SearchApplication.AnalyticsCollectionConverter))]
 public sealed partial class AnalyticsCollection
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public AnalyticsCollection(Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream eventDataStream)
+	{
+		EventDataStream = eventDataStream;
+	}
+#if NET7_0_OR_GREATER
+	public AnalyticsCollection()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public AnalyticsCollection()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal AnalyticsCollection(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Data stream for the collection.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("event_data_stream")]
-	public Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.SearchApplication.EventDataStream EventDataStream { get; set; }
 }

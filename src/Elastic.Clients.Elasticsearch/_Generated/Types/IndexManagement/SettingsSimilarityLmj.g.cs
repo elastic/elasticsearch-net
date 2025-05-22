@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class SettingsSimilarityLmj : ISettingsSimilarity
+internal sealed partial class SettingsSimilarityLmjConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj>
 {
-	[JsonInclude, JsonPropertyName("lambda")]
+	private static readonly System.Text.Json.JsonEncodedText PropLambda = System.Text.Json.JsonEncodedText.Encode("lambda");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propLambda = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLambda.TryReadProperty(ref reader, options, PropLambda, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Lambda = propLambda.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLambda, value.Lambda, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjConverter))]
+public sealed partial class SettingsSimilarityLmj : Elastic.Clients.Elasticsearch.IndexManagement.ISettingsSimilarity
+{
+#if NET7_0_OR_GREATER
+	public SettingsSimilarityLmj()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SettingsSimilarityLmj()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	public double? Lambda { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "LMJelinekMercer";
 }
 
-public sealed partial class SettingsSimilarityLmjDescriptor : SerializableDescriptor<SettingsSimilarityLmjDescriptor>, IBuildableDescriptor<SettingsSimilarityLmj>
+public readonly partial struct SettingsSimilarityLmjDescriptor
 {
-	internal SettingsSimilarityLmjDescriptor(Action<SettingsSimilarityLmjDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj Instance { get; init; }
 
-	public SettingsSimilarityLmjDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityLmjDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj instance)
 	{
+		Instance = instance;
 	}
 
-	private double? LambdaValue { get; set; }
-
-	public SettingsSimilarityLmjDescriptor Lambda(double? lambda)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SettingsSimilarityLmjDescriptor()
 	{
-		LambdaValue = lambda;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj instance) => new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor Lambda(double? value)
 	{
-		writer.WriteStartObject();
-		if (LambdaValue.HasValue)
+		Instance.Lambda = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("lambda");
-			writer.WriteNumberValue(LambdaValue.Value);
+			return new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("LMJelinekMercer");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmjDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.SettingsSimilarityLmj(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	SettingsSimilarityLmj IBuildableDescriptor<SettingsSimilarityLmj>.Build() => new()
-	{
-		Lambda = LambdaValue
-	};
 }

@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class PutIndicesSettingsRequestParameters : RequestParameters
+public sealed partial class PutIndicesSettingsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -51,7 +44,7 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 	/// <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -85,6 +78,15 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 
 	/// <summary>
 	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
+
+	/// <summary>
+	/// <para>
 	/// Period to wait for a response. If no response is received before the
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
@@ -92,30 +94,94 @@ public sealed partial class PutIndicesSettingsRequestParameters : RequestParamet
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutIndicesSettingsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Settings = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Settings, null);
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update index settings.
-/// Changes dynamic index settings in real time. For data streams, index setting
-/// changes are applied to all backing indices by default.
+/// Changes dynamic index settings in real time.
+/// For data streams, index setting changes are applied to all backing indices by default.
+/// </para>
+/// <para>
+/// To revert a setting to the default value, use a null value.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
+/// </para>
+/// <para>
+/// NOTE: You can only define new analyzers on closed indices.
+/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
+/// You cannot close the write index of a data stream.
+/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
+/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
+/// This affects searches and any new data added to the stream after the rollover.
+/// However, it does not affect the data stream's backing indices or their existing data.
+/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 /// </para>
 /// </summary>
-public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesSettingsRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestConverter))]
+public sealed partial class PutIndicesSettingsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestParameters>
 {
-	public PutIndicesSettingsRequest()
-	{
-	}
-
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutSettings;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Indices? indices, Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings) : base(r => r.Optional("index", indices))
+	{
+		Settings = settings;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
+	{
+		Settings = settings;
+	}
+#if NET7_0_OR_GREATER
+	public PutIndicesSettingsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PutIndicesSettingsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementPutSettings;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.put_settings";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Indices? Indices { get => P<Elastic.Clients.Elasticsearch.Indices?>("index"); set => PO("index", value); }
 
 	/// <summary>
 	/// <para>
@@ -126,7 +192,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
 
 	/// <summary>
@@ -137,15 +202,13 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// <c>open,hidden</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? FlatSettings { get => Q<bool?>("flat_settings"); set => Q("flat_settings", value); }
 
 	/// <summary>
@@ -153,7 +216,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// If <c>true</c>, returns settings in flat format.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 
 	/// <summary>
@@ -163,7 +225,6 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -171,8 +232,16 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// If <c>true</c>, existing index settings remain unchanged.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? PreserveExisting { get => Q<bool?>("preserve_existing"); set => Q("preserve_existing", value); }
+
+	/// <summary>
+	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	public bool? Reopen { get => Q<bool?>("reopen"); set => Q("reopen", value); }
 
 	/// <summary>
 	/// <para>
@@ -180,151 +249,502 @@ public sealed partial class PutIndicesSettingsRequest : PlainRequest<PutIndicesS
 	/// timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings Settings { get; set; }
+}
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+/// <summary>
+/// <para>
+/// Update index settings.
+/// Changes dynamic index settings in real time.
+/// For data streams, index setting changes are applied to all backing indices by default.
+/// </para>
+/// <para>
+/// To revert a setting to the default value, use a null value.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
+/// </para>
+/// <para>
+/// NOTE: You can only define new analyzers on closed indices.
+/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
+/// You cannot close the write index of a data stream.
+/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
+/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
+/// This affects searches and any new data added to the stream after the rollover.
+/// However, it does not affect the data stream's backing indices or their existing data.
+/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
+/// </para>
+/// </summary>
+public readonly partial struct PutIndicesSettingsRequestDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance)
 	{
-		JsonSerializer.Serialize(writer, Settings, options);
+		Instance = instance;
+	}
+
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(indices);
+#pragma warning restore CS0618
+	}
+
+	public PutIndicesSettingsRequestDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index
+	/// alias, or <c>_all</c> value targets only missing or closed indices. This
+	/// behavior applies even if the request targets other open indices. For
+	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
+	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target
+	/// data streams, this argument determines whether wildcard expressions match
+	/// hidden data streams. Supports comma-separated values, such as
+	/// <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target
+	/// data streams, this argument determines whether wildcard expressions match
+	/// hidden data streams. Supports comma-separated values, such as
+	/// <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor FlatSettings(bool? value = true)
+	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, existing index settings remain unchanged.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor PreserveExisting(bool? value = true)
+	{
+		Instance.PreserveExisting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Reopen(bool? value = true)
+	{
+		Instance.Reopen = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Settings<T>(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<T>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
 /// Update index settings.
-/// Changes dynamic index settings in real time. For data streams, index setting
-/// changes are applied to all backing indices by default.
+/// Changes dynamic index settings in real time.
+/// For data streams, index setting changes are applied to all backing indices by default.
 /// </para>
-/// </summary>
-public sealed partial class PutIndicesSettingsRequestDescriptor<TDocument> : RequestDescriptor<PutIndicesSettingsRequestDescriptor<TDocument>, PutIndicesSettingsRequestParameters>
-{
-	internal PutIndicesSettingsRequestDescriptor(Action<PutIndicesSettingsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices)) => SettingsValue = settings;
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings) => SettingsValue = settings;
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutSettings;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_settings";
-
-	public PutIndicesSettingsRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public PutIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public PutIndicesSettingsRequestDescriptor<TDocument> FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public PutIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public PutIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutIndicesSettingsRequestDescriptor<TDocument> PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
-	public PutIndicesSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? indices)
-	{
-		RouteValues.Optional("index", indices);
-		return Self;
-	}
-
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> SettingsDescriptorAction { get; set; }
-
-	public PutIndicesSettingsRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
-	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
-	}
-
-	public PutIndicesSettingsRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument> descriptor)
-	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
-	}
-
-	public PutIndicesSettingsRequestDescriptor<TDocument> Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>> configure)
-	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, SettingsValue, options);
-	}
-}
-
-/// <summary>
 /// <para>
-/// Update index settings.
-/// Changes dynamic index settings in real time. For data streams, index setting
-/// changes are applied to all backing indices by default.
+/// To revert a setting to the default value, use a null value.
+/// The list of per-index settings that can be updated dynamically on live indices can be found in index module documentation.
+/// To preserve existing settings from being updated, set the <c>preserve_existing</c> parameter to <c>true</c>.
+/// </para>
+/// <para>
+/// NOTE: You can only define new analyzers on closed indices.
+/// To add an analyzer, you must close the index, define the analyzer, and reopen the index.
+/// You cannot close the write index of a data stream.
+/// To update the analyzer for a data stream's write index and future backing indices, update the analyzer in the index template used by the stream.
+/// Then roll over the data stream to apply the new analyzer to the stream's write index and future backing indices.
+/// This affects searches and any new data added to the stream after the rollover.
+/// However, it does not affect the data stream's backing indices or their existing data.
+/// To change the analyzer for existing backing indices, you must create a new data stream and reindex your data into it.
 /// </para>
 /// </summary>
-public sealed partial class PutIndicesSettingsRequestDescriptor : RequestDescriptor<PutIndicesSettingsRequestDescriptor, PutIndicesSettingsRequestParameters>
+public readonly partial struct PutIndicesSettingsRequestDescriptor<TDocument>
 {
-	internal PutIndicesSettingsRequestDescriptor(Action<PutIndicesSettingsRequestDescriptor> configure) => configure.Invoke(this);
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings, Elastic.Clients.Elasticsearch.Indices? indices) : base(r => r.Optional("index", indices)) => SettingsValue = settings;
-	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings) => SettingsValue = settings;
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutSettings;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_settings";
-
-	public PutIndicesSettingsRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public PutIndicesSettingsRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public PutIndicesSettingsRequestDescriptor FlatSettings(bool? flatSettings = true) => Qs("flat_settings", flatSettings);
-	public PutIndicesSettingsRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-	public PutIndicesSettingsRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutIndicesSettingsRequestDescriptor PreserveExisting(bool? preserveExisting = true) => Qs("preserve_existing", preserveExisting);
-	public PutIndicesSettingsRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutIndicesSettingsRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices? indices)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance)
 	{
-		RouteValues.Optional("index", indices);
-		return Self;
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings SettingsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor SettingsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> SettingsDescriptorAction { get; set; }
-
-	public PutIndicesSettingsRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings settings)
+	public PutIndicesSettingsRequestDescriptor(Elastic.Clients.Elasticsearch.Indices? indices)
 	{
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = null;
-		SettingsValue = settings;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(indices);
+#pragma warning restore CS0618
 	}
 
-	public PutIndicesSettingsRequestDescriptor Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor descriptor)
+	public PutIndicesSettingsRequestDescriptor()
 	{
-		SettingsValue = null;
-		SettingsDescriptorAction = null;
-		SettingsDescriptor = descriptor;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PutIndicesSettingsRequestDescriptor Settings(Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams, indices, and aliases used to limit
+	/// the request. Supports wildcards (<c>*</c>). To target all data streams and
+	/// indices, omit this parameter or use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices? value)
 	{
-		SettingsValue = null;
-		SettingsDescriptor = null;
-		SettingsDescriptorAction = configure;
-		return Self;
+		Instance.Indices = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// If <c>false</c>, the request returns an error if any wildcard expression, index
+	/// alias, or <c>_all</c> value targets only missing or closed indices. This
+	/// behavior applies even if the request targets other open indices. For
+	/// example, a request targeting <c>foo*,bar*</c> returns an error if an index
+	/// starts with <c>foo</c> but no index starts with <c>bar</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
 	{
-		JsonSerializer.Serialize(writer, SettingsValue, options);
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target
+	/// data streams, this argument determines whether wildcard expressions match
+	/// hidden data streams. Supports comma-separated values, such as
+	/// <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of index that wildcard patterns can match. If the request can target
+	/// data streams, this argument determines whether wildcard expressions match
+	/// hidden data streams. Supports comma-separated values, such as
+	/// <c>open,hidden</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> FlatSettings(bool? value = true)
+	{
+		Instance.FlatSettings = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, returns settings in flat format.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, existing index settings remain unchanged.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> PreserveExisting(bool? value = true)
+	{
+		Instance.PreserveExisting = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Whether to close and reopen the index to apply non-dynamic settings.
+	/// If set to <c>true</c> the indices to which the settings are being applied
+	/// will be closed temporarily and then reopened in order to apply the changes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Reopen(bool? value = true)
+	{
+		Instance.Reopen = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response. If no response is received before the
+	/// timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Settings(Elastic.Clients.Elasticsearch.IndexManagement.IndexSettings value)
+	{
+		Instance.Settings = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Settings()
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Settings(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>>? action)
+	{
+		Instance.Settings = Elastic.Clients.Elasticsearch.IndexManagement.IndexSettingsDescriptor<TDocument>.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutIndicesSettingsRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

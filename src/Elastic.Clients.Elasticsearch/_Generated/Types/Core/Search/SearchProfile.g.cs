@@ -17,22 +17,109 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Core.Search;
 
+internal sealed partial class SearchProfileConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Core.Search.SearchProfile>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCollector = System.Text.Json.JsonEncodedText.Encode("collector");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropRewriteTime = System.Text.Json.JsonEncodedText.Encode("rewrite_time");
+
+	public override Elastic.Clients.Elasticsearch.Core.Search.SearchProfile Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector>> propCollector = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>> propQuery = default;
+		LocalJsonValue<long> propRewriteTime = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCollector.TryReadProperty(ref reader, options, PropCollector, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Collector>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, static System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propRewriteTime.TryReadProperty(ref reader, options, PropRewriteTime, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Core.Search.SearchProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Collector = propCollector.Value,
+			Query = propQuery.Value,
+			RewriteTime = propRewriteTime.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Core.Search.SearchProfile value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCollector, value.Collector, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.Collector>(o, v, null));
+		writer.WriteProperty(options, PropQuery, value.Query, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile>(o, v, null));
+		writer.WriteProperty(options, PropRewriteTime, value.RewriteTime, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Core.Search.SearchProfileConverter))]
 public sealed partial class SearchProfile
 {
-	[JsonInclude, JsonPropertyName("collector")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> Collector { get; init; }
-	[JsonInclude, JsonPropertyName("query")]
-	public IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> Query { get; init; }
-	[JsonInclude, JsonPropertyName("rewrite_time")]
-	public long RewriteTime { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SearchProfile(System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> collector, System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> query, long rewriteTime)
+	{
+		Collector = collector;
+		Query = query;
+		RewriteTime = rewriteTime;
+	}
+#if NET7_0_OR_GREATER
+	public SearchProfile()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SearchProfile()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SearchProfile(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.Collector> Collector { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.IReadOnlyCollection<Elastic.Clients.Elasticsearch.Core.Search.QueryProfile> Query { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long RewriteTime { get; set; }
 }

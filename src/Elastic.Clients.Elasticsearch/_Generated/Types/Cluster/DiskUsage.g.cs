@@ -17,28 +17,154 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
+internal sealed partial class DiskUsageConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.DiskUsage>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropFreeBytes = System.Text.Json.JsonEncodedText.Encode("free_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropFreeDiskPercent = System.Text.Json.JsonEncodedText.Encode("free_disk_percent");
+	private static readonly System.Text.Json.JsonEncodedText PropPath = System.Text.Json.JsonEncodedText.Encode("path");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalBytes = System.Text.Json.JsonEncodedText.Encode("total_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsedBytes = System.Text.Json.JsonEncodedText.Encode("used_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropUsedDiskPercent = System.Text.Json.JsonEncodedText.Encode("used_disk_percent");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.DiskUsage Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propFreeBytes = default;
+		LocalJsonValue<double> propFreeDiskPercent = default;
+		LocalJsonValue<string> propPath = default;
+		LocalJsonValue<long> propTotalBytes = default;
+		LocalJsonValue<long> propUsedBytes = default;
+		LocalJsonValue<double> propUsedDiskPercent = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propFreeBytes.TryReadProperty(ref reader, options, PropFreeBytes, null))
+			{
+				continue;
+			}
+
+			if (propFreeDiskPercent.TryReadProperty(ref reader, options, PropFreeDiskPercent, null))
+			{
+				continue;
+			}
+
+			if (propPath.TryReadProperty(ref reader, options, PropPath, null))
+			{
+				continue;
+			}
+
+			if (propTotalBytes.TryReadProperty(ref reader, options, PropTotalBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsedBytes.TryReadProperty(ref reader, options, PropUsedBytes, null))
+			{
+				continue;
+			}
+
+			if (propUsedDiskPercent.TryReadProperty(ref reader, options, PropUsedDiskPercent, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.DiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			FreeBytes = propFreeBytes.Value,
+			FreeDiskPercent = propFreeDiskPercent.Value,
+			Path = propPath.Value,
+			TotalBytes = propTotalBytes.Value,
+			UsedBytes = propUsedBytes.Value,
+			UsedDiskPercent = propUsedDiskPercent.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.DiskUsage value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropFreeBytes, value.FreeBytes, null, null);
+		writer.WriteProperty(options, PropFreeDiskPercent, value.FreeDiskPercent, null, null);
+		writer.WriteProperty(options, PropPath, value.Path, null, null);
+		writer.WriteProperty(options, PropTotalBytes, value.TotalBytes, null, null);
+		writer.WriteProperty(options, PropUsedBytes, value.UsedBytes, null, null);
+		writer.WriteProperty(options, PropUsedDiskPercent, value.UsedDiskPercent, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.DiskUsageConverter))]
 public sealed partial class DiskUsage
 {
-	[JsonInclude, JsonPropertyName("free_bytes")]
-	public long FreeBytes { get; init; }
-	[JsonInclude, JsonPropertyName("free_disk_percent")]
-	public double FreeDiskPercent { get; init; }
-	[JsonInclude, JsonPropertyName("path")]
-	public string Path { get; init; }
-	[JsonInclude, JsonPropertyName("total_bytes")]
-	public long TotalBytes { get; init; }
-	[JsonInclude, JsonPropertyName("used_bytes")]
-	public long UsedBytes { get; init; }
-	[JsonInclude, JsonPropertyName("used_disk_percent")]
-	public double UsedDiskPercent { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DiskUsage(long freeBytes, double freeDiskPercent, string path, long totalBytes, long usedBytes, double usedDiskPercent)
+	{
+		FreeBytes = freeBytes;
+		FreeDiskPercent = freeDiskPercent;
+		Path = path;
+		TotalBytes = totalBytes;
+		UsedBytes = usedBytes;
+		UsedDiskPercent = usedDiskPercent;
+	}
+#if NET7_0_OR_GREATER
+	public DiskUsage()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public DiskUsage()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DiskUsage(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long FreeBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double FreeDiskPercent { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Path { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long UsedBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double UsedDiskPercent { get; set; }
 }

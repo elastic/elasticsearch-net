@@ -17,90 +17,187 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class KeepTypesTokenFilter : ITokenFilter
+internal sealed partial class KeepTypesTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("mode")]
+	private static readonly System.Text.Json.JsonEncodedText PropMode = System.Text.Json.JsonEncodedText.Encode("mode");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropTypes = System.Text.Json.JsonEncodedText.Encode("types");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode?> propMode = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>> propTypes = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propMode.TryReadProperty(ref reader, options, PropMode, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propTypes.TryReadProperty(ref reader, options, PropTypes, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!))
+			{
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Mode = propMode.Value,
+			Types = propTypes.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropMode, value.Mode, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropTypes, value.Types, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterConverter))]
+public sealed partial class KeepTypesTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepTypesTokenFilter(System.Collections.Generic.ICollection<string> types)
+	{
+		Types = types;
+	}
+#if NET7_0_OR_GREATER
+	public KeepTypesTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public KeepTypesTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? Mode { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "keep_types";
 
-	[JsonInclude, JsonPropertyName("types")]
-	public ICollection<string>? Types { get; set; }
-	[JsonInclude, JsonPropertyName("version")]
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<string> Types { get; set; }
 	public string? Version { get; set; }
 }
 
-public sealed partial class KeepTypesTokenFilterDescriptor : SerializableDescriptor<KeepTypesTokenFilterDescriptor>, IBuildableDescriptor<KeepTypesTokenFilter>
+public readonly partial struct KeepTypesTokenFilterDescriptor
 {
-	internal KeepTypesTokenFilterDescriptor(Action<KeepTypesTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Instance { get; init; }
 
-	public KeepTypesTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepTypesTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? ModeValue { get; set; }
-	private ICollection<string>? TypesValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? mode)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public KeepTypesTokenFilterDescriptor()
 	{
-		ModeValue = mode;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public KeepTypesTokenFilterDescriptor Types(ICollection<string>? types)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Indicates whether to keep or remove the specified token types.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Mode(Elastic.Clients.Elasticsearch.Analysis.KeepTypesMode? value)
 	{
-		TypesValue = types;
-		return Self;
+		Instance.Mode = value;
+		return this;
 	}
 
-	public KeepTypesTokenFilterDescriptor Version(string? version)
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(System.Collections.Generic.ICollection<string> value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Types = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// List of token types to keep or remove.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Types(params string[] values)
 	{
-		writer.WriteStartObject();
-		if (ModeValue is not null)
-		{
-			writer.WritePropertyName("mode");
-			JsonSerializer.Serialize(writer, ModeValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("keep_types");
-		if (TypesValue is not null)
-		{
-			writer.WritePropertyName("types");
-			JsonSerializer.Serialize(writer, TypesValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		Instance.Types = [.. values];
+		return this;
 	}
 
-	KeepTypesTokenFilter IBuildableDescriptor<KeepTypesTokenFilter>.Build() => new()
+	public Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor Version(string? value)
 	{
-		Mode = ModeValue,
-		Types = TypesValue,
-		Version = VersionValue
-	};
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.KeepTypesTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 }

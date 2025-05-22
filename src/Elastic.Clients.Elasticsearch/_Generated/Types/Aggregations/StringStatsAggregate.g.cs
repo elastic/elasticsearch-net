@@ -17,36 +17,191 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class StringStatsAggregate : IAggregate
+internal sealed partial class StringStatsAggregateConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate>
 {
-	[JsonInclude, JsonPropertyName("avg_length")]
-	public double? AvgLength { get; init; }
-	[JsonInclude, JsonPropertyName("avg_length_as_string")]
-	public string? AvgLengthAsString { get; init; }
-	[JsonInclude, JsonPropertyName("count")]
-	public long Count { get; init; }
-	[JsonInclude, JsonPropertyName("distribution")]
-	public IReadOnlyDictionary<string, double>? Distribution { get; init; }
-	[JsonInclude, JsonPropertyName("entropy")]
-	public double? Entropy { get; init; }
-	[JsonInclude, JsonPropertyName("max_length")]
-	public int? MaxLength { get; init; }
-	[JsonInclude, JsonPropertyName("max_length_as_string")]
-	public string? MaxLengthAsString { get; init; }
-	[JsonInclude, JsonPropertyName("meta")]
-	public IReadOnlyDictionary<string, object>? Meta { get; init; }
-	[JsonInclude, JsonPropertyName("min_length")]
-	public int? MinLength { get; init; }
-	[JsonInclude, JsonPropertyName("min_length_as_string")]
-	public string? MinLengthAsString { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropAvgLength = System.Text.Json.JsonEncodedText.Encode("avg_length");
+	private static readonly System.Text.Json.JsonEncodedText PropAvgLengthAsString = System.Text.Json.JsonEncodedText.Encode("avg_length_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropCount = System.Text.Json.JsonEncodedText.Encode("count");
+	private static readonly System.Text.Json.JsonEncodedText PropDistribution = System.Text.Json.JsonEncodedText.Encode("distribution");
+	private static readonly System.Text.Json.JsonEncodedText PropEntropy = System.Text.Json.JsonEncodedText.Encode("entropy");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxLength = System.Text.Json.JsonEncodedText.Encode("max_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxLengthAsString = System.Text.Json.JsonEncodedText.Encode("max_length_as_string");
+	private static readonly System.Text.Json.JsonEncodedText PropMeta = System.Text.Json.JsonEncodedText.Encode("meta");
+	private static readonly System.Text.Json.JsonEncodedText PropMinLength = System.Text.Json.JsonEncodedText.Encode("min_length");
+	private static readonly System.Text.Json.JsonEncodedText PropMinLengthAsString = System.Text.Json.JsonEncodedText.Encode("min_length_as_string");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<double?> propAvgLength = default;
+		LocalJsonValue<string?> propAvgLengthAsString = default;
+		LocalJsonValue<long> propCount = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, double>?> propDistribution = default;
+		LocalJsonValue<double?> propEntropy = default;
+		LocalJsonValue<int?> propMaxLength = default;
+		LocalJsonValue<string?> propMaxLengthAsString = default;
+		LocalJsonValue<System.Collections.Generic.IReadOnlyDictionary<string, object>?> propMeta = default;
+		LocalJsonValue<int?> propMinLength = default;
+		LocalJsonValue<string?> propMinLengthAsString = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAvgLength.TryReadProperty(ref reader, options, PropAvgLength, null))
+			{
+				continue;
+			}
+
+			if (propAvgLengthAsString.TryReadProperty(ref reader, options, PropAvgLengthAsString, null))
+			{
+				continue;
+			}
+
+			if (propCount.TryReadProperty(ref reader, options, PropCount, null))
+			{
+				continue;
+			}
+
+			if (propDistribution.TryReadProperty(ref reader, options, PropDistribution, static System.Collections.Generic.IReadOnlyDictionary<string, double>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, double>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propEntropy.TryReadProperty(ref reader, options, PropEntropy, null))
+			{
+				continue;
+			}
+
+			if (propMaxLength.TryReadProperty(ref reader, options, PropMaxLength, null))
+			{
+				continue;
+			}
+
+			if (propMaxLengthAsString.TryReadProperty(ref reader, options, PropMaxLengthAsString, null))
+			{
+				continue;
+			}
+
+			if (propMeta.TryReadProperty(ref reader, options, PropMeta, static System.Collections.Generic.IReadOnlyDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propMinLength.TryReadProperty(ref reader, options, PropMinLength, null))
+			{
+				continue;
+			}
+
+			if (propMinLengthAsString.TryReadProperty(ref reader, options, PropMinLengthAsString, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AvgLength = propAvgLength.Value,
+			AvgLengthAsString = propAvgLengthAsString.Value,
+			Count = propCount.Value,
+			Distribution = propDistribution.Value,
+			Entropy = propEntropy.Value,
+			MaxLength = propMaxLength.Value,
+			MaxLengthAsString = propMaxLengthAsString.Value,
+			Meta = propMeta.Value,
+			MinLength = propMinLength.Value,
+			MinLengthAsString = propMinLengthAsString.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregate value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAvgLength, value.AvgLength, null, null);
+		writer.WriteProperty(options, PropAvgLengthAsString, value.AvgLengthAsString, null, null);
+		writer.WriteProperty(options, PropCount, value.Count, null, null);
+		writer.WriteProperty(options, PropDistribution, value.Distribution, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, double>? v) => w.WriteDictionaryValue<string, double>(o, v, null, null));
+		writer.WriteProperty(options, PropEntropy, value.Entropy, null, null);
+		writer.WriteProperty(options, PropMaxLength, value.MaxLength, null, null);
+		writer.WriteProperty(options, PropMaxLengthAsString, value.MaxLengthAsString, null, null);
+		writer.WriteProperty(options, PropMeta, value.Meta, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IReadOnlyDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropMinLength, value.MinLength, null, null);
+		writer.WriteProperty(options, PropMinLengthAsString, value.MinLengthAsString, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.StringStatsAggregateConverter))]
+public sealed partial class StringStatsAggregate : Elastic.Clients.Elasticsearch.Aggregations.IAggregate
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public StringStatsAggregate(double? avgLength, long count, double? entropy, int? maxLength, int? minLength)
+	{
+		AvgLength = avgLength;
+		Count = count;
+		Entropy = entropy;
+		MaxLength = maxLength;
+		MinLength = minLength;
+	}
+#if NET7_0_OR_GREATER
+	public StringStatsAggregate()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public StringStatsAggregate()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal StringStatsAggregate(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? AvgLength { get; set; }
+	public string? AvgLengthAsString { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Count { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, double>? Distribution { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	double? Entropy { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int? MaxLength { get; set; }
+	public string? MaxLengthAsString { get; set; }
+	public System.Collections.Generic.IReadOnlyDictionary<string, object>? Meta { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int? MinLength { get; set; }
+	public string? MinLengthAsString { get; set; }
+
+	string Elastic.Clients.Elasticsearch.Aggregations.IAggregate.Type => "string_stats";
 }

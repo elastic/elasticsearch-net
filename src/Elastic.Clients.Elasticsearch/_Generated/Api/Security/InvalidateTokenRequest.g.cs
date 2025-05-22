@@ -17,21 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class InvalidateTokenRequestParameters : RequestParameters
+public sealed partial class InvalidateTokenRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class InvalidateTokenRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropRealmName = System.Text.Json.JsonEncodedText.Encode("realm_name");
+	private static readonly System.Text.Json.JsonEncodedText PropRefreshToken = System.Text.Json.JsonEncodedText.Encode("refresh_token");
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Name?> propRealmName = default;
+		LocalJsonValue<string?> propRefreshToken = default;
+		LocalJsonValue<string?> propToken = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propRealmName.TryReadProperty(ref reader, options, PropRealmName, null))
+			{
+				continue;
+			}
+
+			if (propRefreshToken.TryReadProperty(ref reader, options, PropRefreshToken, null))
+			{
+				continue;
+			}
+
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			RealmName = propRealmName.Value,
+			RefreshToken = propRefreshToken.Value,
+			Token = propToken.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropRealmName, value.RealmName, null, null);
+		writer.WriteProperty(options, PropRefreshToken, value.RefreshToken, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -44,27 +103,73 @@ public sealed partial class InvalidateTokenRequestParameters : RequestParameters
 /// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 /// </para>
 /// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// The refresh tokens returned by the get token API are only valid for 24 hours.
+/// They can also be used exactly once.
 /// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 /// </para>
+/// <para>
+/// NOTE: While all parameters are optional, at least one of them is required.
+/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
+/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
+/// </para>
 /// </summary>
-public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateTokenRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestConverter))]
+public sealed partial class InvalidateTokenRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateToken;
+#if NET7_0_OR_GREATER
+	public InvalidateTokenRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public InvalidateTokenRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityInvalidateToken;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.DELETE;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "security.invalidate_token";
 
-	[JsonInclude, JsonPropertyName("realm_name")]
+	/// <summary>
+	/// <para>
+	/// The name of an authentication realm.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Name? RealmName { get; set; }
-	[JsonInclude, JsonPropertyName("refresh_token")]
+
+	/// <summary>
+	/// <para>
+	/// A refresh token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	public string? RefreshToken { get; set; }
-	[JsonInclude, JsonPropertyName("token")]
+
+	/// <summary>
+	/// <para>
+	/// An access token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
 	public string? Token { get; set; }
-	[JsonInclude, JsonPropertyName("username")]
+
+	/// <summary>
+	/// <para>
+	/// The username of a user.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
@@ -78,82 +183,134 @@ public sealed partial class InvalidateTokenRequest : PlainRequest<InvalidateToke
 /// The time period is defined by the <c>xpack.security.authc.token.timeout</c> setting.
 /// </para>
 /// <para>
-/// The refresh tokens returned by the get token API are only valid for 24 hours. They can also be used exactly once.
+/// The refresh tokens returned by the get token API are only valid for 24 hours.
+/// They can also be used exactly once.
 /// If you want to invalidate one or more access or refresh tokens immediately, use this invalidate token API.
 /// </para>
+/// <para>
+/// NOTE: While all parameters are optional, at least one of them is required.
+/// More specifically, either one of <c>token</c> or <c>refresh_token</c> parameters is required.
+/// If none of these two are specified, then <c>realm_name</c> and/or <c>username</c> need to be specified.
+/// </para>
 /// </summary>
-public sealed partial class InvalidateTokenRequestDescriptor : RequestDescriptor<InvalidateTokenRequestDescriptor, InvalidateTokenRequestParameters>
+public readonly partial struct InvalidateTokenRequestDescriptor
 {
-	internal InvalidateTokenRequestDescriptor(Action<InvalidateTokenRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InvalidateTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public InvalidateTokenRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityInvalidateToken;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest instance) => new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.DELETE;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.invalidate_token";
-
-	private Elastic.Clients.Elasticsearch.Name? RealmNameValue { get; set; }
-	private string? RefreshTokenValue { get; set; }
-	private string? TokenValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
-
-	public InvalidateTokenRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? realmName)
+	/// <summary>
+	/// <para>
+	/// The name of an authentication realm.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RealmName(Elastic.Clients.Elasticsearch.Name? value)
 	{
-		RealmNameValue = realmName;
-		return Self;
+		Instance.RealmName = value;
+		return this;
 	}
 
-	public InvalidateTokenRequestDescriptor RefreshToken(string? refreshToken)
+	/// <summary>
+	/// <para>
+	/// A refresh token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RefreshToken(string? value)
 	{
-		RefreshTokenValue = refreshToken;
-		return Self;
+		Instance.RefreshToken = value;
+		return this;
 	}
 
-	public InvalidateTokenRequestDescriptor Token(string? token)
+	/// <summary>
+	/// <para>
+	/// An access token.
+	/// This parameter cannot be used if any of <c>refresh_token</c>, <c>realm_name</c>, or <c>username</c> are used.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Token(string? value)
 	{
-		TokenValue = token;
-		return Self;
+		Instance.Token = value;
+		return this;
 	}
 
-	public InvalidateTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	/// <summary>
+	/// <para>
+	/// The username of a user.
+	/// This parameter cannot be used with either <c>refresh_token</c> or <c>token</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Username = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (RealmNameValue is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("realm_name");
-			JsonSerializer.Serialize(writer, RealmNameValue, options);
+			return new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(RefreshTokenValue))
-		{
-			writer.WritePropertyName("refresh_token");
-			writer.WriteStringValue(RefreshTokenValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(TokenValue))
-		{
-			writer.WritePropertyName("token");
-			writer.WriteStringValue(TokenValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.InvalidateTokenRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

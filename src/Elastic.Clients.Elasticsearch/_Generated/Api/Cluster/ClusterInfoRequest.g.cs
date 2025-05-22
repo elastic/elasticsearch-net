@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class ClusterInfoRequestParameters : RequestParameters
+public sealed partial class ClusterInfoRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClusterInfoRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,19 +62,42 @@ public sealed partial class ClusterInfoRequestParameters : RequestParameters
 /// Returns basic information about the cluster.
 /// </para>
 /// </summary>
-public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestConverter))]
+public sealed partial class ClusterInfoRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestParameters>
 {
-	public ClusterInfoRequest(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target) : base(r => r.Required("target", target))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterInfoRequest(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target) : base(r => r.Required("target", target))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClusterInfoRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterInfo;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.ClusterInfo;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "cluster.info";
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> Target { get => P<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget>>("target"); set => PR("target", value); }
 }
 
 /// <summary>
@@ -61,29 +106,99 @@ public sealed partial class ClusterInfoRequest : PlainRequest<ClusterInfoRequest
 /// Returns basic information about the cluster.
 /// </para>
 /// </summary>
-public sealed partial class ClusterInfoRequestDescriptor : RequestDescriptor<ClusterInfoRequestDescriptor, ClusterInfoRequestParameters>
+public readonly partial struct ClusterInfoRequestDescriptor
 {
-	internal ClusterInfoRequestDescriptor(Action<ClusterInfoRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest Instance { get; init; }
 
-	public ClusterInfoRequestDescriptor(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target) : base(r => r.Required("target", target))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.ClusterInfo;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "cluster.info";
-
-	public ClusterInfoRequestDescriptor Target(IReadOnlyCollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
+	public ClusterInfoRequestDescriptor(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> target)
 	{
-		RouteValues.Required("target", target);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest(target);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ClusterInfoRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest instance) => new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest(Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ClusterInfoTarget> value)
+	{
+		Instance.Target = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits the information returned to the specific target. Supports a comma-separated list, such as http,ingest.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Target(params Elastic.Clients.Elasticsearch.ClusterInfoTarget[] values)
+	{
+		Instance.Target = [.. values];
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest Build(System.Action<Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor(new Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Cluster.ClusterInfoRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

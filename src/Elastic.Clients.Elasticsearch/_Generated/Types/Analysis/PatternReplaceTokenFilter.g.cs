@@ -17,118 +17,204 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class PatternReplaceTokenFilter : ITokenFilter
+internal sealed partial class PatternReplaceTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("all")]
+	private static readonly System.Text.Json.JsonEncodedText PropAll = System.Text.Json.JsonEncodedText.Encode("all");
+	private static readonly System.Text.Json.JsonEncodedText PropPattern = System.Text.Json.JsonEncodedText.Encode("pattern");
+	private static readonly System.Text.Json.JsonEncodedText PropReplacement = System.Text.Json.JsonEncodedText.Encode("replacement");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAll = default;
+		LocalJsonValue<string> propPattern = default;
+		LocalJsonValue<string?> propReplacement = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAll.TryReadProperty(ref reader, options, PropAll, null))
+			{
+				continue;
+			}
+
+			if (propPattern.TryReadProperty(ref reader, options, PropPattern, null))
+			{
+				continue;
+			}
+
+			if (propReplacement.TryReadProperty(ref reader, options, PropReplacement, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			All = propAll.Value,
+			Pattern = propPattern.Value,
+			Replacement = propReplacement.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAll, value.All, null, null);
+		writer.WriteProperty(options, PropPattern, value.Pattern, null, null);
+		writer.WriteProperty(options, PropReplacement, value.Replacement, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterConverter))]
+public sealed partial class PatternReplaceTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceTokenFilter(string pattern)
+	{
+		Pattern = pattern;
+	}
+#if NET7_0_OR_GREATER
+	public PatternReplaceTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public PatternReplaceTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
 	public bool? All { get; set; }
-	[JsonInclude, JsonPropertyName("flags")]
-	public string? Flags { get; set; }
-	[JsonInclude, JsonPropertyName("pattern")]
-	public string Pattern { get; set; }
-	[JsonInclude, JsonPropertyName("replacement")]
+
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Pattern { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
 	public string? Replacement { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "pattern_replace";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class PatternReplaceTokenFilterDescriptor : SerializableDescriptor<PatternReplaceTokenFilterDescriptor>, IBuildableDescriptor<PatternReplaceTokenFilter>
+public readonly partial struct PatternReplaceTokenFilterDescriptor
 {
-	internal PatternReplaceTokenFilterDescriptor(Action<PatternReplaceTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter Instance { get; init; }
 
-	public PatternReplaceTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private bool? AllValue { get; set; }
-	private string? FlagsValue { get; set; }
-	private string PatternValue { get; set; }
-	private string? ReplacementValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public PatternReplaceTokenFilterDescriptor All(bool? all = true)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PatternReplaceTokenFilterDescriptor()
 	{
-		AllValue = all;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PatternReplaceTokenFilterDescriptor Flags(string? flags)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c>, all substrings matching the pattern parameter’s regular expression are replaced. If <c>false</c>, the filter replaces only the first matching substring in each token. Defaults to <c>true</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor All(bool? value = true)
 	{
-		FlagsValue = flags;
-		return Self;
+		Instance.All = value;
+		return this;
 	}
 
-	public PatternReplaceTokenFilterDescriptor Pattern(string pattern)
+	/// <summary>
+	/// <para>
+	/// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the <c>replacement</c> parameter.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Pattern(string value)
 	{
-		PatternValue = pattern;
-		return Self;
+		Instance.Pattern = value;
+		return this;
 	}
 
-	public PatternReplaceTokenFilterDescriptor Replacement(string? replacement)
+	/// <summary>
+	/// <para>
+	/// Replacement substring. Defaults to an empty substring (<c>""</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Replacement(string? value)
 	{
-		ReplacementValue = replacement;
-		return Self;
+		Instance.Replacement = value;
+		return this;
 	}
 
-	public PatternReplaceTokenFilterDescriptor Version(string? version)
+	public Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor Version(string? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Version = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor> action)
 	{
-		writer.WriteStartObject();
-		if (AllValue.HasValue)
-		{
-			writer.WritePropertyName("all");
-			writer.WriteBooleanValue(AllValue.Value);
-		}
-
-		if (!string.IsNullOrEmpty(FlagsValue))
-		{
-			writer.WritePropertyName("flags");
-			writer.WriteStringValue(FlagsValue);
-		}
-
-		writer.WritePropertyName("pattern");
-		writer.WriteStringValue(PatternValue);
-		if (!string.IsNullOrEmpty(ReplacementValue))
-		{
-			writer.WritePropertyName("replacement");
-			writer.WriteStringValue(ReplacementValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("pattern_replace");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.PatternReplaceTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	PatternReplaceTokenFilter IBuildableDescriptor<PatternReplaceTokenFilter>.Build() => new()
-	{
-		All = AllValue,
-		Flags = FlagsValue,
-		Pattern = PatternValue,
-		Replacement = ReplacementValue,
-		Version = VersionValue
-	};
 }

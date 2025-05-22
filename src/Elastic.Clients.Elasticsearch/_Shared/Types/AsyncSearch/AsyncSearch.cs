@@ -6,11 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.AsyncSearch;
-#else
 namespace Elastic.Clients.Elasticsearch.AsyncSearch;
-#endif
 
 public partial class AsyncSearch<TDocument>
 {
@@ -30,5 +26,5 @@ public partial class AsyncSearch<TDocument>
 	/// The total number of hits returned for this search.
 	/// </summary>
 	[JsonIgnore]
-	public long Total => HitsMetadata?.Total?.Item1?.Value ?? HitsMetadata?.Total?.Item2 ?? -1;
+	public long Total => HitsMetadata?.Total?.Value1?.Value ?? HitsMetadata?.Total?.Value2 ?? -1;
 }

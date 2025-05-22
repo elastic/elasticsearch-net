@@ -17,48 +17,274 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
+internal sealed partial class MergesStatsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MergesStats>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCurrent = System.Text.Json.JsonEncodedText.Encode("current");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentDocs = System.Text.Json.JsonEncodedText.Encode("current_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentSize = System.Text.Json.JsonEncodedText.Encode("current_size");
+	private static readonly System.Text.Json.JsonEncodedText PropCurrentSizeInBytes = System.Text.Json.JsonEncodedText.Encode("current_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotal = System.Text.Json.JsonEncodedText.Encode("total");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottle = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalAutoThrottleInBytes = System.Text.Json.JsonEncodedText.Encode("total_auto_throttle_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalDocs = System.Text.Json.JsonEncodedText.Encode("total_docs");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSize = System.Text.Json.JsonEncodedText.Encode("total_size");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalSizeInBytes = System.Text.Json.JsonEncodedText.Encode("total_size_in_bytes");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTime = System.Text.Json.JsonEncodedText.Encode("total_stopped_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalStoppedTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_stopped_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTime = System.Text.Json.JsonEncodedText.Encode("total_throttled_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalThrottledTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_throttled_time_in_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTime = System.Text.Json.JsonEncodedText.Encode("total_time");
+	private static readonly System.Text.Json.JsonEncodedText PropTotalTimeInMillis = System.Text.Json.JsonEncodedText.Encode("total_time_in_millis");
+
+	public override Elastic.Clients.Elasticsearch.MergesStats Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long> propCurrent = default;
+		LocalJsonValue<long> propCurrentDocs = default;
+		LocalJsonValue<string?> propCurrentSize = default;
+		LocalJsonValue<long> propCurrentSizeInBytes = default;
+		LocalJsonValue<long> propTotal = default;
+		LocalJsonValue<string?> propTotalAutoThrottle = default;
+		LocalJsonValue<long> propTotalAutoThrottleInBytes = default;
+		LocalJsonValue<long> propTotalDocs = default;
+		LocalJsonValue<string?> propTotalSize = default;
+		LocalJsonValue<long> propTotalSizeInBytes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalStoppedTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalStoppedTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalThrottledTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalThrottledTimeInMillis = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propTotalTime = default;
+		LocalJsonValue<System.TimeSpan> propTotalTimeInMillis = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCurrent.TryReadProperty(ref reader, options, PropCurrent, null))
+			{
+				continue;
+			}
+
+			if (propCurrentDocs.TryReadProperty(ref reader, options, PropCurrentDocs, null))
+			{
+				continue;
+			}
+
+			if (propCurrentSize.TryReadProperty(ref reader, options, PropCurrentSize, null))
+			{
+				continue;
+			}
+
+			if (propCurrentSizeInBytes.TryReadProperty(ref reader, options, PropCurrentSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotal.TryReadProperty(ref reader, options, PropTotal, null))
+			{
+				continue;
+			}
+
+			if (propTotalAutoThrottle.TryReadProperty(ref reader, options, PropTotalAutoThrottle, null))
+			{
+				continue;
+			}
+
+			if (propTotalAutoThrottleInBytes.TryReadProperty(ref reader, options, PropTotalAutoThrottleInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalDocs.TryReadProperty(ref reader, options, PropTotalDocs, null))
+			{
+				continue;
+			}
+
+			if (propTotalSize.TryReadProperty(ref reader, options, PropTotalSize, null))
+			{
+				continue;
+			}
+
+			if (propTotalSizeInBytes.TryReadProperty(ref reader, options, PropTotalSizeInBytes, null))
+			{
+				continue;
+			}
+
+			if (propTotalStoppedTime.TryReadProperty(ref reader, options, PropTotalStoppedTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalStoppedTimeInMillis.TryReadProperty(ref reader, options, PropTotalStoppedTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalThrottledTime.TryReadProperty(ref reader, options, PropTotalThrottledTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalThrottledTimeInMillis.TryReadProperty(ref reader, options, PropTotalThrottledTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propTotalTime.TryReadProperty(ref reader, options, PropTotalTime, null))
+			{
+				continue;
+			}
+
+			if (propTotalTimeInMillis.TryReadProperty(ref reader, options, PropTotalTimeInMillis, static System.TimeSpan (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MergesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Current = propCurrent.Value,
+			CurrentDocs = propCurrentDocs.Value,
+			CurrentSize = propCurrentSize.Value,
+			CurrentSizeInBytes = propCurrentSizeInBytes.Value,
+			Total = propTotal.Value,
+			TotalAutoThrottle = propTotalAutoThrottle.Value,
+			TotalAutoThrottleInBytes = propTotalAutoThrottleInBytes.Value,
+			TotalDocs = propTotalDocs.Value,
+			TotalSize = propTotalSize.Value,
+			TotalSizeInBytes = propTotalSizeInBytes.Value,
+			TotalStoppedTime = propTotalStoppedTime.Value,
+			TotalStoppedTimeInMillis = propTotalStoppedTimeInMillis.Value,
+			TotalThrottledTime = propTotalThrottledTime.Value,
+			TotalThrottledTimeInMillis = propTotalThrottledTimeInMillis.Value,
+			TotalTime = propTotalTime.Value,
+			TotalTimeInMillis = propTotalTimeInMillis.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MergesStats value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCurrent, value.Current, null, null);
+		writer.WriteProperty(options, PropCurrentDocs, value.CurrentDocs, null, null);
+		writer.WriteProperty(options, PropCurrentSize, value.CurrentSize, null, null);
+		writer.WriteProperty(options, PropCurrentSizeInBytes, value.CurrentSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotal, value.Total, null, null);
+		writer.WriteProperty(options, PropTotalAutoThrottle, value.TotalAutoThrottle, null, null);
+		writer.WriteProperty(options, PropTotalAutoThrottleInBytes, value.TotalAutoThrottleInBytes, null, null);
+		writer.WriteProperty(options, PropTotalDocs, value.TotalDocs, null, null);
+		writer.WriteProperty(options, PropTotalSize, value.TotalSize, null, null);
+		writer.WriteProperty(options, PropTotalSizeInBytes, value.TotalSizeInBytes, null, null);
+		writer.WriteProperty(options, PropTotalStoppedTime, value.TotalStoppedTime, null, null);
+		writer.WriteProperty(options, PropTotalStoppedTimeInMillis, value.TotalStoppedTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalThrottledTime, value.TotalThrottledTime, null, null);
+		writer.WriteProperty(options, PropTotalThrottledTimeInMillis, value.TotalThrottledTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropTotalTime, value.TotalTime, null, null);
+		writer.WriteProperty(options, PropTotalTimeInMillis, value.TotalTimeInMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MergesStatsConverter))]
 public sealed partial class MergesStats
 {
-	[JsonInclude, JsonPropertyName("current")]
-	public long Current { get; init; }
-	[JsonInclude, JsonPropertyName("current_docs")]
-	public long CurrentDocs { get; init; }
-	[JsonInclude, JsonPropertyName("current_size")]
-	public string? CurrentSize { get; init; }
-	[JsonInclude, JsonPropertyName("current_size_in_bytes")]
-	public long CurrentSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total")]
-	public long Total { get; init; }
-	[JsonInclude, JsonPropertyName("total_auto_throttle")]
-	public string? TotalAutoThrottle { get; init; }
-	[JsonInclude, JsonPropertyName("total_auto_throttle_in_bytes")]
-	public long TotalAutoThrottleInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total_docs")]
-	public long TotalDocs { get; init; }
-	[JsonInclude, JsonPropertyName("total_size")]
-	public string? TotalSize { get; init; }
-	[JsonInclude, JsonPropertyName("total_size_in_bytes")]
-	public long TotalSizeInBytes { get; init; }
-	[JsonInclude, JsonPropertyName("total_stopped_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_stopped_time_in_millis")]
-	public long TotalStoppedTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_throttled_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_throttled_time_in_millis")]
-	public long TotalThrottledTimeInMillis { get; init; }
-	[JsonInclude, JsonPropertyName("total_time")]
-	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; init; }
-	[JsonInclude, JsonPropertyName("total_time_in_millis")]
-	public long TotalTimeInMillis { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MergesStats(long current, long currentDocs, long currentSizeInBytes, long total, long totalAutoThrottleInBytes, long totalDocs, long totalSizeInBytes, System.TimeSpan totalStoppedTimeInMillis, System.TimeSpan totalThrottledTimeInMillis, System.TimeSpan totalTimeInMillis)
+	{
+		Current = current;
+		CurrentDocs = currentDocs;
+		CurrentSizeInBytes = currentSizeInBytes;
+		Total = total;
+		TotalAutoThrottleInBytes = totalAutoThrottleInBytes;
+		TotalDocs = totalDocs;
+		TotalSizeInBytes = totalSizeInBytes;
+		TotalStoppedTimeInMillis = totalStoppedTimeInMillis;
+		TotalThrottledTimeInMillis = totalThrottledTimeInMillis;
+		TotalTimeInMillis = totalTimeInMillis;
+	}
+#if NET7_0_OR_GREATER
+	public MergesStats()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public MergesStats()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MergesStats(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Current { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CurrentDocs { get; set; }
+	public string? CurrentSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long CurrentSizeInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Total { get; set; }
+	public string? TotalAutoThrottle { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalAutoThrottleInBytes { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalDocs { get; set; }
+	public string? TotalSize { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long TotalSizeInBytes { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalStoppedTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalStoppedTimeInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalThrottledTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalThrottledTimeInMillis { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? TotalTime { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	System.TimeSpan TotalTimeInMillis { get; set; }
 }

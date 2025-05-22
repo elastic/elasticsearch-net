@@ -17,27 +17,123 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class PutUserRequestParameters : RequestParameters
+public sealed partial class PutUserRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
+	/// These values have the same meaning as in the index API, but the default value for this API is true.
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
+}
+
+internal sealed partial class PutUserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.PutUserRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropEmail = System.Text.Json.JsonEncodedText.Encode("email");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+	private static readonly System.Text.Json.JsonEncodedText PropFullName = System.Text.Json.JsonEncodedText.Encode("full_name");
+	private static readonly System.Text.Json.JsonEncodedText PropMetadata = System.Text.Json.JsonEncodedText.Encode("metadata");
+	private static readonly System.Text.Json.JsonEncodedText PropPassword = System.Text.Json.JsonEncodedText.Encode("password");
+	private static readonly System.Text.Json.JsonEncodedText PropPasswordHash = System.Text.Json.JsonEncodedText.Encode("password_hash");
+	private static readonly System.Text.Json.JsonEncodedText PropRoles = System.Text.Json.JsonEncodedText.Encode("roles");
+	private static readonly System.Text.Json.JsonEncodedText PropUsername = System.Text.Json.JsonEncodedText.Encode("username");
+
+	public override Elastic.Clients.Elasticsearch.Security.PutUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propEmail = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		LocalJsonValue<string?> propFullName = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, object>?> propMetadata = default;
+		LocalJsonValue<string?> propPassword = default;
+		LocalJsonValue<string?> propPasswordHash = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propRoles = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Username?> propUsername = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propEmail.TryReadProperty(ref reader, options, PropEmail, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (propFullName.TryReadProperty(ref reader, options, PropFullName, null))
+			{
+				continue;
+			}
+
+			if (propMetadata.TryReadProperty(ref reader, options, PropMetadata, static System.Collections.Generic.IDictionary<string, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propPassword.TryReadProperty(ref reader, options, PropPassword, null))
+			{
+				continue;
+			}
+
+			if (propPasswordHash.TryReadProperty(ref reader, options, PropPasswordHash, null))
+			{
+				continue;
+			}
+
+			if (propRoles.TryReadProperty(ref reader, options, PropRoles, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propUsername.TryReadProperty(ref reader, options, PropUsername, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Email = propEmail.Value,
+			Enabled = propEnabled.Value,
+			FullName = propFullName.Value,
+			Metadata = propMetadata.Value,
+			Password = propPassword.Value,
+			PasswordHash = propPasswordHash.Value,
+			Roles = propRoles.Value,
+			Username = propUsername.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.PutUserRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropEmail, value.Email, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteProperty(options, PropFullName, value.FullName, null, null);
+		writer.WriteProperty(options, PropMetadata, value.Metadata, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, object>? v) => w.WriteDictionaryValue<string, object>(o, v, null, null));
+		writer.WriteProperty(options, PropPassword, value.Password, null, null);
+		writer.WriteProperty(options, PropPasswordHash, value.PasswordHash, null, null);
+		writer.WriteProperty(options, PropRoles, value.Roles, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropUsername, value.Username, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -45,19 +141,33 @@ public sealed partial class PutUserRequestParameters : RequestParameters
 /// Create or update users.
 /// </para>
 /// <para>
+/// Add and update users in the native realm.
 /// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user’s password without updating any other fields, use the change password API.
+/// To change a user's password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
-public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.PutUserRequestConverter))]
+public sealed partial class PutUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.PutUserRequestParameters>
 {
-	public PutUserRequest(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
+#if NET7_0_OR_GREATER
+	public PutUserRequest()
 	{
 	}
+#endif
+#if !NET7_0_OR_GREATER
+	public PutUserRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutUser;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityPutUser;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
@@ -65,26 +175,69 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 
 	/// <summary>
 	/// <para>
-	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
+	/// These values have the same meaning as in the index API, but the default value for this API is true.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
-	[JsonInclude, JsonPropertyName("email")]
+
+	/// <summary>
+	/// <para>
+	/// The email of the user.
+	/// </para>
+	/// </summary>
 	public string? Email { get; set; }
-	[JsonInclude, JsonPropertyName("enabled")]
+
+	/// <summary>
+	/// <para>
+	/// Specifies whether the user is enabled.
+	/// </para>
+	/// </summary>
 	public bool? Enabled { get; set; }
-	[JsonInclude, JsonPropertyName("full_name")]
+
+	/// <summary>
+	/// <para>
+	/// The full name of the user.
+	/// </para>
+	/// </summary>
 	public string? FullName { get; set; }
-	[JsonInclude, JsonPropertyName("metadata")]
-	public IDictionary<string, object>? Metadata { get; set; }
-	[JsonInclude, JsonPropertyName("password")]
+
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.IDictionary<string, object>? Metadata { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// Passwords must be at least 6 characters long.
+	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
+	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
+	/// </para>
+	/// </summary>
 	public string? Password { get; set; }
-	[JsonInclude, JsonPropertyName("password_hash")]
+
+	/// <summary>
+	/// <para>
+	/// A hash of the user's password.
+	/// This must be produced using the same hashing algorithm as has been configured for password storage.
+	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
+	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
+	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
+	/// </para>
+	/// </summary>
 	public string? PasswordHash { get; set; }
-	[JsonInclude, JsonPropertyName("roles")]
-	public ICollection<string>? Roles { get; set; }
-	[JsonInclude, JsonPropertyName("username")]
+
+	/// <summary>
+	/// <para>
+	/// A set of roles the user has.
+	/// The roles determine the user's access permissions.
+	/// To create a user without any roles, specify an empty list (<c>[]</c>).
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<string>? Roles { get; set; }
 	public Elastic.Clients.Elasticsearch.Username? Username { get; set; }
 }
 
@@ -93,132 +246,227 @@ public sealed partial class PutUserRequest : PlainRequest<PutUserRequestParamete
 /// Create or update users.
 /// </para>
 /// <para>
+/// Add and update users in the native realm.
 /// A password is required for adding a new user but is optional when updating an existing user.
-/// To change a user’s password without updating any other fields, use the change password API.
+/// To change a user's password without updating any other fields, use the change password API.
 /// </para>
 /// </summary>
-public sealed partial class PutUserRequestDescriptor : RequestDescriptor<PutUserRequestDescriptor, PutUserRequestParameters>
+public readonly partial struct PutUserRequestDescriptor
 {
-	internal PutUserRequestDescriptor(Action<PutUserRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.PutUserRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityPutUser;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "security.put_user";
-
-	public PutUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	private string? EmailValue { get; set; }
-	private bool? EnabledValue { get; set; }
-	private string? FullNameValue { get; set; }
-	private IDictionary<string, object>? MetadataValue { get; set; }
-	private string? PasswordValue { get; set; }
-	private string? PasswordHashValue { get; set; }
-	private ICollection<string>? RolesValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Username? UsernameValue { get; set; }
-
-	public PutUserRequestDescriptor Email(string? email)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutUserRequest instance)
 	{
-		EmailValue = email;
-		return Self;
+		Instance = instance;
 	}
 
-	public PutUserRequestDescriptor Enabled(bool? enabled = true)
+	public PutUserRequestDescriptor()
 	{
-		EnabledValue = enabled;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public PutUserRequestDescriptor FullName(string? fullName)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.PutUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Valid values are <c>true</c>, <c>false</c>, and <c>wait_for</c>.
+	/// These values have the same meaning as in the index API, but the default value for this API is true.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
 	{
-		FullNameValue = fullName;
-		return Self;
+		Instance.Refresh = value;
+		return this;
 	}
 
-	public PutUserRequestDescriptor Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+	/// <summary>
+	/// <para>
+	/// The email of the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Email(string? value)
 	{
-		MetadataValue = selector?.Invoke(new FluentDictionary<string, object>());
-		return Self;
+		Instance.Email = value;
+		return this;
 	}
 
-	public PutUserRequestDescriptor Password(string? password)
+	/// <summary>
+	/// <para>
+	/// Specifies whether the user is enabled.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Enabled(bool? value = true)
 	{
-		PasswordValue = password;
-		return Self;
+		Instance.Enabled = value;
+		return this;
 	}
 
-	public PutUserRequestDescriptor PasswordHash(string? passwordHash)
+	/// <summary>
+	/// <para>
+	/// The full name of the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor FullName(string? value)
 	{
-		PasswordHashValue = passwordHash;
-		return Self;
+		Instance.FullName = value;
+		return this;
 	}
 
-	public PutUserRequestDescriptor Roles(ICollection<string>? roles)
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Collections.Generic.IDictionary<string, object>? value)
 	{
-		RolesValue = roles;
-		return Self;
+		Instance.Metadata = value;
+		return this;
 	}
 
-	public PutUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? username)
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata()
 	{
-		UsernameValue = username;
-		return Self;
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(null);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Arbitrary metadata that you want to associate with the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Metadata(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject>? action)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(EmailValue))
+		Instance.Metadata = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringObject.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor AddMetadatum(string key, object value)
+	{
+		Instance.Metadata ??= new System.Collections.Generic.Dictionary<string, object>();
+		Instance.Metadata.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The user's password.
+	/// Passwords must be at least 6 characters long.
+	/// When adding a user, one of <c>password</c> or <c>password_hash</c> is required.
+	/// When updating an existing user, the password is optional, so that other fields on the user (such as their roles) may be updated without modifying the user's password
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Password(string? value)
+	{
+		Instance.Password = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A hash of the user's password.
+	/// This must be produced using the same hashing algorithm as has been configured for password storage.
+	/// For more details, see the explanation of the <c>xpack.security.authc.password_hashing.algorithm</c> setting in the user cache and password hash algorithm documentation.
+	/// Using this parameter allows the client to pre-hash the password for performance and/or confidentiality reasons.
+	/// The <c>password</c> parameter and the <c>password_hash</c> parameter cannot be used in the same request.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor PasswordHash(string? value)
+	{
+		Instance.PasswordHash = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A set of roles the user has.
+	/// The roles determine the user's access permissions.
+	/// To create a user without any roles, specify an empty list (<c>[]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(System.Collections.Generic.ICollection<string>? value)
+	{
+		Instance.Roles = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A set of roles the user has.
+	/// The roles determine the user's access permissions.
+	/// To create a user without any roles, specify an empty list (<c>[]</c>).
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Roles(params string[] values)
+	{
+		Instance.Roles = [.. values];
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username? value)
+	{
+		Instance.Username = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.PutUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("email");
-			writer.WriteStringValue(EmailValue);
+			return new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (EnabledValue.HasValue)
-		{
-			writer.WritePropertyName("enabled");
-			writer.WriteBooleanValue(EnabledValue.Value);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.PutUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		if (!string.IsNullOrEmpty(FullNameValue))
-		{
-			writer.WritePropertyName("full_name");
-			writer.WriteStringValue(FullNameValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (MetadataValue is not null)
-		{
-			writer.WritePropertyName("metadata");
-			JsonSerializer.Serialize(writer, MetadataValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(PasswordValue))
-		{
-			writer.WritePropertyName("password");
-			writer.WriteStringValue(PasswordValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (!string.IsNullOrEmpty(PasswordHashValue))
-		{
-			writer.WritePropertyName("password_hash");
-			writer.WriteStringValue(PasswordHashValue);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-		if (RolesValue is not null)
-		{
-			writer.WritePropertyName("roles");
-			JsonSerializer.Serialize(writer, RolesValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (UsernameValue is not null)
-		{
-			writer.WritePropertyName("username");
-			JsonSerializer.Serialize(writer, UsernameValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Security.PutUserRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

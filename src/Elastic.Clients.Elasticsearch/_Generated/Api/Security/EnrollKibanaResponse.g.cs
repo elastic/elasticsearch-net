@@ -17,19 +17,88 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class EnrollKibanaResponse : ElasticsearchResponse
+internal sealed partial class EnrollKibanaResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse>
 {
-	[JsonInclude, JsonPropertyName("http_ca")]
-	public string HttpCa { get; init; }
-	[JsonInclude, JsonPropertyName("token")]
-	public Elastic.Clients.Elasticsearch.Security.KibanaToken Token { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropHttpCa = System.Text.Json.JsonEncodedText.Encode("http_ca");
+	private static readonly System.Text.Json.JsonEncodedText PropToken = System.Text.Json.JsonEncodedText.Encode("token");
+
+	public override Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propHttpCa = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Security.KibanaToken> propToken = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propHttpCa.TryReadProperty(ref reader, options, PropHttpCa, null))
+			{
+				continue;
+			}
+
+			if (propToken.TryReadProperty(ref reader, options, PropToken, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			HttpCa = propHttpCa.Value,
+			Token = propToken.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropHttpCa, value.HttpCa, null, null);
+		writer.WriteProperty(options, PropToken, value.Token, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.EnrollKibanaResponseConverter))]
+public sealed partial class EnrollKibanaResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrollKibanaResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrollKibanaResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The CA certificate used to sign the node certificates that Elasticsearch uses for TLS on the HTTP layer.
+	/// The certificate is returned as a Base64 encoded string of the ASN.1 DER encoding of the certificate.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string HttpCa { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Security.KibanaToken Token { get; set; }
 }

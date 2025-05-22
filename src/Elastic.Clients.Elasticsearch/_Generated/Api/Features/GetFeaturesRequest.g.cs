@@ -17,61 +17,199 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Features;
 
-public sealed partial class GetFeaturesRequestParameters : RequestParameters
+public sealed partial class GetFeaturesRequestParameters : Elastic.Transport.RequestParameters
 {
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class GetFeaturesRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+/// Get the features.
+/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+/// You can use this API to determine which feature states to include when taking a snapshot.
+/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+/// </para>
+/// <para>
+/// A feature state includes one or more system indices necessary for a given feature to function.
+/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+/// </para>
+/// <para>
+/// The features listed by this API are a combination of built-in features and features defined by plugins.
+/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 /// </para>
 /// </summary>
-public sealed partial class GetFeaturesRequest : PlainRequest<GetFeaturesRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestConverter))]
+public sealed partial class GetFeaturesRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesGetFeatures;
+#if NET7_0_OR_GREATER
+	public GetFeaturesRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetFeaturesRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.FeaturesGetFeatures;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "features.get_features";
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 }
 
 /// <summary>
 /// <para>
-/// Gets a list of features which can be included in snapshots using the feature_states field when creating a snapshot
+/// Get the features.
+/// Get a list of features that can be included in snapshots using the <c>feature_states</c> field when creating a snapshot.
+/// You can use this API to determine which feature states to include when taking a snapshot.
+/// By default, all feature states are included in a snapshot if that snapshot includes the global state, or none if it does not.
+/// </para>
+/// <para>
+/// A feature state includes one or more system indices necessary for a given feature to function.
+/// In order to ensure data integrity, all system indices that comprise a feature state are snapshotted and restored together.
+/// </para>
+/// <para>
+/// The features listed by this API are a combination of built-in features and features defined by plugins.
+/// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
 /// </para>
 /// </summary>
-public sealed partial class GetFeaturesRequestDescriptor : RequestDescriptor<GetFeaturesRequestDescriptor, GetFeaturesRequestParameters>
+public readonly partial struct GetFeaturesRequestDescriptor
 {
-	internal GetFeaturesRequestDescriptor(Action<GetFeaturesRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GetFeaturesRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.FeaturesGetFeatures;
+	public static explicit operator Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest instance) => new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "features.get_features";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest Build(System.Action<Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor(new Elastic.Clients.Elasticsearch.Features.GetFeaturesRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Features.GetFeaturesRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

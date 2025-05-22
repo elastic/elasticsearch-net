@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class DisableUserRequestParameters : RequestParameters
+public sealed partial class DisableUserRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -40,23 +33,66 @@ public sealed partial class DisableUserRequestParameters : RequestParameters
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
+internal sealed partial class DisableUserRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.DisableUserRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.DisableUserRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.DisableUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.DisableUserRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Disable users.
 /// </para>
 /// <para>
 /// Disable users in the native realm.
+/// By default, when you create users, they are enabled.
+/// You can use this API to revoke a user's access to Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.DisableUserRequestConverter))]
+public sealed partial class DisableUserRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.DisableUserRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DisableUserRequest(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public DisableUserRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DisableUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDisableUser;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityDisableUser;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => false;
 
@@ -64,10 +100,20 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 
 	/// <summary>
 	/// <para>
+	/// An identifier for the user.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Username Username { get => P<Elastic.Clients.Elasticsearch.Username>("username"); set => PR("username", value); }
+
+	/// <summary>
+	/// <para>
 	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Refresh? Refresh { get => Q<Elastic.Clients.Elasticsearch.Refresh?>("refresh"); set => Q("refresh", value); }
 }
 
@@ -77,33 +123,103 @@ public sealed partial class DisableUserRequest : PlainRequest<DisableUserRequest
 /// </para>
 /// <para>
 /// Disable users in the native realm.
+/// By default, when you create users, they are enabled.
+/// You can use this API to revoke a user's access to Elasticsearch.
 /// </para>
 /// </summary>
-public sealed partial class DisableUserRequestDescriptor : RequestDescriptor<DisableUserRequestDescriptor, DisableUserRequestParameters>
+public readonly partial struct DisableUserRequestDescriptor
 {
-	internal DisableUserRequestDescriptor(Action<DisableUserRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.DisableUserRequest Instance { get; init; }
 
-	public DisableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Username username) : base(r => r.Required("username", username))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DisableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DisableUserRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityDisableUser;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.disable_user";
-
-	public DisableUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? refresh) => Qs("refresh", refresh);
-
-	public DisableUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username username)
+	public DisableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Username username)
 	{
-		RouteValues.Required("username", username);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.DisableUserRequest(username);
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DisableUserRequestDescriptor()
 	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(Elastic.Clients.Elasticsearch.Security.DisableUserRequest instance) => new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.DisableUserRequest(Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// An identifier for the user.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Username(Elastic.Clients.Elasticsearch.Username value)
+	{
+		Instance.Username = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If <c>true</c> (the default) then refresh the affected shards to make this operation visible to search, if <c>wait_for</c> then wait for a refresh to make this operation visible to search, if <c>false</c> then do nothing with refreshes.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Refresh(Elastic.Clients.Elasticsearch.Refresh? value)
+	{
+		Instance.Refresh = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.DisableUserRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.DisableUserRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.DisableUserRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

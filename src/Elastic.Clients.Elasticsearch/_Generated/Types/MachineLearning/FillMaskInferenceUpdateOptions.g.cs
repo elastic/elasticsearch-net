@@ -17,24 +17,93 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
+internal sealed partial class FillMaskInferenceUpdateOptionsConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropNumTopClasses = System.Text.Json.JsonEncodedText.Encode("num_top_classes");
+	private static readonly System.Text.Json.JsonEncodedText PropResultsField = System.Text.Json.JsonEncodedText.Encode("results_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTokenization = System.Text.Json.JsonEncodedText.Encode("tokenization");
+
+	public override Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propNumTopClasses = default;
+		LocalJsonValue<string?> propResultsField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions?> propTokenization = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propNumTopClasses.TryReadProperty(ref reader, options, PropNumTopClasses, null))
+			{
+				continue;
+			}
+
+			if (propResultsField.TryReadProperty(ref reader, options, PropResultsField, null))
+			{
+				continue;
+			}
+
+			if (propTokenization.TryReadProperty(ref reader, options, PropTokenization, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			NumTopClasses = propNumTopClasses.Value,
+			ResultsField = propResultsField.Value,
+			Tokenization = propTokenization.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropNumTopClasses, value.NumTopClasses, null, null);
+		writer.WriteProperty(options, PropResultsField, value.ResultsField, null, null);
+		writer.WriteProperty(options, PropTokenization, value.Tokenization, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsConverter))]
 public sealed partial class FillMaskInferenceUpdateOptions
 {
+#if NET7_0_OR_GREATER
+	public FillMaskInferenceUpdateOptions()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public FillMaskInferenceUpdateOptions()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("num_top_classes")]
 	public int? NumTopClasses { get; set; }
 
 	/// <summary>
@@ -42,7 +111,6 @@ public sealed partial class FillMaskInferenceUpdateOptions
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("results_field")]
 	public string? ResultsField { get; set; }
 
 	/// <summary>
@@ -50,35 +118,37 @@ public sealed partial class FillMaskInferenceUpdateOptions
 	/// The tokenization options to update when inferring
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tokenization")]
 	public Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? Tokenization { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate(FillMaskInferenceUpdateOptions fillMaskInferenceUpdateOptions) => Elastic.Clients.Elasticsearch.MachineLearning.InferenceConfigUpdate.FillMask(fillMaskInferenceUpdateOptions);
 }
 
-public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : SerializableDescriptor<FillMaskInferenceUpdateOptionsDescriptor>
+public readonly partial struct FillMaskInferenceUpdateOptionsDescriptor
 {
-	internal FillMaskInferenceUpdateOptionsDescriptor(Action<FillMaskInferenceUpdateOptionsDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions Instance { get; init; }
 
-	public FillMaskInferenceUpdateOptionsDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FillMaskInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions instance)
 	{
+		Instance = instance;
 	}
 
-	private int? NumTopClassesValue { get; set; }
-	private string? ResultsFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? TokenizationValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor TokenizationDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> TokenizationDescriptorAction { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public FillMaskInferenceUpdateOptionsDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions instance) => new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Specifies the number of top class predictions to return. Defaults to 0.
 	/// </para>
 	/// </summary>
-	public FillMaskInferenceUpdateOptionsDescriptor NumTopClasses(int? numTopClasses)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor NumTopClasses(int? value)
 	{
-		NumTopClassesValue = numTopClasses;
-		return Self;
+		Instance.NumTopClasses = value;
+		return this;
 	}
 
 	/// <summary>
@@ -86,10 +156,10 @@ public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : Serializa
 	/// The field that is added to incoming documents to contain the inference prediction. Defaults to predicted_value.
 	/// </para>
 	/// </summary>
-	public FillMaskInferenceUpdateOptionsDescriptor ResultsField(string? resultsField)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor ResultsField(string? value)
 	{
-		ResultsFieldValue = resultsField;
-		return Self;
+		Instance.ResultsField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -97,61 +167,44 @@ public sealed partial class FillMaskInferenceUpdateOptionsDescriptor : Serializa
 	/// The tokenization options to update when inferring
 	/// </para>
 	/// </summary>
-	public FillMaskInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? tokenization)
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptions? value)
 	{
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = null;
-		TokenizationValue = tokenization;
-		return Self;
+		Instance.Tokenization = value;
+		return this;
 	}
 
-	public FillMaskInferenceUpdateOptionsDescriptor Tokenization(Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor Tokenization()
 	{
-		TokenizationValue = null;
-		TokenizationDescriptorAction = null;
-		TokenizationDescriptor = descriptor;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(null);
+		return this;
 	}
 
-	public FillMaskInferenceUpdateOptionsDescriptor Tokenization(Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// The tokenization options to update when inferring
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor Tokenization(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor>? action)
 	{
-		TokenizationValue = null;
-		TokenizationDescriptor = null;
-		TokenizationDescriptorAction = configure;
-		return Self;
+		Instance.Tokenization = Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor.Build(action);
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (NumTopClassesValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("num_top_classes");
-			writer.WriteNumberValue(NumTopClassesValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(ResultsFieldValue))
-		{
-			writer.WritePropertyName("results_field");
-			writer.WriteStringValue(ResultsFieldValue);
-		}
-
-		if (TokenizationDescriptor is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationDescriptor, options);
-		}
-		else if (TokenizationDescriptorAction is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.MachineLearning.NlpTokenizationUpdateOptionsDescriptor(TokenizationDescriptorAction), options);
-		}
-		else if (TokenizationValue is not null)
-		{
-			writer.WritePropertyName("tokenization");
-			JsonSerializer.Serialize(writer, TokenizationValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptionsDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.FillMaskInferenceUpdateOptions(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

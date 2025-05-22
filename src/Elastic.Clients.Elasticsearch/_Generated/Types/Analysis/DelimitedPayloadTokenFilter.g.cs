@@ -17,90 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class DelimitedPayloadTokenFilter : ITokenFilter
+internal sealed partial class DelimitedPayloadTokenFilterConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter>
 {
-	[JsonInclude, JsonPropertyName("delimiter")]
+	private static readonly System.Text.Json.JsonEncodedText PropDelimiter = System.Text.Json.JsonEncodedText.Encode("delimiter");
+	private static readonly System.Text.Json.JsonEncodedText PropEncoding = System.Text.Json.JsonEncodedText.Encode("encoding");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+	private static readonly System.Text.Json.JsonEncodedText PropVersion = System.Text.Json.JsonEncodedText.Encode("version");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDelimiter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding?> propEncoding = default;
+		LocalJsonValue<string?> propVersion = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDelimiter.TryReadProperty(ref reader, options, PropDelimiter, null))
+			{
+				continue;
+			}
+
+			if (propEncoding.TryReadProperty(ref reader, options, PropEncoding, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (propVersion.TryReadProperty(ref reader, options, PropVersion, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Delimiter = propDelimiter.Value,
+			Encoding = propEncoding.Value,
+			Version = propVersion.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDelimiter, value.Delimiter, null, null);
+		writer.WriteProperty(options, PropEncoding, value.Encoding, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteProperty(options, PropVersion, value.Version, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterConverter))]
+public sealed partial class DelimitedPayloadTokenFilter : Elastic.Clients.Elasticsearch.Analysis.ITokenFilter
+{
+#if NET7_0_OR_GREATER
+	public DelimitedPayloadTokenFilter()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public DelimitedPayloadTokenFilter()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
 	public string? Delimiter { get; set; }
-	[JsonInclude, JsonPropertyName("encoding")]
+
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
 	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? Encoding { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "delimited_payload";
 
-	[JsonInclude, JsonPropertyName("version")]
 	public string? Version { get; set; }
 }
 
-public sealed partial class DelimitedPayloadTokenFilterDescriptor : SerializableDescriptor<DelimitedPayloadTokenFilterDescriptor>, IBuildableDescriptor<DelimitedPayloadTokenFilter>
+public readonly partial struct DelimitedPayloadTokenFilterDescriptor
 {
-	internal DelimitedPayloadTokenFilterDescriptor(Action<DelimitedPayloadTokenFilterDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter Instance { get; init; }
 
-	public DelimitedPayloadTokenFilterDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelimitedPayloadTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DelimiterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? EncodingValue { get; set; }
-	private string? VersionValue { get; set; }
-
-	public DelimitedPayloadTokenFilterDescriptor Delimiter(string? delimiter)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DelimitedPayloadTokenFilterDescriptor()
 	{
-		DelimiterValue = delimiter;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? encoding)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter instance) => new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Character used to separate tokens from payloads. Defaults to <c>|</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor Delimiter(string? value)
 	{
-		EncodingValue = encoding;
-		return Self;
+		Instance.Delimiter = value;
+		return this;
 	}
 
-	public DelimitedPayloadTokenFilterDescriptor Version(string? version)
+	/// <summary>
+	/// <para>
+	/// Data type for the stored payload.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor Encoding(Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadEncoding? value)
 	{
-		VersionValue = version;
-		return Self;
+		Instance.Encoding = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor Version(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DelimiterValue))
+		Instance.Version = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("delimiter");
-			writer.WriteStringValue(DelimiterValue);
+			return new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (EncodingValue is not null)
-		{
-			writer.WritePropertyName("encoding");
-			JsonSerializer.Serialize(writer, EncodingValue, options);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("delimited_payload");
-		if (!string.IsNullOrEmpty(VersionValue))
-		{
-			writer.WritePropertyName("version");
-			writer.WriteStringValue(VersionValue);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilterDescriptor(new Elastic.Clients.Elasticsearch.Analysis.DelimitedPayloadTokenFilter(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	DelimitedPayloadTokenFilter IBuildableDescriptor<DelimitedPayloadTokenFilter>.Build() => new()
-	{
-		Delimiter = DelimiterValue,
-		Encoding = EncodingValue,
-		Version = VersionValue
-	};
 }

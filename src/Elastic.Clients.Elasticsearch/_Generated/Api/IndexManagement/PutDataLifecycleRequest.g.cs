@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class PutDataLifecycleRequestParameters : RequestParameters
+public sealed partial class PutDataLifecycleRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,7 +32,7 @@ public sealed partial class PutDataLifecycleRequestParameters : RequestParameter
 	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -59,25 +52,107 @@ public sealed partial class PutDataLifecycleRequestParameters : RequestParameter
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
 }
 
+internal sealed partial class PutDataLifecycleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDataRetention = System.Text.Json.JsonEncodedText.Encode("data_retention");
+	private static readonly System.Text.Json.JsonEncodedText PropDownsampling = System.Text.Json.JsonEncodedText.Encode("downsampling");
+	private static readonly System.Text.Json.JsonEncodedText PropEnabled = System.Text.Json.JsonEncodedText.Encode("enabled");
+
+	public override Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propDataRetention = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling?> propDownsampling = default;
+		LocalJsonValue<bool?> propEnabled = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDataRetention.TryReadProperty(ref reader, options, PropDataRetention, null))
+			{
+				continue;
+			}
+
+			if (propDownsampling.TryReadProperty(ref reader, options, PropDownsampling, null))
+			{
+				continue;
+			}
+
+			if (propEnabled.TryReadProperty(ref reader, options, PropEnabled, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			DataRetention = propDataRetention.Value,
+			Downsampling = propDownsampling.Value,
+			Enabled = propEnabled.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDataRetention, value.DataRetention, null, null);
+		writer.WriteProperty(options, PropDownsampling, value.Downsampling, null, null);
+		writer.WriteProperty(options, PropEnabled, value.Enabled, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Update data stream lifecycles.
 /// Update the data stream lifecycle of the specified data streams.
 /// </para>
 /// </summary>
-public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecycleRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestConverter))]
+public sealed partial class PutDataLifecycleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public PutDataLifecycleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutDataLifecycle;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementPutDataLifecycle;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.PUT;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.put_data_lifecycle";
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.DataStreamNames Name { get => P<Elastic.Clients.Elasticsearch.DataStreamNames>("name"); set => PR("name", value); }
 
 	/// <summary>
 	/// <para>
@@ -86,8 +161,7 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -96,7 +170,6 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 	/// error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 
 	/// <summary>
@@ -105,15 +178,31 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 	/// If no response is received before the timeout expires, the request fails and returns an error.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public Elastic.Clients.Elasticsearch.Duration? Timeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("timeout"); set => Q("timeout", value); }
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle Lifecycle { get; set; }
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, Lifecycle, options);
-	}
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? DataRetention { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? Downsampling { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public bool? Enabled { get; set; }
 }
 
 /// <summary>
@@ -122,59 +211,188 @@ public sealed partial class PutDataLifecycleRequest : PlainRequest<PutDataLifecy
 /// Update the data stream lifecycle of the specified data streams.
 /// </para>
 /// </summary>
-public sealed partial class PutDataLifecycleRequestDescriptor : RequestDescriptor<PutDataLifecycleRequestDescriptor, PutDataLifecycleRequestParameters>
+public readonly partial struct PutDataLifecycleRequestDescriptor
 {
-	internal PutDataLifecycleRequestDescriptor(Action<PutDataLifecycleRequestDescriptor> configure) => configure.Invoke(this);
-	public PutDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle lifecycle, Elastic.Clients.Elasticsearch.DataStreamNames name) : base(r => r.Required("name", name)) => LifecycleValue = lifecycle;
+	internal Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementPutDataLifecycle;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.PUT;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.put_data_lifecycle";
-
-	public PutDataLifecycleRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public PutDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? masterTimeout) => Qs("master_timeout", masterTimeout);
-	public PutDataLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? timeout) => Qs("timeout", timeout);
-
-	public PutDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames name)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest instance)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle LifecycleValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor LifecycleDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> LifecycleDescriptorAction { get; set; }
-
-	public PutDataLifecycleRequestDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycle lifecycle)
+	public PutDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.DataStreamNames name)
 	{
-		LifecycleDescriptor = null;
-		LifecycleDescriptorAction = null;
-		LifecycleValue = lifecycle;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest(name);
 	}
 
-	public PutDataLifecycleRequestDescriptor Lifecycle(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor descriptor)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public PutDataLifecycleRequestDescriptor()
 	{
-		LifecycleValue = null;
-		LifecycleDescriptorAction = null;
-		LifecycleDescriptor = descriptor;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public PutDataLifecycleRequestDescriptor Lifecycle(Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDescriptor> configure)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Comma-separated list of data streams used to limit the request.
+	/// Supports wildcards (<c>*</c>).
+	/// To target all data streams use <c>*</c> or <c>_all</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Name(Elastic.Clients.Elasticsearch.DataStreamNames value)
 	{
-		LifecycleValue = null;
-		LifecycleDescriptor = null;
-		LifecycleDescriptorAction = configure;
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
 	{
-		JsonSerializer.Serialize(writer, LifecycleValue, options);
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Type of data stream that wildcard patterns can match.
+	/// Supports comma-separated values, such as <c>open,hidden</c>.
+	/// Valid values are: <c>all</c>, <c>hidden</c>, <c>open</c>, <c>closed</c>, <c>none</c>.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a connection to the master node. If no response is
+	/// received before the timeout expires, the request fails and returns an
+	/// error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.MasterTimeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Period to wait for a response.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Timeout(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.Timeout = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, every document added to this data stream will be stored at least for this time frame.
+	/// Any time after this duration the document could be deleted.
+	/// When empty, every document in this data stream will be stored indefinitely.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor DataRetention(Elastic.Clients.Elasticsearch.Duration? value)
+	{
+		Instance.DataRetention = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsampling? value)
+	{
+		Instance.Downsampling = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The downsampling configuration to execute for the managed backing index after rollover.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Downsampling(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor> action)
+	{
+		Instance.Downsampling = Elastic.Clients.Elasticsearch.IndexManagement.DataStreamLifecycleDownsamplingDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If defined, it turns data stream lifecycle on/off (<c>true</c>/<c>false</c>) for this data stream. A data stream lifecycle
+	/// that's disabled (enabled: <c>false</c>) will have no effect on the data stream.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Enabled(bool? value = true)
+	{
+		Instance.Enabled = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.PutDataLifecycleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

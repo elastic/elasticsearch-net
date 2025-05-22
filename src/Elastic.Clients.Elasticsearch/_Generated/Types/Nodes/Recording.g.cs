@@ -17,24 +17,99 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
+internal sealed partial class RecordingConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Nodes.Recording>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionCount = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_count");
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTime = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time");
+	private static readonly System.Text.Json.JsonEncodedText PropCumulativeExecutionTimeMillis = System.Text.Json.JsonEncodedText.Encode("cumulative_execution_time_millis");
+	private static readonly System.Text.Json.JsonEncodedText PropName = System.Text.Json.JsonEncodedText.Encode("name");
+
+	public override Elastic.Clients.Elasticsearch.Nodes.Recording Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<long?> propCumulativeExecutionCount = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propCumulativeExecutionTime = default;
+		LocalJsonValue<System.TimeSpan?> propCumulativeExecutionTimeMillis = default;
+		LocalJsonValue<string?> propName = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCumulativeExecutionCount.TryReadProperty(ref reader, options, PropCumulativeExecutionCount, null))
+			{
+				continue;
+			}
+
+			if (propCumulativeExecutionTime.TryReadProperty(ref reader, options, PropCumulativeExecutionTime, null))
+			{
+				continue;
+			}
+
+			if (propCumulativeExecutionTimeMillis.TryReadProperty(ref reader, options, PropCumulativeExecutionTimeMillis, static System.TimeSpan? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadValueEx<System.TimeSpan>(o, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker))))
+			{
+				continue;
+			}
+
+			if (propName.TryReadProperty(ref reader, options, PropName, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Nodes.Recording(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			CumulativeExecutionCount = propCumulativeExecutionCount.Value,
+			CumulativeExecutionTime = propCumulativeExecutionTime.Value,
+			CumulativeExecutionTimeMillis = propCumulativeExecutionTimeMillis.Value,
+			Name = propName.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Nodes.Recording value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCumulativeExecutionCount, value.CumulativeExecutionCount, null, null);
+		writer.WriteProperty(options, PropCumulativeExecutionTime, value.CumulativeExecutionTime, null, null);
+		writer.WriteProperty(options, PropCumulativeExecutionTimeMillis, value.CumulativeExecutionTimeMillis, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.TimeSpan? v) => w.WriteValueEx<System.TimeSpan>(o, v, typeof(Elastic.Clients.Elasticsearch.Serialization.TimeSpanMillisMarker)));
+		writer.WriteProperty(options, PropName, value.Name, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Nodes.RecordingConverter))]
 public sealed partial class Recording
 {
-	[JsonInclude, JsonPropertyName("cumulative_execution_count")]
-	public long? CumulativeExecutionCount { get; init; }
-	[JsonInclude, JsonPropertyName("cumulative_execution_time")]
-	public Elastic.Clients.Elasticsearch.Duration? CumulativeExecutionTime { get; init; }
-	[JsonInclude, JsonPropertyName("cumulative_execution_time_millis")]
-	public long? CumulativeExecutionTimeMillis { get; init; }
-	[JsonInclude, JsonPropertyName("name")]
-	public string? Name { get; init; }
+#if NET7_0_OR_GREATER
+	public Recording()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Recording()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Recording(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public long? CumulativeExecutionCount { get; set; }
+	public Elastic.Clients.Elasticsearch.Duration? CumulativeExecutionTime { get; set; }
+	public System.TimeSpan? CumulativeExecutionTimeMillis { get; set; }
+	public string? Name { get; set; }
 }

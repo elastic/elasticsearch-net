@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch;
 
-public sealed partial class ScrollRequestParameters : RequestParameters
+public sealed partial class ScrollRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -38,6 +31,54 @@ public sealed partial class ScrollRequestParameters : RequestParameters
 	/// </para>
 	/// </summary>
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
+}
+
+internal sealed partial class ScrollRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.ScrollRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropScroll = System.Text.Json.JsonEncodedText.Encode("scroll");
+	private static readonly System.Text.Json.JsonEncodedText PropScrollId = System.Text.Json.JsonEncodedText.Encode("scroll_id");
+
+	public override Elastic.Clients.Elasticsearch.ScrollRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propScroll = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.ScrollId> propScrollId = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propScroll.TryReadProperty(ref reader, options, PropScroll, null))
+			{
+				continue;
+			}
+
+			if (propScrollId.TryReadProperty(ref reader, options, PropScrollId, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Scroll = propScroll.Value,
+			ScrollId = propScrollId.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.ScrollRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropScroll, value.Scroll, null, null);
+		writer.WriteProperty(options, PropScrollId, value.ScrollId, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -62,11 +103,34 @@ public sealed partial class ScrollRequestParameters : RequestParameters
 /// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 /// </para>
 /// </summary>
-public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.ScrollRequestConverter))]
+public sealed partial class ScrollRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.ScrollRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScroll;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScrollRequest(Elastic.Clients.Elasticsearch.ScrollId scrollId)
+	{
+		ScrollId = scrollId;
+	}
+#if NET7_0_OR_GREATER
+	public ScrollRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ScrollRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.NoNamespaceScroll;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -77,24 +141,25 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? RestTotalHitsAsInt { get => Q<bool?>("rest_total_hits_as_int"); set => Q("rest_total_hits_as_int", value); }
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scroll")]
 	public Elastic.Clients.Elasticsearch.Duration? Scroll { get; set; }
 
 	/// <summary>
 	/// <para>
-	/// Scroll ID of the search.
+	/// The scroll ID of the search.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("scroll_id")]
-	public Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.ScrollId ScrollId { get; set; }
 }
 
 /// <summary>
@@ -119,60 +184,104 @@ public sealed partial class ScrollRequest : PlainRequest<ScrollRequestParameters
 /// IMPORTANT: Results from a scrolling search reflect the state of the index at the time of the initial search request. Subsequent indexing or document changes only affect later search and scroll requests.
 /// </para>
 /// </summary>
-public sealed partial class ScrollRequestDescriptor : RequestDescriptor<ScrollRequestDescriptor, ScrollRequestParameters>
+public readonly partial struct ScrollRequestDescriptor
 {
-	internal ScrollRequestDescriptor(Action<ScrollRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.ScrollRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ScrollRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ScrollRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.NoNamespaceScroll;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "scroll";
-
-	public ScrollRequestDescriptor RestTotalHitsAsInt(bool? restTotalHitsAsInt = true) => Qs("rest_total_hits_as_int", restTotalHitsAsInt);
-
-	private Elastic.Clients.Elasticsearch.Duration? ScrollValue { get; set; }
-	private Elastic.Clients.Elasticsearch.ScrollId ScrollIdValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.ScrollRequestDescriptor(Elastic.Clients.Elasticsearch.ScrollRequest instance) => new Elastic.Clients.Elasticsearch.ScrollRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.ScrollRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
-	/// Period to retain the search context for scrolling.
+	/// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
 	/// </para>
 	/// </summary>
-	public ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? scroll)
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor RestTotalHitsAsInt(bool? value = true)
 	{
-		ScrollValue = scroll;
-		return Self;
+		Instance.RestTotalHitsAsInt = value;
+		return this;
 	}
 
 	/// <summary>
 	/// <para>
-	/// Scroll ID of the search.
+	/// The period to retain the search context for scrolling.
 	/// </para>
 	/// </summary>
-	public ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId scrollId)
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor Scroll(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		ScrollIdValue = scrollId;
-		return Self;
+		Instance.Scroll = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The scroll ID of the search.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor ScrollId(Elastic.Clients.Elasticsearch.ScrollId value)
 	{
-		writer.WriteStartObject();
-		if (ScrollValue is not null)
-		{
-			writer.WritePropertyName("scroll");
-			JsonSerializer.Serialize(writer, ScrollValue, options);
-		}
+		Instance.ScrollId = value;
+		return this;
+	}
 
-		writer.WritePropertyName("scroll_id");
-		JsonSerializer.Serialize(writer, ScrollIdValue, options);
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.ScrollRequest Build(System.Action<Elastic.Clients.Elasticsearch.ScrollRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.ScrollRequestDescriptor(new Elastic.Clients.Elasticsearch.ScrollRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.ScrollRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

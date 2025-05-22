@@ -17,28 +17,149 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Snapshot;
 
+internal sealed partial class SnapshotShardFailureConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropIndex = System.Text.Json.JsonEncodedText.Encode("index");
+	private static readonly System.Text.Json.JsonEncodedText PropIndexUuid = System.Text.Json.JsonEncodedText.Encode("index_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeId = System.Text.Json.JsonEncodedText.Encode("node_id");
+	private static readonly System.Text.Json.JsonEncodedText PropReason = System.Text.Json.JsonEncodedText.Encode("reason");
+	private static readonly System.Text.Json.JsonEncodedText PropShardId = System.Text.Json.JsonEncodedText.Encode("shard_id");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+
+	public override Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propIndex = default;
+		LocalJsonValue<string> propIndexUuid = default;
+		LocalJsonValue<string?> propNodeId = default;
+		LocalJsonValue<string> propReason = default;
+		LocalJsonValue<int> propShardId = default;
+		LocalJsonValue<string> propStatus = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propIndex.TryReadProperty(ref reader, options, PropIndex, null))
+			{
+				continue;
+			}
+
+			if (propIndexUuid.TryReadProperty(ref reader, options, PropIndexUuid, null))
+			{
+				continue;
+			}
+
+			if (propNodeId.TryReadProperty(ref reader, options, PropNodeId, null))
+			{
+				continue;
+			}
+
+			if (propReason.TryReadProperty(ref reader, options, PropReason, null))
+			{
+				continue;
+			}
+
+			if (propShardId.TryReadProperty(ref reader, options, PropShardId, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Index = propIndex.Value,
+			IndexUuid = propIndexUuid.Value,
+			NodeId = propNodeId.Value,
+			Reason = propReason.Value,
+			ShardId = propShardId.Value,
+			Status = propStatus.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailure value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropIndex, value.Index, null, null);
+		writer.WriteProperty(options, PropIndexUuid, value.IndexUuid, null, null);
+		writer.WriteProperty(options, PropNodeId, value.NodeId, null, null);
+		writer.WriteProperty(options, PropReason, value.Reason, null, null);
+		writer.WriteProperty(options, PropShardId, value.ShardId, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Snapshot.SnapshotShardFailureConverter))]
 public sealed partial class SnapshotShardFailure
 {
-	[JsonInclude, JsonPropertyName("index")]
-	public string Index { get; init; }
-	[JsonInclude, JsonPropertyName("index_uuid")]
-	public string IndexUuid { get; init; }
-	[JsonInclude, JsonPropertyName("node_id")]
-	public string? NodeId { get; init; }
-	[JsonInclude, JsonPropertyName("reason")]
-	public string Reason { get; init; }
-	[JsonInclude, JsonPropertyName("shard_id")]
-	public string ShardId { get; init; }
-	[JsonInclude, JsonPropertyName("status")]
-	public string Status { get; init; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SnapshotShardFailure(string index, string indexUuid, string reason, int shardId, string status)
+	{
+		Index = index;
+		IndexUuid = indexUuid;
+		Reason = reason;
+		ShardId = shardId;
+		Status = status;
+	}
+#if NET7_0_OR_GREATER
+	public SnapshotShardFailure()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public SnapshotShardFailure()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SnapshotShardFailure(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Index { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string IndexUuid { get; set; }
+	public string? NodeId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Reason { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	int ShardId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Status { get; set; }
 }

@@ -17,175 +17,347 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexManagement;
 
-public sealed partial class DownsampleRequestParameters : RequestParameters
+public sealed partial class DownsampleRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class DownsampleRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest>
+{
+	public override Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance) { Config = reader.ReadValue<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig>(options, null) };
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteValue(options, value.Config, null);
+	}
 }
 
 /// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
+/// </para>
+/// <para>
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
-public sealed partial class DownsampleRequest : PlainRequest<DownsampleRequestParameters>, ISelfSerializable
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestConverter))]
+public sealed partial class DownsampleRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public DownsampleRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex) : base(r => r.Required("index", index).Required("target_index", targetIndex))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDownsample;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleRequest(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex, Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config) : base(r => r.Required("index", index).Required("target_index", targetIndex))
+	{
+		Config = config;
+	}
+#if NET7_0_OR_GREATER
+	public DownsampleRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal DownsampleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexManagementDownsample;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "indices.downsample";
 
-	[JsonIgnore]
-	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+	/// <summary>
+	/// <para>
+	/// Name of the time series index to downsample.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName Index { get => P<Elastic.Clients.Elasticsearch.IndexName>("index"); set => PR("index", value); }
 
-	void ISelfSerializable.Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexName TargetIndex { get => P<Elastic.Clients.Elasticsearch.IndexName>("target_index"); set => PR("target_index", value); }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig Config { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
+/// </para>
+/// <para>
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
+/// </para>
+/// </summary>
+public readonly partial struct DownsampleRequestDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance)
 	{
-		JsonSerializer.Serialize(writer, Config, options);
+		Instance = instance;
+	}
+
+	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
+	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(index, targetIndex);
+#pragma warning restore CS0618
+	}
+
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DownsampleRequestDescriptor()
+	{
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the time series index to downsample.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.Index = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName value)
+	{
+		Instance.TargetIndex = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig value)
+	{
+		Instance.Config = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Config(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> action)
+	{
+		Instance.Config = Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// Downsample an index.
+/// Aggregate a time series (TSDS) index and store pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// For example, a TSDS index that contains metrics sampled every 10 seconds can be downsampled to an hourly index.
+/// All documents within an hour interval are summarized and stored as a single document in the downsample index.
 /// </para>
-/// </summary>
-public sealed partial class DownsampleRequestDescriptor<TDocument> : RequestDescriptor<DownsampleRequestDescriptor<TDocument>, DownsampleRequestParameters>
-{
-	internal DownsampleRequestDescriptor(Action<DownsampleRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex) : base(r => r.Required("index", index).Required("target_index", targetIndex)) => ConfigValue = config;
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDownsample;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.downsample";
-
-	public DownsampleRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName index)
-	{
-		RouteValues.Required("index", index);
-		return Self;
-	}
-
-	public DownsampleRequestDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName targetIndex)
-	{
-		RouteValues.Required("target_index", targetIndex);
-		return Self;
-	}
-
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
-
-	public DownsampleRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
-	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
-	}
-
-	public DownsampleRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor)
-	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public DownsampleRequestDescriptor<TDocument> Config(Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> configure)
-	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		JsonSerializer.Serialize(writer, ConfigValue, options);
-	}
-}
-
-/// <summary>
 /// <para>
-/// Aggregates a time series (TSDS) index and stores pre-computed statistical summaries (<c>min</c>, <c>max</c>, <c>sum</c>, <c>value_count</c> and <c>avg</c>) for each metric field grouped by a configured time interval.
+/// NOTE: Only indices in a time series data stream are supported.
+/// Neither field nor document level security can be defined on the source index.
+/// The source index must be read only (<c>index.blocks.write: true</c>).
 /// </para>
 /// </summary>
-public sealed partial class DownsampleRequestDescriptor : RequestDescriptor<DownsampleRequestDescriptor, DownsampleRequestParameters>
+public readonly partial struct DownsampleRequestDescriptor<TDocument>
 {
-	internal DownsampleRequestDescriptor(Action<DownsampleRequestDescriptor> configure) => configure.Invoke(this);
-	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config, Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex) : base(r => r.Required("index", index).Required("target_index", targetIndex)) => ConfigValue = config;
+	internal Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Instance { get; init; }
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexManagementDownsample;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "indices.downsample";
-
-	public DownsampleRequestDescriptor Index(Elastic.Clients.Elasticsearch.IndexName index)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance)
 	{
-		RouteValues.Required("index", index);
-		return Self;
+		Instance = instance;
 	}
 
-	public DownsampleRequestDescriptor TargetIndex(Elastic.Clients.Elasticsearch.IndexName targetIndex)
+	public DownsampleRequestDescriptor(Elastic.Clients.Elasticsearch.IndexName index, Elastic.Clients.Elasticsearch.IndexName targetIndex)
 	{
-		RouteValues.Required("target_index", targetIndex);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(index, targetIndex);
+#pragma warning restore CS0618
 	}
 
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig ConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor ConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> ConfigDescriptorAction { get; set; }
-
-	public DownsampleRequestDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig config)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public DownsampleRequestDescriptor()
 	{
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = null;
-		ConfigValue = config;
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public DownsampleRequestDescriptor Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor descriptor)
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest instance) => new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Name of the time series index to downsample.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Index(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		ConfigValue = null;
-		ConfigDescriptorAction = null;
-		ConfigDescriptor = descriptor;
-		return Self;
+		Instance.Index = value;
+		return this;
 	}
 
-	public DownsampleRequestDescriptor Config(Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Name of the index to create.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> TargetIndex(Elastic.Clients.Elasticsearch.IndexName value)
 	{
-		ConfigValue = null;
-		ConfigDescriptor = null;
-		ConfigDescriptorAction = configure;
-		return Self;
+		Instance.TargetIndex = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Config(Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfig value)
 	{
-		JsonSerializer.Serialize(writer, ConfigValue, options);
+		Instance.Config = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Config(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor> action)
+	{
+		Instance.Config = Elastic.Clients.Elasticsearch.IndexManagement.DownsampleConfigDescriptor.Build(action);
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexManagement.DownsampleRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

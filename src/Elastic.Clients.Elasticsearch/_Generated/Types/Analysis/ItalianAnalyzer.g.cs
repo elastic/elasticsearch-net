@@ -17,90 +17,156 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Analysis;
 
-public sealed partial class ItalianAnalyzer : IAnalyzer
+internal sealed partial class ItalianAnalyzerConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer>
 {
-	[JsonInclude, JsonPropertyName("stem_exclusion")]
-	public ICollection<string>? StemExclusion { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords")]
-	[SingleOrManyCollectionConverter(typeof(string))]
-	public ICollection<string>? Stopwords { get; set; }
-	[JsonInclude, JsonPropertyName("stopwords_path")]
+	private static readonly System.Text.Json.JsonEncodedText PropStemExclusion = System.Text.Json.JsonEncodedText.Encode("stem_exclusion");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwords = System.Text.Json.JsonEncodedText.Encode("stopwords");
+	private static readonly System.Text.Json.JsonEncodedText PropStopwordsPath = System.Text.Json.JsonEncodedText.Encode("stopwords_path");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propStemExclusion = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>?> propStopwords = default;
+		LocalJsonValue<string?> propStopwordsPath = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propStemExclusion.TryReadProperty(ref reader, options, PropStemExclusion, static System.Collections.Generic.ICollection<string>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)))
+			{
+				continue;
+			}
+
+			if (propStopwords.TryReadProperty(ref reader, options, PropStopwords, static Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartArray), null, static System.Collections.Generic.ICollection<string> (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<string>(o, null)!)))
+			{
+				continue;
+			}
+
+			if (propStopwordsPath.TryReadProperty(ref reader, options, PropStopwordsPath, null))
+			{
+				continue;
+			}
+
+			if (reader.ValueTextEquals(PropType))
+			{
+				reader.Skip();
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			StemExclusion = propStemExclusion.Value,
+			Stopwords = propStopwords.Value,
+			StopwordsPath = propStopwordsPath.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropStemExclusion, value.StemExclusion, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string>? v) => w.WriteCollectionValue<string>(o, v, null));
+		writer.WriteProperty(options, PropStopwords, value.Stopwords, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? v) => w.WriteUnionValue<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>(o, v, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<string> v) => w.WriteCollectionValue<string>(o, v, null)));
+		writer.WriteProperty(options, PropStopwordsPath, value.StopwordsPath, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerConverter))]
+public sealed partial class ItalianAnalyzer : Elastic.Clients.Elasticsearch.Analysis.IAnalyzer
+{
+#if NET7_0_OR_GREATER
+	public ItalianAnalyzer()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public ItalianAnalyzer()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ItalianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	public System.Collections.Generic.ICollection<string>? StemExclusion { get; set; }
+	public Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? Stopwords { get; set; }
 	public string? StopwordsPath { get; set; }
 
-	[JsonInclude, JsonPropertyName("type")]
 	public string Type => "italian";
 }
 
-public sealed partial class ItalianAnalyzerDescriptor : SerializableDescriptor<ItalianAnalyzerDescriptor>, IBuildableDescriptor<ItalianAnalyzer>
+public readonly partial struct ItalianAnalyzerDescriptor
 {
-	internal ItalianAnalyzerDescriptor(Action<ItalianAnalyzerDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer Instance { get; init; }
 
-	public ItalianAnalyzerDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ItalianAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer instance)
 	{
+		Instance = instance;
 	}
 
-	private ICollection<string>? StemExclusionValue { get; set; }
-	private ICollection<string>? StopwordsValue { get; set; }
-	private string? StopwordsPathValue { get; set; }
-
-	public ItalianAnalyzerDescriptor StemExclusion(ICollection<string>? stemExclusion)
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ItalianAnalyzerDescriptor()
 	{
-		StemExclusionValue = stemExclusion;
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	public ItalianAnalyzerDescriptor Stopwords(ICollection<string>? stopwords)
+	public static explicit operator Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer instance) => new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer(Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor descriptor) => descriptor.Instance;
+
+	public Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor StemExclusion(System.Collections.Generic.ICollection<string>? value)
 	{
-		StopwordsValue = stopwords;
-		return Self;
+		Instance.StemExclusion = value;
+		return this;
 	}
 
-	public ItalianAnalyzerDescriptor StopwordsPath(string? stopwordsPath)
+	public Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor StemExclusion(params string[] values)
 	{
-		StopwordsPathValue = stopwordsPath;
-		return Self;
+		Instance.StemExclusion = [.. values];
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor Stopwords(Elastic.Clients.Elasticsearch.Union<Elastic.Clients.Elasticsearch.Analysis.StopWordLanguage, System.Collections.Generic.ICollection<string>>? value)
 	{
-		writer.WriteStartObject();
-		if (StemExclusionValue is not null)
+		Instance.Stopwords = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor StopwordsPath(string? value)
+	{
+		Instance.StopwordsPath = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer Build(System.Action<Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("stem_exclusion");
-			JsonSerializer.Serialize(writer, StemExclusionValue, options);
+			return new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (StopwordsValue is not null)
-		{
-			writer.WritePropertyName("stopwords");
-			SingleOrManySerializationHelper.Serialize<string>(StopwordsValue, writer, options);
-		}
-
-		if (!string.IsNullOrEmpty(StopwordsPathValue))
-		{
-			writer.WritePropertyName("stopwords_path");
-			writer.WriteStringValue(StopwordsPathValue);
-		}
-
-		writer.WritePropertyName("type");
-		writer.WriteStringValue("italian");
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzerDescriptor(new Elastic.Clients.Elasticsearch.Analysis.ItalianAnalyzer(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
-
-	ItalianAnalyzer IBuildableDescriptor<ItalianAnalyzer>.Build() => new()
-	{
-		StemExclusion = StemExclusionValue,
-		Stopwords = StopwordsValue,
-		StopwordsPath = StopwordsPathValue
-	};
 }

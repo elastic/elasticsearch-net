@@ -17,32 +17,129 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Core;
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
+
+internal sealed partial class LikeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.Like>
+{
+	public override Elastic.Clients.Elasticsearch.QueryDsl.Like Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		var selector = static (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => JsonUnionSelector.ByTokenType(ref r, o, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.String, Elastic.Clients.Elasticsearch.Serialization.JsonTokenTypes.StartObject);
+		return selector(ref reader, options) switch
+		{
+			Elastic.Clients.Elasticsearch.UnionTag.T1 => new Elastic.Clients.Elasticsearch.QueryDsl.Like(reader.ReadValue<string>(options, null)),
+			Elastic.Clients.Elasticsearch.UnionTag.T2 => new Elastic.Clients.Elasticsearch.QueryDsl.Like(reader.ReadValue<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>(options, null)),
+			_ => throw new System.InvalidOperationException($"Failed to select a union variant for type '{nameof(Elastic.Clients.Elasticsearch.QueryDsl.Like)}")
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.Like value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value.Tag)
+		{
+			case Elastic.Clients.Elasticsearch.UnionTag.T1:
+				{
+					writer.WriteValue(options, value.Value1, null);
+					break;
+				}
+
+			case Elastic.Clients.Elasticsearch.UnionTag.T2:
+				{
+					writer.WriteValue(options, value.Value2, null);
+					break;
+				}
+
+			default:
+				throw new System.InvalidOperationException($"Unrecognized tag value: {value.Tag}");
+		}
+	}
+}
 
 /// <summary>
 /// <para>
 /// Text that we want similar documents for or a lookup to a document's field for the text.
 /// </para>
-/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/query-dsl-mlt-query.html#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
+/// <para><see href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-mlt-query#_document_input_parameters">Learn more about this API in the Elasticsearch documentation.</see></para>
 /// </summary>
-public sealed partial class Like : Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.LikeConverter))]
+public sealed partial class Like : Elastic.Clients.Elasticsearch.Union<string, Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument>
 {
-	public Like(string Text) : base(Text)
+	public Like(string value) : base(value)
 	{
 	}
 
-	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument Document) : base(Document)
+	public Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value) : base(value)
 	{
+	}
+
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Like(string value) => new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value) => new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+}
+
+public readonly partial struct LikeFactory<TDocument>
+{
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Text(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document()
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>.Build(null));
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>>? action)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<TDocument>.Build(action));
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory<TDocument>();
+		return action.Invoke(builder);
+	}
+}
+
+public readonly partial struct LikeFactory
+{
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Text(string value)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocument value)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(value);
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document()
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor.Build(null));
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor>? action)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor.Build(action));
+	}
+
+	public Elastic.Clients.Elasticsearch.QueryDsl.Like Document<T>(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<T>>? action)
+	{
+		return new Elastic.Clients.Elasticsearch.QueryDsl.Like(Elastic.Clients.Elasticsearch.QueryDsl.LikeDocumentDescriptor<T>.Build(action));
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.Like Build(System.Func<Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory, Elastic.Clients.Elasticsearch.QueryDsl.Like> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.LikeFactory();
+		return action.Invoke(builder);
 	}
 }

@@ -17,115 +17,217 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Rollup;
 
-public sealed partial class GetRollupCapsRequestParameters : RequestParameters
+public sealed partial class GetRollupCapsRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetRollupCapsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// Get the rollup job capabilities.
+/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
+/// <para>
+/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+/// This API enables you to inspect an index and determine:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Does this index have associated rollup data somewhere in the cluster?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
-public sealed partial class GetRollupCapsRequest : PlainRequest<GetRollupCapsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestConverter))]
+public sealed partial class GetRollupCapsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestParameters>
 {
-	public GetRollupCapsRequest()
-	{
-	}
-
 	public GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetRollupCapsRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetRollupCapsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupGetRollupCaps;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.RollupGetRollupCaps;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "rollup.get_rollup_caps";
+
+	/// <summary>
+	/// <para>
+	/// Index, indices or index-pattern to return rollup capabilities for.
+	/// <c>_all</c> may be used to fetch rollup capabilities from all jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Id? Id { get => P<Elastic.Clients.Elasticsearch.Id?>("id"); set => PO("id", value); }
 }
 
 /// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// Get the rollup job capabilities.
+/// Get the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
 /// </para>
-/// </summary>
-public sealed partial class GetRollupCapsRequestDescriptor<TDocument> : RequestDescriptor<GetRollupCapsRequestDescriptor<TDocument>, GetRollupCapsRequestParameters>
-{
-	internal GetRollupCapsRequestDescriptor(Action<GetRollupCapsRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
-
-	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
-	{
-	}
-
-	public GetRollupCapsRequestDescriptor()
-	{
-	}
-
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupGetRollupCaps;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "rollup.get_rollup_caps";
-
-	public GetRollupCapsRequestDescriptor<TDocument> Id(Elastic.Clients.Elasticsearch.Id? id)
-	{
-		RouteValues.Optional("id", id);
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-	}
-}
-
-/// <summary>
 /// <para>
-/// Returns the capabilities of any rollup jobs that have been configured for a specific index or index pattern.
+/// This API is useful because a rollup job is often configured to rollup only a subset of fields from the source index.
+/// Furthermore, only certain aggregations can be configured for various fields, leading to a limited subset of functionality depending on that configuration.
+/// This API enables you to inspect an index and determine:
 /// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Does this index have associated rollup data somewhere in the cluster?
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+/// </para>
+/// </item>
+/// </list>
 /// </summary>
-public sealed partial class GetRollupCapsRequestDescriptor : RequestDescriptor<GetRollupCapsRequestDescriptor, GetRollupCapsRequestParameters>
+public readonly partial struct GetRollupCapsRequestDescriptor
 {
-	internal GetRollupCapsRequestDescriptor(Action<GetRollupCapsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest Instance { get; init; }
 
-	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id) : base(r => r.Optional("id", id))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest instance)
 	{
+		Instance = instance;
+	}
+
+	public GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Id? id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(id);
 	}
 
 	public GetRollupCapsRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.RollupGetRollupCaps;
+	public static explicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest instance) => new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "rollup.get_rollup_caps";
-
-	public GetRollupCapsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? id)
+	/// <summary>
+	/// <para>
+	/// Index, indices or index-pattern to return rollup capabilities for.
+	/// <c>_all</c> may be used to fetch rollup capabilities from all jobs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor Id(Elastic.Clients.Elasticsearch.Id? value)
 	{
-		RouteValues.Optional("id", id);
-		return Self;
+		Instance.Id = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest Build(System.Action<Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor(new Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Rollup.GetRollupCapsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

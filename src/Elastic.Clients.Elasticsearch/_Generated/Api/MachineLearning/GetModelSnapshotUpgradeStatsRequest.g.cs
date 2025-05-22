@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : RequestParameters
+public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -62,24 +55,89 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequestParameters : Requ
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
+internal sealed partial class GetModelSnapshotUpgradeStatsRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest>
+{
+	public override Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
 /// Get anomaly detection job model snapshot upgrade usage info.
 /// </para>
 /// </summary>
-public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<GetModelSnapshotUpgradeStatsRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestConverter))]
+public sealed partial class GetModelSnapshotUpgradeStatsRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestParameters>
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public GetModelSnapshotUpgradeStatsRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshotUpgradeStats;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.MachineLearningGetModelSnapshotUpgradeStats;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "ml.get_model_snapshot_upgrade_stats";
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id JobId { get => P<Elastic.Clients.Elasticsearch.Id>("job_id"); set => PR("job_id", value); }
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id SnapshotId { get => P<Elastic.Clients.Elasticsearch.Id>("snapshot_id"); set => PR("snapshot_id", value); }
 
 	/// <summary>
 	/// <para>
@@ -108,7 +166,6 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<G
 	/// no matches or only partial matches.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? AllowNoMatch { get => Q<bool?>("allow_no_match"); set => Q("allow_no_match", value); }
 }
 
@@ -117,37 +174,134 @@ public sealed partial class GetModelSnapshotUpgradeStatsRequest : PlainRequest<G
 /// Get anomaly detection job model snapshot upgrade usage info.
 /// </para>
 /// </summary>
-public sealed partial class GetModelSnapshotUpgradeStatsRequestDescriptor : RequestDescriptor<GetModelSnapshotUpgradeStatsRequestDescriptor, GetModelSnapshotUpgradeStatsRequestParameters>
+public readonly partial struct GetModelSnapshotUpgradeStatsRequestDescriptor
 {
-	internal GetModelSnapshotUpgradeStatsRequestDescriptor(Action<GetModelSnapshotUpgradeStatsRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest Instance { get; init; }
 
-	public GetModelSnapshotUpgradeStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId) : base(r => r.Required("job_id", jobId).Required("snapshot_id", snapshotId))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetModelSnapshotUpgradeStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.MachineLearningGetModelSnapshotUpgradeStats;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "ml.get_model_snapshot_upgrade_stats";
-
-	public GetModelSnapshotUpgradeStatsRequestDescriptor AllowNoMatch(bool? allowNoMatch = true) => Qs("allow_no_match", allowNoMatch);
-
-	public GetModelSnapshotUpgradeStatsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id jobId)
+	public GetModelSnapshotUpgradeStatsRequestDescriptor(Elastic.Clients.Elasticsearch.Id jobId, Elastic.Clients.Elasticsearch.Id snapshotId)
 	{
-		RouteValues.Required("job_id", jobId);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest(jobId, snapshotId);
 	}
 
-	public GetModelSnapshotUpgradeStatsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id snapshotId)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public GetModelSnapshotUpgradeStatsRequestDescriptor()
 	{
-		RouteValues.Required("snapshot_id", snapshotId);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest instance) => new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the anomaly detection job.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor JobId(Elastic.Clients.Elasticsearch.Id value)
 	{
+		Instance.JobId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// A numerical character string that uniquely identifies the model snapshot. You can get information for multiple
+	/// snapshots by using a comma-separated list or a wildcard expression. You can get all snapshots by using <c>_all</c>,
+	/// by specifying <c>*</c> as the snapshot ID, or by omitting the snapshot ID.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor SnapshotId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.SnapshotId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Specifies what to do when the request:
+	/// </para>
+	/// <list type="bullet">
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are no jobs that match.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains the _all string or no identifiers and there are no matches.
+	/// </para>
+	/// </item>
+	/// <item>
+	/// <para>
+	/// Contains wildcard expressions and there are only partial matches.
+	/// </para>
+	/// </item>
+	/// </list>
+	/// <para>
+	/// The default value is true, which returns an empty jobs array when there are no matches and the subset of results
+	/// when there are partial matches. If this parameter is false, the request returns a 404 status code when there are
+	/// no matches or only partial matches.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor AllowNoMatch(bool? value = true)
+	{
+		Instance.AllowNoMatch = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.MachineLearning.GetModelSnapshotUpgradeStatsRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

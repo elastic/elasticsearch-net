@@ -4,11 +4,7 @@
 
 using System;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 /// <summary>
 /// Thrown when the client pre-flight check determines that the server is not a supported Elasticsearch product.

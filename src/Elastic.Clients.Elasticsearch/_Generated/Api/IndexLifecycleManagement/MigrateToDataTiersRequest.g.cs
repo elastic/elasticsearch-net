@@ -17,20 +17,13 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement;
 
-public sealed partial class MigrateToDataTiersRequestParameters : RequestParameters
+public sealed partial class MigrateToDataTiersRequestParameters : Elastic.Transport.RequestParameters
 {
 	/// <summary>
 	/// <para>
@@ -39,20 +32,120 @@ public sealed partial class MigrateToDataTiersRequestParameters : RequestParamet
 	/// </para>
 	/// </summary>
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
+}
+
+internal sealed partial class MigrateToDataTiersRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropLegacyTemplateToDelete = System.Text.Json.JsonEncodedText.Encode("legacy_template_to_delete");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeAttribute = System.Text.Json.JsonEncodedText.Encode("node_attribute");
+
+	public override Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propLegacyTemplateToDelete = default;
+		LocalJsonValue<string?> propNodeAttribute = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propLegacyTemplateToDelete.TryReadProperty(ref reader, options, PropLegacyTemplateToDelete, null))
+			{
+				continue;
+			}
+
+			if (propNodeAttribute.TryReadProperty(ref reader, options, PropNodeAttribute, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			LegacyTemplateToDelete = propLegacyTemplateToDelete.Value,
+			NodeAttribute = propNodeAttribute.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropLegacyTemplateToDelete, value.LegacyTemplateToDelete, null, null);
+		writer.WriteProperty(options, PropNodeAttribute, value.NodeAttribute, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Migrate to data tiers routing.
+/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+/// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.
 /// </para>
+/// <para>
+/// Migrating away from custom node attributes routing can be manually performed.
+/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Stop setting the custom hot attribute on new indices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Remove custom allocation settings from existing ILM policies.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// ILM must be stopped before performing the migration.
+/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
+/// </para>
 /// </summary>
-public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDataTiersRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestConverter))]
+public sealed partial class MigrateToDataTiersRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMigrateToDataTiers;
+#if NET7_0_OR_GREATER
+	public MigrateToDataTiersRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public MigrateToDataTiersRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.IndexLifecycleManagementMigrateToDataTiers;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -64,69 +157,160 @@ public sealed partial class MigrateToDataTiersRequest : PlainRequest<MigrateToDa
 	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? DryRun { get => Q<bool?>("dry_run"); set => Q("dry_run", value); }
-	[JsonInclude, JsonPropertyName("legacy_template_to_delete")]
+
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Duration? MasterTimeout { get => Q<Elastic.Clients.Elasticsearch.Duration?>("master_timeout"); set => Q("master_timeout", value); }
 	public string? LegacyTemplateToDelete { get; set; }
-	[JsonInclude, JsonPropertyName("node_attribute")]
 	public string? NodeAttribute { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Switches the indices, ILM policies, and legacy, composable and component templates from using custom node attributes and
-/// attribute-based allocation filters to using data tiers, and optionally deletes one legacy index template.+
+/// Migrate to data tiers routing.
+/// Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+/// Optionally, delete one legacy index template.
 /// Using node roles enables ILM to automatically move the indices between data tiers.
 /// </para>
+/// <para>
+/// Migrating away from custom node attributes routing can be manually performed.
+/// This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+/// </para>
+/// <list type="number">
+/// <item>
+/// <para>
+/// Stop setting the custom hot attribute on new indices.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Remove custom allocation settings from existing ILM policies.
+/// </para>
+/// </item>
+/// <item>
+/// <para>
+/// Replace custom allocation settings from existing indices with the corresponding tier preference.
+/// </para>
+/// </item>
+/// </list>
+/// <para>
+/// ILM must be stopped before performing the migration.
+/// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <c>STOPPED</c>.
+/// </para>
 /// </summary>
-public sealed partial class MigrateToDataTiersRequestDescriptor : RequestDescriptor<MigrateToDataTiersRequestDescriptor, MigrateToDataTiersRequestParameters>
+public readonly partial struct MigrateToDataTiersRequestDescriptor
 {
-	internal MigrateToDataTiersRequestDescriptor(Action<MigrateToDataTiersRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public MigrateToDataTiersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public MigrateToDataTiersRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.IndexLifecycleManagementMigrateToDataTiers;
+	public static explicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest instance) => new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "ilm.migrate_to_data_tiers";
-
-	public MigrateToDataTiersRequestDescriptor DryRun(bool? dryRun = true) => Qs("dry_run", dryRun);
-
-	private string? LegacyTemplateToDeleteValue { get; set; }
-	private string? NodeAttributeValue { get; set; }
-
-	public MigrateToDataTiersRequestDescriptor LegacyTemplateToDelete(string? legacyTemplateToDelete)
+	/// <summary>
+	/// <para>
+	/// If true, simulates the migration from node attributes based allocation filters to data tiers, but does not perform the migration.
+	/// This provides a way to retrieve the indices and ILM policies that need to be migrated.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor DryRun(bool? value = true)
 	{
-		LegacyTemplateToDeleteValue = legacyTemplateToDelete;
-		return Self;
+		Instance.DryRun = value;
+		return this;
 	}
 
-	public MigrateToDataTiersRequestDescriptor NodeAttribute(string? nodeAttribute)
+	/// <summary>
+	/// <para>
+	/// The period to wait for a connection to the master node.
+	/// If no response is received before the timeout expires, the request fails and returns an error.
+	/// It can also be set to <c>-1</c> to indicate that the request should never timeout.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor MasterTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		NodeAttributeValue = nodeAttribute;
-		return Self;
+		Instance.MasterTimeout = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor LegacyTemplateToDelete(string? value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(LegacyTemplateToDeleteValue))
+		Instance.LegacyTemplateToDelete = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor NodeAttribute(string? value)
+	{
+		Instance.NodeAttribute = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest Build(System.Action<Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("legacy_template_to_delete");
-			writer.WriteStringValue(LegacyTemplateToDeleteValue);
+			return new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (!string.IsNullOrEmpty(NodeAttributeValue))
-		{
-			writer.WritePropertyName("node_attribute");
-			writer.WriteStringValue(NodeAttributeValue);
-		}
+		var builder = new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor(new Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
 
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

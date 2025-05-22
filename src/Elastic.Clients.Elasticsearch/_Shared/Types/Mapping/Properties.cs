@@ -6,17 +6,9 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
 using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Mapping;
-#else
 namespace Elastic.Clients.Elasticsearch.Mapping;
-#endif
 
 [JsonConverter(typeof(PropertiesConverter))]
 public partial class Properties
@@ -49,7 +41,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 
 			var propertyName = reader.GetString();
 			reader.Read();
-			var property = JsonSerializer.Deserialize<IProperty>(ref reader, options);
+			var property = reader.ReadValue<IProperty>(options);
 			properties.Add(propertyName, property);
 		}
 
@@ -79,7 +71,7 @@ internal sealed class PropertiesConverter : JsonConverter<Properties>
 			continue;
 		}
 
-		JsonSerializer.Serialize(writer, properties.BackingDictionary, options);
+		writer.WriteDictionaryValue(options, properties.BackingDictionary, null, null);
 	}
 }
 

@@ -17,67 +17,80 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.TransformManagement;
 
-internal sealed partial class PivotConverter : JsonConverter<Pivot>
+internal sealed partial class PivotConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.TransformManagement.Pivot>
 {
-	public override Pivot Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-	{
-		if (reader.TokenType != JsonTokenType.StartObject)
-			throw new JsonException("Unexpected JSON detected.");
-		var variant = new Pivot();
-		while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
-		{
-			if (reader.TokenType == JsonTokenType.PropertyName)
-			{
-				var property = reader.GetString();
-				if (property == "aggregations" || property == "aggs")
-				{
-					variant.Aggregations = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?>(ref reader, options);
-					continue;
-				}
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations = System.Text.Json.JsonEncodedText.Encode("aggregations");
+	private static readonly System.Text.Json.JsonEncodedText PropAggregations1 = System.Text.Json.JsonEncodedText.Encode("aggs");
+	private static readonly System.Text.Json.JsonEncodedText PropGroupBy = System.Text.Json.JsonEncodedText.Encode("group_by");
 
-				if (property == "group_by")
-				{
-					variant.GroupBy = JsonSerializer.Deserialize<IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>?>(ref reader, options);
-					continue;
-				}
+	public override Elastic.Clients.Elasticsearch.TransformManagement.Pivot Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>?> propAggregations = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>?> propGroupBy = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAggregations.TryReadProperty(ref reader, options, PropAggregations, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)) || propAggregations.TryReadProperty(ref reader, options, PropAggregations1, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, null, null)))
+			{
+				continue;
 			}
+
+			if (propGroupBy.TryReadProperty(ref reader, options, PropGroupBy, static System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
-		return variant;
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Aggregations = propAggregations.Value,
+			GroupBy = propGroupBy.Value
+		};
 	}
 
-	public override void Write(Utf8JsonWriter writer, Pivot value, JsonSerializerOptions options)
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.TransformManagement.Pivot value, System.Text.Json.JsonSerializerOptions options)
 	{
 		writer.WriteStartObject();
-		if (value.Aggregations is not null)
-		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, value.Aggregations, options);
-		}
-
-		if (value.GroupBy is not null)
-		{
-			writer.WritePropertyName("group_by");
-			JsonSerializer.Serialize(writer, value.GroupBy, options);
-		}
-
+		writer.WriteProperty(options, PropAggregations, value.Aggregations, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>(o, v, null, null));
+		writer.WriteProperty(options, PropGroupBy, value.GroupBy, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? v) => w.WriteDictionaryValue<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>(o, v, null, null));
 		writer.WriteEndObject();
 	}
 }
 
-[JsonConverter(typeof(PivotConverter))]
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.TransformManagement.PivotConverter))]
 public sealed partial class Pivot
 {
+#if NET7_0_OR_GREATER
+	public Pivot()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public Pivot()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
@@ -86,7 +99,7 @@ public sealed partial class Pivot
 	/// average.
 	/// </para>
 	/// </summary>
-	public IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? Aggregations { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -94,19 +107,27 @@ public sealed partial class Pivot
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? GroupBy { get; set; }
+	public System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? GroupBy { get; set; }
 }
 
-public sealed partial class PivotDescriptor<TDocument> : SerializableDescriptor<PivotDescriptor<TDocument>>
+public readonly partial struct PivotDescriptor<TDocument>
 {
-	internal PivotDescriptor(Action<PivotDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Pivot Instance { get; init; }
 
-	public PivotDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance)
 	{
+		Instance = instance;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> AggregationsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>> GroupByValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -116,10 +137,52 @@ public sealed partial class PivotDescriptor<TDocument> : SerializableDescriptor<
 	/// average.
 	/// </para>
 	/// </summary>
-	public PivotDescriptor<TDocument> Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -128,41 +191,82 @@ public sealed partial class PivotDescriptor<TDocument> : SerializableDescriptor<
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public PivotDescriptor<TDocument> GroupBy(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? value)
 	{
-		GroupByValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>>());
-		return Self;
+		Instance.GroupBy = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy()
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>>? action)
+	{
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> AddGroupBy(string key, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy value)
+	{
+		Instance.GroupBy ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>();
+		Instance.GroupBy.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument> AddGroupBy(string key, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>> action)
+	{
+		Instance.GroupBy ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>();
+		Instance.GroupBy.Add(key, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Pivot Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			return new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GroupByValue is not null)
-		{
-			writer.WritePropertyName("group_by");
-			JsonSerializer.Serialize(writer, GroupByValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
 
-public sealed partial class PivotDescriptor : SerializableDescriptor<PivotDescriptor>
+public readonly partial struct PivotDescriptor
 {
-	internal PivotDescriptor(Action<PivotDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.TransformManagement.Pivot Instance { get; init; }
 
-	public PivotDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance)
 	{
+		Instance = instance;
 	}
 
-	private IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> AggregationsValue { get; set; }
-	private IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor> GroupByValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PivotDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor(Elastic.Clients.Elasticsearch.TransformManagement.Pivot instance) => new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -172,10 +276,73 @@ public sealed partial class PivotDescriptor : SerializableDescriptor<PivotDescri
 	/// average.
 	/// </para>
 	/// </summary>
-	public PivotDescriptor Aggregations(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>? value)
 	{
-		AggregationsValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor>());
-		return Self;
+		Instance.Aggregations = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations()
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to aggregate the grouped data. The following aggregations are currently supported: average, bucket
+	/// script, bucket selector, cardinality, filter, geo bounds, geo centroid, geo line, max, median absolute deviation,
+	/// min, missing, percentiles, rare terms, scripted metric, stats, sum, terms, top metrics, value count, weighted
+	/// average.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor Aggregations<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>>? action)
+	{
+		Instance.Aggregations = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringAggregation<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddAggregation(string key, Elastic.Clients.Elasticsearch.Aggregations.Aggregation value)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddAggregation(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddAggregation<T>(string key, System.Action<Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>> action)
+	{
+		Instance.Aggregations ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.Aggregations.Aggregation>();
+		Instance.Aggregations.Add(key, Elastic.Clients.Elasticsearch.Aggregations.AggregationDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -184,27 +351,79 @@ public sealed partial class PivotDescriptor : SerializableDescriptor<PivotDescri
 	/// currently supported: date histogram, geotile grid, histogram, terms.
 	/// </para>
 	/// </summary>
-	public PivotDescriptor GroupBy(Func<FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor>, FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Collections.Generic.IDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>? value)
 	{
-		GroupByValue = selector?.Invoke(new FluentDescriptorDictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor>());
-		return Self;
+		Instance.GroupBy = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy()
 	{
-		writer.WriteStartObject();
-		if (AggregationsValue is not null)
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy>? action)
+	{
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Defines how to group the data. More than one grouping can be defined per pivot. The following groupings are
+	/// currently supported: date histogram, geotile grid, histogram, terms.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor GroupBy<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>>? action)
+	{
+		Instance.GroupBy = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfStringPivotGroupBy<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddGroupBy(string key, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy value)
+	{
+		Instance.GroupBy ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>();
+		Instance.GroupBy.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddGroupBy(string key, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor> action)
+	{
+		Instance.GroupBy ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>();
+		Instance.GroupBy.Add(key, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor AddGroupBy<T>(string key, System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<T>> action)
+	{
+		Instance.GroupBy ??= new System.Collections.Generic.Dictionary<string, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupBy>();
+		Instance.GroupBy.Add(key, Elastic.Clients.Elasticsearch.TransformManagement.PivotGroupByDescriptor<T>.Build(action));
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.TransformManagement.Pivot Build(System.Action<Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("aggregations");
-			JsonSerializer.Serialize(writer, AggregationsValue, options);
+			return new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (GroupByValue is not null)
-		{
-			writer.WritePropertyName("group_by");
-			JsonSerializer.Serialize(writer, GroupByValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.TransformManagement.PivotDescriptor(new Elastic.Clients.Elasticsearch.TransformManagement.Pivot(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

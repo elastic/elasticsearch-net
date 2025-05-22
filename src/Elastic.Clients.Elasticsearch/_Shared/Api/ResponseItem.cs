@@ -3,13 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Text.Json.Serialization;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
+[JsonConverter(typeof(BulkResponseItemConverter))]
 public abstract partial class ResponseItem
 {
 	public abstract string Operation { get; }

@@ -17,31 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Synonyms;
 
-public sealed partial class PutSynonymRuleResponse : ElasticsearchResponse
+internal sealed partial class PutSynonymRuleResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse>
 {
-	/// <summary>
-	/// <para>
-	/// Updating synonyms in a synonym set reloads the associated analyzers.
-	/// This is the analyzers reloading result
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("reload_analyzers_details")]
-	public Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; init; }
+	private static readonly System.Text.Json.JsonEncodedText PropReloadAnalyzersDetails = System.Text.Json.JsonEncodedText.Encode("reload_analyzers_details");
+	private static readonly System.Text.Json.JsonEncodedText PropResult = System.Text.Json.JsonEncodedText.Encode("result");
+
+	public override Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult> propReloadAnalyzersDetails = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Result> propResult = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propReloadAnalyzersDetails.TryReadProperty(ref reader, options, PropReloadAnalyzersDetails, null))
+			{
+				continue;
+			}
+
+			if (propResult.TryReadProperty(ref reader, options, PropResult, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ReloadAnalyzersDetails = propReloadAnalyzersDetails.Value,
+			Result = propResult.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropReloadAnalyzersDetails, value.ReloadAnalyzersDetails, null, null);
+		writer.WriteProperty(options, PropResult, value.Result, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Synonyms.PutSynonymRuleResponseConverter))]
+public sealed partial class PutSynonymRuleResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public PutSynonymRuleResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal PutSynonymRuleResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
-	/// Update operation result
+	/// Updating synonyms in a synonym set reloads the associated analyzers.
+	/// This information is the analyzers reloading result.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("result")]
-	public Elastic.Clients.Elasticsearch.Result Result { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.IndexManagement.ReloadResult ReloadAnalyzersDetails { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// The update operation result.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Result Result { get; set; }
 }

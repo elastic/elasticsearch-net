@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class ClearCachedServiceTokensRequestParameters : RequestParameters
+public sealed partial class ClearCachedServiceTokensRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearCachedServiceTokensRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -40,21 +62,74 @@ public sealed partial class ClearCachedServiceTokensRequestParameters : RequestP
 /// </para>
 /// <para>
 /// Evict a subset of all entries from the service account token caches.
+/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
+/// This API clears matching entries from both caches.
+/// </para>
+/// <para>
+/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
+/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<ClearCachedServiceTokensRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestConverter))]
+public sealed partial class ClearCachedServiceTokensRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestParameters>
 {
-	public ClearCachedServiceTokensRequest(string ns, string service, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("namespace", ns).Required("service", service).Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCachedServiceTokensRequest(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("namespace", @namespace).Required("service", service).Required("name", name))
 	{
 	}
+#if NET7_0_OR_GREATER
+	public ClearCachedServiceTokensRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedServiceTokens;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityClearCachedServiceTokens;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => false;
 
 	internal override string OperationName => "security.clear_cached_service_tokens";
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of token names to evict from the service account token caches.
+	/// Use a wildcard (<c>*</c>) to evict all tokens that belong to a service account.
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Names Name { get => P<Elastic.Clients.Elasticsearch.Names>("name"); set => PR("name", value); }
+
+	/// <summary>
+	/// <para>
+	/// The namespace, which is a top-level grouping of service accounts.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Namespace { get => P<string>("namespace"); set => PR("namespace", value); }
+
+	/// <summary>
+	/// <para>
+	/// The name of the service, which must be unique within its namespace.
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Service { get => P<string>("service"); set => PR("service", value); }
 }
 
 /// <summary>
@@ -63,43 +138,120 @@ public sealed partial class ClearCachedServiceTokensRequest : PlainRequest<Clear
 /// </para>
 /// <para>
 /// Evict a subset of all entries from the service account token caches.
+/// Two separate caches exist for service account tokens: one cache for tokens backed by the <c>service_tokens</c> file, and another for tokens backed by the <c>.security</c> index.
+/// This API clears matching entries from both caches.
+/// </para>
+/// <para>
+/// The cache for service account tokens backed by the <c>.security</c> index is cleared automatically on state changes of the security index.
+/// The cache for tokens backed by the <c>service_tokens</c> file is cleared automatically on file changes.
 /// </para>
 /// </summary>
-public sealed partial class ClearCachedServiceTokensRequestDescriptor : RequestDescriptor<ClearCachedServiceTokensRequestDescriptor, ClearCachedServiceTokensRequestParameters>
+public readonly partial struct ClearCachedServiceTokensRequestDescriptor
 {
-	internal ClearCachedServiceTokensRequestDescriptor(Action<ClearCachedServiceTokensRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest Instance { get; init; }
 
-	public ClearCachedServiceTokensRequestDescriptor(string ns, string service, Elastic.Clients.Elasticsearch.Names name) : base(r => r.Required("namespace", ns).Required("service", service).Required("name", name))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCachedServiceTokensRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityClearCachedServiceTokens;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.clear_cached_service_tokens";
-
-	public ClearCachedServiceTokensRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names name)
+	public ClearCachedServiceTokensRequestDescriptor(string @namespace, string service, Elastic.Clients.Elasticsearch.Names name)
 	{
-		RouteValues.Required("name", name);
-		return Self;
+		Instance = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(@namespace, service, name);
 	}
 
-	public ClearCachedServiceTokensRequestDescriptor Namespace(string ns)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public ClearCachedServiceTokensRequestDescriptor()
 	{
-		RouteValues.Required("namespace", ns);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	public ClearCachedServiceTokensRequestDescriptor Service(string service)
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest instance) => new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// A comma-separated list of token names to evict from the service account token caches.
+	/// Use a wildcard (<c>*</c>) to evict all tokens that belong to a service account.
+	/// It does not support other wildcard patterns.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Name(Elastic.Clients.Elasticsearch.Names value)
 	{
-		RouteValues.Required("service", service);
-		return Self;
+		Instance.Name = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// The namespace, which is a top-level grouping of service accounts.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Namespace(string value)
 	{
+		Instance.Namespace = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The name of the service, which must be unique within its namespace.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Service(string value)
+	{
+		Instance.Service = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.ClearCachedServiceTokensRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -18,1219 +18,911 @@
 #nullable restore
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Nodes;
 
-public partial class NodesNamespacedClient : NamespacedClientProxy
+public partial class NodesNamespacedClient : Elastic.Clients.Elasticsearch.NamespacedClientProxy
 {
 	/// <summary>
 	/// <para>
-	/// Initializes a new instance of the <see cref="NodesNamespacedClient"/> class for mocking.
+	/// Initializes a new instance of the <see cref="Elastic.Clients.Elasticsearch.Nodes.NodesNamespacedClient"/> class for mocking.
 	/// </para>
 	/// </summary>
 	protected NodesNamespacedClient() : base()
 	{
 	}
 
-	internal NodesNamespacedClient(ElasticsearchClient client) : base(client)
+	internal NodesNamespacedClient(Elastic.Clients.Elasticsearch.ElasticsearchClient client) : base(client)
 	{
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ClearRepositoriesMeteringArchiveRequest, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, System.Action<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequest, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, System.Action<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequest, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveResponse, Elastic.Clients.Elasticsearch.Nodes.ClearRepositoriesMeteringArchiveRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ClearRepositoriesMeteringArchiveResponse ClearRepositoriesMeteringArchive(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(ClearRepositoriesMeteringArchiveRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use this API to clear the archived repositories metering information in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/clear-repositories-metering-archive-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ClearRepositoriesMeteringArchiveResponse> ClearRepositoriesMeteringArchiveAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, long maxArchiveVersion, Action<ClearRepositoriesMeteringArchiveRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ClearRepositoriesMeteringArchiveRequestDescriptor(nodeId, maxArchiveVersion);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ClearRepositoriesMeteringArchiveRequestDescriptor, ClearRepositoriesMeteringArchiveResponse, ClearRepositoriesMeteringArchiveRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<GetRepositoriesMeteringInfoRequest, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<GetRepositoriesMeteringInfoRequest, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(GetRepositoriesMeteringInfoRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequest, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoResponse, Elastic.Clients.Elasticsearch.Nodes.GetRepositoriesMeteringInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual GetRepositoriesMeteringInfoResponse GetRepositoriesMeteringInfo(Elastic.Clients.Elasticsearch.NodeIds nodeId, Action<GetRepositoriesMeteringInfoRequestDescriptor> configureRequest)
-	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(GetRepositoriesMeteringInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// You can use the cluster repositories metering API to retrieve repositories metering information in a cluster.
-	/// This API exposes monotonically non-decreasing counters and it’s expected that clients would durably store the
-	/// information needed to compute aggregations over a period of time. Additionally, the information exposed by this
-	/// API is volatile, meaning that it won’t be present after node restarts.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/current/get-repositories-metering-api.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<GetRepositoriesMeteringInfoResponse> GetRepositoriesMeteringInfoAsync(Elastic.Clients.Elasticsearch.NodeIds nodeId, Action<GetRepositoriesMeteringInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new GetRepositoriesMeteringInfoRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<GetRepositoriesMeteringInfoRequestDescriptor, GetRepositoriesMeteringInfoResponse, GetRepositoriesMeteringInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(HotThreadsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<HotThreadsRequest, HotThreadsResponse, HotThreadsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse HotThreads()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse HotThreads(System.Action<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequest, HotThreadsResponse, HotThreadsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(HotThreadsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse> HotThreadsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse> HotThreadsAsync(System.Action<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HotThreadsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HotThreadsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new HotThreadsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequest, Elastic.Clients.Elasticsearch.Nodes.HotThreadsResponse, Elastic.Clients.Elasticsearch.Nodes.HotThreadsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual HotThreadsResponse HotThreads(Action<HotThreadsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new HotThreadsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(HotThreadsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HotThreadsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HotThreadsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HotThreadsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// This API yields a breakdown of the hot threads on each selected node in the cluster.
-	/// The output is plain text with a breakdown of each node’s top hot threads.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-hot-threads.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<HotThreadsResponse> HotThreadsAsync(Action<HotThreadsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new HotThreadsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<HotThreadsRequestDescriptor, HotThreadsResponse, HotThreadsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(NodesInfoRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<NodesInfoRequest, NodesInfoResponse, NodesInfoRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequest, NodesInfoResponse, NodesInfoRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(NodesInfoRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesInfoResponse Info(Action<NodesInfoRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(NodesInfoRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse> InfoAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesInfoRequestDescriptor(nodeId, metric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequest, Elastic.Clients.Elasticsearch.Nodes.NodesInfoResponse, Elastic.Clients.Elasticsearch.Nodes.NodesInfoRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new NodesInfoRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes information.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-info.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesInfoResponse> InfoAsync(Action<NodesInfoRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new NodesInfoRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesInfoRequestDescriptor, NodesInfoResponse, NodesInfoRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(ReloadSecureSettingsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequest, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse ReloadSecureSettings()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse ReloadSecureSettings(System.Action<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequest, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(ReloadSecureSettingsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(System.Action<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ReloadSecureSettingsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequest, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsResponse, Elastic.Clients.Elasticsearch.Nodes.ReloadSecureSettingsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual ReloadSecureSettingsResponse ReloadSecureSettings(Action<ReloadSecureSettingsRequestDescriptor> configureRequest)
-	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(ReloadSecureSettingsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
-	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Action<ReloadSecureSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor(nodeId);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Reloads the keystore on nodes in the cluster.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-settings.html#reloadable-secure-settings">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<ReloadSecureSettingsResponse> ReloadSecureSettingsAsync(Action<ReloadSecureSettingsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new ReloadSecureSettingsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<ReloadSecureSettingsRequestDescriptor, ReloadSecureSettingsResponse, ReloadSecureSettingsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(NodesStatsRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<NodesStatsRequest, NodesStatsResponse, NodesStatsRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequest, NodesStatsResponse, NodesStatsRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats<TDocument>()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(NodesStatsRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesStatsResponse Stats(Action<NodesStatsRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(NodesStatsRequestDescriptor<TDocument> descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync<TDocument>(Action<NodesStatsRequestDescriptor<TDocument>> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor<TDocument>();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor<TDocument>, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(NodesStatsRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor(nodeId, metric, indexMetric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse> StatsAsync<TDocument>(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Elastic.Clients.Elasticsearch.Metrics? indexMetric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestDescriptor<TDocument>(nodeId, metric, indexMetric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequest, Elastic.Clients.Elasticsearch.Nodes.NodesStatsResponse, Elastic.Clients.Elasticsearch.Nodes.NodesStatsRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns cluster nodes statistics.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-stats.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesStatsResponse> StatsAsync(Action<NodesStatsRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new NodesStatsRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesStatsRequestDescriptor, NodesStatsResponse, NodesStatsRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(NodesUsageRequest request)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest request)
 	{
 		request.BeforeRequest();
-		return DoRequest<NodesUsageRequest, NodesUsageResponse, NodesUsageRequestParameters>(request);
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequest request, CancellationToken cancellationToken = default)
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage()
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequest<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request);
+	}
+
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest request, System.Threading.CancellationToken cancellationToken = default)
 	{
 		request.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequest, NodesUsageResponse, NodesUsageRequestParameters>(request, cancellationToken);
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(NodesUsageRequestDescriptor descriptor)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor();
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor();
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage()
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	[Obsolete("Synchronous methods are deprecated and could be removed in the future.")]
-	public virtual NodesUsageResponse Usage(Action<NodesUsageRequestDescriptor> configureRequest)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequest<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(NodesUsageRequestDescriptor descriptor, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
+	public virtual System.Threading.Tasks.Task<Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse> UsageAsync(Elastic.Clients.Elasticsearch.NodeIds? nodeId, Elastic.Clients.Elasticsearch.Metrics? metric, System.Action<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor> action, System.Threading.CancellationToken cancellationToken = default)
 	{
-		var descriptor = new NodesUsageRequestDescriptor(nodeId, metric);
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(CancellationToken cancellationToken = default)
-	{
-		var descriptor = new NodesUsageRequestDescriptor();
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
-	}
-
-	/// <summary>
-	/// <para>
-	/// Returns information on the usage of features.
-	/// </para>
-	/// <para><see href="https://www.elastic.co/guide/en/elasticsearch/reference/8.16/cluster-nodes-usage.html">Learn more about this API in the Elasticsearch documentation.</see></para>
-	/// </summary>
-	public virtual Task<NodesUsageResponse> UsageAsync(Action<NodesUsageRequestDescriptor> configureRequest, CancellationToken cancellationToken = default)
-	{
-		var descriptor = new NodesUsageRequestDescriptor();
-		configureRequest?.Invoke(descriptor);
-		descriptor.BeforeRequest();
-		return DoRequestAsync<NodesUsageRequestDescriptor, NodesUsageResponse, NodesUsageRequestParameters>(descriptor, cancellationToken);
+		var builder = new Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestDescriptor(nodeId, metric);
+		action.Invoke(builder);
+		var request = builder.Instance;
+		request.BeforeRequest();
+		return DoRequestAsync<Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequest, Elastic.Clients.Elasticsearch.Nodes.NodesUsageResponse, Elastic.Clients.Elasticsearch.Nodes.NodesUsageRequestParameters>(request, cancellationToken);
 	}
 }

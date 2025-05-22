@@ -3,18 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Text.Json;
-using Elastic.Transport.Extensions;
-#if ELASTICSEARCH_SERVERLESS
-using Elastic.Clients.Elasticsearch.Serverless.Serialization;
-#else
-using Elastic.Clients.Elasticsearch.Serialization;
-#endif
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
+using Elastic.Clients.Elasticsearch.Serialization;
+using Elastic.Transport.Extensions;
+
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 internal class ScriptedBulkUpdateBody : BulkUpdateBody
 {
@@ -22,11 +15,7 @@ internal class ScriptedBulkUpdateBody : BulkUpdateBody
 
 	protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, Script, options);
-		}
+		writer.WriteProperty(options, "script", Script);
 	}
 }
 
@@ -36,16 +25,12 @@ internal class ScriptedBulkUpdateBody<TDocument> : ScriptedBulkUpdateBody
 
 	protected override void SerializeProperties(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
 	{
-		if (Script is not null)
-		{
-			writer.WritePropertyName("script");
-			JsonSerializer.Serialize(writer, Script, options);
-		}
+		writer.WriteProperty(options, "script", Script);
 
 		if (Upsert is not null)
 		{
 			writer.WritePropertyName("upsert");
-			settings.SourceSerializer.Serialize(Upsert, writer, null);
+			settings.SourceSerializer.Serialize(Upsert, writer, settings.MemoryStreamFactory);
 		}
 	}
 }

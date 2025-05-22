@@ -17,59 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
-public sealed partial class SamplerAggregation
+internal sealed partial class SamplerAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation>
 {
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("shard_size")]
-	public int? ShardSize { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropShardSize = System.Text.Json.JsonEncodedText.Encode("shard_size");
 
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(SamplerAggregation samplerAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.Sampler(samplerAggregation);
-}
-
-public sealed partial class SamplerAggregationDescriptor : SerializableDescriptor<SamplerAggregationDescriptor>
-{
-	internal SamplerAggregationDescriptor(Action<SamplerAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public SamplerAggregationDescriptor() : base()
+	public override Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
-	}
-
-	private int? ShardSizeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
-	/// </para>
-	/// </summary>
-	public SamplerAggregationDescriptor ShardSize(int? shardSize)
-	{
-		ShardSizeValue = shardSize;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (ShardSizeValue.HasValue)
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<int?> propShardSize = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
-			writer.WritePropertyName("shard_size");
-			writer.WriteNumberValue(ShardSizeValue.Value);
+			if (propShardSize.TryReadProperty(ref reader, options, PropShardSize, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
 		}
 
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			ShardSize = propShardSize.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropShardSize, value.ShardSize, null, null);
 		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationConverter))]
+public sealed partial class SamplerAggregation
+{
+#if NET7_0_OR_GREATER
+	public SamplerAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public SamplerAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
+	/// </para>
+	/// </summary>
+	public int? ShardSize { get; set; }
+}
+
+public readonly partial struct SamplerAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public SamplerAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Limits how many top-scoring documents are collected in the sample processed on each shard.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor ShardSize(int? value)
+	{
+		Instance.ShardSize = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor>? action)
+	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.SamplerAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

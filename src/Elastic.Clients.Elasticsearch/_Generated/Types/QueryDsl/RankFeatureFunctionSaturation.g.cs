@@ -17,57 +17,118 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.QueryDsl;
 
+internal sealed partial class RankFeatureFunctionSaturationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropPivot = System.Text.Json.JsonEncodedText.Encode("pivot");
+
+	public override Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<float?> propPivot = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propPivot.TryReadProperty(ref reader, options, PropPivot, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Pivot = propPivot.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropPivot, value.Pivot, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationConverter))]
 public sealed partial class RankFeatureFunctionSaturation
 {
+#if NET7_0_OR_GREATER
+	public RankFeatureFunctionSaturation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public RankFeatureFunctionSaturation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Configurable pivot value so that the result will be less than 0.5.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("pivot")]
 	public float? Pivot { get; set; }
 }
 
-public sealed partial class RankFeatureFunctionSaturationDescriptor : SerializableDescriptor<RankFeatureFunctionSaturationDescriptor>
+public readonly partial struct RankFeatureFunctionSaturationDescriptor
 {
-	internal RankFeatureFunctionSaturationDescriptor(Action<RankFeatureFunctionSaturationDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation Instance { get; init; }
 
-	public RankFeatureFunctionSaturationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionSaturationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation instance)
 	{
+		Instance = instance;
 	}
 
-	private float? PivotValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public RankFeatureFunctionSaturationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation instance) => new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Configurable pivot value so that the result will be less than 0.5.
 	/// </para>
 	/// </summary>
-	public RankFeatureFunctionSaturationDescriptor Pivot(float? pivot)
+	public Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor Pivot(float? value)
 	{
-		PivotValue = pivot;
-		return Self;
+		Instance.Pivot = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (PivotValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("pivot");
-			writer.WriteNumberValue(PivotValue.Value);
+			return new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturationDescriptor(new Elastic.Clients.Elasticsearch.QueryDsl.RankFeatureFunctionSaturation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

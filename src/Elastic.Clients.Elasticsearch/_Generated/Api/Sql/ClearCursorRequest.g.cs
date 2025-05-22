@@ -17,33 +17,88 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Sql;
 
-public sealed partial class ClearCursorRequestParameters : RequestParameters
+public sealed partial class ClearCursorRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class ClearCursorRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropCursor = System.Text.Json.JsonEncodedText.Encode("cursor");
+
+	public override Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string> propCursor = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCursor.TryReadProperty(ref reader, options, PropCursor, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Cursor = propCursor.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCursor, value.Cursor, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Clears the SQL cursor
+/// Clear an SQL search cursor.
 /// </para>
 /// </summary>
-public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestConverter))]
+public sealed partial class ClearCursorRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlClearCursor;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCursorRequest(string cursor)
+	{
+		Cursor = cursor;
+	}
+#if NET7_0_OR_GREATER
+	public ClearCursorRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The request contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public ClearCursorRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClearCursorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SqlClearCursor;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
@@ -54,49 +109,94 @@ public sealed partial class ClearCursorRequest : PlainRequest<ClearCursorRequest
 	/// Cursor to clear.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cursor")]
-	public string Cursor { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Cursor { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Clears the SQL cursor
+/// Clear an SQL search cursor.
 /// </para>
 /// </summary>
-public sealed partial class ClearCursorRequestDescriptor : RequestDescriptor<ClearCursorRequestDescriptor, ClearCursorRequestParameters>
+public readonly partial struct ClearCursorRequestDescriptor
 {
-	internal ClearCursorRequestDescriptor(Action<ClearCursorRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClearCursorRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public ClearCursorRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SqlClearCursor;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "sql.clear_cursor";
-
-	private string CursorValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest instance) => new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest(Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Cursor to clear.
 	/// </para>
 	/// </summary>
-	public ClearCursorRequestDescriptor Cursor(string cursor)
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor Cursor(string value)
 	{
-		CursorValue = cursor;
-		return Self;
+		Instance.Cursor = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest Build(System.Action<Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor> action)
 	{
-		writer.WriteStartObject();
-		writer.WritePropertyName("cursor");
-		writer.WriteStringValue(CursorValue);
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor(new Elastic.Clients.Elasticsearch.Sql.ClearCursorRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Sql.ClearCursorRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

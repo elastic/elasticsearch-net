@@ -2,13 +2,18 @@
 // Elasticsearch B.V licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless.Core.Bulk;
-#else
+using System.Diagnostics.CodeAnalysis;
+
+using Elastic.Clients.Elasticsearch.Serialization;
+
 namespace Elastic.Clients.Elasticsearch.Core.Bulk;
-#endif
 
 public sealed class BulkUpdateResponseItem : ResponseItem
 {
 	public override string Operation => "update";
+
+	[SetsRequiredMembers]
+	internal BulkUpdateResponseItem(JsonConstructorSentinel sentinel) : base(sentinel)
+	{
+	}
 }

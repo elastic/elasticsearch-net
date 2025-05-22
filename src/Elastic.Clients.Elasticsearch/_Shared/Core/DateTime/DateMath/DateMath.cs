@@ -10,11 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-#if ELASTICSEARCH_SERVERLESS
-namespace Elastic.Clients.Elasticsearch.Serverless;
-#else
 namespace Elastic.Clients.Elasticsearch;
-#endif
 
 [JsonConverter(typeof(DateMathConverter))]
 public abstract class DateMath
@@ -25,7 +21,9 @@ public abstract class DateMath
 	public static DateMathExpression Now => new("now");
 
 	internal DateMath(string anchor) => Anchor = anchor;
+
 	internal DateMath(DateTime anchor) => Anchor = anchor;
+
 	internal DateMath(Union<DateTime, string> anchor, DateMathTime range, DateMathOperation operation)
 	{
 		anchor.ThrowIfNull(nameof(anchor));
@@ -47,12 +45,14 @@ public abstract class DateMath
 
 	public static implicit operator DateMath(string dateMath) => FromString(dateMath);
 
-	public static DateMath FromString(string dateMath)
+	public static DateMath FromString(string? dateMath)
 	{
-		if (dateMath == null) return null;
+		if (dateMath is null)
+			throw new ArgumentNullException(nameof(dateMath));
 
 		var match = DateMathRegex.Match(dateMath);
-		if (!match.Success) throw new ArgumentException($"Cannot create a {nameof(DateMathExpression)} out of '{dateMath}'");
+		if (!match.Success)
+			throw new ArgumentException($"Cannot create a {nameof(DateMathExpression)} out of '{dateMath}'");
 
 		var math = new DateMathExpression(match.Groups["anchor"].Value);
 
@@ -61,8 +61,12 @@ public abstract class DateMath
 			var rangeString = match.Groups["ranges"].Value;
 			do
 			{
-				var nextRangeStart = rangeString.Substring(1).IndexOfAny(new[] { '+', '-', '/' });
-				if (nextRangeStart == -1) nextRangeStart = rangeString.Length - 1;
+				var nextRangeStart = rangeString[1..].IndexOfAny(['+', '-', '/']);
+				if (nextRangeStart == -1)
+				{
+					nextRangeStart = rangeString.Length - 1;
+				}
+
 				var unit = rangeString.Substring(1, nextRangeStart);
 				if (rangeString.StartsWith("+", StringComparison.Ordinal))
 				{
@@ -72,18 +76,25 @@ public abstract class DateMath
 				else if (rangeString.StartsWith("-", StringComparison.Ordinal))
 				{
 					math = math.Subtract(unit);
-					rangeString = rangeString.Substring(nextRangeStart + 1);
+					rangeString = rangeString[(nextRangeStart + 1)..];
 				}
-				else rangeString = null;
+				else
+				{
+					break;
+				}
 			} while (!rangeString.IsNullOrEmpty());
 		}
 
-		if (match.Groups["rounding"].Success)
+		if (!match.Groups["rounding"].Success)
 		{
-			var rounding = match.Groups["rounding"].Value.Substring(1).ToEnum<DateMathTimeUnit>(StringComparison.Ordinal);
-			if (rounding.HasValue)
-				return math.RoundTo(rounding.Value);
+			return math;
 		}
+
+		if (EnumValue<DateMathTimeUnit>.TryParse(match.Groups["rounding"].Value[1..], out var rounding))
+		{
+			return math.RoundTo(rounding);
+		}
+
 		return math;
 	}
 
@@ -93,7 +104,8 @@ public abstract class DateMath
 
 	public override string ToString()
 	{
-		if (!IsValid) return string.Empty;
+		if (!IsValid)
+			return string.Empty;
 
 		var separator = Round.HasValue || Ranges.HasAny() ? "||" : string.Empty;
 
@@ -147,6 +159,7 @@ public abstract class DateMath
 				builder.Append(':');
 				AppendTwoDigitNumber(builder, offset.Minutes);
 				break;
+
 			case DateTimeKind.Utc:
 				builder.Append('Z');
 				break;
@@ -172,7 +185,6 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 		// TODO: Performance - Review potential to avoid allocation on DateTime path and use Span<byte>
 
 		var value = reader.GetString();
-		reader.Read();
 
 		if (!value.Contains("|") && DateTime.TryParse(value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dateTime))
 			return DateMath.Anchored(dateTime);
@@ -182,12 +194,6 @@ internal sealed class DateMathConverter : JsonConverter<DateMath>
 
 	public override void Write(Utf8JsonWriter writer, DateMath value, JsonSerializerOptions options)
 	{
-		if (value is null)
-		{
-			writer.WriteNullValue();
-			return;
-		}
-
 		writer.WriteStringValue(value.ToString());
 	}
 }

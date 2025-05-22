@@ -17,25 +17,172 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Ingest;
 
+internal sealed partial class InferenceProcessorConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropDescription = System.Text.Json.JsonEncodedText.Encode("description");
+	private static readonly System.Text.Json.JsonEncodedText PropFieldMap = System.Text.Json.JsonEncodedText.Encode("field_map");
+	private static readonly System.Text.Json.JsonEncodedText PropIf = System.Text.Json.JsonEncodedText.Encode("if");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreFailure = System.Text.Json.JsonEncodedText.Encode("ignore_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropIgnoreMissing = System.Text.Json.JsonEncodedText.Encode("ignore_missing");
+	private static readonly System.Text.Json.JsonEncodedText PropInferenceConfig = System.Text.Json.JsonEncodedText.Encode("inference_config");
+	private static readonly System.Text.Json.JsonEncodedText PropInputOutput = System.Text.Json.JsonEncodedText.Encode("input_output");
+	private static readonly System.Text.Json.JsonEncodedText PropModelId = System.Text.Json.JsonEncodedText.Encode("model_id");
+	private static readonly System.Text.Json.JsonEncodedText PropOnFailure = System.Text.Json.JsonEncodedText.Encode("on_failure");
+	private static readonly System.Text.Json.JsonEncodedText PropTag = System.Text.Json.JsonEncodedText.Encode("tag");
+	private static readonly System.Text.Json.JsonEncodedText PropTargetField = System.Text.Json.JsonEncodedText.Encode("target_field");
+
+	public override Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<string?> propDescription = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>?> propFieldMap = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Script?> propIf = default;
+		LocalJsonValue<bool?> propIgnoreFailure = default;
+		LocalJsonValue<bool?> propIgnoreMissing = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Ingest.InferenceConfig?> propInferenceConfig = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>?> propInputOutput = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Id> propModelId = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>?> propOnFailure = default;
+		LocalJsonValue<string?> propTag = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTargetField = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propDescription.TryReadProperty(ref reader, options, PropDescription, null))
+			{
+				continue;
+			}
+
+			if (propFieldMap.TryReadProperty(ref reader, options, PropFieldMap, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, object>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propIf.TryReadProperty(ref reader, options, PropIf, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreFailure.TryReadProperty(ref reader, options, PropIgnoreFailure, null))
+			{
+				continue;
+			}
+
+			if (propIgnoreMissing.TryReadProperty(ref reader, options, PropIgnoreMissing, null))
+			{
+				continue;
+			}
+
+			if (propInferenceConfig.TryReadProperty(ref reader, options, PropInferenceConfig, null))
+			{
+				continue;
+			}
+
+			if (propInputOutput.TryReadProperty(ref reader, options, PropInputOutput, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(o, null)))
+			{
+				continue;
+			}
+
+			if (propModelId.TryReadProperty(ref reader, options, PropModelId, null))
+			{
+				continue;
+			}
+
+			if (propOnFailure.TryReadProperty(ref reader, options, PropOnFailure, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, null)))
+			{
+				continue;
+			}
+
+			if (propTag.TryReadProperty(ref reader, options, PropTag, null))
+			{
+				continue;
+			}
+
+			if (propTargetField.TryReadProperty(ref reader, options, PropTargetField, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Description = propDescription.Value,
+			FieldMap = propFieldMap.Value,
+			If = propIf.Value,
+			IgnoreFailure = propIgnoreFailure.Value,
+			IgnoreMissing = propIgnoreMissing.Value,
+			InferenceConfig = propInferenceConfig.Value,
+			InputOutput = propInputOutput.Value,
+			ModelId = propModelId.Value,
+			OnFailure = propOnFailure.Value,
+			Tag = propTag.Value,
+			TargetField = propTargetField.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropDescription, value.Description, null, null);
+		writer.WriteProperty(options, PropFieldMap, value.FieldMap, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, object>(o, v, null, null));
+		writer.WriteProperty(options, PropIf, value.If, null, null);
+		writer.WriteProperty(options, PropIgnoreFailure, value.IgnoreFailure, null, null);
+		writer.WriteProperty(options, PropIgnoreMissing, value.IgnoreMissing, null, null);
+		writer.WriteProperty(options, PropInferenceConfig, value.InferenceConfig, null, null);
+		writer.WriteProperty(options, PropInputOutput, value.InputOutput, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.Ingest.InputConfig>(o, v, null));
+		writer.WriteProperty(options, PropModelId, value.ModelId, null, null);
+		writer.WriteProperty(options, PropOnFailure, value.OnFailure, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? v) => w.WriteCollectionValue<Elastic.Clients.Elasticsearch.Ingest.Processor>(o, v, null));
+		writer.WriteProperty(options, PropTag, value.Tag, null, null);
+		writer.WriteProperty(options, PropTargetField, value.TargetField, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorConverter))]
 public sealed partial class InferenceProcessor
 {
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceProcessor(Elastic.Clients.Elasticsearch.Id modelId)
+	{
+		ModelId = modelId;
+	}
+#if NET7_0_OR_GREATER
+	public InferenceProcessor()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	[System.Obsolete("The type contains required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	public InferenceProcessor()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Description of the processor.
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("description")]
 	public string? Description { get; set; }
 
 	/// <summary>
@@ -44,48 +191,63 @@ public sealed partial class InferenceProcessor
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("field_map")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMap { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("if")]
-	public string? If { get; set; }
+	public Elastic.Clients.Elasticsearch.Script? If { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("ignore_failure")]
 	public bool? IgnoreFailure { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public bool? IgnoreMissing { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("inference_config")]
 	public Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfig { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? InputOutput { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The ID or alias for the trained model, or the ID of the deployment.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("model_id")]
-	public Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Id ModelId { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("on_failure")]
-	public ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailure { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -93,7 +255,6 @@ public sealed partial class InferenceProcessor
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tag")]
 	public string? Tag { get; set; }
 
 	/// <summary>
@@ -101,34 +262,27 @@ public sealed partial class InferenceProcessor
 	/// Field added to incoming documents to contain results objects.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("target_field")]
 	public Elastic.Clients.Elasticsearch.Field? TargetField { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.Processor(InferenceProcessor inferenceProcessor) => Elastic.Clients.Elasticsearch.Ingest.Processor.Inference(inferenceProcessor);
 }
 
-public sealed partial class InferenceProcessorDescriptor<TDocument> : SerializableDescriptor<InferenceProcessorDescriptor<TDocument>>
+public readonly partial struct InferenceProcessorDescriptor<TDocument>
 {
-	internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Instance { get; init; }
 
-	public InferenceProcessorDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance)
 	{
+		Instance = instance;
 	}
 
-	private string? DescriptionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument> InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> InferenceConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
@@ -136,10 +290,10 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	/// Useful for describing the purpose of the processor or its configuration.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> Description(string? description)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> Description(string? value)
 	{
-		DescriptionValue = description;
-		return Self;
+		Instance.Description = value;
+		return this;
 	}
 
 	/// <summary>
@@ -148,285 +302,10 @@ public sealed partial class InferenceProcessorDescriptor<TDocument> : Serializab
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? value)
 	{
-		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Conditionally execute the processor.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> If(string? value)
-	{
-		IfValue = value;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Ignore failures for the processor.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? ignoreFailure = true)
-	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Contains the inference type and its options.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
-	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument> descriptor)
-	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> InferenceConfig(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> configure)
-	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The ID or alias for the trained model, or the ID of the deployment.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id modelId)
-	{
-		ModelIdValue = modelId;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Handle failures for the processor.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
-	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument> descriptor)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>> configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
-
-	public InferenceProcessorDescriptor<TDocument> OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Identifier for the processor.
-	/// Useful for debugging and metrics.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> Tag(string? tag)
-	{
-		TagValue = tag;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> TargetField<TValue>(Expression<Func<TDocument, TValue>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field added to incoming documents to contain results objects.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor<TDocument> TargetField(Expression<Func<TDocument, object>> targetField)
-	{
-		TargetFieldValue = targetField;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
-
-		if (FieldMapValue is not null)
-		{
-			writer.WritePropertyName("field_map");
-			JsonSerializer.Serialize(writer, FieldMapValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
-
-		writer.WritePropertyName("model_id");
-		JsonSerializer.Serialize(writer, ModelIdValue, options);
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class InferenceProcessorDescriptor : SerializableDescriptor<InferenceProcessorDescriptor>
-{
-	internal InferenceProcessorDescriptor(Action<InferenceProcessorDescriptor> configure) => configure.Invoke(this);
-
-	public InferenceProcessorDescriptor() : base()
-	{
-	}
-
-	private string? DescriptionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, object>? FieldMapValue { get; set; }
-	private string? IfValue { get; set; }
-	private bool? IgnoreFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? InferenceConfigValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor InferenceConfigDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> InferenceConfigDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Id ModelIdValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? OnFailureValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor OnFailureDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> OnFailureDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] OnFailureDescriptorActions { get; set; }
-	private string? TagValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TargetFieldValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Description of the processor.
-	/// Useful for describing the purpose of the processor or its configuration.
-	/// </para>
-	/// </summary>
-	public InferenceProcessorDescriptor Description(string? description)
-	{
-		DescriptionValue = description;
-		return Self;
+		Instance.FieldMap = value;
+		return this;
 	}
 
 	/// <summary>
@@ -435,10 +314,36 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// This mapping takes precedence over any default mappings provided in the model configuration.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor FieldMap(Func<FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>, FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>> selector)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap()
 	{
-		FieldMapValue = selector?.Invoke(new FluentDictionary<Elastic.Clients.Elasticsearch.Field, object>());
-		return Self;
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maps the document field names to the known field names of the model.
+	/// This mapping takes precedence over any default mappings provided in the model configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>>? action)
+	{
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> AddFieldMap(Elastic.Clients.Elasticsearch.Field key, object value)
+	{
+		Instance.FieldMap ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, object>();
+		Instance.FieldMap.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> AddFieldMap(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, object value)
+	{
+		Instance.FieldMap ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, object>();
+		Instance.FieldMap.Add(key, value);
+		return this;
 	}
 
 	/// <summary>
@@ -446,10 +351,32 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Conditionally execute the processor.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor If(string? value)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If(Elastic.Clients.Elasticsearch.Script? value)
 	{
-		IfValue = value;
-		return Self;
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -457,10 +384,23 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Ignore failures for the processor.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor IgnoreFailure(bool? ignoreFailure = true)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> IgnoreFailure(bool? value = true)
 	{
-		IgnoreFailureValue = ignoreFailure;
-		return Self;
+		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
 	}
 
 	/// <summary>
@@ -468,28 +408,63 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Contains the inference type and its options.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? inferenceConfig)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? value)
 	{
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigValue = inferenceConfig;
-		return Self;
+		Instance.InferenceConfig = value;
+		return this;
 	}
 
-	public InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>> action)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptorAction = null;
-		InferenceConfigDescriptor = descriptor;
-		return Self;
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
-	public InferenceProcessorDescriptor InferenceConfig(Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
 	{
-		InferenceConfigValue = null;
-		InferenceConfigDescriptor = null;
-		InferenceConfigDescriptorAction = configure;
-		return Self;
+		Instance.InputOutput = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
+	{
+		Instance.InputOutput = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor.Build(action));
+		}
+
+		Instance.InputOutput = items;
+		return this;
 	}
 
 	/// <summary>
@@ -497,10 +472,10 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// The ID or alias for the trained model, or the ID of the deployment.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id modelId)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> ModelId(Elastic.Clients.Elasticsearch.Id value)
 	{
-		ModelIdValue = modelId;
-		return Self;
+		Instance.ModelId = value;
+		return this;
 	}
 
 	/// <summary>
@@ -508,40 +483,38 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Handle failures for the processor.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor OnFailure(ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? onFailure)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
 	{
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureValue = onFailure;
-		return Self;
+		Instance.OnFailure = value;
+		return this;
 	}
 
-	public InferenceProcessorDescriptor OnFailure(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptor = descriptor;
-		return Self;
+		Instance.OnFailure = [.. values];
+		return this;
 	}
 
-	public InferenceProcessorDescriptor OnFailure(Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>>[] actions)
 	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorActions = null;
-		OnFailureDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<TDocument>.Build(action));
+		}
 
-	public InferenceProcessorDescriptor OnFailure(params Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] configure)
-	{
-		OnFailureValue = null;
-		OnFailureDescriptor = null;
-		OnFailureDescriptorAction = null;
-		OnFailureDescriptorActions = configure;
-		return Self;
+		Instance.OnFailure = items;
+		return this;
 	}
 
 	/// <summary>
@@ -550,10 +523,10 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Useful for debugging and metrics.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor Tag(string? tag)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> Tag(string? value)
 	{
-		TagValue = tag;
-		return Self;
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -561,10 +534,10 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Field added to incoming documents to contain results objects.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -572,10 +545,323 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Field added to incoming documents to contain results objects.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor TargetField<TDocument, TValue>(Expression<Func<TDocument, TValue>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument> TargetField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct InferenceProcessorDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public InferenceProcessorDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor instance) => new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Description of the processor.
+	/// Useful for describing the purpose of the processor or its configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor Description(string? value)
+	{
+		Instance.Description = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maps the document field names to the known field names of the model.
+	/// This mapping takes precedence over any default mappings provided in the model configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, object>? value)
+	{
+		Instance.FieldMap = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maps the document field names to the known field names of the model.
+	/// This mapping takes precedence over any default mappings provided in the model configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap()
+	{
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maps the document field names to the known field names of the model.
+	/// This mapping takes precedence over any default mappings provided in the model configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject>? action)
+	{
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Maps the document field names to the known field names of the model.
+	/// This mapping takes precedence over any default mappings provided in the model configuration.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor FieldMap<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>>? action)
+	{
+		Instance.FieldMap = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldObject<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor AddFieldMap(Elastic.Clients.Elasticsearch.Field key, object value)
+	{
+		Instance.FieldMap ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, object>();
+		Instance.FieldMap.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor AddFieldMap<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, object value)
+	{
+		Instance.FieldMap ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, object>();
+		Instance.FieldMap.Add(key, value);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If(Elastic.Clients.Elasticsearch.Script? value)
+	{
+		Instance.If = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If()
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(null);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Conditionally execute the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor If(System.Action<Elastic.Clients.Elasticsearch.ScriptDescriptor>? action)
+	{
+		Instance.If = Elastic.Clients.Elasticsearch.ScriptDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Ignore failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor IgnoreFailure(bool? value = true)
+	{
+		Instance.IgnoreFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true and any of the input fields defined in input_ouput are missing
+	/// then those missing fields are quietly ignored, otherwise a missing field causes a failure.
+	/// Only applies when using input_output configurations to explicitly list the input fields.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor IgnoreMissing(bool? value = true)
+	{
+		Instance.IgnoreMissing = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig(Elastic.Clients.Elasticsearch.Ingest.InferenceConfig? value)
+	{
+		Instance.InferenceConfig = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor> action)
+	{
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Contains the inference type and its options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InferenceConfig<T>(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>> action)
+	{
+		Instance.InferenceConfig = Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.InputConfig>? value)
+	{
+		Instance.InputOutput = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params Elastic.Clients.Elasticsearch.Ingest.InputConfig[] values)
+	{
+		Instance.InputOutput = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Input fields for inference and output (destination) fields for the inference results.
+	/// This option is incompatible with the target_field and field_map options.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor InputOutput(params System.Action<Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.InputConfig>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.InputConfigDescriptor.Build(action));
+		}
+
+		Instance.InputOutput = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The ID or alias for the trained model, or the ID of the deployment.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor ModelId(Elastic.Clients.Elasticsearch.Id value)
+	{
+		Instance.ModelId = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.Ingest.Processor>? value)
+	{
+		Instance.OnFailure = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(params Elastic.Clients.Elasticsearch.Ingest.Processor[] values)
+	{
+		Instance.OnFailure = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Handle failures for the processor.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor OnFailure<T>(params System.Action<Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>>[] actions)
+	{
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.Ingest.Processor>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor<T>.Build(action));
+		}
+
+		Instance.OnFailure = items;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Identifier for the processor.
+	/// Useful for debugging and metrics.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor Tag(string? value)
+	{
+		Instance.Tag = value;
+		return this;
 	}
 
 	/// <summary>
@@ -583,100 +869,28 @@ public sealed partial class InferenceProcessorDescriptor : SerializableDescripto
 	/// Field added to incoming documents to contain results objects.
 	/// </para>
 	/// </summary>
-	public InferenceProcessorDescriptor TargetField<TDocument>(Expression<Func<TDocument, object>> targetField)
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor TargetField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TargetFieldValue = targetField;
-		return Self;
+		Instance.TargetField = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	/// <summary>
+	/// <para>
+	/// Field added to incoming documents to contain results objects.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor TargetField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		writer.WriteStartObject();
-		if (!string.IsNullOrEmpty(DescriptionValue))
-		{
-			writer.WritePropertyName("description");
-			writer.WriteStringValue(DescriptionValue);
-		}
+		Instance.TargetField = value;
+		return this;
+	}
 
-		if (FieldMapValue is not null)
-		{
-			writer.WritePropertyName("field_map");
-			JsonSerializer.Serialize(writer, FieldMapValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(IfValue))
-		{
-			writer.WritePropertyName("if");
-			writer.WriteStringValue(IfValue);
-		}
-
-		if (IgnoreFailureValue.HasValue)
-		{
-			writer.WritePropertyName("ignore_failure");
-			writer.WriteBooleanValue(IgnoreFailureValue.Value);
-		}
-
-		if (InferenceConfigDescriptor is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigDescriptor, options);
-		}
-		else if (InferenceConfigDescriptorAction is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.InferenceConfigDescriptor(InferenceConfigDescriptorAction), options);
-		}
-		else if (InferenceConfigValue is not null)
-		{
-			writer.WritePropertyName("inference_config");
-			JsonSerializer.Serialize(writer, InferenceConfigValue, options);
-		}
-
-		writer.WritePropertyName("model_id");
-		JsonSerializer.Serialize(writer, ModelIdValue, options);
-		if (OnFailureDescriptor is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, OnFailureDescriptor, options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorAction is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(OnFailureDescriptorAction), options);
-			writer.WriteEndArray();
-		}
-		else if (OnFailureDescriptorActions is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			writer.WriteStartArray();
-			foreach (var action in OnFailureDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Ingest.ProcessorDescriptor(action), options);
-			}
-
-			writer.WriteEndArray();
-		}
-		else if (OnFailureValue is not null)
-		{
-			writer.WritePropertyName("on_failure");
-			JsonSerializer.Serialize(writer, OnFailureValue, options);
-		}
-
-		if (!string.IsNullOrEmpty(TagValue))
-		{
-			writer.WritePropertyName("tag");
-			writer.WriteStringValue(TagValue);
-		}
-
-		if (TargetFieldValue is not null)
-		{
-			writer.WritePropertyName("target_field");
-			JsonSerializer.Serialize(writer, TargetFieldValue, options);
-		}
-
-		writer.WriteEndObject();
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor Build(System.Action<Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor> action)
+	{
+		var builder = new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessorDescriptor(new Elastic.Clients.Elasticsearch.Ingest.InferenceProcessor(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

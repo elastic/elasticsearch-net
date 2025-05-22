@@ -17,64 +17,94 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.MachineLearning;
 
-/// <summary>
-/// <para>
-/// RoBERTa tokenization configuration options
-/// </para>
-/// </summary>
-public sealed partial class NlpRobertaTokenizationConfig
+internal sealed partial class NlpRobertaTokenizationConfigConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig>
 {
-	/// <summary>
-	/// <para>
-	/// Should the tokenizer prefix input with a space character
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("add_prefix_space")]
-	public bool? AddPrefixSpace { get; set; }
+	private static readonly System.Text.Json.JsonEncodedText PropAddPrefixSpace = System.Text.Json.JsonEncodedText.Encode("add_prefix_space");
+	private static readonly System.Text.Json.JsonEncodedText PropDoLowerCase = System.Text.Json.JsonEncodedText.Encode("do_lower_case");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSequenceLength = System.Text.Json.JsonEncodedText.Encode("max_sequence_length");
+	private static readonly System.Text.Json.JsonEncodedText PropSpan = System.Text.Json.JsonEncodedText.Encode("span");
+	private static readonly System.Text.Json.JsonEncodedText PropTruncate = System.Text.Json.JsonEncodedText.Encode("truncate");
+	private static readonly System.Text.Json.JsonEncodedText PropWithSpecialTokens = System.Text.Json.JsonEncodedText.Encode("with_special_tokens");
 
-	/// <summary>
-	/// <para>
-	/// Maximum input sequence length for the model
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("max_sequence_length")]
-	public int? MaxSequenceLength { get; set; }
+	public override Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAddPrefixSpace = default;
+		LocalJsonValue<bool?> propDoLowerCase = default;
+		LocalJsonValue<int?> propMaxSequenceLength = default;
+		LocalJsonValue<int?> propSpan = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate?> propTruncate = default;
+		LocalJsonValue<bool?> propWithSpecialTokens = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAddPrefixSpace.TryReadProperty(ref reader, options, PropAddPrefixSpace, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("span")]
-	public int? Span { get; set; }
+			if (propDoLowerCase.TryReadProperty(ref reader, options, PropDoLowerCase, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Should tokenization input be automatically truncated before sending to the model for inference
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("truncate")]
-	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
+			if (propMaxSequenceLength.TryReadProperty(ref reader, options, PropMaxSequenceLength, null))
+			{
+				continue;
+			}
 
-	/// <summary>
-	/// <para>
-	/// Is tokenization completed with special tokens
-	/// </para>
-	/// </summary>
-	[JsonInclude, JsonPropertyName("with_special_tokens")]
-	public bool? WithSpecialTokens { get; set; }
+			if (propSpan.TryReadProperty(ref reader, options, PropSpan, null))
+			{
+				continue;
+			}
 
-	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig(NlpRobertaTokenizationConfig nlpRobertaTokenizationConfig) => Elastic.Clients.Elasticsearch.MachineLearning.TokenizationConfig.Roberta(nlpRobertaTokenizationConfig);
+			if (propTruncate.TryReadProperty(ref reader, options, PropTruncate, null))
+			{
+				continue;
+			}
+
+			if (propWithSpecialTokens.TryReadProperty(ref reader, options, PropWithSpecialTokens, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AddPrefixSpace = propAddPrefixSpace.Value,
+			DoLowerCase = propDoLowerCase.Value,
+			MaxSequenceLength = propMaxSequenceLength.Value,
+			Span = propSpan.Value,
+			Truncate = propTruncate.Value,
+			WithSpecialTokens = propWithSpecialTokens.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAddPrefixSpace, value.AddPrefixSpace, null, null);
+		writer.WriteProperty(options, PropDoLowerCase, value.DoLowerCase, null, null);
+		writer.WriteProperty(options, PropMaxSequenceLength, value.MaxSequenceLength, null, null);
+		writer.WriteProperty(options, PropSpan, value.Span, null, null);
+		writer.WriteProperty(options, PropTruncate, value.Truncate, null, null);
+		writer.WriteProperty(options, PropWithSpecialTokens, value.WithSpecialTokens, null, null);
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -82,29 +112,112 @@ public sealed partial class NlpRobertaTokenizationConfig
 /// RoBERTa tokenization configuration options
 /// </para>
 /// </summary>
-public sealed partial class NlpRobertaTokenizationConfigDescriptor : SerializableDescriptor<NlpRobertaTokenizationConfigDescriptor>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigConverter))]
+public sealed partial class NlpRobertaTokenizationConfig
 {
-	internal NlpRobertaTokenizationConfigDescriptor(Action<NlpRobertaTokenizationConfigDescriptor> configure) => configure.Invoke(this);
-
-	public NlpRobertaTokenizationConfigDescriptor() : base()
+#if NET7_0_OR_GREATER
+	public NlpRobertaTokenizationConfig()
 	{
 	}
-
-	private bool? AddPrefixSpaceValue { get; set; }
-	private int? MaxSequenceLengthValue { get; set; }
-	private int? SpanValue { get; set; }
-	private Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? TruncateValue { get; set; }
-	private bool? WithSpecialTokensValue { get; set; }
+#endif
+#if !NET7_0_OR_GREATER
+	public NlpRobertaTokenizationConfig()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
 	/// <summary>
 	/// <para>
 	/// Should the tokenizer prefix input with a space character
 	/// </para>
 	/// </summary>
-	public NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? addPrefixSpace = true)
+	public bool? AddPrefixSpace { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Should the tokenizer lower case the text
+	/// </para>
+	/// </summary>
+	public bool? DoLowerCase { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Maximum input sequence length for the model
+	/// </para>
+	/// </summary>
+	public int? MaxSequenceLength { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
+	/// </para>
+	/// </summary>
+	public int? Span { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Should tokenization input be automatically truncated before sending to the model for inference
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? Truncate { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// Is tokenization completed with special tokens
+	/// </para>
+	/// </summary>
+	public bool? WithSpecialTokens { get; set; }
+}
+
+/// <summary>
+/// <para>
+/// RoBERTa tokenization configuration options
+/// </para>
+/// </summary>
+public readonly partial struct NlpRobertaTokenizationConfigDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpRobertaTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig instance)
 	{
-		AddPrefixSpaceValue = addPrefixSpace;
-		return Self;
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public NlpRobertaTokenizationConfigDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig instance) => new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Should the tokenizer prefix input with a space character
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor AddPrefixSpace(bool? value = true)
+	{
+		Instance.AddPrefixSpace = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Should the tokenizer lower case the text
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor DoLowerCase(bool? value = true)
+	{
+		Instance.DoLowerCase = value;
+		return this;
 	}
 
 	/// <summary>
@@ -112,10 +225,10 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	/// Maximum input sequence length for the model
 	/// </para>
 	/// </summary>
-	public NlpRobertaTokenizationConfigDescriptor MaxSequenceLength(int? maxSequenceLength)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor MaxSequenceLength(int? value)
 	{
-		MaxSequenceLengthValue = maxSequenceLength;
-		return Self;
+		Instance.MaxSequenceLength = value;
+		return this;
 	}
 
 	/// <summary>
@@ -123,10 +236,10 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	/// Tokenization spanning options. Special value of -1 indicates no spanning takes place
 	/// </para>
 	/// </summary>
-	public NlpRobertaTokenizationConfigDescriptor Span(int? span)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor Span(int? value)
 	{
-		SpanValue = span;
-		return Self;
+		Instance.Span = value;
+		return this;
 	}
 
 	/// <summary>
@@ -134,10 +247,10 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	/// Should tokenization input be automatically truncated before sending to the model for inference
 	/// </para>
 	/// </summary>
-	public NlpRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? truncate)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor Truncate(Elastic.Clients.Elasticsearch.MachineLearning.TokenizationTruncate? value)
 	{
-		TruncateValue = truncate;
-		return Self;
+		Instance.Truncate = value;
+		return this;
 	}
 
 	/// <summary>
@@ -145,45 +258,22 @@ public sealed partial class NlpRobertaTokenizationConfigDescriptor : Serializabl
 	/// Is tokenization completed with special tokens
 	/// </para>
 	/// </summary>
-	public NlpRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? withSpecialTokens = true)
+	public Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor WithSpecialTokens(bool? value = true)
 	{
-		WithSpecialTokensValue = withSpecialTokens;
-		return Self;
+		Instance.WithSpecialTokens = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig Build(System.Action<Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor>? action)
 	{
-		writer.WriteStartObject();
-		if (AddPrefixSpaceValue.HasValue)
+		if (action is null)
 		{
-			writer.WritePropertyName("add_prefix_space");
-			writer.WriteBooleanValue(AddPrefixSpaceValue.Value);
+			return new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (MaxSequenceLengthValue.HasValue)
-		{
-			writer.WritePropertyName("max_sequence_length");
-			writer.WriteNumberValue(MaxSequenceLengthValue.Value);
-		}
-
-		if (SpanValue.HasValue)
-		{
-			writer.WritePropertyName("span");
-			writer.WriteNumberValue(SpanValue.Value);
-		}
-
-		if (TruncateValue is not null)
-		{
-			writer.WritePropertyName("truncate");
-			JsonSerializer.Serialize(writer, TruncateValue, options);
-		}
-
-		if (WithSpecialTokensValue.HasValue)
-		{
-			writer.WritePropertyName("with_special_tokens");
-			writer.WriteBooleanValue(WithSpecialTokensValue.Value);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfigDescriptor(new Elastic.Clients.Elasticsearch.MachineLearning.NlpRobertaTokenizationConfig(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }

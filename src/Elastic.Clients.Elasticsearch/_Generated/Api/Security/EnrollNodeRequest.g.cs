@@ -17,21 +17,43 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Security;
 
-public sealed partial class EnrollNodeRequestParameters : RequestParameters
+public sealed partial class EnrollNodeRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class EnrollNodeRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest>
+{
+	public override Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
@@ -41,12 +63,33 @@ public sealed partial class EnrollNodeRequestParameters : RequestParameters
 /// <para>
 /// Enroll a new node to allow it to join an existing cluster with security features enabled.
 /// </para>
+/// <para>
+/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
+/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
+/// </para>
 /// </summary>
-public sealed partial class EnrollNodeRequest : PlainRequest<EnrollNodeRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestConverter))]
+public sealed partial class EnrollNodeRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnrollNode;
+#if NET7_0_OR_GREATER
+	public EnrollNodeRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public EnrollNodeRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EnrollNodeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.SecurityEnrollNode;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -60,24 +103,81 @@ public sealed partial class EnrollNodeRequest : PlainRequest<EnrollNodeRequestPa
 /// <para>
 /// Enroll a new node to allow it to join an existing cluster with security features enabled.
 /// </para>
+/// <para>
+/// The response contains all the necessary information for the joining node to bootstrap discovery and security related settings so that it can successfully join the cluster.
+/// The response contains key and certificate material that allows the caller to generate valid signed certificates for the HTTP layer of all nodes in the cluster.
+/// </para>
 /// </summary>
-public sealed partial class EnrollNodeRequestDescriptor : RequestDescriptor<EnrollNodeRequestDescriptor, EnrollNodeRequestParameters>
+public readonly partial struct EnrollNodeRequestDescriptor
 {
-	internal EnrollNodeRequestDescriptor(Action<EnrollNodeRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EnrollNodeRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public EnrollNodeRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.SecurityEnrollNode;
+	public static explicit operator Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest instance) => new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest(Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "security.enroll_node";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest Build(System.Action<Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor(new Elastic.Clients.Elasticsearch.Security.EnrollNodeRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Security.EnrollNodeRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

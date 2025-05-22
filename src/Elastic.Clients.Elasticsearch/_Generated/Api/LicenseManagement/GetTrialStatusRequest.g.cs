@@ -17,33 +17,72 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.LicenseManagement;
 
-public sealed partial class GetTrialStatusRequestParameters : RequestParameters
+public sealed partial class GetTrialStatusRequestParameters : Elastic.Transport.RequestParameters
 {
+}
+
+internal sealed partial class GetTrialStatusRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest>
+{
+	public override Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteEndObject();
+	}
 }
 
 /// <summary>
 /// <para>
-/// Retrieves information about the status of the trial license.
+/// Get the trial status.
 /// </para>
 /// </summary>
-public sealed partial class GetTrialStatusRequest : PlainRequest<GetTrialStatusRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestConverter))]
+public sealed partial class GetTrialStatusRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestParameters>
 {
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGetTrialStatus;
+#if NET7_0_OR_GREATER
+	public GetTrialStatusRequest()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public GetTrialStatusRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.LicenseManagementGetTrialStatus;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.GET;
 
 	internal override bool SupportsBody => false;
 
@@ -52,26 +91,79 @@ public sealed partial class GetTrialStatusRequest : PlainRequest<GetTrialStatusR
 
 /// <summary>
 /// <para>
-/// Retrieves information about the status of the trial license.
+/// Get the trial status.
 /// </para>
 /// </summary>
-public sealed partial class GetTrialStatusRequestDescriptor : RequestDescriptor<GetTrialStatusRequestDescriptor, GetTrialStatusRequestParameters>
+public readonly partial struct GetTrialStatusRequestDescriptor
 {
-	internal GetTrialStatusRequestDescriptor(Action<GetTrialStatusRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public GetTrialStatusRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest instance)
+	{
+		Instance = instance;
+	}
 
 	public GetTrialStatusRequestDescriptor()
 	{
+		Instance = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.LicenseManagementGetTrialStatus;
+	public static explicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest instance) => new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest(Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor descriptor) => descriptor.Instance;
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.GET;
-
-	internal override bool SupportsBody => false;
-
-	internal override string OperationName => "license.get_trial_status";
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest Build(System.Action<Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor>? action)
 	{
+		if (action is null)
+		{
+			return new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+		}
+
+		var builder = new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor(new Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor ErrorTrace(bool? value)
+	{
+		Instance.ErrorTrace = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.LicenseManagement.GetTrialStatusRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

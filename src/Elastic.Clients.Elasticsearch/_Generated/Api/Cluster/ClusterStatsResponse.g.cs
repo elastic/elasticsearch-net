@@ -17,70 +17,209 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport.Products.Elasticsearch;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Cluster;
 
-public sealed partial class ClusterStatsResponse : ElasticsearchResponse
+internal sealed partial class ClusterStatsResponseConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse>
 {
+	private static readonly System.Text.Json.JsonEncodedText PropCcs = System.Text.Json.JsonEncodedText.Encode("ccs");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterName = System.Text.Json.JsonEncodedText.Encode("cluster_name");
+	private static readonly System.Text.Json.JsonEncodedText PropClusterUuid = System.Text.Json.JsonEncodedText.Encode("cluster_uuid");
+	private static readonly System.Text.Json.JsonEncodedText PropIndices = System.Text.Json.JsonEncodedText.Encode("indices");
+	private static readonly System.Text.Json.JsonEncodedText PropNodes = System.Text.Json.JsonEncodedText.Encode("nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropNodeStats = System.Text.Json.JsonEncodedText.Encode("_nodes");
+	private static readonly System.Text.Json.JsonEncodedText PropStatus = System.Text.Json.JsonEncodedText.Encode("status");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestamp = System.Text.Json.JsonEncodedText.Encode("timestamp");
+
+	public override Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.CCSStats> propCcs = default;
+		LocalJsonValue<string> propClusterName = default;
+		LocalJsonValue<string> propClusterUuid = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterIndices> propIndices = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Cluster.ClusterNodes> propNodes = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.NodeStatistics?> propNodeStats = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.HealthStatus> propStatus = default;
+		LocalJsonValue<long> propTimestamp = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propCcs.TryReadProperty(ref reader, options, PropCcs, null))
+			{
+				continue;
+			}
+
+			if (propClusterName.TryReadProperty(ref reader, options, PropClusterName, null))
+			{
+				continue;
+			}
+
+			if (propClusterUuid.TryReadProperty(ref reader, options, PropClusterUuid, null))
+			{
+				continue;
+			}
+
+			if (propIndices.TryReadProperty(ref reader, options, PropIndices, null))
+			{
+				continue;
+			}
+
+			if (propNodes.TryReadProperty(ref reader, options, PropNodes, null))
+			{
+				continue;
+			}
+
+			if (propNodeStats.TryReadProperty(ref reader, options, PropNodeStats, null))
+			{
+				continue;
+			}
+
+			if (propStatus.TryReadProperty(ref reader, options, PropStatus, null))
+			{
+				continue;
+			}
+
+			if (propTimestamp.TryReadProperty(ref reader, options, PropTimestamp, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			Ccs = propCcs.Value,
+			ClusterName = propClusterName.Value,
+			ClusterUuid = propClusterUuid.Value,
+			Indices = propIndices.Value,
+			Nodes = propNodes.Value,
+			NodeStats = propNodeStats.Value,
+			Status = propStatus.Value,
+			Timestamp = propTimestamp.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponse value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropCcs, value.Ccs, null, null);
+		writer.WriteProperty(options, PropClusterName, value.ClusterName, null, null);
+		writer.WriteProperty(options, PropClusterUuid, value.ClusterUuid, null, null);
+		writer.WriteProperty(options, PropIndices, value.Indices, null, null);
+		writer.WriteProperty(options, PropNodes, value.Nodes, null, null);
+		writer.WriteProperty(options, PropNodeStats, value.NodeStats, null, null);
+		writer.WriteProperty(options, PropStatus, value.Status, null, null);
+		writer.WriteProperty(options, PropTimestamp, value.Timestamp, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Cluster.ClusterStatsResponseConverter))]
+public sealed partial class ClusterStatsResponse : Elastic.Transport.Products.Elasticsearch.ElasticsearchResponse
+{
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public ClusterStatsResponse()
+	{
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal ClusterStatsResponse(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Cross-cluster stats
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.CCSStats Ccs { get; set; }
+
 	/// <summary>
 	/// <para>
 	/// Name of the cluster, based on the cluster name setting.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_name")]
-	public string ClusterName { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ClusterName { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unique identifier for the cluster.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("cluster_uuid")]
-	public string ClusterUuid { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string ClusterUuid { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about indices with shards assigned to selected nodes.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("indices")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterIndices Indices { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("nodes")]
-	public Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Cluster.ClusterNodes Nodes { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Contains statistics about the number of nodes selected by the request’s node filters.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("_nodes")]
-	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; init; }
+	public Elastic.Clients.Elasticsearch.NodeStatistics? NodeStats { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Health status of the cluster, based on the state of its primary and replica shards.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("status")]
-	public Elastic.Clients.Elasticsearch.HealthStatus Status { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.HealthStatus Status { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Unix timestamp, in milliseconds, for the last time the cluster statistics were refreshed.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp")]
-	public long Timestamp { get; init; }
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	long Timestamp { get; set; }
 }

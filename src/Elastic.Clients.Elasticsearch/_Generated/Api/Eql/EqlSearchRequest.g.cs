@@ -17,23 +17,16 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Requests;
-using Elastic.Clients.Elasticsearch.Serialization;
-using Elastic.Transport;
-using Elastic.Transport.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Eql;
 
-public sealed partial class EqlSearchRequestParameters : RequestParameters
+public sealed partial class EqlSearchRequestParameters : Elastic.Transport.RequestParameters
 {
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
@@ -43,38 +36,266 @@ public sealed partial class EqlSearchRequestParameters : RequestParameters
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
 }
 
+internal sealed partial class EqlSearchRequestConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSearchResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_search_results");
+	private static readonly System.Text.Json.JsonEncodedText PropAllowPartialSequenceResults = System.Text.Json.JsonEncodedText.Encode("allow_partial_sequence_results");
+	private static readonly System.Text.Json.JsonEncodedText PropCaseSensitive = System.Text.Json.JsonEncodedText.Encode("case_sensitive");
+	private static readonly System.Text.Json.JsonEncodedText PropEventCategoryField = System.Text.Json.JsonEncodedText.Encode("event_category_field");
+	private static readonly System.Text.Json.JsonEncodedText PropFetchSize = System.Text.Json.JsonEncodedText.Encode("fetch_size");
+	private static readonly System.Text.Json.JsonEncodedText PropFields = System.Text.Json.JsonEncodedText.Encode("fields");
+	private static readonly System.Text.Json.JsonEncodedText PropFilter = System.Text.Json.JsonEncodedText.Encode("filter");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepAlive = System.Text.Json.JsonEncodedText.Encode("keep_alive");
+	private static readonly System.Text.Json.JsonEncodedText PropKeepOnCompletion = System.Text.Json.JsonEncodedText.Encode("keep_on_completion");
+	private static readonly System.Text.Json.JsonEncodedText PropMaxSamplesPerKey = System.Text.Json.JsonEncodedText.Encode("max_samples_per_key");
+	private static readonly System.Text.Json.JsonEncodedText PropQuery = System.Text.Json.JsonEncodedText.Encode("query");
+	private static readonly System.Text.Json.JsonEncodedText PropResultPosition = System.Text.Json.JsonEncodedText.Encode("result_position");
+	private static readonly System.Text.Json.JsonEncodedText PropRuntimeMappings = System.Text.Json.JsonEncodedText.Encode("runtime_mappings");
+	private static readonly System.Text.Json.JsonEncodedText PropSize = System.Text.Json.JsonEncodedText.Encode("size");
+	private static readonly System.Text.Json.JsonEncodedText PropTiebreakerField = System.Text.Json.JsonEncodedText.Encode("tiebreaker_field");
+	private static readonly System.Text.Json.JsonEncodedText PropTimestampField = System.Text.Json.JsonEncodedText.Encode("timestamp_field");
+	private static readonly System.Text.Json.JsonEncodedText PropWaitForCompletionTimeout = System.Text.Json.JsonEncodedText.Encode("wait_for_completion_timeout");
+
+	public override Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<bool?> propAllowPartialSearchResults = default;
+		LocalJsonValue<bool?> propAllowPartialSequenceResults = default;
+		LocalJsonValue<bool?> propCaseSensitive = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propEventCategoryField = default;
+		LocalJsonValue<int?> propFetchSize = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>?> propFields = default;
+		LocalJsonValue<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>?> propFilter = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propKeepAlive = default;
+		LocalJsonValue<bool?> propKeepOnCompletion = default;
+		LocalJsonValue<int?> propMaxSamplesPerKey = default;
+		LocalJsonValue<string> propQuery = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Eql.ResultPosition?> propResultPosition = default;
+		LocalJsonValue<System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>?> propRuntimeMappings = default;
+		LocalJsonValue<int?> propSize = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTiebreakerField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Field?> propTimestampField = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Duration?> propWaitForCompletionTimeout = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propAllowPartialSearchResults.TryReadProperty(ref reader, options, PropAllowPartialSearchResults, null))
+			{
+				continue;
+			}
+
+			if (propAllowPartialSequenceResults.TryReadProperty(ref reader, options, PropAllowPartialSequenceResults, null))
+			{
+				continue;
+			}
+
+			if (propCaseSensitive.TryReadProperty(ref reader, options, PropCaseSensitive, null))
+			{
+				continue;
+			}
+
+			if (propEventCategoryField.TryReadProperty(ref reader, options, PropEventCategoryField, null))
+			{
+				continue;
+			}
+
+			if (propFetchSize.TryReadProperty(ref reader, options, PropFetchSize, null))
+			{
+				continue;
+			}
+
+			if (propFields.TryReadProperty(ref reader, options, PropFields, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, null)))
+			{
+				continue;
+			}
+
+			if (propFilter.TryReadProperty(ref reader, options, PropFilter, static System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, null)))
+			{
+				continue;
+			}
+
+			if (propKeepAlive.TryReadProperty(ref reader, options, PropKeepAlive, null))
+			{
+				continue;
+			}
+
+			if (propKeepOnCompletion.TryReadProperty(ref reader, options, PropKeepOnCompletion, null))
+			{
+				continue;
+			}
+
+			if (propMaxSamplesPerKey.TryReadProperty(ref reader, options, PropMaxSamplesPerKey, null))
+			{
+				continue;
+			}
+
+			if (propQuery.TryReadProperty(ref reader, options, PropQuery, null))
+			{
+				continue;
+			}
+
+			if (propResultPosition.TryReadProperty(ref reader, options, PropResultPosition, null))
+			{
+				continue;
+			}
+
+			if (propRuntimeMappings.TryReadProperty(ref reader, options, PropRuntimeMappings, static System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? (ref System.Text.Json.Utf8JsonReader r, System.Text.Json.JsonSerializerOptions o) => r.ReadDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, null, null)))
+			{
+				continue;
+			}
+
+			if (propSize.TryReadProperty(ref reader, options, PropSize, null))
+			{
+				continue;
+			}
+
+			if (propTiebreakerField.TryReadProperty(ref reader, options, PropTiebreakerField, null))
+			{
+				continue;
+			}
+
+			if (propTimestampField.TryReadProperty(ref reader, options, PropTimestampField, null))
+			{
+				continue;
+			}
+
+			if (propWaitForCompletionTimeout.TryReadProperty(ref reader, options, PropWaitForCompletionTimeout, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			AllowPartialSearchResults = propAllowPartialSearchResults.Value,
+			AllowPartialSequenceResults = propAllowPartialSequenceResults.Value,
+			CaseSensitive = propCaseSensitive.Value,
+			EventCategoryField = propEventCategoryField.Value,
+			FetchSize = propFetchSize.Value,
+			Fields = propFields.Value,
+			Filter = propFilter.Value,
+			KeepAlive = propKeepAlive.Value,
+			KeepOnCompletion = propKeepOnCompletion.Value,
+			MaxSamplesPerKey = propMaxSamplesPerKey.Value,
+			Query = propQuery.Value,
+			ResultPosition = propResultPosition.Value,
+			RuntimeMappings = propRuntimeMappings.Value,
+			Size = propSize.Value,
+			TiebreakerField = propTiebreakerField.Value,
+			TimestampField = propTimestampField.Value,
+			WaitForCompletionTimeout = propWaitForCompletionTimeout.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropAllowPartialSearchResults, value.AllowPartialSearchResults, null, null);
+		writer.WriteProperty(options, PropAllowPartialSequenceResults, value.AllowPartialSequenceResults, null, null);
+		writer.WriteProperty(options, PropCaseSensitive, value.CaseSensitive, null, null);
+		writer.WriteProperty(options, PropEventCategoryField, value.EventCategoryField, null, null);
+		writer.WriteProperty(options, PropFetchSize, value.FetchSize, null, null);
+		writer.WriteProperty(options, PropFields, value.Fields, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(o, v, null));
+		writer.WriteProperty(options, PropFilter, value.Filter, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? v) => w.WriteSingleOrManyCollectionValue<Elastic.Clients.Elasticsearch.QueryDsl.Query>(o, v, null));
+		writer.WriteProperty(options, PropKeepAlive, value.KeepAlive, null, null);
+		writer.WriteProperty(options, PropKeepOnCompletion, value.KeepOnCompletion, null, null);
+		writer.WriteProperty(options, PropMaxSamplesPerKey, value.MaxSamplesPerKey, null, null);
+		writer.WriteProperty(options, PropQuery, value.Query, null, null);
+		writer.WriteProperty(options, PropResultPosition, value.ResultPosition, null, null);
+		writer.WriteProperty(options, PropRuntimeMappings, value.RuntimeMappings, null, static (System.Text.Json.Utf8JsonWriter w, System.Text.Json.JsonSerializerOptions o, System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? v) => w.WriteDictionaryValue<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>(o, v, null, null));
+		writer.WriteProperty(options, PropSize, value.Size, null, null);
+		writer.WriteProperty(options, PropTiebreakerField, value.TiebreakerField, null, null);
+		writer.WriteProperty(options, PropTimestampField, value.TimestampField, null, null);
+		writer.WriteProperty(options, PropWaitForCompletionTimeout, value.WaitForCompletionTimeout, null, null);
+		writer.WriteEndObject();
+	}
+}
+
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
-public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestParameters>
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestConverter))]
+public sealed partial class EqlSearchRequest : Elastic.Clients.Elasticsearch.Requests.PlainRequest<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestParameters>
 {
+	[System.Obsolete("The request contains additional required properties that must be initialized. Please use an alternative constructor to ensure all required values are properly set.")]
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
 	public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
 	{
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlSearchRequest(Elastic.Clients.Elasticsearch.Indices indices, string query) : base(r => r.Required("index", indices))
+	{
+		Query = query;
+	}
+#if NET7_0_OR_GREATER
+	public EqlSearchRequest()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal EqlSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
 
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
+	internal override Elastic.Clients.Elasticsearch.Requests.ApiUrls ApiUrls => Elastic.Clients.Elasticsearch.Requests.ApiUrlLookup.EqlSearch;
+
+	protected override Elastic.Transport.HttpMethod StaticHttpMethod => Elastic.Transport.HttpMethod.POST;
 
 	internal override bool SupportsBody => true;
 
 	internal override string OperationName => "eql.search";
 
-	[JsonIgnore]
+	/// <summary>
+	/// <para>
+	/// The name of the index to scope the operation
+	/// </para>
+	/// </summary>
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	Elastic.Clients.Elasticsearch.Indices Indices { get => P<Elastic.Clients.Elasticsearch.Indices>("index"); set => PR("index", value); }
 	public bool? AllowNoIndices { get => Q<bool?>("allow_no_indices"); set => Q("allow_no_indices", value); }
-	[JsonIgnore]
-	public ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? ExpandWildcards { get => Q<System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>?>("expand_wildcards"); set => Q("expand_wildcards", value); }
 
 	/// <summary>
 	/// <para>
 	/// If true, missing or closed indices are not included in the response.
 	/// </para>
 	/// </summary>
-	[JsonIgnore]
 	public bool? IgnoreUnavailable { get => Q<bool?>("ignore_unavailable"); set => Q("ignore_unavailable", value); }
-	[JsonInclude, JsonPropertyName("case_sensitive")]
+
+	/// <summary>
+	/// <para>
+	/// Allow query execution also in case of shard failures.
+	/// If true, the query will keep running and will return results based on the available shards.
+	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialSearchResults { get; set; }
+
+	/// <summary>
+	/// <para>
+	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
+	/// If true, the sequence query will return results based on the available shards, ignoring the others.
+	/// If false, the sequence query will return successfully, but will always have empty results.
+	/// </para>
+	/// </summary>
+	public bool? AllowPartialSequenceResults { get; set; }
 	public bool? CaseSensitive { get; set; }
 
 	/// <summary>
@@ -82,7 +303,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("event_category_field")]
 	public Elastic.Clients.Elasticsearch.Field? EventCategoryField { get; set; }
 
 	/// <summary>
@@ -90,7 +310,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Maximum number of events to search at a time for sequence queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fetch_size")]
 	public int? FetchSize { get; set; }
 
 	/// <summary>
@@ -98,21 +317,15 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("fields")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? Fields { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("filter")]
-	[SingleOrManyCollectionConverter(typeof(Elastic.Clients.Elasticsearch.QueryDsl.Query))]
-	public ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
-	[JsonInclude, JsonPropertyName("keep_alive")]
+	public System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? Filter { get; set; }
 	public Elastic.Clients.Elasticsearch.Duration? KeepAlive { get; set; }
-	[JsonInclude, JsonPropertyName("keep_on_completion")]
 	public bool? KeepOnCompletion { get; set; }
 
 	/// <summary>
@@ -122,7 +335,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("max_samples_per_key")]
 	public int? MaxSamplesPerKey { get; set; }
 
 	/// <summary>
@@ -130,19 +342,19 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("query")]
-	public string Query { get; set; }
-	[JsonInclude, JsonPropertyName("result_position")]
+	public
+#if NET7_0_OR_GREATER
+	required
+#endif
+	string Query { get; set; }
 	public Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPosition { get; set; }
-	[JsonInclude, JsonPropertyName("runtime_mappings")]
-	public IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
+	public System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? RuntimeMappings { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// For basic queries, the maximum number of matching events to return. Defaults to 10
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("size")]
 	public int? Size { get; set; }
 
 	/// <summary>
@@ -150,7 +362,6 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("tiebreaker_field")]
 	public Elastic.Clients.Elasticsearch.Field? TiebreakerField { get; set; }
 
 	/// <summary>
@@ -158,73 +369,113 @@ public sealed partial class EqlSearchRequest : PlainRequest<EqlSearchRequestPara
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("timestamp_field")]
 	public Elastic.Clients.Elasticsearch.Field? TimestampField { get; set; }
-	[JsonInclude, JsonPropertyName("wait_for_completion_timeout")]
 	public Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeout { get; set; }
 }
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
-public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescriptor<EqlSearchRequestDescriptor<TDocument>, EqlSearchRequestParameters>
+public readonly partial struct EqlSearchRequestDescriptor
 {
-	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Instance { get; init; }
 
-	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	public EqlSearchRequestDescriptor() : this(typeof(TDocument))
+	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(indices);
+#pragma warning restore CS0618
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "eql.search";
-
-	public EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public EqlSearchRequestDescriptor<TDocument> ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	[System.Obsolete("The use of the parameterless constructor is not permitted for this type.")]
+	public EqlSearchRequestDescriptor()
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+		throw new System.InvalidOperationException("The use of the parameterless constructor is not permitted for this type.");
 	}
 
-	private bool? CaseSensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
-	private int? FetchSizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] FieldsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] FilterDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
-	private string QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
+	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor descriptor) => descriptor.Instance;
 
-	public EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? caseSensitive = true)
+	/// <summary>
+	/// <para>
+	/// The name of the index to scope the operation
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices value)
 	{
-		CaseSensitiveValue = caseSensitive;
-		return Self;
+		Instance.Indices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allow query execution also in case of shard failures.
+	/// If true, the query will keep running and will return results based on the available shards.
+	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowPartialSearchResults(bool? value = true)
+	{
+		Instance.AllowPartialSearchResults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
+	/// If true, the sequence query will return results based on the available shards, ignoring the others.
+	/// If false, the sequence query will return successfully, but will always have empty results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AllowPartialSequenceResults(bool? value = true)
+	{
+		Instance.AllowPartialSequenceResults = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor CaseSensitive(bool? value = true)
+	{
+		Instance.CaseSensitive = value;
+		return this;
 	}
 
 	/// <summary>
@@ -232,10 +483,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Field? eventCategoryField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
+		Instance.EventCategoryField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -243,21 +494,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> EventCategoryField<TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor EventCategoryField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> EventCategoryField(Expression<Func<TDocument, object>> eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
+		Instance.EventCategoryField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -265,10 +505,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Maximum number of events to search at a time for sequence queries.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -276,40 +516,55 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Fields<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<T>.Build(action));
+		}
+
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -317,52 +572,67 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>> configure)
+	/// <summary>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] configure)
+	/// <summary>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Filter<T>(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<T>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		KeepAliveValue = keepAlive;
-		return Self;
+		Instance.KeepAlive = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? keepOnCompletion = true)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor KeepOnCompletion(bool? value = true)
 	{
-		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
+		Instance.KeepOnCompletion = value;
+		return this;
 	}
 
 	/// <summary>
@@ -372,10 +642,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> MaxSamplesPerKey(int? maxSamplesPerKey)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor MaxSamplesPerKey(int? value)
 	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
-		return Self;
+		Instance.MaxSamplesPerKey = value;
+		return this;
 	}
 
 	/// <summary>
@@ -383,22 +653,82 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> Query(string query)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? resultPosition)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? value)
 	{
-		ResultPositionValue = resultPosition;
-		return Self;
+		Instance.ResultPosition = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>> selector)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RuntimeMappings<T>(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<T>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping<T>(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor AddRuntimeMapping<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<T>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -406,10 +736,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// For basic queries, the maximum number of matching events to return. Defaults to 10
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> Size(int? size)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -417,10 +747,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TiebreakerField(Elastic.Clients.Elasticsearch.Field? tiebreakerField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TiebreakerField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
+		Instance.TiebreakerField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -428,21 +758,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TiebreakerField<TValue>(Expression<Func<TDocument, TValue>> tiebreakerField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TiebreakerField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TiebreakerField(Expression<Func<TDocument, object>> tiebreakerField)
-	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
+		Instance.TiebreakerField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -450,10 +769,10 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.TimestampField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -461,225 +780,173 @@ public sealed partial class EqlSearchRequestDescriptor<TDocument> : RequestDescr
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TimestampField<TValue>(Expression<Func<TDocument, TValue>> timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor TimestampField<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.TimestampField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor<TDocument> TimestampField(Expression<Func<TDocument, object>> timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.WaitForCompletionTimeout = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor> action)
 	{
-		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor(new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (CaseSensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_sensitive");
-			writer.WriteBooleanValue(CaseSensitiveValue.Value);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (EventCategoryFieldValue is not null)
-		{
-			writer.WritePropertyName("event_category_field");
-			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(FieldsDescriptorAction), options);
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			if (FieldsDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-			if (FieldsDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(FieldsValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (KeepAliveValue is not null)
-		{
-			writer.WritePropertyName("keep_alive");
-			JsonSerializer.Serialize(writer, KeepAliveValue, options);
-		}
-
-		if (KeepOnCompletionValue.HasValue)
-		{
-			writer.WritePropertyName("keep_on_completion");
-			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (ResultPositionValue is not null)
-		{
-			writer.WritePropertyName("result_position");
-			JsonSerializer.Serialize(writer, ResultPositionValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (TiebreakerFieldValue is not null)
-		{
-			writer.WritePropertyName("tiebreaker_field");
-			JsonSerializer.Serialize(writer, TiebreakerFieldValue, options);
-		}
-
-		if (TimestampFieldValue is not null)
-		{
-			writer.WritePropertyName("timestamp_field");
-			JsonSerializer.Serialize(writer, TimestampFieldValue, options);
-		}
-
-		if (WaitForCompletionTimeoutValue is not null)
-		{
-			writer.WritePropertyName("wait_for_completion_timeout");
-			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }
 
 /// <summary>
 /// <para>
-/// Returns results matching a query expressed in Event Query Language (EQL)
+/// Get EQL search results.
+/// Returns search results for an Event Query Language (EQL) query.
+/// EQL assumes each document in a data stream or index corresponds to an event.
 /// </para>
 /// </summary>
-public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSearchRequestDescriptor, EqlSearchRequestParameters>
+public readonly partial struct EqlSearchRequestDescriptor<TDocument>
 {
-	internal EqlSearchRequestDescriptor(Action<EqlSearchRequestDescriptor> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Instance { get; init; }
 
-	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices) : base(r => r.Required("index", indices))
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance)
 	{
+		Instance = instance;
 	}
 
-	internal override ApiUrls ApiUrls => ApiUrlLookup.EqlSearch;
-
-	protected override HttpMethod StaticHttpMethod => HttpMethod.POST;
-
-	internal override bool SupportsBody => true;
-
-	internal override string OperationName => "eql.search";
-
-	public EqlSearchRequestDescriptor AllowNoIndices(bool? allowNoIndices = true) => Qs("allow_no_indices", allowNoIndices);
-	public EqlSearchRequestDescriptor ExpandWildcards(ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? expandWildcards) => Qs("expand_wildcards", expandWildcards);
-	public EqlSearchRequestDescriptor IgnoreUnavailable(bool? ignoreUnavailable = true) => Qs("ignore_unavailable", ignoreUnavailable);
-
-	public EqlSearchRequestDescriptor Indices(Elastic.Clients.Elasticsearch.Indices indices)
+	public EqlSearchRequestDescriptor(Elastic.Clients.Elasticsearch.Indices indices)
 	{
-		RouteValues.Required("index", indices);
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(indices);
+#pragma warning restore CS0618
 	}
 
-	private bool? CaseSensitiveValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? EventCategoryFieldValue { get; set; }
-	private int? FetchSizeValue { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? FieldsValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor FieldsDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> FieldsDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] FieldsDescriptorActions { get; set; }
-	private ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? FilterValue { get; set; }
-	private Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor FilterDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> FilterDescriptorAction { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] FilterDescriptorActions { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? KeepAliveValue { get; set; }
-	private bool? KeepOnCompletionValue { get; set; }
-	private int? MaxSamplesPerKeyValue { get; set; }
-	private string QueryValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Eql.ResultPosition? ResultPositionValue { get; set; }
-	private IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor> RuntimeMappingsValue { get; set; }
-	private int? SizeValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TiebreakerFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Field? TimestampFieldValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Duration? WaitForCompletionTimeoutValue { get; set; }
-
-	public EqlSearchRequestDescriptor CaseSensitive(bool? caseSensitive = true)
+	public EqlSearchRequestDescriptor()
 	{
-		CaseSensitiveValue = caseSensitive;
-		return Self;
+#pragma warning disable CS0618
+		Instance = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(typeof(TDocument));
+#pragma warning restore CS0618
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest instance) => new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// The name of the index to scope the operation
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Indices(Elastic.Clients.Elasticsearch.Indices value)
+	{
+		Instance.Indices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowNoIndices(bool? value = true)
+	{
+		Instance.AllowNoIndices = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.ExpandWildcard>? value)
+	{
+		Instance.ExpandWildcards = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ExpandWildcards(params Elastic.Clients.Elasticsearch.ExpandWildcard[] values)
+	{
+		Instance.ExpandWildcards = [.. values];
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// If true, missing or closed indices are not included in the response.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> IgnoreUnavailable(bool? value = true)
+	{
+		Instance.IgnoreUnavailable = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Allow query execution also in case of shard failures.
+	/// If true, the query will keep running and will return results based on the available shards.
+	/// For sequences, the behavior can be further refined using allow_partial_sequence_results
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowPartialSearchResults(bool? value = true)
+	{
+		Instance.AllowPartialSearchResults = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// This flag applies only to sequences and has effect only if allow_partial_search_results=true.
+	/// If true, the sequence query will return results based on the available shards, ignoring the others.
+	/// If false, the sequence query will return successfully, but will always have empty results.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AllowPartialSequenceResults(bool? value = true)
+	{
+		Instance.AllowPartialSequenceResults = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> CaseSensitive(bool? value = true)
+	{
+		Instance.CaseSensitive = value;
+		return this;
 	}
 
 	/// <summary>
@@ -687,10 +954,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField(Elastic.Clients.Elasticsearch.Field? eventCategoryField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> EventCategoryField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
+		Instance.EventCategoryField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -698,21 +965,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field containing the event classification, such as process, file, or network.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField<TDocument, TValue>(Expression<Func<TDocument, TValue>> eventCategoryField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> EventCategoryField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field containing the event classification, such as process, file, or network.
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor EventCategoryField<TDocument>(Expression<Func<TDocument, object>> eventCategoryField)
-	{
-		EventCategoryFieldValue = eventCategoryField;
-		return Self;
+		Instance.EventCategoryField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -720,10 +976,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Maximum number of events to search at a time for sequence queries.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor FetchSize(int? fetchSize)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> FetchSize(int? value)
 	{
-		FetchSizeValue = fetchSize;
-		return Self;
+		Instance.FetchSize = value;
+		return this;
 	}
 
 	/// <summary>
@@ -731,40 +987,38 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor Fields(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? fields)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>? value)
 	{
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsValue = fields;
-		return Self;
+		Instance.Fields = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(params Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[] values)
 	{
-		FieldsValue = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptor = descriptor;
-		return Self;
+		Instance.Fields = [.. values];
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor Fields(Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Fields(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>>[] actions)
 	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorActions = null;
-		FieldsDescriptorAction = configure;
-		return Self;
-	}
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor<TDocument>.Build(action));
+		}
 
-	public EqlSearchRequestDescriptor Fields(params Action<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor>[] configure)
-	{
-		FieldsValue = null;
-		FieldsDescriptor = null;
-		FieldsDescriptorAction = null;
-		FieldsDescriptorActions = configure;
-		return Self;
+		Instance.Fields = items;
+		return this;
 	}
 
 	/// <summary>
@@ -772,52 +1026,50 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor Filter(ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? filter)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(System.Collections.Generic.ICollection<Elastic.Clients.Elasticsearch.QueryDsl.Query>? value)
 	{
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterValue = filter;
-		return Self;
+		Instance.Filter = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor Filter(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor descriptor)
+	/// <summary>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(params Elastic.Clients.Elasticsearch.QueryDsl.Query[] values)
 	{
-		FilterValue = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = null;
-		FilterDescriptor = descriptor;
-		return Self;
+		Instance.Filter = [.. values];
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor Filter(Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor> configure)
+	/// <summary>
+	/// <para>
+	/// Query, written in Query DSL, used to filter the events on which the EQL query runs.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Filter(params System.Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>>[] actions)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorActions = null;
-		FilterDescriptorAction = configure;
-		return Self;
+		var items = new System.Collections.Generic.List<Elastic.Clients.Elasticsearch.QueryDsl.Query>();
+		foreach (var action in actions)
+		{
+			items.Add(Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor<TDocument>.Build(action));
+		}
+
+		Instance.Filter = items;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor Filter(params Action<Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor>[] configure)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> KeepAlive(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		FilterValue = null;
-		FilterDescriptor = null;
-		FilterDescriptorAction = null;
-		FilterDescriptorActions = configure;
-		return Self;
+		Instance.KeepAlive = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor KeepAlive(Elastic.Clients.Elasticsearch.Duration? keepAlive)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> KeepOnCompletion(bool? value = true)
 	{
-		KeepAliveValue = keepAlive;
-		return Self;
-	}
-
-	public EqlSearchRequestDescriptor KeepOnCompletion(bool? keepOnCompletion = true)
-	{
-		KeepOnCompletionValue = keepOnCompletion;
-		return Self;
+		Instance.KeepOnCompletion = value;
+		return this;
 	}
 
 	/// <summary>
@@ -827,10 +1079,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// <c>max_samples_per_key</c> parameter. Pipes are not supported for sample queries.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor MaxSamplesPerKey(int? maxSamplesPerKey)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> MaxSamplesPerKey(int? value)
 	{
-		MaxSamplesPerKeyValue = maxSamplesPerKey;
-		return Self;
+		Instance.MaxSamplesPerKey = value;
+		return this;
 	}
 
 	/// <summary>
@@ -838,22 +1090,62 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// EQL query you wish to run.
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor Query(string query)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Query(string value)
 	{
-		QueryValue = query;
-		return Self;
+		Instance.Query = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? resultPosition)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ResultPosition(Elastic.Clients.Elasticsearch.Eql.ResultPosition? value)
 	{
-		ResultPositionValue = resultPosition;
-		return Self;
+		Instance.ResultPosition = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor RuntimeMappings(Func<FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>, FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>> selector)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings(System.Collections.Generic.IDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>? value)
 	{
-		RuntimeMappingsValue = selector?.Invoke(new FluentDescriptorDictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor>());
-		return Self;
+		Instance.RuntimeMappings = value;
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings()
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(null);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RuntimeMappings(System.Action<Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>>? action)
+	{
+		Instance.RuntimeMappings = Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField<TDocument>.Build(action);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, Elastic.Clients.Elasticsearch.Mapping.RuntimeField value)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, value);
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
+	}
+
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> AddRuntimeMapping(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> key, System.Action<Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>> action)
+	{
+		Instance.RuntimeMappings ??= new System.Collections.Generic.Dictionary<Elastic.Clients.Elasticsearch.Field, Elastic.Clients.Elasticsearch.Mapping.RuntimeField>();
+		Instance.RuntimeMappings.Add(key, Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor<TDocument>.Build(action));
+		return this;
 	}
 
 	/// <summary>
@@ -861,10 +1153,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// For basic queries, the maximum number of matching events to return. Defaults to 10
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor Size(int? size)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Size(int? value)
 	{
-		SizeValue = size;
-		return Self;
+		Instance.Size = value;
+		return this;
 	}
 
 	/// <summary>
@@ -872,10 +1164,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor TiebreakerField(Elastic.Clients.Elasticsearch.Field? tiebreakerField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TiebreakerField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
+		Instance.TiebreakerField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -883,21 +1175,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field used to sort hits with the same timestamp in ascending order
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor TiebreakerField<TDocument, TValue>(Expression<Func<TDocument, TValue>> tiebreakerField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TiebreakerField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// Field used to sort hits with the same timestamp in ascending order
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor TiebreakerField<TDocument>(Expression<Func<TDocument, object>> tiebreakerField)
-	{
-		TiebreakerFieldValue = tiebreakerField;
-		return Self;
+		Instance.TiebreakerField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -905,10 +1186,10 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor TimestampField(Elastic.Clients.Elasticsearch.Field? timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(Elastic.Clients.Elasticsearch.Field? value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.TimestampField = value;
+		return this;
 	}
 
 	/// <summary>
@@ -916,164 +1197,65 @@ public sealed partial class EqlSearchRequestDescriptor : RequestDescriptor<EqlSe
 	/// Field containing event timestamp. Default "@timestamp"
 	/// </para>
 	/// </summary>
-	public EqlSearchRequestDescriptor TimestampField<TDocument, TValue>(Expression<Func<TDocument, TValue>> timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> TimestampField(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.TimestampField = value;
+		return this;
 	}
 
-	/// <summary>
-	/// <para>
-	/// Field containing event timestamp. Default "@timestamp"
-	/// </para>
-	/// </summary>
-	public EqlSearchRequestDescriptor TimestampField<TDocument>(Expression<Func<TDocument, object>> timestampField)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? value)
 	{
-		TimestampFieldValue = timestampField;
-		return Self;
+		Instance.WaitForCompletionTimeout = value;
+		return this;
 	}
 
-	public EqlSearchRequestDescriptor WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration? waitForCompletionTimeout)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest Build(System.Action<Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>> action)
 	{
-		WaitForCompletionTimeoutValue = waitForCompletionTimeout;
-		return Self;
+		var builder = new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> ErrorTrace(bool? value)
 	{
-		writer.WriteStartObject();
-		if (CaseSensitiveValue.HasValue)
-		{
-			writer.WritePropertyName("case_sensitive");
-			writer.WriteBooleanValue(CaseSensitiveValue.Value);
-		}
+		Instance.ErrorTrace = value;
+		return this;
+	}
 
-		if (EventCategoryFieldValue is not null)
-		{
-			writer.WritePropertyName("event_category_field");
-			JsonSerializer.Serialize(writer, EventCategoryFieldValue, options);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> FilterPath(params string[]? value)
+	{
+		Instance.FilterPath = value;
+		return this;
+	}
 
-		if (FetchSizeValue.HasValue)
-		{
-			writer.WritePropertyName("fetch_size");
-			writer.WriteNumberValue(FetchSizeValue.Value);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Human(bool? value)
+	{
+		Instance.Human = value;
+		return this;
+	}
 
-		if (FieldsDescriptor is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, FieldsDescriptor, options);
-		}
-		else if (FieldsDescriptorAction is not null)
-		{
-			writer.WritePropertyName("fields");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(FieldsDescriptorAction), options);
-		}
-		else if (FieldsDescriptorActions is not null)
-		{
-			writer.WritePropertyName("fields");
-			if (FieldsDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FieldsDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> Pretty(bool? value)
+	{
+		Instance.Pretty = value;
+		return this;
+	}
 
-			if (FieldsDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FieldsValue is not null)
-		{
-			writer.WritePropertyName("fields");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat>(FieldsValue, writer, options);
-		}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> SourceQueryString(string? value)
+	{
+		Instance.SourceQueryString = value;
+		return this;
+	}
 
-		if (FilterDescriptor is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, FilterDescriptor, options);
-		}
-		else if (FilterDescriptorAction is not null)
-		{
-			writer.WritePropertyName("filter");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(FilterDescriptorAction), options);
-		}
-		else if (FilterDescriptorActions is not null)
-		{
-			writer.WritePropertyName("filter");
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteStartArray();
-			foreach (var action in FilterDescriptorActions)
-			{
-				JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor(action), options);
-			}
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RequestConfiguration(Elastic.Transport.IRequestConfiguration? value)
+	{
+		Instance.RequestConfiguration = value;
+		return this;
+	}
 
-			if (FilterDescriptorActions.Length != 1)
-				writer.WriteEndArray();
-		}
-		else if (FilterValue is not null)
-		{
-			writer.WritePropertyName("filter");
-			SingleOrManySerializationHelper.Serialize<Elastic.Clients.Elasticsearch.QueryDsl.Query>(FilterValue, writer, options);
-		}
-
-		if (KeepAliveValue is not null)
-		{
-			writer.WritePropertyName("keep_alive");
-			JsonSerializer.Serialize(writer, KeepAliveValue, options);
-		}
-
-		if (KeepOnCompletionValue.HasValue)
-		{
-			writer.WritePropertyName("keep_on_completion");
-			writer.WriteBooleanValue(KeepOnCompletionValue.Value);
-		}
-
-		if (MaxSamplesPerKeyValue.HasValue)
-		{
-			writer.WritePropertyName("max_samples_per_key");
-			writer.WriteNumberValue(MaxSamplesPerKeyValue.Value);
-		}
-
-		writer.WritePropertyName("query");
-		writer.WriteStringValue(QueryValue);
-		if (ResultPositionValue is not null)
-		{
-			writer.WritePropertyName("result_position");
-			JsonSerializer.Serialize(writer, ResultPositionValue, options);
-		}
-
-		if (RuntimeMappingsValue is not null)
-		{
-			writer.WritePropertyName("runtime_mappings");
-			JsonSerializer.Serialize(writer, RuntimeMappingsValue, options);
-		}
-
-		if (SizeValue.HasValue)
-		{
-			writer.WritePropertyName("size");
-			writer.WriteNumberValue(SizeValue.Value);
-		}
-
-		if (TiebreakerFieldValue is not null)
-		{
-			writer.WritePropertyName("tiebreaker_field");
-			JsonSerializer.Serialize(writer, TiebreakerFieldValue, options);
-		}
-
-		if (TimestampFieldValue is not null)
-		{
-			writer.WritePropertyName("timestamp_field");
-			JsonSerializer.Serialize(writer, TimestampFieldValue, options);
-		}
-
-		if (WaitForCompletionTimeoutValue is not null)
-		{
-			writer.WritePropertyName("wait_for_completion_timeout");
-			JsonSerializer.Serialize(writer, WaitForCompletionTimeoutValue, options);
-		}
-
-		writer.WriteEndObject();
+	public Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor<TDocument> RequestConfiguration(System.Func<Elastic.Transport.RequestConfigurationDescriptor, Elastic.Transport.IRequestConfiguration>? configurationSelector)
+	{
+		Instance.RequestConfiguration = configurationSelector.Invoke(Instance.RequestConfiguration is null ? new Elastic.Transport.RequestConfigurationDescriptor() : new Elastic.Transport.RequestConfigurationDescriptor(Instance.RequestConfiguration)) ?? Instance.RequestConfiguration;
+		return this;
 	}
 }

@@ -17,88 +17,149 @@
 
 #nullable restore
 
-using Elastic.Clients.Elasticsearch.Fluent;
-using Elastic.Clients.Elasticsearch.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Linq;
+using Elastic.Clients.Elasticsearch.Serialization;
 
 namespace Elastic.Clients.Elasticsearch.Aggregations;
 
+internal sealed partial class TTestAggregationConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation>
+{
+	private static readonly System.Text.Json.JsonEncodedText PropA = System.Text.Json.JsonEncodedText.Encode("a");
+	private static readonly System.Text.Json.JsonEncodedText PropB = System.Text.Json.JsonEncodedText.Encode("b");
+	private static readonly System.Text.Json.JsonEncodedText PropType = System.Text.Json.JsonEncodedText.Encode("type");
+
+	public override Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?> propA = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TestPopulation?> propB = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.TTestType?> propType = default;
+		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
+		{
+			if (propA.TryReadProperty(ref reader, options, PropA, null))
+			{
+				continue;
+			}
+
+			if (propB.TryReadProperty(ref reader, options, PropB, null))
+			{
+				continue;
+			}
+
+			if (propType.TryReadProperty(ref reader, options, PropType, null))
+			{
+				continue;
+			}
+
+			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
+			{
+				reader.Skip();
+				continue;
+			}
+
+			throw new System.Text.Json.JsonException($"Unknown JSON property '{reader.GetString()}' for type '{typeToConvert.Name}'.");
+		}
+
+		reader.ValidateToken(System.Text.Json.JsonTokenType.EndObject);
+		return new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance)
+		{
+			A = propA.Value,
+			B = propB.Value,
+			Type = propType.Value
+		};
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation value, System.Text.Json.JsonSerializerOptions options)
+	{
+		writer.WriteStartObject();
+		writer.WriteProperty(options, PropA, value.A, null, null);
+		writer.WriteProperty(options, PropB, value.B, null, null);
+		writer.WriteProperty(options, PropType, value.Type, null, null);
+		writer.WriteEndObject();
+	}
+}
+
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationConverter))]
 public sealed partial class TTestAggregation
 {
+#if NET7_0_OR_GREATER
+	public TTestAggregation()
+	{
+	}
+#endif
+#if !NET7_0_OR_GREATER
+	public TTestAggregation()
+	{
+	}
+#endif
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	internal TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel sentinel)
+	{
+		_ = sentinel;
+	}
+
 	/// <summary>
 	/// <para>
 	/// Test population A.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("a")]
-	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? A { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// Test population B.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("b")]
-	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? B { get; set; }
 
 	/// <summary>
 	/// <para>
 	/// The type of test.
 	/// </para>
 	/// </summary>
-	[JsonInclude, JsonPropertyName("type")]
 	public Elastic.Clients.Elasticsearch.Aggregations.TTestType? Type { get; set; }
-
-	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.Aggregation(TTestAggregation tTestAggregation) => Elastic.Clients.Elasticsearch.Aggregations.Aggregation.TTest(tTestAggregation);
 }
 
-public sealed partial class TTestAggregationDescriptor<TDocument> : SerializableDescriptor<TTestAggregationDescriptor<TDocument>>
+public readonly partial struct TTestAggregationDescriptor<TDocument>
 {
-	internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor<TDocument>> configure) => configure.Invoke(this);
+	internal Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Instance { get; init; }
 
-	public TTestAggregationDescriptor() : base()
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TTestAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance)
 	{
+		Instance = instance;
 	}
 
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? aValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> aDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> aDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> bDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> bDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TTestAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> descriptor) => descriptor.Instance;
 
 	/// <summary>
 	/// <para>
 	/// Test population A.
 	/// </para>
 	/// </summary>
-	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> A(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
-		aDescriptor = null;
-		aDescriptorAction = null;
-		aValue = a;
-		return Self;
+		Instance.A = value;
+		return this;
 	}
 
-	public TTestAggregationDescriptor<TDocument> a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> descriptor)
+	/// <summary>
+	/// <para>
+	/// Test population A.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> A(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> action)
 	{
-		aValue = null;
-		aDescriptorAction = null;
-		aDescriptor = descriptor;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor<TDocument> a(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> configure)
-	{
-		aValue = null;
-		aDescriptor = null;
-		aDescriptorAction = configure;
-		return Self;
+		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -106,129 +167,10 @@ public sealed partial class TTestAggregationDescriptor<TDocument> : Serializable
 	/// Test population B.
 	/// </para>
 	/// </summary>
-	public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> B(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
 	{
-		bDescriptor = null;
-		bDescriptorAction = null;
-		bValue = b;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor<TDocument> b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument> descriptor)
-	{
-		bValue = null;
-		bDescriptorAction = null;
-		bDescriptor = descriptor;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor<TDocument> b(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> configure)
-	{
-		bValue = null;
-		bDescriptor = null;
-		bDescriptorAction = configure;
-		return Self;
-	}
-
-	/// <summary>
-	/// <para>
-	/// The type of test.
-	/// </para>
-	/// </summary>
-	public TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
-	{
-		TypeValue = type;
-		return Self;
-	}
-
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
-	{
-		writer.WriteStartObject();
-		if (aDescriptor is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, aDescriptor, options);
-		}
-		else if (aDescriptorAction is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>(aDescriptorAction), options);
-		}
-		else if (aValue is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, aValue, options);
-		}
-
-		if (bDescriptor is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, bDescriptor, options);
-		}
-		else if (bDescriptorAction is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>(bDescriptorAction), options);
-		}
-		else if (bValue is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, bValue, options);
-		}
-
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
-	}
-}
-
-public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<TTestAggregationDescriptor>
-{
-	internal TTestAggregationDescriptor(Action<TTestAggregationDescriptor> configure) => configure.Invoke(this);
-
-	public TTestAggregationDescriptor() : base()
-	{
-	}
-
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? aValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor aDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> aDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? bValue { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor bDescriptor { get; set; }
-	private Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> bDescriptorAction { get; set; }
-	private Elastic.Clients.Elasticsearch.Aggregations.TTestType? TypeValue { get; set; }
-
-	/// <summary>
-	/// <para>
-	/// Test population A.
-	/// </para>
-	/// </summary>
-	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? a)
-	{
-		aDescriptor = null;
-		aDescriptorAction = null;
-		aValue = a;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor a(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor descriptor)
-	{
-		aValue = null;
-		aDescriptorAction = null;
-		aDescriptor = descriptor;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor a(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> configure)
-	{
-		aValue = null;
-		aDescriptor = null;
-		aDescriptorAction = configure;
-		return Self;
+		Instance.B = value;
+		return this;
 	}
 
 	/// <summary>
@@ -236,28 +178,10 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	/// Test population B.
 	/// </para>
 	/// </summary>
-	public TTestAggregationDescriptor b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? b)
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> B(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>> action)
 	{
-		bDescriptor = null;
-		bDescriptorAction = null;
-		bValue = b;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor b(Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor descriptor)
-	{
-		bValue = null;
-		bDescriptorAction = null;
-		bDescriptor = descriptor;
-		return Self;
-	}
-
-	public TTestAggregationDescriptor b(Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> configure)
-	{
-		bValue = null;
-		bDescriptor = null;
-		bDescriptorAction = configure;
-		return Self;
+		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<TDocument>.Build(action);
+		return this;
 	}
 
 	/// <summary>
@@ -265,53 +189,132 @@ public sealed partial class TTestAggregationDescriptor : SerializableDescriptor<
 	/// The type of test.
 	/// </para>
 	/// </summary>
-	public TTestAggregationDescriptor Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? type)
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument> Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? value)
 	{
-		TypeValue = type;
-		return Self;
+		Instance.Type = value;
+		return this;
 	}
 
-	protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>>? action)
 	{
-		writer.WriteStartObject();
-		if (aDescriptor is not null)
+		if (action is null)
 		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, aDescriptor, options);
-		}
-		else if (aDescriptorAction is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor(aDescriptorAction), options);
-		}
-		else if (aValue is not null)
-		{
-			writer.WritePropertyName("a");
-			JsonSerializer.Serialize(writer, aValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (bDescriptor is not null)
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor<TDocument>(new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
+	}
+}
+
+public readonly partial struct TTestAggregationDescriptor
+{
+	internal Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Instance { get; init; }
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TTestAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance)
+	{
+		Instance = instance;
+	}
+
+	[System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
+	public TTestAggregationDescriptor()
+	{
+		Instance = new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
+	}
+
+	public static explicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation instance) => new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor(instance);
+	public static implicit operator Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor descriptor) => descriptor.Instance;
+
+	/// <summary>
+	/// <para>
+	/// Test population A.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
+	{
+		Instance.A = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test population A.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> action)
+	{
+		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test population A.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor A<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> action)
+	{
+		Instance.A = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test population B.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B(Elastic.Clients.Elasticsearch.Aggregations.TestPopulation? value)
+	{
+		Instance.B = value;
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test population B.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor> action)
+	{
+		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// Test population B.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor B<T>(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>> action)
+	{
+		Instance.B = Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor<T>.Build(action);
+		return this;
+	}
+
+	/// <summary>
+	/// <para>
+	/// The type of test.
+	/// </para>
+	/// </summary>
+	public Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor Type(Elastic.Clients.Elasticsearch.Aggregations.TTestType? value)
+	{
+		Instance.Type = value;
+		return this;
+	}
+
+	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+	internal static Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation Build(System.Action<Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor>? action)
+	{
+		if (action is null)
 		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, bDescriptor, options);
-		}
-		else if (bDescriptorAction is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, new Elastic.Clients.Elasticsearch.Aggregations.TestPopulationDescriptor(bDescriptorAction), options);
-		}
-		else if (bValue is not null)
-		{
-			writer.WritePropertyName("b");
-			JsonSerializer.Serialize(writer, bValue, options);
+			return new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance);
 		}
 
-		if (TypeValue is not null)
-		{
-			writer.WritePropertyName("type");
-			JsonSerializer.Serialize(writer, TypeValue, options);
-		}
-
-		writer.WriteEndObject();
+		var builder = new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregationDescriptor(new Elastic.Clients.Elasticsearch.Aggregations.TTestAggregation(Elastic.Clients.Elasticsearch.Serialization.JsonConstructorSentinel.Instance));
+		action.Invoke(builder);
+		return builder.Instance;
 	}
 }
