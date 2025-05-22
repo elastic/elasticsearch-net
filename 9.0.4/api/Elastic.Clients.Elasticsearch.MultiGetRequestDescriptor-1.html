@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct MultiGetRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct MultiGetRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get multiple documents.   Get multiple JSON documents by ID from one or more indices. If you specify an index in the request URI, you only need to specify the document IDs in the request body. To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.   Filter source fields   By default, the _source field is returned for every document (if stored). Use the _source and _source_include or source_exclude attributes to filter what fields are returned for a particular document. You can include the _source, _source_includes, and _source_excludes query parameters in the request URI to specify the defaults to use when there are no per-document instructions.   Get stored fields   Use the stored_fields attribute to specify the set of stored fields you want to retrieve. Any requested fields that are not stored are ignored. You can include the stored_fields query parameter in the request URI to specify the defaults to use when there are no per-document instructions.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1" class="text-break">
+Struct MultiGetRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L662"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get multiple documents.
+</p>
+<p>
+Get multiple JSON documents by ID from one or more indices.
+If you specify an index in the request URI, you only need to specify the document IDs in the request body.
+To ensure fast responses, this multi get (mget) API responds with partial results if one or more shards fail.
+</p>
+<p>
+<strong>Filter source fields</strong>
+</p>
+<p>
+By default, the <code>_source</code> field is returned for every document (if stored).
+Use the <code>_source</code> and <code>_source_include</code> or <code>source_exclude</code> attributes to filter what fields are returned for a particular document.
+You can include the <code>_source</code>, <code>_source_includes</code>, and <code>_source_excludes</code> query parameters in the request URI to specify the defaults to use when there are no per-document instructions.
+</p>
+<p>
+<strong>Get stored fields</strong>
+</p>
+<p>
+Use the <code>stored_fields</code> attribute to specify the set of stored fields you want to retrieve.
+Any requested fields that are not stored are ignored.
+You can include the <code>stored_fields</code> query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct MultiGetRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor">
+  MultiGetRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L677"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.IndexName)">
+  MultiGetRequestDescriptor(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor(IndexName? index)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_MultiGetRequest_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.MultiGetRequest)">
+  MultiGetRequestDescriptor(MultiGetRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L666"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor(MultiGetRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequest.html">MultiGetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_Elastic_Clients_Elasticsearch_Core_MGet_MultiGetOperation___" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs(Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation[])">
+  Docs(params MultiGetOperation[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L863"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The documents you want to retrieve. Required if no index is specified in the request URI.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Docs(params MultiGetOperation[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation.html">MultiGetOperation</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_System_Action_Elastic_Clients_Elasticsearch_Core_MGet_MultiGetOperationDescriptor__0_____" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs(System.Action{Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor{`0}}[])">
+  Docs(params Action&lt;MultiGetOperationDescriptor&lt;TDocument&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L874"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The documents you want to retrieve. Required if no index is specified in the request URI.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Docs(params Action&lt;MultiGetOperationDescriptor&lt;TDocument&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperationDescriptor-1.html">MultiGetOperationDescriptor</a>&lt;TDocument&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Docs_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_Core_MGet_MultiGetOperation__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Docs(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation})">
+  Docs(ICollection&lt;MultiGetOperation&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L852"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The documents you want to retrieve. Required if no index is specified in the request URI.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Docs(ICollection&lt;MultiGetOperation&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.MGet.MultiGetOperation.html">MultiGetOperation</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L910"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L916"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_ForceSyntheticSource_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.ForceSyntheticSource*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_ForceSyntheticSource_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.ForceSyntheticSource(System.Nullable{System.Boolean})">
+  ForceSyntheticSource(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L703"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Should this request force synthetic _source?
+Use this to test if the mapping supports synthetic _source and to get a sense of the worst case performance.
+Fetches with this enabled will be slower the enabling synthetic source natively in the index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; ForceSyntheticSource(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L922"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Ids_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Ids*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Ids_Elastic_Clients_Elasticsearch_Ids_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Ids(Elastic.Clients.Elasticsearch.Ids)">
+  Ids(Ids?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L891"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The IDs of the documents you want to retrieve. Allowed when the index is specified in the request URI.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Ids(Ids? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Ids.html">Ids</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Index_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Index_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Index(Elastic.Clients.Elasticsearch.IndexName)">
+  Index(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L690"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the index to retrieve documents from when <code>ids</code> are specified, or when a document in the <code>docs</code> array does not specify an index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Index(IndexName? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Preference_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Preference_System_String_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Preference(System.String)">
+  Preference(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L714"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies the node or shard the operation should be performed on. Random by default.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Preference(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L928"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Realtime_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Realtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Realtime_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Realtime(System.Nullable{System.Boolean})">
+  Realtime(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L725"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request is real-time as opposed to near-real-time.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Realtime(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Refresh_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Refresh*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Refresh_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Refresh(System.Nullable{System.Boolean})">
+  Refresh(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L736"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, the request refreshes relevant shards before retrieving documents.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Refresh(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L940"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L946"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L747"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Custom value used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Routing(Routing? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Source_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Source_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Source(Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam)">
+  Source(SourceConfigParam?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L758"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+True or false to return the <code>_source</code> field or not, or a list of fields to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Source(SourceConfigParam? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Source_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_Source_System_Func_Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParamFactory__0__Elastic_Clients_Elasticsearch_Core_Search_SourceConfigParam__" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.Source(System.Func{Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory{`0},Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam})">
+  Source(Func&lt;SourceConfigParamFactory&lt;TDocument&gt;, SourceConfigParam&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L769"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+True or false to return the <code>_source</code> field or not, or a list of fields to return.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; Source(Func&lt;SourceConfigParamFactory&lt;TDocument&gt;, SourceConfigParam&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParamFactory-1.html">SourceConfigParamFactory</a>&lt;TDocument&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SourceConfigParam.html">SourceConfigParam</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceExcludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceExcludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceExcludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L781"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to exclude from the response.
+You can also use this parameter to exclude fields from the subset specified in <code>_source_includes</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; SourceExcludes(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceExcludes_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceExcludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceExcludes_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceExcludes(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  SourceExcludes(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L793"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to exclude from the response.
+You can also use this parameter to exclude fields from the subset specified in <code>_source_includes</code> query parameter.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; SourceExcludes(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceIncludes_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceIncludes(Elastic.Clients.Elasticsearch.Fields)">
+  SourceIncludes(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L806"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to include in the response.
+If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <code>_source_excludes</code> query parameter.
+If the <code>_source</code> parameter is <code>false</code>, this parameter is ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; SourceIncludes(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceIncludes_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceIncludes*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceIncludes_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceIncludes(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  SourceIncludes(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L819"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of source fields to include in the response.
+If this parameter is specified, only these source fields are returned. You can exclude fields from this subset using the <code>_source_excludes</code> query parameter.
+If the <code>_source</code> parameter is <code>false</code>, this parameter is ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; SourceIncludes(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L934"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_StoredFields_Elastic_Clients_Elasticsearch_Fields_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.StoredFields(Elastic.Clients.Elasticsearch.Fields)">
+  StoredFields(Fields?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L830"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, retrieves the document fields stored in the index rather than the document <code>_source</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; StoredFields(Fields? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Fields.html">Fields</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_StoredFields_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.StoredFields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_StoredFields_System_Linq_Expressions_Expression_System_Func__0_System_Object_____" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.StoredFields(System.Linq.Expressions.Expression{System.Func{`0,System.Object}}[])">
+  StoredFields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L841"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, retrieves the document fields stored in the index rather than the document <code>_source</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiGetRequestDescriptor&lt;TDocument&gt; StoredFields(params Expression&lt;Func&lt;TDocument, object?&gt;&gt;[] value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;TDocument, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_MultiGetRequest__Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.MultiGetRequest)~Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor{`0}">
+  explicit operator MultiGetRequestDescriptor&lt;TDocument&gt;(MultiGetRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator MultiGetRequestDescriptor&lt;TDocument&gt;(MultiGetRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequest.html">MultiGetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_MultiGetRequestDescriptor__0___Elastic_Clients_Elasticsearch_MultiGetRequest" data-uid="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.MultiGetRequest">
+  implicit operator MultiGetRequest(MultiGetRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MultiGetRequest.g.cs/#L683"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator MultiGetRequest(MultiGetRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequestDescriptor-1.html">MultiGetRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MultiGetRequest.html">MultiGetRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

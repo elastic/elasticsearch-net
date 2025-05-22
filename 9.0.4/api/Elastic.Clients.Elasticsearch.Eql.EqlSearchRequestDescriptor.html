@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct EqlSearchRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct EqlSearchRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Get EQL search results. Returns search results for an Event Query Language (EQL) query. EQL assumes each document in a data stream or index corresponds to an event.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor" class="text-break">
+Struct EqlSearchRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L383"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Eql.html">Eql</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Get EQL search results.
+Returns search results for an Event Query Language (EQL) query.
+EQL assumes each document in a data stream or index corresponds to an event.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct EqlSearchRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor">
+  EqlSearchRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;The use of the parameterless constructor is not permitted for this type.&quot;)]
+public EqlSearchRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Eql_EqlSearchRequest_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest)">
+  EqlSearchRequestDescriptor(EqlSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L387"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor(EqlSearchRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest.html">EqlSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  EqlSearchRequestDescriptor(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L393"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping(Field, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L692"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping(Field key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor})">
+  AddRuntimeMapping(Field, Action&lt;RuntimeFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L706"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping(Field key, Action&lt;RuntimeFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping__1_Elastic_Clients_Elasticsearch_Field_System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping``1(Elastic.Clients.Elasticsearch.Field,System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{``0}})">
+  AddRuntimeMapping&lt;T&gt;(Field, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L720"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping&lt;T&gt;(Field key, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___Elastic_Clients_Elasticsearch_Mapping_RuntimeField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},Elastic.Clients.Elasticsearch.Mapping.RuntimeField)">
+  AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, RuntimeField)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L699"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, RuntimeField value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor{``0}})">
+  AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L727"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor-1.html">RuntimeFieldDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AddRuntimeMapping__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___System_Action_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AddRuntimeMapping``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Action{Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor})">
+  AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;, Action&lt;RuntimeFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AddRuntimeMapping&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; key, Action&lt;RuntimeFieldDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>key</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowPartialSearchResults_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowPartialSearchResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowPartialSearchResults_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowPartialSearchResults(System.Nullable{System.Boolean})">
+  AllowPartialSearchResults(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L456"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Allow query execution also in case of shard failures.
+If true, the query will keep running and will return results based on the available shards.
+For sequences, the behavior can be further refined using allow_partial_sequence_results
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AllowPartialSearchResults(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowPartialSequenceResults_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowPartialSequenceResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_AllowPartialSequenceResults_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.AllowPartialSequenceResults(System.Nullable{System.Boolean})">
+  AllowPartialSequenceResults(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L469"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This flag applies only to sequences and has effect only if allow_partial_search_results=true.
+If true, the sequence query will return results based on the available shards, ignoring the others.
+If false, the sequence query will return successfully, but will always have empty results.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor AllowPartialSequenceResults(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_CaseSensitive_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.CaseSensitive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_CaseSensitive_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.CaseSensitive(System.Nullable{System.Boolean})">
+  CaseSensitive(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L475"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor CaseSensitive(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L803"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_EventCategoryField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.EventCategoryField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_EventCategoryField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.EventCategoryField(Elastic.Clients.Elasticsearch.Field)">
+  EventCategoryField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L486"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the event classification, such as process, file, or network.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor EventCategoryField(Field? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_EventCategoryField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.EventCategoryField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_EventCategoryField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.EventCategoryField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  EventCategoryField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L497"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing the event classification, such as process, file, or network.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor EventCategoryField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_FetchSize_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.FetchSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_FetchSize_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.FetchSize(System.Nullable{System.Int32})">
+  FetchSize(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L508"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of events to search at a time for sequence queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor FetchSize(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields(Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat[])">
+  Fields(params FieldAndFormat[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L530"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Fields(params FieldAndFormat[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor}[])">
+  Fields(params Action&lt;FieldAndFormatDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L541"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Fields(params Action&lt;FieldAndFormatDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor.html">FieldAndFormatDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormat__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat})">
+  Fields(ICollection&lt;FieldAndFormat&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L519"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Fields(ICollection&lt;FieldAndFormat&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormat.html">FieldAndFormat</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Fields__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_FieldAndFormatDescriptor___0_____" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Fields``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor{``0}}[])">
+  Fields&lt;T&gt;(params Action&lt;FieldAndFormatDescriptor&lt;T&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Array of wildcard (*) patterns. The response returns values for field names matching these patterns in the fields property of each hit.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Fields&lt;T&gt;(params Action&lt;FieldAndFormatDescriptor&lt;T&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.FieldAndFormatDescriptor-1.html">FieldAndFormatDescriptor</a>&lt;T&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_Elastic_Clients_Elasticsearch_QueryDsl_Query___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter(Elastic.Clients.Elasticsearch.QueryDsl.Query[])">
+  Filter(params Query[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L586"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query, written in Query DSL, used to filter the events on which the EQL query runs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Filter(params Query[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor____" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor}[])">
+  Filter(params Action&lt;QueryDescriptor&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L597"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query, written in Query DSL, used to filter the events on which the EQL query runs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Filter(params Action&lt;QueryDescriptor&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor.html">QueryDescriptor</a>&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_QueryDsl_Query__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.QueryDsl.Query})">
+  Filter(ICollection&lt;Query&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L575"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query, written in Query DSL, used to filter the events on which the EQL query runs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Filter(ICollection&lt;Query&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L809"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Filter__1_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor___0_____" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Filter``1(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{``0}}[])">
+  Filter&lt;T&gt;(params Action&lt;QueryDescriptor&lt;T&gt;&gt;[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L614"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Query, written in Query DSL, used to filter the events on which the EQL query runs.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Filter&lt;T&gt;(params Action&lt;QueryDescriptor&lt;T&gt;&gt;[] actions)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>actions</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;T&gt;&gt;[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L443"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If true, missing or closed indices are not included in the response.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Indices_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L414"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The name of the index to scope the operation
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Indices(Indices value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_KeepAlive_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.KeepAlive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_KeepAlive_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.KeepAlive(Elastic.Clients.Elasticsearch.Duration)">
+  KeepAlive(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L626"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor KeepAlive(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_KeepOnCompletion_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.KeepOnCompletion*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_KeepOnCompletion_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.KeepOnCompletion(System.Nullable{System.Boolean})">
+  KeepOnCompletion(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor KeepOnCompletion(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_MaxSamplesPerKey_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.MaxSamplesPerKey*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_MaxSamplesPerKey_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.MaxSamplesPerKey(System.Nullable{System.Int32})">
+  MaxSamplesPerKey(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L645"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+By default, the response of a sample query contains up to <code>10</code> samples, with one sample per unique set of join keys. Use the <code>size</code>
+parameter to get a smaller or larger set of samples. To retrieve more than one sample per set of join keys, use the
+<code>max_samples_per_key</code> parameter. Pipes are not supported for sample queries.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor MaxSamplesPerKey(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L821"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Query_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Query_System_String_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Query(System.String)">
+  Query(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L656"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+EQL query you wish to run.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Query(string value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L833"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L839"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ResultPosition_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ResultPosition*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_ResultPosition_System_Nullable_Elastic_Clients_Elasticsearch_Eql_ResultPosition__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.ResultPosition(System.Nullable{Elastic.Clients.Elasticsearch.Eql.ResultPosition})">
+  ResultPosition(ResultPosition?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L662"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor ResultPosition(ResultPosition? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Eql.ResultPosition.html">ResultPosition</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings">
+  RuntimeMappings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L674"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RuntimeMappings()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField})">
+  RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L680"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RuntimeMappings(Action&lt;FluentDictionaryOfFieldRuntimeField&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField.html">FluentDictionaryOfFieldRuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_System_Collections_Generic_IDictionary_Elastic_Clients_Elasticsearch_Field_Elastic_Clients_Elasticsearch_Mapping_RuntimeField__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings(System.Collections.Generic.IDictionary{Elastic.Clients.Elasticsearch.Field,Elastic.Clients.Elasticsearch.Mapping.RuntimeField})">
+  RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L668"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RuntimeMappings(IDictionary&lt;Field, RuntimeField&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeField.html">RuntimeField</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_RuntimeMappings__1_System_Action_Elastic_Clients_Elasticsearch_Fluent_FluentDictionaryOfFieldRuntimeField___0___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.RuntimeMappings``1(System.Action{Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField{``0}})">
+  RuntimeMappings&lt;T&gt;(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L686"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor RuntimeMappings&lt;T&gt;(Action&lt;FluentDictionaryOfFieldRuntimeField&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionaryOfFieldRuntimeField-1.html">FluentDictionaryOfFieldRuntimeField</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L739"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+For basic queries, the maximum number of matching events to return. Defaults to 10
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor Size(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L827"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TiebreakerField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TiebreakerField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TiebreakerField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TiebreakerField(Elastic.Clients.Elasticsearch.Field)">
+  TiebreakerField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L750"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field used to sort hits with the same timestamp in ascending order
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor TiebreakerField(Field? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TiebreakerField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TiebreakerField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TiebreakerField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TiebreakerField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  TiebreakerField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L761"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field used to sort hits with the same timestamp in ascending order
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor TiebreakerField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TimestampField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TimestampField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TimestampField_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TimestampField(Elastic.Clients.Elasticsearch.Field)">
+  TimestampField(Field?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L772"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing event timestamp. Default "@timestamp"
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor TimestampField(Field? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TimestampField_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TimestampField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_TimestampField__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.TimestampField``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  TimestampField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L783"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Field containing event timestamp. Default "@timestamp"
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor TimestampField&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_WaitForCompletionTimeout_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.WaitForCompletionTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_WaitForCompletionTimeout_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.WaitForCompletionTimeout(Elastic.Clients.Elasticsearch.Duration)">
+  WaitForCompletionTimeout(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L789"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EqlSearchRequestDescriptor WaitForCompletionTimeout(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Eql_EqlSearchRequest__Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest)~Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor">
+  explicit operator EqlSearchRequestDescriptor(EqlSearchRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L406"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator EqlSearchRequestDescriptor(EqlSearchRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest.html">EqlSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Eql_EqlSearchRequestDescriptor__Elastic_Clients_Elasticsearch_Eql_EqlSearchRequest" data-uid="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor)~Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest">
+  implicit operator EqlSearchRequest(EqlSearchRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/Eql/EqlSearchRequest.g.cs/#L407"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator EqlSearchRequest(EqlSearchRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequestDescriptor.html">EqlSearchRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Eql.EqlSearchRequest.html">EqlSearchRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

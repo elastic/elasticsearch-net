@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct PutJobRequestDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct PutJobRequestDescriptor | Elasticsearch.NET ">
+      
+      <meta name="description" content="Create an anomaly detection job.   If you include a datafeed_config, you must have read index privileges on the source index. If you include a datafeed_config but do not provide a query, the datafeed uses {&quot;match_all&quot;: {&quot;boost&quot;: 1}}.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor" class="text-break">
+Struct PutJobRequestDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L492"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.html">MachineLearning</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Create an anomaly detection job.
+</p>
+<p>
+If you include a <code>datafeed_config</code>, you must have read index privileges on the source index.
+If you include a <code>datafeed_config</code> but do not provide a query, the datafeed uses <code>{"match_all": {"boost": 1}}</code>.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct PutJobRequestDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.#ctor">
+  PutJobRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L502"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor__ctor_Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequest_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.#ctor(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest)">
+  PutJobRequestDescriptor(PutJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L496"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor(PutJobRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest.html">PutJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AllowLazyOpen_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AllowLazyOpen*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AllowLazyOpen_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AllowLazyOpen(System.Nullable{System.Boolean})">
+  AllowLazyOpen(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L628"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Specifies whether this job can open when there is insufficient machine learning node capacity for it to be immediately assigned to a node. By default, if a machine learning node with capacity to run the job cannot immediately be found, the open anomaly detection jobs API returns an error. However, this is also subject to the cluster-wide <code>xpack.ml.max_lazy_ml_nodes</code> setting. If this option is set to true, the open anomaly detection jobs API does not return an error and the job waits in the opening state until sufficient machine learning node capacity is available.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AllowLazyOpen(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AllowNoIndices_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AllowNoIndices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AllowNoIndices_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AllowNoIndices(System.Nullable{System.Boolean})">
+  AllowNoIndices(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L516"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, wildcard indices expressions that resolve into no concrete indices are ignored. This includes the
+<code>_all</code> string or when no indices are specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AllowNoIndices(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig)">
+  AnalysisConfig(AnalysisConfig)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L639"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisConfig(AnalysisConfig value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfig.html">AnalysisConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisConfigDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor})">
+  AnalysisConfig(Action&lt;AnalysisConfigDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L650"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisConfig(Action&lt;AnalysisConfigDescriptor&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor.html">AnalysisConfigDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisConfig__1_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisConfigDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisConfig``1(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor{``0}})">
+  AnalysisConfig&lt;T&gt;(Action&lt;AnalysisConfigDescriptor&lt;T&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L661"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Specifies how to analyze the data. After you create a job, you cannot change the analysis configuration; all the properties are informational.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisConfig&lt;T&gt;(Action&lt;AnalysisConfigDescriptor&lt;T&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisConfigDescriptor-1.html">AnalysisConfigDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits">
+  AnalysisLimits()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L683"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisLimits()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits(Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits)">
+  AnalysisLimits(AnalysisLimits?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L672"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisLimits(AnalysisLimits? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimits.html">AnalysisLimits</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_AnalysisLimits_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_AnalysisLimitsDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.AnalysisLimits(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor})">
+  AnalysisLimits(Action&lt;AnalysisLimitsDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L694"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Limits can be applied for the resources required to hold the mathematical models in memory. These limits are approximate and can be set per job. They do not control the memory used by other processes, for example the Elasticsearch Java processes.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor AnalysisLimits(Action&lt;AnalysisLimitsDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.AnalysisLimitsDescriptor.html">AnalysisLimitsDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_BackgroundPersistInterval_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.BackgroundPersistInterval*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_BackgroundPersistInterval_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.BackgroundPersistInterval(Elastic.Clients.Elasticsearch.Duration)">
+  BackgroundPersistInterval(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L705"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The time between each periodic persistence of the model. The default value is a randomized value between 3 to 4 hours, which avoids all jobs persisting at exactly the same time. The smallest allowed value is 1 hour. For very large models (several GB), persistence could take 10-20 minutes, so do not set the <code>background_persist_interval</code> value too low.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor BackgroundPersistInterval(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_CustomSettings_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.CustomSettings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_CustomSettings_System_Object_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.CustomSettings(System.Object)">
+  CustomSettings(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L716"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. Contains custom meta data about the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor CustomSettings(object? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DailyModelSnapshotRetentionAfterDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DailyModelSnapshotRetentionAfterDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DailyModelSnapshotRetentionAfterDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DailyModelSnapshotRetentionAfterDays(System.Nullable{System.Int64})">
+  DailyModelSnapshotRetentionAfterDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L727"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies a period of time (in days) after which only the first snapshot per day is retained. This period is relative to the timestamp of the most recent snapshot for this job. Valid values range from 0 to <code>model_snapshot_retention_days</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DailyModelSnapshotRetentionAfterDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription">
+  DataDescription()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L749"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DataDescription()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_Elastic_Clients_Elasticsearch_MachineLearning_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription(Elastic.Clients.Elasticsearch.MachineLearning.DataDescription)">
+  DataDescription(DataDescription)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L738"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DataDescription(DataDescription value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescription.html">DataDescription</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DataDescriptionDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor})">
+  DataDescription(Action&lt;DataDescriptionDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L760"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DataDescription(Action&lt;DataDescriptionDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor.html">DataDescriptionDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DataDescription__1_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DataDescriptionDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DataDescription``1(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor{``0}})">
+  DataDescription&lt;T&gt;(Action&lt;DataDescriptionDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L771"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines the format of the input data when you send data to the job by using the post data API. Note that when configure a datafeed, these properties are automatically set. When data is received via the post data API, it is not stored in Elasticsearch. Only the results for anomaly detection are retained.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DataDescription&lt;T&gt;(Action&lt;DataDescriptionDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DataDescriptionDescriptor-1.html">DataDescriptionDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig">
+  DatafeedConfig()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L793"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DatafeedConfig()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_Elastic_Clients_Elasticsearch_MachineLearning_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig(Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig)">
+  DatafeedConfig(DatafeedConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L782"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DatafeedConfig(DatafeedConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfig.html">DatafeedConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DatafeedConfigDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor})">
+  DatafeedConfig(Action&lt;DatafeedConfigDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L804"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DatafeedConfig(Action&lt;DatafeedConfigDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor.html">DatafeedConfigDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_DatafeedConfig__1_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_DatafeedConfigDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.DatafeedConfig``1(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor{``0}})">
+  DatafeedConfig&lt;T&gt;(Action&lt;DatafeedConfigDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L815"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines a datafeed for the anomaly detection job. If Elasticsearch security features are enabled, your datafeed remembers which roles the user who created it had at the time of creation and runs the query using those same roles. If you provide secondary authorization headers, those credentials are used instead.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor DatafeedConfig&lt;T&gt;(Action&lt;DatafeedConfigDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.DatafeedConfigDescriptor-1.html">DatafeedConfigDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Description_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Description*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Description_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Description(System.String)">
+  Description(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L826"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A description of the job.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Description(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L961"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L594"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+</p>
+<ul><li>
+<p>
+<code>all</code>: Match any data stream or index, including hidden ones.
+</p>
+</li><li>
+<p>
+<code>closed</code>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+</p>
+</li><li>
+<p>
+<code>hidden</code>: Match hidden data streams and hidden indices. Must be combined with <code>open</code>, <code>closed</code>, or both.
+</p>
+</li><li>
+<p>
+<code>none</code>: Wildcard patterns are not accepted.
+</p>
+</li><li>
+<p>
+<code>open</code>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L555"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Type of index that wildcard patterns can match. If the request can target data streams, this argument determines
+whether wildcard expressions match hidden data streams. Supports comma-separated values. Valid values are:
+</p>
+<ul><li>
+<p>
+<code>all</code>: Match any data stream or index, including hidden ones.
+</p>
+</li><li>
+<p>
+<code>closed</code>: Match closed, non-hidden indices. Also matches any non-hidden data stream. Data streams cannot be closed.
+</p>
+</li><li>
+<p>
+<code>hidden</code>: Match hidden data streams and hidden indices. Must be combined with <code>open</code>, <code>closed</code>, or both.
+</p>
+</li><li>
+<p>
+<code>none</code>: Wildcard patterns are not accepted.
+</p>
+</li><li>
+<p>
+<code>open</code>: Match open, non-hidden indices. Also matches any non-hidden data stream.
+</p>
+</li></ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L967"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Groups_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Groups(System.Collections.Generic.ICollection{System.String})">
+  Groups(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L837"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of job groups. A job can belong to no groups or many.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Groups(ICollection&lt;string&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Groups_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Groups*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Groups_System_String___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Groups(System.String[])">
+  Groups(params string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L848"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A list of job groups. A job can belong to no groups or many.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Groups(params string[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Human_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L973"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_IgnoreThrottled_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.IgnoreThrottled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_IgnoreThrottled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.IgnoreThrottled(System.Nullable{System.Boolean})">
+  IgnoreThrottled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L600"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Deprecated in &#39;7.16.0&#39;.&quot;)]
+public PutJobRequestDescriptor IgnoreThrottled(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L617"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, unavailable indices (missing or closed) are ignored.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_JobId_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.JobId*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_JobId_Elastic_Clients_Elasticsearch_Id_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.JobId(Elastic.Clients.Elasticsearch.Id)">
+  JobId(Id?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L859"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The identifier for the anomaly detection job. This identifier can contain lowercase alphanumeric characters (a-z and 0-9), hyphens, and underscores. It must start and end with alphanumeric characters.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor JobId(Id? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Id.html">Id</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig">
+  ModelPlotConfig()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L881"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ModelPlotConfig()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_Elastic_Clients_Elasticsearch_MachineLearning_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig(Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig)">
+  ModelPlotConfig(ModelPlotConfig?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L870"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ModelPlotConfig(ModelPlotConfig? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfig.html">ModelPlotConfig</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_ModelPlotConfigDescriptor__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor})">
+  ModelPlotConfig(Action&lt;ModelPlotConfigDescriptor&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L892"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ModelPlotConfig(Action&lt;ModelPlotConfigDescriptor&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor.html">ModelPlotConfigDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelPlotConfig__1_System_Action_Elastic_Clients_Elasticsearch_MachineLearning_ModelPlotConfigDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelPlotConfig``1(System.Action{Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor{``0}})">
+  ModelPlotConfig&lt;T&gt;(Action&lt;ModelPlotConfigDescriptor&lt;T&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L903"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+This advanced configuration option stores model information along with the results. It provides a more detailed view into anomaly detection. If you enable model plot it can add considerable overhead to the performance of the system; it is not feasible for jobs with many entities. Model plot provides a simplified and indicative view of the model and its bounds. It does not display complex features such as multivariate correlations or multimodal data. As such, anomalies may occasionally be reported which cannot be seen in the model plot. Model plot config can be configured when the job is created or updated later. It must be disabled if performance issues are experienced.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ModelPlotConfig&lt;T&gt;(Action&lt;ModelPlotConfigDescriptor&lt;T&gt;&gt;? action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.ModelPlotConfigDescriptor-1.html">ModelPlotConfigDescriptor</a>&lt;T&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelSnapshotRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelSnapshotRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ModelSnapshotRetentionDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ModelSnapshotRetentionDays(System.Nullable{System.Int64})">
+  ModelSnapshotRetentionDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L914"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option, which affects the automatic removal of old model snapshots for this job. It specifies the maximum period of time (in days) that snapshots are retained. This period is relative to the timestamp of the most recent snapshot for this job. By default, snapshots ten days older than the newest snapshot are deleted.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ModelSnapshotRetentionDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Pretty_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L979"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RenormalizationWindowDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RenormalizationWindowDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RenormalizationWindowDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RenormalizationWindowDays(System.Nullable{System.Int64})">
+  RenormalizationWindowDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L925"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The period over which adjustments to the score are applied, as new data is seen. The default value is the longer of 30 days or 100 bucket spans.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor RenormalizationWindowDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L991"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L997"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.4/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ResultsIndexName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ResultsIndexName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ResultsIndexName_Elastic_Clients_Elasticsearch_IndexName_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ResultsIndexName(Elastic.Clients.Elasticsearch.IndexName)">
+  ResultsIndexName(IndexName?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L936"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A text string that affects the name of the machine learning results index. By default, the job generates an index named <code>.ml-anomalies-shared</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ResultsIndexName(IndexName? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ResultsRetentionDays_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ResultsRetentionDays*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_ResultsRetentionDays_System_Nullable_System_Int64__" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.ResultsRetentionDays(System.Nullable{System.Int64})">
+  ResultsRetentionDays(long?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L947"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Advanced configuration option. The period of time (in days) that results are retained. Age is calculated relative to the timestamp of the latest bucket result. If this property has a non-null value, once per day at 00:30 (server time), results that are the specified number of days older than the latest bucket result are deleted from Elasticsearch. The default value is null, which means all results are retained. Annotations generated by the system also count as results for retention purposes; they are deleted after the same number of days as results. Annotations added by users are retained forever.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor ResultsRetentionDays(long? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">long</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L985"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PutJobRequestDescriptor SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequest__Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest)~Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor">
+  explicit operator PutJobRequestDescriptor(PutJobRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L507"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator PutJobRequestDescriptor(PutJobRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest.html">PutJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequestDescriptor__Elastic_Clients_Elasticsearch_MachineLearning_PutJobRequest" data-uid="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor)~Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest">
+  implicit operator PutJobRequest(PutJobRequestDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Api/MachineLearning/PutJobRequest.g.cs/#L508"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator PutJobRequest(PutJobRequestDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequestDescriptor.html">PutJobRequestDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MachineLearning.PutJobRequest.html">PutJobRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

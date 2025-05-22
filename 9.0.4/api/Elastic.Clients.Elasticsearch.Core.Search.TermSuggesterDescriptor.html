@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct TermSuggesterDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct TermSuggesterDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.4/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor" class="text-break">
+Struct TermSuggesterDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L542"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.html">Core</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.html">Search</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct TermSuggesterDescriptor</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.#ctor">
+  TermSuggesterDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L552"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor__ctor_Elastic_Clients_Elasticsearch_Core_Search_TermSuggester_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.#ctor(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)">
+  TermSuggesterDescriptor(TermSuggester)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L546"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor(TermSuggester instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggester.html">TermSuggester</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Analyzer_System_String_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Analyzer(System.String)">
+  Analyzer(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L567"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The analyzer to analyze the suggest text with.
+Defaults to the search analyzer of the suggest field.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Analyzer(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Field_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Field(Elastic.Clients.Elasticsearch.Field)">
+  Field(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L579"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to fetch the candidate suggestions from.
+Needs to be set globally or per suggestion.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Field(Field value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Field_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Field__1_System_Linq_Expressions_Expression_System_Func___0_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Field``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+  Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L591"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The field to fetch the candidate suggestions from.
+Needs to be set globally or per suggestion.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Field&lt;T&gt;(Expression&lt;Func&lt;T, object?&gt;&gt; value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_LowercaseTerms_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.LowercaseTerms*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_LowercaseTerms_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.LowercaseTerms(System.Nullable{System.Boolean})">
+  LowercaseTerms(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L597"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor LowercaseTerms(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxEdits_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxEdits*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxEdits_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxEdits(System.Nullable{System.Int32})">
+  MaxEdits(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L609"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum edit distance candidate suggestions can have in order to be considered as a suggestion.
+Can only be <code>1</code> or <code>2</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor MaxEdits(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxInspections_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxInspections*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxInspections_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxInspections(System.Nullable{System.Int32})">
+  MaxInspections(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L621"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A factor that is used to multiply with the shard_size in order to inspect more candidate spelling corrections on the shard level.
+Can improve accuracy at the cost of performance.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor MaxInspections(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxTermFreq_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxTermFreq*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MaxTermFreq_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MaxTermFreq(System.Nullable{System.Single})">
+  MaxTermFreq(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L634"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum threshold in number of documents in which a suggest text token can exist in order to be included.
+Can be a relative percentage number (for example <code>0.4</code>) or an absolute number to represent document frequencies.
+If a value higher than 1 is specified, then fractional can not be specified.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor MaxTermFreq(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MinDocFreq_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MinDocFreq*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MinDocFreq_System_Nullable_System_Single__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MinDocFreq(System.Nullable{System.Single})">
+  MinDocFreq(float?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L648"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimal threshold in number of documents a suggestion should appear in.
+This can improve quality by only suggesting high frequency terms.
+Can be specified as an absolute number or as a relative percentage of number of documents.
+If a value higher than 1 is specified, then the number cannot be fractional.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor MinDocFreq(float? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MinWordLength_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MinWordLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_MinWordLength_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.MinWordLength(System.Nullable{System.Int32})">
+  MinWordLength(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L659"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The minimum length a suggest text term must have in order to be included.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor MinWordLength(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_PrefixLength_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.PrefixLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_PrefixLength_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.PrefixLength(System.Nullable{System.Int32})">
+  PrefixLength(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L671"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of minimal prefix characters that must match in order be a candidate for suggestions.
+Increasing this number improves spellcheck performance.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor PrefixLength(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_ShardSize_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.ShardSize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_ShardSize_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.ShardSize(System.Nullable{System.Int32})">
+  ShardSize(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L682"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Sets the maximum number of suggestions to be retrieved from each individual shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor ShardSize(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Size_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Size(System.Nullable{System.Int32})">
+  Size(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L693"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The maximum corrections to be returned per suggest text token.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Size(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Sort_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Sort*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Sort_System_Nullable_Elastic_Clients_Elasticsearch_Core_Search_SuggestSort__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Sort(System.Nullable{Elastic.Clients.Elasticsearch.Core.Search.SuggestSort})">
+  Sort(SuggestSort?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L704"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Defines how suggestions should be sorted per suggest text term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Sort(SuggestSort? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.SuggestSort.html">SuggestSort</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_StringDistance_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.StringDistance*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_StringDistance_System_Nullable_Elastic_Clients_Elasticsearch_Core_Search_StringDistance__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.StringDistance(System.Nullable{Elastic.Clients.Elasticsearch.Core.Search.StringDistance})">
+  StringDistance(StringDistance?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L715"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The string distance implementation to use for comparing how similar suggested terms are.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor StringDistance(StringDistance? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.StringDistance.html">StringDistance</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_SuggestMode_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.SuggestMode*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_SuggestMode_System_Nullable_Elastic_Clients_Elasticsearch_SuggestMode__" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.SuggestMode(System.Nullable{Elastic.Clients.Elasticsearch.SuggestMode})">
+  SuggestMode(SuggestMode?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L726"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor SuggestMode(SuggestMode? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.SuggestMode.html">SuggestMode</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Text_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Text*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_Text_System_String_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.Text(System.String)">
+  Text(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L738"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The suggest text.
+Needs to be set globally or per suggestion.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TermSuggesterDescriptor Text(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_op_Explicit_Elastic_Clients_Elasticsearch_Core_Search_TermSuggester__Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.op_Explicit(Elastic.Clients.Elasticsearch.Core.Search.TermSuggester)~Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor">
+  explicit operator TermSuggesterDescriptor(TermSuggester)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L558"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator TermSuggesterDescriptor(TermSuggester instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggester.html">TermSuggester</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor_op_Implicit_Elastic_Clients_Elasticsearch_Core_Search_TermSuggesterDescriptor__Elastic_Clients_Elasticsearch_Core_Search_TermSuggester" data-uid="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.op_Implicit(Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor)~Elastic.Clients.Elasticsearch.Core.Search.TermSuggester">
+  implicit operator TermSuggester(TermSuggesterDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.4/src/Elastic.Clients.Elasticsearch/_Generated/Types/Core/Search/TermSuggester.g.cs/#L559"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator TermSuggester(TermSuggesterDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggesterDescriptor.html">TermSuggesterDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Core.Search.TermSuggester.html">TermSuggester</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
