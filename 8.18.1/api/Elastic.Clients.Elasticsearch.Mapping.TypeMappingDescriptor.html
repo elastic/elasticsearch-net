@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class TypeMappingDescriptor | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class TypeMappingDescriptor | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor" class="text-break">
+Class TypeMappingDescriptor  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L529"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.html">Mapping</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class TypeMappingDescriptor : SerializableDescriptor&lt;TypeMappingDescriptor&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor.html">Descriptor</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.Descriptor-1.html">Descriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.SerializableDescriptor-1.html">SerializableDescriptor</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a>&gt;</div>
+      <div><span class="xref">TypeMappingDescriptor</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__ctor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor__ctor" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.#ctor">
+  TypeMappingDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L533"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_Elastic_Clients_Elasticsearch_Mapping_AllField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField(Elastic.Clients.Elasticsearch.Mapping.AllField)">
+  AllField(AllField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor AllField(AllField? allField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>allField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AllField.html">AllField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_Elastic_Clients_Elasticsearch_Mapping_AllFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField(Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor)">
+  AllField(AllFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L577"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor AllField(AllFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor.html">AllFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_AllField_System_Action_Elastic_Clients_Elasticsearch_Mapping_AllFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.AllField(System.Action{Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor})">
+  AllField(Action&lt;AllFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L585"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor AllField(Action&lt;AllFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.AllFieldDescriptor.html">AllFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_Elastic_Clients_Elasticsearch_Mapping_DataStreamTimestamp_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp)">
+  DataStreamTimestamp(DataStreamTimestamp?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L593"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DataStreamTimestamp(DataStreamTimestamp? dataStreamTimestamp)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dataStreamTimestamp</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestamp.html">DataStreamTimestamp</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_Elastic_Clients_Elasticsearch_Mapping_DataStreamTimestampDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp(Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor)">
+  DataStreamTimestamp(DataStreamTimestampDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L601"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DataStreamTimestamp(DataStreamTimestampDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor.html">DataStreamTimestampDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DataStreamTimestamp_System_Action_Elastic_Clients_Elasticsearch_Mapping_DataStreamTimestampDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DataStreamTimestamp(System.Action{Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor})">
+  DataStreamTimestamp(Action&lt;DataStreamTimestampDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L609"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DataStreamTimestamp(Action&lt;DataStreamTimestampDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DataStreamTimestampDescriptor.html">DataStreamTimestampDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DateDetection_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DateDetection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DateDetection_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DateDetection(System.Nullable{System.Boolean})">
+  DateDetection(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L617"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DateDetection(bool? dateDetection = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dateDetection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Dynamic_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Dynamic*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Dynamic_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_DynamicMapping__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Dynamic(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.DynamicMapping})">
+  Dynamic(DynamicMapping?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L623"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Dynamic(DynamicMapping? dynamic)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dynamic</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicMapping.html">DynamicMapping</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DynamicDateFormats_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DynamicDateFormats*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DynamicDateFormats_System_Collections_Generic_ICollection_System_String__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DynamicDateFormats(System.Collections.Generic.ICollection{System.String})">
+  DynamicDateFormats(ICollection&lt;string&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L629"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DynamicDateFormats(ICollection&lt;string&gt;? dynamicDateFormats)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dynamicDateFormats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DynamicTemplates_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DynamicTemplates*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_DynamicTemplates_System_Collections_Generic_ICollection_System_Collections_Generic_KeyValuePair_System_String_Elastic_Clients_Elasticsearch_Mapping_DynamicTemplate___" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.DynamicTemplates(System.Collections.Generic.ICollection{System.Collections.Generic.KeyValuePair{System.String,Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate}})">
+  DynamicTemplates(ICollection&lt;KeyValuePair&lt;string, DynamicTemplate&gt;&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L635"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor DynamicTemplates(ICollection&lt;KeyValuePair&lt;string, DynamicTemplate&gt;&gt;? dynamicTemplates)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>dynamicTemplates</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.keyvaluepair-2">KeyValuePair</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.DynamicTemplate.html">DynamicTemplate</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Enabled_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Enabled*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Enabled_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Enabled(System.Nullable{System.Boolean})">
+  Enabled(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L641"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Enabled(bool? enabled = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>enabled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_Elastic_Clients_Elasticsearch_Mapping_FieldNamesField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesField)">
+  FieldNames(FieldNamesField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L647"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor FieldNames(FieldNamesField? fieldNames)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fieldNames</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesField.html">FieldNamesField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_Elastic_Clients_Elasticsearch_Mapping_FieldNamesFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames(Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor)">
+  FieldNames(FieldNamesFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L655"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor FieldNames(FieldNamesFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.html">FieldNamesFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_FieldNames_System_Action_Elastic_Clients_Elasticsearch_Mapping_FieldNamesFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.FieldNames(System.Action{Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor})">
+  FieldNames(Action&lt;FieldNamesFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L663"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor FieldNames(Action&lt;FieldNamesFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.FieldNamesFieldDescriptor.html">FieldNamesFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_Elastic_Clients_Elasticsearch_Mapping_IndexField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexField)">
+  IndexField(IndexField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L671"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor IndexField(IndexField? indexField)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indexField</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IndexField.html">IndexField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_Elastic_Clients_Elasticsearch_Mapping_IndexFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField(Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor)">
+  IndexField(IndexFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L679"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor IndexField(IndexFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor.html">IndexFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_IndexField_System_Action_Elastic_Clients_Elasticsearch_Mapping_IndexFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.IndexField(System.Action{Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor})">
+  IndexField(Action&lt;IndexFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L687"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor IndexField(Action&lt;IndexFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.IndexFieldDescriptor.html">IndexFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Meta_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Meta*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Meta_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object__Elastic_Clients_Elasticsearch_Fluent_FluentDictionary_System_String_System_Object___" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Meta(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object},Elastic.Clients.Elasticsearch.Fluent.FluentDictionary{System.String,System.Object}})">
+  Meta(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L695"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Meta(Func&lt;FluentDictionary&lt;string, object&gt;, FluentDictionary&lt;string, object&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDictionary-2.html">FluentDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_NumericDetection_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.NumericDetection*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_NumericDetection_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.NumericDetection(System.Nullable{System.Boolean})">
+  NumericDetection(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L701"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor NumericDetection(bool? numericDetection = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>numericDetection</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties_Elastic_Clients_Elasticsearch_Mapping_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties(Elastic.Clients.Elasticsearch.Mapping.Properties)">
+  Properties(Properties?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L707"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Properties(Properties? properties)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>properties</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Properties.html">Properties</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties__1_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor___0__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties``1(Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{``0})">
+  Properties&lt;TDocument&gt;(PropertiesDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L713"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Properties&lt;TDocument&gt;(PropertiesDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Properties__1_System_Action_Elastic_Clients_Elasticsearch_Mapping_PropertiesDescriptor___0___" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Properties``1(System.Action{Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor{``0}})">
+  Properties&lt;TDocument&gt;(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L719"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Properties&lt;TDocument&gt;(Action&lt;PropertiesDescriptor&lt;TDocument&gt;&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.PropertiesDescriptor-1.html">PropertiesDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_Elastic_Clients_Elasticsearch_Mapping_RoutingField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingField)">
+  Routing(RoutingField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L727"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Routing(RoutingField? routing)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>routing</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingField.html">RoutingField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_Elastic_Clients_Elasticsearch_Mapping_RoutingFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing(Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor)">
+  Routing(RoutingFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L735"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Routing(RoutingFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.html">RoutingFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Routing_System_Action_Elastic_Clients_Elasticsearch_Mapping_RoutingFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Routing(System.Action{Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor})">
+  Routing(Action&lt;RoutingFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L743"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Routing(Action&lt;RoutingFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RoutingFieldDescriptor.html">RoutingFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Runtime_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Runtime*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Runtime_System_Func_Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor__Elastic_Clients_Elasticsearch_Fluent_FluentDescriptorDictionary_System_String_Elastic_Clients_Elasticsearch_Mapping_RuntimeFieldDescriptor___" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Runtime(System.Func{Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor},Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary{System.String,Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor}})">
+  Runtime(Func&lt;FluentDescriptorDictionary&lt;string, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, RuntimeFieldDescriptor&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L751"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Runtime(Func&lt;FluentDescriptorDictionary&lt;string, RuntimeFieldDescriptor&gt;, FluentDescriptorDictionary&lt;string, RuntimeFieldDescriptor&gt;&gt; selector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>selector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;, <a class="xref" href="Elastic.Clients.Elasticsearch.Fluent.FluentDescriptorDictionary-2.html">FluentDescriptorDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.RuntimeFieldDescriptor.html">RuntimeFieldDescriptor</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Serialize_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Serialize*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Serialize_System_Text_Json_Utf8JsonWriter_System_Text_Json_JsonSerializerOptions_Elastic_Clients_Elasticsearch_IElasticsearchClientSettings_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Serialize(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions,Elastic.Clients.Elasticsearch.IElasticsearchClientSettings)">
+  Serialize(Utf8JsonWriter, JsonSerializerOptions, IElasticsearchClientSettings)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L811"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options, IElasticsearchClientSettings settings)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>writer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.utf8jsonwriter">Utf8JsonWriter</a></dt>
+    <dd></dd>
+    <dt><code>options</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.json.jsonserializeroptions">JsonSerializerOptions</a></dt>
+    <dd></dd>
+    <dt><code>settings</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IElasticsearchClientSettings.html">IElasticsearchClientSettings</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_Elastic_Clients_Elasticsearch_Mapping_SizeField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size(Elastic.Clients.Elasticsearch.Mapping.SizeField)">
+  Size(SizeField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L757"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Size(SizeField? size)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>size</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SizeField.html">SizeField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_Elastic_Clients_Elasticsearch_Mapping_SizeFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size(Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor)">
+  Size(SizeFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L765"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Size(SizeFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor.html">SizeFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Size_System_Action_Elastic_Clients_Elasticsearch_Mapping_SizeFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Size(System.Action{Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor})">
+  Size(Action&lt;SizeFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L773"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Size(Action&lt;SizeFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SizeFieldDescriptor.html">SizeFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_Elastic_Clients_Elasticsearch_Mapping_SourceField_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source(Elastic.Clients.Elasticsearch.Mapping.SourceField)">
+  Source(SourceField?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L781"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Source(SourceField? source)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>source</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceField.html">SourceField</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_Elastic_Clients_Elasticsearch_Mapping_SourceFieldDescriptor_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source(Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor)">
+  Source(SourceFieldDescriptor)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L789"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Source(SourceFieldDescriptor descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.html">SourceFieldDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Source_System_Action_Elastic_Clients_Elasticsearch_Mapping_SourceFieldDescriptor__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Source(System.Action{Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor})">
+  Source(Action&lt;SourceFieldDescriptor&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L797"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Source(Action&lt;SourceFieldDescriptor&gt; configure)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configure</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.SourceFieldDescriptor.html">SourceFieldDescriptor</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Subobjects_" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Subobjects*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_Mapping_TypeMappingDescriptor_Subobjects_System_Nullable_Elastic_Clients_Elasticsearch_Mapping_Subobjects__" data-uid="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.Subobjects(System.Nullable{Elastic.Clients.Elasticsearch.Mapping.Subobjects})">
+  Subobjects(Subobjects?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/Mapping/TypeMapping.g.cs/#L805"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TypeMappingDescriptor Subobjects(Subobjects? subobjects)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>subobjects</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.Subobjects.html">Subobjects</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Mapping.TypeMappingDescriptor.html">TypeMappingDescriptor</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

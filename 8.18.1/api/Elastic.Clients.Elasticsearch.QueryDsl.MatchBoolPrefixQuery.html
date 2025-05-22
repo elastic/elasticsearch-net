@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MatchBoolPrefixQuery | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MatchBoolPrefixQuery | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.18.1/apiSpec/new?filename=Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery" class="text-break">
+Class MatchBoolPrefixQuery  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.html">QueryDsl</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(MatchBoolPrefixQueryConverter))]
+public sealed class MatchBoolPrefixQuery</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">MatchBoolPrefixQuery</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery__ctor_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery__ctor_Elastic_Clients_Elasticsearch_Field_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.#ctor(Elastic.Clients.Elasticsearch.Field)">
+  MatchBoolPrefixQuery(Field)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L196"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MatchBoolPrefixQuery(Field field)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>field</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Analyzer_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Analyzer*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Analyzer" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Analyzer">
+  Analyzer
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Analyzer used to convert the text in the query value into tokens.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Analyzer { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Boost_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Boost*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Boost" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Boost">
+  Boost
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L218"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Floating point number used to decrease or increase the relevance scores of the query.
+Boost values are relative to the default value of 1.0.
+A boost value between 0 and 1.0 decreases the relevance score.
+A value greater than 1.0 increases the relevance score.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float? Boost { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Field_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Field*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Field" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Field">
+  Field
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L219"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Field Field { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Field.html">Field</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Fuzziness_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Fuzziness*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Fuzziness" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Fuzziness">
+  Fuzziness
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L227"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum edit distance allowed for matching.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Fuzziness? Fuzziness { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Fuzziness.html">Fuzziness</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_FuzzyRewrite_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.FuzzyRewrite*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_FuzzyRewrite" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.FuzzyRewrite">
+  FuzzyRewrite
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L235"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Method used to rewrite the query.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? FuzzyRewrite { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_FuzzyTranspositions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.FuzzyTranspositions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_FuzzyTranspositions" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.FuzzyTranspositions">
+  FuzzyTranspositions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L243"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>true</code>, edits for fuzzy matching include transpositions of two adjacent characters (for example, <code>ab</code> to <code>ba</code>).
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? FuzzyTranspositions { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_MaxExpansions_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.MaxExpansions*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_MaxExpansions" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.MaxExpansions">
+  MaxExpansions
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L251"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of terms to which the query will expand.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? MaxExpansions { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_MinimumShouldMatch_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.MinimumShouldMatch*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_MinimumShouldMatch" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.MinimumShouldMatch">
+  MinimumShouldMatch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L259"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Minimum number of clauses that must match for a document to be returned.
+Applied to the constructed bool query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MinimumShouldMatch? MinimumShouldMatch { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.MinimumShouldMatch.html">MinimumShouldMatch</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Operator_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Operator*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Operator" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Operator">
+  Operator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Boolean logic used to interpret text in the query value.
+Applied to the constructed bool query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Operator? Operator { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Operator.html">Operator</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_PrefixLength_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.PrefixLength*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_PrefixLength" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.PrefixLength">
+  PrefixLength
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L275"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Number of beginning characters left unchanged for fuzzy matching.
+Can be applied to the term subqueries constructed for all terms but the final term.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? PrefixLength { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Query_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Query*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.Query">
+  Query
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L283"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Terms you wish to find in the provided field.
+The last term is used in a prefix query.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Query { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_QueryName_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.QueryName*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_QueryName" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.QueryName">
+  QueryName
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L284"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? QueryName { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery_op_Implicit_Elastic_Clients_Elasticsearch_QueryDsl_MatchBoolPrefixQuery__Elastic_Clients_Elasticsearch_QueryDsl_Query" data-uid="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.op_Implicit(Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery)~Elastic.Clients.Elasticsearch.QueryDsl.Query">
+  implicit operator Query(MatchBoolPrefixQuery)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.18.1/src/Elastic.Clients.Elasticsearch/_Generated/Types/QueryDsl/MatchBoolPrefixQuery.g.cs/#L286"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator Query(MatchBoolPrefixQuery matchBoolPrefixQuery)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>matchBoolPrefixQuery</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.MatchBoolPrefixQuery.html">MatchBoolPrefixQuery</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

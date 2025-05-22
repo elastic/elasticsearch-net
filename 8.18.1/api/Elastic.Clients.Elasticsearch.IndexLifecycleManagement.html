@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement | Elasticsearch.NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexLifecycleManagement">
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexLifecycleManagement" data-uid="Elastic.Clients.Elasticsearch.IndexLifecycleManagement" class="text-break">Namespace Elastic.Clients.Elasticsearch.IndexLifecycleManagement</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Actions.html">Actions</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ActionsDescriptor.html">ActionsDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateAction.html">AllocateAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.AllocateActionDescriptor.html">AllocateActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteAction.html">DeleteAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteActionDescriptor.html">DeleteActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequest.html">DeleteLifecycleRequest</a></dt>
+      <dd><p>
+Delete a lifecycle policy.
+You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestDescriptor.html">DeleteLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Delete a lifecycle policy.
+You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleRequestParameters.html">DeleteLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DeleteLifecycleResponse.html">DeleteLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleAction.html">DownsampleAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.DownsampleActionDescriptor.html">DownsampleActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeAction.html">ForceMergeAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ForceMergeActionDescriptor.html">ForceMergeActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequest.html">GetIlmStatusRequest</a></dt>
+      <dd><p>
+Get the ILM status.
+</p>
+<p>
+Get the current index lifecycle management status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestDescriptor.html">GetIlmStatusRequestDescriptor</a></dt>
+      <dd><p>
+Get the ILM status.
+</p>
+<p>
+Get the current index lifecycle management status.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusRequestParameters.html">GetIlmStatusRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetIlmStatusResponse.html">GetIlmStatusResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequest.html">GetLifecycleRequest</a></dt>
+      <dd><p>
+Get lifecycle policies.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestDescriptor.html">GetLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Get lifecycle policies.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleRequestParameters.html">GetLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.GetLifecycleResponse.html">GetLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicy.html">IlmPolicy</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IlmPolicyDescriptor.html">IlmPolicyDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.IndexLifecycleManagementNamespacedClient.html">IndexLifecycleManagementNamespacedClient</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Lifecycle.html">Lifecycle</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateAction.html">MigrateAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateActionDescriptor.html">MigrateActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequest.html">MigrateToDataTiersRequest</a></dt>
+      <dd><p>
+Migrate to data tiers routing.
+Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+Optionally, delete one legacy index template.
+Using node roles enables ILM to automatically move the indices between data tiers.
+</p>
+<p>
+Migrating away from custom node attributes routing can be manually performed.
+This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+</p>
+<ol><li>
+<p>
+Stop setting the custom hot attribute on new indices.
+</p>
+</li><li>
+<p>
+Remove custom allocation settings from existing ILM policies.
+</p>
+</li><li>
+<p>
+Replace custom allocation settings from existing indices with the corresponding tier preference.
+</p>
+</li></ol>
+<p>
+ILM must be stopped before performing the migration.
+Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <code>STOPPED</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestDescriptor.html">MigrateToDataTiersRequestDescriptor</a></dt>
+      <dd><p>
+Migrate to data tiers routing.
+Switch the indices, ILM policies, and legacy, composable, and component templates from using custom node attributes and attribute-based allocation filters to using data tiers.
+Optionally, delete one legacy index template.
+Using node roles enables ILM to automatically move the indices between data tiers.
+</p>
+<p>
+Migrating away from custom node attributes routing can be manually performed.
+This API provides an automated way of performing three out of the four manual steps listed in the migration guide:
+</p>
+<ol><li>
+<p>
+Stop setting the custom hot attribute on new indices.
+</p>
+</li><li>
+<p>
+Remove custom allocation settings from existing ILM policies.
+</p>
+</li><li>
+<p>
+Replace custom allocation settings from existing indices with the corresponding tier preference.
+</p>
+</li></ol>
+<p>
+ILM must be stopped before performing the migration.
+Use the stop ILM and get ILM status APIs to wait until the reported operation mode is <code>STOPPED</code>.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersRequestParameters.html">MigrateToDataTiersRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MigrateToDataTiersResponse.html">MigrateToDataTiersResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequest.html">MoveToStepRequest</a></dt>
+      <dd><p>
+Move to a lifecycle step.
+Manually move an index into a specific step in the lifecycle policy and run that step.
+</p>
+<p>
+WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+</p>
+<p>
+You must specify both the current step and the step to be executed in the body of the request.
+The request will fail if the current step does not match the step currently running for the index
+This is to prevent the index from being moved from an unexpected step into the next step.
+</p>
+<p>
+When specifying the target (<code>next_step</code>) to which the index will be moved, either the name or both the action and name fields are optional.
+If only the phase is specified, the index will move to the first step of the first action in the target phase.
+If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+Only actions specified in the ILM policy are considered valid.
+An index cannot move to a step that is not part of its policy.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor.html">MoveToStepRequestDescriptor</a></dt>
+      <dd><p>
+Move to a lifecycle step.
+Manually move an index into a specific step in the lifecycle policy and run that step.
+</p>
+<p>
+WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+</p>
+<p>
+You must specify both the current step and the step to be executed in the body of the request.
+The request will fail if the current step does not match the step currently running for the index
+This is to prevent the index from being moved from an unexpected step into the next step.
+</p>
+<p>
+When specifying the target (<code>next_step</code>) to which the index will be moved, either the name or both the action and name fields are optional.
+If only the phase is specified, the index will move to the first step of the first action in the target phase.
+If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+Only actions specified in the ILM policy are considered valid.
+An index cannot move to a step that is not part of its policy.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestDescriptor-1.html">MoveToStepRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Move to a lifecycle step.
+Manually move an index into a specific step in the lifecycle policy and run that step.
+</p>
+<p>
+WARNING: This operation can result in the loss of data. Manually moving an index into a specific step runs that step even if it has already been performed. This is a potentially destructive action and this should be considered an expert level API.
+</p>
+<p>
+You must specify both the current step and the step to be executed in the body of the request.
+The request will fail if the current step does not match the step currently running for the index
+This is to prevent the index from being moved from an unexpected step into the next step.
+</p>
+<p>
+When specifying the target (<code>next_step</code>) to which the index will be moved, either the name or both the action and name fields are optional.
+If only the phase is specified, the index will move to the first step of the first action in the target phase.
+If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
+Only actions specified in the ILM policy are considered valid.
+An index cannot move to a step that is not part of its policy.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepRequestParameters.html">MoveToStepRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.MoveToStepResponse.html">MoveToStepResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phase.html">Phase</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhaseDescriptor.html">PhaseDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.Phases.html">Phases</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PhasesDescriptor.html">PhasesDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequest.html">PutLifecycleRequest</a></dt>
+      <dd><p>
+Create or update a lifecycle policy.
+If the specified policy exists, it is replaced and the policy version is incremented.
+</p>
+<p>
+NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestDescriptor.html">PutLifecycleRequestDescriptor</a></dt>
+      <dd><p>
+Create or update a lifecycle policy.
+If the specified policy exists, it is replaced and the policy version is incremented.
+</p>
+<p>
+NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleRequestParameters.html">PutLifecycleRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.PutLifecycleResponse.html">PutLifecycleResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequest.html">RemovePolicyRequest</a></dt>
+      <dd><p>
+Remove policies from an index.
+Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+It also stops managing the indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor.html">RemovePolicyRequestDescriptor</a></dt>
+      <dd><p>
+Remove policies from an index.
+Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+It also stops managing the indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestDescriptor-1.html">RemovePolicyRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Remove policies from an index.
+Remove the assigned lifecycle policies from an index or a data stream's backing indices.
+It also stops managing the indices.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyRequestParameters.html">RemovePolicyRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RemovePolicyResponse.html">RemovePolicyResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequest.html">RetryRequest</a></dt>
+      <dd><p>
+Retry a policy.
+Retry running the lifecycle policy for an index that is in the ERROR step.
+The API sets the policy back to the step where the error occurred and runs the step.
+Use the explain lifecycle state API to determine whether an index is in the ERROR step.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor.html">RetryRequestDescriptor</a></dt>
+      <dd><p>
+Retry a policy.
+Retry running the lifecycle policy for an index that is in the ERROR step.
+The API sets the policy back to the step where the error occurred and runs the step.
+Use the explain lifecycle state API to determine whether an index is in the ERROR step.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestDescriptor-1.html">RetryRequestDescriptor&lt;TDocument&gt;</a></dt>
+      <dd><p>
+Retry a policy.
+Retry running the lifecycle policy for an index that is in the ERROR step.
+The API sets the policy back to the step where the error occurred and runs the step.
+Use the explain lifecycle state API to determine whether an index is in the ERROR step.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryRequestParameters.html">RetryRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RetryResponse.html">RetryResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverAction.html">RolloverAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.RolloverActionDescriptor.html">RolloverActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotAction.html">SearchableSnapshotAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SearchableSnapshotActionDescriptor.html">SearchableSnapshotActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityAction.html">SetPriorityAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.SetPriorityActionDescriptor.html">SetPriorityActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkAction.html">ShrinkAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.ShrinkActionDescriptor.html">ShrinkActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequest.html">StartIlmRequest</a></dt>
+      <dd><p>
+Start the ILM plugin.
+Start the index lifecycle management plugin if it is currently stopped.
+ILM is started automatically when the cluster is formed.
+Restarting ILM is necessary only when it has been stopped using the stop ILM API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestDescriptor.html">StartIlmRequestDescriptor</a></dt>
+      <dd><p>
+Start the ILM plugin.
+Start the index lifecycle management plugin if it is currently stopped.
+ILM is started automatically when the cluster is formed.
+Restarting ILM is necessary only when it has been stopped using the stop ILM API.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmRequestParameters.html">StartIlmRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StartIlmResponse.html">StartIlmResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKey.html">StepKey</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StepKeyDescriptor.html">StepKeyDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequest.html">StopIlmRequest</a></dt>
+      <dd><p>
+Stop the ILM plugin.
+Halt all lifecycle management operations and stop the index lifecycle management plugin.
+This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+</p>
+<p>
+The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+Use the get ILM status API to check whether ILM is running.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestDescriptor.html">StopIlmRequestDescriptor</a></dt>
+      <dd><p>
+Stop the ILM plugin.
+Halt all lifecycle management operations and stop the index lifecycle management plugin.
+This is useful when you are performing maintenance on the cluster and need to prevent ILM from performing any actions on your indices.
+</p>
+<p>
+The API returns as soon as the stop request has been acknowledged, but the plugin might continue to run until in-progress operations complete and the plugin can be safely stopped.
+Use the get ILM status API to check whether ILM is running.
+</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmRequestParameters.html">StopIlmRequestParameters</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.StopIlmResponse.html">StopIlmResponse</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotAction.html">WaitForSnapshotAction</a></dt>
+      <dd></dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexLifecycleManagement.WaitForSnapshotActionDescriptor.html">WaitForSnapshotActionDescriptor</a></dt>
+      <dd></dd>
+    </dl>
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
