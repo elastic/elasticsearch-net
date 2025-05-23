@@ -1,0 +1,90 @@
+[[release-notes-8.1.0]]
+== Release notes v8.1.0
+
+A core theme of the 8.1.0 release is the reintroduction of many features which 
+were missing from the 8.0 releases. The 8.x client still does NOT have full 
+feature parity with NEST and we continue to work on closing these gaps.
+
+[discrete]
+=== Enhancements
+
+[discrete]
+==== Support for additional endpoints
+
+Adds support for the following endpoints:
+
+- Cluster.AllocationExplain
+- Cluster.Stats
+- Cluster.PendingTasks
+- DanglingIndices.List
+- Enrich.DeletePolicy
+- Enrich.ExecutePolicy
+- Enrich.PutPolicy
+- Enrich.Stats
+- Graph.Explore
+- IndexManagement.UpdateAliases
+- Ingest.GeoIpStats
+- Ingest.GetPipeline
+- Ingest.ProcessorGrok
+- Ingest.PutPipeline
+- Ingest.Simulate
+- MultiTermVectors
+- RenderSearchTemplate
+- SearchTemplate
+- Tasks.Cancel
+- Tasks.Get
+- Tasks.List
+- TermVectors
+
+[discrete]
+==== Support for additional queries
+
+Adds support for the following queries:
+
+- Geo distance
+- Geo bounding box
+- Geo polygon
+- Pinned
+- Range queries (date and numeric)
+- Raw (can be used as a client specific fallback for missing queries by sending raw JSON)
+
+[discrete]
+==== Support for additional aggregations
+
+Adds support for the following aggregations:
+
+- Boxplot
+- Bucket sort
+- Composite
+- Cumulative sum
+- Geo bounds
+- Geo centroid
+- Geo distance
+- Geo line
+- Geohash grid
+- Geohex grid
+- Geotile grid
+- IP prefix
+- Multi terms
+- Rare terms
+- Significant terms
+- Weighted average
+
+[discrete]
+==== Other enhancements
+
+- *Add support for geo distance sorting.*
+Adds support for specifying a `GeoDistanceSort` on `SortOptions`.
+- *Add support for weight score on FunctionScore.*
+Adds support for specifying a weight score value on the `FunctionScore` type.
+- *Code generate XML doc comments.*
+The code generator now adds XML doc comments to types and members when present in 
+the Elasticsearch specification. This acts as an aid when exploring the API in an 
+IDE such as Visual Studio.
+- *Add additional client overloads.*
+Adds additional overloads to the `ElasticsearchClient` and namespaced sub-clients 
+that allow consumers to provide a descriptor instance used when building requests.
+- *Add support for bool query operators in Query DSL for object initializer syntax*
+Adds support for using operators `&&``, `||`, `!` and `+` to build up bool queries 
+using the object initializer syntax. NOTE: Operators are not yet supported for 
+combining queires defined using the fluent descriptor syntax.
