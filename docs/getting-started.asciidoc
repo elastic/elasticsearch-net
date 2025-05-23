@@ -1,0 +1,160 @@
+[[getting-started-net]]
+== Getting started
+
+This page guides you through the installation process of the .NET client, shows 
+you how to instantiate the client, and how to perform basic Elasticsearch 
+operations with it.
+
+[discrete]
+=== Requirements
+
+* .NET Core, .NET 5+ or .NET Framework (4.6.1 and higher).
+
+[discrete]
+=== Installation 
+
+To install the latest version of the client for SDK style projects, run the following command:
+
+[source,shell]
+--------------------------
+dotnet add package Elastic.Clients.Elasticsearch
+--------------------------
+
+Refer to the <<installation>> page to learn more.
+
+
+[discrete]
+=== Connecting
+
+You can connect to the Elastic Cloud using an API key and your Elasticsearch 
+Cloud ID. 
+
+[source,net]
+----
+var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); 
+----
+
+You can find your Elasticsearch Cloud ID on the deployment page: 
+
+image::images/es-cloudid.jpg[alt="Cloud ID on the deployment page",align="center"]
+
+To generate an API key, use the
+https://www.elastic.co/guide/en/elasticsearch/reference/current/security-api-create-api-key.html[Elasticsearch Create API key API]
+or https://www.elastic.co/guide/en/kibana/current/api-keys.html#create-api-key[Kibana Stack Management].
+
+For other connection options, refer to the <<connecting>> section.
+
+
+[discrete]
+=== Operations
+
+Time to use Elasticsearch! This section walks you through the basic, and most 
+important, operations of Elasticsearch. For more operations and more advanced 
+examples, refer to the <<examples>> page.
+
+
+[discrete]
+==== Creating an index
+
+This is how you create the `my_index` index:
+
+[source,net]
+----
+var response = await client.Indices.CreateAsync("my_index");
+----
+
+
+[discrete]
+==== Indexing documents
+
+This is a simple way of indexing a document:
+
+[source,net]
+----
+var doc = new MyDoc
+{
+    Id = 1,
+    User = "flobernd",
+    Message = "Trying out the client, so far so good?"
+};
+
+var response = await client.IndexAsync(doc, "my_index"); 
+----
+
+
+[discrete]
+==== Getting documents
+
+You can get documents by using the following code:
+
+[source,net]
+----
+var response = await client.GetAsync<MyDoc>(id, idx => idx.Index("my_index"));
+
+if (response.IsValidResponse) 
+{
+    var doc = response.Source;
+}
+----
+
+
+[discrete]
+==== Searching documents
+
+This is how you can create a single match query with the .NET client: 
+
+[source,net]
+----
+var response = await client.SearchAsync<MyDoc>(s => s 
+    .Index("my_index") 
+    .From(0)
+    .Size(10)
+    .Query(q => q
+        .Term(t => t.User, "flobernd") 
+    )
+);
+
+if (response.IsValidResponse)
+{
+    var doc = response.Documents.FirstOrDefault(); 
+}
+----
+
+
+[discrete]
+==== Updating documents
+
+This is how you can update a document, for example to add a new field:
+
+[source,net]
+----
+doc.Message = "This is a new message"; 
+
+var response = await client.UpdateAsync<MyDoc, MyDoc>("my_index", 1, u => u
+    .Doc(doc)); 
+----
+
+
+[discrete]
+==== Deleting documents
+
+[source,net]
+----
+var response = await client.DeleteAsync("my_index", 1);
+----
+
+
+[discrete]
+==== Deleting an index
+
+[source,net]
+----
+var response = await client.Indices.DeleteAsync("my_index");
+----
+
+
+[discrete]
+== Further reading
+
+* Refer to the <<recommendations>> page to learn more about how to use the 
+client the most efficiently. 
