@@ -1,0 +1,13 @@
+[[release-notes-8.11.0]]
+== Release notes v8.11.0
+
+[discrete]
+=== Features & Enhancements
+
+- https://github.com/elastic/elasticsearch-net/pull/7978[#7978] Regenerate client for 8.11
+
+[discrete]
+=== Bug fixes
+
+- https://github.com/elastic/elasticsearch-net/pull/7979[#7979] Add workaround for stringified properties which are not marked properly in specification
+- https://github.com/elastic/elasticsearch-net/pull/7965[#7965] Fix `Stringified` converters
