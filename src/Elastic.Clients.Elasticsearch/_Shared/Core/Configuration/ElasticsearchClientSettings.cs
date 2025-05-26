@@ -8,9 +8,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using Elastic.Clients.Elasticsearch.Esql;
-
+using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Clients.Elasticsearch.Serialization;
 
 using Elastic.Transport;
@@ -110,6 +111,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 	private readonly FluentDictionary<MemberInfo, PropertyMapping> _propertyMappings = new();
 	private readonly FluentDictionary<Type, string> _routeProperties = new();
 	private readonly Serializer _sourceSerializer;
+	private BeforeRequestEvent? _onBeforeRequest;
 	private bool _experimentalEnableSerializeNullInferredValues;
 	private ExperimentalSettings _experimentalSettings = new();
 
@@ -158,7 +160,7 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 
 	FluentDictionary<Type, string> IElasticsearchClientSettings.RouteProperties => _routeProperties;
 	Serializer IElasticsearchClientSettings.SourceSerializer => _sourceSerializer;
-
+	BeforeRequestEvent? IElasticsearchClientSettings.OnBeforeRequest => _onBeforeRequest;
 	ExperimentalSettings IElasticsearchClientSettings.Experimental => _experimentalSettings;
 
 	bool IElasticsearchClientSettings.ExperimentalEnableSerializeNullInferredValues => _experimentalEnableSerializeNullInferredValues;
@@ -321,6 +323,20 @@ public abstract class ElasticsearchClientSettingsBase<TConnectionSettings> :
 		}
 
 		return (TConnectionSettings)this;
+	}
+
+	/// <inheritdoc cref="IElasticsearchClientSettings.OnBeforeRequest"/>
+	public TConnectionSettings OnBeforeRequest(BeforeRequestEvent handler)
+	{
+		return Assign(handler, static (a, v) => a._onBeforeRequest += v ?? DefaultBeforeRequestHandler);
+	}
+
+	private static void DefaultBeforeRequestHandler(ElasticsearchClient client,
+		Request request,
+		EndpointPath endpointPath,
+		ref PostData? postData,
+		ref IRequestConfiguration? requestConfiguration)
+	{
 	}
 }
 
