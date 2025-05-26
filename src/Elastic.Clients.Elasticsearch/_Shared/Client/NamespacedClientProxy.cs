@@ -5,15 +5,16 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
-using Elastic.Transport.Products.Elasticsearch;
 
 namespace Elastic.Clients.Elasticsearch;
 
 public abstract class NamespacedClientProxy
 {
-	private const string InvalidOperation = "The client has not been initialised for proper usage as may have been partially mocked. Ensure you are using a " +
+	private const string InvalidOperation =
+		"The client has not been initialised for proper usage as may have been partially mocked. Ensure you are using a " +
 		"new instance of ElasticsearchClient to perform requests over a network to Elasticsearch.";
 
 	protected ElasticsearchClient Client { get; }
@@ -21,27 +22,24 @@ public abstract class NamespacedClientProxy
 	/// <summary>
 	/// Initializes a new instance for mocking.
 	/// </summary>
-	protected NamespacedClientProxy() { }
+	protected NamespacedClientProxy()
+	{
+	}
 
 	internal NamespacedClientProxy(ElasticsearchClient client) => Client = client;
 
-	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(TRequest request)
-		where TRequest : Request<TRequestParameters>
-		where TResponse : TransportResponse, new()
-		where TRequestParameters : RequestParameters, new()
-			=> DoRequest<TRequest, TResponse, TRequestParameters>(request, null);
-
 	internal TResponse DoRequest<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		Action<IRequestConfiguration>? forceConfiguration)
+		TRequest request)
 		where TRequest : Request<TRequestParameters>
 		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
 	{
 		if (Client is null)
-			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
+		{
+			throw new InvalidOperationException(InvalidOperation);
+		}
 
-		return Client.DoRequest<TRequest, TResponse, TRequestParameters>(request, forceConfiguration);
+		return Client.DoRequest<TRequest, TResponse, TRequestParameters>(request);
 	}
 
 	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
@@ -50,19 +48,12 @@ public abstract class NamespacedClientProxy
 		where TRequest : Request<TRequestParameters>
 		where TResponse : TransportResponse, new()
 		where TRequestParameters : RequestParameters, new()
-			=> DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, null, cancellationToken);
-
-	internal Task<TResponse> DoRequestAsync<TRequest, TResponse, TRequestParameters>(
-		TRequest request,
-		Action<IRequestConfiguration>? forceConfiguration,
-		CancellationToken cancellationToken = default)
-		where TRequest : Request<TRequestParameters>
-		where TResponse : TransportResponse, new()
-		where TRequestParameters : RequestParameters, new()
 	{
 		if (Client is null)
-			ThrowHelper.ThrowInvalidOperationException(InvalidOperation);
+		{
+			throw new InvalidOperationException(InvalidOperation);
+		}
 
-		return Client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, forceConfiguration, cancellationToken);
+		return Client.DoRequestAsync<TRequest, TResponse, TRequestParameters>(request, cancellationToken);
 	}
 }
