@@ -20,7 +20,6 @@ toc:
       - file: query.md
       - file: recommendations.md
       - file: transport.md
-      - file: migration-guide.md
   - file: troubleshoot/index.md
     children:
       - file: troubleshoot/logging.md
