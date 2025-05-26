@@ -5,9 +5,25 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Elastic.Clients.Elasticsearch.Requests;
 using Elastic.Transport;
 
 namespace Elastic.Clients.Elasticsearch;
+
+/// <summary>
+/// An event that is fired before a request is sent.
+/// </summary>
+/// <param name="name">The <see cref="ElasticsearchClient"/> instance used to send the request.</param>
+/// <param name="request">The request.</param>
+/// <param name="endpointPath">The endpoint path.</param>
+/// <param name="postData">The post data.</param>
+/// <param name="requestConfiguration">The request configuration.</param>
+public delegate void BeforeRequestEvent(
+	ElasticsearchClient client,
+	Request request,
+	EndpointPath endpointPath,
+	ref PostData? postData,
+	ref IRequestConfiguration? requestConfiguration);
 
 /// <summary>
 ///     Provides the connection settings for Elastic.Clients.Elasticsearch's high level <see cref="ElasticsearchClient" />
@@ -90,6 +106,14 @@ public interface IElasticsearchClientSettings : ITransportConfiguration
 	///     The serializer use to serialize CLR types representing documents and other types related to documents.
 	/// </summary>
 	Serializer SourceSerializer { get; }
+
+	/// <summary>
+	/// A callback that is invoked immediately before a request is sent.
+	/// <para>
+	///	Allows to dynamically update the <see cref="PostData"/> and <see cref="IRequestConfiguration"/>.
+	/// </para>
+	/// </summary>
+	BeforeRequestEvent? OnBeforeRequest { get; }
 
 	/// <summary>
 	/// This is an advanced setting which controls serialization behaviour for inferred properies such as ID, routing and index name.
