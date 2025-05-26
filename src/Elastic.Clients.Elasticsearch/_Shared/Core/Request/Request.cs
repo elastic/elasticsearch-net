@@ -57,7 +57,8 @@ public abstract class Request
 		ApiUrls.Resolve(routeValues, settings);
 
 	internal virtual void BeforeRequest()
-	{ }
+	{
+	}
 
 	internal (string ResolvedUrl, string UrlTemplate, Dictionary<string, string>? resolvedRouteValues) GetUrl(IElasticsearchClientSettings settings) => ResolveUrl(RouteValues, settings);
 
