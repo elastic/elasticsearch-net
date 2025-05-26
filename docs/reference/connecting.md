@@ -10,10 +10,10 @@ This page contains the information you need to create an instance of the .NET Cl
 It’s possible to connect to your {{es}} cluster via a single node, or by specifying multiple nodes using a node pool. Using a node pool has a few advantages over a single node, such as load balancing and cluster failover support. The client provides convenient configuration options to connect to an Elastic Cloud deployment.
 
 ::::{important}
+
 Client applications should create a single instance of `ElasticsearchClient` that is used throughout your application for its entire lifetime. Internally the client manages and maintains HTTP connections to nodes, reusing them to optimize performance. If you use a dependency injection container for your application, the client instance should be registered with a singleton lifetime.
+
 ::::
-
-
 
 ## Connecting to a cloud deployment [cloud-deployment]
 
@@ -35,8 +35,6 @@ var client = new ElasticsearchClient("<CLOUD_ID>", new ApiKey("<API_KEY>")); <1>
 ```
 
 1. Replace the placeholder string values above with your cloud ID and the API key configured for your application to access your deployment.
-
-
 
 ## Connecting to a single node [single-node]
 
@@ -92,7 +90,6 @@ var client = new ElasticsearchClient(settings);
 
 The preceding snippet demonstrates configuring the client to authenticate by providing a username and password with basic authentication. If preferred, you may also use `ApiKey` authentication as shown in the cloud connection example.
 
-
 ## Connecting to multiple nodes using a node pool [multiple-nodes]
 
 To provide resiliency, you should configure multiple nodes for your cluster to which the client attempts to communicate. By default, the client cycles through nodes for each request in a round robin fashion. The client also tracks unhealthy nodes and avoids sending requests to them until they become healthy.
@@ -107,9 +104,9 @@ using Elastic.Transport;
 
 var nodes = new Uri[]
 {
-	new Uri("https://myserver1:9200"),
-	new Uri("https://myserver2:9200"),
-	new Uri("https://myserver3:9200")
+    new Uri("https://myserver1:9200"),
+    new Uri("https://myserver2:9200"),
+    new Uri("https://myserver3:9200")
 };
 
 var pool = new StaticNodePool(nodes);
@@ -120,4 +117,3 @@ var settings = new ElasticsearchClientSettings(pool)
 
 var client = new ElasticsearchClient(settings);
 ```
-
