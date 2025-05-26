@@ -20,7 +20,6 @@ The following is a list of available connection configuration options on `Elasti
     `Base64ApiKey` for Elastic Cloud style encoded api keys
     ```
 
-
 `ClientCertificate`
 :   Use the following certificates to authenticate all HTTP requests. You can also set them on individual request using `ClientCertificates`.
 
@@ -34,7 +33,6 @@ The following is a list of available connection configuration options on `Elasti
 
     For Core CLR, this setting applies to the `MaxConnectionsPerServer` property on the `HttpClientHandler` instances used by the `HttpClient` inside the default `IConnection` implementation.
 
-
 `DeadTimeout`
 :   The time to put dead nodes out of rotation (this will be multiplied by the number of times they’ve been dead).
 
@@ -43,12 +41,10 @@ The following is a list of available connection configuration options on `Elasti
 
     The client by default will use the value of a property named `Id` on a CLR type as the `_id` to send to {{es}}. Adding a type will disable this behaviour for that CLR type. If `Id` inference should be disabled for all CLR types, use `DefaultDisableIdInference`.
 
-
 `DefaultFieldNameInferrer`
 :   Specifies how field names are inferred from CLR property names.
 
     By default, the client camel cases property names. For example, CLR property `EmailAddress` will be inferred as "emailAddress" {{es}} document field name.
-
 
 `DefaultIndex`
 :   The default index to use for a request when no index has been explicitly specified and no default indices are specified for the given CLR type specified for the request.
@@ -82,7 +78,6 @@ The following is a list of available connection configuration options on `Elasti
 
     For Desktop CLR, sets `ServicePointManager`.`SetTcpKeepAlive`.
 
-
 `EnableTcpStats`
 :   Enable statistics about TCP connections to be collected when making a request.
 
@@ -110,8 +105,8 @@ The following is a list of available connection configuration options on `Elasti
 `OnRequestCompleted`
 :   Allows you to register a callback every time a an API call is returned.
 
-`OnRequestDataCreated`
-:   An action to run when the `RequestData` for a request has been created.
+`OnBeforeRequest`
+:   An action to run before a request is made.
 
 `PingTimeout`
 :   The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive.
@@ -120,7 +115,6 @@ The following is a list of available connection configuration options on `Elasti
 :   Provide hints to serializer and products to produce pretty, non minified json.
 
     Note: this is not a guarantee you will always get prettified json.
-
 
 `Proxy`
 :   If your connection has to go through proxy, use this method to specify the proxy url.
@@ -148,7 +142,6 @@ The following is a list of available connection configuration options on `Elasti
 
     Reasons for such exceptions could be search parser errors, index missing exceptions, and so on.
 
-
 `TransferEncodingChunked`
 :   Whether the request should be sent with chunked Transfer-Encoding.
 
@@ -171,5 +164,3 @@ var settings= new ElasticsearchClientSettings()
 
 var client = new ElasticsearchClient(settings);
 ```
-
-
