@@ -18,7 +18,7 @@ If you’re new to {{es}}, make sure also to read [Elasticsearch’s quick start
 * [Using ES|QL](/reference/esql.md)
 
 ::::{note}
+
 This is still a work in progress, more sections will be added in the near future.
+
 ::::
-
-

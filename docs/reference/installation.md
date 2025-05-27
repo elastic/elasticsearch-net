@@ -7,12 +7,6 @@ mapped_pages:
 
 This page shows you how to install the .NET client for {{es}}.
 
-::::{important}
-The v8 client for .NET does not have complete feature parity with the v7 `NEST` client. It may not be suitable for for all applications until additional endpoints and features are supported. We therefore recommend you thoroughly review our [release notes](/release-notes/index.md) before attempting to migrate existing applications to the `Elastic.Clients.Elasticsearch` library. Until the new client supports all endpoints and features your application requires, you may continue to use the 7.17.x [NEST](https://www.nuget.org/packages/NEST) client to communicate with v8 Elasticsearch servers using compatibility mode. Refer to the [Connecting to Elasticsearch v8.x using the v7.17.x client documentation](https://www.elastic.co/guide/en/elasticsearch/client/net-api/7.17/connecting-to-elasticsearch-v8.html) for guidance on configuring the 7.17.x client.
-::::
-
-
-
 ## Installing the .NET client [dot-net-client]
 
 For SDK style projects, you can install the {{es}} client by running the following .NET CLI command in your terminal:
@@ -46,22 +40,23 @@ To learn how to connect the {{es}} client, refer to the [Connecting](/reference/
 
 The {{es}} client is compatible with currently maintained .NET runtime versions. Compatibility with End of Life (EOL) .NET runtimes is not guaranteed or supported.
 
-Language clients are forward compatible; meaning that the clients support communicating with greater or equal minor versions of {{es}} without breaking. It does not mean that the clients automatically support new features of newer {{es}} versions; it is only possible after a release of a new client version. For example, a 8.12 client version won’t automatically support the new features of the 8.13 version of {{es}}, the 8.13 client version is required for that. {{es}} language clients are only backwards compatible with default distributions and without guarantees made.
+Language clients are **forward compatible**:
 
-| Elasticsearch Version | Elasticsearch-NET Branch | Supported |
-| --- | --- | --- |
-| main | main |  |
-| 8.x | 8.x | 8.x |
-| 7.x | 7.x | 7.17 |
+Given a constant major version of the client, each related minor version is compatible with its equivalent- and all later {{es}} minor versions of the **same or next higher** major version.
+
+For example:
+
+| Client Version | Compatible with {{es}} `8.x` | Compatible with {{es}} `9.x` | Compatible with {{es}} `10.x` |
+| ---: | :-- | :-- | :-- |
+| 9.x | ❌ no | ✅ yes | ✅ yes |
+| 8.x | ✅ yes | ✅ yes | ❌ no |
+
+Language clients are also **backward compatible** across minor versions within the **same** major version (without strong guarantees), but **never** backward compatible with earlier {{es}} major versions.
+
+:::{note}
+
+Compatibility does not imply feature parity. For example, an `8.12` client is compatible with `8.13`, but does not support any of the new features introduced in {{es}} `8.13`.
+
+:::
 
 Refer to the [end-of-life policy](https://www.elastic.co/support/eol) for more information.
-
-
-## CI feed [ci-feed]
-
-We publish CI builds of our client packages, including the latest unreleased features. If you want to experiment with the latest bits, you can add the CI feed to your list of NuGet package sources.
-
-Feed URL: [https://f.feedz.io/elastic/all/nuget/index.json](https://f.feedz.io/elastic/all/nuget/index.json)
-
-We do not recommend using CI builds for production applications as they are not formally supported until they are released.
-
