@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct OpenPointInTimeRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct OpenPointInTimeRequestDescriptor&lt;TDocument&gt; | Elasticsearch.NET ">
+      
+      <meta name="description" content="Open a point in time.   A search request by default runs against the most recent visible data of the target indices, which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple search requests using the same point in time. For example, if refreshes happen between search_after requests, then the results of those requests might not be consistent as changes happening between searches are only visible to the more recent point in time.   A point in time must be opened explicitly before being used in search requests.   A subsequent search request with the pit parameter must not specify index, routing, or preference values as these parameters are copied from the point in time.   Just like regular searches, you can use from and size to page through point in time search results, up to the first 10,000 hits. If you want to retrieve more hits, use PIT with search_after.   IMPORTANT: The open point in time request and each subsequent search request can return different identifiers; always use the most recently received ID for the next search request.   When a PIT that contains shard failures is used in a search request, the missing are always reported in the search response as a NoShardAvailableActionException exception. To get rid of these exceptions, a new PIT needs to be created so that shards missing from the previous PIT can be handled, assuming they become available in the meantime.   Keeping point in time alive   The keep_alive parameter, which is passed to a open point in time request and search request, extends the time to live of the corresponding point in time. The value does not need to be long enough to process all data — it just needs to be long enough for the next request.   Normally, the background merge process optimizes the index by merging together smaller segments to create new, bigger segments. Once the smaller segments are no longer needed they are deleted. However, open point-in-times prevent the old segments from being deleted since they are still in use.   TIP: Keeping older segments alive means that more disk space and file handles are needed. Ensure that you have configured your nodes to have ample free file handles.   Additionally, if a segment contains deleted or updated documents then the point in time must keep track of whether each document in the segment was live at the time of the initial search request. Ensure that your nodes have sufficient heap space if you have many open point-in-times on an index that is subject to ongoing deletes or updates. Note that a point-in-time doesn&#39;t prevent its associated indices from being deleted. You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/8.19.0-preview.2/apiSpec/new?filename=Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor%601%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1" class="text-break">
+Struct OpenPointInTimeRequestDescriptor&lt;TDocument&gt;  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L591"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Open a point in time.
+</p>
+<p>
+A search request by default runs against the most recent visible data of the target indices,
+which is called point in time. Elasticsearch pit (point in time) is a lightweight view into the
+state of the data as it existed when initiated. In some cases, it’s preferred to perform multiple
+search requests using the same point in time. For example, if refreshes happen between
+<code>search_after</code> requests, then the results of those requests might not be consistent as changes happening
+between searches are only visible to the more recent point in time.
+</p>
+<p>
+A point in time must be opened explicitly before being used in search requests.
+</p>
+<p>
+A subsequent search request with the <code>pit</code> parameter must not specify <code>index</code>, <code>routing</code>, or <code>preference</code> values as these parameters are copied from the point in time.
+</p>
+<p>
+Just like regular searches, you can use <code>from</code> and <code>size</code> to page through point in time search results, up to the first 10,000 hits.
+If you want to retrieve more hits, use PIT with <code>search_after</code>.
+</p>
+<p>
+IMPORTANT: The open point in time request and each subsequent search request can return different identifiers; always use the most recently received ID for the next search request.
+</p>
+<p>
+When a PIT that contains shard failures is used in a search request, the missing are always reported in the search response as a <code>NoShardAvailableActionException</code> exception.
+To get rid of these exceptions, a new PIT needs to be created so that shards missing from the previous PIT can be handled, assuming they become available in the meantime.
+</p>
+<p>
+<strong>Keeping point in time alive</strong>
+</p>
+<p>
+The <code>keep_alive</code> parameter, which is passed to a open point in time request and search request, extends the time to live of the corresponding point in time.
+The value does not need to be long enough to process all data — it just needs to be long enough for the next request.
+</p>
+<p>
+Normally, the background merge process optimizes the index by merging together smaller segments to create new, bigger segments.
+Once the smaller segments are no longer needed they are deleted.
+However, open point-in-times prevent the old segments from being deleted since they are still in use.
+</p>
+<p>
+TIP: Keeping older segments alive means that more disk space and file handles are needed.
+Ensure that you have configured your nodes to have ample free file handles.
+</p>
+<p>
+Additionally, if a segment contains deleted or updated documents then the point in time must keep track of whether each document in the segment was live at the time of the initial search request.
+Ensure that your nodes have sufficient heap space if you have many open point-in-times on an index that is subject to ongoing deletes or updates.
+Note that a point-in-time doesn't prevent its associated indices from being deleted.
+You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct OpenPointInTimeRequestDescriptor&lt;TDocument&gt;</code></pre>
+  </div>
+
+
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>TDocument</code></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor">
+  OpenPointInTimeRequestDescriptor()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L606"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.Indices)">
+  OpenPointInTimeRequestDescriptor(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L601"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor(Indices indices)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>indices</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1__ctor_Elastic_Clients_Elasticsearch_OpenPointInTimeRequest_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.#ctor(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest)">
+  OpenPointInTimeRequestDescriptor(OpenPointInTimeRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L595"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor(OpenPointInTimeRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequest.html">OpenPointInTimeRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_AllowPartialSearchResults_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.AllowPartialSearchResults*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_AllowPartialSearchResults_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.AllowPartialSearchResults(System.Nullable{System.Boolean})">
+  AllowPartialSearchResults(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L632"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Indicates whether the point in time tolerates unavailable shards or shard failures when initially creating the PIT.
+If <code>false</code>, creating a point in time request when a shard is missing or unavailable will throw an exception.
+If <code>true</code>, the point in time will contain all the shards that are available at the time of the request.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; AllowPartialSearchResults(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ErrorTrace_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ErrorTrace*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ErrorTrace_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ErrorTrace(System.Nullable{System.Boolean})">
+  ErrorTrace(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L750"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; ErrorTrace(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ExpandWildcards_Elastic_Clients_Elasticsearch_ExpandWildcard___" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ExpandWildcards(Elastic.Clients.Elasticsearch.ExpandWildcard[])">
+  ExpandWildcards(params ExpandWildcard[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L658"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values, such as <code>open,hidden</code>. Valid values are: <code>all</code>, <code>open</code>, <code>closed</code>, <code>hidden</code>, <code>none</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; ExpandWildcards(params ExpandWildcard[] values)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>values</code> <a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ExpandWildcards_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ExpandWildcards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_ExpandWildcards_System_Collections_Generic_ICollection_Elastic_Clients_Elasticsearch_ExpandWildcard__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.ExpandWildcards(System.Collections.Generic.ICollection{Elastic.Clients.Elasticsearch.ExpandWildcard})">
+  ExpandWildcards(ICollection&lt;ExpandWildcard&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L645"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The type of index that wildcard patterns can match.
+If the request can target data streams, this argument determines whether wildcard expressions match hidden data streams.
+It supports comma-separated values, such as <code>open,hidden</code>. Valid values are: <code>all</code>, <code>open</code>, <code>closed</code>, <code>hidden</code>, <code>none</code>.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; ExpandWildcards(ICollection&lt;ExpandWildcard&gt;? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.ExpandWildcard.html">ExpandWildcard</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_FilterPath_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.FilterPath*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_FilterPath_System_String___" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.FilterPath(System.String[])">
+  FilterPath(params string[]?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L756"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; FilterPath(params string[]? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Human_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Human*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Human_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Human(System.Nullable{System.Boolean})">
+  Human(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L762"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; Human(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IgnoreUnavailable_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IgnoreUnavailable*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IgnoreUnavailable_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IgnoreUnavailable(System.Nullable{System.Boolean})">
+  IgnoreUnavailable(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+If <code>false</code>, the request returns an error if it targets a missing or closed index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; IgnoreUnavailable(bool? value = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IndexFilter_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IndexFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IndexFilter_Elastic_Clients_Elasticsearch_QueryDsl_Query_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IndexFilter(Elastic.Clients.Elasticsearch.QueryDsl.Query)">
+  IndexFilter(Query?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L725"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Filter indices if the provided query rewrites to <code>match_none</code> on every shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; IndexFilter(Query? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.Query.html">Query</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IndexFilter_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IndexFilter*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_IndexFilter_System_Action_Elastic_Clients_Elasticsearch_QueryDsl_QueryDescriptor__0___" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.IndexFilter(System.Action{Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor{`0}})">
+  IndexFilter(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L736"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Filter indices if the provided query rewrites to <code>match_none</code> on every shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; IndexFilter(Action&lt;QueryDescriptor&lt;TDocument&gt;&gt; action)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>action</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.QueryDsl.QueryDescriptor-1.html">QueryDescriptor</a>&lt;TDocument&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Indices_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Indices*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Indices_Elastic_Clients_Elasticsearch_Indices_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Indices(Elastic.Clients.Elasticsearch.Indices)">
+  Indices(Indices)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L619"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A comma-separated list of index names to open point in time; use <code>_all</code> or empty string to perform the operation on all indices
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; Indices(Indices value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Indices.html">Indices</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_KeepAlive_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.KeepAlive*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_KeepAlive_Elastic_Clients_Elasticsearch_Duration_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.KeepAlive(Elastic.Clients.Elasticsearch.Duration)">
+  KeepAlive(Duration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L680"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Extend the length of time that the point in time persists.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; KeepAlive(Duration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_MaxConcurrentShardRequests_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.MaxConcurrentShardRequests*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_MaxConcurrentShardRequests_System_Nullable_System_Int32__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.MaxConcurrentShardRequests(System.Nullable{System.Int32})">
+  MaxConcurrentShardRequests(int?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L691"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Maximum number of concurrent shard requests that each sub-search request executes per node.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; MaxConcurrentShardRequests(int? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Preference_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Preference*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Preference_System_String_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Preference(System.String)">
+  Preference(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L703"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The node or shard the operation should be performed on.
+By default, it is random.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; Preference(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Pretty_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Pretty*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Pretty_System_Nullable_System_Boolean__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Pretty(System.Nullable{System.Boolean})">
+  Pretty(bool?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L768"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; Pretty(bool? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>?</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_RequestConfiguration_Elastic_Transport_IRequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.RequestConfiguration(Elastic.Transport.IRequestConfiguration)">
+  RequestConfiguration(IRequestConfiguration?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L780"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; RequestConfiguration(IRequestConfiguration? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.0-preview.2/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_RequestConfiguration_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.RequestConfiguration*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_RequestConfiguration_System_Func_Elastic_Transport_RequestConfigurationDescriptor_Elastic_Transport_IRequestConfiguration__" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.RequestConfiguration(System.Func{Elastic.Transport.RequestConfigurationDescriptor,Elastic.Transport.IRequestConfiguration})">
+  RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L786"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; RequestConfiguration(Func&lt;RequestConfigurationDescriptor, IRequestConfiguration&gt;? configurationSelector)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>configurationSelector</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.0-preview.2/src/Elastic.Transport/Configuration/RequestConfigurationDescriptor.cs">RequestConfigurationDescriptor</a>, <a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/8.19.0-preview.2/src/Elastic.Transport/Configuration/IRequestConfiguration.cs">IRequestConfiguration</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Routing_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Routing*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_Routing_Elastic_Clients_Elasticsearch_Routing_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.Routing(Elastic.Clients.Elasticsearch.Routing)">
+  Routing(Routing?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L714"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+A custom value that is used to route operations to a specific shard.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; Routing(Routing? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Routing.html">Routing</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_SourceQueryString_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.SourceQueryString*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_SourceQueryString_System_String_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.SourceQueryString(System.String)">
+  SourceQueryString(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L774"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public OpenPointInTimeRequestDescriptor&lt;TDocument&gt; SourceQueryString(string? value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_op_Explicit_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.op_Explicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_op_Explicit_Elastic_Clients_Elasticsearch_OpenPointInTimeRequest__Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor__0_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.op_Explicit(Elastic.Clients.Elasticsearch.OpenPointInTimeRequest)~Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor{`0}">
+  explicit operator OpenPointInTimeRequestDescriptor&lt;TDocument&gt;(OpenPointInTimeRequest)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L611"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator OpenPointInTimeRequestDescriptor&lt;TDocument&gt;(OpenPointInTimeRequest instance)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>instance</code> <a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequest.html">OpenPointInTimeRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_op_Implicit_" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.op_Implicit*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor_1_op_Implicit_Elastic_Clients_Elasticsearch_OpenPointInTimeRequestDescriptor__0___Elastic_Clients_Elasticsearch_OpenPointInTimeRequest" data-uid="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor`1.op_Implicit(Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor{`0})~Elastic.Clients.Elasticsearch.OpenPointInTimeRequest">
+  implicit operator OpenPointInTimeRequest(OpenPointInTimeRequestDescriptor&lt;TDocument&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/8.19.0-preview.2/src/Elastic.Clients.Elasticsearch/_Generated/Api/OpenPointInTimeRequest.g.cs/#L612"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator OpenPointInTimeRequest(OpenPointInTimeRequestDescriptor&lt;TDocument&gt; descriptor)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>descriptor</code> <a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequestDescriptor-1.html">OpenPointInTimeRequestDescriptor</a>&lt;TDocument&gt;</dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.OpenPointInTimeRequest.html">OpenPointInTimeRequest</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
