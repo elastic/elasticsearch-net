@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class CloneIndexRequest | Elasticsearch.NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class CloneIndexRequest | Elasticsearch.NET ">
+      
+      <meta name="description" content="Clone an index. Clone an existing index into a new index. Each original primary shard is cloned into a new primary shard in the new index.   IMPORTANT: Elasticsearch does not apply index templates to the resulting index. The API also does not copy index metadata from the original index. Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information. For example, if you clone a CCR follower index, the resulting clone will not be a follower index.   The clone API copies most index settings from the source index to the resulting index, with the exception of index.number_of_replicas and index.auto_expand_replicas. To set the number of replicas in the resulting index, configure these settings in the clone request.   Cloning works as follows:    First, it creates a new target index with the same definition as the source index.    Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.    Finally, it recovers the target index as though it were a closed index which had just been re-opened.    IMPORTANT: Indices can only be cloned if they meet the following requirements:    The index must be marked as read-only and have a cluster health status of green.    The target index must not exist.    The source index must have the same number of primary shards as the target index.    The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.    The current write index on a data stream cannot be cloned. In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.   NOTE: Mappings cannot be specified in the _clone request. The mappings of the source index will be used for the target index.   Monitor the cloning process   The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the wait_for_status parameter to yellow.   The _clone API returns as soon as the target index has been added to the cluster state, before any shards have been allocated. At this point, all shards are in the state unassigned. If, for any reason, the target index can&#39;t be allocated, its primary shard will remain unassigned until it can be allocated on that node.   Once the primary shard is allocated, it moves to state initializing, and the clone process begins. When the clone operation completes, the shard will become active. At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.   Wait for active shards   Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/elastic/elasticsearch-net/new/9.0.5/apiSpec/new?filename=Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest.md&amp;value=---%0Auid%3A%20Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.svg" alt="Elasticsearch.NET">
+            Elasticsearch.NET
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest">
+
+
+
+  <h1 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest" class="text-break">
+Class CloneIndexRequest  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Elastic.html">Elastic</a>.<a class="xref" href="Elastic.Clients.html">Clients</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.html">Elasticsearch</a>.<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.html">IndexManagement</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Elastic.Clients.Elasticsearch.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>
+Clone an index.
+Clone an existing index into a new index.
+Each original primary shard is cloned into a new primary shard in the new index.
+</p>
+<p>
+IMPORTANT: Elasticsearch does not apply index templates to the resulting index.
+The API also does not copy index metadata from the original index.
+Index metadata includes aliases, index lifecycle management phase definitions, and cross-cluster replication (CCR) follower information.
+For example, if you clone a CCR follower index, the resulting clone will not be a follower index.
+</p>
+<p>
+The clone API copies most index settings from the source index to the resulting index, with the exception of <code>index.number_of_replicas</code> and <code>index.auto_expand_replicas</code>.
+To set the number of replicas in the resulting index, configure these settings in the clone request.
+</p>
+<p>
+Cloning works as follows:
+</p>
+<ul><li>
+<p>
+First, it creates a new target index with the same definition as the source index.
+</p>
+</li><li>
+<p>
+Then it hard-links segments from the source index into the target index. If the file system does not support hard-linking, all segments are copied into the new index, which is a much more time consuming process.
+</p>
+</li><li>
+<p>
+Finally, it recovers the target index as though it were a closed index which had just been re-opened.
+</p>
+</li></ul>
+<p>
+IMPORTANT: Indices can only be cloned if they meet the following requirements:
+</p>
+<ul><li>
+<p>
+The index must be marked as read-only and have a cluster health status of green.
+</p>
+</li><li>
+<p>
+The target index must not exist.
+</p>
+</li><li>
+<p>
+The source index must have the same number of primary shards as the target index.
+</p>
+</li><li>
+<p>
+The node handling the clone process must have sufficient free disk space to accommodate a second copy of the existing index.
+</p>
+</li></ul>
+<p>
+The current write index on a data stream cannot be cloned.
+In order to clone the current write index, the data stream must first be rolled over so that a new write index is created and then the previous write index can be cloned.
+</p>
+<p>
+NOTE: Mappings cannot be specified in the <code>_clone</code> request. The mappings of the source index will be used for the target index.
+</p>
+<p>
+<strong>Monitor the cloning process</strong>
+</p>
+<p>
+The cloning process can be monitored with the cat recovery API or the cluster health API can be used to wait until all primary shards have been allocated by setting the <code>wait_for_status</code> parameter to <code>yellow</code>.
+</p>
+<p>
+The <code>_clone</code> API returns as soon as the target index has been added to the cluster state, before any shards have been allocated.
+At this point, all shards are in the state unassigned.
+If, for any reason, the target index can't be allocated, its primary shard will remain unassigned until it can be allocated on that node.
+</p>
+<p>
+Once the primary shard is allocated, it moves to state initializing, and the clone process begins.
+When the clone operation completes, the shard will become active.
+At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+</p>
+<p>
+<strong>Wait for active shards</strong>
+</p>
+<p>
+Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
+</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConverter(typeof(CloneIndexRequestConverter))]
+public sealed class CloneIndexRequest : PlainRequest&lt;CloneIndexRequestParameters&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html">Request</a></div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request-1.html">Request</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters.html">CloneIndexRequestParameters</a>&gt;</div>
+      <div><a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html">PlainRequest</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequestParameters.html">CloneIndexRequestParameters</a>&gt;</div>
+      <div><span class="xref">CloneIndexRequest</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_ErrorTrace">PlainRequest&lt;CloneIndexRequestParameters&gt;.ErrorTrace</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_FilterPath">PlainRequest&lt;CloneIndexRequestParameters&gt;.FilterPath</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Human">PlainRequest&lt;CloneIndexRequestParameters&gt;.Human</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_Pretty">PlainRequest&lt;CloneIndexRequestParameters&gt;.Pretty</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.PlainRequest-1.html#Elastic_Clients_Elasticsearch_Requests_PlainRequest_1_SourceQueryString">PlainRequest&lt;CloneIndexRequestParameters&gt;.SourceQueryString</a>
+    </div>
+    <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.Requests.Request.html#Elastic_Clients_Elasticsearch_Requests_Request_RequestConfiguration">Request.RequestConfiguration</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+  <dl class="typelist extensionMethods">
+    <dt>Extension Methods</dt>
+    <dd>
+  <div>
+      <a class="xref" href="Elastic.Clients.Elasticsearch.SuffixExtensions.html#Elastic_Clients_Elasticsearch_SuffixExtensions_Suffix_System_Object_System_String_">SuffixExtensions.Suffix(object, string)</a>
+  </div>
+  </dd></dl>
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest__ctor_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.#ctor*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest__ctor_Elastic_Clients_Elasticsearch_IndexName_Elastic_Clients_Elasticsearch_Name_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.#ctor(Elastic.Clients.Elasticsearch.IndexName,Elastic.Clients.Elasticsearch.Name)">
+  CloneIndexRequest(IndexName, Name)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CloneIndexRequest(IndexName index, Name target)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>index</code> <a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+    <dt><code>target</code> <a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Aliases_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Aliases*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Aliases" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Aliases">
+  Aliases
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Aliases for the resulting index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;IndexName, Alias&gt;? Aliases { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a>, <a class="xref" href="Elastic.Clients.Elasticsearch.IndexManagement.Alias.html">Alias</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Index_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Index*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Index" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Index">
+  Index
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the source index to clone.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IndexName Index { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.IndexName.html">IndexName</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_MasterTimeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.MasterTimeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_MasterTimeout" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.MasterTimeout">
+  MasterTimeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L246"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a connection to the master node.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? MasterTimeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Settings_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Settings*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Settings" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Settings">
+  Settings
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L276"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Configuration options for the target index.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IDictionary&lt;string, object&gt;? Settings { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_StaticHttpMethod_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.StaticHttpMethod*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_StaticHttpMethod" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.StaticHttpMethod">
+  StaticHttpMethod
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L212"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The default HTTP method for the request which is based on the Elasticsearch Specification endpoint definition.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override HttpMethod StaticHttpMethod { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://github.com/elastic/elastic-transport-net/blob/9.0.5/src/Elastic.Transport/Components/TransportClient/HttpMethod.cs">HttpMethod</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Target_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Target*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Target" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Target">
+  Target
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Name of the target index to create.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Name Target { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Name.html">Name</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Timeout_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Timeout*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_Timeout" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.Timeout">
+  Timeout
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L254"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+Period to wait for a response.
+If no response is received before the timeout expires, the request fails and returns an error.
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Duration? Timeout { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.Duration.html">Duration</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_WaitForActiveShards_" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.WaitForActiveShards*"></a>
+
+  <h3 id="Elastic_Clients_Elasticsearch_IndexManagement_CloneIndexRequest_WaitForActiveShards" data-uid="Elastic.Clients.Elasticsearch.IndexManagement.CloneIndexRequest.WaitForActiveShards">
+  WaitForActiveShards
+  <a class="header-action link-secondary" title="View source" href="https://github.com/elastic/elasticsearch-net/blob/9.0.5/src/Elastic.Clients.Elasticsearch/_Generated/Api/IndexManagement/CloneIndexRequest.g.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>
+The number of shard copies that must be active before proceeding with the operation.
+Set to <code>all</code> or any positive integer up to the total number of shards in the index (<code>number_of_replicas+1</code>).
+</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WaitForActiveShards? WaitForActiveShards { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Elastic.Clients.Elasticsearch.WaitForActiveShards.html">WaitForActiveShards</a>?</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
