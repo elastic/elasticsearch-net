@@ -1034,6 +1034,91 @@ internal sealed partial class WatsonxTaskTypeConverter : System.Text.Json.Serial
 	}
 }
 
+internal sealed partial class TaskTypeAlibabaCloudAIConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI>
+{
+	private static readonly System.Text.Json.JsonEncodedText MemberCompletion = System.Text.Json.JsonEncodedText.Encode("completion");
+	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
+	private static readonly System.Text.Json.JsonEncodedText MemberSparseEmbedding = System.Text.Json.JsonEncodedText.Encode("sparse_embedding");
+	private static readonly System.Text.Json.JsonEncodedText MemberTextEmbedding = System.Text.Json.JsonEncodedText.Encode("text_embedding");
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		if (reader.ValueTextEquals(MemberCompletion))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Completion;
+		}
+
+		if (reader.ValueTextEquals(MemberRerank))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Rerank;
+		}
+
+		if (reader.ValueTextEquals(MemberSparseEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.SparseEmbedding;
+		}
+
+		if (reader.ValueTextEquals(MemberTextEmbedding))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.TextEmbedding;
+		}
+
+		var value = reader.GetString()!;
+		if (string.Equals(value, MemberCompletion.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Completion;
+		}
+
+		if (string.Equals(value, MemberRerank.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Rerank;
+		}
+
+		if (string.Equals(value, MemberSparseEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.SparseEmbedding;
+		}
+
+		if (string.Equals(value, MemberTextEmbedding.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.TextEmbedding;
+		}
+
+		throw new System.Text.Json.JsonException($"Unknown member '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI)}'.");
+	}
+
+	public override void Write(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI value, System.Text.Json.JsonSerializerOptions options)
+	{
+		switch (value)
+		{
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Completion:
+				writer.WriteStringValue(MemberCompletion);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.Rerank:
+				writer.WriteStringValue(MemberRerank);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.SparseEmbedding:
+				writer.WriteStringValue(MemberSparseEmbedding);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI.TextEmbedding:
+				writer.WriteStringValue(MemberTextEmbedding);
+				break;
+			default:
+				throw new System.Text.Json.JsonException($"Invalid value '{value}' for enum '{nameof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI)}'.");
+		}
+	}
+
+	public override Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI ReadAsPropertyName(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
+	{
+		return Read(ref reader, typeToConvert, options);
+	}
+
+	public override void WriteAsPropertyName(System.Text.Json.Utf8JsonWriter writer, Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAI value, System.Text.Json.JsonSerializerOptions options)
+	{
+		Write(writer, value, options);
+	}
+}
+
 internal sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAi>
 {
 	private static readonly System.Text.Json.JsonEncodedText MemberRerank = System.Text.Json.JsonEncodedText.Encode("rerank");
@@ -1093,12 +1178,24 @@ internal sealed partial class TaskTypeJinaAiConverter : System.Text.Json.Seriali
 
 internal sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType>
 {
+	private static readonly System.Text.Json.JsonEncodedText MemberBinary = System.Text.Json.JsonEncodedText.Encode("binary");
+	private static readonly System.Text.Json.JsonEncodedText MemberBit = System.Text.Json.JsonEncodedText.Encode("bit");
 	private static readonly System.Text.Json.JsonEncodedText MemberByte = System.Text.Json.JsonEncodedText.Encode("byte");
 	private static readonly System.Text.Json.JsonEncodedText MemberFloat = System.Text.Json.JsonEncodedText.Encode("float");
 	private static readonly System.Text.Json.JsonEncodedText MemberInt8 = System.Text.Json.JsonEncodedText.Encode("int8");
 
 	public override Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
+		if (reader.ValueTextEquals(MemberBinary))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Binary;
+		}
+
+		if (reader.ValueTextEquals(MemberBit))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Bit;
+		}
+
 		if (reader.ValueTextEquals(MemberByte))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte;
@@ -1115,6 +1212,16 @@ internal sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Se
 		}
 
 		var value = reader.GetString()!;
+		if (string.Equals(value, MemberBinary.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Binary;
+		}
+
+		if (string.Equals(value, MemberBit.Value, System.StringComparison.OrdinalIgnoreCase))
+		{
+			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Bit;
+		}
+
 		if (string.Equals(value, MemberByte.Value, System.StringComparison.OrdinalIgnoreCase))
 		{
 			return Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte;
@@ -1137,6 +1244,12 @@ internal sealed partial class CohereEmbeddingTypeConverter : System.Text.Json.Se
 	{
 		switch (value)
 		{
+			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Binary:
+				writer.WriteStringValue(MemberBinary);
+				break;
+			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Bit:
+				writer.WriteStringValue(MemberBit);
+				break;
 			case Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingType.Byte:
 				writer.WriteStringValue(MemberByte);
 				break;
@@ -1704,6 +1817,19 @@ public enum WatsonxTaskType
 	TextEmbedding
 }
 
+[System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeAlibabaCloudAIConverter))]
+public enum TaskTypeAlibabaCloudAI
+{
+	[System.Runtime.Serialization.EnumMember(Value = "completion")]
+	Completion,
+	[System.Runtime.Serialization.EnumMember(Value = "rerank")]
+	Rerank,
+	[System.Runtime.Serialization.EnumMember(Value = "sparse_embedding")]
+	SparseEmbedding,
+	[System.Runtime.Serialization.EnumMember(Value = "text_embedding")]
+	TextEmbedding
+}
+
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.TaskTypeJinaAiConverter))]
 public enum TaskTypeJinaAi
 {
@@ -1716,6 +1842,10 @@ public enum TaskTypeJinaAi
 [System.Text.Json.Serialization.JsonConverter(typeof(Elastic.Clients.Elasticsearch.Inference.CohereEmbeddingTypeConverter))]
 public enum CohereEmbeddingType
 {
+	[System.Runtime.Serialization.EnumMember(Value = "binary")]
+	Binary,
+	[System.Runtime.Serialization.EnumMember(Value = "bit")]
+	Bit,
 	[System.Runtime.Serialization.EnumMember(Value = "byte")]
 	Byte,
 	[System.Runtime.Serialization.EnumMember(Value = "float")]

@@ -19,7 +19,7 @@ namespace Elastic.Clients.Elasticsearch.Aggregations;
 /// <para>Buckets path can be expressed in different ways, and an aggregation may accept some or all of these<br/>forms depending on its type. Please refer to each aggregation's documentation to know what buckets<br/>path forms they accept.</para>
 /// </summary>
 [JsonConverter(typeof(BucketsPathConverter))]
-public sealed partial class BucketsPath : IComplexUnion<BucketsPath.Kind>
+public sealed class BucketsPath : IComplexUnion<BucketsPath.Kind>
 {
 	public enum Kind
 	{
