@@ -144,6 +144,8 @@ public sealed partial class CohereServiceSettings
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
+	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
+	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
 	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
 	/// Use <c>float</c> for the default float embeddings.
 	/// Use <c>int8</c> for signed int8 embeddings.
@@ -236,6 +238,8 @@ public readonly partial struct CohereServiceSettingsDescriptor
 	/// <summary>
 	/// <para>
 	/// For a <c>text_embedding</c> task, the types of embeddings you want to get back.
+	/// Use <c>binary</c> for binary embeddings, which are encoded as bytes with signed int8 precision.
+	/// Use <c>bit</c> for binary embeddings, which are encoded as bytes with signed int8 precision (this is a synonym of <c>binary</c>).
 	/// Use <c>byte</c> for signed int8 embeddings (this is a synonym of <c>int8</c>).
 	/// Use <c>float</c> for the default float embeddings.
 	/// Use <c>int8</c> for signed int8 embeddings.
