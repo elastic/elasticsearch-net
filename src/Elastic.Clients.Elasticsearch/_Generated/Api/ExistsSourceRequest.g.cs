@@ -541,6 +541,11 @@ public readonly partial struct ExistsSourceRequestDescriptor<TDocument>
 		Instance = new Elastic.Clients.Elasticsearch.ExistsSourceRequest(index, id);
 	}
 
+	public ExistsSourceRequestDescriptor(string index, Elastic.Clients.Elasticsearch.Id id)
+	{
+		Instance = new Elastic.Clients.Elasticsearch.ExistsSourceRequest((Elastic.Clients.Elasticsearch.IndexName)index, id);
+	}
+
 	public ExistsSourceRequestDescriptor(TDocument document)
 	{
 		Instance = new Elastic.Clients.Elasticsearch.ExistsSourceRequest(typeof(TDocument), Elastic.Clients.Elasticsearch.Id.From(document));
