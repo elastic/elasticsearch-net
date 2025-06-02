@@ -34,7 +34,7 @@ internal sealed partial class BucketKsAggregationConverter : System.Text.Json.Se
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<System.Collections.Generic.ICollection<string>?> propAlternative = default;
-		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?> propBucketsPath = default;
 		LocalJsonValue<System.Collections.Generic.ICollection<double>?> propFractions = default;
 		LocalJsonValue<string?> propSamplingMethod = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -135,7 +135,7 @@ public sealed partial class BucketKsAggregation
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public object? BucketsPath { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -222,7 +222,7 @@ public readonly partial struct BucketKsAggregationDescriptor
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor BucketsPath(object? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketKsAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;

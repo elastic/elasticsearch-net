@@ -32,7 +32,7 @@ internal sealed partial class SumBucketAggregationConverter : System.Text.Json.S
 	public override Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregation Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
-		LocalJsonValue<object?> propBucketsPath = default;
+		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.BucketsPath?> propBucketsPath = default;
 		LocalJsonValue<string?> propFormat = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Aggregations.GapPolicy?> propGapPolicy = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
@@ -104,7 +104,7 @@ public sealed partial class SumBucketAggregation
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public object? BucketsPath { get; set; }
+	public Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? BucketsPath { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -146,7 +146,7 @@ public readonly partial struct SumBucketAggregationDescriptor
 	/// Path to the buckets that contain one set of values to correlate.
 	/// </para>
 	/// </summary>
-	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor BucketsPath(object? value)
+	public Elastic.Clients.Elasticsearch.Aggregations.SumBucketAggregationDescriptor BucketsPath(Elastic.Clients.Elasticsearch.Aggregations.BucketsPath? value)
 	{
 		Instance.BucketsPath = value;
 		return this;
