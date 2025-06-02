@@ -26,14 +26,12 @@ namespace Elastic.Clients.Elasticsearch.QueryDsl;
 internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Serialization.JsonConverter<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery>
 {
 	private static readonly System.Text.Json.JsonEncodedText PropBoost = System.Text.Json.JsonEncodedText.Encode("boost");
-	private static readonly System.Text.Json.JsonEncodedText PropFrom = System.Text.Json.JsonEncodedText.Encode("from");
 	private static readonly System.Text.Json.JsonEncodedText PropGt = System.Text.Json.JsonEncodedText.Encode("gt");
 	private static readonly System.Text.Json.JsonEncodedText PropGte = System.Text.Json.JsonEncodedText.Encode("gte");
 	private static readonly System.Text.Json.JsonEncodedText PropLt = System.Text.Json.JsonEncodedText.Encode("lt");
 	private static readonly System.Text.Json.JsonEncodedText PropLte = System.Text.Json.JsonEncodedText.Encode("lte");
 	private static readonly System.Text.Json.JsonEncodedText PropQueryName = System.Text.Json.JsonEncodedText.Encode("_name");
 	private static readonly System.Text.Json.JsonEncodedText PropRelation = System.Text.Json.JsonEncodedText.Encode("relation");
-	private static readonly System.Text.Json.JsonEncodedText PropTo = System.Text.Json.JsonEncodedText.Encode("to");
 
 	public override Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Read(ref System.Text.Json.Utf8JsonReader reader, System.Type typeToConvert, System.Text.Json.JsonSerializerOptions options)
 	{
@@ -44,22 +42,15 @@ internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Seria
 		reader.Read();
 		reader.ValidateToken(System.Text.Json.JsonTokenType.StartObject);
 		LocalJsonValue<float?> propBoost = default;
-		LocalJsonValue<double?> propFrom = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propGt = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propGte = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propLt = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.Number?> propLte = default;
 		LocalJsonValue<string?> propQueryName = default;
 		LocalJsonValue<Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation?> propRelation = default;
-		LocalJsonValue<double?> propTo = default;
 		while (reader.Read() && reader.TokenType is System.Text.Json.JsonTokenType.PropertyName)
 		{
 			if (propBoost.TryReadProperty(ref reader, options, PropBoost, null))
-			{
-				continue;
-			}
-
-			if (propFrom.TryReadProperty(ref reader, options, PropFrom, null))
 			{
 				continue;
 			}
@@ -94,11 +85,6 @@ internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Seria
 				continue;
 			}
 
-			if (propTo.TryReadProperty(ref reader, options, PropTo, null))
-			{
-				continue;
-			}
-
 			if (options.UnmappedMemberHandling is System.Text.Json.Serialization.JsonUnmappedMemberHandling.Skip)
 			{
 				reader.Skip();
@@ -115,14 +101,12 @@ internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Seria
 		{
 			Boost = propBoost.Value,
 			Field = propField.Value,
-			From = propFrom.Value,
 			Gt = propGt.Value,
 			Gte = propGte.Value,
 			Lt = propLt.Value,
 			Lte = propLte.Value,
 			QueryName = propQueryName.Value,
-			Relation = propRelation.Value,
-			To = propTo.Value
+			Relation = propRelation.Value
 		};
 	}
 
@@ -132,14 +116,12 @@ internal sealed partial class NumberRangeQueryConverter : System.Text.Json.Seria
 		writer.WritePropertyName(options, value.Field, null);
 		writer.WriteStartObject();
 		writer.WriteProperty(options, PropBoost, value.Boost, null, null);
-		writer.WriteProperty(options, PropFrom, value.From, null, null);
 		writer.WriteProperty(options, PropGt, value.Gt, null, null);
 		writer.WriteProperty(options, PropGte, value.Gte, null, null);
 		writer.WriteProperty(options, PropLt, value.Lt, null, null);
 		writer.WriteProperty(options, PropLte, value.Lte, null, null);
 		writer.WriteProperty(options, PropQueryName, value.QueryName, null, null);
 		writer.WriteProperty(options, PropRelation, value.Relation, null, null);
-		writer.WriteProperty(options, PropTo, value.To, null, null);
 		writer.WriteEndObject();
 		writer.WriteEndObject();
 	}
@@ -178,7 +160,6 @@ public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.Que
 	required
 #endif
 	Elastic.Clients.Elasticsearch.Field Field { get; set; }
-	public double? From { get; set; }
 
 	/// <summary>
 	/// <para>
@@ -215,7 +196,6 @@ public sealed partial class NumberRangeQuery : Elastic.Clients.Elasticsearch.Que
 	/// </para>
 	/// </summary>
 	public Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? Relation { get; set; }
-	public double? To { get; set; }
 
 	string Elastic.Clients.Elasticsearch.QueryDsl.IRangeQuery.Type => "number";
 }
@@ -262,12 +242,6 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> Field(System.Linq.Expressions.Expression<System.Func<TDocument, object?>> value)
 	{
 		Instance.Field = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> From(double? value)
-	{
-		Instance.From = value;
 		return this;
 	}
 
@@ -332,12 +306,6 @@ public readonly partial struct NumberRangeQueryDescriptor<TDocument>
 		return this;
 	}
 
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument> To(double? value)
-	{
-		Instance.To = value;
-		return this;
-	}
-
 	[System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 	internal static Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQuery Build(System.Action<Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor<TDocument>> action)
 	{
@@ -389,12 +357,6 @@ public readonly partial struct NumberRangeQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Field<T>(System.Linq.Expressions.Expression<System.Func<T, object?>> value)
 	{
 		Instance.Field = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor From(double? value)
-	{
-		Instance.From = value;
 		return this;
 	}
 
@@ -456,12 +418,6 @@ public readonly partial struct NumberRangeQueryDescriptor
 	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor Relation(Elastic.Clients.Elasticsearch.QueryDsl.RangeRelation? value)
 	{
 		Instance.Relation = value;
-		return this;
-	}
-
-	public Elastic.Clients.Elasticsearch.QueryDsl.NumberRangeQueryDescriptor To(double? value)
-	{
-		Instance.To = value;
 		return this;
 	}
 
